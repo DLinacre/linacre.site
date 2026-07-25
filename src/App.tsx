@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { WifiOff } from 'lucide-react';
 import Header from './components/Header';
+import MobileBottomNav from './components/MobileBottomNav';
 import { getEmblemSVG, CustomEmblem } from './lib/emblemRenderer';
 import { RouteHead } from './components/RouteHead';
 import routeMeta from '../route-meta.json';
@@ -991,6 +992,11 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      <MobileBottomNav
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        openMore={() => setIsPaletteOpen(true)}
+      />
       <Footer />
     </div>
   );

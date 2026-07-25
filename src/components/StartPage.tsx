@@ -307,10 +307,10 @@ export default function StartPage({ navigate }: StartPageProps) {
           </div>
 
           <h1 id="start-heading" className="font-display text-4xl font-bold tracking-[-0.045em] text-foreground sm:text-5xl lg:text-6xl">
-            Get something <span className="text-amber-color">useful</span> done.
+            Get useful work done <span className="text-amber-color">faster</span>.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-            Search the web, clean up data, generate secure values, or open one of the free tools below. No account and no uploads.
+            Search, clean data, generate secure values, convert time, calculate VAT, and launch practical apps. Everything runs locally in your browser — no account, no tracking, no uploads.
           </p>
 
           <form onSubmit={handleSmartAction} className="mx-auto mt-8 max-w-3xl" role="search">
@@ -326,7 +326,7 @@ export default function StartPage({ navigate }: StartPageProps) {
                 autoComplete="off"
                 spellCheck={false}
               />
-              <button type="submit" className="absolute right-2 top-2 flex h-12 items-center gap-2 rounded-xl bg-amber-color px-4 font-mono text-xs font-bold text-[#030c14] transition-all hover:bg-amber-glow">
+              <button type="submit" className="absolute right-2 top-2 flex h-12 items-center gap-2 rounded-xl bg-amber-color px-4 font-mono text-xs font-bold text-[#030c14] transition-all hover:bg-amber-glow cursor-pointer">
                 Go <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </button>
             </div>
@@ -338,6 +338,10 @@ export default function StartPage({ navigate }: StartPageProps) {
               ['New UUID', 'generate'],
               ['Decode Base64', 'base64'],
               ['Convert time', 'time'],
+              ['UK VAT', 'vat'],
+              ['Clean text', 'text'],
+              ['SHA-256', 'hash'],
+              ['Clean URL', 'url'],
             ].map(([label, utility]) => (
               <button
                 key={label}
@@ -345,7 +349,7 @@ export default function StartPage({ navigate }: StartPageProps) {
                   if (label === 'New UUID') generateValue('uuid');
                   selectUtility(utility as UtilityId);
                 }}
-                className="rounded-full border border-border-color bg-muted/25 px-3 py-1.5 font-mono text-[11px] text-muted-foreground transition-colors hover:border-amber-color/35 hover:text-foreground"
+                className="rounded-full border border-border-color bg-muted/25 px-3 py-1.5 font-mono text-[11px] text-muted-foreground transition-colors hover:border-amber-color/35 hover:text-foreground cursor-pointer"
               >
                 {label}
               </button>

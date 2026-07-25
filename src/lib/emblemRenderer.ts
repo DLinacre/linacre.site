@@ -109,7 +109,24 @@ export function getEmblemSVG(
   }
 
   let emblemContents = '';
-  if (frame === 'hexagon') {
+  if (frame === 'dl-mushroom') {
+    emblemContents = `
+  <!-- Cyber Mushroom Emblem -->
+  <circle cx="50" cy="50" r="45" fill="none" stroke="${p}" stroke-width="2" filter="url(#glow)" opacity="0.3" />
+  <!-- Mushroom Stem -->
+  <path d="M 42,48 C 41,68 43,82 50,82 C 57,82 59,68 58,48 Z" fill="url(#brandGrad)" opacity="0.9" stroke="${p}" stroke-width="1.5" />
+  <!-- Stem Gill Shading -->
+  <path d="M 45,52 Q 50,55 55,52 M 46,58 Q 50,61 54,58 M 47,64 Q 50,67 53,64" fill="none" stroke="${s}" stroke-width="1" opacity="0.6" />
+  <!-- Mushroom Cap -->
+  <path d="M 16,48 C 16,18 84,18 84,48 C 84,52 74,52 66,48 C 58,44 42,44 34,48 C 26,52 16,52 16,48 Z" fill="url(#brandGrad)" filter="url(#glow)" stroke="${p}" stroke-width="2" />
+  <!-- Cap Spots -->
+  <circle cx="34" cy="30" r="5" fill="#ffffff" opacity="0.9" />
+  <circle cx="50" cy="24" r="6" fill="#ffffff" opacity="0.9" />
+  <circle cx="66" cy="30" r="5" fill="#ffffff" opacity="0.9" />
+  <circle cx="26" cy="40" r="3.5" fill="#ffffff" opacity="0.8" />
+  <circle cx="74" cy="40" r="3.5" fill="#ffffff" opacity="0.8" />
+  <circle cx="48" cy="38" r="4" fill="#ffffff" opacity="0.85" />`;
+  } else if (frame === 'hexagon') {
     emblemContents = `
   <!-- Pipeline Nexus Hexagon -->
   <polygon points="50,3 91,25 91,75 50,97 9,75 9,25" fill="none" stroke="${p}" stroke-width="3" stroke-linejoin="round" filter="url(#glow)" />

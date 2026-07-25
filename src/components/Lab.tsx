@@ -228,8 +228,13 @@ export default function Lab({ theme = 'dark' }: LabProps) {
   // Tab control for Sidebar: 'chats' or 'files'
   const [sidebarTab, setSidebarTab] = useState<'chats' | 'files'>('chats');
 
-  // Main Column Tab: 'chat' or 'sql'
-  const [mainTab, setMainTab] = useState<'chat' | 'sql'>('chat');
+  // Main Column Tab: 'chat' | 'sql' | 'editor'
+  const [mainTab, setMainTab] = useState<'chat' | 'sql' | 'editor'>('chat');
+
+  // Hyperparameters
+  const [temperature, setTemperature] = useState<number>(0.7);
+  const [topP, setTopP] = useState<number>(0.95);
+  const [maxTokens, setMaxTokens] = useState<number>(2048);
 
   // SQL Sandbox States
   const [sqlQuery, setSqlQuery] = useState('SELECT * FROM projects;');
@@ -255,6 +260,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
   const [activeFileId, setActiveFileId] = useState<string | null>(null);
   const [editorContent, setEditorContent] = useState('');
   const [collapsedFolders, setCollapsedFolders] = useState<string[]>([]);
+  const [editorSaveNotification, setEditorSaveNotification] = useState(false);
 
   // Creation States
   const [isCreateOpen, setIsCreateOpen] = useState<'file' | 'folder' | null>(null);
@@ -285,6 +291,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
   const handleOpenFile = (file: WorkspaceItem) => {
     setActiveFileId(file.id);
     setEditorContent(file.content || '');
+    setMainTab('editor');
   };
 
   const handleSaveFileContent = () => {
@@ -293,7 +300,8 @@ export default function Lab({ theme = 'dark' }: LabProps) {
       item.id === activeFileId ? { ...item, content: editorContent } : item
     );
     saveWorkspace(updated);
-    setActiveFileId(null);
+    setEditorSaveNotification(true);
+    setTimeout(() => setEditorSaveNotification(false), 2000);
   };
 
   const handleExecuteSQL = (queryText: string) => {
@@ -2059,6 +2067,77 @@ You do not need to use all agents if the task is simple, but at least two should
                     </div>
                   </div>
                 )}
+                {/* Model Hyperparameters Adjustment Sliders */}
+                <div className="pt-4 border-t border-border-color/40 grid grid-cols-1 md:grid-cols-3 gap-4 font-mono">
+                  <div className="space-y-1.5 bg-background/50 p-3 rounded-lg border border-border-color/40">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-semibold text-muted-foreground flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-amber-color shrink-0" />
+                        <span>Temperature</span>
+                      </span>
+                      <span className="text-amber-color font-bold text-xs">{temperature.toFixed(2)}</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value={temperature}
+                      onChange={(e) => setTemperature(parseFloat(e.target.value))}
+                      className="w-full h-1.5 bg-muted/40 rounded-lg appearance-none cursor-pointer accent-amber-color"
+                    />
+                    <div className="flex justify-between text-[9px] text-muted-foreground/60">
+                      <span>0.0 (Precise)</span>
+                      <span>1.0 (Creative)</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5 bg-background/50 p-3 rounded-lg border border-border-color/40">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-semibold text-muted-foreground flex items-center gap-1.5">
+                        <Settings className="w-3.5 h-3.5 text-cyan shrink-0" />
+                        <span>Top P Sampling</span>
+                      </span>
+                      <span className="text-cyan font-bold text-xs">{topP.toFixed(2)}</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value={topP}
+                      onChange={(e) => setTopP(parseFloat(e.target.value))}
+                      className="w-full h-1.5 bg-muted/40 rounded-lg appearance-none cursor-pointer accent-cyan"
+                    />
+                    <div className="flex justify-between text-[9px] text-muted-foreground/60">
+                      <span>0.0 (Focused)</span>
+                      <span>1.0 (Diverse)</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5 bg-background/50 p-3 rounded-lg border border-border-color/40">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-semibold text-muted-foreground flex items-center gap-1.5">
+                        <Cpu className="w-3.5 h-3.5 text-emerald-color shrink-0" />
+                        <span>Max Tokens</span>
+                      </span>
+                      <span className="text-emerald-color font-bold text-xs">{maxTokens}</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="256"
+                      max="8192"
+                      step="256"
+                      value={maxTokens}
+                      onChange={(e) => setMaxTokens(parseInt(e.target.value, 10))}
+                      className="w-full h-1.5 bg-muted/40 rounded-lg appearance-none cursor-pointer accent-emerald-color"
+                    />
+                    <div className="flex justify-between text-[9px] text-muted-foreground/60">
+                      <span>256 (Short)</span>
+                      <span>8192 (Long)</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
@@ -2413,6 +2492,19 @@ You do not need to use all agents if the task is simple, but at least two should
               <Database className="w-3.5 h-3.5" />
               <span>🗄️ SQL PLAYGROUND (POSTGRES)</span>
             </button>
+            {activeFileId && (
+              <button
+                onClick={() => setMainTab('editor')}
+                className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 text-xs font-mono font-bold transition-all border-r border-border-color/60 cursor-pointer ${
+                  mainTab === 'editor'
+                    ? 'bg-emerald-color/10 text-emerald-color border-b-2 border-b-emerald-color shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/10'
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span className="truncate max-w-[180px]">📝 {workspace.find(i => i.id === activeFileId)?.name || 'FILE EDITOR'}</span>
+              </button>
+            )}
           </div>
 
           <div className="border border-border-color bg-muted/5 dark:bg-[#081c28]/60 rounded-b-xl overflow-hidden flex flex-col h-full min-h-[460px] shadow-lg select-text" id="lab-terminal-shell">
@@ -2621,7 +2713,7 @@ You do not need to use all agents if the task is simple, but at least two should
                   )}
                 </div>
               </>
-            ) : (
+            ) : mainTab === 'sql' ? (
               /* SQL Playground Panel */
               <div className="flex flex-col flex-1 font-mono text-xs h-full bg-[#0a0c14]/40" id="sql-playground-panel">
                 {/* Top status header */}
@@ -2805,7 +2897,7 @@ You do not need to use all agents if the task is simple, but at least two should
                             {sqlResult.length === 0 ? (
                               <tr>
                                 <td colSpan={sqlColumns.length || 1} className="p-4 text-center text-muted-foreground/50 italic">
-                                  // 0 records returned.
+                                  {/* 0 records returned. */}
                                 </td>
                               </tr>
                             ) : (
@@ -2857,7 +2949,78 @@ You do not need to use all agents if the task is simple, but at least two should
                   )}
                 </div>
               </div>
-            )}
+            ) : mainTab === 'editor' ? (
+              <div className="flex-1 flex flex-col bg-[#07090e] font-mono text-xs overflow-hidden select-text min-h-[460px]">
+                {/* Editor Header Bar */}
+                <div className="flex items-center justify-between px-4 py-2.5 bg-muted/40 dark:bg-[#161b26]/70 border-b border-border-color shrink-0">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <FileText className="w-4 h-4 text-emerald-color shrink-0" />
+                    <span className="font-bold text-foreground truncate text-xs">
+                      {workspace.find(i => i.id === activeFileId)?.path || 'Untitled File'}
+                    </span>
+                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan/10 text-cyan border border-cyan/20 uppercase font-bold">
+                      {workspace.find(i => i.id === activeFileId)?.name.split('.').pop() || 'text'}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    {editorSaveNotification && (
+                      <span className="text-[10px] text-emerald-color font-bold flex items-center gap-1 animate-pulse">
+                        <CheckCircle className="w-3.5 h-3.5" />
+                        <span>Saved!</span>
+                      </span>
+                    )}
+                    <button
+                      onClick={() => {
+                        const item = workspace.find(i => i.id === activeFileId);
+                        if (item) handleAttachToPrompt(item, {} as any);
+                      }}
+                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-cyan/15 hover:bg-cyan/25 text-cyan border border-cyan/30 text-[10px] uppercase tracking-wider font-bold transition-all cursor-pointer"
+                      title="Attach Code to Chat Prompt"
+                    >
+                      <Paperclip className="w-3 h-3" />
+                      <span>Attach to Chat</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        const item = workspace.find(i => i.id === activeFileId);
+                        if (item) handleDownloadFile(item, {} as any);
+                      }}
+                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-muted/30 hover:bg-muted/50 border border-border-color text-muted-foreground hover:text-foreground text-[10px] uppercase tracking-wider font-bold transition-all cursor-pointer"
+                      title="Download File"
+                    >
+                      <Download className="w-3 h-3 text-emerald-color" />
+                      <span>Download</span>
+                    </button>
+                    <button
+                      onClick={handleSaveFileContent}
+                      className="flex items-center gap-1.5 px-3 py-1 bg-amber-color hover:bg-amber-color/90 text-black font-bold rounded text-[10px] uppercase tracking-wider transition-all cursor-pointer shadow-sm"
+                    >
+                      <Save className="w-3.5 h-3.5" />
+                      <span>Save Changes</span>
+                    </button>
+                    <button
+                      onClick={() => setMainTab('chat')}
+                      className="p-1 hover:bg-muted/30 rounded text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      title="Close File"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Textarea Code Editor Area */}
+                <div className="flex-1 p-4 bg-[#0a0d14] relative flex">
+                  <textarea
+                    value={editorContent}
+                    onChange={(e) => setEditorContent(e.target.value)}
+                    className="w-full h-full min-h-[360px] bg-transparent text-xs text-foreground/90 font-mono leading-relaxed focus:outline-none resize-none border-none p-2 overflow-y-auto selection:bg-cyan/30"
+                    placeholder="// Write code here..."
+                    spellCheck={false}
+                  />
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

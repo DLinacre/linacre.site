@@ -72,43 +72,65 @@ type FontOption = {
 
 const PALETTES: PaletteOption[] = [
   {
-    id: 'cyber',
-    name: 'CyberBlue',
-    primary: '#22D3EE',
-    secondary: '#34D399',
-    description: 'The site default — electric cyan with clean green energy.',
+    id: 'obsidian',
+    name: 'Obsidian Dark & Glass',
+    primary: '#38BDF8',
+    secondary: '#818CF8',
+    description: '🌌 Deep obsidian #030712 background with sky cyan & soft indigo border glass glows.',
   },
   {
-    id: 'ocean',
-    name: 'Ocean Signal',
-    primary: '#38BDF8',
-    secondary: '#2DD4BF',
-    description: 'Cool blue and teal for a calmer technical identity.',
+    id: 'midnight',
+    name: 'Midnight Linear Indigo',
+    primary: '#6366F1',
+    secondary: '#EC4899',
+    description: '🏙️ Sleek Linear/Vercel dark slate with vivid indigo & hot pink accents.',
+  },
+  {
+    id: 'synthwave',
+    name: 'Neon Synthwave Cyber',
+    primary: '#F43F5E',
+    secondary: '#22D3EE',
+    description: '⚡ High-octane crimson magenta and electric neon cyan.',
   },
   {
     id: 'matrix',
-    name: 'Green Matrix',
-    primary: '#2DD4BF',
+    name: 'Green Matrix Terminal',
+    primary: '#10B981',
     secondary: '#A3E635',
-    description: 'High-energy mint and lime without the usual neon clutter.',
+    description: '🌿 Deep terminal matrix green and glowing lime gold.',
   },
   {
-    id: 'violet',
-    name: 'Ultraviolet',
-    primary: '#818CF8',
-    secondary: '#22D3EE',
-    description: 'Indigo and cyan for AI experiments and creative systems.',
+    id: 'amber',
+    name: 'Solar Ember Sunset',
+    primary: '#F97316',
+    secondary: '#FBBF24',
+    description: '🔥 Fiery solar orange and warm glowing amber gold.',
   },
   {
-    id: 'mono',
-    name: 'Ice Mono',
-    primary: '#E2F7FA',
-    secondary: '#7DD3FC',
-    description: 'Restrained icy neutrals for formal and minimal assets.',
+    id: 'amethyst',
+    name: 'Royal Amethyst & Violet',
+    primary: '#A855F7',
+    secondary: '#EC4899',
+    description: '🍇 Deep purple amethyst with vibrant magenta pink highlights.',
+  },
+  {
+    id: 'arctic',
+    name: 'Arctic Ice & Frost',
+    primary: '#38BDF8',
+    secondary: '#E2F7FA',
+    description: '🧊 Crisp arctic ice blue and pale frost white on deep cold slate.',
+  },
+  {
+    id: 'stealth',
+    name: 'Monochrome Stealth',
+    primary: '#F8FAFC',
+    secondary: '#64748B',
+    description: '👑 Ultra-clean pure white and cool graphite stealth.',
   },
 ];
 
 const FRAMES = [
+  { id: 'dl-mushroom', name: 'Cyber Mushroom', description: '🍄 Built-in mushroom emblem' },
   { id: 'dl-geo', name: 'Geometric DL', description: 'Primary brand mark' },
   { id: 'dl-terminal', name: 'Terminal DL', description: 'Developer identity' },
   { id: 'dl-crest', name: 'Cyber Crest', description: 'Sharper social mark' },
@@ -411,6 +433,31 @@ export default function IdentityHub() {
     safeStorage.set('linacre_lab_cpx', String(labCpx));
     safeStorage.set('linacre_lab_batch', String(labBatch));
     safeStorage.set('linacre_brand_custom_bg', customBgColor);
+
+    // Sync live theme colors & background variables to document root
+    const root = document.documentElement;
+    root.style.setProperty('--color-amber-color', palette.primary);
+    root.style.setProperty('--color-cyan', palette.primary);
+    root.style.setProperty('--linacre-accent', palette.primary);
+    root.style.setProperty('--color-amber-glow', palette.secondary);
+    root.style.setProperty('--color-emerald-color', palette.secondary);
+
+    const themeBgs: Record<string, { bg: string; panel: string }> = {
+      obsidian: { bg: '#030712', panel: '#0b1220' },
+      midnight: { bg: '#0f172a', panel: '#1e293b' },
+      synthwave: { bg: '#05050a', panel: '#12091c' },
+      matrix: { bg: '#02140d', panel: '#052618' },
+      amber: { bg: '#120a04', panel: '#241408' },
+      amethyst: { bg: '#0c0414', panel: '#1a082b' },
+      arctic: { bg: '#031017', panel: '#0a1c26' },
+      stealth: { bg: '#020408', panel: '#0f172a' },
+    };
+
+    if (themeBgs[palette.id]) {
+      root.style.setProperty('--background', themeBgs[palette.id].bg);
+      root.style.setProperty('--linacre-panel', themeBgs[palette.id].panel);
+    }
+
     window.dispatchEvent(new Event('linacre-identity-updated'));
   }, [palette, frame, activeFont, motionMode, glow, name, title, bio, email, website, customPrimary, customSecondary, recentColors, favMarks, customEmblems, markTab, labWord, labFamily, labSym, labCpx, labBatch, customBgColor]);
 

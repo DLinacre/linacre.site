@@ -522,13 +522,9 @@ app.post("/api/contact", (req, res) => {
       }
       throw new Error("Empty response from Claude");
     } catch (claudeError: any) {
-      console.warn("Claude Chat failed, using local Mock fallback...", claudeError.message || claudeError);
+      console.error("All AI Chat Backends failed:", claudeError.message || claudeError);
+      return res.status(500).json({ error: "Failed to generate response from AI models." });
     }
-
-    // 4. Ultimate Mock Fallback
-    return res.json({
-      reply: "Hello! I am the local system proxy. Currently, the server's Gemini, OpenAI, and Claude API keys are exhausted or depleted. \n\nPlease expand the **Configuration Panel** at the top of the page to input your own API keys to chat with the live models! This sandbox runs entirely in your browser and will connect directly using your keys."
-    });
   });
 
   // API route for generating AI SVG icons/emblems using Gemini 3.6 Flash

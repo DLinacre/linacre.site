@@ -185,84 +185,141 @@ const WriterRobotSVG = ({ color }: { color: string }) => (
 
 
 
+const STORAGE_KEY_AGENTS = 'linacre_agents_state_v2';
+const STORAGE_KEY_LOGS = 'linacre_agents_logs_v2';
+
+const INITIAL_DEFAULT_AGENTS: Agent[] = [
+  {
+    id: 'agent-architect',
+    name: 'Agent Architect',
+    role: 'Dev',
+    spriteName: 'mewtwo',
+    personality: 'focused',
+    color: '#c084fc',
+    x: 5,
+    y: 5,
+    startX: 5,
+    startY: 5,
+    targetX: 5,
+    targetY: 5,
+    status: 'Generating ideas...',
+    task: 'Idle',
+    taskQueue: [],
+    isPaused: false,
+    roboticTraits: 'Equipped with cognitive neural synapses, deep model synthesis logic, and auto-spawner subassemblies.',
+    cpu: 12,
+    ram: 256
+  },
+  {
+    id: 'agent-devops',
+    name: 'DevOps Rotom',
+    role: 'DevOps',
+    spriteName: 'rotom-wash',
+    personality: 'focused',
+    color: '#5ccfe6',
+    x: 1,
+    y: 8,
+    startX: 1,
+    startY: 8,
+    targetX: 1,
+    targetY: 8,
+    status: 'Awaiting tasks',
+    task: 'Idle',
+    taskQueue: [],
+    isPaused: false,
+    roboticTraits: 'Forged from plasma coils, hydraulic washers, and dual high-frequency wifi antennas. Specialized in container pipelines.',
+    cpu: 18,
+    ram: 242
+  },
+  {
+    id: 'agent-security',
+    name: 'SecMagnezone',
+    role: 'Security',
+    spriteName: 'magnezone',
+    personality: 'pragmatic',
+    color: '#34D399',
+    x: 1,
+    y: 1,
+    startX: 1,
+    startY: 1,
+    targetX: 1,
+    targetY: 1,
+    status: 'Monitoring registry integrity',
+    task: 'Ecosystem guard duty',
+    taskQueue: [],
+    isPaused: false,
+    roboticTraits: 'Equipped with heavy magnetic shielding plating, triple-lens focal visors, and high-entropy security scanners.',
+    cpu: 32,
+    ram: 512
+  }
+];
+
 import McpToolboxCallout from './McpToolboxCallout';
 
 export default function AgentsHub() {
-  const [agents, setAgents] = useState<Agent[]>([
-    {
-      id: 'agent-architect',
-      name: 'Agent Architect',
-      role: 'Dev',
-      spriteName: 'mewtwo',
-      personality: 'focused',
-      color: '#c084fc',
-      x: 5,
-      y: 5,
-      startX: 5,
-      startY: 5,
-      targetX: 5,
-      targetY: 5,
-      status: 'Generating ideas...',
-      task: 'Idle',
-      taskQueue: [],
-      isPaused: false,
-      roboticTraits: 'Equipped with cognitive neural synapses, deep model synthesis logic, and auto-spawner subassemblies.',
-      cpu: 12,
-      ram: 256
-    },
-    {
-      id: 'agent-devops',
-      name: 'DevOps Rotom',
-      role: 'DevOps',
-      spriteName: 'rotom-wash',
-      personality: 'focused',
-      color: '#5ccfe6',
-      x: 1,
-      y: 8,
-      startX: 1,
-      startY: 8,
-      targetX: 1,
-      targetY: 8,
-      status: 'Awaiting tasks',
-      task: 'Idle',
-      taskQueue: [],
-      isPaused: false,
-      roboticTraits: 'Forged from plasma coils, hydraulic washers, and dual high-frequency wifi antennas. Specialized in container pipelines.',
-      cpu: 18,
-      ram: 242
-    },
-    {
-      id: 'agent-security',
-      name: 'SecMagnezone',
-      role: 'Security',
-      spriteName: 'magnezone',
-      personality: 'pragmatic',
-      color: '#34D399',
-      x: 1,
-      y: 1,
-      startX: 1,
-      startY: 1,
-      targetX: 1,
-      targetY: 1,
-      status: 'Monitoring registry integrity',
-      task: 'Ecosystem guard duty',
-      taskQueue: [],
-      isPaused: false,
-      roboticTraits: 'Equipped with heavy magnetic shielding plating, triple-lens focal visors, and high-entropy security scanners.',
-      cpu: 32,
-      ram: 512
-    }
-  ]);
+  const [agents, setAgents] = useState<Agent[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_AGENTS);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {}
+    return INITIAL_DEFAULT_AGENTS;
+  });
 
-  const [logs, setLogs] = useState<LogMessage[]>([
-    {
-      id: 'log-initial-1',
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
-      agentName: 'System',
-      message: 'Welcome to the Autonomous Agent Grid! Dispatch a command to start.',
-      type: 'info'
+  const [logs, setLogs] = useState<LogMessage[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_LOGS);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch {}
+    return [
+      {
+        id: 'log-initial-1',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+        agentName: 'System',
+        message: 'Welcome to the Autonomous Agent Grid! Dispatch a command to start.',
+        type: 'info'
+      }
+    ];
+  });
+
+  // Automatically persist agents and logs to browser storage so navigating back never wipes state
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY_AGENTS, JSON.stringify(agents));
+    } catch (err) {
+      console.warn('Failed to save agents to localStorage:', err);
     }
-  ]);
+  }, [agents]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY_LOGS, JSON.stringify(logs.slice(-50)));
+    } catch (err) {
+      console.warn('Failed to save logs to localStorage:', err);
+    }
+  }, [logs]);
+
+  const handleResetAgents = () => {
+    if (window.confirm('Reset Agent Grid back to default initial state?')) {
+      localStorage.removeItem(STORAGE_KEY_AGENTS);
+      localStorage.removeItem(STORAGE_KEY_LOGS);
+      setAgents(INITIAL_DEFAULT_AGENTS);
+      setLogs([
+        {
+          id: `log-${Date.now()}`,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+          agentName: 'System',
+          message: 'Agent grid restored to initial factory defaults.',
+          type: 'info'
+        }
+      ]);
+    }
+  };
 
   const addLog = (agentName: string, message: string, type: 'info' | 'success' | 'warning' = 'info') => {
     const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -562,11 +619,15 @@ export default function AgentsHub() {
             setParticles((prev) => prev.filter(p => p.id !== particleId));
           }, 1100);
 
+          const targetStationObj = WORKSTATIONS.find(w => w.x === targetX && w.y === targetY);
+          const stationLabel = targetStationObj ? targetStationObj.name : `Node (${targetX}, ${targetY})`;
+          const progressPct = getPathProgress({ ...agent, x: nextX, y: nextY });
+
           return {
             ...agent,
             x: nextX,
             y: nextY,
-            status: `Moving to node (${targetX}, ${targetY})...`
+            status: `En route to ${stationLabel} (${progressPct}%)`
           };
         })
       );
@@ -1053,16 +1114,43 @@ export default function AgentsHub() {
   return (
     <div className="space-y-12 animate-fade-in text-foreground">
       {/* Title Hero */}
-      <div className="space-y-2">
-        <span className="font-mono text-xs text-purple-color tracking-widest uppercase font-semibold bg-purple-color/10 border border-purple-color/20 px-2.5 py-1 rounded-full">
-          Autonomous Monitor
-        </span>
-        <h1 className="font-display text-3xl font-bold tracking-tight text-foreground mt-3">
-          Agent <span className="text-purple-color">Ecosystem</span>
-        </h1>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          Monitor real-time simulated AI agent operations, telemetry metrics, and background task executions.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/40 pb-6">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-xs text-purple-color tracking-widest uppercase font-semibold bg-purple-color/10 border border-purple-color/20 px-2.5 py-1 rounded-full">
+              Autonomous Monitor
+            </span>
+            <span className="font-mono text-[10px] text-emerald-color bg-emerald-color/10 border border-emerald-color/20 px-2 py-0.5 rounded-full">
+              ● {agents.length} Active Agents
+            </span>
+          </div>
+          <h1 className="font-display text-3xl font-bold tracking-tight text-foreground mt-2">
+            Agent <span className="text-purple-color">Ecosystem</span>
+          </h1>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Monitor real-time simulated AI agent operations, telemetry metrics, and background task executions.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+          <button
+            onClick={() => setIsMuted(prev => !prev)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/60 bg-card/40 hover:bg-card/80 text-xs font-mono text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+            title={isMuted ? "Unmute Retro Synthesizer" : "Mute Retro Synthesizer"}
+          >
+            {isMuted ? <VolumeX className="w-3.5 h-3.5 text-rose-400" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-color" />}
+            <span>{isMuted ? "Sound Off" : "Sound On"}</span>
+          </button>
+
+          <button
+            onClick={handleResetAgents}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-xs font-mono text-rose-400 transition-all cursor-pointer"
+            title="Reset Agent Grid to default initial state"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            <span>Reset Grid</span>
+          </button>
+        </div>
       </div>
 
       {/* Linacre Tool Box — callable over MCP */}

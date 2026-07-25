@@ -95,12 +95,27 @@ export default function EverydayTools() {
     setUrlInput(cleaned.toString());
   };
 
+  const [hmacSecret, setHmacSecret] = useState('');
+
   const generateHash = async () => {
     setHashing(true);
     try {
       const bytes = new TextEncoder().encode(hashInput);
-      const digest = await crypto.subtle.digest('SHA-256', bytes);
-      setHashOutput([...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join(''));
+      if (hmacSecret.trim()) {
+        const keyBytes = new TextEncoder().encode(hmacSecret);
+        const cryptoKey = await crypto.subtle.importKey(
+          'raw',
+          keyBytes,
+          { name: 'HMAC', hash: 'SHA-256' },
+          false,
+          ['sign']
+        );
+        const signature = await crypto.subtle.sign('HMAC', cryptoKey, bytes);
+        setHashOutput([...new Uint8Array(signature)].map((byte) => byte.toString(16).padStart(2, '0')).join(''));
+      } else {
+        const digest = await crypto.subtle.digest('SHA-256', bytes);
+        setHashOutput([...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join(''));
+      }
     } finally {
       setHashing(false);
     }
@@ -138,54 +153,85 @@ export default function EverydayTools() {
                 aria-selected={active}
                 className={`relative flex items-center gap-3 border-b border-r border-border-color px-4 py-4 text-left transition-colors sm:border-b-0 ${active ? 'bg-amber-color/[0.07] text-foreground' : 'text-muted-foreground hover:bg-muted/25 hover:text-foreground'}`}
               >
-                <Icon className={`h-4 w-4 shrink-0 ${active ? 'text-amber-color' : ''}`} />
-                <span><span className="block font-mono text-xs font-bold">{tool.label}</span><span className="mt-0.5 hidden text-[10px] sm:block">{tool.detail}</span></span>
-                {active && <span className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-gradient-to-r from-amber-color to-emerald-color" />}
+                <Icon className={`h-4 w-4 shrink-0 ${active ? 'text-amber-color' : 'text-muted-foreground'}`} />
+                <div>
+                  <span className="block font-mono text-xs font-bold">{tool.label}</span>
+                  <span className="block text-[10px] text-muted-foreground">{tool.detail}</span>
+                </div>
               </button>
             );
           })}
         </div>
 
-        <div className="p-4 sm:p-6">
+        <div className="p-5 sm:p-6">
           {activeTool === 'vat' && (
-            <div className="space-y-5">
-              <div><h3 className="font-display text-base font-bold text-foreground">UK VAT calculator</h3><p className="mt-1 text-xs text-muted-foreground">Add VAT to a net price or extract it from a VAT-inclusive total.</p></div>
-              <div className="grid gap-4 lg:grid-cols-[1fr_auto_auto] lg:items-end">
-                <label><span className="mb-1.5 block font-mono text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Amount (£)</span><input inputMode="decimal" value={vatAmount} onChange={(event) => setVatAmount(event.target.value)} className="h-12 w-full rounded-xl border border-border-color bg-[#020a11] px-4 font-mono text-sm text-foreground focus:border-amber-color focus:outline-none" /></label>
-                <div><span className="mb-1.5 block font-mono text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Amount is</span><div className="flex h-12 rounded-xl border border-border-color bg-[#020a11] p-1">{(['net', 'gross'] as const).map((mode) => <button key={mode} onClick={() => setVatMode(mode)} className={`rounded-lg px-4 font-mono text-[10px] font-bold uppercase ${vatMode === mode ? 'bg-amber-color text-[#031018]' : 'text-muted-foreground'}`}>{mode}</button>)}</div></div>
-                <label><span className="mb-1.5 block font-mono text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Rate</span><select value={vatRate} onChange={(event) => setVatRate(Number(event.target.value))} className="h-12 rounded-xl border border-border-color bg-[#020a11] px-4 font-mono text-xs text-foreground focus:border-amber-color focus:outline-none"><option value={20}>20% standard</option><option value={5}>5% reduced</option><option value={0}>0% zero-rated</option></select></label>
+            <div className="space-y-4">
+              <div><h3 className="font-display text-base font-bold text-foreground">UK VAT Calculator</h3><p className="mt-1 text-xs text-muted-foreground">Calculate Net, VAT amount, and Gross total for standard (20%), reduced (5%), or custom rates.</p></div>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div>
+                  <label htmlFor="vat-amount-input" className="block font-mono text-[9px] uppercase tracking-wider text-muted-foreground">Amount (£)</label>
+                  <input id="vat-amount-input" value={vatAmount} onChange={(e) => setVatAmount(e.target.value)} className="mt-1 h-10 w-full rounded-lg border border-border-color bg-[#020a11] px-3 font-mono text-xs text-foreground focus:border-amber-color focus:outline-none" />
+                </div>
+                <div>
+                  <label htmlFor="vat-rate-select" className="block font-mono text-[9px] uppercase tracking-wider text-muted-foreground">VAT Rate (%)</label>
+                  <select id="vat-rate-select" value={vatRate} onChange={(e) => setVatRate(Number(e.target.value))} className="mt-1 h-10 w-full rounded-lg border border-border-color bg-[#020a11] px-3 font-mono text-xs text-foreground focus:border-amber-color focus:outline-none">
+                    <option value={20}>20% (Standard)</option>
+                    <option value={5}>5% (Reduced)</option>
+                    <option value={0}>0% (Zero-rated)</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="vat-mode-select" className="block font-mono text-[9px] uppercase tracking-wider text-muted-foreground">Input Mode</label>
+                  <div id="vat-mode-select" className="mt-1 flex h-10 rounded-lg border border-border-color bg-[#020a11] p-1">
+                    <button onClick={() => setVatMode('net')} className={`flex-1 rounded-md font-mono text-[10px] font-bold ${vatMode === 'net' ? 'bg-amber-color text-[#031018]' : 'text-muted-foreground'}`}>Net</button>
+                    <button onClick={() => setVatMode('gross')} className={`flex-1 rounded-md font-mono text-[10px] font-bold ${vatMode === 'gross' ? 'bg-amber-color text-[#031018]' : 'text-muted-foreground'}`}>Gross</button>
+                  </div>
+                </div>
               </div>
-              <div className="grid gap-3 sm:grid-cols-3">{[['Net', vatResult.net], [`VAT (${vatRate}%)`, vatResult.vat], ['Gross', vatResult.gross]].map(([label, value]) => <div key={String(label)} className="rounded-xl border border-border-color bg-muted/15 p-4"><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</span><strong className="mt-2 block font-display text-2xl text-foreground">£{Number(value).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>)}</div>
-              <p className="font-mono text-[9px] leading-4 text-muted-foreground">For quick estimates only. Tax treatment can vary by product, service, location, and business status.</p>
+              <div className="grid grid-cols-3 gap-3 rounded-xl border border-border-color bg-muted/15 p-4 text-center">
+                <div><span className="block font-mono text-[9px] uppercase text-muted-foreground">Net Amount</span><strong className="mt-1 block font-mono text-sm text-foreground">£{vatResult.net.toFixed(2)}</strong></div>
+                <div><span className="block font-mono text-[9px] uppercase text-amber-color">VAT ({vatRate}%)</span><strong className="mt-1 block font-mono text-sm text-amber-color">£{vatResult.vat.toFixed(2)}</strong></div>
+                <div><span className="block font-mono text-[9px] uppercase text-cyan">Gross Total</span><strong className="mt-1 block font-mono text-sm text-cyan">£{vatResult.gross.toFixed(2)}</strong></div>
+              </div>
             </div>
           )}
 
           {activeTool === 'text' && (
             <div className="space-y-4">
-              <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="font-display text-base font-bold text-foreground">Text cleaner and counter</h3><p className="mt-1 text-xs text-muted-foreground">Count copy, normalise case, or clean pasted lists.</p></div><button onClick={() => copy(text, 'text')} className="inline-flex items-center gap-2 rounded-lg border border-border-color px-3 py-2 font-mono text-[10px] font-bold text-foreground">{copied === 'text' ? <Check className="h-4 w-4 text-emerald-color" /> : <Copy className="h-4 w-4" />} Copy</button></div>
-              <textarea value={text} onChange={(event) => setText(event.target.value)} placeholder="Paste or type text here…" className="min-h-56 w-full resize-y rounded-xl border border-border-color bg-[#020a11] p-4 text-sm leading-6 text-foreground focus:border-amber-color focus:outline-none" />
-              <div className="flex flex-wrap gap-2">{[
-                ['UPPERCASE', () => setText(text.toUpperCase())],
-                ['lowercase', () => setText(text.toLowerCase())],
-                ['Title Case', () => setText(titleCase(text))],
-                ['Trim lines', () => transformLines('trim')],
-                ['Remove blanks', () => transformLines('blank')],
-                ['Remove duplicates', () => transformLines('dedupe')],
-                ['Sort lines', () => transformLines('sort')],
-              ].map(([label, action]) => <button key={label as string} onClick={action as () => void} className="rounded-lg border border-border-color bg-muted/15 px-3 py-2 font-mono text-[9px] font-bold text-muted-foreground hover:border-amber-color/40 hover:text-foreground">{label as string}</button>)}</div>
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">{[
-                ['Characters', textStats.characters], ['No spaces', textStats.charactersNoSpaces], ['Words', textStats.words], ['Lines', textStats.lines], ['Read time', `${textStats.readingMinutes} min`],
-              ].map(([label, value]) => <div key={String(label)} className="rounded-lg border border-border-color bg-background/30 p-3"><span className="block font-mono text-[8px] uppercase text-muted-foreground">{label}</span><strong className="mt-1 block font-mono text-sm text-foreground">{value}</strong></div>)}</div>
+              <div><h3 className="font-display text-base font-bold text-foreground">Text Inspector & Cleaner</h3><p className="mt-1 text-xs text-muted-foreground">Count words, characters, lines, and transform text formatting client-side.</p></div>
+              <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="Type or paste text here to analyze..." className="min-h-32 w-full resize-y rounded-xl border border-border-color bg-[#020a11] p-4 font-mono text-xs leading-6 text-foreground focus:border-amber-color focus:outline-none" />
+              <div className="flex flex-wrap gap-2">
+                {[
+                  ['UPPERCASE', () => setText(text.toUpperCase())],
+                  ['lowercase', () => setText(text.toLowerCase())],
+                  ['Title Case', () => setText(titleCase(text))],
+                  ['Trim lines', () => transformLines('trim')],
+                  ['Remove blanks', () => transformLines('blank')],
+                  ['Remove duplicates', () => transformLines('dedupe')],
+                  ['Sort lines', () => transformLines('sort')],
+                ].map(([label, action]) => <button key={label as string} onClick={action as () => void} className="rounded-lg border border-border-color bg-muted/15 px-3 py-2 font-mono text-[9px] font-bold text-muted-foreground hover:border-amber-color/40 hover:text-foreground">{label as string}</button>)}
+              </div>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+                {[
+                  ['Characters', textStats.characters], ['No spaces', textStats.charactersNoSpaces], ['Words', textStats.words], ['Lines', textStats.lines], ['Read time', `${textStats.readingMinutes} min`],
+                ].map(([label, value]) => <div key={String(label)} className="rounded-lg border border-border-color bg-background/30 p-3"><span className="block font-mono text-[8px] uppercase text-muted-foreground">{label}</span><strong className="mt-1 block font-mono text-sm text-foreground">{value}</strong></div>)}
+              </div>
             </div>
           )}
 
           {activeTool === 'hash' && (
             <div className="space-y-4">
-              <div><h3 className="font-display text-base font-bold text-foreground">SHA-256 hash generator</h3><p className="mt-1 text-xs text-muted-foreground">Create a deterministic fingerprint for text. The input never leaves your browser.</p></div>
-              <textarea value={hashInput} onChange={(event) => { setHashInput(event.target.value); setHashOutput(''); }} placeholder="Enter text to hash…" className="min-h-40 w-full resize-y rounded-xl border border-border-color bg-[#020a11] p-4 font-mono text-xs leading-6 text-foreground focus:border-amber-color focus:outline-none" />
-              <div className="flex flex-wrap gap-2"><button onClick={generateHash} disabled={hashing} className="inline-flex items-center gap-2 rounded-lg bg-amber-color px-4 py-2.5 font-mono text-[10px] font-bold text-[#031018] disabled:opacity-50"><Fingerprint className="h-4 w-4" />{hashing ? 'Hashing…' : 'Generate SHA-256'}</button><button onClick={() => { setHashInput(''); setHashOutput(''); }} className="inline-flex items-center gap-2 rounded-lg border border-border-color px-3 py-2.5 font-mono text-[10px] font-bold text-muted-foreground"><RefreshCw className="h-4 w-4" /> Clear</button></div>
+              <div><h3 className="font-display text-base font-bold text-foreground">SHA-256 & HMAC Generator</h3><p className="mt-1 text-xs text-muted-foreground">Create deterministic SHA-256 fingerprints or HMAC-SHA-256 secret signatures completely offline.</p></div>
+              <textarea value={hashInput} onChange={(event) => { setHashInput(event.target.value); setHashOutput(''); }} placeholder="Enter text to hash…" className="min-h-32 w-full resize-y rounded-xl border border-border-color bg-[#020a11] p-4 font-mono text-xs leading-6 text-foreground focus:border-amber-color focus:outline-none" />
+              <div>
+                <label htmlFor="hmac-secret-key-input" className="block font-mono text-[9px] uppercase tracking-wider text-muted-foreground">HMAC Secret Key (Optional)</label>
+                <input id="hmac-secret-key-input" value={hmacSecret} onChange={(e) => setHmacSecret(e.target.value)} placeholder="Leave blank for plain SHA-256" className="mt-1 h-9 w-full rounded-lg border border-border-color bg-[#020a11] px-3 font-mono text-xs text-foreground focus:border-amber-color focus:outline-none" />
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <button onClick={generateHash} disabled={hashing} className="inline-flex items-center gap-2 rounded-lg bg-amber-color px-4 py-2.5 font-mono text-[10px] font-bold text-[#031018] disabled:opacity-50"><Fingerprint className="h-4 w-4" />{hashing ? 'Generating…' : hmacSecret.trim() ? 'Generate HMAC-SHA-256' : 'Generate SHA-256'}</button>
+                <button onClick={() => { setHashInput(''); setHmacSecret(''); setHashOutput(''); }} className="inline-flex items-center gap-2 rounded-lg border border-border-color px-3 py-2.5 font-mono text-[10px] font-bold text-muted-foreground"><RefreshCw className="h-4 w-4" /> Clear</button>
+              </div>
               {hashOutput && <div className="flex items-start gap-3 rounded-xl border border-amber-color/25 bg-[#020a11] p-4"><code className="min-w-0 flex-1 break-all font-mono text-xs leading-6 text-cyan">{hashOutput}</code><button onClick={() => copy(hashOutput, 'hash')} className="shrink-0 rounded-lg border border-border-color p-2 text-muted-foreground" aria-label="Copy hash">{copied === 'hash' ? <Check className="h-4 w-4 text-emerald-color" /> : <Copy className="h-4 w-4" />}</button></div>}
-              <p className="font-mono text-[9px] leading-4 text-muted-foreground">A hash is not encryption and cannot verify who created a value. Never use a plain SHA-256 hash alone for password storage.</p>
             </div>
           )}
 

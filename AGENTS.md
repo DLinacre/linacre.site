@@ -1,37 +1,32 @@
 # linacre-site-repo — Agent Instructions
 
 ## What This Is
-The developer portal and devops hub for **Linacre** brand, deployed to www.linacre.site.
+The developer portal, private browser toolbox, and app launcher for the **Linacre** ecosystem, deployed to www.linacre.site.
 
 ## Structure
-`
+```
 api/
   server.ts            (Express API backend)
 src/
-  App.tsx              (Vite React frontend)
-  components/          (Tabs: Dashboard, Lab, Toolkit, IdentityHub, DevPlayground, AgentsHub, Projects)
+  App.tsx              (Vite React frontend & routing)
+  components/          (Header, StartPage, Toolkit, Lab, Projects, DevPlayground, AgentsHub, IdentityHub, MobileBottomNav)
+  lib/                 (design-system.ts, audioEngine.ts, emblemRenderer.ts)
 public/
   favicon.svg          (Lucide cat favicon)
   manifest.json        (PWA manifest)
 vercel.json            (API rewrites and CSP security headers)
-`
+```
 
-## Rules
-- **No artificial limits** — use any free tool, any format, any license. Only real constraints: hardware specs (RTX 3070 Ti 4GB VRAM, 64GB RAM, C/D/E drives) and free/free-tier only. All assets should follow the brand guide at D:\AI Truth\BRAND.md.
-- **Vercel project:** `linacre-site-repo`
-- **Build command:** `python linacre.py build`
-- **Deploy command:** `vercel deploy --prod --yes --project linacre-site-repo --force`
-- **After changes, verify with:** `Invoke-WebRequest -Uri "https://www.linacre.site/"`
-- **Secrets workflow:** Registry is the single source of truth. Never hardcode keys. Use `python linacre.py setup` (Registry → .env), `python linacre.py sync` (.env → Vercel), `python linacre.py verify` (check all match), `python linacre.py audit` (scan for leaks). See D:\AI Truth\AGENTS.md for full inventory.
+## Rules & Workflows
+- **No Artificial Limits** — Use any free tool, any format, any license. Constraints: hardware specs (RTX 3070 Ti, 64GB RAM, D: canonical storage at `D:\LIN4CRE`) and free/open-source tools.
+- **Single Source of Truth** — All active repositories live under `D:\LIN4CRE\`. Desktop app shortcuts are populated at `C:\Users\KingL\Desktop` for 1-by-1 execution and testing.
+- **Build Command:** `npm run build` (Compiles Vite React app + Node server and prerenders 22 static routes).
+- **Local Dev Command:** `npm run dev` (Runs Vite dev server on port 3000).
+- **Deploy Command:** `vercel deploy --prod --yes --project linacre-site-repo --force`
+- **Verification:** Run `npm run build` and test `http://localhost:3000/`.
+- **Secrets Workflow:** Centralized secrets via Windows Environment Variables & `.env` files. Every project includes `.env` protected by strict `.gitignore` rules (`.env`, `.env*`, `*.key`) so secrets are never pushed to Git/GitHub.
 
-## Architecture
-- React SPA with tabbed navigation:
-  - **Toolkit:** Developer tool search and filters.
-  - **Lab:** LLM chatbot with active directory file viewer.
-  - **Dashboard:** Code runner stats, path audits.
-  - **Identity:** Live vector monogram customizer and SVG builder.
-  - **Playground / Projects / Agents:** Dev tools, git maps, and agent executor triggers.
-- CyberBlue-Green theme: #030c14 background, #ecfeff text, cyan #22D3EE primary and signal green #34D399 secondary.
-
-## Context
-For full brand knowledge, read D:\AI Truth\ directory.
+## Design System & Architecture
+- **Navigation Architecture**: 6 primary items (**Start**, **Tools**, **Projects**, **Playground**, **About**, **Contact**) and secondary pages grouped under **More** dropdown.
+- **Mobile Usability**: Includes `MobileBottomNav` for responsive touch navigation on mobile viewports.
+- **Flexible Visual Themes**: Supports dynamic HSL custom themes (e.g., CyberBlue-Green, Midnight Slate, Obsidian Dark, Neon Cyberpunk, or Light Mode). Themes are user-customizable and never set in stone.
