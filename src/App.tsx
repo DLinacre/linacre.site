@@ -1,9 +1,9 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { WifiOff } from 'lucide-react';
 import Header from './components/Header';
 import MobileBottomNav from './components/MobileBottomNav';
-import { getEmblemSVG, CustomEmblem } from './lib/emblemRenderer';
+import { getEmblemSVG } from './lib/emblemRenderer';
 import { RouteHead } from './components/RouteHead';
 import routeMeta from '../route-meta.json';
 import TerminalIntro from './components/TerminalIntro';
@@ -11,6 +11,15 @@ import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import { CHANGELOG } from './data/core';
 import { ToolCategory } from './types';
+import { type BreadcrumbPath } from './app/types';
+import { resolveColorScheme, resolveFontScheme } from './config/brand';
+import { APP_TABS, ROUTE_LABEL, getTabFromLocation, routeKeyForTab, shouldPreserveCurrentPath, tabToPath } from './config/routes';
+import { useCommandPaletteShortcut } from './hooks/useCommandPaletteShortcut';
+import { useIdleFlag } from './hooks/useIdleFlag';
+import { useIdentityPreferences } from './hooks/useIdentityPreferences';
+import { useKonamiUnlock } from './hooks/useKonamiUnlock';
+import { useOnlineStatus } from './hooks/useOnlineStatus';
+import { useThemePreference } from './hooks/useThemePreference';
 
 // Lazy-loaded page components for optimization (code splitting)
 const StartPage = lazy(() => import('./components/StartPage'));
@@ -40,74 +49,29 @@ const Now = lazy(() => import('./components/Now'));
 import { BLOG_POSTS } from './data';
 import Breadcrumbs from './components/Breadcrumbs';
 
-type BreadcrumbPath = { label: string; onClick?: () => void; active?: boolean };
-
-const ROUTE_LABEL: Record<string, string> = {
-  '/now': 'Now',
-  '/projects': 'Projects',
-  '/games': 'Games',
-  '/toolkit': 'Toolkit',
-  '/learn': 'Learn',
-  '/blog': 'Blog',
-  '/playground': 'Playground',
-  '/lab': 'AI Lab',
-  '/agents': 'Agents',
-  '/identity': 'Identity',
-  '/about': 'About',
-  '/contact': 'Contact',
-  '/contact/thanks': 'Thanks',
-  '/privacy': 'Privacy',
-  '/cookie-policy': 'Cookie Policy',
-  '/terms': 'Terms',
-  '/accessibility': 'Accessibility',
-  '/status': 'Status'
-};
-
 export default function App() {
-  const getTabFromPath = () => {
-    const pathname = window.location.pathname.replace(/^\/+|\/+$/g, '');
-    const hash = window.location.hash.replace(/^#/, '');
-    const validTabs = [
-      'toolkit', 'games', 'learn', 'lab', 'dashboard', 'identity', 'playground',
-      'projects', 'agents', 'about', 'contact', 'privacy', 'accessibility', 'blog', 'status',
-      'contact/thanks', 'cookie-policy', 'terms', 'now'
-    ];
-
-    // Route path -> internal tab id (colons/paths kept as-is where safe).
-    if (pathname === 'contact/thanks') return 'contact-thanks';
-    if (pathname === 'cookie-policy') return 'cookie-policy';
-    if (pathname === 'terms') return 'terms';
-
-    // 1. Authoritative: check window.location.pathname first
-    if (validTabs.includes(pathname)) {
-      return pathname;
-    }
-    if (pathname.startsWith('blog/')) {
-      return 'blog';
-    }
-    // 2. Fallback: check hash
-    if (validTabs.includes(hash)) {
-      return hash;
-    }
-    // 3. Root path mapping: the dedicated utility-first start page.
-    if (window.location.pathname === '/' || window.location.pathname === '') {
-      return 'home';
-    }
-    // 4. Default fallback
-    return 'projects';
-  };
-
-  const [activeTab, setActiveTab] = useState<string>(() => getTabFromPath());
+  const [activeTab, setActiveTab] = useState<string>(() => getTabFromLocation(window.location.pathname, window.location.hash));
+  const [locationPath, setLocationPath] = useState(() => window.location.pathname);
   const [activeCategory, setActiveCategory] = useState<ToolCategory | 'all'>('all');
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [paletteLoaded, setPaletteLoaded] = useState(false);
-  const [chatbotReady, setChatbotReady] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isOffline, setIsOffline] = useState(() => !navigator.onLine);
+
+  const openPalette = useCallback(() => {
+    setPaletteLoaded(true);
+    setPaletteOpen(true);
+  }, []);
+
+  const isOffline = useOnlineStatus();
+  const { konamiUnlocked, setKonamiUnlocked } = useKonamiUnlock();
+  const { theme, setTheme } = useThemePreference('dark');
+  const { identity, customEmblems } = useIdentityPreferences();
+  const chatbotReady = useIdleFlag(1500, 3000);
+
+  useCommandPaletteShortcut(openPalette);
 
   const getBreadcrumbPaths = () => {
-    const pathname = window.location.pathname;
+    const pathname = locationPath;
     const parts = pathname.split('/').filter(Boolean);
 
     const paths: BreadcrumbPath[] = [
@@ -132,9 +96,10 @@ export default function App() {
     let runningPath = '';
     parts.forEach((part, idx) => {
       runningPath += `/${part}`;
+      const targetPath = runningPath;
       const isLast = idx === parts.length - 1;
 
-      let label = ROUTE_LABEL[runningPath] || decodeURIComponent(part).replace(/-/g, ' ');
+      let label = ROUTE_LABEL[targetPath] || decodeURIComponent(part).replace(/-/g, ' ');
 
       if (parts[0] === 'blog' && idx === 1) {
         const post = BLOG_POSTS.find(p => p.slug === part);
@@ -147,7 +112,7 @@ export default function App() {
         onClick: isLast ? undefined : () => {
           const tab = part === 'thanks' ? 'contact-thanks' : part;
           setActiveTab(tab);
-          window.history.pushState(null, '', runningPath);
+          window.history.pushState(null, '', targetPath);
           window.dispatchEvent(new PopStateEvent('popstate'));
         }
       });
@@ -156,48 +121,11 @@ export default function App() {
     return paths;
   };
 
-  const [konamiUnlocked, setKonamiUnlocked] = useState(false);
-
-  useEffect(() => {
-    const handleOnline = () => setIsOffline(false);
-    const handleOffline = () => setIsOffline(true);
-
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    // Secret Konami Code Listener: ↑ ↑ ↓ ↓ ← → ← → b a
-    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-    let konamiIndex = 0;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
-      const expected = konamiSequence[konamiIndex].length === 1 ? konamiSequence[konamiIndex].toLowerCase() : konamiSequence[konamiIndex];
-
-      if (key === expected) {
-        konamiIndex++;
-        if (konamiIndex === konamiSequence.length) {
-          setKonamiUnlocked(true);
-          import('./lib/audioEngine').then(m => m.playKonamiSound());
-          konamiIndex = 0;
-        }
-      } else {
-        konamiIndex = 0;
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
   // Synchronize activeTab with URL path for back/forward navigation support
   useEffect(() => {
     const handleNavigation = () => {
-      setActiveTab(getTabFromPath());
+      setLocationPath(window.location.pathname);
+      setActiveTab(getTabFromLocation(window.location.pathname, window.location.hash));
     };
 
     window.addEventListener('popstate', handleNavigation);
@@ -208,25 +136,15 @@ export default function App() {
     };
   }, []);
 
-  // Map internal tab id back to a real URL path.
-  const tabToPath = (tab: string): string => {
-    if (tab === 'home') return '/';
-    if (tab === 'contact-thanks') return '/contact/thanks';
-    return `/${tab}`;
-  };
-
   // Update URL path and localStorage when activeTab changes
   useEffect(() => {
     const currentPath = window.location.pathname;
     const targetPath = tabToPath(activeTab);
     // Preserve existing search params for /contact/thanks?ref=…
-    if (
-      currentPath !== targetPath
-      && !(activeTab === 'blog' && currentPath.startsWith('/blog/'))
-      && !(activeTab === 'contact-thanks' && currentPath === '/contact/thanks')
-    ) {
+    if (currentPath !== targetPath && !shouldPreserveCurrentPath(activeTab, currentPath)) {
       const search = activeTab === 'contact-thanks' ? window.location.search : '';
       window.history.pushState(null, '', `${targetPath}${search}`);
+      setLocationPath(targetPath);
     }
     try {
       localStorage.setItem('linacre_active_tab', activeTab);
@@ -241,176 +159,13 @@ export default function App() {
   }, [activeTab]);
 
   // Look up metadata for the current route
-  const getRouteMeta = () => {
-    const pathname = window.location.pathname;
-    if (activeTab === 'blog' && pathname.startsWith('/blog/') && pathname.length > 6) {
-      const match = routeMeta.routes[pathname as keyof typeof routeMeta.routes];
-      if (match) return match;
-    }
-    // Map new synthetic tabs -> canonical route keys.
-    let key: string;
-    if (activeTab === 'home') key = '/';
-    else if (activeTab === 'contact-thanks') key = '/contact/thanks';
-    else key = `/${activeTab}`;
+  const currentMeta = useMemo(() => {
+    const key = routeKeyForTab(activeTab, locationPath);
     return routeMeta.routes[key as keyof typeof routeMeta.routes] || routeMeta.routes['/'];
-  };
+  }, [activeTab, locationPath]);
 
-  const currentMeta = getRouteMeta();
-
-  // Identity and Brand custom values synchronized from localStorage
-  const [customEmblems, setCustomEmblems] = useState<CustomEmblem[]>([]);
-  const [identity, setIdentity] = useState({
-    colorId: 'cyber',
-    fontId: 'cyber',
-    frameId: 'dl-geo',
-    motionId: 'pulse',
-    pulseSpeed: 'slow',
-    name: 'DAVID LINACRE',
-    title: 'Software engineer · useful tools · AI systems',
-    bio: 'Building practical software, open-source tools, and reliable automation systems.',
-    glow: 2,
-    customPrimary: '#22D3EE',
-    customSecondary: '#34D399'
-  });
-
-  const syncIdentity = () => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      const pColor = params.get('brand_color');
-      const pFont = params.get('brand_font');
-      const pFrame = params.get('brand_frame');
-      const pMotion = params.get('brand_motion');
-      const pPulseSpeed = params.get('brand_pulse_speed');
-      const pGlow = params.get('brand_glow');
-      const pName = params.get('brand_name');
-      const pPrimary = params.get('brand_primary');
-      const pSecondary = params.get('brand_secondary');
-
-      if (pColor) localStorage.setItem('linacre_brand_color', pColor);
-      if (pFont) localStorage.setItem('linacre_brand_font', pFont);
-      if (pFrame) localStorage.setItem('linacre_brand_frame', pFrame);
-      if (pMotion) localStorage.setItem('linacre_brand_motion', pMotion);
-      if (pPulseSpeed) localStorage.setItem('linacre_brand_pulse_speed', pPulseSpeed);
-      if (pGlow) localStorage.setItem('linacre_brand_glow', pGlow);
-      if (pName) localStorage.setItem('linacre_brand_name', pName);
-      if (pPrimary) localStorage.setItem('linacre_brand_custom_primary', pPrimary);
-      if (pSecondary) localStorage.setItem('linacre_brand_custom_secondary', pSecondary);
-    } catch (e) {
-      console.error('Failed to parse search params', e);
-    }
-
-    const storedColor = localStorage.getItem('linacre_brand_color');
-    const colorId = !storedColor || storedColor === 'amber' ? 'cyber' : storedColor;
-    if (storedColor === 'amber') localStorage.setItem('linacre_brand_color', 'cyber');
-    const fontId = localStorage.getItem('linacre_brand_font') || 'cyber';
-    const frameId = localStorage.getItem('linacre_brand_frame') || 'dl-geo';
-    const motionId = localStorage.getItem('linacre_brand_motion') || 'pulse';
-    const pulseSpeed = localStorage.getItem('linacre_brand_pulse_speed') || 'slow';
-    const name = localStorage.getItem('linacre_brand_name') || 'DAVID LINACRE';
-    const title = localStorage.getItem('linacre_brand_title') || 'Software engineer · useful tools · AI systems';
-    const bio = localStorage.getItem('linacre_brand_bio') || 'Building practical software, open-source tools, and reliable automation systems.';
-    const glow = Number(localStorage.getItem('linacre_brand_glow') || '2');
-    const customPrimary = localStorage.getItem('linacre_brand_custom_primary') || '#22D3EE';
-    const customSecondary = localStorage.getItem('linacre_brand_custom_secondary') || '#34D399';
-
-    try {
-      const savedEmblems = localStorage.getItem('linacre_custom_emblems');
-      setCustomEmblems(savedEmblems ? JSON.parse(savedEmblems) : []);
-    } catch (e) {
-      console.error('Failed to parse custom emblems in App.tsx', e);
-    }
-
-    setIdentity({ colorId, fontId, frameId, motionId, pulseSpeed, name, title, bio, glow, customPrimary, customSecondary });
-  };
-
-  useEffect(() => {
-    syncIdentity();
-    window.addEventListener('linacre-identity-updated', syncIdentity);
-    return () => window.removeEventListener('linacre-identity-updated', syncIdentity);
-  }, []);
-
-  // Defer the chatbot chunk to idle time after first paint
-  useEffect(() => {
-    const start = () => setChatbotReady(true);
-    if ('requestIdleCallback' in window) {
-      const id = (window as any).requestIdleCallback(start, { timeout: 3000 });
-      return () => (window as any).cancelIdleCallback?.(id);
-    }
-    const t = setTimeout(start, 1500);
-    return () => clearTimeout(t);
-  }, []);
-
-  // Synchronize theme on initial mount
-  useEffect(() => {
-    try {
-      const savedTheme = localStorage.getItem('linacre_theme') || 'dark';
-      setTheme(savedTheme as 'dark' | 'light');
-      document.documentElement.classList.remove('dark', 'light');
-      document.documentElement.classList.add(savedTheme);
-    } catch (e) {
-      console.error('Failed to sync theme', e);
-    }
-  }, []);
-
-  // Keyboard shortcut listener to open command palette on "/" or "Cmd+K"
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || e.key === '/') {
-        if (
-          document.activeElement?.tagName === 'INPUT' ||
-          document.activeElement?.tagName === 'TEXTAREA'
-        ) {
-          return; // Skip if focused on input fields
-        }
-        e.preventDefault();
-        (setPaletteLoaded(true), setPaletteOpen(true));
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  // Define brand configuration maps to inject into styles and SVGs
-  const colorsMap: Record<string, { primary: string; secondary: string }> = {
-    cyber: { primary: '#22D3EE', secondary: '#34D399' },
-    ocean: { primary: '#38BDF8', secondary: '#2DD4BF' },
-    matrix: { primary: '#2DD4BF', secondary: '#A3E635' },
-    violet: { primary: '#818CF8', secondary: '#22D3EE' },
-    mono: { primary: '#E2F7FA', secondary: '#7DD3FC' },
-    // Fully custom two-colour system tuned in the Identity Studio colour lab.
-    custom: { primary: identity.customPrimary, secondary: identity.customSecondary },
-    // Compatibility aliases for previously shared theme links.
-    amber: { primary: '#22D3EE', secondary: '#34D399' },
-    cyan: { primary: '#38BDF8', secondary: '#2DD4BF' },
-    emerald: { primary: '#2DD4BF', secondary: '#A3E635' },
-    crimson: { primary: '#818CF8', secondary: '#22D3EE' }
-  };
-
-  const fontsMap: Record<string, { display: string; mono: string; import: string }> = {
-    cyber: {
-      display: '"Space Grotesk", "Inter", sans-serif',
-      mono: '"JetBrains Mono", monospace',
-      import: "" /* default fonts are self-hosted in /fonts — no external CSS */
-    },
-    neotech: {
-      display: '"Orbitron", sans-serif',
-      mono: '"Share Tech Mono", monospace',
-      import: "@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Share+Tech+Mono&display=swap');"
-    },
-    brutalist: {
-      display: '"Plus Jakarta Sans", sans-serif',
-      mono: '"Fira Code", monospace',
-      import: "@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Plus+Jakarta+Sans:wght@500;800&display=swap');"
-    },
-    editorial: {
-      display: '"Playfair Display", serif',
-      mono: '"Fira Mono", monospace',
-      import: "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Fira+Mono&display=swap');"
-    }
-  };
-
-  const activeColor = colorsMap[identity.colorId] || colorsMap.cyber;
-  const activeFont = fontsMap[identity.fontId] || fontsMap.cyber;
+  const activeColor = useMemo(() => resolveColorScheme(identity), [identity]);
+  const activeFont = useMemo(() => resolveFontScheme(identity.fontId), [identity.fontId]);
 
   // Stagger & entering animation variants
   const containerVariants = {
@@ -494,7 +249,7 @@ export default function App() {
         setActiveTab={setActiveTab}
         theme={theme}
         setTheme={setTheme}
-        openPalette={() => (setPaletteLoaded(true), setPaletteOpen(true))}
+        openPalette={openPalette}
         activeColor={activeColor}
       />
 
@@ -637,7 +392,7 @@ export default function App() {
                 <Toolkit
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
-                  openPalette={() => (setPaletteLoaded(true), setPaletteOpen(true))}
+                  openPalette={openPalette}
                   activeCategory={activeCategory}
                   setActiveCategory={setActiveCategory}
                 />
@@ -906,7 +661,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {!['home', 'toolkit', 'games', 'learn', 'lab', 'dashboard', 'identity', 'playground', 'projects', 'agents', 'about', 'contact', 'privacy', 'accessibility', 'blog', 'status', 'contact-thanks', 'cookie-policy', 'terms', 'now'].includes(activeTab) && (
+          {!APP_TABS.includes(activeTab as any) && (
             <motion.div
               key="404"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -995,7 +750,7 @@ export default function App() {
       <MobileBottomNav
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        openMore={() => setIsPaletteOpen(true)}
+        openMore={openPalette}
       />
       <Footer />
     </div>

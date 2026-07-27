@@ -12,7 +12,9 @@
     "lint": "tsc --noEmit",
     "setup": "python linacre.py setup",
     "sync": "python linacre.py sync",
-    "status": "python linacre.py status"
+    "status": "python linacre.py status",
+    "test": "vitest run",
+    "check": "npm run lint && npm run test && npm run build"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -39,6 +41,7 @@
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
-    "vite": "^6.2.3"
+    "vite": "^6.2.3",
+    "vitest": "^4.1.10"
   }
 }
