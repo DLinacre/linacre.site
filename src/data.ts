@@ -239,7 +239,7 @@ export const MANUAL_PROJECTS: Project[] = [
     solution: 'Engineered a standalone 170KB single-file HTML workspace with inline CSS, key storage, dynamic system prompts, and responsive streaming layout.',
     tech: ['HTML5', 'Vanilla JS', 'Tailwind CSS', 'Web Storage', 'AI Prompts'],
     liveUrl: '/tools/opagent.html',
-    repoUrl: 'https://github.com/LIN4CRE/ev-backend'
+    live: true
   },
   {
     name: 'Arena Audit Prompt Builder',
@@ -311,7 +311,7 @@ export const MANUAL_PROJECTS: Project[] = [
     solution: 'Kept the product client-side with IndexedDB offline storage, responsive register flows, inventory warnings, expense tracking, and receipt output.',
     tech: ['Vue 3', 'Dexie', 'IndexedDB', 'PWA', 'Offline-first'],
     liveUrl: 'https://dlinacre.github.io/Apex-POS/',
-    repoUrl: 'https://github.com/LIN4CRE/Apex-POS',
+    repoUrl: 'https://github.com/DLinacre/Apex-POS',
     live: true,
   },
   {
@@ -399,6 +399,20 @@ export const MANUAL_PROJECTS: Project[] = [
     solution: 'Organised the workflow as a versioned Python project with architecture notes, CI, tests, security reports, release tags, and a repository-hosted demo recording.',
     tech: ['Python', 'GitHub Actions', 'CI/CD', 'Security', 'DORA Metrics'],
     repoUrl: 'https://github.com/LIN4CRE/myhub-pipeline'
+  },
+  {
+    name: 'PayHip Scraper 🔎',
+    category: 'build',
+    description: 'Digital product intelligence for Payhip sellers: scrapes the live marketplace, scores every listing for opportunity, and generates Arena.ai prompts to build a better version.',
+    url: 'https://github.com/LIN4CRE/PayHip-Scraper',
+    host: 'github.com/LIN4CRE/PayHip-Scraper',
+    tag: 'Node.js · Self-hosted · Source',
+    role: 'Creator and backend engineer',
+    challenges: 'Payhip renders its marketplace client-side and its search matches any term in a phrase, so a naive scraper reads an empty page and a literal search returns unrelated products.',
+    solution: 'Targets the marketplace search API directly, probes each term to narrow on the most selective one, then filters locally for full-phrase matches. Scores listings deterministically from real review volume, ratings and market size — no estimated sales figures.',
+    tech: ['Node.js', 'Express', 'SQLite', 'Cheerio', 'Zod', 'Docker'],
+    repoUrl: 'https://github.com/LIN4CRE/PayHip-Scraper',
+    live: false
   },
   {
     name: 'Deasy Continuous Command Suite',
