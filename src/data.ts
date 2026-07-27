@@ -4,6 +4,16 @@ import { Tool, Project, MCPServer, SkillTemplate, BlogPost } from './types';
 export const TOOLS: Tool[] = [
   // SINGLE-FILE APPS & TOOLS
   {
+    id: 'nic_food_decider',
+    name: "Nic's Food Decider",
+    category: 'start',
+    description: 'One-click decision engine for dinner — cook or takeaway with weighted preferences & dietary filters.',
+    url: 'https://nic-food-decider.vercel.app',
+    host: 'nic-food-decider.vercel.app',
+    searchKeywords: 'nic food decider dinner meal decision takeaway cook recipes flask vercel',
+    tag: 'App · Live'
+  },
+  {
     id: 'opagent',
     name: 'Personal OP Agent',
     category: 'start',
@@ -162,6 +172,21 @@ export const TOOLS: Tool[] = [
 ];
 
 export const MANUAL_PROJECTS: Project[] = [
+  {
+    name: "Nic's Food Decider 🍕",
+    category: 'build',
+    description: 'An intelligent, bias-weighted meal decision web application designed to solve dinner paralysis with cook & takeaway modes, custom filters, and decision history.',
+    url: 'https://nic-food-decider.vercel.app',
+    host: 'nic-food-decider.vercel.app',
+    tag: 'Featured · Live v1.0.0',
+    role: 'Full-stack developer & designer',
+    challenges: 'Overcoming daily meal decision paralysis with an instant, bias-weighted decider and clean mobile-first UI.',
+    solution: 'Engineered a Flask 3 & SQLite application with SQLAlchemy ORM, bcrypt auth, Pydantic validation, Jinja templates, and Vercel serverless deployment.',
+    tech: ['Python', 'Flask', 'SQLAlchemy', 'SQLite', 'Vercel', 'Vanilla JS', 'CSS3', 'Pydantic'],
+    liveUrl: 'https://nic-food-decider.vercel.app',
+    repoUrl: 'https://github.com/DLinacre/nic-food-decider',
+    live: true,
+  },
   {
     name: 'Fleatment 🐱',
     category: 'build',
