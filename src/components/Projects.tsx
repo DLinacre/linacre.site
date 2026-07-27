@@ -22,7 +22,7 @@ const CATEGORY_META: Record<string, { label: string; colour: string }> = {
   design: { label: 'Interactive', colour: '#818CF8' },
 };
 
-const FEATURED_ORDER = ['APKHub', 'OmniRoute LLM Engine', 'Fleatment 🐱', 'Personal OP Agent', 'Arena Audit Prompt Builder', 'PokeGuru', 'Apex POS', 'Mob Deals'];
+const FEATURED_ORDER = ["Nic's Food Decider 🍕", 'APKHub 📱', 'Linacre Uninstaller', 'OmniRoute LLM Engine', 'Fleatment 🐱', 'Personal OP Agent', 'Arena Audit Prompt Builder', 'PokeGuru', 'Apex POS', 'Mob Deals'];
 
 function projectRank(project: Project) {
   const featured = FEATURED_ORDER.indexOf(project.name);
@@ -220,9 +220,18 @@ export default function Projects() {
                   </div>
                   <p className="mt-3 flex-1 text-sm leading-6 text-muted-foreground">{project.description}</p>
                   <div className="mt-4 flex flex-wrap gap-1.5">{(project.tech || []).slice(0, 5).map((tech) => <span key={tech} className="rounded-full border border-border-color bg-background/40 px-2 py-1 font-mono text-[9px] text-muted-foreground">{tech}</span>)}</div>
-                  <div className="mt-5 flex items-center justify-between gap-3 border-t border-border-color pt-4">
+                  <div className="mt-5 flex items-center justify-between gap-2 border-t border-border-color pt-4">
                     <span className="flex min-w-0 items-center gap-1.5 truncate font-mono text-[9px] text-muted-foreground"><Globe2 className="h-3 w-3 shrink-0" />{project.host}</span>
-                    <button onClick={() => setSelected(project)} className="inline-flex shrink-0 items-center gap-1 font-mono text-[10px] font-bold text-amber-color hover:text-amber-glow">Details <ArrowRight className="h-3.5 w-3.5" /></button>
+                    <div className="flex items-center gap-2.5">
+                      {(project.liveUrl || project.url) && (
+                        <a href={project.liveUrl || project.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-mono text-[10px] font-bold text-emerald-color hover:underline">
+                          Open live <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                      <button onClick={() => setSelected(project)} className="inline-flex shrink-0 items-center gap-1 font-mono text-[10px] font-bold text-amber-color hover:text-amber-glow">
+                        Case study <ArrowRight className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </article>

@@ -1,4 +1,3 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -7,6 +6,7 @@ import {
   Check,
   Clock,
   Copy,
+  Download,
   ExternalLink,
   FileJson,
   KeyRound,
@@ -19,6 +19,7 @@ import {
   Sparkles,
   Store,
   Trash2,
+  UtensilsCrossed,
   Zap,
 } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -44,6 +45,33 @@ const utilities: Array<{
 ];
 
 const products = [
+  {
+    name: "Nic's Food Decider 🍕",
+    eyebrow: "What's for dinner?",
+    description: "One-click decision engine for meals. Cook or takeaway with weighted random choices.",
+    url: 'https://nic-food-decider.vercel.app',
+    action: 'Decide Dinner',
+    icon: UtensilsCrossed,
+    accent: 'amber',
+  },
+  {
+    name: 'APKHub 📱',
+    eyebrow: 'Android App Indexer',
+    description: 'Discover and download official open-source Android APK releases directly from GitHub & F-Droid.',
+    url: 'https://apkhub-alpha.vercel.app',
+    action: 'Open APKHub',
+    icon: Smartphone,
+    accent: 'cyan',
+  },
+  {
+    name: 'Linacre Uninstaller 📦',
+    eyebrow: 'Android Debloat Utility',
+    description: 'Downloadable Android cleanup app with app labels, safety tiers, and scoped batch-uninstall flow.',
+    url: 'https://github.com/LIN4CRE/LinacreUninstaller/releases/latest',
+    action: 'Download APK',
+    icon: Download,
+    accent: 'purple',
+  },
   {
     name: 'Fleatment 🐱',
     eyebrow: 'Cat Flea Index & Finder',
