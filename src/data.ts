@@ -4,6 +4,16 @@ import { Tool, Project, MCPServer, SkillTemplate, BlogPost } from './types';
 export const TOOLS: Tool[] = [
   // SINGLE-FILE APPS & TOOLS
   {
+    id: 'poke_flip_ai',
+    name: 'PokéFlip AI',
+    category: 'start',
+    description: 'Real-time arbitrage, high-frequency card flipping & predictive TCG valuation engine powered by Gemini.',
+    url: 'https://pok-flip-ai.vercel.app',
+    host: 'pok-flip-ai.vercel.app',
+    searchKeywords: 'poke flip ai pokemon tcg arbitrage valuation high frequency trading gemini cardmarket ebay',
+    tag: 'App · Live'
+  },
+  {
     id: 'nic_food_decider',
     name: "Nic's Food Decider",
     category: 'start',
@@ -172,6 +182,21 @@ export const TOOLS: Tool[] = [
 ];
 
 export const MANUAL_PROJECTS: Project[] = [
+  {
+    name: 'PokéFlip AI 🎴',
+    category: 'build',
+    description: 'A real-time Pokémon TCG arbitrage, valuation & predictive market scanner utilizing Gemini models, live eBay API spreads, and Capacitor mobile APK packaging.',
+    url: 'https://pok-flip-ai.vercel.app',
+    host: 'pok-flip-ai.vercel.app',
+    tag: 'Featured · AI & Mobile',
+    role: 'Lead AI Engineer & Mobile Developer',
+    challenges: 'Estimating TCG card values, grading yields (PSA pop reports), and processing OCR/card scans under tight latency boundaries.',
+    solution: 'Built a React 19 web and Capacitor app powered by a Vercel-hosted serverless Express app integrating Gemini 3.6 Flash for instant OCR card scans, automated price spreads, and live arbitrage suggestions.',
+    tech: ['React 19', 'Express', 'Gemini AI', 'Capacitor', 'Recharts', 'TailwindCSS'],
+    liveUrl: 'https://pok-flip-ai.vercel.app',
+    repoUrl: 'https://github.com/DLinacre/Pok-Flip-AI',
+    live: true,
+  },
   {
     name: "Nic's Food Decider 🍕",
     category: 'build',

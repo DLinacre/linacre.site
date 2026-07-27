@@ -47,6 +47,15 @@ const utilities: Array<{
 
 const products = [
   {
+    name: 'PokéFlip AI 🎴',
+    eyebrow: 'AI Card Valuation & Arbitrage',
+    description: 'Real-time Pokémon TCG arbitrage, valuation & predictive market scanner powered by Gemini.',
+    url: 'https://pok-flip-ai.vercel.app',
+    action: 'Evaluate Cards',
+    icon: Sparkles,
+    accent: 'purple',
+  },
+  {
     name: "Nic's Food Decider 🍕",
     eyebrow: "What's for dinner?",
     description: "One-click decision engine for meals. Cook or takeaway with weighted random choices.",

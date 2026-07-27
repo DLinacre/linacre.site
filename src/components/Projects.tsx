@@ -22,7 +22,7 @@ const CATEGORY_META: Record<string, { label: string; colour: string }> = {
   design: { label: 'Interactive', colour: '#818CF8' },
 };
 
-const FEATURED_ORDER = ["Nic's Food Decider 🍕", 'APKHub 📱', 'Linacre Uninstaller', 'OmniRoute LLM Engine', 'Fleatment 🐱', 'Personal OP Agent', 'Arena Audit Prompt Builder', 'PokeGuru', 'Apex POS', 'Mob Deals'];
+const FEATURED_ORDER = ["PokéFlip AI 🎴", "Nic's Food Decider 🍕", 'APKHub 📱', 'Linacre Uninstaller', 'OmniRoute LLM Engine', 'Fleatment 🐱', 'Personal OP Agent', 'Arena Audit Prompt Builder', 'PokeGuru', 'Apex POS', 'Mob Deals'];
 
 function projectRank(project: Project) {
   const featured = FEATURED_ORDER.indexOf(project.name);
