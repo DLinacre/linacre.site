@@ -24,6 +24,16 @@ export const TOOLS: Tool[] = [
     tag: 'App · Live'
   },
   {
+    id: 'payhip_scraper',
+    name: 'PayHip Scraper',
+    category: 'start',
+    description: 'Digital product intelligence for Payhip: live marketplace scraping, deterministic scoring & Arena.ai prompts.',
+    url: 'https://payhipscraper-production.up.railway.app',
+    host: 'payhipscraper-production.up.railway.app',
+    searchKeywords: 'payhip scraper digital product intelligence market research arena ai node railway',
+    tag: 'App · Live'
+  },
+  {
     id: 'opagent',
     name: 'Personal OP Agent',
     category: 'start',
@@ -404,15 +414,16 @@ export const MANUAL_PROJECTS: Project[] = [
     name: 'PayHip Scraper 🔎',
     category: 'build',
     description: 'Digital product intelligence for Payhip sellers: scrapes the live marketplace, scores every listing for opportunity, and generates Arena.ai prompts to build a better version.',
-    url: 'https://github.com/LIN4CRE/PayHip-Scraper',
-    host: 'github.com/LIN4CRE/PayHip-Scraper',
-    tag: 'Node.js · Self-hosted · Source',
+    url: 'https://payhipscraper-production.up.railway.app',
+    host: 'payhipscraper-production.up.railway.app',
+    tag: 'Featured · Live App',
     role: 'Creator and backend engineer',
     challenges: 'Payhip renders its marketplace client-side and its search matches any term in a phrase, so a naive scraper reads an empty page and a literal search returns unrelated products.',
     solution: 'Targets the marketplace search API directly, probes each term to narrow on the most selective one, then filters locally for full-phrase matches. Scores listings deterministically from real review volume, ratings and market size — no estimated sales figures.',
-    tech: ['Node.js', 'Express', 'SQLite', 'Cheerio', 'Zod', 'Docker'],
-    repoUrl: 'https://github.com/LIN4CRE/PayHip-Scraper',
-    live: false
+    tech: ['Node.js', 'Express', 'SQLite', 'Cheerio', 'Zod', 'Docker', 'Railway'],
+    liveUrl: 'https://payhipscraper-production.up.railway.app',
+    repoUrl: 'https://github.com/DLinacre/PayHip-Scraper',
+    live: true
   },
   {
     name: 'Deasy Continuous Command Suite',
