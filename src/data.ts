@@ -4,6 +4,16 @@ import { Tool, Project, MCPServer, SkillTemplate, BlogPost } from './types';
 export const TOOLS: Tool[] = [
   // SINGLE-FILE APPS & TOOLS
   {
+    id: 'facerater_ai',
+    name: 'FaceRater AI ✨',
+    category: 'start',
+    description: 'Neutral aesthetic face scoring & instant AI reasoning card with shareable TikTok/Instagram 1080x1350 layouts.',
+    url: 'https://ai-face-rater-next.vercel.app',
+    host: 'ai-face-rater-next.vercel.app',
+    searchKeywords: 'face rater ai aesthetic scoring vision selfie ratings viral tiktok vercel dlinacre',
+    tag: 'App · Live'
+  },
+  {
     id: 'pixel_heist',
     name: 'Pixel Heist 🚨',
     category: 'start',
@@ -212,6 +222,21 @@ export const TOOLS: Tool[] = [
 ];
 
 export const MANUAL_PROJECTS: Project[] = [
+  {
+    name: 'FaceRater AI ✨',
+    category: 'build',
+    description: 'Neutral aesthetic face scoring viral consumer app. Upload a selfie to receive a 0–100 score with neutral AI vision reasoning, dark/light conic rating ring, local storage history, and 1-tap 1080×1350 image exports.',
+    url: 'https://ai-face-rater-next.vercel.app',
+    host: 'ai-face-rater-next.vercel.app',
+    tag: 'Featured · Live App',
+    role: 'Creator & Lead Developer',
+    challenges: 'Processing face aesthetic analysis neutrally without bias, age, or gender inference while keeping latency under 1.5 seconds and rendering instant downloadable social cards.',
+    solution: 'Engineered a Next.js 14 App Router application with OpenAI Vision API, Supabase vector storage, PayPal & Stripe unlock webhooks, and instant client heuristic fallback.',
+    tech: ['React 18', 'Next.js 14', 'TypeScript', 'OpenAI Vision', 'Supabase', 'Tailwind CSS', 'Vercel'],
+    liveUrl: 'https://ai-face-rater-next.vercel.app',
+    repoUrl: 'https://github.com/LIN4CRE/FaceRater-AI',
+    live: true,
+  },
   {
     name: 'Pixel Heist 🚨',
     category: 'build',
