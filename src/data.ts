@@ -4,6 +4,16 @@ import { Tool, Project, MCPServer, SkillTemplate, BlogPost } from './types';
 export const TOOLS: Tool[] = [
   // SINGLE-FILE APPS & TOOLS
   {
+    id: 'grumpy_guy_ai',
+    name: 'Grumpy Guy AI ಠ_ಠ',
+    category: 'start',
+    description: 'Your disagreeable AI copilot — motivation, with complaints. Reality checks with custom tones & speech synthesis.',
+    url: 'https://dlinacre.github.io/grumpy-guy-ai/',
+    host: 'dlinacre.github.io/grumpy-guy-ai',
+    searchKeywords: 'grumpy guy ai motivation copilot disagreeable reality check react vite speak synthesis dlinacre github pages',
+    tag: 'App · Live'
+  },
+  {
     id: 'poke_flip_ai',
     name: 'PokéFlip AI',
     category: 'start',
@@ -192,6 +202,21 @@ export const TOOLS: Tool[] = [
 ];
 
 export const MANUAL_PROJECTS: Project[] = [
+  {
+    name: 'Grumpy Guy AI ಠ_ಠ',
+    category: 'build',
+    description: 'Your disagreeable AI copilot delivering motivation with complaints. Features custom tone selection (Dry, Brutal, Supportive), Web Speech synthesis, local storage persistence, and Cloudflare Worker fallback architecture.',
+    url: 'https://dlinacre.github.io/grumpy-guy-ai/',
+    host: 'dlinacre.github.io/grumpy-guy-ai',
+    tag: 'Featured · Live v0.1.0',
+    role: 'Creator & Lead Engineer',
+    challenges: 'Developers and creators often face daily motivation slumps and need a fast, humorous, zero-friction reality check without bloat.',
+    solution: 'Engineered a React 19 + TypeScript + Vite app with built-in Web Speech API voice synthesis, HSL dark-mode styling, Vitest coverage, and automated GitHub Actions CI/CD Pages deployment.',
+    tech: ['React 19', 'TypeScript', 'Vite 7', 'Web Speech API', 'Vitest', 'GitHub Pages', 'Cloudflare Workers'],
+    liveUrl: 'https://dlinacre.github.io/grumpy-guy-ai/',
+    repoUrl: 'https://github.com/DLinacre/grumpy-guy-ai',
+    live: true,
+  },
   {
     name: 'PokéFlip AI 🎴',
     category: 'build',

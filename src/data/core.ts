@@ -7,6 +7,11 @@ import { ChangelogItem } from '../types';
 
 export const CHANGELOG: ChangelogItem[] = [
   {
+    version: 'v6.4',
+    title: 'Grumpy Guy AI & GitHub Pages Product Launch',
+    description: 'Added Grumpy Guy AI — motivation with complaints — to the live products index; featured custom reality-check tones, Web Speech synthesis, Vitest test suite, and automated GitHub Actions CI/CD deployment.'
+  },
+  {
     version: 'v6.3',
     title: 'Self-Hosted Offline Fonts & Web Audio Arcade',
     description: 'Self-hosted variable fonts locally under /fonts for 100% offline standalone rendering; added synthesized Web Audio blips and touch gesture control to the Games Hub; and expanded David\'s full 16-year career timeline.'
