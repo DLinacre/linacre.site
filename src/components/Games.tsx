@@ -15,6 +15,16 @@ interface GameItem {
 
 const GAMES_DATA: GameItem[] = [
   {
+    title: 'Pixel Heist',
+    tagline: 'Cyberpunk stealth heist arcade game with Phaser 3 & procedural levels',
+    desc: 'Infiltrate high-security neon vaults, hack security terminals, dodge laser grids, and escape with the loot. Features responsive controls, Web Audio sound synthesis, daily contracts, and leaderboards.',
+    tags: ['Arcade', 'Stealth', 'Phaser 3', 'Cyberpunk', 'Procedural'],
+    tech: 'React 19 · Phaser 3 · TypeScript · Tailwind CSS',
+    badge: 'Live',
+    play: 'https://dlinacre.github.io/pixel-heist/',
+    source: 'https://github.com/DLinacre/pixel-heist'
+  },
+  {
     title: 'KushCloud',
     tagline: 'Chill one-tap browser arcade flyer with synthesized audio',
     desc: 'Pass through procedural obstacles, earn coins, unlock worlds and custom cosmetics. Features Web Audio sound synthesis and a global leaderboard.',

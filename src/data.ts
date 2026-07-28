@@ -4,6 +4,16 @@ import { Tool, Project, MCPServer, SkillTemplate, BlogPost } from './types';
 export const TOOLS: Tool[] = [
   // SINGLE-FILE APPS & TOOLS
   {
+    id: 'pixel_heist',
+    name: 'Pixel Heist 🚨',
+    category: 'start',
+    description: 'Cyberpunk stealth heist arcade game built with React 19 & Phaser 3. Procedural neon vaults, guard AI, laser grids & HMAC high scores.',
+    url: 'https://dlinacre.github.io/pixel-heist/',
+    host: 'dlinacre.github.io/pixel-heist',
+    searchKeywords: 'pixel heist game stealth phaser cyberpunk arcade arcade game procedural lockpicking dlinacre github pages',
+    tag: 'Game · Live'
+  },
+  {
     id: 'grumpy_guy_ai',
     name: 'Grumpy Guy AI ಠ_ಠ',
     category: 'start',
@@ -202,6 +212,21 @@ export const TOOLS: Tool[] = [
 ];
 
 export const MANUAL_PROJECTS: Project[] = [
+  {
+    name: 'Pixel Heist 🚨',
+    category: 'build',
+    description: 'Cyberpunk stealth heist arcade game with Next.js 15, Phaser 3, and React 19. Features procedural facility layouts, guard vision-cone AI simulation, interactive lockpicking & wire mini-games, Web Audio synthesis, and HMAC anti-cheat score validation.',
+    url: 'https://dlinacre.github.io/pixel-heist/',
+    host: 'dlinacre.github.io/pixel-heist',
+    tag: 'Featured · Live v1.0.0',
+    role: 'Creator & Lead Architect',
+    challenges: 'Integrating a heavy 2D physics game engine (Phaser 3) cleanly inside a SSR Next.js 15 App Router application with bi-directional event bridging and anti-cheat verification.',
+    solution: 'Designed a lightweight bi-directional event emitter bridge for Phaser-React synchronization, client-side HMAC run proof signing, Drizzle ORM schemas, and automated static export GitHub Actions deployment.',
+    tech: ['React 19', 'Phaser 3', 'TypeScript', 'Next.js 15', 'Tailwind CSS', 'Web Audio API', 'GitHub Pages'],
+    liveUrl: 'https://dlinacre.github.io/pixel-heist/',
+    repoUrl: 'https://github.com/DLinacre/pixel-heist',
+    live: true,
+  },
   {
     name: 'Grumpy Guy AI ಠ_ಠ',
     category: 'build',
