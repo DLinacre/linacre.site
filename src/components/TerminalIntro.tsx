@@ -137,7 +137,10 @@ export default function TerminalIntro({ onComplete }: TerminalIntroProps) {
         {/* Terminal Body */}
         <div
           ref={terminalBodyRef}
-          className="p-5 min-h-[280px] max-h-[400px] overflow-y-auto text-sm leading-relaxed space-y-2 select-text"
+          tabIndex={0}
+          role="region"
+          aria-label="Terminal output"
+          className="p-5 min-h-[280px] max-h-[400px] overflow-y-auto text-sm leading-relaxed space-y-2 select-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
           style={{ scrollbarColor: 'rgba(34,211,238,0.15) transparent' }}
         >
           {renderedLines.map((line, idx) => {
