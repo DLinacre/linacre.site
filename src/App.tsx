@@ -504,7 +504,7 @@ export default function App() {
             <Breadcrumbs paths={getBreadcrumbPaths()} />
           )}
           <Suspense fallback={
-            <div className="py-20 min-h-[70svh] text-center font-mono text-xs text-muted-foreground flex flex-col items-center justify-center gap-3">
+            <div className="py-20 min-h-[100svh] text-center font-mono text-xs text-muted-foreground flex flex-col items-center justify-center gap-3">
               <div className="w-6 h-6 border-2 border-amber-color border-t-transparent rounded-full animate-spin"></div>
               <span>Loading interface module...</span>
             </div>

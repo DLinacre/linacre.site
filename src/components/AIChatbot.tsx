@@ -161,7 +161,7 @@ export default function AIChatbot() {
       {/* Floating Action Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-40 p-3.5 bg-amber-color text-[#030c14] rounded-full hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-amber-color flex items-center justify-center cursor-pointer select-none"
+        className="fixed bottom-24 sm:bottom-6 right-6 z-40 p-3.5 min-w-11 min-h-11 bg-amber-color text-[#030c14] rounded-full hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-amber-color focus-visible:ring-2 focus-visible:ring-offset-2 flex items-center justify-center cursor-pointer select-none"
         style={{ boxShadow: 'var(--linacre-glow-strong)' }}
         aria-label="Toggle AI Assistant"
         id="btn-chatbot-toggle"
