@@ -408,7 +408,7 @@ export default function Toolkit({
                 <Terminal className="w-3.5 h-3.5 text-amber-color" /> 1 · Build once
               </div>
               <div className="flex items-center gap-2 bg-[#061923] border border-border-color/60 rounded-lg px-3 py-2">
-                <code className="font-mono text-[11px] text-cyan overflow-x-auto whitespace-nowrap flex-1">
+                <code tabIndex={0} className="font-mono text-[11px] text-cyan overflow-x-auto whitespace-nowrap flex-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan">
                   cd mcp &amp;&amp; npm install &amp;&amp; npm run build
                 </code>
                 <CopyButton text="cd mcp && npm install && npm run build" />
@@ -425,7 +425,7 @@ export default function Toolkit({
                 <Terminal className="w-3.5 h-3.5 text-emerald-color" /> 2 · Add to Claude
               </div>
               <div className="flex items-center gap-2 bg-[#061923] border border-border-color/60 rounded-lg px-3 py-2">
-                <code className="font-mono text-[11px] text-emerald-color overflow-x-auto whitespace-nowrap flex-1">
+                <code tabIndex={0} className="font-mono text-[11px] text-emerald-color overflow-x-auto whitespace-nowrap flex-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-color">
                   claude mcp add linacre-toolbox -- node ./mcp/dist/server.js
                 </code>
                 <CopyButton text="claude mcp add linacre-toolbox -- node ./mcp/dist/server.js" />
