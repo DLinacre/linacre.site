@@ -442,7 +442,7 @@ const NAV = [
 ];
 
 const SHELL_CSS = `
-#prerender-shell{max-width:60rem;margin:0 auto;padding:2rem 1.25rem;background:#030c14;color:#e5e5e5;
+#prerender-shell{position:absolute;top:0;left:0;right:0;max-width:60rem;margin:0 auto;padding:2rem 1.25rem;background:#030c14;color:#e5e5e5;
 font-family:Inter,ui-sans-serif,system-ui,sans-serif;line-height:1.65;min-height:100vh}
 #prerender-shell a{color:#22d3ee;text-decoration:none}#prerender-shell a:hover{text-decoration:underline}
 #prerender-shell nav{display:flex;flex-wrap:wrap;gap:.9rem;margin:1rem 0 2rem;font-family:'JetBrains Mono',monospace;font-size:.85rem}

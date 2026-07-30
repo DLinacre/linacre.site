@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import {
   Play, Code2, ExternalLink, Layers, CheckCircle2, Clock,
   ChevronDown, Gamepad2, Smartphone, Tablet, Monitor, ImageOff, Tag
@@ -32,6 +32,13 @@ const DEVICE_ICON: Record<string, typeof Smartphone> = {
   Desktop: Monitor,
 };
 
+const TABS = [
+  ['features', 'Features'],
+  ['systems', 'Systems'],
+  ['changelog', 'Changelog'],
+  ['roadmap', 'Roadmap'],
+] as const;
+
 const STATUS_STYLE: Record<string, string> = {
   'In development': 'bg-amber-color/10 text-amber-color border-amber-color/30',
   'Live': 'bg-emerald-500/10 text-emerald-color border-emerald-500/30',
@@ -39,6 +46,7 @@ const STATUS_STYLE: Record<string, string> = {
 };
 
 export default function GameShowcase() {
+  const reduceMotion = useReducedMotion();
   const [tab, setTab] = useState<'features' | 'systems' | 'changelog' | 'roadmap'>('features');
   const [logOpen, setLogOpen] = useState<string | null>(manifest.changelog[0]?.version ?? null);
 
@@ -48,7 +56,7 @@ export default function GameShowcase() {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 14 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       className="rounded-2xl border border-amber-color/20 bg-muted/20 dark:bg-[#0B1220]/80 overflow-hidden shadow-[var(--linacre-card-shadow)]"
       itemScope
@@ -177,19 +185,31 @@ export default function GameShowcase() {
         </section>
 
         {/* --------------------------------------------------------- tabs */}
-        <div className="border-b border-border-color/60 flex flex-wrap gap-1">
-          {([
-            ['features', 'Features'],
-            ['systems', 'Systems'],
-            ['changelog', 'Changelog'],
-            ['roadmap', 'Roadmap'],
-          ] as const).map(([id, label]) => (
+        <div
+          role="tablist"
+          aria-label="Project details"
+          className="border-b border-border-color/60 flex flex-wrap gap-1"
+          onKeyDown={e => {
+            // ARIA authoring practice: arrow keys move between tabs.
+            const i = TABS.findIndex(([id]) => id === tab);
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+              e.preventDefault();
+              const next = (i + (e.key === 'ArrowRight' ? 1 : -1) + TABS.length) % TABS.length;
+              setTab(TABS[next][0]);
+              document.getElementById(`sft-tab-${TABS[next][0]}`)?.focus();
+            }
+          }}
+        >
+          {TABS.map(([id, label]) => (
             <button
               key={id}
+              id={`sft-tab-${id}`}
               onClick={() => setTab(id)}
-              aria-selected={tab === id}
               role="tab"
-              className={`px-3 py-2 font-mono text-xs rounded-t-lg border-b-2 transition-all cursor-pointer ${
+              aria-selected={tab === id}
+              aria-controls={`sft-panel-${id}`}
+              tabIndex={tab === id ? 0 : -1}
+              className={`px-3 py-2 min-h-[44px] font-mono text-xs rounded-t-lg border-b-2 transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-color ${
                 tab === id
                   ? 'border-amber-color text-amber-color font-bold'
                   : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -203,11 +223,14 @@ export default function GameShowcase() {
         <AnimatePresence mode="wait">
           <motion.div
             key={tab}
-            initial={{ opacity: 0, y: 6 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
             transition={{ duration: 0.15 }}
             role="tabpanel"
+            id={`sft-panel-${tab}`}
+            aria-labelledby={`sft-tab-${tab}`}
+            tabIndex={0}
           >
             {tab === 'features' && (
               <ul className="grid sm:grid-cols-2 gap-2.5">
@@ -245,7 +268,8 @@ export default function GameShowcase() {
                       <button
                         onClick={() => setLogOpen(open ? null : entry.version)}
                         aria-expanded={open}
-                        className="w-full flex items-center justify-between gap-3 px-3 py-2.5 text-left cursor-pointer hover:bg-muted/30 transition-colors"
+                        aria-controls={`sft-log-${entry.version}`}
+                        className="w-full flex items-center justify-between gap-3 px-3 py-2.5 min-h-[44px] text-left cursor-pointer hover:bg-muted/30 transition-colors focus-visible:outline-2 focus-visible:outline-offset--2 focus-visible:outline-amber-color"
                       >
                         <span className="flex items-center gap-2 min-w-0">
                           <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-color/15 text-amber-color border border-amber-color/25 shrink-0">
@@ -259,7 +283,7 @@ export default function GameShowcase() {
                         </span>
                       </button>
                       {open && (
-                        <ul className="px-3 pb-3 pt-0 space-y-1.5 border-t border-border-color/40">
+                        <ul id={`sft-log-${entry.version}`} className="px-3 pb-3 pt-0 space-y-1.5 border-t border-border-color/40">
                           {entry.changes.map((c, i) => (
                             <li key={i} className="text-[11px] text-muted-foreground leading-relaxed flex gap-2 pt-1.5">
                               <span className="text-amber-color shrink-0">›</span>
