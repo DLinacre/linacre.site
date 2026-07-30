@@ -3,7 +3,7 @@
   "schemaVersion": 1,
   "slug": "slime-factory-tycoon",
   "name": "Slime Factory Tycoon",
-  "tagline": "Tap, automate, rebirth \u2014 an idle slime empire built to last.",
+  "tagline": "Tap, automate, rebirth — an idle slime empire built to last.",
   "description": "An open-source Roblox idle-tycoon built as a production-grade foundation rather than a prototype. Tap the vat to earn Goo, automate production, unlock factory zones, and rebirth for permanent multipliers. Under the hood it's a modular service architecture with a declarative networking layer, session-locked saves, idempotent purchase handling, and a CI balance simulator that plays the game on every commit.",
   "status": "In development",
   "statusDetail": "Core systems complete and testable in Roblox Studio. Not yet published to Roblox.",
@@ -154,7 +154,7 @@
   "stats": {
     "$comment": "Code metrics only. No player counts, visits, ratings or revenue figures are recorded here because the game is unpublished and any such number would be fabricated.",
     "luauModules": 23,
-    "linesOfLuau": 3696,
+    "linesOfLuau": 3724,
     "achievements": 16,
     "cosmetics": 15,
     "zones": 6,
