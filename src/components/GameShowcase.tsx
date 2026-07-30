@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import {
   Play, Code2, ExternalLink, Layers, CheckCircle2, Clock,
-  ChevronDown, Gamepad2, Smartphone, Tablet, Monitor, ImageOff, Tag
+  ChevronDown, Gamepad2, Smartphone, Tablet, Monitor, ImageOff, Tag, Download
 } from 'lucide-react';
 import manifest from '../data/slime-factory-tycoon.json';
 
@@ -51,6 +51,32 @@ export default function GameShowcase() {
   const [logOpen, setLogOpen] = useState<string | null>(manifest.changelog[0]?.version ?? null);
 
   const base = '/games/slime-factory-tycoon';
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'SoftwareSourceCode',
+        name: manifest.name,
+        description: manifest.description,
+        codeRepository: manifest.links.github,
+        programmingLanguage: { '@type': 'ComputerLanguage', name: 'Luau', url: 'https://luau-lang.org/' },
+        runtimePlatform: manifest.platform,
+        license: 'https://opensource.org/licenses/MIT',
+        author: { '@type': 'Person', name: 'David Linacre', url: 'https://www.linacre.site' },
+        image: `https://www.linacre.site${base}/banner.webp`,
+        isAccessibleForFree: true,
+        keywords: manifest.genre.join(', '),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.linacre.site/' },
+          { '@type': 'ListItem', position: 2, name: 'Games', item: 'https://www.linacre.site/games' },
+        ],
+      },
+    ],
+  };
   const hasRoblox = Boolean(manifest.links.roblox);
   const hasShots = manifest.screenshots.length > 0;
 
@@ -62,6 +88,11 @@ export default function GameShowcase() {
       itemScope
       itemType="https://schema.org/VideoGame"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* ---------------------------------------------------------- banner */}
       <div className="relative">
         <picture>
@@ -71,7 +102,8 @@ export default function GameShowcase() {
             alt={`${manifest.name} — ${manifest.tagline}`}
             width={1600}
             height={800}
-            loading="lazy"
+            loading="eager"
+            fetchPriority="high"
             decoding="async"
             className="w-full aspect-[2/1] object-cover"
             itemProp="image"
@@ -326,11 +358,23 @@ export default function GameShowcase() {
               href={manifest.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-lg border border-border-color hover:border-amber-color/40 text-foreground text-xs font-mono font-bold hover:bg-muted/40 transition-all flex items-center gap-1.5"
+              className="px-3 py-1.5 min-h-[36px] rounded-lg border border-border-color hover:border-amber-color/40 text-foreground text-xs font-mono font-bold hover:bg-muted/40 transition-all flex items-center gap-1.5"
             >
               <Code2 className="w-3.5 h-3.5" />
               <span>Source</span>
             </a>
+
+            {(manifest.links as Record<string, string | null>).release && (
+              <a
+                href={(manifest.links as Record<string, string>).release}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 min-h-[36px] rounded-lg border border-emerald-500/40 bg-emerald-500/10 text-emerald-color text-xs font-mono font-bold hover:bg-emerald-500/20 transition-all flex items-center gap-1.5"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Download v{manifest.version}</span>
+              </a>
+            )}
 
             {hasRoblox ? (
               <a

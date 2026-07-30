@@ -6,7 +6,7 @@
   "tagline": "Tap, automate, rebirth — an idle slime empire built to last.",
   "description": "An open-source Roblox idle-tycoon built as a production-grade foundation rather than a prototype. Tap the vat to earn Goo, automate production, unlock factory zones, and rebirth for permanent multipliers. Under the hood it's a modular service architecture with a declarative networking layer, session-locked saves, idempotent purchase handling, and a CI balance simulator that plays the game on every commit.",
   "status": "In development",
-  "statusDetail": "Core systems complete and testable in Roblox Studio. Not yet published to Roblox.",
+  "statusDetail": "Core systems complete. Download the .rbxlx and open it in Roblox Studio. Not yet published to Roblox.",
   "platform": "Roblox",
   "engine": "Roblox / Luau",
   "genre": [
@@ -24,7 +24,9 @@
     "github": "https://github.com/LIN4CRE/slime-factory-tycoon",
     "roblox": null,
     "play": null,
-    "devforum": null
+    "devforum": null,
+    "release": "https://github.com/LIN4CRE/slime-factory-tycoon/releases/latest",
+    "download": "https://github.com/LIN4CRE/slime-factory-tycoon/releases/download/v0.3.0/SlimeFactoryTycoon-v0.3.0.rbxlx"
   },
   "brand": {
     "logo": "assets/logo.png",
@@ -105,7 +107,8 @@
         "Added server-persisted settings with reduced motion, high contrast, text scale and colour-blind modes",
         "Added pooled procedural audio engine with pentatonic tap combo pitching",
         "Added themed UI component library with 44px minimum touch targets",
-        "Established visual identity: logo, icon set, banner, and full brand guidelines"
+        "Established visual identity: logo, icon set, banner, and full brand guidelines",
+        "Published v0.3.0 with a downloadable .rbxlx place file — no toolchain required"
       ]
     },
     {
@@ -163,5 +166,6 @@
     "visits": null,
     "rating": null
   },
-  "license": "MIT"
+  "license": "MIT",
+  "version": "0.3.0"
 }
