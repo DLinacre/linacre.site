@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Cpu, Settings, ChevronDown, ChevronUp, Send, RefreshCw, Key, Sparkles, AlertCircle, CheckCircle, Info, Lock, Download, Trash2, StopCircle, Plus, MessageSquare, Folder, File, FolderPlus, FilePlus, Upload, Paperclip, ChevronRight, Eye, Save, FileText, Terminal, X, Play, Database, Coins, DollarSign, CreditCard } from 'lucide-react';
+import { Cpu, Settings, ChevronDown, ChevronUp, Send, RefreshCw, Key, Sparkles, AlertCircle, CheckCircle, Info, Lock, Download, Trash2, StopCircle, Plus, MessageSquare, Folder, File, FolderPlus, Upload, Paperclip, ChevronRight, Save, FileText, Terminal, X, Play, Database, CreditCard } from 'lucide-react';
 import { ChatMessage } from '../types';
 
 export type LabProvider = 'gemini' | 'openai' | 'ollama' | 'litellm' | 'claude';
@@ -103,7 +103,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
   const [teamMode, setTeamMode] = useState<boolean>(true);
 
   // Anthropic Budget & Credit States ($100 starting balance)
-  const [anthropicBudget, setAnthropicBudget] = useState(() => {
+  const [anthropicBudget] = useState(() => {
     try {
       const saved = localStorage.getItem('linacre_anthropic_budget_v1');
       return saved ? parseFloat(saved) : 100.0;
@@ -112,7 +112,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     }
   });
 
-  const [anthropicSpent, setAnthropicSpent] = useState(() => {
+  const [anthropicSpent] = useState(() => {
     try {
       const saved = localStorage.getItem('linacre_anthropic_spent_v1');
       return saved ? parseFloat(saved) : 0.0;
@@ -121,22 +121,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     }
   });
 
-  const [lastUsage, setLastUsage] = useState<{ input: number; output: number; cost: number } | null>(null);
-
-  const recordAnthropicUsage = (inputTokens: number, outputTokens: number) => {
-    const isHaiku = String(claudeModel).toLowerCase().includes('haiku');
-    const inputRate = isHaiku ? 0.0000008 : 0.000003;
-    const outputRate = isHaiku ? 0.000004 : 0.000015;
-    const cost = (inputTokens * inputRate) + (outputTokens * outputRate);
-
-    setAnthropicSpent(prev => {
-      const next = prev + cost;
-      try { localStorage.setItem('linacre_anthropic_spent_v1', next.toString()); } catch {}
-      return next;
-    });
-
-    setLastUsage({ input: inputTokens, output: outputTokens, cost });
-  };
+  const [lastUsage] = useState<{ input: number; output: number; cost: number } | null>(null);
 
   // prefers-reduced-motion hook (TASK-002)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -209,8 +194,8 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     }
 
     const dialogue: { agent: string; text: string }[] = [];
-    let currentAgent = 'orchestrator';
-    let currentText = parts[0];
+    const currentAgent = 'orchestrator';
+    const currentText = parts[0];
 
     if (currentText.trim()) {
       dialogue.push({ agent: currentAgent, text: currentText });
@@ -242,7 +227,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
   const [sqlColumns, setSqlColumns] = useState<string[]>([]);
   const [sqlLatency, setSqlLatency] = useState<number | null>(null);
   const [sqlErr, setSqlErr] = useState<string | null>(null);
-  const [sqlAffectedRows, setSqlAffectedRows] = useState<number | null>(null);
+  const [_sqlAffectedRows, setSqlAffectedRows] = useState<number | null>(null);
 
   // Virtual Filesystem States
   const [workspace, setWorkspace] = useState<WorkspaceItem[]>(() => {

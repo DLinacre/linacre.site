@@ -1,5 +1,4 @@
 import { execSync } from 'child_process';
-import path from 'path';
 
 function log(msg: string) {
   console.log(`[🧹 Janitor Agent] ${msg}`);

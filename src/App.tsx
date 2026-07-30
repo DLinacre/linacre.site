@@ -34,7 +34,6 @@ const StatusPage = lazy(() => import('./components/StatusPage'));
 const ContactThanks = lazy(() => import('./components/ContactThanks'));
 const CookiePolicy = lazy(() => import('./components/CookiePolicy'));
 const Terms = lazy(() => import('./components/Terms'));
-const ConsentBanner = lazy(() => import('./components/ConsentBanner'));
 const Now = lazy(() => import('./components/Now'));
 
 import { BLOG_POSTS } from './data';

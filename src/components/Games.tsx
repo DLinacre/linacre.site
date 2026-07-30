@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Gamepad2, Play, Heart, ExternalLink, Code2, Sparkles, Trophy, RotateCcw, Volume2, VolumeX } from 'lucide-react';
+import { Gamepad2, Play, Heart, Code2, Sparkles, RotateCcw, Volume2, VolumeX } from 'lucide-react';
 import { lazy, Suspense } from 'react';
 
 const GameShowcase = lazy(() => import('./GameShowcase'));

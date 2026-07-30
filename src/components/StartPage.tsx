@@ -8,7 +8,6 @@ import {
   Clock,
   Copy,
   ExternalLink,
-  FileJson,
   KeyRound,
   Layers,
   LockKeyhole,

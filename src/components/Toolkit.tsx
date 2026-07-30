@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef, MouseEvent, FormEvent } from 'react';
+import { useState, useEffect, useRef, MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Star, ExternalLink, HelpCircle, Sparkles, Check, Terminal, Copy, Bot } from 'lucide-react';
+import { Star, ExternalLink, HelpCircle, Sparkles, Check, Terminal, Copy, Bot } from 'lucide-react';
 import { TOOLS } from '../data';
 import { Tool, ToolCategory } from '../types';
 
@@ -42,7 +42,7 @@ interface ToolkitProps {
   setActiveCategory: (category: ToolCategory | 'all') => void;
 }
 
-export default function Toolkit({ onToolSelect, openPalette, searchQuery, setSearchQuery, activeCategory, setActiveCategory }: ToolkitProps) {
+export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _openPalette, searchQuery, setSearchQuery, activeCategory, setActiveCategory }: ToolkitProps) {
   const [bookmarkedTools, setBookmarkedTools] = useState<string[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
 

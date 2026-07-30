@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Compass, Cpu, BookOpen, Terminal, Github, ExternalLink, Hash, CornerDownLeft, Star, Sparkles, Sliders, Briefcase, Bot, Activity, FileText, FolderCode, Calendar, House, Gamepad2 } from 'lucide-react';
+import { Search, Compass, Cpu, BookOpen, Terminal, Hash, CornerDownLeft, Sparkles, Sliders, Bot, Activity, FileText, FolderCode, House, Gamepad2 } from 'lucide-react';
 import { TOOLS } from '../data';
-import { Tool } from '../types';
 import Fuse from 'fuse.js';
 
 interface CommandPaletteProps {

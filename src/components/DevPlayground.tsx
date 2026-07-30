@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Braces,
@@ -11,16 +11,13 @@ import {
   AlertCircle,
   CheckCircle,
   RefreshCw,
-  HelpCircle,
   Code,
   Lock,
-  Compass,
   Play,
   Pause,
   SkipForward,
   SkipBack,
   Cpu,
-  Layers,
   Terminal,
   Bot
 } from 'lucide-react';
@@ -381,7 +378,7 @@ interface DevPlaygroundProps {
 
 import McpToolboxCallout from './McpToolboxCallout';
 
-export default function DevPlayground({ theme = 'dark' }: DevPlaygroundProps) {
+export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundProps) {
   const [activeTool, setActiveTool] = useState<'jwt' | 'glass' | 'regex' | 'gen' | 'c_to_wasm' | 'svg_creator' | 'json2ts' | 'cron' | 'theme'>('jwt');
   const [copiedType, setCopiedType] = useState<string | null>(null);
 
@@ -565,8 +562,8 @@ export default function DevPlayground({ theme = 'dark' }: DevPlaygroundProps) {
 
   const prettifySvg = () => {
     let formatted = '';
-    let reg = /(>)(<)(\/*)/g;
-    let html = svgCode.replace(reg, '$1\r\n$2$3');
+    const reg = /(>)(<)(\/*)/g;
+    const html = svgCode.replace(reg, '$1\r\n$2$3');
     let pad = 0;
     html.split('\r\n').forEach((line) => {
       let indent = 0;
@@ -673,7 +670,7 @@ ${svgCode}`;
   const [compileSuccess, setCompileSuccess] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [playSpeed, setPlaySpeed] = useState<number>(1500); // ms per step
+  const [playSpeed] = useState<number>(1500); // ms per step
   const [compileLogs, setCompileLogs] = useState<string[]>([]);
   const [editableCode, setEditableCode] = useState(C_PROGRAMS[0].code);
 

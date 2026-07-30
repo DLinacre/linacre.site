@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from 'react';
-import { motion } from 'motion/react';
 import { Terminal as TerminalIcon, Sparkles } from 'lucide-react';
 import { TERMINAL_LINES } from '../data/core';
 
@@ -10,7 +9,7 @@ interface TerminalIntroProps {
 export default function TerminalIntro({ onComplete }: TerminalIntroProps) {
   const [renderedLines, setRenderedLines] = useState<any[]>([]);
   const [currentLineText, setCurrentLineText] = useState('');
-  const [currentLineIdx, setCurrentLineIdx] = useState(0);
+  const [_currentLineIdx, setCurrentLineIdx] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
   const [isSkipped, setIsSkipped] = useState(false);
   const terminalBodyRef = useRef<HTMLDivElement>(null);

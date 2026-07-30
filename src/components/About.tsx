@@ -8,11 +8,8 @@ import {
   MapPin,
   ShieldCheck,
   Sparkles,
-  TerminalSquare,
   Briefcase,
-  GraduationCap,
   Clock,
-  Award
 } from 'lucide-react';
 
 const skillGroups = [

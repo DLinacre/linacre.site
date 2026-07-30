@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Calendar, Clock, ArrowRight, X, BookOpen, Hash } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, X, Hash } from 'lucide-react';
 import { BLOG_POSTS } from '../data';
 import { BlogPost } from '../types';
 import { mdToHtml } from '../lib/markdown';
@@ -91,7 +91,7 @@ export default function Blog() {
 
       {/* Posts Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6" id="blog-posts-grid">
-        {BLOG_POSTS.map((post, idx) => (
+        {BLOG_POSTS.map((post, _idx) => (
           <motion.a
             key={post.slug}
             href={`/blog/${post.slug}`}

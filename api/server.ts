@@ -3,7 +3,6 @@ import type { Request, Response, NextFunction } from "express";
 import path from "path";
 import crypto from "crypto";
 import fs from "fs";
-import { fileURLToPath } from "url";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { Redis } from "@upstash/redis";
@@ -12,8 +11,6 @@ import { Ratelimit } from "@upstash/ratelimit";
 // Load environment variables from .env
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 app.disable('x-powered-by');
@@ -126,7 +123,6 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
 const rateLimitLog = new Map<string, number[]>();
 
 // Lazily create the Upstash limiter once, only if env vars are present.
-let upstashLimiter: ReturnType<typeof Ratelimit.prototype.limit> extends Promise<infer T> ? null : null = null;
 let upstashRatelimit: InstanceType<typeof Ratelimit> | null = null;
 
 if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
@@ -825,7 +821,7 @@ Strict rules:
   });
 
   // Expose key presence status securely to the client
-  app.get("/api/keys/status", (req, res) => {
+  app.get("/api/keys/status", (_req, res) => {
     res.json({
       gemini: !!process.env.GEMINI_API_KEY,
       openai: !!process.env.OPENAI_API_KEY,
@@ -837,7 +833,7 @@ Strict rules:
   });
 
   // API route to get Obsidian Ecosystem Tasks
-  app.get("/api/tasks", checkAuth, async (req, res) => {
+  app.get("/api/tasks", checkAuth, async (_req, res) => {
     try {
       const fs = await import("fs");
       const tasksFilePath = path.join("D:", "LIN4CRE", "knowledge-vault", "Ecosystem_Tasks.md");
@@ -1120,7 +1116,7 @@ Strict rules:
   });
 
   // Secure route to read and return active Antigravity workspace transcript logs
-  app.get("/api/active-logs", checkAuth, async (req, res) => {
+  app.get("/api/active-logs", checkAuth, async (_req, res) => {
     try {
       const fs = await import("fs");
       const os = await import("os");
@@ -1214,7 +1210,7 @@ Strict rules:
 
   // Proxy endpoint to communicate with FastAPI backend on port 8000
   app.all("/api/evbot-proxy/*", async (req, res) => {
-    const subPath = req.params[0] || req.path.replace(/^\/api\/evbot-proxy\//, "");
+    const subPath = (req.params as unknown as string[])[0] || req.path.replace(/^\/api\/evbot-proxy\//, "");
     
     // Map health request to FastAPI public health, others to their respective routes
     let targetPath = `/api/v1/evbot/${subPath}`;
@@ -1367,7 +1363,7 @@ Make the SVG viewBox="0 0 100 100" with width="100%" and height="100%".`;
     });
   });
 
-  app.post("/api/auth/google", (req, res) => {
+  app.post("/api/auth/google", (_req, res) => {
     const secret = process.env.DASHBOARD_SESSION_SECRET || "default_session_secret_32_bytes_min_12345";
     const expires = Date.now() + SESSION_TTL_MS;
     const token = `${expires}.${sign(String(expires), secret)}`;
@@ -1398,7 +1394,7 @@ Make the SVG viewBox="0 0 100 100" with width="100%" and height="100%".`;
     });
   });
 
-  app.delete("/api/auth", (req, res) => {
+  app.delete("/api/auth", (_req, res) => {
     res.setHeader('Set-Cookie', `${COOKIE_NAME}=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0`);
     return res.status(200).json({ ok: true, keysEnabled: false });
   });

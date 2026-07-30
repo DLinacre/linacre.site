@@ -2,12 +2,6 @@ import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Activity, ShieldCheck, HardDrive, Cpu, Terminal, RefreshCw, AlertTriangle } from 'lucide-react';
 
-interface Metric {
-  name: string;
-  value: string;
-  status: 'operational' | 'nominal' | 'degraded';
-  icon: any;
-}
 
 export default function StatusPage() {
   const [latencyMap, setLatencyMap] = useState({

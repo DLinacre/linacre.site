@@ -4,10 +4,15 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  quality:
-    name: Typecheck & Build
+  verify:
+    name: Typecheck · Lint · Test · Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,11 +22,27 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Install dependencies
-        run: npm install
+      - run: npm ci
 
-      - name: Typecheck (tsc --noEmit)
+      - name: Typecheck (strict)
+        run: npm run typecheck
+
+      - name: Lint
         run: npm run lint
 
-      - name: Build (vite + prerender + api bundle)
+      - name: Format check
+        run: npm run format:check
+        continue-on-error: true
+
+      - name: Unit & component tests
+        run: npm run test
+
+      - name: Production build
         run: npm run build
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7

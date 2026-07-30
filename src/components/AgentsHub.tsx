@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Terminal, Send, Plus, Bot, Coffee, Shield, Database, LayoutGrid, Award, Server, Pause, Play, Trash2, AlertTriangle, Info, Cpu, Activity, Zap, Layers, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { Send, Plus, Bot, Coffee, Database, LayoutGrid, Award, Server, Pause, Play, Trash2, AlertTriangle, Info, Cpu, Activity, Zap, Layers, Volume2, VolumeX, Sparkles } from 'lucide-react';
 
 interface Agent {
   id: string;
@@ -48,7 +48,6 @@ interface AgentSuggestion {
   steps: string[];
 }
 
-const GRID_SIZE = 10;
 
 // Pokémon Showdown Sprite Database URL
 const SPRITE_BASE_URL = 'https://play.pokemonshowdown.com/sprites/ani/';
@@ -550,7 +549,7 @@ export default function AgentsHub() {
     const interval = setInterval(() => {
       setAgents((prevAgents) =>
         prevAgents.map((agent) => {
-          let { x, y, targetX, targetY, personality, name, isPaused, taskQueue } = agent;
+          const { x, y, targetX, targetY, personality, name, isPaused, taskQueue } = agent;
 
           if (isPaused) return agent;
 

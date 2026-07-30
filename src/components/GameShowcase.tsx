@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import {
-  Play, Code2, ExternalLink, Layers, CheckCircle2, Clock,
+  Play, Code2, Layers, CheckCircle2, Clock,
   ChevronDown, Gamepad2, Smartphone, Tablet, Monitor, ImageOff, Tag, Download
 } from 'lucide-react';
 import manifest from '../data/slime-factory-tycoon.json';
@@ -364,9 +364,9 @@ export default function GameShowcase() {
               <span>Source</span>
             </a>
 
-            {(manifest.links as Record<string, string | null>).release && (
+            {manifest.links.release && (
               <a
-                href={(manifest.links as Record<string, string>).release}
+                href={manifest.links.release}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3 py-1.5 min-h-[36px] rounded-lg border border-emerald-500/40 bg-emerald-500/10 text-emerald-color text-xs font-mono font-bold hover:bg-emerald-500/20 transition-all flex items-center gap-1.5"

@@ -482,7 +482,6 @@ function motifPath(motif: string, x: number, y: number, size: number, dotFill: s
 function renderArray(rng: Rng, cfg: GenConfig, c: Palette): string {
   const cpx = cfg.complexity;
   const parts: string[] = [];
-  const spacing = 15;
   const size = 8;
   const positionsX = [27.5, 42.5, 57.5, 72.5];
   const positionsY = [27.5, 42.5, 57.5, 72.5];

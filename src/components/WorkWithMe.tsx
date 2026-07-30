@@ -1,6 +1,5 @@
-import React from 'react';
 import { motion } from 'motion/react';
-import { Calendar, Mail, Shield, Zap, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { WORK_FAQS, WORK_NEXT_AVAILABLE } from '../data';
 
 interface Offering {
