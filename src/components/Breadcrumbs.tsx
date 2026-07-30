@@ -30,7 +30,7 @@ export default function Breadcrumbs({ paths }: BreadcrumbsProps) {
           <div key={idx} className="flex items-center gap-1.5">
             {path.onClick && !isLast ? (
               <button
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   path.onClick?.();
                 }}
@@ -39,13 +39,17 @@ export default function Breadcrumbs({ paths }: BreadcrumbsProps) {
                 {normalizedLabel}
               </button>
             ) : (
-              <span className={isLast ? "text-foreground font-semibold truncate max-w-[150px] sm:max-w-xs" : "text-muted-foreground"}>
+              <span
+                className={
+                  isLast
+                    ? 'text-foreground font-semibold truncate max-w-[150px] sm:max-w-xs'
+                    : 'text-muted-foreground'
+                }
+              >
                 {normalizedLabel}
               </span>
             )}
-            {!isLast && (
-              <ChevronRight className="w-3 h-3 text-muted-foreground/30 shrink-0" />
-            )}
+            {!isLast && <ChevronRight className="w-3 h-3 text-muted-foreground/30 shrink-0" />}
           </div>
         );
       })}

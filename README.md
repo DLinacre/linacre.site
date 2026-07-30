@@ -1,137 +1,255 @@
-<p align="center">
-  <img src=".github/banner.svg" alt="linacre.site banner" width="100%">
-</p>
+<div align="center">
 
-<p align="center">
-  <a href="https://www.linacre.site/"><img src="https://img.shields.io/badge/live-linacre.site-22D3EE?style=for-the-badge&logo=vercel&logoColor=white"></a>
-  <a href="#ci-status-note"><img src="https://img.shields.io/badge/BUILD-VERIFIED%20VIA%20VERCEL-34D399?style=for-the-badge"></a>
-  <a href="#ci-status-note"><img src="https://img.shields.io/badge/GITHUB%20ACTIONS-PAUSED%20(BILLING%20LOCK)-f59e0b?style=for-the-badge"></a>
-  <img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-  <img src="https://img.shields.io/badge/Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white">
-  <img src="https://img.shields.io/badge/Tailwind_CSS_4-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white">
-  <img src="https://img.shields.io/badge/Gemini_3.6_Flash-8E75FF?style=for-the-badge&logo=google&logoColor=white">
-  <img src="https://img.shields.io/badge/license-MIT-34D399?style=for-the-badge">
-</p>
+# linacre.site
 
----
+**Developer portal, free browser toolbox, and project showcase.**
 
-# 🏛️ linacre.site — Enterprise Developer Portal & Autonomous AI Ecosystem
+[![Live](https://img.shields.io/badge/live-www.linacre.site-22d3ee)](https://www.linacre.site)
+[![CI](https://github.com/LIN4CRE/linacre.site/actions/workflows/ci.yml/badge.svg)](https://github.com/LIN4CRE/linacre.site/actions/workflows/ci.yml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)](tsconfig.json)
+[![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=black)](https://react.dev)
+[![Tests](https://img.shields.io/badge/tests-18%20passing-brightgreen)](src/components/__tests__)
+[![WCAG](https://img.shields.io/badge/WCAG_2.2_AA-0%20violations-success)](#accessibility)
 
-**linacre.site** is an offline-first developer portal, multi-model AI orchestration lab, and personal software engine engineered by **David Linacre**. Built with React 19, TypeScript, Vite 6, and Express 4, deployed globally across Vercel Edge with zero-downtime static prerendering across all 24 routes.
+**[www.linacre.site](https://www.linacre.site)** · [Toolbox](https://www.linacre.site/toolkit) · [Projects](https://www.linacre.site/projects) · [Games](https://www.linacre.site/games)
 
-
-> **CI status note:** `tsc` typecheck + full build verified locally (see PR #4). GitHub Actions is currently **paused by an account-level billing lock** (free plan, no minutes consumed) — jobs show as failed without ever starting a runner. Workflow disabled until billing is cleared; one click re-enables it (repo → Actions → CI → Enable).
+</div>
 
 ---
 
-## ⚡ System Architecture
+## Overview
 
-```mermaid
-flowchart TD
-    subgraph Client ["Client Browser (PWA Shell)"]
-        ReactSPA["React 19 SPA Container"]
-        SWCache["Service Worker Cache (sw.js)"]
-        StateStore["LocalStorage & IndexedDB State"]
-    end
+A React 19 single-page application with prerendered static routes, deployed on
+Vercel. It serves three purposes:
 
-    subgraph Edge ["Vercel Edge & Content Delivery"]
-        EdgeCDN["Vercel Global CDN"]
-        CSP["Content Security Policy Engine"]
-        StaticPre["Prerender Snapshot Engine (24 Routes)"]
-    end
-
-    subgraph Backend ["Serverless API Backend (api/server.ts)"]
-        ExpressApp["Express API Engine"]
-        AuthMiddleware["SHA-256 Timing-Safe Auth Guard"]
-        RateLimiter["IP Sliding Window Rate Limiter"]
-    end
-
-    subgraph LLM ["AI Engine Integration"]
-        Gemini["Google Gemini 3.6 Flash API"]
-        OpenAI["OpenAI GPT-4o Fallback"]
-        Claude["Anthropic Claude 3.5 Sonnet"]
-        LocalOllama["Local Docker Ollama Instance"]
-    end
-
-    ReactSPA --> EdgeCDN
-    EdgeCDN --> StaticPre
-    ReactSPA --> ExpressApp
-    ExpressApp --> AuthMiddleware
-    ExpressApp --> RateLimiter
-    ExpressApp --> Gemini
-    ExpressApp --> OpenAI
-    ExpressApp --> Claude
-    ExpressApp --> LocalOllama
-```
+1. **A free browser toolbox** — JSON, Base64, VAT, hashing, text and URL
+   utilities that run entirely client-side. Nothing is uploaded anywhere.
+2. **A project showcase** — live builds, downloadable releases, and inspectable
+   source.
+3. **A games hub** — playable browser games plus
+   [Slime Factory Tycoon](https://github.com/LIN4CRE/slime-factory-tycoon), an
+   open-source Roblox idle-tycoon.
 
 ---
 
-## 🌟 Key Application Hubs
+## Quality bar
 
-- ⚡ **AI Lab (`/lab`):** Unified multi-provider model sandbox with active streaming proxies for Gemini 3.6 Flash, OpenAI, Claude, and local Docker Ollama nodes. Features pre-tuned Quick-Start Engineering Templates (*Code Audit*, *PostgreSQL Schema Designer*, *Regex Builder*, *OpenAPI 3.0 Spec Generator*).
-- ✨ **Identity Studio (`/identity`):** Real-time AI prompt emblem generator powered by Gemini 3.6 Flash with dynamic brand palette matching and SVG/PNG vector exports.
-- 🧰 **Developer Playground (`/playground`):** Client-side engineering utilities including JSON-to-TypeScript Generator with JSDoc headers, 5-field Cron Expression Explainer & Schedule Builder, JWT Inspector, RegEx Evaluator, and WebAssembly compiler testbed.
-- 🤖 **Agents Hub (`/agents`):** Autonomous agent workflow visualizer, step execution simulator, and one-click JSON blueprint exporter for AI agent playbooks.
-- 📅 **Discovery Scheduling (`/book`):** Dedicated client route for 15-minute discovery calls and 45-minute architectural review appointments.
-- 📊 **Telemetry Dashboard (`/dashboard`):** Real-time service mesh monitoring with accessible text data tables, radar stats, and KeePassXC secret key state verification.
+Everything below is measured on the live site, not estimated.
+
+| Metric                         |            Value | Threshold |
+| ------------------------------ | ---------------: | --------- |
+| TypeScript errors (strict)     |            **0** | —         |
+| Test suite                     |   **18 passing** | —         |
+| axe-core WCAG 2.2 AA — mobile  | **0 violations** | 0         |
+| axe-core WCAG 2.2 AA — desktop | **0 violations** | 0         |
+| CLS — mobile                   |       **0.0155** | < 0.10    |
+| CLS — desktop                  |       **0.0023** | < 0.10    |
+| LCP                            |       **~1.0 s** | < 2.5 s   |
+| TTFB                           |      **~150 ms** | < 800 ms  |
+
+Reproduce with `npm run verify`, or see [Testing](#testing) for the browser
+measurements.
 
 ---
 
-## 🔒 Security & Governance
+## Tech stack
 
-- **Zero Hardcoded Secrets:** Centralized secrets pipeline managed via `linacre.py` CLI and environment variables (`.env`).
-- **Timing-Safe Authentication:** Session authentication uses HMAC-SHA256 signatures with constant-time equality comparisons (`crypto.timingSafeEqual`) to mitigate side-channel timing attacks.
-- **Strict CSP Headers:** Hardened Content-Security-Policy rules in `vercel.json` enforcing strict script, style, frame, and font origin restrictions.
-- **Bounded Rate Limiting:** Sliding-window IP rate limiters on all public API endpoints to prevent brute-force attacks and resource exhaustion.
+| Layer      | Choice                         | Why                                                                    |
+| ---------- | ------------------------------ | ---------------------------------------------------------------------- |
+| Framework  | React 19                       | Concurrent rendering, `useReducedMotion`, modern Suspense              |
+| Language   | TypeScript 5.8, **strict**     | `strict`, `noUnusedLocals`, `noUnusedParameters`, `noImplicitOverride` |
+| Build      | Vite 7                         | Fast HMR, Rollup manual chunking                                       |
+| Styling    | Tailwind CSS v4                | Vite plugin, no PostCSS config needed                                  |
+| Animation  | Motion                         | Respects `prefers-reduced-motion` throughout                           |
+| Testing    | Vitest + React Testing Library | Shares the Vite config; jsdom environment                              |
+| Linting    | ESLint 9 flat config           | `typescript-eslint` + `react-hooks`                                    |
+| Formatting | Prettier 3                     |                                                                        |
+| Backend    | Express (bundled with esbuild) | Small API surface for contact and status                               |
+| Hosting    | Vercel                         | Static output plus a Node function                                     |
 
 ---
 
-## 🛠️ Local Development & Build Pipeline
+## Getting started
 
-### Prerequisites
-- Node.js >= 20.x
-- npm >= 10.x
-- Python 3.11+ (optional for orchestration via `linacre.py`)
+**Requirements:** Node 22+ and npm.
 
-### Development Commands
 ```bash
-# Install dependencies
-npm install
-
-# Launch development environment (Vite middleware + Express API on port 3000)
-npm run dev
-
-# Run TypeScript typechecks & linter
-npm run lint
-
-# Build production bundle & prerender static HTML snapshots (24 routes)
-npm run build
-
-# Preview production build locally
-npm run start
+git clone https://github.com/LIN4CRE/linacre.site.git
+cd linacre.site
+npm ci
+npm run dev            # http://localhost:3000
 ```
 
-### Deployment Command
-```powershell
-# Automated build and production deployment via Python CLI
-python linacre.py build
-vercel deploy --prod --yes --project linacre-site-repo --force
-```
+### Scripts
+
+| Script                  | Does                                                  |
+| ----------------------- | ----------------------------------------------------- |
+| `npm run dev`           | Vite dev server                                       |
+| `npm run build`         | Vite build → prerender 22 routes → bundle the API     |
+| `npm run preview`       | Serve the production build locally                    |
+| `npm run typecheck`     | `tsc --noEmit` under strict mode                      |
+| `npm run lint`          | ESLint                                                |
+| `npm run lint:fix`      | ESLint with `--fix`                                   |
+| `npm run format`        | Prettier write                                        |
+| `npm run format:check`  | Prettier check (CI)                                   |
+| `npm test`              | Vitest, single run                                    |
+| `npm run test:watch`    | Vitest watch mode                                     |
+| `npm run test:coverage` | V8 coverage report                                    |
+| **`npm run verify`**    | **typecheck + lint + test — run this before pushing** |
 
 ---
 
-## 👨‍💻 About the Author
+## Architecture
 
-**David Linacre**  
-*Principal Infrastructure Engineer, DevOps Architect, and Software Systems Developer*
+```
+linacre.site/
+├── api/
+│   └── server.ts              Express API (contact, status, proxies)
+├── scripts/
+│   ├── prerender.mjs          Static-renders 22 routes + sitemap, feeds, llms.txt
+│   └── agents/                Maintenance tooling
+├── src/
+│   ├── App.tsx                Shell: routing, theming, layout
+│   ├── main.tsx               Entry point, service worker registration
+│   ├── components/            Feature components, lazily loaded
+│   │   ├── GameShowcase.tsx   Manifest-driven game showcase
+│   │   └── __tests__/         Component tests
+│   ├── lib/                   design-system, audioEngine, emblemRenderer
+│   ├── data/                  Static content + synced game manifests
+│   └── test/setup.ts          jsdom polyfills, per-test cleanup
+├── public/                    Fonts, icons, game art
+├── route-meta.json            Per-route SEO metadata
+├── vercel.json                Headers, redirects, caching
+└── vite.config.ts             Build, chunking, and Vitest config
+```
 
-- 🌐 **Live Portal:** [www.linacre.site](https://www.linacre.site)
-- 🐙 **GitHub Org:** [@LIN4CRE](https://github.com/LIN4CRE)
-- 👤 **GitHub Personal:** [@DLinacre](https://github.com/DLinacre)
-- ☕ **Sponsor Craft:** [paypal.me/DLinacre16](https://paypal.me/DLinacre16)
+### Design decisions worth knowing
+
+**Prerendering over SSR.** `scripts/prerender.mjs` emits static HTML for 22
+routes at build time. Crawlers get real content with no JS; users get an SPA
+after hydration. No server rendering cost.
+
+**Manual vendor chunks.** React and Motion are split into long-cached chunks, so
+shipping app code doesn't invalidate a ~96 KB Motion download.
+
+**Route-level code splitting.** Every page is `React.lazy`. The Suspense
+fallback reserves `min-h-[100svh]` — without that reservation the footer paints
+high and drops on hydration, which previously caused a **0.42 CLS on every
+page**.
+
+**Self-hosted variable fonts.** Three families, `unicode-range` subset into
+latin/latin-ext, `font-display: swap`, preloaded, immutable cache headers. No
+third-party font requests.
 
 ---
 
-## 📄 License
-This repository is licensed under the [MIT License](LICENSE).
+## Accessibility
+
+Verified with axe-core against WCAG 2.0/2.1/2.2 A **and** AA at 390 px and
+1440 px: **0 violations, 27 passing checks** on both.
+
+- Full ARIA tabs pattern — `tablist` container, `aria-controls` ↔
+  `aria-labelledby` wiring, roving `tabindex`, arrow-key navigation
+- 44 px minimum touch targets
+- `prefers-reduced-motion` honoured throughout
+- Opaque surfaces behind text, so contrast is deterministic rather than
+  dependent on whatever scrolls underneath
+- Semantic landmarks, skip link, visible focus rings
+
+The tabs contract is covered by tests, so the fix can't silently regress.
+
+---
+
+## Testing
+
+```bash
+npm test                  # 18 tests
+npm run test:coverage     # V8 coverage
+```
+
+The `GameShowcase` suite encodes the project's **honesty guarantees as
+executable contracts**:
+
+- No fabricated player, visit, download, or rating figures
+- Honest empty states — "Coming Soon" rather than placeholder imagery
+- The Play CTA stays disabled until the game is genuinely published
+- Structured data contains no invented `aggregateRating` or `offers`
+
+If someone later adds a fake metric, CI fails. The rule stops being a
+convention and becomes something the build enforces.
+
+Browser-level checks (axe-core, Core Web Vitals) are run with Playwright
+against the live deployment — see the audit in the
+[game repository](https://github.com/LIN4CRE/slime-factory-tycoon/tree/main/audit).
+
+---
+
+## Deployment
+
+Auto-deploys from `main` via the Vercel GitHub integration. No manual step.
+
+```bash
+# Manual deploy, if ever needed
+npx vercel deploy --prod --yes
+```
+
+`vercel.json` sets the security headers and caching:
+
+| Header                      | Value                                                                           |
+| --------------------------- | ------------------------------------------------------------------------------- |
+| `content-security-policy`   | `default-src 'self'`, `object-src 'none'`, `frame-ancestors 'none'`             |
+| `strict-transport-security` | `max-age=63072000; includeSubDomains; preload`                                  |
+| `permissions-policy`        | camera, mic, geolocation, payment, USB, sensors, `interest-cohort` all disabled |
+| `x-frame-options`           | `DENY`                                                                          |
+| `referrer-policy`           | `strict-origin-when-cross-origin`                                               |
+
+Hashed assets are `immutable, max-age=31536000`; HTML is `must-revalidate`.
+
+### Environment variables
+
+All optional — the site builds and runs without them. Absent keys disable
+their feature rather than breaking the build.
+
+| Variable                            | Purpose               |
+| ----------------------------------- | --------------------- |
+| `GEMINI_API_KEY`                    | AI assistant          |
+| `UPSTASH_REDIS_REST_URL` / `_TOKEN` | API rate limiting     |
+| `RESEND_API_KEY`                    | Contact form delivery |
+
+---
+
+## Contributing
+
+```bash
+npm run verify     # must pass before opening a PR
+```
+
+1. Keep TypeScript strict — no new `any` without a comment explaining why.
+2. Any UI change needs a mobile (390 px) check.
+3. Accessibility regressions are treated as bugs, not polish.
+4. Comments should explain _why_, not _what_.
+
+---
+
+## Troubleshooting
+
+**`npm run dev` fails on a fresh clone** — you need Node 22+. Check with
+`node -v`.
+
+**Tests fail with `matchMedia is not a function`** — you're outside the Vitest
+environment. Run `npm test`, which loads `src/test/setup.ts`.
+
+**Build succeeds but a route 404s in preview** — routes are prerendered at build
+time. Add the path to `scripts/prerender.mjs` and `route-meta.json`.
+
+**Fonts flash on first load** — expected. `font-display: swap` is deliberate;
+blocking paint on a font download is worse.
+
+**Playwright can't launch Chromium on Linux** — install system libraries:
+`sudo apt-get install -y libnspr4 libnss3 libasound2t64`.
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).

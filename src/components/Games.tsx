@@ -25,7 +25,7 @@ const GAMES_DATA: GameItem[] = [
     tech: 'React · TypeScript · Vite · Canvas 2D',
     badge: 'Live',
     play: 'https://lin4cre.github.io/KushCloud/',
-    source: 'https://github.com/LIN4CRE/KushCloud'
+    source: 'https://github.com/LIN4CRE/KushCloud',
   },
   {
     title: 'Snake',
@@ -35,8 +35,8 @@ const GAMES_DATA: GameItem[] = [
     tech: 'Vanilla JS · Canvas 2D · Web Audio',
     badge: 'Built-in',
     play: '#snake',
-    source: 'https://github.com/LIN4CRE/linacre.site'
-  }
+    source: 'https://github.com/LIN4CRE/linacre.site',
+  },
 ];
 
 export default function Games() {
@@ -126,13 +126,15 @@ export default function Games() {
   }, [favs]);
 
   const toggleFav = (title: string) => {
-    setFavs(prev => prev.includes(title) ? prev.filter(t => t !== title) : [...prev, title]);
+    setFavs(prev => (prev.includes(title) ? prev.filter(t => t !== title) : [...prev, title]));
   };
 
   const toggleMute = () => {
     setMuted(m => {
       const next = !m;
-      try { localStorage.setItem('dlg_muted', String(next)); } catch {}
+      try {
+        localStorage.setItem('dlg_muted', String(next));
+      } catch {}
       return next;
     });
   };
@@ -156,7 +158,11 @@ export default function Games() {
   };
 
   const startSnake = () => {
-    snakeRef.current = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
+    snakeRef.current = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 },
+    ];
     dirRef.current = { x: 1, y: 0 };
     queueRef.current = [];
     speedRef.current = 120;
@@ -169,7 +175,11 @@ export default function Games() {
 
   const pushDir = (m: [number, number]) => {
     const last = queueRef.current[queueRef.current.length - 1] || dirRef.current;
-    if (queueRef.current.length < 3 && (m[0] !== last.x || m[1] !== last.y) && (m[0] !== -last.x || m[1] !== -last.y)) {
+    if (
+      queueRef.current.length < 3 &&
+      (m[0] !== last.x || m[1] !== last.y) &&
+      (m[0] !== -last.x || m[1] !== -last.y)
+    ) {
       queueRef.current.push({ x: m[0], y: m[1] });
     }
   };
@@ -178,15 +188,26 @@ export default function Games() {
     if (queueRef.current.length) {
       dirRef.current = queueRef.current.shift()!;
     }
-    const head = { x: snakeRef.current[0].x + dirRef.current.x, y: snakeRef.current[0].y + dirRef.current.y };
+    const head = {
+      x: snakeRef.current[0].x + dirRef.current.x,
+      y: snakeRef.current[0].y + dirRef.current.y,
+    };
 
-    if (head.x < 0 || head.y < 0 || head.x >= N || head.y >= N || snakeRef.current.some(s => s.x === head.x && s.y === head.y)) {
+    if (
+      head.x < 0 ||
+      head.y < 0 ||
+      head.x >= N ||
+      head.y >= N ||
+      snakeRef.current.some(s => s.x === head.x && s.y === head.y)
+    ) {
       setGameState('over');
       playSynthSound('over');
       setScore(s => {
         if (s > highScore) {
           setHighScore(s);
-          try { localStorage.setItem('dlg_snakeHigh', String(s)); } catch {}
+          try {
+            localStorage.setItem('dlg_snakeHigh', String(s));
+          } catch {}
         }
         return s;
       });
@@ -220,8 +241,10 @@ export default function Games() {
     ctx.lineWidth = 1;
     ctx.beginPath();
     for (let i = 1; i < N; i++) {
-      ctx.moveTo(i * cell, 0); ctx.lineTo(i * cell, cv.height);
-      ctx.moveTo(0, i * cell); ctx.lineTo(cv.width, i * cell);
+      ctx.moveTo(i * cell, 0);
+      ctx.lineTo(i * cell, cv.height);
+      ctx.moveTo(0, i * cell);
+      ctx.lineTo(cv.width, i * cell);
     }
     ctx.stroke();
 
@@ -269,16 +292,30 @@ export default function Games() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!snakeOpen) return;
       const k = e.key.toLowerCase();
-      if (k === 'escape') { setSnakeOpen(false); return; }
-      if (k === 'enter') { e.preventDefault(); if (gameState !== 'run') startSnake(); return; }
+      if (k === 'escape') {
+        setSnakeOpen(false);
+        return;
+      }
+      if (k === 'enter') {
+        e.preventDefault();
+        if (gameState !== 'run') startSnake();
+        return;
+      }
       const move = {
-        arrowup: [0, -1], w: [0, -1],
-        arrowdown: [0, 1], s: [0, 1],
-        arrowleft: [-1, 0], a: [-1, 0],
-        arrowright: [1, 0], d: [1, 0]
+        arrowup: [0, -1],
+        w: [0, -1],
+        arrowdown: [0, 1],
+        s: [0, 1],
+        arrowleft: [-1, 0],
+        a: [-1, 0],
+        arrowright: [1, 0],
+        d: [1, 0],
       }[k] as [number, number] | undefined;
 
-      if (move) { e.preventDefault(); pushDir(move); }
+      if (move) {
+        e.preventDefault();
+        pushDir(move);
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -297,7 +334,8 @@ export default function Games() {
           Playable browser games <span className="text-amber-color">built by me</span>
         </h1>
         <p className="text-muted-foreground text-sm leading-relaxed">
-          Real, playable games made from scratch — zero filler or fake data. Play right in your browser or inspect the source on GitHub.
+          Real, playable games made from scratch — zero filler or fake data. Play right in your
+          browser or inspect the source on GitHub.
         </p>
       </section>
 
@@ -309,11 +347,13 @@ export default function Games() {
             In development
           </span>
         </div>
-        <Suspense fallback={
-          <div className="rounded-2xl border border-border-color/60 bg-muted/15 h-64 grid place-items-center">
-            <span className="font-mono text-xs text-muted-foreground">Loading project…</span>
-          </div>
-        }>
+        <Suspense
+          fallback={
+            <div className="rounded-2xl border border-border-color/60 bg-muted/15 h-64 grid place-items-center">
+              <span className="font-mono text-xs text-muted-foreground">Loading project…</span>
+            </div>
+          }
+        >
           <GameShowcase />
         </Suspense>
       </section>
@@ -354,13 +394,19 @@ export default function Games() {
             className="px-3 py-1.5 rounded-lg border border-border-color bg-muted/20 font-mono text-xs text-muted-foreground hover:text-foreground hover:border-amber-color/40 flex items-center gap-1.5 cursor-pointer"
             title="Toggle Web Audio"
           >
-            {muted ? <VolumeX className="w-3.5 h-3.5 text-muted-foreground" /> : <Volume2 className="w-3.5 h-3.5 text-amber-color" />}
+            {muted ? (
+              <VolumeX className="w-3.5 h-3.5 text-muted-foreground" />
+            ) : (
+              <Volume2 className="w-3.5 h-3.5 text-amber-color" />
+            )}
             <span>{muted ? 'Muted' : 'Audio On'}</span>
           </button>
 
           <div className="font-mono text-xs text-muted-foreground flex items-center gap-2">
             <Gamepad2 className="w-4 h-4 text-amber-color" />
-            <span>Showing {filteredGames.length} of {GAMES_DATA.length} games</span>
+            <span>
+              Showing {filteredGames.length} of {GAMES_DATA.length} games
+            </span>
           </div>
         </div>
       </div>
@@ -380,9 +426,13 @@ export default function Games() {
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
-                    isBuiltIn ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20' : 'bg-emerald-500/10 text-emerald-color border border-emerald-500/20'
-                  }`}>
+                  <span
+                    className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
+                      isBuiltIn
+                        ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                        : 'bg-emerald-500/10 text-emerald-color border border-emerald-500/20'
+                    }`}
+                  >
                     {game.badge}
                   </span>
 
@@ -391,7 +441,9 @@ export default function Games() {
                     className="p-1.5 rounded-lg hover:bg-muted/60 transition-colors cursor-pointer"
                     title="Toggle favourite"
                   >
-                    <Heart className={`w-4 h-4 ${isFav ? 'text-rose-400 fill-rose-400' : 'text-muted-foreground'}`} />
+                    <Heart
+                      className={`w-4 h-4 ${isFav ? 'text-rose-400 fill-rose-400' : 'text-muted-foreground'}`}
+                    />
                   </button>
                 </div>
 
@@ -404,7 +456,10 @@ export default function Games() {
 
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {game.tags.map(t => (
-                    <span key={t} className="font-mono text-[10px] bg-muted/40 px-2 py-0.5 rounded border border-border-color/50 text-muted-foreground">
+                    <span
+                      key={t}
+                      className="font-mono text-[10px] bg-muted/40 px-2 py-0.5 rounded border border-border-color/50 text-muted-foreground"
+                    >
                       {t}
                     </span>
                   ))}
@@ -461,7 +516,9 @@ export default function Games() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 font-display font-bold text-lg text-foreground">
                 <Gamepad2 className="w-5 h-5 text-amber-color" />
-                <span>SNAKE <span className="font-mono text-xs text-amber-color">· BUILT-IN</span></span>
+                <span>
+                  SNAKE <span className="font-mono text-xs text-amber-color">· BUILT-IN</span>
+                </span>
               </div>
               <button
                 onClick={() => setSnakeOpen(false)}
@@ -472,8 +529,12 @@ export default function Games() {
             </div>
 
             <div className="flex items-center justify-between font-mono text-xs text-muted-foreground bg-muted/30 p-2.5 rounded-xl">
-              <span>SCORE: <b className="text-amber-color text-sm">{score}</b></span>
-              <span>BEST: <b className="text-amber-color text-sm">{highScore}</b></span>
+              <span>
+                SCORE: <b className="text-amber-color text-sm">{score}</b>
+              </span>
+              <span>
+                BEST: <b className="text-amber-color text-sm">{highScore}</b>
+              </span>
               <button
                 onClick={startSnake}
                 className="px-3 py-1 rounded-lg bg-amber-color text-[#030c14] font-bold text-xs flex items-center gap-1 cursor-pointer"

@@ -1,8 +1,19 @@
 import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import {
-  Play, Code2, Layers, CheckCircle2, Clock,
-  ChevronDown, Gamepad2, Smartphone, Tablet, Monitor, ImageOff, Tag, Download
+  Play,
+  Code2,
+  Layers,
+  CheckCircle2,
+  Clock,
+  ChevronDown,
+  Gamepad2,
+  Smartphone,
+  Tablet,
+  Monitor,
+  ImageOff,
+  Tag,
+  Download,
 } from 'lucide-react';
 import manifest from '../data/slime-factory-tycoon.json';
 
@@ -41,8 +52,8 @@ const TABS = [
 
 const STATUS_STYLE: Record<string, string> = {
   'In development': 'bg-amber-color/10 text-amber-color border-amber-color/30',
-  'Live': 'bg-emerald-500/10 text-emerald-color border-emerald-500/30',
-  'Planned': 'bg-muted/40 text-muted-foreground border-border-color',
+  Live: 'bg-emerald-500/10 text-emerald-color border-emerald-500/30',
+  Planned: 'bg-muted/40 text-muted-foreground border-border-color',
 };
 
 export default function GameShowcase() {
@@ -60,7 +71,11 @@ export default function GameShowcase() {
         name: manifest.name,
         description: manifest.description,
         codeRepository: manifest.links.github,
-        programmingLanguage: { '@type': 'ComputerLanguage', name: 'Luau', url: 'https://luau-lang.org/' },
+        programmingLanguage: {
+          '@type': 'ComputerLanguage',
+          name: 'Luau',
+          url: 'https://luau-lang.org/',
+        },
         runtimePlatform: manifest.platform,
         license: 'https://opensource.org/licenses/MIT',
         author: { '@type': 'Person', name: 'David Linacre', url: 'https://www.linacre.site' },
@@ -72,7 +87,12 @@ export default function GameShowcase() {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.linacre.site/' },
-          { '@type': 'ListItem', position: 2, name: 'Games', item: 'https://www.linacre.site/games' },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Games',
+            item: 'https://www.linacre.site/games',
+          },
         ],
       },
     ],
@@ -111,7 +131,9 @@ export default function GameShowcase() {
         </picture>
 
         <div className="absolute top-3 right-3 flex flex-wrap gap-2 justify-end">
-          <span className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg border backdrop-blur-md ${STATUS_STYLE[manifest.status] ?? STATUS_STYLE.Planned}`}>
+          <span
+            className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg border backdrop-blur-md ${STATUS_STYLE[manifest.status] ?? STATUS_STYLE.Planned}`}
+          >
             {manifest.status}
           </span>
           <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg border border-white/15 bg-black/50 text-white/90 backdrop-blur-md">
@@ -137,7 +159,10 @@ export default function GameShowcase() {
           </picture>
 
           <div className="min-w-0 space-y-1">
-            <h3 className="font-display text-2xl font-bold text-foreground leading-tight" itemProp="name">
+            <h3
+              className="font-display text-2xl font-bold text-foreground leading-tight"
+              itemProp="name"
+            >
               {manifest.name}
             </h3>
             <p className="font-mono text-xs text-amber-color">{manifest.tagline}</p>
@@ -156,7 +181,11 @@ export default function GameShowcase() {
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <div className="flex flex-wrap gap-1.5">
             {manifest.genre.map(g => (
-              <span key={g} className="font-mono text-[10px] bg-muted/40 px-2 py-0.5 rounded border border-border-color/50 text-muted-foreground" itemProp="genre">
+              <span
+                key={g}
+                className="font-mono text-[10px] bg-muted/40 px-2 py-0.5 rounded border border-border-color/50 text-muted-foreground"
+                itemProp="genre"
+              >
                 {g}
               </span>
             ))}
@@ -184,8 +213,13 @@ export default function GameShowcase() {
             { label: 'Achievements', value: manifest.stats.achievements },
             { label: 'Cosmetics', value: manifest.stats.cosmetics },
           ].map(s => (
-            <div key={s.label} className="rounded-xl border border-border-color/60 bg-muted/25 px-3 py-2.5">
-              <div className="font-display text-lg font-bold text-amber-color leading-none">{s.value ?? '—'}</div>
+            <div
+              key={s.label}
+              className="rounded-xl border border-border-color/60 bg-muted/25 px-3 py-2.5"
+            >
+              <div className="font-display text-lg font-bold text-amber-color leading-none">
+                {s.value ?? '—'}
+              </div>
               <div className="font-mono text-[10px] text-muted-foreground mt-1">{s.label}</div>
             </div>
           ))}
@@ -193,7 +227,9 @@ export default function GameShowcase() {
 
         {/* ------------------------------------------------------ gallery */}
         <section aria-label="Screenshots">
-          <h4 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground mb-2">Screenshots</h4>
+          <h4 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground mb-2">
+            Screenshots
+          </h4>
           {hasShots ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {manifest.screenshots.map((src: string, i: number) => (
@@ -211,7 +247,9 @@ export default function GameShowcase() {
             <div className="rounded-xl border border-dashed border-border-color bg-muted/15 py-7 grid place-items-center text-center gap-1.5">
               <ImageOff className="w-5 h-5 text-muted-foreground" />
               <p className="font-mono text-xs text-muted-foreground">Screenshots — Coming Soon</p>
-              <p className="font-mono text-[10px] text-muted-foreground/70">Captured once the art pass is complete</p>
+              <p className="font-mono text-[10px] text-muted-foreground/70">
+                Captured once the art pass is complete
+              </p>
             </div>
           )}
         </section>
@@ -267,12 +305,17 @@ export default function GameShowcase() {
             {tab === 'features' && (
               <ul className="grid sm:grid-cols-2 gap-2.5">
                 {(manifest.features as Feature[]).map(f => (
-                  <li key={f.title} className="rounded-xl border border-border-color/60 bg-muted/20 p-3">
+                  <li
+                    key={f.title}
+                    className="rounded-xl border border-border-color/60 bg-muted/20 p-3"
+                  >
                     <div className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-color shrink-0 mt-0.5" />
                       <div>
                         <p className="text-xs font-bold text-foreground">{f.title}</p>
-                        <p className="text-[11px] text-muted-foreground leading-relaxed mt-0.5">{f.desc}</p>
+                        <p className="text-[11px] text-muted-foreground leading-relaxed mt-0.5">
+                          {f.desc}
+                        </p>
                       </div>
                     </div>
                   </li>
@@ -283,7 +326,10 @@ export default function GameShowcase() {
             {tab === 'systems' && (
               <div className="flex flex-wrap gap-1.5">
                 {manifest.systems.map((s: string) => (
-                  <span key={s} className="font-mono text-[11px] bg-muted/40 px-2.5 py-1 rounded-lg border border-border-color/50 text-muted-foreground flex items-center gap-1.5">
+                  <span
+                    key={s}
+                    className="font-mono text-[11px] bg-muted/40 px-2.5 py-1 rounded-lg border border-border-color/50 text-muted-foreground flex items-center gap-1.5"
+                  >
                     <Layers className="w-3 h-3 text-amber-color" />
                     {s}
                   </span>
@@ -296,7 +342,10 @@ export default function GameShowcase() {
                 {(manifest.changelog as ChangeEntry[]).map(entry => {
                   const open = logOpen === entry.version;
                   return (
-                    <div key={entry.version} className="rounded-xl border border-border-color/60 bg-muted/20 overflow-hidden">
+                    <div
+                      key={entry.version}
+                      className="rounded-xl border border-border-color/60 bg-muted/20 overflow-hidden"
+                    >
                       <button
                         onClick={() => setLogOpen(open ? null : entry.version)}
                         aria-expanded={open}
@@ -307,17 +356,32 @@ export default function GameShowcase() {
                           <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-color/15 text-amber-color border border-amber-color/25 shrink-0">
                             v{entry.version}
                           </span>
-                          <span className="text-xs font-bold text-foreground truncate">{entry.title}</span>
+                          <span className="text-xs font-bold text-foreground truncate">
+                            {entry.title}
+                          </span>
                         </span>
                         <span className="flex items-center gap-2 shrink-0">
-                          <time className="font-mono text-[10px] text-muted-foreground" dateTime={entry.date}>{entry.date}</time>
-                          <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform ${open ? 'rotate-180' : ''}`} />
+                          <time
+                            className="font-mono text-[10px] text-muted-foreground"
+                            dateTime={entry.date}
+                          >
+                            {entry.date}
+                          </time>
+                          <ChevronDown
+                            className={`w-3.5 h-3.5 text-muted-foreground transition-transform ${open ? 'rotate-180' : ''}`}
+                          />
                         </span>
                       </button>
                       {open && (
-                        <ul id={`sft-log-${entry.version}`} className="px-3 pb-3 pt-0 space-y-1.5 border-t border-border-color/40">
+                        <ul
+                          id={`sft-log-${entry.version}`}
+                          className="px-3 pb-3 pt-0 space-y-1.5 border-t border-border-color/40"
+                        >
                           {entry.changes.map((c, i) => (
-                            <li key={i} className="text-[11px] text-muted-foreground leading-relaxed flex gap-2 pt-1.5">
+                            <li
+                              key={i}
+                              className="text-[11px] text-muted-foreground leading-relaxed flex gap-2 pt-1.5"
+                            >
                               <span className="text-amber-color shrink-0">›</span>
                               <span>{c}</span>
                             </li>
@@ -333,7 +397,10 @@ export default function GameShowcase() {
             {tab === 'roadmap' && (
               <ul className="space-y-2">
                 {(manifest.roadmap as RoadmapItem[]).map(r => (
-                  <li key={r.item} className="flex items-center gap-2.5 rounded-xl border border-border-color/60 bg-muted/20 px-3 py-2.5">
+                  <li
+                    key={r.item}
+                    className="flex items-center gap-2.5 rounded-xl border border-border-color/60 bg-muted/20 px-3 py-2.5"
+                  >
                     <Clock className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                     <span className="text-xs text-foreground flex-1">{r.item}</span>
                     <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground px-2 py-0.5 rounded border border-border-color/60">

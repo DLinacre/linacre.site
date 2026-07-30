@@ -23,9 +23,7 @@ export default function Learn() {
 
   const toggleStep = (stepNum: number) => {
     setCompletedSteps(prev =>
-      prev.includes(stepNum)
-        ? prev.filter(n => n !== stepNum)
-        : [...prev, stepNum]
+      prev.includes(stepNum) ? prev.filter(n => n !== stepNum) : [...prev, stepNum],
     );
   };
 
@@ -42,7 +40,9 @@ export default function Learn() {
           Learn to build <span className="text-amber-color">from scratch</span>
         </h1>
         <p className="text-base text-muted-foreground leading-relaxed">
-          The exact route I followed and recommendations I'd give to any beginner: a curated list of top-tier, 100% free learning resources, followed by a roadmap to go from absolute zero to shipping full-stack applications.
+          The exact route I followed and recommendations I'd give to any beginner: a curated list of
+          top-tier, 100% free learning resources, followed by a roadmap to go from absolute zero to
+          shipping full-stack applications.
         </p>
       </section>
 
@@ -51,14 +51,18 @@ export default function Learn() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-color/30 pb-4">
           <div className="flex items-center gap-2">
             <GraduationCap className="w-5 h-5 text-amber-color" />
-            <h2 className="font-display text-lg font-bold tracking-tight text-foreground">The Roadmap</h2>
+            <h2 className="font-display text-lg font-bold tracking-tight text-foreground">
+              The Roadmap
+            </h2>
           </div>
 
           <div className="flex items-center gap-3 bg-muted/10 border border-border-color/30 rounded-xl px-4 py-2 text-xs font-mono w-full sm:w-[320px]">
             <div className="flex-1">
               <div className="flex justify-between text-[10px] text-muted-foreground uppercase font-bold mb-1">
                 <span>Progress Log</span>
-                <span>{completedSteps.length} / {ROADMAP_STEPS.length} Completed ({progressPercent}%)</span>
+                <span>
+                  {completedSteps.length} / {ROADMAP_STEPS.length} Completed ({progressPercent}%)
+                </span>
               </div>
               <div className="w-full h-1.5 bg-zinc-950 rounded-full overflow-hidden border border-border-color/20">
                 <div
@@ -71,7 +75,10 @@ export default function Learn() {
         </div>
 
         {/* Steps container */}
-        <div className="relative pl-8 sm:pl-10 space-y-8 border-l-2 border-border-color" id="roadmap-timeline">
+        <div
+          className="relative pl-8 sm:pl-10 space-y-8 border-l-2 border-border-color"
+          id="roadmap-timeline"
+        >
           {ROADMAP_STEPS.map((step, idx) => {
             const isCompleted = completedSteps.includes(step.n);
             return (
@@ -110,16 +117,22 @@ export default function Learn() {
                   style={{ transitionDuration: 'var(--linacre-duration-base)' }}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => {
+                  onKeyDown={e => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
                       toggleStep(step.n);
                     }
                   }}
                 >
-                  <h3 className={`font-mono text-sm font-semibold transition-colors flex items-center gap-2 ${isCompleted ? 'text-amber-color' : 'text-foreground group-hover:text-amber-color'}`}>
+                  <h3
+                    className={`font-mono text-sm font-semibold transition-colors flex items-center gap-2 ${isCompleted ? 'text-amber-color' : 'text-foreground group-hover:text-amber-color'}`}
+                  >
                     <span>{step.title}</span>
-                    {isCompleted && <span className="text-[9px] uppercase bg-amber-color/10 px-1.5 py-0.5 rounded font-bold border border-amber-color/20">LOGGED</span>}
+                    {isCompleted && (
+                      <span className="text-[9px] uppercase bg-amber-color/10 px-1.5 py-0.5 rounded font-bold border border-amber-color/20">
+                        LOGGED
+                      </span>
+                    )}
                   </h3>
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-1.5 font-sans">
                     {step.text}
@@ -136,7 +149,9 @@ export default function Learn() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-cyan" />
-            <h2 className="font-display text-lg font-bold tracking-tight text-foreground">Curated Resources</h2>
+            <h2 className="font-display text-lg font-bold tracking-tight text-foreground">
+              Curated Resources
+            </h2>
           </div>
           <span className="hidden sm:inline-block font-mono text-[10px] text-muted-foreground/60">
             // 100% Free resources only
@@ -155,7 +170,10 @@ export default function Learn() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.25, delay: idx * 0.05 }}
               className="group flex flex-col justify-between bg-muted/20 dark:bg-[#0B1220]/80 border border-amber-color/12 rounded-2xl p-5 hover:bg-muted/35 dark:hover:bg-[#111827] hover:border-amber-color/30 hover:-translate-y-1 transition-all border-l-[3px] border-l-purple-color text-left"
-              style={{ transitionDuration: 'var(--linacre-duration-base)', boxShadow: 'var(--linacre-card-shadow)' }}
+              style={{
+                transitionDuration: 'var(--linacre-duration-base)',
+                boxShadow: 'var(--linacre-card-shadow)',
+              }}
               id={`resource-card-${res.name.toLowerCase().replace(/\s+/g, '-')}`}
             >
               <div>

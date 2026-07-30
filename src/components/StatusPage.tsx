@@ -1,27 +1,34 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Activity, ShieldCheck, HardDrive, Cpu, Terminal, RefreshCw, AlertTriangle } from 'lucide-react';
-
+import {
+  Activity,
+  ShieldCheck,
+  HardDrive,
+  Cpu,
+  Terminal,
+  RefreshCw,
+  AlertTriangle,
+} from 'lucide-react';
 
 export default function StatusPage() {
   const [latencyMap, setLatencyMap] = useState({
     cdn: 12,
     api: 34,
     db: 1,
-    ai: 245
+    ai: 245,
   });
 
   const [systemLoad, setSystemLoad] = useState({
     cpu: 8.5,
     mem: 41.2,
-    disk: 18.7
+    disk: 18.7,
   });
 
   const [logs, setLogs] = useState<string[]>([
-    "[12:49:01] SYS: Daemon initialising check...",
-    "[12:49:02] NET: Edge latency resolver matching local CDN...",
-    "[12:49:03] DB: Local cache indices valid. Syncing state...",
-    "[12:49:03] SYS: ALL SYSTEMS OPERATIONAL."
+    '[12:49:01] SYS: Daemon initialising check...',
+    '[12:49:02] NET: Edge latency resolver matching local CDN...',
+    '[12:49:03] DB: Local cache indices valid. Syncing state...',
+    '[12:49:03] SYS: ALL SYSTEMS OPERATIONAL.',
   ]);
 
   // Periodically fluctuate values to simulate live server tracking
@@ -31,13 +38,13 @@ export default function StatusPage() {
         cdn: Math.max(8, prev.cdn + Math.floor(Math.random() * 5) - 2),
         api: Math.max(28, prev.api + Math.floor(Math.random() * 9) - 4),
         db: Math.max(1, prev.db + (Math.random() > 0.85 ? 1 : 0) - (Math.random() > 0.85 ? 1 : 0)),
-        ai: Math.max(180, prev.ai + Math.floor(Math.random() * 41) - 20)
+        ai: Math.max(180, prev.ai + Math.floor(Math.random() * 41) - 20),
       }));
 
       setSystemLoad(prev => ({
         cpu: Math.max(2, Math.min(99, prev.cpu + Number((Math.random() * 3 - 1.5).toFixed(1)))),
         mem: Math.max(30, Math.min(95, prev.mem + Number((Math.random() * 0.8 - 0.4).toFixed(1)))),
-        disk: prev.disk
+        disk: prev.disk,
       }));
 
       // Append logs occasionally
@@ -48,7 +55,7 @@ export default function StatusPage() {
           'Pruning stale transient sessions.',
           'Ping response received from host.',
           'Central secrets key synchronized.',
-          'Rate limiting token bucket flushed.'
+          'Rate limiting token bucket flushed.',
         ];
         const randomService = services[Math.floor(Math.random() * services.length)];
         const randomMsg = msgs[Math.floor(Math.random() * msgs.length)];
@@ -68,13 +75,17 @@ export default function StatusPage() {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.08 }
-    }
+      transition: { staggerChildren: 0.08 },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 110, damping: 14 } }
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'spring' as const, stiffness: 110, damping: 14 },
+    },
   };
 
   return (
@@ -85,7 +96,11 @@ export default function StatusPage() {
       className="space-y-12 animate-fade-in"
     >
       {/* Title Hero — clearly labelled as demo (audit UX-02, 11 Jul 2026) */}
-      <motion.section variants={itemVariants} className="text-center md:text-left space-y-4 max-w-3xl" id="status-hero">
+      <motion.section
+        variants={itemVariants}
+        className="text-center md:text-left space-y-4 max-w-3xl"
+        id="status-hero"
+      >
         <div className="flex flex-wrap items-center gap-2 justify-center md:justify-start">
           <span className="font-mono text-xs text-amber-color tracking-widest uppercase font-semibold bg-amber-color/10 border border-amber-color/40 px-2.5 py-1 rounded-full">
             Demo &middot; Simulated data
@@ -95,13 +110,17 @@ export default function StatusPage() {
           </span>
         </div>
         <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-foreground mt-3">
-          Systems <span className="text-emerald-color">Status</span> <span className="text-amber-color">(Demo)</span>
+          Systems <span className="text-emerald-color">Status</span>{' '}
+          <span className="text-amber-color">(Demo)</span>
         </h1>
         <p className="text-base text-muted-foreground leading-relaxed">
-          This is a client-side UI demo of a status console. Latency, uptime, logs and load
-          values below are generated in your browser to showcase interface patterns &mdash;
-          they do not reflect real infrastructure. For genuine linacre.site availability,{' '}
-          <a href="mailto:david@linacre.site" className="text-amber-color hover:underline">email david@linacre.site</a>.
+          This is a client-side UI demo of a status console. Latency, uptime, logs and load values
+          below are generated in your browser to showcase interface patterns &mdash; they do not
+          reflect real infrastructure. For genuine linacre.site availability,{' '}
+          <a href="mailto:david@linacre.site" className="text-amber-color hover:underline">
+            email david@linacre.site
+          </a>
+          .
         </p>
       </motion.section>
 
@@ -115,7 +134,9 @@ export default function StatusPage() {
         <div className="space-y-0.5">
           <div className="font-bold uppercase tracking-wider">Simulated Console Feed</div>
           <p className="text-muted-foreground text-[10px] leading-relaxed">
-            All telemetry metrics, server ping logs, and response latency values rendered below are local mock simulations designed to demonstrate console interfaces. No real-world server infrastructure is monitored.
+            All telemetry metrics, server ping logs, and response latency values rendered below are
+            local mock simulations designed to demonstrate console interfaces. No real-world server
+            infrastructure is monitored.
           </p>
         </div>
       </motion.div>
@@ -130,8 +151,12 @@ export default function StatusPage() {
           <div className="w-3.5 h-3.5 rounded-full bg-emerald-color animate-ping" />
           <div className="w-3.5 h-3.5 rounded-full bg-emerald-color absolute" />
           <div>
-            <h2 className="font-mono text-sm font-bold text-foreground uppercase">Simulated Engine State: Running</h2>
-            <p className="font-mono text-[10px] text-muted-foreground/80 mt-0.5">Mock Uptime: 99.98% · SSL verified · Simulated Latency Metrics</p>
+            <h2 className="font-mono text-sm font-bold text-foreground uppercase">
+              Simulated Engine State: Running
+            </h2>
+            <p className="font-mono text-[10px] text-muted-foreground/80 mt-0.5">
+              Mock Uptime: 99.98% · SSL verified · Simulated Latency Metrics
+            </p>
           </div>
         </div>
         <span className="font-mono text-xs text-emerald-color font-bold tracking-wider hidden sm:inline-block">
@@ -141,9 +166,14 @@ export default function StatusPage() {
 
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4" id="status-metrics-grid">
-        <motion.div variants={itemVariants} className="bg-muted/10 border border-border-color rounded-xl p-5 space-y-3">
+        <motion.div
+          variants={itemVariants}
+          className="bg-muted/10 border border-border-color rounded-xl p-5 space-y-3"
+        >
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="font-mono text-[10px] uppercase font-bold tracking-wider">Vercel CDN Edge</span>
+            <span className="font-mono text-[10px] uppercase font-bold tracking-wider">
+              Vercel CDN Edge
+            </span>
             <ShieldCheck className="w-4 h-4 text-emerald-color" />
           </div>
           <div className="font-mono text-lg font-bold text-foreground">{latencyMap.cdn}ms</div>
@@ -153,9 +183,14 @@ export default function StatusPage() {
           </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="bg-muted/10 border border-border-color rounded-xl p-5 space-y-3">
+        <motion.div
+          variants={itemVariants}
+          className="bg-muted/10 border border-border-color rounded-xl p-5 space-y-3"
+        >
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="font-mono text-[10px] uppercase font-bold tracking-wider">Express Server</span>
+            <span className="font-mono text-[10px] uppercase font-bold tracking-wider">
+              Express Server
+            </span>
             <Activity className="w-4 h-4 text-emerald-color" />
           </div>
           <div className="font-mono text-lg font-bold text-foreground">{latencyMap.api}ms</div>
@@ -165,9 +200,14 @@ export default function StatusPage() {
           </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="bg-muted/10 border border-border-color rounded-xl p-5 space-y-3">
+        <motion.div
+          variants={itemVariants}
+          className="bg-muted/10 border border-border-color rounded-xl p-5 space-y-3"
+        >
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="font-mono text-[10px] uppercase font-bold tracking-wider">Local DB Sandbox</span>
+            <span className="font-mono text-[10px] uppercase font-bold tracking-wider">
+              Local DB Sandbox
+            </span>
             <HardDrive className="w-4 h-4 text-emerald-color" />
           </div>
           <div className="font-mono text-lg font-bold text-foreground">{latencyMap.db}ms</div>
@@ -177,9 +217,14 @@ export default function StatusPage() {
           </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="bg-muted/10 border border-border-color rounded-xl p-5 space-y-3">
+        <motion.div
+          variants={itemVariants}
+          className="bg-muted/10 border border-border-color rounded-xl p-5 space-y-3"
+        >
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="font-mono text-[10px] uppercase font-bold tracking-wider">AI Node Ping</span>
+            <span className="font-mono text-[10px] uppercase font-bold tracking-wider">
+              AI Node Ping
+            </span>
             <Cpu className="w-4 h-4 text-emerald-color" />
           </div>
           <div className="font-mono text-lg font-bold text-foreground">{latencyMap.ai}ms</div>
@@ -193,13 +238,21 @@ export default function StatusPage() {
       {/* Grid: Console Logs & Load Meters */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
         {/* Terminal logs */}
-        <motion.div variants={itemVariants} className="md:col-span-8 bg-[#030c14] border border-border-color rounded-xl p-5 space-y-4 shadow-2xl">
+        <motion.div
+          variants={itemVariants}
+          className="md:col-span-8 bg-[#030c14] border border-border-color rounded-xl p-5 space-y-4 shadow-2xl"
+        >
           <div className="flex items-center justify-between border-b border-border-color/30 pb-3">
             <div className="flex items-center gap-2">
               <Terminal className="w-4 h-4 text-emerald-color" />
-              <span className="font-mono text-xs font-bold text-foreground uppercase">Console Log Output</span>
+              <span className="font-mono text-xs font-bold text-foreground uppercase">
+                Console Log Output
+              </span>
             </div>
-            <RefreshCw className="w-3.5 h-3.5 text-muted-foreground/60 animate-spin" style={{ animationDuration: '4s' }} />
+            <RefreshCw
+              className="w-3.5 h-3.5 text-muted-foreground/60 animate-spin"
+              style={{ animationDuration: '4s' }}
+            />
           </div>
           <div className="font-mono text-[11px] space-y-2.5 h-[160px] text-muted-foreground overflow-hidden">
             {logs.map((log, index) => {
@@ -214,7 +267,10 @@ export default function StatusPage() {
         </motion.div>
 
         {/* System load stats */}
-        <motion.div variants={itemVariants} className="md:col-span-4 bg-muted/10 border border-border-color rounded-xl p-5 space-y-5">
+        <motion.div
+          variants={itemVariants}
+          className="md:col-span-4 bg-muted/10 border border-border-color rounded-xl p-5 space-y-5"
+        >
           <h2 className="font-mono text-xs font-bold text-foreground uppercase border-b border-border-color/25 pb-3">
             Resource Monitors
           </h2>
@@ -227,7 +283,10 @@ export default function StatusPage() {
                 <span>{systemLoad.cpu}%</span>
               </div>
               <div className="w-full h-1.5 bg-zinc-950 border border-border-color/20 rounded-full overflow-hidden">
-                <div className="h-full bg-emerald-color" style={{ width: `${systemLoad.cpu}%`, transition: 'width 0.5s ease-out' }} />
+                <div
+                  className="h-full bg-emerald-color"
+                  style={{ width: `${systemLoad.cpu}%`, transition: 'width 0.5s ease-out' }}
+                />
               </div>
             </div>
 
@@ -238,7 +297,10 @@ export default function StatusPage() {
                 <span>{systemLoad.mem}%</span>
               </div>
               <div className="w-full h-1.5 bg-zinc-950 border border-border-color/20 rounded-full overflow-hidden">
-                <div className="h-full bg-emerald-color" style={{ width: `${systemLoad.mem}%`, transition: 'width 0.5s ease-out' }} />
+                <div
+                  className="h-full bg-emerald-color"
+                  style={{ width: `${systemLoad.mem}%`, transition: 'width 0.5s ease-out' }}
+                />
               </div>
             </div>
 

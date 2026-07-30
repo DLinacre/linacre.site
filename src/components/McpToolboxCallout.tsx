@@ -3,8 +3,17 @@ import { Bot, Terminal, Copy, Check, ExternalLink } from 'lucide-react';
 
 // Tools exposed by the Linacre Tool Box MCP server (see mcp/ in this repo).
 const MCP_TOOLS = [
-  'json_format', 'base64', 'jwt_decode', 'regex_test', 'hash', 'uuid_generate',
-  'password_generate', 'uk_vat', 'url_clean', 'timestamp_convert', 'text_tools',
+  'json_format',
+  'base64',
+  'jwt_decode',
+  'regex_test',
+  'hash',
+  'uuid_generate',
+  'password_generate',
+  'uk_vat',
+  'url_clean',
+  'timestamp_convert',
+  'text_tools',
 ];
 
 function CopyButton({ text, label = 'command' }: { text: string; label?: string }) {
@@ -24,7 +33,11 @@ function CopyButton({ text, label = 'command' }: { text: string; label?: string 
       title={`Copy ${label}`}
       aria-label={copied ? `${label} copied` : `Copy ${label}`}
     >
-      {copied ? <Check className="w-3.5 h-3.5 text-emerald-color" /> : <Copy className="w-3.5 h-3.5" />}
+      {copied ? (
+        <Check className="w-3.5 h-3.5 text-emerald-color" />
+      ) : (
+        <Copy className="w-3.5 h-3.5" />
+      )}
     </button>
   );
 }
@@ -51,7 +64,10 @@ export default function McpToolboxCallout({ blurb, className = '' }: McpToolboxC
           <Bot className="w-4 h-4 text-cyan" />
         </div>
         <div>
-          <h2 id="mcp-callout-heading" className="font-mono text-sm sm:text-base font-semibold text-foreground flex items-center gap-2 flex-wrap">
+          <h2
+            id="mcp-callout-heading"
+            className="font-mono text-sm sm:text-base font-semibold text-foreground flex items-center gap-2 flex-wrap"
+          >
             Call these tools from your AI
             <span className="font-mono text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded text-cyan bg-cyan/10 border border-cyan/20">
               MCP
@@ -65,7 +81,7 @@ export default function McpToolboxCallout({ blurb, className = '' }: McpToolboxC
       </div>
 
       <div className="flex flex-wrap gap-1.5 mb-5" aria-label="Tools available over MCP">
-        {MCP_TOOLS.map((t) => (
+        {MCP_TOOLS.map(t => (
           <span
             key={t}
             className="font-mono text-[10px] px-2 py-1 rounded-md bg-muted/40 dark:bg-[#0B1220]/60 border border-amber-color/12 text-muted-foreground"
@@ -101,13 +117,26 @@ export default function McpToolboxCallout({ blurb, className = '' }: McpToolboxC
       </div>
 
       <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4 font-mono text-[11px]">
-        <a href="/toolkit" className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1">
+        <a
+          href="/toolkit"
+          className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1"
+        >
           <ExternalLink className="w-3 h-3" /> toolkit
         </a>
-        <a href="/.well-known/mcp.json" target="_blank" rel="noopener" className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1">
+        <a
+          href="/.well-known/mcp.json"
+          target="_blank"
+          rel="noopener"
+          className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1"
+        >
           <ExternalLink className="w-3 h-3" /> manifest
         </a>
-        <a href="https://github.com/LIN4CRE/linacre.site" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1">
+        <a
+          href="https://github.com/LIN4CRE/linacre.site"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1"
+        >
           <ExternalLink className="w-3 h-3" /> source · mcp/
         </a>
       </div>

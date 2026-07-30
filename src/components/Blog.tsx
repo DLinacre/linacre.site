@@ -47,13 +47,17 @@ export default function Blog() {
       opacity: 1,
       transition: {
         staggerChildren: 0.08,
-      }
-    }
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 110, damping: 14 } }
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'spring' as const, stiffness: 110, damping: 14 },
+    },
   };
 
   const getCategoryColor = (cat: string) => {
@@ -77,7 +81,11 @@ export default function Blog() {
       className="space-y-12 animate-fade-in"
     >
       {/* Title Hero */}
-      <motion.section variants={itemVariants} className="text-center md:text-left space-y-4 max-w-3xl" id="blog-hero">
+      <motion.section
+        variants={itemVariants}
+        className="text-center md:text-left space-y-4 max-w-3xl"
+        id="blog-hero"
+      >
         <span className="font-mono text-xs text-amber-color tracking-widest uppercase font-semibold bg-amber-color/10 border border-amber-color/20 px-2.5 py-1 rounded-full">
           Technical Logs & Case Studies
         </span>
@@ -85,7 +93,8 @@ export default function Blog() {
           The <span className="text-amber-color">Linacre</span> Blog
         </h1>
         <p className="text-base text-muted-foreground leading-relaxed">
-          Practical engineering notes on interface systems, frontend theming, delivery quality, and cloud caching.
+          Practical engineering notes on interface systems, frontend theming, delivery quality, and
+          cloud caching.
         </p>
       </motion.section>
 
@@ -97,7 +106,7 @@ export default function Blog() {
             href={`/blog/${post.slug}`}
             variants={itemVariants}
             whileHover={{ y: -4 }}
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               setSelectedPost(post);
             }}
@@ -107,7 +116,9 @@ export default function Blog() {
             <div>
               {/* Category / Read time */}
               <div className="flex items-center justify-between mb-3.5">
-                <span className={`font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full border ${getCategoryColor(post.category)}`}>
+                <span
+                  className={`font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full border ${getCategoryColor(post.category)}`}
+                >
                   {post.category}
                 </span>
                 <span className="font-mono text-[10px] text-muted-foreground/60 flex items-center gap-1">
@@ -153,7 +164,7 @@ export default function Blog() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               className="w-full max-w-2xl bg-[#030c14] border border-border-color rounded-xl overflow-hidden shadow-2xl font-mono text-xs flex flex-col"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
               role="dialog"
               aria-modal="true"
               aria-labelledby="modal-blog-title"
@@ -164,7 +175,9 @@ export default function Blog() {
                   <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#eab308]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
-                  <span className="text-muted-foreground/60 text-[10px] ml-2">article_viewer.sh</span>
+                  <span className="text-muted-foreground/60 text-[10px] ml-2">
+                    article_viewer.sh
+                  </span>
                 </div>
                 <button
                   onClick={() => setSelectedPost(null)}
@@ -179,7 +192,9 @@ export default function Blog() {
               <div className="p-6 space-y-6 overflow-y-auto max-h-[75vh]">
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <span className={`font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full border ${getCategoryColor(selectedPost.category)}`}>
+                    <span
+                      className={`font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full border ${getCategoryColor(selectedPost.category)}`}
+                    >
                       {selectedPost.category}
                     </span>
                     <span className="text-muted-foreground/50">·</span>
@@ -194,7 +209,10 @@ export default function Blog() {
                     </span>
                   </div>
 
-                  <h2 id="modal-blog-title" className="font-display text-xl font-bold text-foreground leading-tight">
+                  <h2
+                    id="modal-blog-title"
+                    className="font-display text-xl font-bold text-foreground leading-tight"
+                  >
                     {selectedPost.title}
                   </h2>
                 </div>
@@ -211,8 +229,11 @@ export default function Blog() {
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 pt-4 border-t border-border-color/30">
-                  {selectedPost.tags.map((tag) => (
-                    <span key={tag} className="text-[10px] font-mono px-2 py-0.5 bg-zinc-900 border border-border-color/30 rounded text-foreground flex items-center gap-0.5">
+                  {selectedPost.tags.map(tag => (
+                    <span
+                      key={tag}
+                      className="text-[10px] font-mono px-2 py-0.5 bg-zinc-900 border border-border-color/30 rounded text-foreground flex items-center gap-0.5"
+                    >
                       <Hash className="w-2.5 h-2.5 text-cyan" />
                       {tag}
                     </span>

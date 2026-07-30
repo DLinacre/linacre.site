@@ -6,8 +6,17 @@ import { Tool, ToolCategory } from '../types';
 
 // Tools exposed by the Linacre Tool Box MCP server (mcp/ in this repo).
 const MCP_TOOLS = [
-  'json_format', 'base64', 'jwt_decode', 'regex_test', 'hash', 'uuid_generate',
-  'password_generate', 'uk_vat', 'url_clean', 'timestamp_convert', 'text_tools',
+  'json_format',
+  'base64',
+  'jwt_decode',
+  'regex_test',
+  'hash',
+  'uuid_generate',
+  'password_generate',
+  'uk_vat',
+  'url_clean',
+  'timestamp_convert',
+  'text_tools',
 ];
 
 // Small copy-to-clipboard button used by the MCP install snippets.
@@ -28,7 +37,11 @@ function CopyButton({ text, label = 'command' }: { text: string; label?: string 
       title={`Copy ${label}`}
       aria-label={copied ? `${label} copied` : `Copy ${label}`}
     >
-      {copied ? <Check className="w-3.5 h-3.5 text-emerald-color" /> : <Copy className="w-3.5 h-3.5" />}
+      {copied ? (
+        <Check className="w-3.5 h-3.5 text-emerald-color" />
+      ) : (
+        <Copy className="w-3.5 h-3.5" />
+      )}
     </button>
   );
 }
@@ -42,7 +55,14 @@ interface ToolkitProps {
   setActiveCategory: (category: ToolCategory | 'all') => void;
 }
 
-export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _openPalette, searchQuery, setSearchQuery, activeCategory, setActiveCategory }: ToolkitProps) {
+export default function Toolkit({
+  onToolSelect: _onToolSelect,
+  openPalette: _openPalette,
+  searchQuery,
+  setSearchQuery,
+  activeCategory,
+  setActiveCategory,
+}: ToolkitProps) {
   const [bookmarkedTools, setBookmarkedTools] = useState<string[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -101,7 +121,7 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
 
     let updated: string[];
     if (bookmarkedTools.includes(id)) {
-      updated = bookmarkedTools.filter((item) => item !== id);
+      updated = bookmarkedTools.filter(item => item !== id);
     } else {
       updated = [...bookmarkedTools, id];
     }
@@ -121,7 +141,7 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
   }, []);
 
   // Filter tools based on search and category
-  const filteredTools = TOOLS.filter((tool) => {
+  const filteredTools = TOOLS.filter(tool => {
     const matchesSearch =
       !searchQuery ||
       tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -177,7 +197,7 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
               type="search"
               placeholder="search the toolkit..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
               className="w-full bg-muted/40 dark:bg-[#0B1220]/60 border border-amber-color/15 rounded-2xl py-2.5 pl-20 pr-16 text-sm focus:outline-none focus:ring-2 focus:ring-amber-color/50 focus:border-amber-color text-foreground placeholder:text-muted-foreground/60 transition-all font-mono"
               id="search-input"
             />
@@ -194,15 +214,26 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
             <span>
               // showing {filteredTools.length} of {TOOLS.length} tools
               {activeCategory !== 'all' && (
-                <span> in <span className="text-amber-color">{activeCategory === 'stack' ? 'my stack' : activeCategory}</span></span>
+                <span>
+                  {' '}
+                  in{' '}
+                  <span className="text-amber-color">
+                    {activeCategory === 'stack' ? 'my stack' : activeCategory}
+                  </span>
+                </span>
               )}
             </span>
           </div>
         </div>
 
         {/* Categories Grid/Chips */}
-        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter by category" id="category-chips">
-          {categories.map((cat) => {
+        <div
+          className="flex flex-wrap items-center gap-2"
+          role="group"
+          aria-label="Filter by category"
+          id="category-chips"
+        >
+          {categories.map(cat => {
             const isSelected = activeCategory === cat.id;
             return (
               <button
@@ -234,7 +265,7 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
               id="toolkit-grid"
             >
-              {filteredTools.map((tool) => {
+              {filteredTools.map(tool => {
                 const isBookmarked = bookmarkedTools.includes(tool.id);
                 return (
                   <motion.a
@@ -248,11 +279,19 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`group relative flex flex-col justify-between bg-muted/20 dark:bg-[#0B1220]/80 border border-amber-color/12 rounded-2xl p-5 hover:bg-muted/35 dark:hover:bg-[#111827] hover:border-amber-color/30 hover:-translate-y-1 transition-all border-l-[3px] ${getLeftBorderColor(
-                      tool.category
+                      tool.category,
                     )}`}
-                    style={{ transitionDuration: 'var(--linacre-duration-base)', boxShadow: 'var(--linacre-card-shadow)' }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'var(--linacre-glow-soft)'; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'var(--linacre-card-shadow)'; }}
+                    style={{
+                      transitionDuration: 'var(--linacre-duration-base)',
+                      boxShadow: 'var(--linacre-card-shadow)',
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLElement).style.boxShadow = 'var(--linacre-glow-soft)';
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLElement).style.boxShadow =
+                        'var(--linacre-card-shadow)';
+                    }}
                     id={`tool-card-${tool.id}`}
                   >
                     <div>
@@ -265,7 +304,7 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
                         <div className="flex items-center gap-1.5">
                           {/* Bookmark button */}
                           <button
-                            onClick={(e) => toggleBookmark(tool.id, e)}
+                            onClick={e => toggleBookmark(tool.id, e)}
                             className="p-1 rounded-md text-muted-foreground hover:text-amber-color hover:bg-muted/60 transition-colors cursor-pointer"
                             title={isBookmarked ? 'Remove from stack' : 'Add to stack'}
                             aria-label={isBookmarked ? 'Remove from stack' : 'Add to stack'}
@@ -331,7 +370,10 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
               <Bot className="w-4 h-4 text-cyan" />
             </div>
             <div>
-              <h2 id="mcp-heading" className="font-mono text-base sm:text-lg font-semibold text-foreground flex items-center gap-2 flex-wrap">
+              <h2
+                id="mcp-heading"
+                className="font-mono text-base sm:text-lg font-semibold text-foreground flex items-center gap-2 flex-wrap"
+              >
                 Use these tools in your AI
                 <span className="font-mono text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded text-cyan bg-cyan/10 border border-cyan/20">
                   MCP
@@ -339,16 +381,16 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
               </h2>
               <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-1 max-w-2xl">
                 The Linacre Tool Box also runs as a{' '}
-                <span className="text-foreground">Model Context Protocol</span> server — the same private,
-                offline utilities, callable by Claude, Cursor or any MCP client. Nothing you pass in ever
-                leaves your machine.
+                <span className="text-foreground">Model Context Protocol</span> server — the same
+                private, offline utilities, callable by Claude, Cursor or any MCP client. Nothing
+                you pass in ever leaves your machine.
               </p>
             </div>
           </div>
 
           {/* Tool chips */}
           <div className="flex flex-wrap gap-1.5 mb-6" aria-label="Tools available over MCP">
-            {MCP_TOOLS.map((t) => (
+            {MCP_TOOLS.map(t => (
               <span
                 key={t}
                 className="font-mono text-[10px] px-2 py-1 rounded-md bg-muted/40 dark:bg-[#0B1220]/60 border border-amber-color/12 text-muted-foreground"
@@ -372,7 +414,8 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
                 <CopyButton text="cd mcp && npm install && npm run build" />
               </div>
               <p className="text-[10px] text-muted-foreground/70 mt-2 leading-relaxed">
-                Builds <code className="text-muted-foreground">mcp/dist/server.js</code> — pure Node, no keys.
+                Builds <code className="text-muted-foreground">mcp/dist/server.js</code> — pure
+                Node, no keys.
               </p>
             </div>
 
@@ -388,21 +431,36 @@ export default function Toolkit({ onToolSelect: _onToolSelect, openPalette: _ope
                 <CopyButton text="claude mcp add linacre-toolbox -- node ./mcp/dist/server.js" />
               </div>
               <p className="text-[10px] text-muted-foreground/70 mt-2 leading-relaxed">
-                Or point Claude Desktop's <code className="text-muted-foreground">mcpServers</code> at that file.
-                All 11 tools appear instantly.
+                Or point Claude Desktop's <code className="text-muted-foreground">mcpServers</code>{' '}
+                at that file. All 11 tools appear instantly.
               </p>
             </div>
           </div>
 
           {/* Links */}
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-5 font-mono text-[11px]">
-            <a href="/.well-known/mcp.json" target="_blank" rel="noopener" className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1">
+            <a
+              href="/.well-known/mcp.json"
+              target="_blank"
+              rel="noopener"
+              className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1"
+            >
               <ExternalLink className="w-3 h-3" /> manifest
             </a>
-            <a href="/skills.txt" target="_blank" rel="noopener" className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1">
+            <a
+              href="/skills.txt"
+              target="_blank"
+              rel="noopener"
+              className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1"
+            >
               <ExternalLink className="w-3 h-3" /> skills.txt
             </a>
-            <a href="https://github.com/LIN4CRE/linacre.site" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1">
+            <a
+              href="https://github.com/LIN4CRE/linacre.site"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1"
+            >
               <ExternalLink className="w-3 h-3" /> source · mcp/
             </a>
           </div>

@@ -1,6 +1,37 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Cpu, Settings, ChevronDown, ChevronUp, Send, RefreshCw, Key, Sparkles, AlertCircle, CheckCircle, Info, Lock, Download, Trash2, StopCircle, Plus, MessageSquare, Folder, File, FolderPlus, Upload, Paperclip, ChevronRight, Save, FileText, Terminal, X, Play, Database, CreditCard } from 'lucide-react';
+import {
+  Cpu,
+  Settings,
+  ChevronDown,
+  ChevronUp,
+  Send,
+  RefreshCw,
+  Key,
+  Sparkles,
+  AlertCircle,
+  CheckCircle,
+  Info,
+  Lock,
+  Download,
+  Trash2,
+  StopCircle,
+  Plus,
+  MessageSquare,
+  Folder,
+  File,
+  FolderPlus,
+  Upload,
+  Paperclip,
+  ChevronRight,
+  Save,
+  FileText,
+  Terminal,
+  X,
+  Play,
+  Database,
+  CreditCard,
+} from 'lucide-react';
 import { ChatMessage } from '../types';
 
 export type LabProvider = 'gemini' | 'openai' | 'ollama' | 'litellm' | 'claude';
@@ -31,58 +62,141 @@ const DEFAULT_WORKSPACE: WorkspaceItem[] = [
     name: 'README.md',
     path: 'README.md',
     type: 'file',
-    content: `# David Linacre AI Lab - Workspace\n\nWelcome to your sandbox environment! Here you can upload, edit, and manage virtual files and folders.\n\n### 🚀 Features:\n1. **Create Files & Folders**: Organize your ideas directly in the file tree.\n2. **Import Files & Folders**: Drag & drop or use the Upload buttons to load local code files or entire directories!\n3. **Export Workspace**: Save your whole layout as a clean JSON backup file.\n4. **Attach to Chat**: Click the Paperclip icon next to any file to automatically include its source code in your chat prompts! This lets you ask the AI to debug, refactor, or explain your code with ease.\n\nTry opening \`src/App.tsx\` to see an example component, or upload your own files to get started!`
+    content: `# David Linacre AI Lab - Workspace\n\nWelcome to your sandbox environment! Here you can upload, edit, and manage virtual files and folders.\n\n### 🚀 Features:\n1. **Create Files & Folders**: Organize your ideas directly in the file tree.\n2. **Import Files & Folders**: Drag & drop or use the Upload buttons to load local code files or entire directories!\n3. **Export Workspace**: Save your whole layout as a clean JSON backup file.\n4. **Attach to Chat**: Click the Paperclip icon next to any file to automatically include its source code in your chat prompts! This lets you ask the AI to debug, refactor, or explain your code with ease.\n\nTry opening \`src/App.tsx\` to see an example component, or upload your own files to get started!`,
   },
   {
     id: 'ws-src-folder',
     name: 'src',
     path: 'src',
-    type: 'folder'
+    type: 'folder',
   },
   {
     id: 'ws-src-app',
     name: 'App.tsx',
     path: 'src/App.tsx',
     type: 'file',
-    content: `import React, { useState } from 'react';\n\nexport default function App() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div className="p-8 max-w-md mx-auto bg-slate-900 text-white rounded-xl shadow-md">\n      <h1 className="text-xl font-bold font-mono">Hello React in the Lab!</h1>\n      <p className="mt-2 text-slate-400 font-mono">Count: {count}</p>\n      <button \n        onClick={() => setCount(count + 1)}\n        className="mt-4 px-4 py-2 bg-amber-500 text-black font-semibold rounded-lg hover:bg-amber-400 transition-colors"\n      >\n        Increment\n      </button>\n    </div>\n  );\n}`
+    content: `import React, { useState } from 'react';\n\nexport default function App() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div className="p-8 max-w-md mx-auto bg-slate-900 text-white rounded-xl shadow-md">\n      <h1 className="text-xl font-bold font-mono">Hello React in the Lab!</h1>\n      <p className="mt-2 text-slate-400 font-mono">Count: {count}</p>\n      <button \n        onClick={() => setCount(count + 1)}\n        className="mt-4 px-4 py-2 bg-amber-500 text-black font-semibold rounded-lg hover:bg-amber-400 transition-colors"\n      >\n        Increment\n      </button>\n    </div>\n  );\n}`,
   },
   {
     id: 'ws-src-css',
     name: 'index.css',
     path: 'src/index.css',
     type: 'file',
-    content: `@import "tailwindcss";\n\nbody {\n  font-family: 'Inter', sans-serif;\n  background-color: #0b0f19;\n  color: #f3f4f6;\n}`
+    content: `@import "tailwindcss";\n\nbody {\n  font-family: 'Inter', sans-serif;\n  background-color: #0b0f19;\n  color: #f3f4f6;\n}`,
   },
   {
     id: 'ws-db-folder',
     name: 'db',
     path: 'db',
-    type: 'folder'
+    type: 'folder',
   },
   {
     id: 'ws-db-schema',
     name: 'schema.sql',
     path: 'db/schema.sql',
     type: 'file',
-    content: `-- PostgreSQL schema for David Linacre's Dashboard\n\nCREATE TABLE IF NOT EXISTS projects (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(100) UNIQUE NOT NULL,\n  category VARCHAR(50) NOT NULL,\n  description TEXT,\n  url VARCHAR(255),\n  host VARCHAR(100),\n  tag VARCHAR(50) DEFAULT 'Live',\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n\n-- Seed initial projects\nINSERT INTO projects (name, category, description, url, host, tag)\nVALUES \n  ('linacre.site', 'build', 'Useful start page and browser tools', 'https://www.linacre.site', 'linacre.site', 'Live'),\n  ('DKMA Monster', 'build', 'Android background-app survival toolkit', 'https://lin4cre.github.io/dkma-monster/', 'GitHub Pages', 'Open Source');`
-  }
+    content: `-- PostgreSQL schema for David Linacre's Dashboard\n\nCREATE TABLE IF NOT EXISTS projects (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(100) UNIQUE NOT NULL,\n  category VARCHAR(50) NOT NULL,\n  description TEXT,\n  url VARCHAR(255),\n  host VARCHAR(100),\n  tag VARCHAR(50) DEFAULT 'Live',\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n\n-- Seed initial projects\nINSERT INTO projects (name, category, description, url, host, tag)\nVALUES \n  ('linacre.site', 'build', 'Useful start page and browser tools', 'https://www.linacre.site', 'linacre.site', 'Live'),\n  ('DKMA Monster', 'build', 'Android background-app survival toolkit', 'https://lin4cre.github.io/dkma-monster/', 'GitHub Pages', 'Open Source');`,
+  },
 ];
 
 const MOCK_USERS = [
-  { id: 1, name: 'David Linacre', role: 'Lead Architect', email: 'delinacre@gmail.com', status: 'Active', created_at: '2026-01-15' },
-  { id: 2, name: 'AI Assistant', role: 'Senior Agent', email: 'gemini@assistant.local', status: 'Active', created_at: '2026-02-10' },
-  { id: 3, name: 'Sarah Jenkins', role: 'QA Lead', email: 'sarah.j@linacre.site', status: 'Inactive', created_at: '2026-03-24' },
-  { id: 4, name: 'Marcus Vance', role: 'DevOps Specialist', email: 'marcus@infra.net', status: 'Active', created_at: '2026-04-12' },
-  { id: 5, name: 'Elena Rostova', role: 'Backend Engineer', email: 'elena@code.org', status: 'Active', created_at: '2026-05-01' }
+  {
+    id: 1,
+    name: 'David Linacre',
+    role: 'Lead Architect',
+    email: 'delinacre@gmail.com',
+    status: 'Active',
+    created_at: '2026-01-15',
+  },
+  {
+    id: 2,
+    name: 'AI Assistant',
+    role: 'Senior Agent',
+    email: 'gemini@assistant.local',
+    status: 'Active',
+    created_at: '2026-02-10',
+  },
+  {
+    id: 3,
+    name: 'Sarah Jenkins',
+    role: 'QA Lead',
+    email: 'sarah.j@linacre.site',
+    status: 'Inactive',
+    created_at: '2026-03-24',
+  },
+  {
+    id: 4,
+    name: 'Marcus Vance',
+    role: 'DevOps Specialist',
+    email: 'marcus@infra.net',
+    status: 'Active',
+    created_at: '2026-04-12',
+  },
+  {
+    id: 5,
+    name: 'Elena Rostova',
+    role: 'Backend Engineer',
+    email: 'elena@code.org',
+    status: 'Active',
+    created_at: '2026-05-01',
+  },
 ];
 
 const MOCK_API_LOGS = [
-  { id: 1001, timestamp: '15:42:01', endpoint: '/api/chat', method: 'POST', latency_ms: 245, status: 200, bytes_sent: 1024 },
-  { id: 1002, timestamp: '15:43:12', endpoint: '/api/health', method: 'GET', latency_ms: 12, status: 200, bytes_sent: 128 },
-  { id: 1003, timestamp: '15:45:50', endpoint: '/api/scan', method: 'GET', latency_ms: 410, status: 200, bytes_sent: 2048 },
-  { id: 1004, timestamp: '15:51:24', endpoint: '/api/chat', method: 'POST', latency_ms: 895, status: 500, bytes_sent: 512 },
-  { id: 1005, timestamp: '15:52:10', endpoint: '/api/keys', method: 'GET', latency_ms: 22, status: 200, bytes_sent: 256 },
-  { id: 1006, timestamp: '15:53:01', endpoint: '/api/chat', method: 'POST', latency_ms: 310, status: 200, bytes_sent: 890 }
+  {
+    id: 1001,
+    timestamp: '15:42:01',
+    endpoint: '/api/chat',
+    method: 'POST',
+    latency_ms: 245,
+    status: 200,
+    bytes_sent: 1024,
+  },
+  {
+    id: 1002,
+    timestamp: '15:43:12',
+    endpoint: '/api/health',
+    method: 'GET',
+    latency_ms: 12,
+    status: 200,
+    bytes_sent: 128,
+  },
+  {
+    id: 1003,
+    timestamp: '15:45:50',
+    endpoint: '/api/scan',
+    method: 'GET',
+    latency_ms: 410,
+    status: 200,
+    bytes_sent: 2048,
+  },
+  {
+    id: 1004,
+    timestamp: '15:51:24',
+    endpoint: '/api/chat',
+    method: 'POST',
+    latency_ms: 895,
+    status: 500,
+    bytes_sent: 512,
+  },
+  {
+    id: 1005,
+    timestamp: '15:52:10',
+    endpoint: '/api/keys',
+    method: 'GET',
+    latency_ms: 22,
+    status: 200,
+    bytes_sent: 256,
+  },
+  {
+    id: 1006,
+    timestamp: '15:53:01',
+    endpoint: '/api/chat',
+    method: 'POST',
+    latency_ms: 310,
+    status: 200,
+    bytes_sent: 890,
+  },
 ];
 
 import McpToolboxCallout from './McpToolboxCallout';
@@ -145,7 +259,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
           gifUrl: `https://play.pokemonshowdown.com/sprites/${folder}/mewtwo.${spriteExt}`,
           bgColor: 'bg-[#c084fc]/5',
           borderColor: 'border-[#c084fc]/20',
-          tagColor: 'bg-[#c084fc]/10 border-[#c084fc]/25 text-[#c084fc]'
+          tagColor: 'bg-[#c084fc]/10 border-[#c084fc]/25 text-[#c084fc]',
         };
       case 'coder':
         return {
@@ -154,7 +268,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
           gifUrl: `https://play.pokemonshowdown.com/sprites/${folder}/porygon2.${spriteExt}`,
           bgColor: 'bg-cyan/5',
           borderColor: 'border-cyan/20',
-          tagColor: 'bg-cyan/10 border-cyan/25 text-cyan'
+          tagColor: 'bg-cyan/10 border-cyan/25 text-cyan',
         };
       case 'security':
         return {
@@ -163,7 +277,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
           gifUrl: `https://play.pokemonshowdown.com/sprites/${folder}/magnezone.${spriteExt}`,
           bgColor: 'bg-[#34D399]/5',
           borderColor: 'border-[#34D399]/20',
-          tagColor: 'bg-[#34D399]/10 border-[#34D399]/25 text-amber-color'
+          tagColor: 'bg-[#34D399]/10 border-[#34D399]/25 text-amber-color',
         };
       case 'devops':
         return {
@@ -172,7 +286,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
           gifUrl: `https://play.pokemonshowdown.com/sprites/${folder}/rotom-wash.${spriteExt}`,
           bgColor: 'bg-[#f87171]/5',
           borderColor: 'border-[#f87171]/20',
-          tagColor: 'bg-[#f87171]/10 border-[#f87171]/25 text-rose-400'
+          tagColor: 'bg-[#f87171]/10 border-[#f87171]/25 text-rose-400',
         };
       default:
         return {
@@ -181,7 +295,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
           gifUrl: `https://play.pokemonshowdown.com/sprites/${folder}/mewtwo.${spriteExt}`,
           bgColor: 'bg-[#0b0f19]/30 dark:bg-[#161b26]/30',
           borderColor: 'border-border-color/85',
-          tagColor: 'bg-[#0f172a] border-border-color text-muted-foreground'
+          tagColor: 'bg-[#0f172a] border-border-color text-muted-foreground',
         };
     }
   };
@@ -282,7 +396,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
   const handleSaveFileContent = () => {
     if (!activeFileId) return;
     const updated = workspace.map(item =>
-      item.id === activeFileId ? { ...item, content: editorContent } : item
+      item.id === activeFileId ? { ...item, content: editorContent } : item,
     );
     saveWorkspace(updated);
     setEditorSaveNotification(true);
@@ -306,9 +420,13 @@ export default function Lab({ theme = 'dark' }: LabProps) {
 
       // Check for INSERT INTO projects
       if (cleanQuery.toUpperCase().startsWith('INSERT INTO PROJECTS')) {
-        const match = cleanQuery.match(/INSERT\s+INTO\s+projects\s*\(([^)]+)\)\s*VALUES\s*\(([^)]+)\)/i);
+        const match = cleanQuery.match(
+          /INSERT\s+INTO\s+projects\s*\(([^)]+)\)\s*VALUES\s*\(([^)]+)\)/i,
+        );
         if (!match) {
-          throw new Error("Unsupported INSERT syntax. Use: INSERT INTO projects (name, category, description, url, host, tag) VALUES ('My Project', 'build', 'Tested from database console', 'https://github.com', 'github.com', 'Live');");
+          throw new Error(
+            "Unsupported INSERT syntax. Use: INSERT INTO projects (name, category, description, url, host, tag) VALUES ('My Project', 'build', 'Tested from database console', 'https://github.com', 'github.com', 'Live');",
+          );
         }
 
         const cols = match[1].split(',').map(s => s.trim().toLowerCase());
@@ -322,7 +440,9 @@ export default function Lab({ theme = 'dark' }: LabProps) {
         });
 
         if (cols.length !== vals.length) {
-          throw new Error(`Column count (${cols.length}) does not match value count (${vals.length}).`);
+          throw new Error(
+            `Column count (${cols.length}) does not match value count (${vals.length}).`,
+          );
         }
 
         const newProject: any = {
@@ -331,7 +451,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
           description: '',
           url: 'https://github.com',
           host: 'github.com',
-          tag: 'Live'
+          tag: 'Live',
         };
 
         cols.forEach((col, idx) => {
@@ -345,15 +465,31 @@ export default function Lab({ theme = 'dark' }: LabProps) {
             currentProjects = JSON.parse(saved);
           } else {
             currentProjects = [
-              { name: 'linacre.site', category: 'deploy', description: 'Terminal-styled toolkit + AI Lab', url: 'https://www.linacre.site', host: 'linacre.site', tag: 'Live' },
-              { name: 'DKMA Monster', category: 'build', description: 'Android background-app survival toolkit', url: 'https://lin4cre.github.io/dkma-monster/', host: 'GitHub Pages', tag: 'Open Source' }
+              {
+                name: 'linacre.site',
+                category: 'deploy',
+                description: 'Terminal-styled toolkit + AI Lab',
+                url: 'https://www.linacre.site',
+                host: 'linacre.site',
+                tag: 'Live',
+              },
+              {
+                name: 'DKMA Monster',
+                category: 'build',
+                description: 'Android background-app survival toolkit',
+                url: 'https://lin4cre.github.io/dkma-monster/',
+                host: 'GitHub Pages',
+                tag: 'Open Source',
+              },
             ];
           }
         } catch {
           // ignore
         }
 
-        if (currentProjects.some((p: any) => p.name.toLowerCase() === newProject.name.toLowerCase())) {
+        if (
+          currentProjects.some((p: any) => p.name.toLowerCase() === newProject.name.toLowerCase())
+        ) {
           throw new Error(`Duplicate key violation: Project "${newProject.name}" already exists.`);
         }
 
@@ -364,8 +500,13 @@ export default function Lab({ theme = 'dark' }: LabProps) {
         const latency = Math.round(performance.now() - startTime + Math.random() * 5);
         setSqlLatency(latency);
         setSqlAffectedRows(1);
-        setSqlResult([{ status: "success", message: `INSERT 0 1: Project "${newProject.name}" added successfully. Check your Toolkit portfolio!` }]);
-        setSqlColumns(["status", "message"]);
+        setSqlResult([
+          {
+            status: 'success',
+            message: `INSERT 0 1: Project "${newProject.name}" added successfully. Check your Toolkit portfolio!`,
+          },
+        ]);
+        setSqlColumns(['status', 'message']);
         return;
       }
 
@@ -373,7 +514,9 @@ export default function Lab({ theme = 'dark' }: LabProps) {
       if (cleanQuery.toUpperCase().startsWith('DELETE FROM PROJECTS')) {
         const whereMatch = cleanQuery.match(/WHERE\s+(\w+)\s*=\s*'([^']+)'/i);
         if (!whereMatch) {
-          throw new Error("Unsupported DELETE syntax. Use: DELETE FROM projects WHERE name = 'ProjectName';");
+          throw new Error(
+            "Unsupported DELETE syntax. Use: DELETE FROM projects WHERE name = 'ProjectName';",
+          );
         }
 
         const field = whereMatch[1].toLowerCase();
@@ -386,8 +529,22 @@ export default function Lab({ theme = 'dark' }: LabProps) {
             currentProjects = JSON.parse(saved);
           } else {
             currentProjects = [
-              { name: 'linacre.site', category: 'deploy', description: 'Terminal-styled toolkit + AI Lab', url: 'https://www.linacre.site', host: 'linacre.site', tag: 'Live' },
-              { name: 'DKMA Monster', category: 'build', description: 'Android background-app survival toolkit', url: 'https://lin4cre.github.io/dkma-monster/', host: 'GitHub Pages', tag: 'Open Source' }
+              {
+                name: 'linacre.site',
+                category: 'deploy',
+                description: 'Terminal-styled toolkit + AI Lab',
+                url: 'https://www.linacre.site',
+                host: 'linacre.site',
+                tag: 'Live',
+              },
+              {
+                name: 'DKMA Monster',
+                category: 'build',
+                description: 'Android background-app survival toolkit',
+                url: 'https://lin4cre.github.io/dkma-monster/',
+                host: 'GitHub Pages',
+                tag: 'Open Source',
+              },
             ];
           }
         } catch {
@@ -395,7 +552,9 @@ export default function Lab({ theme = 'dark' }: LabProps) {
         }
 
         const initialLength = currentProjects.length;
-        const updated = currentProjects.filter((p: any) => p[field]?.toLowerCase() !== value.toLowerCase());
+        const updated = currentProjects.filter(
+          (p: any) => p[field]?.toLowerCase() !== value.toLowerCase(),
+        );
         const deletedCount = initialLength - updated.length;
 
         localStorage.setItem('linacre_custom_projects', JSON.stringify(updated));
@@ -404,14 +563,16 @@ export default function Lab({ theme = 'dark' }: LabProps) {
         const latency = Math.round(performance.now() - startTime + Math.random() * 5);
         setSqlLatency(latency);
         setSqlAffectedRows(deletedCount);
-        setSqlResult([{ status: "success", deleted_rows: deletedCount }]);
-        setSqlColumns(["status", "deleted_rows"]);
+        setSqlResult([{ status: 'success', deleted_rows: deletedCount }]);
+        setSqlColumns(['status', 'deleted_rows']);
         return;
       }
 
       // SELECT queries
       if (!cleanQuery.toUpperCase().startsWith('SELECT')) {
-        throw new Error('Only SELECT, INSERT INTO projects, and DELETE FROM projects statement formats are simulated in this sandbox.');
+        throw new Error(
+          'Only SELECT, INSERT INTO projects, and DELETE FROM projects statement formats are simulated in this sandbox.',
+        );
       }
 
       let tableName = '';
@@ -422,7 +583,9 @@ export default function Lab({ theme = 'dark' }: LabProps) {
       } else if (/from\s+api_logs/i.test(cleanQuery)) {
         tableName = 'api_logs';
       } else {
-        throw new Error('Table not found. Supported playground tables are: projects, users, api_logs');
+        throw new Error(
+          'Table not found. Supported playground tables are: projects, users, api_logs',
+        );
       }
 
       let rows: any[] = [];
@@ -437,8 +600,22 @@ export default function Lab({ theme = 'dark' }: LabProps) {
             rows = JSON.parse(saved);
           } else {
             rows = [
-              { name: 'linacre.site', category: 'deploy', description: 'Terminal-styled toolkit + AI Lab', url: 'https://www.linacre.site', host: 'linacre.site', tag: 'Live' },
-              { name: 'DKMA Monster', category: 'build', description: 'Android background-app survival toolkit', url: 'https://lin4cre.github.io/dkma-monster/', host: 'GitHub Pages', tag: 'Open Source' }
+              {
+                name: 'linacre.site',
+                category: 'deploy',
+                description: 'Terminal-styled toolkit + AI Lab',
+                url: 'https://www.linacre.site',
+                host: 'linacre.site',
+                tag: 'Live',
+              },
+              {
+                name: 'DKMA Monster',
+                category: 'build',
+                description: 'Android background-app survival toolkit',
+                url: 'https://lin4cre.github.io/dkma-monster/',
+                host: 'GitHub Pages',
+                tag: 'Open Source',
+              },
             ];
           }
         } catch {
@@ -450,7 +627,9 @@ export default function Lab({ theme = 'dark' }: LabProps) {
       const whereClause = cleanQuery.match(/where\s+([^order|limit|;]+)/i);
       if (whereClause) {
         const expression = whereClause[1].trim();
-        const parts = expression.match(/(\w+)\s*(=|>|<|like)\s*(['"]?.*?['"]?)$/i) || expression.match(/(\w+)\s*(=|>|<|like)\s*(['"]?[^ ]+['"]?)/i);
+        const parts =
+          expression.match(/(\w+)\s*(=|>|<|like)\s*(['"]?.*?['"]?)$/i) ||
+          expression.match(/(\w+)\s*(=|>|<|like)\s*(['"]?[^ ]+['"]?)/i);
         if (parts) {
           const col = parts[1].trim().toLowerCase();
           const op = parts[2].trim().toLowerCase();
@@ -493,12 +672,25 @@ export default function Lab({ theme = 'dark' }: LabProps) {
           finalCols = Object.keys(rows[0]);
           finalRows = rows;
         } else {
-          if (tableName === 'users') finalCols = ['id', 'name', 'role', 'email', 'status', 'created_at'];
-          else if (tableName === 'api_logs') finalCols = ['id', 'timestamp', 'endpoint', 'method', 'latency_ms', 'status', 'bytes_sent'];
+          if (tableName === 'users')
+            finalCols = ['id', 'name', 'role', 'email', 'status', 'created_at'];
+          else if (tableName === 'api_logs')
+            finalCols = [
+              'id',
+              'timestamp',
+              'endpoint',
+              'method',
+              'latency_ms',
+              'status',
+              'bytes_sent',
+            ];
           else finalCols = ['name', 'category', 'description', 'url', 'host', 'tag'];
           finalRows = [];
         }
-      } else if (projection.toLowerCase() === 'count(*)' || projection.toLowerCase() === 'count(1)') {
+      } else if (
+        projection.toLowerCase() === 'count(*)' ||
+        projection.toLowerCase() === 'count(1)'
+      ) {
         finalCols = ['count'];
         finalRows = [{ count: rows.length }];
       } else {
@@ -552,14 +744,16 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     try {
       const headers = sqlColumns.join(',');
       const rows = sqlResult.map(row =>
-        sqlColumns.map(col => {
-          const val = row[col];
-          const str = val === null || val === undefined ? '' : String(val);
-          if (str.includes(',') || str.includes('"') || str.includes('\n')) {
-            return `"${str.replace(/"/g, '""')}"`;
-          }
-          return str;
-        }).join(',')
+        sqlColumns
+          .map(col => {
+            const val = row[col];
+            const str = val === null || val === undefined ? '' : String(val);
+            if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+              return `"${str.replace(/"/g, '""')}"`;
+            }
+            return str;
+          })
+          .join(','),
       );
       const csvContent = [headers, ...rows].join('\n');
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -578,14 +772,17 @@ export default function Lab({ theme = 'dark' }: LabProps) {
   const handleDeleteItem = (item: WorkspaceItem, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const confirmMsg = item.type === 'folder'
-      ? `Are you sure you want to delete folder "${item.name}" and all its contents?`
-      : `Are you sure you want to delete file "${item.name}"?`;
+    const confirmMsg =
+      item.type === 'folder'
+        ? `Are you sure you want to delete folder "${item.name}" and all its contents?`
+        : `Are you sure you want to delete file "${item.name}"?`;
 
     if (confirm(confirmMsg)) {
       let updated: WorkspaceItem[];
       if (item.type === 'folder') {
-        updated = workspace.filter(i => i.path !== item.path && !i.path.startsWith(item.path + '/'));
+        updated = workspace.filter(
+          i => i.path !== item.path && !i.path.startsWith(item.path + '/'),
+        );
       } else {
         updated = workspace.filter(i => i.id !== item.id);
       }
@@ -618,7 +815,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
         name,
         path: relativePath,
         type: 'file',
-        content: `// New file: ${name}\n\n`
+        content: `// New file: ${name}\n\n`,
       };
 
       const pathParts = relativePath.split('/');
@@ -631,7 +828,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
             id: `folder-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
             name: pathParts[i],
             path: currentPath,
-            type: 'folder'
+            type: 'folder',
           });
         }
       }
@@ -642,7 +839,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
         id: `folder-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         name,
         path: relativePath,
-        type: 'folder'
+        type: 'folder',
       };
 
       const pathParts = relativePath.split('/');
@@ -655,7 +852,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
             id: `folder-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
             name: pathParts[i],
             path: currentPath,
-            type: 'folder'
+            type: 'folder',
           });
         }
       }
@@ -695,7 +892,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     const backupData = {
       version: '1.0',
       exportedAt: new Date().toISOString(),
-      workspace
+      workspace,
     };
     const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -713,7 +910,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = (event) => {
+    reader.onload = event => {
       try {
         const data = JSON.parse(event.target?.result as string);
         if (data && Array.isArray(data.workspace)) {
@@ -745,7 +942,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
       const file = files[i];
       const reader = new FileReader();
 
-      reader.onload = (event) => {
+      reader.onload = event => {
         const text = event.target?.result as string;
         let filePath = file.name;
         if ((file as any).webkitRelativePath) {
@@ -760,12 +957,15 @@ export default function Lab({ theme = 'dark' }: LabProps) {
         let currentPath = '';
         for (let j = 0; j < pathParts.length - 1; j++) {
           currentPath = currentPath ? `${currentPath}/${pathParts[j]}` : pathParts[j];
-          if (!workspace.some(item => item.path === currentPath) && !newItems.some(item => item.path === currentPath)) {
+          if (
+            !workspace.some(item => item.path === currentPath) &&
+            !newItems.some(item => item.path === currentPath)
+          ) {
             newItems.push({
               id: `folder-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
               name: pathParts[j],
               path: currentPath,
-              type: 'folder'
+              type: 'folder',
             });
           }
         }
@@ -775,7 +975,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
           name,
           path: filePath,
           type: 'file',
-          content: text || ''
+          content: text || '',
         });
 
         processed++;
@@ -817,11 +1017,15 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     gemini: false,
     openai: false,
     claude: false,
-    litellm: false
+    litellm: false,
   });
-  const [ollamaStatus, setOllamaStatus] = useState<'idle' | 'scanning' | 'online' | 'offline'>('idle');
+  const [ollamaStatus, setOllamaStatus] = useState<'idle' | 'scanning' | 'online' | 'offline'>(
+    'idle',
+  );
   const [ollamaModels, setOllamaModels] = useState<string[]>([]);
-  const [litellmStatus, setLiteLLMStatus] = useState<'idle' | 'scanning' | 'online' | 'offline'>('idle');
+  const [litellmStatus, setLiteLLMStatus] = useState<'idle' | 'scanning' | 'online' | 'offline'>(
+    'idle',
+  );
 
   const fetchServerKeys = async () => {
     try {
@@ -835,14 +1039,17 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     }
   };
 
-  const scanLocalServers = async (currentOllamaEndpoint = ollamaEndpoint, currentLiteLLMEndpoint = litellmEndpoint) => {
+  const scanLocalServers = async (
+    currentOllamaEndpoint = ollamaEndpoint,
+    currentLiteLLMEndpoint = litellmEndpoint,
+  ) => {
     setOllamaStatus('scanning');
     try {
       const controller = new AbortController();
       const id = setTimeout(() => controller.abort(), 1200);
 
       const res = await fetch(`${currentOllamaEndpoint || 'http://localhost:11434'}/api/tags`, {
-        signal: controller.signal
+        signal: controller.signal,
       });
       clearTimeout(id);
 
@@ -871,7 +1078,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
       const id = setTimeout(() => controller.abort(), 1200);
 
       const res = await fetch(currentLiteLLMEndpoint || 'http://localhost:4000/api/health', {
-        signal: controller.signal
+        signal: controller.signal,
       });
       clearTimeout(id);
 
@@ -893,15 +1100,24 @@ export default function Lab({ theme = 'dark' }: LabProps) {
       const legacyKeyNames = ['linacre_openai_key', 'linacre_claude_key', 'linacre_litellm_key'];
       let purgedAny = false;
       for (const k of legacyKeyNames) {
-        if (localStorage.getItem(k) !== null) { purgedAny = true; localStorage.removeItem(k); }
-        if (sessionStorage.getItem(k) !== null) { purgedAny = true; sessionStorage.removeItem(k); }
+        if (localStorage.getItem(k) !== null) {
+          purgedAny = true;
+          localStorage.removeItem(k);
+        }
+        if (sessionStorage.getItem(k) !== null) {
+          purgedAny = true;
+          sessionStorage.removeItem(k);
+        }
       }
       if (purgedAny) {
         // Non-blocking notice — the UI will show inputs cleared, which is intentional.
-        console.info('[linacre.site] Purged legacy provider API keys from browser storage. Please paste them again per tab (they are no longer persisted).');
+        console.info(
+          '[linacre.site] Purged legacy provider API keys from browser storage. Please paste them again per tab (they are no longer persisted).',
+        );
       }
 
-      const storedOllamaEnd = localStorage.getItem('linacre_ollama_endpoint') || 'http://localhost:11434';
+      const storedOllamaEnd =
+        localStorage.getItem('linacre_ollama_endpoint') || 'http://localhost:11434';
       const storedOllamaMod = localStorage.getItem('linacre_ollama_model') || 'llama3.2';
       const storedLiteLLMEnd = localStorage.getItem('linacre_litellm_endpoint') || '';
       const storedLiteLLMMod = localStorage.getItem('linacre_litellm_model') || '';
@@ -942,10 +1158,11 @@ export default function Lab({ theme = 'dark' }: LabProps) {
             {
               id: 'welcome',
               role: 'assistant',
-              content: "Welcome to the Lab! I'm your **AI Dev Assistant**. \n\nBy default, I am powered by a secure server-side connection to **Gemini 3.5 Flash**—meaning you can chat with me immediately, zero API keys required from your side!\n\nIf you prefer to connect to OpenAI, a local Docker Ollama instance, a LiteLLM proxy, or a direct Claude proxy, open the configuration panel above to input your keys. Let's build something awesome!",
-              timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            }
-          ]
+              content:
+                "Welcome to the Lab! I'm your **AI Dev Assistant**. \n\nBy default, I am powered by a secure server-side connection to **Gemini 3.5 Flash**—meaning you can chat with me immediately, zero API keys required from your side!\n\nIf you prefer to connect to OpenAI, a local Docker Ollama instance, a LiteLLM proxy, or a direct Claude proxy, open the configuration panel above to input your keys. Let's build something awesome!",
+              timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            },
+          ],
         };
         parsedSessions = [defaultSession];
         activeId = 'session-default';
@@ -971,7 +1188,11 @@ export default function Lab({ theme = 'dark' }: LabProps) {
   }, []);
 
   // Save history to localStorage
-  const saveSessionMessages = (sessionId: string, newMessages: ChatMessage[], newProvider?: LabProvider) => {
+  const saveSessionMessages = (
+    sessionId: string,
+    newMessages: ChatMessage[],
+    newProvider?: LabProvider,
+  ) => {
     setSessions(prev => {
       const updated = prev.map(s => {
         if (s.id === sessionId) {
@@ -979,14 +1200,15 @@ export default function Lab({ theme = 'dark' }: LabProps) {
           if (title === 'New Chat' || title === 'Welcome Session') {
             const firstUserMsg = newMessages.find(m => m.role === 'user');
             if (firstUserMsg) {
-              title = firstUserMsg.content.slice(0, 30) + (firstUserMsg.content.length > 30 ? '...' : '');
+              title =
+                firstUserMsg.content.slice(0, 30) + (firstUserMsg.content.length > 30 ? '...' : '');
             }
           }
           return {
             ...s,
             messages: newMessages,
             provider: newProvider || s.provider,
-            title
+            title,
           };
         }
         return s;
@@ -1013,9 +1235,9 @@ export default function Lab({ theme = 'dark' }: LabProps) {
           id: `welcome-${Date.now()}`,
           role: 'assistant',
           content: `This is a new **${activeProvider.toUpperCase()}** chat session. Let me know what you want to build or debug!`,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        }
-      ]
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        },
+      ],
     };
 
     setSessions(prev => {
@@ -1053,9 +1275,9 @@ export default function Lab({ theme = 'dark' }: LabProps) {
               id: 'welcome',
               role: 'assistant',
               content: "Welcome to the Lab! I'm your **AI Dev Assistant**...",
-              timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            }
-          ]
+              timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            },
+          ],
         };
         updated = [defaultSession];
       }
@@ -1092,9 +1314,10 @@ export default function Lab({ theme = 'dark' }: LabProps) {
       {
         id: `clear-${Date.now()}`,
         role: 'assistant',
-        content: "History cleared! Let me know if you want to write some code or optimize a PostgreSQL schema.",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      }
+        content:
+          'History cleared! Let me know if you want to write some code or optimize a PostgreSQL schema.',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      },
     ];
     saveSessionMessages(activeSessionId, defaultMsg);
   };
@@ -1117,7 +1340,9 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     if (SENSITIVE_KEY_NAMES.has(key)) return; // in-memory only
     try {
       localStorage.setItem(key, value);
-    } catch (_) { /* private-mode / quota */ }
+    } catch (_) {
+      /* private-mode / quota */
+    }
   };
 
   // Safe inline and block markdown formatter with code highlight block container (Fix S1: Whitelist https?:// only to avoid javascript: links)
@@ -1133,10 +1358,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
       const displayLang = lang || 'code';
 
       // Escape HTML inside code blocks
-      const escapedCode = code
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+      const escapedCode = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
       const isDark = theme === 'dark';
       const containerBg = isDark ? 'bg-black/35' : 'bg-[#f4f4f5] dark:bg-black/35';
@@ -1171,7 +1393,10 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     processed = processed.replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
     // Inline Code snippets
-    processed = processed.replace(/`([^`]+)`/g, '<code class="font-mono bg-muted/70 text-cyan px-1.5 py-0.5 rounded text-[11px] font-medium">$1</code>');
+    processed = processed.replace(
+      /`([^`]+)`/g,
+      '<code class="font-mono bg-muted/70 text-cyan px-1.5 py-0.5 rounded text-[11px] font-medium">$1</code>',
+    );
 
     // Anchor tags with Strict Whitelist for http/https (Fix S1)
     processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, linkText, url) => {
@@ -1188,12 +1413,15 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     });
 
     // Bullet points conversion
-    processed = processed.split('\n').map(line => {
-      if (line.trim().startsWith('- ')) {
-        return `<li class="ml-4 list-disc my-1 text-xs sm:text-sm text-foreground/85">${line.trim().slice(2)}</li>`;
-      }
-      return line;
-    }).join('\n');
+    processed = processed
+      .split('\n')
+      .map(line => {
+        if (line.trim().startsWith('- ')) {
+          return `<li class="ml-4 list-disc my-1 text-xs sm:text-sm text-foreground/85">${line.trim().slice(2)}</li>`;
+        }
+        return line;
+      })
+      .join('\n');
 
     // Join lines by breaking them
     return processed.split('\n').join('<br />');
@@ -1214,7 +1442,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
     mdContent += `*Exported on: ${new Date().toLocaleString()}*\n`;
     mdContent += `*Provider: ${activeProvider}*\n\n---\n\n`;
 
-    messages.forEach((msg) => {
+    messages.forEach(msg => {
       const roleName = msg.role === 'user' ? 'User (David)' : 'AI Dev Assistant';
       mdContent += `### **${roleName}** *[${msg.timestamp}]*\n\n${msg.content}\n\n---\n\n`;
     });
@@ -1241,7 +1469,7 @@ export default function Lab({ theme = 'dark' }: LabProps) {
       id: `msg-${Date.now()}-user`,
       role: 'user',
       content: promptText,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
     const updatedMessages = [...messages, userMsg];
@@ -1278,7 +1506,7 @@ You do not need to use all agents if the task is simple, but at least two should
       id: assistantMsgId,
       role: 'assistant',
       content: '',
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
     setMessages([...updatedMessages, initialAssistantMsg]);
@@ -1291,7 +1519,7 @@ You do not need to use all agents if the task is simple, but at least two should
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ prompt: finalPromptText, history: updatedMessages.slice(0, -1) }),
-          signal: controller.signal
+          signal: controller.signal,
         });
 
         if (!response.ok) {
@@ -1300,7 +1528,7 @@ You do not need to use all agents if the task is simple, but at least two should
         }
 
         const reader = response.body?.getReader();
-        if (!reader) throw new Error("Stream is not readable.");
+        if (!reader) throw new Error('Stream is not readable.');
 
         const decoder = new TextDecoder();
         let buffer = '';
@@ -1335,7 +1563,9 @@ You do not need to use all agents if the task is simple, but at least two should
                 if (parsed.text) {
                   assistantContent += parsed.text;
                   setMessages(prev =>
-                    prev.map(m => m.id === assistantMsgId ? { ...m, content: assistantContent } : m)
+                    prev.map(m =>
+                      m.id === assistantMsgId ? { ...m, content: assistantContent } : m,
+                    ),
                   );
                 }
               }
@@ -1343,10 +1573,11 @@ You do not need to use all agents if the task is simple, but at least two should
             boundary = buffer.indexOf('\n\n');
           }
         }
-
       } else if (activeProvider === 'openai') {
         if (!openaiKey && !serverKeys.openai) {
-          throw new Error('OpenAI API key is missing. Please expand the configuration panel and provide a key, or define OPENAI_API_KEY in your server environment.');
+          throw new Error(
+            'OpenAI API key is missing. Please expand the configuration panel and provide a key, or define OPENAI_API_KEY in your server environment.',
+          );
         }
 
         const response = await fetch('/api/chat/openai', {
@@ -1355,9 +1586,9 @@ You do not need to use all agents if the task is simple, but at least two should
           body: JSON.stringify({
             prompt: finalPromptText,
             history: updatedMessages.slice(0, -1),
-            apiKey: openaiKey
+            apiKey: openaiKey,
           }),
-          signal: controller.signal
+          signal: controller.signal,
         });
 
         if (!response.ok) {
@@ -1366,7 +1597,7 @@ You do not need to use all agents if the task is simple, but at least two should
         }
 
         const reader = response.body?.getReader();
-        if (!reader) throw new Error("Stream is not readable.");
+        if (!reader) throw new Error('Stream is not readable.');
 
         const decoder = new TextDecoder();
         let buffer = '';
@@ -1401,7 +1632,9 @@ You do not need to use all agents if the task is simple, but at least two should
                 if (text) {
                   assistantContent += text;
                   setMessages(prev =>
-                    prev.map(m => m.id === assistantMsgId ? { ...m, content: assistantContent } : m)
+                    prev.map(m =>
+                      m.id === assistantMsgId ? { ...m, content: assistantContent } : m,
+                    ),
                   );
                 }
               }
@@ -1409,10 +1642,11 @@ You do not need to use all agents if the task is simple, but at least two should
             boundary = buffer.indexOf('\n\n');
           }
         }
-
       } else if (activeProvider === 'claude' && !claudeEndpoint) {
         if (!claudeKey && !serverKeys.claude) {
-          throw new Error('Claude API key is missing. Please expand the configuration panel and provide a key, or define ANTHROPIC_API_KEY in your server environment.');
+          throw new Error(
+            'Claude API key is missing. Please expand the configuration panel and provide a key, or define ANTHROPIC_API_KEY in your server environment.',
+          );
         }
 
         const response = await fetch('/api/chat/claude', {
@@ -1421,9 +1655,9 @@ You do not need to use all agents if the task is simple, but at least two should
           body: JSON.stringify({
             prompt: finalPromptText,
             history: updatedMessages.slice(0, -1),
-            apiKey: claudeKey
+            apiKey: claudeKey,
           }),
-          signal: controller.signal
+          signal: controller.signal,
         });
 
         if (!response.ok) {
@@ -1432,7 +1666,7 @@ You do not need to use all agents if the task is simple, but at least two should
         }
 
         const reader = response.body?.getReader();
-        if (!reader) throw new Error("Stream is not readable.");
+        if (!reader) throw new Error('Stream is not readable.');
 
         const decoder = new TextDecoder();
         let buffer = '';
@@ -1467,7 +1701,9 @@ You do not need to use all agents if the task is simple, but at least two should
                 if (text) {
                   assistantContent += text;
                   setMessages(prev =>
-                    prev.map(m => m.id === assistantMsgId ? { ...m, content: assistantContent } : m)
+                    prev.map(m =>
+                      m.id === assistantMsgId ? { ...m, content: assistantContent } : m,
+                    ),
                   );
                 }
               }
@@ -1475,7 +1711,6 @@ You do not need to use all agents if the task is simple, but at least two should
             boundary = buffer.indexOf('\n\n');
           }
         }
-
       } else {
         // Ollama, LiteLLM, or Claude proxy calls
         let endpoint = '';
@@ -1496,7 +1731,9 @@ You do not need to use all agents if the task is simple, but at least two should
         }
 
         if (!endpoint) {
-          throw new Error(`${activeProvider.toUpperCase()} endpoint URL is missing. Please configure it above.`);
+          throw new Error(
+            `${activeProvider.toUpperCase()} endpoint URL is missing. Please configure it above.`,
+          );
         }
 
         const isOllama = activeProvider === 'ollama';
@@ -1506,12 +1743,12 @@ You do not need to use all agents if the task is simple, but at least two should
           ? {
               model,
               messages: payloadMessages,
-              stream: true
+              stream: true,
             }
           : {
               model,
               messages: payloadMessages,
-              stream: true
+              stream: true,
             };
 
         const headers: HeadersInit = { 'Content-Type': 'application/json' };
@@ -1521,15 +1758,17 @@ You do not need to use all agents if the task is simple, but at least two should
           method: 'POST',
           headers,
           body: JSON.stringify(requestBody),
-          signal: controller.signal
+          signal: controller.signal,
         });
 
         if (!response.ok) {
-          throw new Error(`${activeProvider.toUpperCase()} server returned error status ${response.status}`);
+          throw new Error(
+            `${activeProvider.toUpperCase()} server returned error status ${response.status}`,
+          );
         }
 
         const reader = response.body?.getReader();
-        if (!reader) throw new Error("Stream is not readable.");
+        if (!reader) throw new Error('Stream is not readable.');
 
         const decoder = new TextDecoder();
         let buffer = '';
@@ -1562,7 +1801,9 @@ You do not need to use all agents if the task is simple, but at least two should
                 if (text) {
                   assistantContent += text;
                   setMessages(prev =>
-                    prev.map(m => m.id === assistantMsgId ? { ...m, content: assistantContent } : m)
+                    prev.map(m =>
+                      m.id === assistantMsgId ? { ...m, content: assistantContent } : m,
+                    ),
                   );
                 }
               }
@@ -1595,7 +1836,9 @@ You do not need to use all agents if the task is simple, but at least two should
                   if (text) {
                     assistantContent += text;
                     setMessages(prev =>
-                      prev.map(m => m.id === assistantMsgId ? { ...m, content: assistantContent } : m)
+                      prev.map(m =>
+                        m.id === assistantMsgId ? { ...m, content: assistantContent } : m,
+                      ),
                     );
                   }
                 }
@@ -1607,23 +1850,29 @@ You do not need to use all agents if the task is simple, but at least two should
       }
 
       // Final save
-      const finalContent = assistantContent || "Sorry, I received an empty response from the provider.";
-      const finalMsgList = [...updatedMessages, {
-        id: assistantMsgId,
-        role: 'assistant' as const,
-        content: finalContent,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      }];
-      saveSessionMessages(activeSessionId, finalMsgList);
-
-    } catch (err: any) {
-      if (err.name === 'AbortError') {
-        const finalMsgList = [...updatedMessages, {
+      const finalContent =
+        assistantContent || 'Sorry, I received an empty response from the provider.';
+      const finalMsgList = [
+        ...updatedMessages,
+        {
           id: assistantMsgId,
           role: 'assistant' as const,
-          content: assistantContent + "\n\n*[Generation stopped by user]*",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        }];
+          content: finalContent,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        },
+      ];
+      saveSessionMessages(activeSessionId, finalMsgList);
+    } catch (err: any) {
+      if (err.name === 'AbortError') {
+        const finalMsgList = [
+          ...updatedMessages,
+          {
+            id: assistantMsgId,
+            role: 'assistant' as const,
+            content: assistantContent + '\n\n*[Generation stopped by user]*',
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          },
+        ];
         saveSessionMessages(activeSessionId, finalMsgList);
       } else {
         console.error(err);
@@ -1643,7 +1892,7 @@ You do not need to use all agents if the task is simple, but at least two should
     '🔍 Build a RegEx to validate ISO timestamps, UUID v4, and email domains with explanation',
     '📜 Generate an OpenAPI 3.0 YAML specification for a REST API authentication server',
     'Explain Docker Compose in simple terms',
-    'Explain the benefits of Tailwind CSS v4'
+    'Explain the benefits of Tailwind CSS v4',
   ];
 
   return (
@@ -1658,7 +1907,9 @@ You do not need to use all agents if the task is simple, but at least two should
           AI Dev Assistant
         </h1>
         <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-3xl">
-          Connect your choice of AI: Chat with <strong className="text-amber-color">Gemini</strong> securely out of the box, or input keys for OpenAI, a local Docker <strong className="text-foreground">Ollama</strong> instance, LiteLLM, or Claude.
+          Connect your choice of AI: Chat with <strong className="text-amber-color">Gemini</strong>{' '}
+          securely out of the box, or input keys for OpenAI, a local Docker{' '}
+          <strong className="text-foreground">Ollama</strong> instance, LiteLLM, or Claude.
         </p>
       </section>
 
@@ -1690,7 +1941,9 @@ You do not need to use all agents if the task is simple, but at least two should
               <span>Scan & Sync</span>
             </button>
             <span className="text-xs text-muted-foreground/60 hidden sm:inline-block">
-              {activeProvider === 'gemini' ? 'gemini · Server Route active' : `${activeProvider} · config active`}
+              {activeProvider === 'gemini'
+                ? 'gemini · Server Route active'
+                : `${activeProvider} · config active`}
             </span>
           </div>
         </div>
@@ -1707,29 +1960,74 @@ You do not need to use all agents if the task is simple, but at least two should
             >
               {/* Provider Selection Tabs with dynamic pulsing live badges */}
               <div className="flex flex-wrap gap-1.5 border-b border-border-color/50 pb-4">
-                {(['gemini', 'openai', 'ollama', 'litellm', 'claude'] as const).map((prov) => {
+                {(['gemini', 'openai', 'ollama', 'litellm', 'claude'] as const).map(prov => {
                   let badge = null;
                   if (prov === 'gemini') {
-                    badge = <span className="inline-block w-2 h-2 rounded-full bg-emerald-color animate-pulse" title="Server Connection Ready" />;
+                    badge = (
+                      <span
+                        className="inline-block w-2 h-2 rounded-full bg-emerald-color animate-pulse"
+                        title="Server Connection Ready"
+                      />
+                    );
                   } else if (prov === 'openai' && serverKeys.openai) {
-                    badge = <span className="inline-block w-2 h-2 rounded-full bg-emerald-color animate-pulse" title="Seamless Environment Key Detected" />;
+                    badge = (
+                      <span
+                        className="inline-block w-2 h-2 rounded-full bg-emerald-color animate-pulse"
+                        title="Seamless Environment Key Detected"
+                      />
+                    );
                   } else if (prov === 'claude' && serverKeys.claude) {
-                    badge = <span className="inline-block w-2 h-2 rounded-full bg-emerald-color animate-pulse" title="Seamless Environment Key Detected" />;
+                    badge = (
+                      <span
+                        className="inline-block w-2 h-2 rounded-full bg-emerald-color animate-pulse"
+                        title="Seamless Environment Key Detected"
+                      />
+                    );
                   } else if (prov === 'ollama') {
                     if (ollamaStatus === 'online') {
-                      badge = <span className="inline-block w-2 h-2 rounded-full bg-emerald-color animate-pulse" title="Local Server Live & Connected" />;
+                      badge = (
+                        <span
+                          className="inline-block w-2 h-2 rounded-full bg-emerald-color animate-pulse"
+                          title="Local Server Live & Connected"
+                        />
+                      );
                     } else if (ollamaStatus === 'scanning') {
-                      badge = <span className="inline-block w-2 h-2 rounded-full bg-amber-color animate-pulse" title="Scanning localhost:11434..." />;
+                      badge = (
+                        <span
+                          className="inline-block w-2 h-2 rounded-full bg-amber-color animate-pulse"
+                          title="Scanning localhost:11434..."
+                        />
+                      );
                     } else {
-                      badge = <span className="inline-block w-2 h-2 rounded-full bg-muted-foreground/30" title="Offline" />;
+                      badge = (
+                        <span
+                          className="inline-block w-2 h-2 rounded-full bg-muted-foreground/30"
+                          title="Offline"
+                        />
+                      );
                     }
                   } else if (prov === 'litellm') {
                     if (litellmStatus === 'online') {
-                      badge = <span className="inline-block w-2 h-2 rounded-full bg-emerald-color animate-pulse" title="Local Server Live & Connected" />;
+                      badge = (
+                        <span
+                          className="inline-block w-2 h-2 rounded-full bg-emerald-color animate-pulse"
+                          title="Local Server Live & Connected"
+                        />
+                      );
                     } else if (litellmStatus === 'scanning') {
-                      badge = <span className="inline-block w-2 h-2 rounded-full bg-amber-color animate-pulse" title="Scanning localhost:4000..." />;
+                      badge = (
+                        <span
+                          className="inline-block w-2 h-2 rounded-full bg-amber-color animate-pulse"
+                          title="Scanning localhost:4000..."
+                        />
+                      );
                     } else {
-                      badge = <span className="inline-block w-2 h-2 rounded-full bg-muted-foreground/30" title="Offline" />;
+                      badge = (
+                        <span
+                          className="inline-block w-2 h-2 rounded-full bg-muted-foreground/30"
+                          title="Offline"
+                        />
+                      );
                     }
                   }
 
@@ -1759,7 +2057,9 @@ You do not need to use all agents if the task is simple, but at least two should
                       <span>Server-Side Gemini Ready!</span>
                     </div>
                     <p>
-                      Your calls are proxied securely through the local backend. No key inputs or configuration is needed from the client! This is fully secure, private, and fast.
+                      Your calls are proxied securely through the local backend. No key inputs or
+                      configuration is needed from the client! This is fully secure, private, and
+                      fast.
                     </p>
                     <div className="flex items-center gap-1 text-[10px] text-muted-foreground/60">
                       <Lock className="w-3 h-3 text-cyan" />
@@ -1771,23 +2071,29 @@ You do not need to use all agents if the task is simple, but at least two should
                 {activeProvider === 'openai' && (
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <label className="block text-xs font-semibold text-muted-foreground">OpenAI Secret Key</label>
+                      <label className="block text-xs font-semibold text-muted-foreground">
+                        OpenAI Secret Key
+                      </label>
                       {serverKeys.openai ? (
                         <span className="text-[10px] text-emerald-color font-bold px-2 py-0.5 rounded bg-emerald-color/10 border border-emerald-color/20 flex items-center gap-1">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-color animate-ping" />
                           <span>Seamless Environment Key Active</span>
                         </span>
                       ) : (
-                        <span className="text-[10px] text-muted-foreground/60">Using Client Key</span>
+                        <span className="text-[10px] text-muted-foreground/60">
+                          Using Client Key
+                        </span>
                       )}
                     </div>
                     <div className="relative">
                       <Key className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
                       <input
                         type="password"
-                        placeholder={serverKeys.openai ? "•••••••••••••••• (Using Server Key)" : "sk-..."}
+                        placeholder={
+                          serverKeys.openai ? '•••••••••••••••• (Using Server Key)' : 'sk-...'
+                        }
                         value={openaiKey}
-                        onChange={(e) => {
+                        onChange={e => {
                           setOpenaiKey(e.target.value);
                           saveConfig('linacre_openai_key', e.target.value);
                         }}
@@ -1797,9 +2103,8 @@ You do not need to use all agents if the task is simple, but at least two should
                     <span className="text-[10px] text-muted-foreground/60 flex items-center gap-1">
                       <Info className="w-3 h-3 text-cyan" />
                       {serverKeys.openai
-                        ? "Since an OPENAI_API_KEY was found in your server environment, you can leave this field blank and it will work seamlessly!"
-                        : "Keys stay in memory for this tab only — never written to browser storage, never sent to linacre.site servers. Paste again if you refresh."
-                      }
+                        ? 'Since an OPENAI_API_KEY was found in your server environment, you can leave this field blank and it will work seamlessly!'
+                        : 'Keys stay in memory for this tab only — never written to browser storage, never sent to linacre.site servers. Paste again if you refresh.'}
                     </span>
                   </div>
                 )}
@@ -1809,7 +2114,9 @@ You do not need to use all agents if the task is simple, but at least two should
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
-                          <label className="block text-xs font-semibold text-muted-foreground">Ollama Endpoint</label>
+                          <label className="block text-xs font-semibold text-muted-foreground">
+                            Ollama Endpoint
+                          </label>
                           {ollamaStatus === 'online' ? (
                             <span className="text-[9px] text-emerald-color font-bold uppercase tracking-wider flex items-center gap-1">
                               <span className="w-1.5 h-1.5 rounded-full bg-emerald-color animate-ping" />
@@ -1829,7 +2136,7 @@ You do not need to use all agents if the task is simple, but at least two should
                           type="text"
                           placeholder="http://localhost:11434"
                           value={ollamaEndpoint}
-                          onChange={(e) => {
+                          onChange={e => {
                             setOllamaEndpoint(e.target.value);
                             saveConfig('linacre_ollama_endpoint', e.target.value);
                             scanLocalServers(e.target.value, litellmEndpoint);
@@ -1849,13 +2156,13 @@ You do not need to use all agents if the task is simple, but at least two should
                         {ollamaStatus === 'online' && ollamaModels.length > 0 ? (
                           <select
                             value={ollamaModel}
-                            onChange={(e) => {
+                            onChange={e => {
                               setOllamaModel(e.target.value);
                               saveConfig('linacre_ollama_model', e.target.value);
                             }}
                             className="w-full bg-background border border-border-color rounded-lg px-3 py-2 text-xs font-mono text-foreground focus:outline-none focus:ring-1 focus:ring-cyan cursor-pointer"
                           >
-                            {ollamaModels.map((m) => (
+                            {ollamaModels.map(m => (
                               <option key={m} value={m}>
                                 {m}
                               </option>
@@ -1866,7 +2173,7 @@ You do not need to use all agents if the task is simple, but at least two should
                             type="text"
                             placeholder="llama3.2"
                             value={ollamaModel}
-                            onChange={(e) => {
+                            onChange={e => {
                               setOllamaModel(e.target.value);
                               saveConfig('linacre_ollama_model', e.target.value);
                             }}
@@ -1880,8 +2187,7 @@ You do not need to use all agents if the task is simple, but at least two should
                       <span>
                         {ollamaStatus === 'online'
                           ? "Success! Connected to local Ollama. We've automatically fetched your active models."
-                          : "Make sure Ollama is running locally on your computer with 'ollama serve' and CORS headers are allowed."
-                        }
+                          : "Make sure Ollama is running locally on your computer with 'ollama serve' and CORS headers are allowed."}
                       </span>
                     </span>
                   </div>
@@ -1892,7 +2198,9 @@ You do not need to use all agents if the task is simple, but at least two should
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
-                          <label className="block text-xs font-semibold text-muted-foreground">LiteLLM Endpoint URL</label>
+                          <label className="block text-xs font-semibold text-muted-foreground">
+                            LiteLLM Endpoint URL
+                          </label>
                           {litellmStatus === 'online' ? (
                             <span className="text-[9px] text-emerald-color font-bold uppercase tracking-wider flex items-center gap-1">
                               <span className="w-1.5 h-1.5 rounded-full bg-emerald-color animate-ping" />
@@ -1906,7 +2214,7 @@ You do not need to use all agents if the task is simple, but at least two should
                           type="text"
                           placeholder="http://localhost:4000"
                           value={litellmEndpoint}
-                          onChange={(e) => {
+                          onChange={e => {
                             setLiteLLMEndpoint(e.target.value);
                             saveConfig('linacre_litellm_endpoint', e.target.value);
                             scanLocalServers(ollamaEndpoint, e.target.value);
@@ -1915,12 +2223,14 @@ You do not need to use all agents if the task is simple, but at least two should
                         />
                       </div>
                       <div className="space-y-1.5">
-                        <label className="block text-xs font-semibold text-muted-foreground">LiteLLM Model Name</label>
+                        <label className="block text-xs font-semibold text-muted-foreground">
+                          LiteLLM Model Name
+                        </label>
                         <input
                           type="text"
                           placeholder="gpt-3.5-turbo"
                           value={litellmModel}
-                          onChange={(e) => {
+                          onChange={e => {
                             setLiteLLMModel(e.target.value);
                             saveConfig('linacre_litellm_model', e.target.value);
                           }}
@@ -1929,12 +2239,14 @@ You do not need to use all agents if the task is simple, but at least two should
                       </div>
                     </div>
                     <div className="space-y-1.5">
-                      <label className="block text-xs font-semibold text-muted-foreground">LiteLLM API Key (Optional)</label>
+                      <label className="block text-xs font-semibold text-muted-foreground">
+                        LiteLLM API Key (Optional)
+                      </label>
                       <input
                         type="password"
                         placeholder="Enter custom proxy key"
                         value={litellmKey}
-                        onChange={(e) => {
+                        onChange={e => {
                           setLiteLLMKey(e.target.value);
                           saveConfig('linacre_litellm_key', e.target.value);
                         }}
@@ -1948,12 +2260,14 @@ You do not need to use all agents if the task is simple, but at least two should
                   <div className="space-y-3">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="space-y-1.5">
-                        <label className="block text-xs font-semibold text-muted-foreground">Claude Proxy Endpoint</label>
+                        <label className="block text-xs font-semibold text-muted-foreground">
+                          Claude Proxy Endpoint
+                        </label>
                         <input
                           type="text"
                           placeholder="Optional (falls back to server proxy)"
                           value={claudeEndpoint}
-                          onChange={(e) => {
+                          onChange={e => {
                             setClaudeEndpoint(e.target.value);
                             saveConfig('linacre_claude_endpoint', e.target.value);
                           }}
@@ -1961,12 +2275,14 @@ You do not need to use all agents if the task is simple, but at least two should
                         />
                       </div>
                       <div className="space-y-1.5">
-                        <label className="block text-xs font-semibold text-muted-foreground">Claude Model Name</label>
+                        <label className="block text-xs font-semibold text-muted-foreground">
+                          Claude Model Name
+                        </label>
                         <input
                           type="text"
                           placeholder="claude-3-5-sonnet-latest"
                           value={claudeModel}
-                          onChange={(e) => {
+                          onChange={e => {
                             setClaudeModel(e.target.value);
                             saveConfig('linacre_claude_model', e.target.value);
                           }}
@@ -1976,21 +2292,27 @@ You do not need to use all agents if the task is simple, but at least two should
                     </div>
                     <div className="space-y-1.5">
                       <div className="flex items-center justify-between">
-                        <label className="block text-xs font-semibold text-muted-foreground">Claude API Key</label>
+                        <label className="block text-xs font-semibold text-muted-foreground">
+                          Claude API Key
+                        </label>
                         {serverKeys.claude ? (
                           <span className="text-[10px] text-emerald-color font-bold px-2 py-0.5 rounded bg-emerald-color/10 border border-emerald-color/20 flex items-center gap-1">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-color animate-ping" />
                             <span>Seamless Environment Key Active</span>
                           </span>
                         ) : (
-                          <span className="text-[10px] text-muted-foreground/60">Using Client Key</span>
+                          <span className="text-[10px] text-muted-foreground/60">
+                            Using Client Key
+                          </span>
                         )}
                       </div>
                       <input
                         type="password"
-                        placeholder={serverKeys.claude ? "•••••••••••••••• (Using Server Key)" : "sk-ant-..."}
+                        placeholder={
+                          serverKeys.claude ? '•••••••••••••••• (Using Server Key)' : 'sk-ant-...'
+                        }
                         value={claudeKey}
-                        onChange={(e) => {
+                        onChange={e => {
                           setClaudeKey(e.target.value);
                           saveConfig('linacre_claude_key', e.target.value);
                         }}
@@ -2013,21 +2335,35 @@ You do not need to use all agents if the task is simple, but at least two should
                           <CreditCard className="w-3.5 h-3.5" />
                           <span>Anthropic $100 Live Credit Gauge</span>
                         </span>
-                        <span className="text-[10px] text-muted-foreground">Real-Time USD Precision</span>
+                        <span className="text-[10px] text-muted-foreground">
+                          Real-Time USD Precision
+                        </span>
                       </div>
 
                       <div className="grid grid-cols-3 gap-2 text-center font-mono py-1">
                         <div className="bg-muted/20 p-2 rounded-lg border border-border-color/40">
-                          <div className="text-[9px] text-muted-foreground uppercase">Starting Budget</div>
-                          <div className="text-xs font-bold text-foreground">${anthropicBudget.toFixed(2)}</div>
+                          <div className="text-[9px] text-muted-foreground uppercase">
+                            Starting Budget
+                          </div>
+                          <div className="text-xs font-bold text-foreground">
+                            ${anthropicBudget.toFixed(2)}
+                          </div>
                         </div>
                         <div className="bg-muted/20 p-2 rounded-lg border border-border-color/40">
-                          <div className="text-[9px] text-muted-foreground uppercase">Total USD Spent</div>
-                          <div className="text-xs font-bold text-rose-400">${anthropicSpent.toFixed(5)}</div>
+                          <div className="text-[9px] text-muted-foreground uppercase">
+                            Total USD Spent
+                          </div>
+                          <div className="text-xs font-bold text-rose-400">
+                            ${anthropicSpent.toFixed(5)}
+                          </div>
                         </div>
                         <div className="bg-muted/20 p-2 rounded-lg border border-border-color/40">
-                          <div className="text-[9px] text-muted-foreground uppercase">Remaining Credit</div>
-                          <div className="text-xs font-bold text-emerald-color">${Math.max(0, anthropicBudget - anthropicSpent).toFixed(5)}</div>
+                          <div className="text-[9px] text-muted-foreground uppercase">
+                            Remaining Credit
+                          </div>
+                          <div className="text-xs font-bold text-emerald-color">
+                            ${Math.max(0, anthropicBudget - anthropicSpent).toFixed(5)}
+                          </div>
                         </div>
                       </div>
 
@@ -2035,14 +2371,20 @@ You do not need to use all agents if the task is simple, but at least two should
                       <div className="w-full bg-muted/40 h-2 rounded-full overflow-hidden">
                         <div
                           className="bg-emerald-color h-full transition-all duration-300"
-                          style={{ width: `${Math.max(0, Math.min(100, ((anthropicBudget - anthropicSpent) / anthropicBudget) * 100))}%` }}
+                          style={{
+                            width: `${Math.max(0, Math.min(100, ((anthropicBudget - anthropicSpent) / anthropicBudget) * 100))}%`,
+                          }}
                         />
                       </div>
 
                       {lastUsage ? (
                         <div className="text-[10px] text-cyan font-mono flex items-center justify-between border-t border-border-color/30 pt-1.5">
-                          <span>Last Query: {lastUsage.input} in / {lastUsage.output} out</span>
-                          <span className="font-bold text-amber-color">+${lastUsage.cost.toFixed(5)}</span>
+                          <span>
+                            Last Query: {lastUsage.input} in / {lastUsage.output} out
+                          </span>
+                          <span className="font-bold text-amber-color">
+                            +${lastUsage.cost.toFixed(5)}
+                          </span>
                         </div>
                       ) : (
                         <div className="text-[9px] text-muted-foreground/60 text-center font-mono pt-1">
@@ -2060,7 +2402,9 @@ You do not need to use all agents if the task is simple, but at least two should
                         <Sparkles className="w-3.5 h-3.5 text-amber-color shrink-0" />
                         <span>Temperature</span>
                       </span>
-                      <span className="text-amber-color font-bold text-xs">{temperature.toFixed(2)}</span>
+                      <span className="text-amber-color font-bold text-xs">
+                        {temperature.toFixed(2)}
+                      </span>
                     </div>
                     <input
                       type="range"
@@ -2068,7 +2412,7 @@ You do not need to use all agents if the task is simple, but at least two should
                       max="1"
                       step="0.05"
                       value={temperature}
-                      onChange={(e) => setTemperature(parseFloat(e.target.value))}
+                      onChange={e => setTemperature(parseFloat(e.target.value))}
                       className="w-full h-1.5 bg-muted/40 rounded-lg appearance-none cursor-pointer accent-amber-color"
                     />
                     <div className="flex justify-between text-[9px] text-muted-foreground/60">
@@ -2091,7 +2435,7 @@ You do not need to use all agents if the task is simple, but at least two should
                       max="1"
                       step="0.05"
                       value={topP}
-                      onChange={(e) => setTopP(parseFloat(e.target.value))}
+                      onChange={e => setTopP(parseFloat(e.target.value))}
                       className="w-full h-1.5 bg-muted/40 rounded-lg appearance-none cursor-pointer accent-cyan"
                     />
                     <div className="flex justify-between text-[9px] text-muted-foreground/60">
@@ -2114,7 +2458,7 @@ You do not need to use all agents if the task is simple, but at least two should
                       max="8192"
                       step="256"
                       value={maxTokens}
-                      onChange={(e) => setMaxTokens(parseInt(e.target.value, 10))}
+                      onChange={e => setMaxTokens(parseInt(e.target.value, 10))}
                       className="w-full h-1.5 bg-muted/40 rounded-lg appearance-none cursor-pointer accent-emerald-color"
                     />
                     <div className="flex justify-between text-[9px] text-muted-foreground/60">
@@ -2178,7 +2522,7 @@ You do not need to use all agents if the task is simple, but at least two should
 
                 {/* List of sessions */}
                 <div className="flex lg:flex-col overflow-x-auto lg:overflow-x-visible gap-2 lg:gap-0 lg:space-y-2 pb-2 lg:pb-0 scrollbar-thin lg:max-h-[360px] lg:overflow-y-auto">
-                  {sessions.map((sess) => {
+                  {sessions.map(sess => {
                     const isActive = sess.id === activeSessionId;
                     return (
                       <div
@@ -2192,11 +2536,13 @@ You do not need to use all agents if the task is simple, but at least two should
                       >
                         <div className="flex flex-col min-w-0 flex-1">
                           <span className="font-bold truncate pr-1">{sess.title}</span>
-                          <span className="text-[9px] opacity-60 mt-0.5">{sess.provider.toUpperCase()} · {sess.timestamp}</span>
+                          <span className="text-[9px] opacity-60 mt-0.5">
+                            {sess.provider.toUpperCase()} · {sess.timestamp}
+                          </span>
                         </div>
 
                         <button
-                          onClick={(e) => handleDeleteSession(sess.id, e)}
+                          onClick={e => handleDeleteSession(sess.id, e)}
                           className="p-1 hover:text-rose-400 rounded text-muted-foreground/30 hover:bg-rose-500/10 cursor-pointer select-none transition-colors ml-1"
                           title="Delete Session"
                         >
@@ -2239,7 +2585,10 @@ You do not need to use all agents if the task is simple, but at least two should
                     <div className="w-px h-4 bg-border-color/60 mx-1" />
 
                     {/* Import / Upload drop buttons */}
-                    <label className="p-1 rounded border border-border-color bg-muted/20 hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Upload Files">
+                    <label
+                      className="p-1 rounded border border-border-color bg-muted/20 hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      title="Upload Files"
+                    >
                       <Upload className="w-3.5 h-3.5 text-cyan" />
                       <input
                         type="file"
@@ -2249,18 +2598,24 @@ You do not need to use all agents if the task is simple, but at least two should
                       />
                     </label>
 
-                    <label className="p-1 rounded border border-border-color bg-muted/20 hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Upload Folder Structure">
+                    <label
+                      className="p-1 rounded border border-border-color bg-muted/20 hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      title="Upload Folder Structure"
+                    >
                       <Folder className="w-3.5 h-3.5 text-amber-color" />
                       <input
                         type="file"
                         multiple
                         onChange={handleImportSingleFiles}
                         className="hidden"
-                        {...{ webkitdirectory: "", directory: "" }}
+                        {...{ webkitdirectory: '', directory: '' }}
                       />
                     </label>
 
-                    <label className="p-1 rounded border border-border-color bg-muted/20 hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" title="Import Workspace JSON Backup">
+                    <label
+                      className="p-1 rounded border border-border-color bg-muted/20 hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                      title="Import Workspace JSON Backup"
+                    >
                       <Key className="w-3.5 h-3.5 text-rose-400" />
                       <input
                         type="file"
@@ -2282,10 +2637,19 @@ You do not need to use all agents if the task is simple, but at least two should
 
                 {/* Inline item creation form */}
                 {isCreateOpen && (
-                  <form onSubmit={handleCreateItem} className="bg-muted/30 border border-border-color/60 rounded p-2.5 space-y-2 font-mono text-xs shrink-0">
+                  <form
+                    onSubmit={handleCreateItem}
+                    className="bg-muted/30 border border-border-color/60 rounded p-2.5 space-y-2 font-mono text-xs shrink-0"
+                  >
                     <div className="flex items-center justify-between text-[10px] text-muted-foreground font-bold uppercase">
                       <span>New {isCreateOpen}</span>
-                      <button type="button" onClick={() => setIsCreateOpen(null)} className="text-rose-400">Cancel</button>
+                      <button
+                        type="button"
+                        onClick={() => setIsCreateOpen(null)}
+                        className="text-rose-400"
+                      >
+                        Cancel
+                      </button>
                     </div>
                     {createParentFolder && (
                       <div className="text-[10px] text-cyan truncate bg-cyan/5 px-1 py-0.5 rounded border border-cyan/10">
@@ -2298,10 +2662,13 @@ You do not need to use all agents if the task is simple, but at least two should
                       required
                       placeholder={isCreateOpen === 'file' ? 'e.g. index.js' : 'e.g. components'}
                       value={createPathInput}
-                      onChange={(e) => setCreatePathInput(e.target.value)}
+                      onChange={e => setCreatePathInput(e.target.value)}
                       className="w-full bg-background border border-border-color rounded px-2 py-1 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-cyan"
                     />
-                    <button type="submit" className="w-full py-1 bg-cyan/20 hover:bg-cyan/30 text-cyan border border-cyan/40 rounded text-center text-[10px] font-bold uppercase transition-colors cursor-pointer">
+                    <button
+                      type="submit"
+                      className="w-full py-1 bg-cyan/20 hover:bg-cyan/30 text-cyan border border-cyan/40 rounded text-center text-[10px] font-bold uppercase transition-colors cursor-pointer"
+                    >
                       Create
                     </button>
                   </form>
@@ -2310,10 +2677,10 @@ You do not need to use all agents if the task is simple, but at least two should
                 {/* Render Workspace Tree view */}
                 <div
                   className="flex-1 flex flex-col gap-0.5 max-h-[380px] overflow-y-auto scrollbar-thin pr-1 border border-border-color/20 rounded p-2 bg-[#0c0f17]/40 min-h-[160px]"
-                  onDragOver={(e) => {
+                  onDragOver={e => {
                     e.preventDefault();
                   }}
-                  onDrop={(e) => {
+                  onDrop={e => {
                     e.preventDefault();
                     const files = e.dataTransfer.files;
                     if (files && files.length > 0) {
@@ -2324,7 +2691,9 @@ You do not need to use all agents if the task is simple, but at least two should
                 >
                   {workspace.length === 0 ? (
                     <div className="text-center py-10 text-[11px] text-muted-foreground font-mono leading-relaxed">
-                      // drag & drop files here<br />or click buttons to import
+                      // drag & drop files here
+                      <br />
+                      or click buttons to import
                     </div>
                   ) : (
                     (() => {
@@ -2336,8 +2705,8 @@ You do not need to use all agents if the task is simple, but at least two should
                           if (aParts[i] !== bParts[i]) {
                             const aIsLast = i === aParts.length - 1;
                             const bIsLast = i === bParts.length - 1;
-                            const aType = (aIsLast && a.type === 'file') ? 'file' : 'folder';
-                            const bType = (bIsLast && b.type === 'file') ? 'file' : 'folder';
+                            const aType = aIsLast && a.type === 'file' ? 'file' : 'folder';
+                            const bType = bIsLast && b.type === 'file' ? 'file' : 'folder';
                             if (aType !== bType) {
                               return aType === 'folder' ? -1 : 1;
                             }
@@ -2347,9 +2716,11 @@ You do not need to use all agents if the task is simple, but at least two should
                         return a.path.length - b.path.length;
                       });
 
-                      return sorted.map((item) => {
+                      return sorted.map(item => {
                         const depth = item.path.split('/').length - 1;
-                        const isCollapsed = collapsedFolders.some(f => item.path.startsWith(f + '/'));
+                        const isCollapsed = collapsedFolders.some(f =>
+                          item.path.startsWith(f + '/'),
+                        );
                         if (isCollapsed) return null;
 
                         const isItemCollapsed = collapsedFolders.includes(item.path);
@@ -2362,8 +2733,8 @@ You do not need to use all agents if the task is simple, but at least two should
                               item.type === 'folder'
                                 ? 'text-foreground hover:bg-muted/15 font-semibold'
                                 : activeFileId === item.id
-                                ? 'bg-cyan/10 text-cyan font-bold border-r border-cyan'
-                                : 'text-muted-foreground hover:text-foreground hover:bg-muted/10'
+                                  ? 'bg-cyan/10 text-cyan font-bold border-r border-cyan'
+                                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/10'
                             }`}
                             onClick={() => {
                               if (item.type === 'folder') {
@@ -2376,7 +2747,9 @@ You do not need to use all agents if the task is simple, but at least two should
                             <div className="flex items-center gap-1.5 min-w-0 flex-1">
                               {item.type === 'folder' ? (
                                 <>
-                                  <ChevronRight className={`w-3 h-3 text-muted-foreground/60 transition-transform shrink-0 ${isItemCollapsed ? '' : 'rotate-90'}`} />
+                                  <ChevronRight
+                                    className={`w-3 h-3 text-muted-foreground/60 transition-transform shrink-0 ${isItemCollapsed ? '' : 'rotate-90'}`}
+                                  />
                                   <Folder className="w-3.5 h-3.5 text-amber-color shrink-0" />
                                 </>
                               ) : (
@@ -2390,7 +2763,7 @@ You do not need to use all agents if the task is simple, but at least two should
                               {item.type === 'folder' ? (
                                 <>
                                   <button
-                                    onClick={(e) => {
+                                    onClick={e => {
                                       e.preventDefault();
                                       e.stopPropagation();
                                       setCreateParentFolder(item.path);
@@ -2402,7 +2775,7 @@ You do not need to use all agents if the task is simple, but at least two should
                                     <Plus className="w-3 h-3 text-cyan" />
                                   </button>
                                   <button
-                                    onClick={(e) => handleDeleteItem(item, e)}
+                                    onClick={e => handleDeleteItem(item, e)}
                                     className="p-0.5 hover:text-rose-400 rounded transition-colors"
                                     title="Delete folder"
                                   >
@@ -2412,21 +2785,21 @@ You do not need to use all agents if the task is simple, but at least two should
                               ) : (
                                 <>
                                   <button
-                                    onClick={(e) => handleAttachToPrompt(item, e)}
+                                    onClick={e => handleAttachToPrompt(item, e)}
                                     className="p-0.5 hover:text-cyan rounded transition-colors text-cyan/70"
                                     title="Attach Code to Prompt"
                                   >
                                     <Paperclip className="w-3 h-3" />
                                   </button>
                                   <button
-                                    onClick={(e) => handleDownloadFile(item, e)}
+                                    onClick={e => handleDownloadFile(item, e)}
                                     className="p-0.5 hover:text-emerald-color rounded transition-colors text-emerald-color/70"
                                     title="Download File"
                                   >
                                     <Download className="w-3 h-3" />
                                   </button>
                                   <button
-                                    onClick={(e) => handleDeleteItem(item, e)}
+                                    onClick={e => handleDeleteItem(item, e)}
                                     className="p-0.5 hover:text-rose-400 rounded transition-colors text-rose-400/70"
                                     title="Delete file"
                                   >
@@ -2487,12 +2860,17 @@ You do not need to use all agents if the task is simple, but at least two should
                 }`}
               >
                 <FileText className="w-3.5 h-3.5" />
-                <span className="truncate max-w-[180px]">📝 {workspace.find(i => i.id === activeFileId)?.name || 'FILE EDITOR'}</span>
+                <span className="truncate max-w-[180px]">
+                  📝 {workspace.find(i => i.id === activeFileId)?.name || 'FILE EDITOR'}
+                </span>
               </button>
             )}
           </div>
 
-          <div className="border border-border-color bg-muted/5 dark:bg-[#081c28]/60 rounded-b-xl overflow-hidden flex flex-col h-full min-h-[460px] shadow-lg select-text" id="lab-terminal-shell">
+          <div
+            className="border border-border-color bg-muted/5 dark:bg-[#081c28]/60 rounded-b-xl overflow-hidden flex flex-col h-full min-h-[460px] shadow-lg select-text"
+            id="lab-terminal-shell"
+          >
             {mainTab === 'chat' ? (
               <>
                 {/* Status bar */}
@@ -2505,12 +2883,12 @@ You do not need to use all agents if the task is simple, but at least two should
                       {activeProvider === 'gemini'
                         ? 'gemini-3.5-flash'
                         : activeProvider === 'openai'
-                        ? 'gpt-4o-mini'
-                        : activeProvider === 'ollama'
-                        ? ollamaModel
-                        : activeProvider === 'litellm'
-                        ? litellmModel || 'litellm-proxy'
-                        : claudeModel || 'claude-3.5-sonnet'}
+                          ? 'gpt-4o-mini'
+                          : activeProvider === 'ollama'
+                            ? ollamaModel
+                            : activeProvider === 'litellm'
+                              ? litellmModel || 'litellm-proxy'
+                              : claudeModel || 'claude-3.5-sonnet'}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -2529,10 +2907,10 @@ You do not need to use all agents if the task is simple, but at least two should
                       {activeProvider === 'gemini'
                         ? 'Active Server Route'
                         : activeProvider === 'openai'
-                        ? openaiKey
-                          ? 'Key Configured ✓'
-                          : 'Key Needed ⚠'
-                        : 'Connection active'}
+                          ? openaiKey
+                            ? 'Key Configured ✓'
+                            : 'Key Needed ⚠'
+                          : 'Connection active'}
                     </span>
                     <div className="hidden sm:block h-3 w-px bg-border-color/60 mx-1" />
                     <button
@@ -2557,8 +2935,11 @@ You do not need to use all agents if the task is simple, but at least two should
                 </div>
 
                 {/* Chat Message Window */}
-                <div className="flex-1 p-5 overflow-y-auto max-h-[400px] min-h-[300px] space-y-4" id="lab-message-window">
-                  {messages.map((msg) => {
+                <div
+                  className="flex-1 p-5 overflow-y-auto max-h-[400px] min-h-[300px] space-y-4"
+                  id="lab-message-window"
+                >
+                  {messages.map(msg => {
                     const isUser = msg.role === 'user';
                     return (
                       <div
@@ -2583,7 +2964,9 @@ You do not need to use all agents if the task is simple, but at least two should
                           {isUser ? (
                             <div
                               className="prose prose-invert max-w-none text-xs sm:text-sm prose-p:my-1 prose-pre:bg-black/40"
-                              dangerouslySetInnerHTML={{ __html: formatMessageContent(msg.content) }}
+                              dangerouslySetInnerHTML={{
+                                __html: formatMessageContent(msg.content),
+                              }}
                             />
                           ) : (
                             parseAgentDialogue(msg.content).map((part, pIdx) => {
@@ -2599,17 +2982,25 @@ You do not need to use all agents if the task is simple, but at least two should
                                         src={agentInfo.gifUrl}
                                         alt={agentInfo.name}
                                         className="w-5 h-5 object-contain"
-                                        onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+                                        onError={e => {
+                                          (e.target as HTMLElement).style.display = 'none';
+                                        }}
                                       />
-                                      <span className="font-display font-bold text-xs uppercase tracking-wide text-foreground">{agentInfo.name}</span>
+                                      <span className="font-display font-bold text-xs uppercase tracking-wide text-foreground">
+                                        {agentInfo.name}
+                                      </span>
                                     </div>
-                                    <span className={`text-[8px] font-mono font-bold px-1.5 py-0.5 rounded border uppercase ${agentInfo.tagColor}`}>
+                                    <span
+                                      className={`text-[8px] font-mono font-bold px-1.5 py-0.5 rounded border uppercase ${agentInfo.tagColor}`}
+                                    >
                                       {agentInfo.role}
                                     </span>
                                   </div>
                                   <div
                                     className="prose prose-invert max-w-none text-xs sm:text-sm prose-p:my-1 prose-pre:bg-black/40 text-muted-foreground/90 font-mono"
-                                    dangerouslySetInnerHTML={{ __html: formatMessageContent(part.text) }}
+                                    dangerouslySetInnerHTML={{
+                                      __html: formatMessageContent(part.text),
+                                    }}
                                   />
                                 </div>
                               );
@@ -2627,7 +3018,9 @@ You do not need to use all agents if the task is simple, but at least two should
                       </div>
                       <div className="rounded-xl p-4 bg-muted/30 dark:bg-[#161b26] border border-border-color flex items-center gap-2">
                         <RefreshCw className="w-4 h-4 text-cyan animate-spin" />
-                        <span className="font-mono text-xs text-muted-foreground animate-pulse">Assistant is thinking...</span>
+                        <span className="font-mono text-xs text-muted-foreground animate-pulse">
+                          Assistant is thinking...
+                        </span>
                       </div>
                     </div>
                   )}
@@ -2636,7 +3029,9 @@ You do not need to use all agents if the task is simple, but at least two should
                     <div className="border border-red-500/20 bg-red-500/5 text-red-400 p-4 rounded-xl flex gap-3 text-xs sm:text-sm max-w-2xl mx-auto">
                       <AlertCircle className="w-5 h-5 flex-shrink-0 text-red-400" />
                       <div className="space-y-1">
-                        <span className="font-semibold font-mono text-xs uppercase block">Assistant Error</span>
+                        <span className="font-semibold font-mono text-xs uppercase block">
+                          Assistant Error
+                        </span>
                         <p>{errorText}</p>
                       </div>
                     </div>
@@ -2647,7 +3042,10 @@ You do not need to use all agents if the task is simple, but at least two should
 
                 {/* Quick prompts chips */}
                 {messages.length <= 1 && (
-                  <div className="px-5 py-2.5 bg-muted/10 border-t border-border-color/30 flex flex-wrap gap-2" id="quick-prompts-bar">
+                  <div
+                    className="px-5 py-2.5 bg-muted/10 border-t border-border-color/30 flex flex-wrap gap-2"
+                    id="quick-prompts-bar"
+                  >
                     {quickPrompts.map((p, i) => (
                       <button
                         key={i}
@@ -2662,13 +3060,15 @@ You do not need to use all agents if the task is simple, but at least two should
 
                 {/* User Input prompt row */}
                 <div className="p-4 bg-muted/20 dark:bg-[#161b26]/30 border-t border-border-color flex items-center gap-3">
-                  <span className="font-mono text-md text-amber-color font-bold select-none pl-1">$</span>
+                  <span className="font-mono text-md text-amber-color font-bold select-none pl-1">
+                    $
+                  </span>
                   <input
                     type="text"
                     placeholder="ask the dev assistant..."
                     value={inputPrompt}
-                    onChange={(e) => setInputPrompt(e.target.value)}
-                    onKeyDown={(e) => {
+                    onChange={e => setInputPrompt(e.target.value)}
+                    onKeyDown={e => {
                       if (e.key === 'Enter') handleSendPrompt(inputPrompt);
                     }}
                     disabled={isGenerating}
@@ -2700,14 +3100,21 @@ You do not need to use all agents if the task is simple, but at least two should
               </>
             ) : mainTab === 'sql' ? (
               /* SQL Playground Panel */
-              <div className="flex flex-col flex-1 font-mono text-xs h-full bg-[#0a0c14]/40" id="sql-playground-panel">
+              <div
+                className="flex flex-col flex-1 font-mono text-xs h-full bg-[#0a0c14]/40"
+                id="sql-playground-panel"
+              >
                 {/* Top status header */}
                 <div className="flex items-center justify-between px-4 py-2 bg-muted/30 border-b border-border-color/60 text-[10px] text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <Database className="w-3.5 h-3.5 text-cyan" />
-                    <span className="font-bold text-foreground">PostgreSQL 16.3 (Virtual Sandbox)</span>
+                    <span className="font-bold text-foreground">
+                      PostgreSQL 16.3 (Virtual Sandbox)
+                    </span>
                     <span>·</span>
-                    <span className="text-[9px] bg-cyan/10 text-cyan px-1.5 py-0.5 rounded border border-cyan/20">CONNECTED</span>
+                    <span className="text-[9px] bg-cyan/10 text-cyan px-1.5 py-0.5 rounded border border-cyan/20">
+                      CONNECTED
+                    </span>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-[9px]">Schema: public</span>
@@ -2731,7 +3138,7 @@ You do not need to use all agents if the task is simple, but at least two should
                     <div className="relative border border-border-color bg-[#07090f] rounded-lg overflow-hidden flex flex-col">
                       <textarea
                         value={sqlQuery}
-                        onChange={(e) => setSqlQuery(e.target.value)}
+                        onChange={e => setSqlQuery(e.target.value)}
                         className="w-full h-24 p-3 bg-transparent text-xs text-foreground/90 font-mono focus:outline-none resize-none leading-relaxed"
                         placeholder="SELECT * FROM projects;"
                         spellCheck={false}
@@ -2774,11 +3181,21 @@ You do not need to use all agents if the task is simple, but at least two should
                           <span>projects</span>
                         </span>
                         <div className="pl-3.5 text-muted-foreground/80 space-y-0.5">
-                          <div>id <span className="opacity-60 font-normal">SERIAL (PK)</span></div>
-                          <div>name <span className="opacity-60 font-normal">VARCHAR</span></div>
-                          <div>category <span className="opacity-60 font-normal">VARCHAR</span></div>
-                          <div>description <span className="opacity-60 font-normal">TEXT</span></div>
-                          <div>tag <span className="opacity-60 font-normal">VARCHAR</span></div>
+                          <div>
+                            id <span className="opacity-60 font-normal">SERIAL (PK)</span>
+                          </div>
+                          <div>
+                            name <span className="opacity-60 font-normal">VARCHAR</span>
+                          </div>
+                          <div>
+                            category <span className="opacity-60 font-normal">VARCHAR</span>
+                          </div>
+                          <div>
+                            description <span className="opacity-60 font-normal">TEXT</span>
+                          </div>
+                          <div>
+                            tag <span className="opacity-60 font-normal">VARCHAR</span>
+                          </div>
                         </div>
                       </div>
 
@@ -2789,11 +3206,21 @@ You do not need to use all agents if the task is simple, but at least two should
                           <span>users</span>
                         </span>
                         <div className="pl-3.5 text-muted-foreground/80 space-y-0.5">
-                          <div>id <span className="opacity-60 font-normal">INT (PK)</span></div>
-                          <div>name <span className="opacity-60 font-normal">VARCHAR</span></div>
-                          <div>role <span className="opacity-60 font-normal">VARCHAR</span></div>
-                          <div>email <span className="opacity-60 font-normal">VARCHAR</span></div>
-                          <div>status <span className="opacity-60 font-normal">VARCHAR</span></div>
+                          <div>
+                            id <span className="opacity-60 font-normal">INT (PK)</span>
+                          </div>
+                          <div>
+                            name <span className="opacity-60 font-normal">VARCHAR</span>
+                          </div>
+                          <div>
+                            role <span className="opacity-60 font-normal">VARCHAR</span>
+                          </div>
+                          <div>
+                            email <span className="opacity-60 font-normal">VARCHAR</span>
+                          </div>
+                          <div>
+                            status <span className="opacity-60 font-normal">VARCHAR</span>
+                          </div>
                         </div>
                       </div>
 
@@ -2804,11 +3231,21 @@ You do not need to use all agents if the task is simple, but at least two should
                           <span>api_logs</span>
                         </span>
                         <div className="pl-3.5 text-muted-foreground/80 space-y-0.5">
-                          <div>id <span className="opacity-60 font-normal">INT (PK)</span></div>
-                          <div>endpoint <span className="opacity-60 font-normal">VARCHAR</span></div>
-                          <div>method <span className="opacity-60 font-normal">VARCHAR</span></div>
-                          <div>latency_ms <span className="opacity-60 font-normal">INT</span></div>
-                          <div>status <span className="opacity-60 font-normal">INT</span></div>
+                          <div>
+                            id <span className="opacity-60 font-normal">INT (PK)</span>
+                          </div>
+                          <div>
+                            endpoint <span className="opacity-60 font-normal">VARCHAR</span>
+                          </div>
+                          <div>
+                            method <span className="opacity-60 font-normal">VARCHAR</span>
+                          </div>
+                          <div>
+                            latency_ms <span className="opacity-60 font-normal">INT</span>
+                          </div>
+                          <div>
+                            status <span className="opacity-60 font-normal">INT</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -2817,13 +3254,28 @@ You do not need to use all agents if the task is simple, but at least two should
 
                 {/* Preset SQL Pills row */}
                 <div className="px-4 py-2 bg-muted/20 border-b border-border-color/50 flex flex-wrap gap-1.5 items-center">
-                  <span className="text-[9px] text-muted-foreground uppercase font-bold mr-1">Quick Presets:</span>
+                  <span className="text-[9px] text-muted-foreground uppercase font-bold mr-1">
+                    Quick Presets:
+                  </span>
                   {[
-                    { label: 'Select Projects', query: 'SELECT * FROM projects ORDER BY name ASC;' },
-                    { label: 'Select Active Users', query: 'SELECT * FROM users WHERE status = \'Active\';' },
-                    { label: 'Sort Slow Logs', query: 'SELECT * FROM api_logs ORDER BY latency_ms DESC LIMIT 3;' },
+                    {
+                      label: 'Select Projects',
+                      query: 'SELECT * FROM projects ORDER BY name ASC;',
+                    },
+                    {
+                      label: 'Select Active Users',
+                      query: "SELECT * FROM users WHERE status = 'Active';",
+                    },
+                    {
+                      label: 'Sort Slow Logs',
+                      query: 'SELECT * FROM api_logs ORDER BY latency_ms DESC LIMIT 3;',
+                    },
                     { label: 'Count Projects', query: 'SELECT count(*) FROM projects;' },
-                    { label: 'Insert Project (writes to UI!)', query: "INSERT INTO projects (name, category, description, url, host, tag) VALUES ('CyberGuard', 'build', 'Go security shield built in sandbox', 'https://github.com', 'github.com', 'SQL New');" }
+                    {
+                      label: 'Insert Project (writes to UI!)',
+                      query:
+                        "INSERT INTO projects (name, category, description, url, host, tag) VALUES ('CyberGuard', 'build', 'Go security shield built in sandbox', 'https://github.com', 'github.com', 'SQL New');",
+                    },
                   ].map((preset, index) => (
                     <button
                       key={index}
@@ -2842,10 +3294,13 @@ You do not need to use all agents if the task is simple, but at least two should
                 {/* Output Console Section */}
                 <div className="flex-1 p-4 bg-[#06080e]/95 flex flex-col gap-3 overflow-hidden min-h-[220px]">
                   <div className="flex items-center justify-between text-[10px] text-muted-foreground shrink-0">
-                    <span className="uppercase font-bold tracking-wider">QUERY OUTPUT TERMINAL</span>
+                    <span className="uppercase font-bold tracking-wider">
+                      QUERY OUTPUT TERMINAL
+                    </span>
                     {sqlLatency !== null && (
                       <span className="text-cyan text-[9px] font-mono">
-                        Success · {sqlResult ? sqlResult.length : 0} rows retrieved ({sqlLatency} ms)
+                        Success · {sqlResult ? sqlResult.length : 0} rows retrieved ({sqlLatency}{' '}
+                        ms)
                       </span>
                     )}
                   </div>
@@ -2859,8 +3314,10 @@ You do not need to use all agents if the task is simple, but at least two should
                       </div>
                       <div className="font-bold">Error: {sqlErr}</div>
                       <div className="text-[10px] text-red-400/60 mt-2 font-mono leading-relaxed">
-                        at VirtualPGPool.query (postgresql/client.ts:84:11)<br />
-                        at SandboxSession.execute (postgresql/sandbox.ts:139:41)<br />
+                        at VirtualPGPool.query (postgresql/client.ts:84:11)
+                        <br />
+                        at SandboxSession.execute (postgresql/sandbox.ts:139:41)
+                        <br />
                         at handleExecuteSQL (Lab.tsx:182:12)
                       </div>
                     </div>
@@ -2872,7 +3329,10 @@ You do not need to use all agents if the task is simple, but at least two should
                           <thead>
                             <tr className="bg-[#101421] text-muted-foreground border-b border-border-color sticky top-0">
                               {sqlColumns.map((col, idx) => (
-                                <th key={idx} className="p-2 border-r border-border-color last:border-0 uppercase font-bold text-[9px] tracking-wide select-none">
+                                <th
+                                  key={idx}
+                                  className="p-2 border-r border-border-color last:border-0 uppercase font-bold text-[9px] tracking-wide select-none"
+                                >
                                   {col}
                                 </th>
                               ))}
@@ -2881,19 +3341,31 @@ You do not need to use all agents if the task is simple, but at least two should
                           <tbody>
                             {sqlResult.length === 0 ? (
                               <tr>
-                                <td colSpan={sqlColumns.length || 1} className="p-4 text-center text-muted-foreground/50 italic">
+                                <td
+                                  colSpan={sqlColumns.length || 1}
+                                  className="p-4 text-center text-muted-foreground/50 italic"
+                                >
                                   {/* 0 records returned. */}
                                 </td>
                               </tr>
                             ) : (
                               sqlResult.map((row, rowIdx) => (
-                                <tr key={rowIdx} className="hover:bg-muted/10 border-b border-border-color last:border-0 transition-colors">
+                                <tr
+                                  key={rowIdx}
+                                  className="hover:bg-muted/10 border-b border-border-color last:border-0 transition-colors"
+                                >
                                   {sqlColumns.map((col, colIdx) => {
                                     const cellVal = row[col];
-                                    const cellText = cellVal === null || cellVal === undefined ? 'NULL' : String(cellVal);
+                                    const cellText =
+                                      cellVal === null || cellVal === undefined
+                                        ? 'NULL'
+                                        : String(cellVal);
                                     const isNull = cellVal === null || cellVal === undefined;
                                     return (
-                                      <td key={colIdx} className={`p-2 border-r border-border-color last:border-0 truncate max-w-xs ${isNull ? 'text-muted-foreground/35 italic' : 'text-foreground/90'}`}>
+                                      <td
+                                        key={colIdx}
+                                        className={`p-2 border-r border-border-color last:border-0 truncate max-w-xs ${isNull ? 'text-muted-foreground/35 italic' : 'text-foreground/90'}`}
+                                      >
                                         {cellText}
                                       </td>
                                     );
@@ -2909,7 +3381,10 @@ You do not need to use all agents if the task is simple, but at least two should
                       <div className="flex items-center justify-between px-3 py-1.5 border-t border-border-color bg-[#101421]/50 text-[10px] text-muted-foreground shrink-0 select-none">
                         <span className="flex items-center gap-1 text-[9px]">
                           <Info className="w-3 h-3 text-cyan" />
-                          <span>INSERT / DELETE statements will dynamically update the live portfolio Projects tab!</span>
+                          <span>
+                            INSERT / DELETE statements will dynamically update the live portfolio
+                            Projects tab!
+                          </span>
                         </span>
                         <button
                           onClick={handleDownloadCSV}
@@ -2926,9 +3401,12 @@ You do not need to use all agents if the task is simple, but at least two should
                     /* Initial execution guidance */
                     <div className="flex-1 flex flex-col items-center justify-center text-center p-8 border border-dashed border-border-color/60 bg-[#07090f]/40 rounded-lg text-muted-foreground select-none">
                       <Terminal className="w-8 h-8 text-cyan/30 mb-2 animate-pulse" />
-                      <div className="text-[11px] font-bold text-foreground">Sandbox ready for evaluation</div>
+                      <div className="text-[11px] font-bold text-foreground">
+                        Sandbox ready for evaluation
+                      </div>
                       <p className="max-w-md text-[10px] text-muted-foreground/70 mt-1 leading-relaxed">
-                        Enter a valid query or click one of the quick preset query templates above to test your virtual database!
+                        Enter a valid query or click one of the quick preset query templates above
+                        to test your virtual database!
                       </p>
                     </div>
                   )}
@@ -2944,7 +3422,10 @@ You do not need to use all agents if the task is simple, but at least two should
                       {workspace.find(i => i.id === activeFileId)?.path || 'Untitled File'}
                     </span>
                     <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan/10 text-cyan border border-cyan/20 uppercase font-bold">
-                      {workspace.find(i => i.id === activeFileId)?.name.split('.').pop() || 'text'}
+                      {workspace
+                        .find(i => i.id === activeFileId)
+                        ?.name.split('.')
+                        .pop() || 'text'}
                     </span>
                   </div>
 
@@ -2998,7 +3479,7 @@ You do not need to use all agents if the task is simple, but at least two should
                 <div className="flex-1 p-4 bg-[#0a0d14] relative flex">
                   <textarea
                     value={editorContent}
-                    onChange={(e) => setEditorContent(e.target.value)}
+                    onChange={e => setEditorContent(e.target.value)}
                     className="w-full h-full min-h-[360px] bg-transparent text-xs text-foreground/90 font-mono leading-relaxed focus:outline-none resize-none border-none p-2 overflow-y-auto selection:bg-cyan/30"
                     placeholder="// Write code here..."
                     spellCheck={false}
@@ -3010,77 +3491,77 @@ You do not need to use all agents if the task is simple, but at least two should
         </div>
       </div>
 
-        {/* Inline Code Editor Modal */}
-        <AnimatePresence>
-          {activeFileId && (
+      {/* Inline Code Editor Modal */}
+      <AnimatePresence>
+        {activeFileId && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center z-50 p-4 font-mono select-text"
+            onClick={() => setActiveFileId(null)}
+          >
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center z-50 p-4 font-mono select-text"
-              onClick={() => setActiveFileId(null)}
+              initial={{ scale: 0.95, y: 10 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 10 }}
+              className="bg-[#081c28] border border-border-color rounded-xl w-full max-w-3xl h-[80vh] flex flex-col overflow-hidden shadow-2xl"
+              onClick={e => e.stopPropagation()}
             >
-              <motion.div
-                initial={{ scale: 0.95, y: 10 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.95, y: 10 }}
-                className="bg-[#081c28] border border-border-color rounded-xl w-full max-w-3xl h-[80vh] flex flex-col overflow-hidden shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Header */}
-                <div className="flex items-center justify-between px-5 py-3 border-b border-border-color bg-[#161b26]">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-cyan" />
-                    <span className="text-xs font-bold text-foreground truncate max-w-sm">
-                      {workspace.find(i => i.id === activeFileId)?.path}
-                    </span>
-                  </div>
+              {/* Header */}
+              <div className="flex items-center justify-between px-5 py-3 border-b border-border-color bg-[#161b26]">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-cyan" />
+                  <span className="text-xs font-bold text-foreground truncate max-w-sm">
+                    {workspace.find(i => i.id === activeFileId)?.path}
+                  </span>
+                </div>
+                <button
+                  onClick={() => setActiveFileId(null)}
+                  className="p-1 hover:bg-muted/20 text-muted-foreground hover:text-foreground rounded transition-colors cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Editor Area */}
+              <div className="flex-1 p-4 bg-[#0a0d14] relative">
+                <textarea
+                  value={editorContent}
+                  onChange={e => setEditorContent(e.target.value)}
+                  className="w-full h-full bg-transparent text-xs text-foreground/90 font-mono leading-relaxed focus:outline-none resize-none border-none p-1 overflow-y-auto selection:bg-cyan/30"
+                  placeholder="// write some code..."
+                  spellCheck={false}
+                />
+              </div>
+
+              {/* Footer Controls */}
+              <div className="flex items-center justify-between px-5 py-3 border-t border-border-color bg-[#161b26] text-xs">
+                <span className="text-[10px] text-muted-foreground">
+                  Click "Save Changes" to apply edits
+                </span>
+                <div className="flex gap-2">
                   <button
+                    type="button"
                     onClick={() => setActiveFileId(null)}
-                    className="p-1 hover:bg-muted/20 text-muted-foreground hover:text-foreground rounded transition-colors cursor-pointer"
+                    className="px-3 py-1.5 border border-border-color rounded-lg text-xs font-mono hover:bg-muted/20 text-muted-foreground hover:text-foreground transition-all cursor-pointer"
                   >
-                    <X className="w-4 h-4" />
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSaveFileContent}
+                    className="flex items-center gap-1.5 px-4 py-1.5 bg-cyan hover:bg-cyan/95 text-black font-bold rounded-lg text-xs font-mono transition-all cursor-pointer"
+                  >
+                    <Save className="w-3.5 h-3.5" />
+                    <span>Save Changes</span>
                   </button>
                 </div>
-
-                {/* Editor Area */}
-                <div className="flex-1 p-4 bg-[#0a0d14] relative">
-                  <textarea
-                    value={editorContent}
-                    onChange={(e) => setEditorContent(e.target.value)}
-                    className="w-full h-full bg-transparent text-xs text-foreground/90 font-mono leading-relaxed focus:outline-none resize-none border-none p-1 overflow-y-auto selection:bg-cyan/30"
-                    placeholder="// write some code..."
-                    spellCheck={false}
-                  />
-                </div>
-
-                {/* Footer Controls */}
-                <div className="flex items-center justify-between px-5 py-3 border-t border-border-color bg-[#161b26] text-xs">
-                  <span className="text-[10px] text-muted-foreground">
-                    Click "Save Changes" to apply edits
-                  </span>
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setActiveFileId(null)}
-                      className="px-3 py-1.5 border border-border-color rounded-lg text-xs font-mono hover:bg-muted/20 text-muted-foreground hover:text-foreground transition-all cursor-pointer"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleSaveFileContent}
-                      className="flex items-center gap-1.5 px-4 py-1.5 bg-cyan hover:bg-cyan/95 text-black font-bold rounded-lg text-xs font-mono transition-all cursor-pointer"
-                    >
-                      <Save className="w-3.5 h-3.5" />
-                      <span>Save Changes</span>
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

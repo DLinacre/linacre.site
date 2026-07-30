@@ -1,6 +1,17 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Calendar, Clock, Lock, CheckCircle2, ShieldCheck, Mail, ArrowRight, Video, Sparkles, MessageSquare } from 'lucide-react';
+import {
+  Calendar,
+  Clock,
+  Lock,
+  CheckCircle2,
+  ShieldCheck,
+  Mail,
+  ArrowRight,
+  Video,
+  Sparkles,
+  MessageSquare,
+} from 'lucide-react';
 import FAQ from './FAQ';
 
 interface BookCallProps {
@@ -8,7 +19,9 @@ interface BookCallProps {
 }
 
 export default function BookCall({ navigate }: BookCallProps) {
-  const [selectedCallType, setSelectedCallType] = useState<'discovery' | 'architecture'>('discovery');
+  const [selectedCallType, setSelectedCallType] = useState<'discovery' | 'architecture'>(
+    'discovery',
+  );
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const callTypes = [
@@ -17,27 +30,29 @@ export default function BookCall({ navigate }: BookCallProps) {
       title: '15-Min Discovery Call',
       price: 'Free',
       badge: 'Recommended for new projects',
-      description: 'A quick intro call to discuss your goals, system constraints, timeline, and whether my services are the right fit.',
+      description:
+        'A quick intro call to discuss your goals, system constraints, timeline, and whether my services are the right fit.',
       deliverables: [
         'High-level scope alignment',
         'Stack & feasibility feedback',
         'Estimated project cost range',
-        'Direct follow-up summary email'
-      ]
+        'Direct follow-up summary email',
+      ],
     },
     {
       id: 'architecture' as const,
       title: '45-Min Systems Architecture Review',
       price: 'Included with Audits',
       badge: 'For complex systems',
-      description: 'Deep dive into existing software, pipeline bottlenecks, API integrations, security concerns, or migration plans.',
+      description:
+        'Deep dive into existing software, pipeline bottlenecks, API integrations, security concerns, or migration plans.',
       deliverables: [
         'Technical bottleneck diagnosis',
         'Security & IAM review',
         'Recommended architecture roadmap',
-        'Written assessment within 24h'
-      ]
-    }
+        'Written assessment within 24h',
+      ],
+    },
   ];
 
   const handleCopyEmail = () => {
@@ -48,11 +63,15 @@ export default function BookCall({ navigate }: BookCallProps) {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.08 } }
+    show: { opacity: 1, transition: { staggerChildren: 0.08 } },
   };
   const itemVariants = {
     hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 110, damping: 14 } }
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'spring' as const, stiffness: 110, damping: 14 },
+    },
   };
 
   return (
@@ -64,7 +83,11 @@ export default function BookCall({ navigate }: BookCallProps) {
       id="book-call-page"
     >
       {/* Title Hero */}
-      <motion.section variants={itemVariants} className="text-center md:text-left space-y-4 max-w-3xl" id="book-hero">
+      <motion.section
+        variants={itemVariants}
+        className="text-center md:text-left space-y-4 max-w-3xl"
+        id="book-hero"
+      >
         <span className="font-mono text-xs text-amber-color tracking-widest uppercase font-semibold bg-amber-color/10 border border-amber-color/20 px-2.5 py-1 rounded-full">
           Schedule a Call
         </span>
@@ -72,13 +95,14 @@ export default function BookCall({ navigate }: BookCallProps) {
           Book a <span className="text-amber-color">Discovery Call</span> with David
         </h1>
         <p className="text-base text-muted-foreground leading-relaxed">
-          No automated calendar loops or pushy sales reps. Pick your topic below and send two preferred time slots &mdash; I reply with a calendar invite within 12 hours.
+          No automated calendar loops or pushy sales reps. Pick your topic below and send two
+          preferred time slots &mdash; I reply with a calendar invite within 12 hours.
         </p>
       </motion.section>
 
       {/* Call options selection */}
       <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {callTypes.map((type) => {
+        {callTypes.map(type => {
           const isSelected = selectedCallType === type.id;
           return (
             <div
@@ -106,11 +130,16 @@ export default function BookCall({ navigate }: BookCallProps) {
               </div>
 
               <div className="border-t border-border-color/40 pt-3 space-y-2">
-                <span className="font-mono text-[10px] text-muted-foreground uppercase font-bold tracking-wider">What&#39;s included:</span>
+                <span className="font-mono text-[10px] text-muted-foreground uppercase font-bold tracking-wider">
+                  What&#39;s included:
+                </span>
                 <ul className="space-y-1.5 text-xs text-foreground/90 font-mono">
                   {type.deliverables.map((item, idx) => (
                     <li key={idx} className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-color shrink-0" aria-hidden="true" />
+                      <CheckCircle2
+                        className="w-3.5 h-3.5 text-emerald-color shrink-0"
+                        aria-hidden="true"
+                      />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -122,7 +151,10 @@ export default function BookCall({ navigate }: BookCallProps) {
       </motion.div>
 
       {/* Main booking card */}
-      <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <motion.div
+        variants={itemVariants}
+        className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+      >
         <div className="lg:col-span-7 linacre-surface p-6 sm:p-8 space-y-6">
           <div className="space-y-2">
             <h2 className="font-display text-xl font-bold text-foreground flex items-center gap-2">
@@ -130,7 +162,10 @@ export default function BookCall({ navigate }: BookCallProps) {
               Request your time slot
             </h2>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Selected call: <span className="text-amber-color font-bold font-mono">{callTypes.find(c => c.id === selectedCallType)?.title}</span>
+              Selected call:{' '}
+              <span className="text-amber-color font-bold font-mono">
+                {callTypes.find(c => c.id === selectedCallType)?.title}
+              </span>
             </p>
           </div>
 
@@ -144,13 +179,17 @@ export default function BookCall({ navigate }: BookCallProps) {
               </div>
               <div className="flex items-center justify-between text-muted-foreground border-b border-border-color/30 pb-2">
                 <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-color" aria-hidden="true" /> Availability
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-color" aria-hidden="true" />{' '}
+                  Availability
                 </span>
-                <span className="text-foreground font-bold">Mon &ndash; Fri · 09:00 &ndash; 18:00</span>
+                <span className="text-foreground font-bold">
+                  Mon &ndash; Fri · 09:00 &ndash; 18:00
+                </span>
               </div>
               <div className="flex items-center justify-between text-muted-foreground">
                 <span className="flex items-center gap-1.5">
-                  <Lock className="w-3.5 h-3.5 text-amber-color" aria-hidden="true" /> Confidentiality
+                  <Lock className="w-3.5 h-3.5 text-amber-color" aria-hidden="true" />{' '}
+                  Confidentiality
                 </span>
                 <span className="text-foreground font-bold">NDA-friendly by default</span>
               </div>
@@ -167,7 +206,9 @@ export default function BookCall({ navigate }: BookCallProps) {
               </a>
 
               <div className="flex items-center justify-between text-xs font-mono text-muted-foreground px-1">
-                <span>Direct email: <strong className="text-foreground">david@linacre.site</strong></span>
+                <span>
+                  Direct email: <strong className="text-foreground">david@linacre.site</strong>
+                </span>
                 <button
                   onClick={handleCopyEmail}
                   className="text-amber-color hover:underline cursor-pointer"
@@ -188,7 +229,10 @@ export default function BookCall({ navigate }: BookCallProps) {
             </h3>
             <ul className="space-y-2 leading-relaxed list-disc pl-4">
               <li>Think about your top 1&ndash;2 outcomes for the call.</li>
-              <li>Have links to current repositories, Figma, or staging environments handy if applicable.</li>
+              <li>
+                Have links to current repositories, Figma, or staging environments handy if
+                applicable.
+              </li>
               <li>Rough target budget and timeline (estimates are completely fine).</li>
               <li>You will receive a Google Meet or Zoom video link prior to the call.</li>
             </ul>
@@ -200,7 +244,8 @@ export default function BookCall({ navigate }: BookCallProps) {
               Prefer text first?
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              If you prefer to outline your requirements in writing before jumping on a call, use the direct contact form.
+              If you prefer to outline your requirements in writing before jumping on a call, use
+              the direct contact form.
             </p>
             <button
               onClick={() => navigate?.('contact')}

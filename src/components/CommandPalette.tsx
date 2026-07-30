@@ -1,6 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Compass, Cpu, BookOpen, Terminal, Hash, CornerDownLeft, Sparkles, Sliders, Bot, Activity, FileText, FolderCode, House, Gamepad2 } from 'lucide-react';
+import {
+  Search,
+  Compass,
+  Cpu,
+  BookOpen,
+  Terminal,
+  Hash,
+  CornerDownLeft,
+  Sparkles,
+  Sliders,
+  Bot,
+  Activity,
+  FileText,
+  FolderCode,
+  House,
+  Gamepad2,
+} from 'lucide-react';
 import { TOOLS } from '../data';
 import Fuse from 'fuse.js';
 
@@ -12,7 +28,13 @@ interface CommandPaletteProps {
   setActiveCategory: (category: any) => void;
 }
 
-export default function CommandPalette({ isOpen, onClose, setActiveTab, setSearchQuery, setActiveCategory }: CommandPaletteProps) {
+export default function CommandPalette({
+  isOpen,
+  onClose,
+  setActiveTab,
+  setSearchQuery,
+  setActiveCategory,
+}: CommandPaletteProps) {
   const [query, setQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,31 +69,179 @@ export default function CommandPalette({ isOpen, onClose, setActiveTab, setSearc
 
   // Command lists
   const navCommands: CommandItem[] = [
-    { id: 'nav-home', label: 'Go to Useful Start Page', icon: House, action: () => { setActiveTab('home'); onClose(); }, meta: 'Quick browser tools and free products' },
-    { id: 'nav-projects', label: 'Go to Projects Portfolio', icon: FolderCode, action: () => { setActiveTab('projects'); onClose(); }, meta: 'Manage, build, and showcase workspace applications' },
-    { id: 'nav-games', label: 'Go to Playable Browser Games', icon: Gamepad2, action: () => { setActiveTab('games'); onClose(); }, meta: 'Play KushCloud flyer and built-in interactive Snake' },
-    { id: 'nav-toolkit', label: 'Go to Toolkit Directory', icon: Compass, action: () => { setActiveTab('toolkit'); onClose(); }, meta: 'View David\'s curated developer loadout' },
-    { id: 'nav-agents', label: 'Go to AI Autonomous Agents Hub', icon: Bot, action: () => { setActiveTab('agents'); onClose(); }, meta: 'Create, coordinate, and delegate jobs to simulated bot agents' },
-    { id: 'nav-blog', label: 'Go to Technical Case Studies & Blog', icon: FileText, action: () => { setActiveTab('blog'); onClose(); }, meta: 'Deep dives on concurrency, styling and caching architectures' },
-    { id: 'nav-status', label: 'Go to Systems Status Console', icon: Activity, action: () => { setActiveTab('status'); onClose(); }, meta: 'Check live latency, operational checks and simulated loads' },
-    { id: 'nav-learn', label: 'Go to Curriculum & Learn', icon: BookOpen, action: () => { setActiveTab('learn'); onClose(); }, meta: 'Free roadmaps and learning paths' },
-    { id: 'nav-lab', label: 'Go to AI Dev Assistant Lab', icon: Cpu, action: () => { setActiveTab('lab'); onClose(); }, meta: 'Interactive multi-provider AI terminal' },
-    { id: 'nav-playground', label: 'Go to Developer Playground', icon: Sliders, action: () => { setActiveTab('playground'); onClose(); }, meta: 'JWT decoder, Glassmorphism builder, RegEx tester, and generators' },
-    { id: 'nav-dashboard', label: 'Go to David\'s Private Dashboard', icon: Terminal, action: () => { setActiveTab('dashboard'); onClose(); }, meta: 'MCP server configurations and private console' },
-    { id: 'nav-identity', label: 'Go to Identity & Brand Hub', icon: Sparkles, action: () => { setActiveTab('identity'); onClose(); }, meta: 'Sleek custom SVG emblems, social banners and embeddable badges' },
+    {
+      id: 'nav-home',
+      label: 'Go to Useful Start Page',
+      icon: House,
+      action: () => {
+        setActiveTab('home');
+        onClose();
+      },
+      meta: 'Quick browser tools and free products',
+    },
+    {
+      id: 'nav-projects',
+      label: 'Go to Projects Portfolio',
+      icon: FolderCode,
+      action: () => {
+        setActiveTab('projects');
+        onClose();
+      },
+      meta: 'Manage, build, and showcase workspace applications',
+    },
+    {
+      id: 'nav-games',
+      label: 'Go to Playable Browser Games',
+      icon: Gamepad2,
+      action: () => {
+        setActiveTab('games');
+        onClose();
+      },
+      meta: 'Play KushCloud flyer and built-in interactive Snake',
+    },
+    {
+      id: 'nav-toolkit',
+      label: 'Go to Toolkit Directory',
+      icon: Compass,
+      action: () => {
+        setActiveTab('toolkit');
+        onClose();
+      },
+      meta: "View David's curated developer loadout",
+    },
+    {
+      id: 'nav-agents',
+      label: 'Go to AI Autonomous Agents Hub',
+      icon: Bot,
+      action: () => {
+        setActiveTab('agents');
+        onClose();
+      },
+      meta: 'Create, coordinate, and delegate jobs to simulated bot agents',
+    },
+    {
+      id: 'nav-blog',
+      label: 'Go to Technical Case Studies & Blog',
+      icon: FileText,
+      action: () => {
+        setActiveTab('blog');
+        onClose();
+      },
+      meta: 'Deep dives on concurrency, styling and caching architectures',
+    },
+    {
+      id: 'nav-status',
+      label: 'Go to Systems Status Console',
+      icon: Activity,
+      action: () => {
+        setActiveTab('status');
+        onClose();
+      },
+      meta: 'Check live latency, operational checks and simulated loads',
+    },
+    {
+      id: 'nav-learn',
+      label: 'Go to Curriculum & Learn',
+      icon: BookOpen,
+      action: () => {
+        setActiveTab('learn');
+        onClose();
+      },
+      meta: 'Free roadmaps and learning paths',
+    },
+    {
+      id: 'nav-lab',
+      label: 'Go to AI Dev Assistant Lab',
+      icon: Cpu,
+      action: () => {
+        setActiveTab('lab');
+        onClose();
+      },
+      meta: 'Interactive multi-provider AI terminal',
+    },
+    {
+      id: 'nav-playground',
+      label: 'Go to Developer Playground',
+      icon: Sliders,
+      action: () => {
+        setActiveTab('playground');
+        onClose();
+      },
+      meta: 'JWT decoder, Glassmorphism builder, RegEx tester, and generators',
+    },
+    {
+      id: 'nav-dashboard',
+      label: "Go to David's Private Dashboard",
+      icon: Terminal,
+      action: () => {
+        setActiveTab('dashboard');
+        onClose();
+      },
+      meta: 'MCP server configurations and private console',
+    },
+    {
+      id: 'nav-identity',
+      label: 'Go to Identity & Brand Hub',
+      icon: Sparkles,
+      action: () => {
+        setActiveTab('identity');
+        onClose();
+      },
+      meta: 'Sleek custom SVG emblems, social banners and embeddable badges',
+    },
   ];
 
   const catCommands: CommandItem[] = [
-    { id: 'cat-start', label: 'Filter toolkit: start', action: () => { setActiveTab('toolkit'); setActiveCategory('start'); setSearchQuery(''); onClose(); }, meta: 'Explore workspace editors, Git VCS, and planners' },
-    { id: 'cat-build', label: 'Filter toolkit: build', action: () => { setActiveTab('toolkit'); setActiveCategory('build'); setSearchQuery(''); onClose(); }, meta: 'Explore frameworks, databases, auth, and billing' },
-    { id: 'cat-deploy', label: 'Filter toolkit: deploy', action: () => { setActiveTab('toolkit'); setActiveCategory('deploy'); setSearchQuery(''); onClose(); }, meta: 'Explore cloud hosting platforms and edge servers' },
-    { id: 'cat-design', label: 'Filter toolkit: design', action: () => { setActiveTab('toolkit'); setActiveCategory('design'); setSearchQuery(''); onClose(); }, meta: 'Explore assets, prototypes, and icons' },
+    {
+      id: 'cat-start',
+      label: 'Filter toolkit: start',
+      action: () => {
+        setActiveTab('toolkit');
+        setActiveCategory('start');
+        setSearchQuery('');
+        onClose();
+      },
+      meta: 'Explore workspace editors, Git VCS, and planners',
+    },
+    {
+      id: 'cat-build',
+      label: 'Filter toolkit: build',
+      action: () => {
+        setActiveTab('toolkit');
+        setActiveCategory('build');
+        setSearchQuery('');
+        onClose();
+      },
+      meta: 'Explore frameworks, databases, auth, and billing',
+    },
+    {
+      id: 'cat-deploy',
+      label: 'Filter toolkit: deploy',
+      action: () => {
+        setActiveTab('toolkit');
+        setActiveCategory('deploy');
+        setSearchQuery('');
+        onClose();
+      },
+      meta: 'Explore cloud hosting platforms and edge servers',
+    },
+    {
+      id: 'cat-design',
+      label: 'Filter toolkit: design',
+      action: () => {
+        setActiveTab('toolkit');
+        setActiveCategory('design');
+        setSearchQuery('');
+        onClose();
+      },
+      meta: 'Explore assets, prototypes, and icons',
+    },
   ];
 
   const allSearchableItems: CommandItem[] = [
     ...navCommands,
     ...catCommands,
-    ...TOOLS.map((tool) => ({
+    ...TOOLS.map(tool => ({
       id: `tool-${tool.id}`,
       label: `Open ${tool.name} (${tool.host})`,
       icon: Compass,
@@ -80,8 +250,8 @@ export default function CommandPalette({ isOpen, onClose, setActiveTab, setSearc
         onClose();
       },
       meta: tool.description,
-      keywords: tool.searchKeywords
-    }))
+      keywords: tool.searchKeywords,
+    })),
   ];
 
   const fuseRef = useRef<Fuse<CommandItem> | null>(null);
@@ -89,12 +259,15 @@ export default function CommandPalette({ isOpen, onClose, setActiveTab, setSearc
     fuseRef.current = new Fuse(allSearchableItems, {
       keys: ['label', 'meta', 'keywords'],
       threshold: 0.35,
-      distance: 100
+      distance: 100,
     });
   }
 
   const allItems = query
-    ? fuseRef.current.search(query).map((res) => res.item).slice(0, 10)
+    ? fuseRef.current
+        .search(query)
+        .map(res => res.item)
+        .slice(0, 10)
     : [...navCommands, ...catCommands];
 
   // Keyboard navigation
@@ -107,10 +280,12 @@ export default function CommandPalette({ isOpen, onClose, setActiveTab, setSearc
         onClose();
       } else if (e.key === 'ArrowDown') {
         e.preventDefault();
-        setActiveIndex((prev) => (allItems.length > 0 ? (prev + 1) % allItems.length : 0));
+        setActiveIndex(prev => (allItems.length > 0 ? (prev + 1) % allItems.length : 0));
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
-        setActiveIndex((prev) => (allItems.length > 0 ? (prev - 1 + allItems.length) % allItems.length : 0));
+        setActiveIndex(prev =>
+          allItems.length > 0 ? (prev - 1 + allItems.length) % allItems.length : 0,
+        );
       } else if (e.key === 'Enter') {
         e.preventDefault();
         if (allItems[activeIndex]) {
@@ -172,7 +347,7 @@ export default function CommandPalette({ isOpen, onClose, setActiveTab, setSearc
                   type="text"
                   placeholder="type a command or search a tool..."
                   value={query}
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={e => setQuery(e.target.value)}
                   className="w-full bg-transparent pl-10 pr-4 text-sm font-mono text-foreground placeholder:text-muted-foreground/65 focus:outline-none border-none outline-none"
                   id="palette-search-input"
                 />
@@ -200,7 +375,9 @@ export default function CommandPalette({ isOpen, onClose, setActiveTab, setSearc
                       }`}
                       id={`palette-item-${item.id}`}
                     >
-                      <Icon className={`w-4 h-4 flex-shrink-0 mt-0.5 ${isHighlighted ? 'text-amber-color' : 'text-muted-foreground/50'}`} />
+                      <Icon
+                        className={`w-4 h-4 flex-shrink-0 mt-0.5 ${isHighlighted ? 'text-amber-color' : 'text-muted-foreground/50'}`}
+                      />
                       <div className="flex-1 font-mono text-xs">
                         <span className="font-semibold">{item.label}</span>
                         {item.meta && (
@@ -231,14 +408,23 @@ export default function CommandPalette({ isOpen, onClose, setActiveTab, setSearc
               <div className="border-t border-border-color bg-muted/40 dark:bg-[#161b26]/40 px-4 py-2 flex items-center justify-between text-[10px] font-mono text-muted-foreground">
                 <div className="flex items-center gap-4">
                   <span>
-                    <kbd className="bg-background px-1.5 py-0.5 rounded border border-border-color">↑↓</kbd> to navigate
+                    <kbd className="bg-background px-1.5 py-0.5 rounded border border-border-color">
+                      ↑↓
+                    </kbd>{' '}
+                    to navigate
                   </span>
                   <span>
-                    <kbd className="bg-background px-1.5 py-0.5 rounded border border-border-color">Enter</kbd> to select
+                    <kbd className="bg-background px-1.5 py-0.5 rounded border border-border-color">
+                      Enter
+                    </kbd>{' '}
+                    to select
                   </span>
                 </div>
                 <span>
-                  <kbd className="bg-background px-1.5 py-0.5 rounded border border-border-color">Esc</kbd> to close
+                  <kbd className="bg-background px-1.5 py-0.5 rounded border border-border-color">
+                    Esc
+                  </kbd>{' '}
+                  to close
                 </span>
               </div>
             </motion.div>

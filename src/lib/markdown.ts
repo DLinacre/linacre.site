@@ -43,7 +43,7 @@ export function mdToHtml(md: string): string {
   };
   const flushList = () => {
     if (list.length) {
-      out.push(`<ul>${list.map((li) => `<li>${inline(li)}</li>`).join('')}</ul>`);
+      out.push(`<ul>${list.map(li => `<li>${inline(li)}</li>`).join('')}</ul>`);
       list = [];
     }
   };

@@ -92,13 +92,9 @@ describe('GameShowcase', () => {
     render(<GameShowcase />);
     await user.click(screen.getByRole('tab', { name: 'Changelog' }));
     await waitFor(() => {
-      expect(screen.getByRole('tabpanel').textContent).toContain(
-        manifest.changelog[0]!.version,
-      );
+      expect(screen.getByRole('tabpanel').textContent).toContain(manifest.changelog[0]!.version);
     });
-    expect(screen.getByRole('tabpanel').textContent).toContain(
-      manifest.changelog[0]!.title,
-    );
+    expect(screen.getByRole('tabpanel').textContent).toContain(manifest.changelog[0]!.title);
   });
 
   it('emits valid structured data with no fabricated fields', () => {

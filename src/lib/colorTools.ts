@@ -49,7 +49,10 @@ export function hslToHex(h: number, s: number, l: number): string {
   else if (hue < 240) [r, g, b] = [0, x, c];
   else if (hue < 300) [r, g, b] = [x, 0, c];
   else [r, g, b] = [c, 0, x];
-  const toHex = (channel: number) => Math.round((channel + m) * 255).toString(16).padStart(2, '0');
+  const toHex = (channel: number) =>
+    Math.round((channel + m) * 255)
+      .toString(16)
+      .padStart(2, '0');
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
 }
 
@@ -69,8 +72,10 @@ export function withLightness(hex: string, lightness: number): string {
 export function contrastRatio(hex1: string, hex2: string): number {
   const luminance = (hex: string) => {
     const clean = (normalizeHex(hex) || '#000000').slice(1);
-    const values = [0, 2, 4].map((index) => parseInt(clean.slice(index, index + 2), 16) / 255);
-    const [r, g, b] = values.map((value) => (value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4));
+    const values = [0, 2, 4].map(index => parseInt(clean.slice(index, index + 2), 16) / 255);
+    const [r, g, b] = values.map(value =>
+      value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4,
+    );
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   };
   const a = luminance(hex1);

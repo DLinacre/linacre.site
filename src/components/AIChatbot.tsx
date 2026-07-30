@@ -14,9 +14,10 @@ export default function AIChatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: "Hello! I am David's virtual assistant. Ask me anything about his technical projects (like Mob Deals, PokeGuru and DKMA Monster), his skills, or his professional background.",
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
+      content:
+        "Hello! I am David's virtual assistant. Ask me anything about his technical projects (like Mob Deals, PokeGuru and DKMA Monster), his skills, or his professional background.",
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    },
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const [a11yMsg, setA11yMsg] = useState('');
@@ -37,7 +38,7 @@ export default function AIChatbot() {
     const newMsg: Message = {
       role: 'user',
       content: userMessage,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
     setMessages(prev => [...prev, newMsg]);
@@ -47,15 +48,15 @@ export default function AIChatbot() {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           prompt: userMessage,
           history: messages.map(m => ({
             role: m.role,
-            content: m.content
-          }))
-        })
+            content: m.content,
+          })),
+        }),
       });
 
       if (!response.ok) {
@@ -66,7 +67,7 @@ export default function AIChatbot() {
       const assistantMessage: Message = {
         role: 'assistant',
         content: data.reply || "I didn't receive a response. Please try again.",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
@@ -74,9 +75,9 @@ export default function AIChatbot() {
         ...prev,
         {
           role: 'assistant',
-          content: "System error: Failed to connect to secure API chat gateway.",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        }
+          content: 'System error: Failed to connect to secure API chat gateway.',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        },
       ]);
     } finally {
       setIsLoading(false);
@@ -89,9 +90,10 @@ export default function AIChatbot() {
     setMessages([
       {
         role: 'assistant',
-        content: "Hello! I am David's virtual assistant. Ask me anything about his technical projects (like Mob Deals, PokeGuru and DKMA Monster), his skills, or his professional background.",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      }
+        content:
+          "Hello! I am David's virtual assistant. Ask me anything about his technical projects (like Mob Deals, PokeGuru and DKMA Monster), his skills, or his professional background.",
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      },
     ]);
   };
 
@@ -100,7 +102,7 @@ export default function AIChatbot() {
     const newMsg: Message = {
       role: 'user',
       content: promptText,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
     setMessages(prev => [...prev, newMsg]);
@@ -110,15 +112,15 @@ export default function AIChatbot() {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           prompt: promptText,
           history: messages.map(m => ({
             role: m.role,
-            content: m.content
-          }))
-        })
+            content: m.content,
+          })),
+        }),
       });
 
       if (!response.ok) throw new Error('Network error');
@@ -129,17 +131,17 @@ export default function AIChatbot() {
         {
           role: 'assistant',
           content: data.reply || "I didn't receive a response. Please try again.",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        }
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        },
       ]);
     } catch (error) {
       setMessages(prev => [
         ...prev,
         {
           role: 'assistant',
-          content: "System error: Failed to connect to secure API chat gateway.",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        }
+          content: 'System error: Failed to connect to secure API chat gateway.',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        },
       ]);
     } finally {
       setIsLoading(false);
@@ -153,7 +155,13 @@ export default function AIChatbot() {
         role="status"
         aria-live="polite"
         aria-atomic="true"
-        style={{ position: 'fixed', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}
+        style={{
+          position: 'fixed',
+          left: '-9999px',
+          width: '1px',
+          height: '1px',
+          overflow: 'hidden',
+        }}
       >
         {a11yMsg}
       </div>
@@ -228,13 +236,15 @@ export default function AIChatbot() {
               ))}
               {messages.length === 1 && (
                 <div className="space-y-2 pt-2.5 border-t border-border-color/20 mt-3.5">
-                  <span className="text-[9px] text-muted-foreground/60 font-mono uppercase tracking-wider">Suggested Prompts:</span>
+                  <span className="text-[9px] text-muted-foreground/60 font-mono uppercase tracking-wider">
+                    Suggested Prompts:
+                  </span>
                   <div className="flex flex-col gap-1.5">
                     {[
                       "What are David's primary technical skills?",
                       "Tell me about David's open-source projects",
-                      "How do I request access to his private code?",
-                      "Is David currently open for freelance work?"
+                      'How do I request access to his private code?',
+                      'Is David currently open for freelance work?',
                     ].map((prompt, pIdx) => (
                       <button
                         key={pIdx}

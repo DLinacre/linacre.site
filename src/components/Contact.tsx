@@ -25,7 +25,12 @@ export default function Contact() {
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; message?: string; consent?: string }>({});
+  const [fieldErrors, setFieldErrors] = useState<{
+    name?: string;
+    email?: string;
+    message?: string;
+    consent?: string;
+  }>({});
   const [requestId, setRequestId] = useState('');
   const [company, setCompany] = useState('');
   const [startedAt] = useState(() => Date.now());
@@ -39,7 +44,7 @@ export default function Contact() {
         if (parsed && parsed.projectName) {
           setSubject(`Access request: ${parsed.projectName}`);
           setMessage(
-            `Hi David,\n\nI'd like to request details/access for your project "${parsed.projectName}" (${parsed.projectType || 'Internal'}).\n\nBackground: `
+            `Hi David,\n\nI'd like to request details/access for your project "${parsed.projectName}" (${parsed.projectType || 'Internal'}).\n\nBackground: `,
           );
         }
         sessionStorage.removeItem('linacre_pending_request');
@@ -51,11 +56,15 @@ export default function Contact() {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.08 } }
+    show: { opacity: 1, transition: { staggerChildren: 0.08 } },
   };
   const itemVariants = {
     hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 110, damping: 14 } }
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'spring' as const, stiffness: 110, damping: 14 },
+    },
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -64,8 +73,10 @@ export default function Contact() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!name.trim()) errors.name = 'Please enter your name.';
-    if (!email.trim() || !emailRegex.test(email.trim())) errors.email = 'Please enter a valid email address.';
-    if (!message.trim() || message.trim().length < 10) errors.message = 'Message must be at least 10 characters long.';
+    if (!email.trim() || !emailRegex.test(email.trim()))
+      errors.email = 'Please enter a valid email address.';
+    if (!message.trim() || message.trim().length < 10)
+      errors.message = 'Message must be at least 10 characters long.';
     if (!consent) errors.consent = 'You must agree to the privacy policy before sending.';
 
     setFieldErrors(errors);
@@ -79,8 +90,9 @@ export default function Contact() {
     setStatus('submitting');
     setErrorMessage('');
 
-    const composedSubject = subject
-      || `[${budget || 'Budget TBD'} / ${timeline || 'Timeline TBD'}] Project enquiry - ${name}`;
+    const composedSubject =
+      subject ||
+      `[${budget || 'Budget TBD'} / ${timeline || 'Timeline TBD'}] Project enquiry - ${name}`;
     const composedMessage =
       `From: ${name}${companyOrg ? ` (${companyOrg})` : ''}\n` +
       `Budget: ${budget || '-'}\n` +
@@ -90,41 +102,47 @@ export default function Contact() {
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           email,
           subject: composedSubject,
           message: composedMessage,
           company,
-          startedAt
-        })
+          startedAt,
+        }),
       });
 
       const body = await response.json().catch(() => ({}));
 
       if (!response.ok) {
         throw new Error(
-          typeof body.error === 'string' ? body.error : 'Your enquiry could not be sent.'
+          typeof body.error === 'string' ? body.error : 'Your enquiry could not be sent.',
         );
       }
 
       setRequestId(body.requestId);
       setStatus('success');
       setFieldErrors({});
-      setName(''); setEmail(''); setCompanyOrg('');
-      setBudget(''); setTimeline(''); setSubject(''); setMessage('');
+      setName('');
+      setEmail('');
+      setCompanyOrg('');
+      setBudget('');
+      setTimeline('');
+      setSubject('');
+      setMessage('');
 
       // Redirect to /contact/thanks (conversion URL for analytics).
       try {
         const ref = body.requestId ? `?ref=${encodeURIComponent(body.requestId)}` : '';
         window.history.pushState(null, '', `/contact/thanks${ref}`);
         window.dispatchEvent(new PopStateEvent('popstate'));
-      } catch (_) { /* non-fatal */ }
+      } catch (_) {
+        /* non-fatal */
+      }
     } catch (err: any) {
       setStatus('error');
       setErrorMessage(
-        err.message
-          || 'Connection failed. Please try again or email david@linacre.site directly.'
+        err.message || 'Connection failed. Please try again or email david@linacre.site directly.',
       );
     }
   };
@@ -137,7 +155,11 @@ export default function Contact() {
       className="space-y-12 animate-fade-in"
     >
       {/* Title hero - plain English (audit UX-03) */}
-      <motion.section variants={itemVariants} className="text-center md:text-left space-y-4 max-w-3xl" id="contact-hero">
+      <motion.section
+        variants={itemVariants}
+        className="text-center md:text-left space-y-4 max-w-3xl"
+        id="contact-hero"
+      >
         <span className="font-mono text-xs text-amber-color tracking-widest uppercase font-semibold bg-amber-color/10 border border-amber-color/20 px-2.5 py-1 rounded-full">
           Contact
         </span>
@@ -168,8 +190,15 @@ export default function Contact() {
               </div>
               <p className="text-muted-foreground/70">
                 We use your email and message only to reply. Retained max 30 days post-resolution.
-                See <a href="/privacy" className="text-amber-color hover:underline">Privacy</a>{' '}
-                and <a href="/cookie-policy" className="text-amber-color hover:underline">Cookie Policy</a>.
+                See{' '}
+                <a href="/privacy" className="text-amber-color hover:underline">
+                  Privacy
+                </a>{' '}
+                and{' '}
+                <a href="/cookie-policy" className="text-amber-color hover:underline">
+                  Cookie Policy
+                </a>
+                .
               </p>
             </div>
           </div>
@@ -177,8 +206,8 @@ export default function Contact() {
           <div className="bg-amber-color/5 border border-border-color rounded-xl p-6 space-y-3">
             <h3 className="text-amber-color font-bold text-sm font-display">Prefer to talk?</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Email a couple of time slots that suit you and I&#39;ll send a
-              calendar invite for a free 15-minute discovery call.
+              Email a couple of time slots that suit you and I&#39;ll send a calendar invite for a
+              free 15-minute discovery call.
             </p>
             <a
               href="mailto:david@linacre.site?subject=Book%20a%2015-min%20intro%20call"
@@ -203,11 +232,14 @@ export default function Contact() {
                   exit={{ opacity: 0 }}
                   className="py-12 text-center space-y-4"
                 >
-                  <CheckCircle className="w-12 h-12 text-emerald-color mx-auto" aria-hidden="true" />
+                  <CheckCircle
+                    className="w-12 h-12 text-emerald-color mx-auto"
+                    aria-hidden="true"
+                  />
                   <h2 className="font-display text-lg font-bold text-foreground">Message sent</h2>
                   <p className="text-xs text-muted-foreground max-w-sm mx-auto font-mono">
-                    Reference <span className="text-amber-color font-bold">{requestId}</span> &mdash;
-                    I&#39;ll reply from david@linacre.site within 12 hours.
+                    Reference <span className="text-amber-color font-bold">{requestId}</span>{' '}
+                    &mdash; I&#39;ll reply from david@linacre.site within 12 hours.
                   </p>
                   <div className="flex flex-wrap justify-center gap-2 pt-2">
                     <a
@@ -229,7 +261,13 @@ export default function Contact() {
                   {/* Honeypot */}
                   <div
                     aria-hidden="true"
-                    style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}
+                    style={{
+                      position: 'absolute',
+                      left: '-9999px',
+                      width: '1px',
+                      height: '1px',
+                      overflow: 'hidden',
+                    }}
                   >
                     <label htmlFor="website">Leave this field blank</label>
                     <input
@@ -239,7 +277,7 @@ export default function Contact() {
                       tabIndex={-1}
                       autoComplete="off"
                       value={company}
-                      onChange={(e) => setCompany(e.target.value)}
+                      onChange={e => setCompany(e.target.value)}
                     />
                   </div>
 
@@ -264,7 +302,10 @@ export default function Contact() {
                   )}
 
                   <div className="space-y-1">
-                    <label htmlFor="name" className="block font-mono text-[11px] text-muted-foreground uppercase font-bold">
+                    <label
+                      htmlFor="name"
+                      className="block font-mono text-[11px] text-muted-foreground uppercase font-bold"
+                    >
                       Name <span className="text-amber-color">*</span>
                     </label>
                     <input
@@ -274,18 +315,27 @@ export default function Contact() {
                       autoComplete="name"
                       placeholder="Jane Doe"
                       value={name}
-                      onChange={(e) => { setName(e.target.value); if (fieldErrors.name) setFieldErrors(prev => ({ ...prev, name: undefined })); }}
+                      onChange={e => {
+                        setName(e.target.value);
+                        if (fieldErrors.name)
+                          setFieldErrors(prev => ({ ...prev, name: undefined }));
+                      }}
                       aria-invalid={Boolean(fieldErrors.name)}
                       aria-describedby={fieldErrors.name ? 'name-error' : undefined}
                       className={`w-full bg-background/50 border ${fieldErrors.name ? 'border-rose-500' : 'border-border-color'} rounded-lg px-4 py-2.5 text-sm text-foreground focus:outline-none focus-visible:border-amber-color`}
                     />
                     {fieldErrors.name && (
-                      <p id="name-error" className="text-xs text-rose-400 font-mono" role="alert">{fieldErrors.name}</p>
+                      <p id="name-error" className="text-xs text-rose-400 font-mono" role="alert">
+                        {fieldErrors.name}
+                      </p>
                     )}
                   </div>
 
                   <div className="space-y-1">
-                    <label htmlFor="email" className="block font-mono text-[11px] text-muted-foreground uppercase font-bold">
+                    <label
+                      htmlFor="email"
+                      className="block font-mono text-[11px] text-muted-foreground uppercase font-bold"
+                    >
                       Work email <span className="text-amber-color">*</span>
                     </label>
                     <input
@@ -295,19 +345,31 @@ export default function Contact() {
                       autoComplete="email"
                       placeholder="you@company.com"
                       value={email}
-                      onChange={(e) => { setEmail(e.target.value); if (fieldErrors.email) setFieldErrors(prev => ({ ...prev, email: undefined })); }}
+                      onChange={e => {
+                        setEmail(e.target.value);
+                        if (fieldErrors.email)
+                          setFieldErrors(prev => ({ ...prev, email: undefined }));
+                      }}
                       aria-invalid={Boolean(fieldErrors.email)}
                       aria-describedby={fieldErrors.email ? 'email-error' : undefined}
                       className={`w-full bg-background/50 border ${fieldErrors.email ? 'border-rose-500' : 'border-border-color'} rounded-lg px-4 py-2.5 text-sm text-foreground focus:outline-none focus-visible:border-amber-color`}
                     />
                     {fieldErrors.email && (
-                      <p id="email-error" className="text-xs text-rose-400 font-mono" role="alert">{fieldErrors.email}</p>
+                      <p id="email-error" className="text-xs text-rose-400 font-mono" role="alert">
+                        {fieldErrors.email}
+                      </p>
                     )}
                   </div>
 
                   <div className="space-y-1">
-                    <label htmlFor="companyOrg" className="block font-mono text-[11px] text-muted-foreground uppercase font-bold">
-                      Company <span className="text-muted-foreground/60 normal-case font-normal">(optional)</span>
+                    <label
+                      htmlFor="companyOrg"
+                      className="block font-mono text-[11px] text-muted-foreground uppercase font-bold"
+                    >
+                      Company{' '}
+                      <span className="text-muted-foreground/60 normal-case font-normal">
+                        (optional)
+                      </span>
                     </label>
                     <input
                       id="companyOrg"
@@ -315,17 +377,22 @@ export default function Contact() {
                       autoComplete="organization"
                       placeholder="Acme Corp"
                       value={companyOrg}
-                      onChange={(e) => setCompanyOrg(e.target.value)}
+                      onChange={e => setCompanyOrg(e.target.value)}
                       className="w-full bg-background/50 border border-border-color rounded-lg px-4 py-2.5 text-sm text-foreground focus:outline-none focus-visible:border-amber-color"
                     />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label htmlFor="budget" className="block font-mono text-[11px] text-muted-foreground uppercase font-bold">Budget</label>
+                      <label
+                        htmlFor="budget"
+                        className="block font-mono text-[11px] text-muted-foreground uppercase font-bold"
+                      >
+                        Budget
+                      </label>
                       <select
                         id="budget"
                         value={budget}
-                        onChange={(e) => setBudget(e.target.value)}
+                        onChange={e => setBudget(e.target.value)}
                         className="w-full bg-background/50 border border-border-color rounded-lg px-4 py-2.5 text-sm text-foreground focus:outline-none focus-visible:border-amber-color"
                       >
                         <option value="">Select&hellip;</option>
@@ -337,11 +404,16 @@ export default function Contact() {
                       </select>
                     </div>
                     <div className="space-y-1">
-                      <label htmlFor="timeline" className="block font-mono text-[11px] text-muted-foreground uppercase font-bold">Timeline</label>
+                      <label
+                        htmlFor="timeline"
+                        className="block font-mono text-[11px] text-muted-foreground uppercase font-bold"
+                      >
+                        Timeline
+                      </label>
                       <select
                         id="timeline"
                         value={timeline}
-                        onChange={(e) => setTimeline(e.target.value)}
+                        onChange={e => setTimeline(e.target.value)}
                         className="w-full bg-background/50 border border-border-color rounded-lg px-4 py-2.5 text-sm text-foreground focus:outline-none focus-visible:border-amber-color"
                       >
                         <option value="">Select&hellip;</option>
@@ -354,7 +426,10 @@ export default function Contact() {
                   </div>
 
                   <div className="space-y-1">
-                    <label htmlFor="message" className="block font-mono text-[11px] text-muted-foreground uppercase font-bold">
+                    <label
+                      htmlFor="message"
+                      className="block font-mono text-[11px] text-muted-foreground uppercase font-bold"
+                    >
                       Project details <span className="text-amber-color">*</span>
                     </label>
                     <textarea
@@ -363,36 +438,64 @@ export default function Contact() {
                       rows={6}
                       placeholder="What are you building? Goals, current stack, constraints, links..."
                       value={message}
-                      onChange={(e) => { setMessage(e.target.value); if (fieldErrors.message) setFieldErrors(prev => ({ ...prev, message: undefined })); }}
+                      onChange={e => {
+                        setMessage(e.target.value);
+                        if (fieldErrors.message)
+                          setFieldErrors(prev => ({ ...prev, message: undefined }));
+                      }}
                       aria-invalid={Boolean(fieldErrors.message)}
                       aria-describedby={fieldErrors.message ? 'message-error' : undefined}
                       className={`w-full bg-background/50 border ${fieldErrors.message ? 'border-rose-500' : 'border-border-color'} rounded-lg px-4 py-2.5 text-sm text-foreground focus:outline-none focus-visible:border-amber-color`}
                     />
                     {fieldErrors.message && (
-                      <p id="message-error" className="text-xs text-rose-400 font-mono" role="alert">{fieldErrors.message}</p>
+                      <p
+                        id="message-error"
+                        className="text-xs text-rose-400 font-mono"
+                        role="alert"
+                      >
+                        {fieldErrors.message}
+                      </p>
                     )}
                   </div>
                   <div className="space-y-1">
-                    <label htmlFor="consent" className="flex items-start gap-2 text-xs text-muted-foreground cursor-pointer">
+                    <label
+                      htmlFor="consent"
+                      className="flex items-start gap-2 text-xs text-muted-foreground cursor-pointer"
+                    >
                       <input
                         id="consent"
                         type="checkbox"
                         required
                         checked={consent}
-                        onChange={(e) => { setConsent(e.target.checked); if (fieldErrors.consent) setFieldErrors(prev => ({ ...prev, consent: undefined })); }}
+                        onChange={e => {
+                          setConsent(e.target.checked);
+                          if (fieldErrors.consent)
+                            setFieldErrors(prev => ({ ...prev, consent: undefined }));
+                        }}
                         aria-invalid={Boolean(fieldErrors.consent)}
                         aria-describedby={fieldErrors.consent ? 'consent-error' : undefined}
                         className="mt-0.5 accent-[color:var(--color-amber-color)]"
                       />
                       <span>
                         I agree to the{' '}
-                        <a href="/privacy" className="text-amber-color hover:underline">Privacy Policy</a>{' '}
+                        <a href="/privacy" className="text-amber-color hover:underline">
+                          Privacy Policy
+                        </a>{' '}
                         and{' '}
-                        <a href="/terms" className="text-amber-color hover:underline">Terms</a>. <span className="text-amber-color">*</span>
+                        <a href="/terms" className="text-amber-color hover:underline">
+                          Terms
+                        </a>
+                        . <span className="text-amber-color">*</span>
                       </span>
                     </label>
                     {fieldErrors.consent && (
-                      <p id="consent-error" className="text-xs text-rose-400 font-mono pl-6" role="alert">{fieldErrors.consent}</p>
+                      <p
+                        id="consent-error"
+                        className="text-xs text-rose-400 font-mono pl-6"
+                        role="alert"
+                      >
+                        {fieldErrors.consent}
+                      </p>
                     )}
                   </div>
                   <AnimatePresence>
@@ -406,7 +509,10 @@ export default function Contact() {
                         aria-live="assertive"
                       >
                         <div className="flex items-center gap-2">
-                          <ShieldAlert className="w-4 h-4 text-rose-400 shrink-0" aria-hidden="true" />
+                          <ShieldAlert
+                            className="w-4 h-4 text-rose-400 shrink-0"
+                            aria-hidden="true"
+                          />
                           <span>{errorMessage}</span>
                         </div>
                         <p className="text-[11px] text-muted-foreground/80 pl-6">
@@ -416,7 +522,8 @@ export default function Contact() {
                             className="text-amber-color hover:underline font-bold"
                           >
                             david@linacre.site
-                          </a>.
+                          </a>
+                          .
                         </p>
                       </motion.div>
                     )}

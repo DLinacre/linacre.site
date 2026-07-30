@@ -1,6 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Github, Terminal, BookOpen, Cpu, Layers, Sun, Moon, Command, Sparkles, Sliders, Bot, User, Mail, Activity, FileText, FolderCode, House, Gamepad2, Volume2, VolumeX } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Github,
+  Terminal,
+  BookOpen,
+  Cpu,
+  Layers,
+  Sun,
+  Moon,
+  Command,
+  Sparkles,
+  Sliders,
+  Bot,
+  User,
+  Mail,
+  Activity,
+  FileText,
+  FolderCode,
+  House,
+  Gamepad2,
+  Volume2,
+  VolumeX,
+} from 'lucide-react';
 import InteractiveGlobe from './InteractiveGlobe';
 import { toggleSoundFx, isSoundFxEnabled, playClick } from '../lib/audioEngine';
 
@@ -13,7 +36,14 @@ interface HeaderProps {
   activeColor: { primary: string; secondary: string };
 }
 
-export default function Header({ activeTab, setActiveTab, theme, setTheme, openPalette, activeColor }: HeaderProps) {
+export default function Header({
+  activeTab,
+  setActiveTab,
+  theme,
+  setTheme,
+  openPalette,
+  activeColor,
+}: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(() => isSoundFxEnabled());
   const mobileButtonRef = useRef<HTMLButtonElement>(null);
@@ -63,7 +93,11 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-amber-color/10 bg-background/70 backdrop-blur-xl transition-colors" style={{ transitionDuration: 'var(--linacre-duration-base)' }} role="banner">
+    <header
+      className="sticky top-0 z-50 w-full border-b border-amber-color/10 bg-background/70 backdrop-blur-xl transition-colors"
+      style={{ transitionDuration: 'var(--linacre-duration-base)' }}
+      role="banner"
+    >
       {/* Skip-to-content link for keyboard/screen reader accessibility */}
       <a href="#main-content" className="skip-link">
         Skip to content
@@ -73,7 +107,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
           {/* Logo / Brand */}
           <a
             href="/"
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               setActiveTab('home');
               setMobileMenuOpen(false);
@@ -107,7 +141,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
-            {coreItems.map((item) => {
+            {coreItems.map(item => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
               return (
@@ -115,13 +149,15 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
                   key={item.id}
                   id={`nav-tab-${item.id}`}
                   href={item.id === 'home' ? '/' : `/${item.id}`}
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     setActiveTab(item.id);
                     setMobileMenuOpen(false);
                   }}
                   className={`relative px-4 py-2 flex items-center gap-1.5 font-mono text-sm transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-cyan/50 ${
-                    isActive ? 'text-amber-color font-medium' : 'text-muted-foreground hover:text-foreground'
+                    isActive
+                      ? 'text-amber-color font-medium'
+                      : 'text-muted-foreground hover:text-foreground'
                   }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
@@ -143,21 +179,29 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
             <div className="relative">
               <button
                 onClick={() => setMoreOpen(!moreOpen)}
-                onBlur={(e) => {
+                onBlur={e => {
                   // Close dropdown on focus loss (accessibility)
                   if (!e.currentTarget.contains(e.relatedTarget as Node)) {
                     setTimeout(() => setMoreOpen(false), 150);
                   }
                 }}
                 className={`px-3 py-2 flex items-center gap-1 font-mono text-sm transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-cyan/50 cursor-pointer ${
-                  moreItems.some(item => item.id === activeTab) ? 'text-amber-color font-medium' : 'text-muted-foreground hover:text-foreground'
+                  moreItems.some(item => item.id === activeTab)
+                    ? 'text-amber-color font-medium'
+                    : 'text-muted-foreground hover:text-foreground'
                 }`}
                 aria-expanded={moreOpen}
                 aria-haspopup="true"
                 aria-label="More options menu"
               >
                 <span>More</span>
-                <svg className={`w-3.5 h-3.5 transition-transform ${moreOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform ${moreOpen ? 'rotate-180' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </button>
@@ -171,20 +215,22 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
                     transition={{ duration: 0.1 }}
                     className="absolute right-0 mt-1.5 w-44 bg-background border border-amber-color/10 rounded-lg shadow-xl py-1 z-50 flex flex-col"
                   >
-                    {moreItems.map((item) => {
+                    {moreItems.map(item => {
                       const Icon = item.icon;
                       const isActive = activeTab === item.id;
                       return (
                         <a
                           key={item.id}
                           href={`/${item.id}`}
-                          onClick={(e) => {
+                          onClick={e => {
                             e.preventDefault();
                             setActiveTab(item.id);
                             setMoreOpen(false);
                           }}
                           className={`px-4 py-2 flex items-center gap-2 font-mono text-xs transition-colors hover:bg-muted/50 ${
-                            isActive ? 'text-amber-color font-semibold' : 'text-muted-foreground hover:text-foreground'
+                            isActive
+                              ? 'text-amber-color font-semibold'
+                              : 'text-muted-foreground hover:text-foreground'
                           }`}
                         >
                           <Icon className="w-3.5 h-3.5" />
@@ -215,7 +261,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
             {/* Primary CTA — the tool box */}
             <a
               href="/toolkit"
-              onClick={(e) => {
+              onClick={e => {
                 e.preventDefault();
                 setActiveTab('toolkit');
                 setMobileMenuOpen(false);
@@ -252,11 +298,17 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
                 setSoundOn(enabled);
               }}
               className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
-              title={soundOn ? 'Sound FX Enabled (Click to Mute)' : 'Sound FX Muted (Click to Enable)'}
+              title={
+                soundOn ? 'Sound FX Enabled (Click to Mute)' : 'Sound FX Muted (Click to Enable)'
+              }
               aria-label="Toggle synthesized sound effects"
               id="btn-sound-toggle"
             >
-              {soundOn ? <Volume2 className="w-4 h-4 text-emerald-color" /> : <VolumeX className="w-4 h-4 text-muted-foreground/60" />}
+              {soundOn ? (
+                <Volume2 className="w-4 h-4 text-emerald-color" />
+              ) : (
+                <VolumeX className="w-4 h-4 text-muted-foreground/60" />
+              )}
             </button>
 
             {/* Theme Toggle Button */}
@@ -270,7 +322,11 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
               aria-label="Toggle visual theme"
               id="btn-theme-toggle"
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-color" /> : <Moon className="w-4 h-4 text-cyan" />}
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-color" />
+              ) : (
+                <Moon className="w-4 h-4 text-cyan" />
+              )}
             </button>
 
             {/* Mobile menu button */}
@@ -302,7 +358,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
             aria-label="Mobile primary navigation"
           >
             <div className="px-4 py-3 space-y-1">
-              {[...coreItems, ...moreItems].map((item) => {
+              {[...coreItems, ...moreItems].map(item => {
                 const Icon = item.icon;
                 const isActive = activeTab === item.id;
                 return (
@@ -310,7 +366,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
                     key={item.id}
                     id={`mobile-nav-tab-${item.id}`}
                     href={item.id === 'home' ? '/' : `/${item.id}`}
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       setActiveTab(item.id);
                       setMobileMenuOpen(false);
@@ -330,7 +386,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
               {/* Mobile primary CTA — the tool box */}
               <a
                 href="/toolkit"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   setActiveTab('toolkit');
                   setMobileMenuOpen(false);

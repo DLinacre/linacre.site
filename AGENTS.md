@@ -1,9 +1,11 @@
 # linacre-site-repo — Agent Instructions
 
 ## What This Is
+
 The developer portal, private browser toolbox, and app launcher for the **Linacre** ecosystem, deployed to www.linacre.site.
 
 ## Structure
+
 ```
 api/
   server.ts            (Express API backend)
@@ -18,6 +20,7 @@ vercel.json            (API rewrites and CSP security headers)
 ```
 
 ## Rules & Workflows
+
 - **No Artificial Limits** — Use any free tool, any format, any license. Constraints: hardware specs (RTX 3070 Ti, 64GB RAM, D: canonical storage at `D:\LIN4CRE`) and free/open-source tools.
 - **Single Source of Truth** — All active repositories live under `D:\LIN4CRE\`. Desktop app shortcuts are populated at `C:\Users\KingL\Desktop` for 1-by-1 execution and testing.
 - **Build Command:** `npm run build` (Compiles Vite React app + Node server and prerenders 22 static routes).
@@ -27,6 +30,7 @@ vercel.json            (API rewrites and CSP security headers)
 - **Secrets Workflow:** Centralized secrets via Windows Environment Variables & `.env` files. Every project includes `.env` protected by strict `.gitignore` rules (`.env`, `.env*`, `*.key`) so secrets are never pushed to Git/GitHub.
 
 ## Design System & Architecture
+
 - **Navigation Architecture**: 6 primary items (**Start**, **Tools**, **Projects**, **Playground**, **About**, **Contact**) and secondary pages grouped under **More** dropdown.
 - **Mobile Usability**: Includes `MobileBottomNav` for responsive touch navigation on mobile viewports.
 - **Flexible Visual Themes**: Supports dynamic HSL custom themes (e.g., CyberBlue-Green, Midnight Slate, Obsidian Dark, Neon Cyberpunk, or Light Mode). Themes are user-customizable and never set in stone.

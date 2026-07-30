@@ -22,7 +22,7 @@ export default function ContactThanks() {
       (window as any).dataLayer = (window as any).dataLayer || [];
       (window as any).dataLayer.push({
         event: 'contact_form_submitted',
-        page: '/contact/thanks'
+        page: '/contact/thanks',
       });
     } catch (_) {
       // No-op — this page is a decorative confirmation.
@@ -51,8 +51,8 @@ export default function ContactThanks() {
         within 12 hours.
         {ref && (
           <>
-            {' '}Your reference:{' '}
-            <span className="font-mono text-amber-color font-bold">{ref}</span>.
+            {' '}
+            Your reference: <span className="font-mono text-amber-color font-bold">{ref}</span>.
           </>
         )}
       </p>
@@ -76,7 +76,8 @@ export default function ContactThanks() {
       </div>
 
       <p className="pt-6 text-xs text-muted-foreground/60 font-mono">
-        Prefer email? Just hit reply once mine lands &mdash; or add project links / a Loom to speed things up.
+        Prefer email? Just hit reply once mine lands &mdash; or add project links / a Loom to speed
+        things up.
       </p>
     </motion.section>
   );

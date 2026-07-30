@@ -23,7 +23,7 @@ const OPTIONAL_KEYS = [
   'linacre_brand_pulse_speed',
   'linacre_brand_glow',
   'linacre_brand_name',
-  'linacre_lab_sessions_v1'
+  'linacre_lab_sessions_v1',
 ];
 
 export type ConsentValue = 'all' | 'essential' | 'rejected';
@@ -64,7 +64,9 @@ export default function ConsentBanner() {
         for (const k of OPTIONAL_KEYS) {
           if (!ESSENTIAL_KEYS.has(k)) localStorage.removeItem(k);
         }
-      } catch { /* ignore */ }
+      } catch {
+        /* ignore */
+      }
     }
     setVisible(false);
   };
@@ -84,12 +86,19 @@ export default function ConsentBanner() {
           <p id="lc-consent-title" className="font-display text-sm font-bold text-foreground">
             Storage preferences
           </p>
-          <p id="lc-consent-desc" className="text-xs text-muted-foreground leading-relaxed max-w-2xl">
-            We use essential browser storage for your theme and workspace state. Optional
-            storage saves AI Lab chats and your own API keys locally. No tracking cookies.{' '}
-            <a href="/cookie-policy" className="text-cyan hover:underline">Cookie Policy</a>{' '}
+          <p
+            id="lc-consent-desc"
+            className="text-xs text-muted-foreground leading-relaxed max-w-2xl"
+          >
+            We use essential browser storage for your theme and workspace state. Optional storage
+            saves AI Lab chats and your own API keys locally. No tracking cookies.{' '}
+            <a href="/cookie-policy" className="text-cyan hover:underline">
+              Cookie Policy
+            </a>{' '}
             &middot;{' '}
-            <a href="/privacy" className="text-cyan hover:underline">Privacy</a>
+            <a href="/privacy" className="text-cyan hover:underline">
+              Privacy
+            </a>
           </p>
         </div>
         <div className="flex flex-wrap gap-2 shrink-0">

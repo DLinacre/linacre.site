@@ -19,7 +19,7 @@ import {
   SkipBack,
   Cpu,
   Terminal,
-  Bot
+  Bot,
 } from 'lucide-react';
 
 interface CProgram {
@@ -85,11 +85,12 @@ const C_PROGRAMS: CProgram[] = [
     steps: [
       {
         line: 1,
-        explanation: 'Initialize function bubble_sort with array: [24, 8, 41, 15, 3] and pointers p, q.',
+        explanation:
+          'Initialize function bubble_sort with array: [24, 8, 41, 15, 3] and pointers p, q.',
         watLine: 3,
         watHighlightIndex: 3,
         pointers: { arr: 0 },
-        memory: [24, 8, 41, 15, 3]
+        memory: [24, 8, 41, 15, 3],
       },
       {
         line: 5,
@@ -97,7 +98,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 10,
         watHighlightIndex: 10,
         pointers: { arr: 0, p: 0 },
-        memory: [24, 8, 41, 15, 3]
+        memory: [24, 8, 41, 15, 3],
       },
       {
         line: 6,
@@ -105,15 +106,16 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 11,
         watHighlightIndex: 11,
         pointers: { arr: 0, p: 0, q: 1 },
-        memory: [24, 8, 41, 15, 3]
+        memory: [24, 8, 41, 15, 3],
       },
       {
         line: 7,
-        explanation: 'Compare value at p (*p = 24) with value at q (*q = 8). Since 24 > 8, prepare to swap.',
+        explanation:
+          'Compare value at p (*p = 24) with value at q (*q = 8). Since 24 > 8, prepare to swap.',
         watLine: 12,
         watHighlightIndex: 12,
         pointers: { arr: 0, p: 0, q: 1 },
-        memory: [24, 8, 41, 15, 3]
+        memory: [24, 8, 41, 15, 3],
       },
       {
         line: 8,
@@ -121,7 +123,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 15,
         watHighlightIndex: 15,
         pointers: { arr: 0, p: 0, q: 1 },
-        memory: [24, 8, 41, 15, 3]
+        memory: [24, 8, 41, 15, 3],
       },
       {
         line: 9,
@@ -129,15 +131,16 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 16,
         watHighlightIndex: 16,
         pointers: { arr: 0, p: 0, q: 1 },
-        memory: [8, 8, 41, 15, 3]
+        memory: [8, 8, 41, 15, 3],
       },
       {
         line: 10,
-        explanation: 'Write temp (24) to memory address q (0x1004). Array is now [8, 24, 41, 15, 3].',
+        explanation:
+          'Write temp (24) to memory address q (0x1004). Array is now [8, 24, 41, 15, 3].',
         watLine: 17,
         watHighlightIndex: 17,
         pointers: { arr: 0, p: 0, q: 1 },
-        memory: [8, 24, 41, 15, 3]
+        memory: [8, 24, 41, 15, 3],
       },
       {
         line: 5,
@@ -145,7 +148,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 10,
         watHighlightIndex: 10,
         pointers: { arr: 0, p: 1 },
-        memory: [8, 24, 41, 15, 3]
+        memory: [8, 24, 41, 15, 3],
       },
       {
         line: 6,
@@ -153,7 +156,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 11,
         watHighlightIndex: 11,
         pointers: { arr: 0, p: 1, q: 2 },
-        memory: [8, 24, 41, 15, 3]
+        memory: [8, 24, 41, 15, 3],
       },
       {
         line: 7,
@@ -161,7 +164,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 12,
         watHighlightIndex: 12,
         pointers: { arr: 0, p: 1, q: 2 },
-        memory: [8, 24, 41, 15, 3]
+        memory: [8, 24, 41, 15, 3],
       },
       {
         line: 5,
@@ -169,7 +172,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 10,
         watHighlightIndex: 10,
         pointers: { arr: 0, p: 2 },
-        memory: [8, 24, 41, 15, 3]
+        memory: [8, 24, 41, 15, 3],
       },
       {
         line: 6,
@@ -177,7 +180,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 11,
         watHighlightIndex: 11,
         pointers: { arr: 0, p: 2, q: 3 },
-        memory: [8, 24, 41, 15, 3]
+        memory: [8, 24, 41, 15, 3],
       },
       {
         line: 7,
@@ -185,7 +188,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 12,
         watHighlightIndex: 12,
         pointers: { arr: 0, p: 2, q: 3 },
-        memory: [8, 24, 41, 15, 3]
+        memory: [8, 24, 41, 15, 3],
       },
       {
         line: 9,
@@ -193,15 +196,16 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 16,
         watHighlightIndex: 16,
         pointers: { arr: 0, p: 2, q: 3 },
-        memory: [8, 24, 15, 15, 3]
+        memory: [8, 24, 15, 15, 3],
       },
       {
         line: 10,
-        explanation: 'Write temp (41) to memory address q (0x100c). Array is now [8, 24, 15, 41, 3].',
+        explanation:
+          'Write temp (41) to memory address q (0x100c). Array is now [8, 24, 15, 41, 3].',
         watLine: 17,
         watHighlightIndex: 17,
         pointers: { arr: 0, p: 2, q: 3 },
-        memory: [8, 24, 15, 41, 3]
+        memory: [8, 24, 15, 41, 3],
       },
       {
         line: 5,
@@ -209,7 +213,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 10,
         watHighlightIndex: 10,
         pointers: { arr: 0, p: 3 },
-        memory: [8, 24, 15, 41, 3]
+        memory: [8, 24, 15, 41, 3],
       },
       {
         line: 6,
@@ -217,7 +221,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 11,
         watHighlightIndex: 11,
         pointers: { arr: 0, p: 3, q: 4 },
-        memory: [8, 24, 15, 41, 3]
+        memory: [8, 24, 15, 41, 3],
       },
       {
         line: 7,
@@ -225,7 +229,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 12,
         watHighlightIndex: 12,
         pointers: { arr: 0, p: 3, q: 4 },
-        memory: [8, 24, 15, 41, 3]
+        memory: [8, 24, 15, 41, 3],
       },
       {
         line: 9,
@@ -233,25 +237,27 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 16,
         watHighlightIndex: 16,
         pointers: { arr: 0, p: 3, q: 4 },
-        memory: [8, 24, 15, 3, 3]
+        memory: [8, 24, 15, 3, 3],
       },
       {
         line: 10,
-        explanation: 'Write temp (41) to memory address q (0x1010). Array is now [8, 24, 15, 3, 41]. Max element (41) bubbled up!',
+        explanation:
+          'Write temp (41) to memory address q (0x1010). Array is now [8, 24, 15, 3, 41]. Max element (41) bubbled up!',
         watLine: 17,
         watHighlightIndex: 17,
         pointers: { arr: 0, p: 3, q: 4 },
-        memory: [8, 24, 15, 3, 41]
+        memory: [8, 24, 15, 3, 41],
       },
       {
         line: 12,
-        explanation: 'Completed outer pass. Next iterations bubble up remaining elements: [8, 15, 3, 24, 41] -> [8, 3, 15, 24, 41] -> [3, 8, 15, 24, 41].',
+        explanation:
+          'Completed outer pass. Next iterations bubble up remaining elements: [8, 15, 3, 24, 41] -> [8, 3, 15, 24, 41] -> [3, 8, 15, 24, 41].',
         watLine: 18,
         watHighlightIndex: 18,
         pointers: { arr: 0 },
-        memory: [3, 8, 15, 24, 41]
-      }
-    ]
+        memory: [3, 8, 15, 24, 41],
+      },
+    ],
   },
   {
     id: 'binary_search',
@@ -290,11 +296,12 @@ const C_PROGRAMS: CProgram[] = [
     steps: [
       {
         line: 1,
-        explanation: 'Starting binary search in memory looking for key: 24. Array is [3, 8, 15, 24, 41].',
+        explanation:
+          'Starting binary search in memory looking for key: 24. Array is [3, 8, 15, 24, 41].',
         watLine: 3,
         watHighlightIndex: 3,
         pointers: { arr: 0 },
-        memory: [3, 8, 15, 24, 41]
+        memory: [3, 8, 15, 24, 41],
       },
       {
         line: 2,
@@ -302,7 +309,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 5,
         watHighlightIndex: 5,
         pointers: { arr: 0, low: 0 },
-        memory: [3, 8, 15, 24, 41]
+        memory: [3, 8, 15, 24, 41],
       },
       {
         line: 3,
@@ -310,7 +317,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 6,
         watHighlightIndex: 6,
         pointers: { arr: 0, low: 0, high: 4 },
-        memory: [3, 8, 15, 24, 41]
+        memory: [3, 8, 15, 24, 41],
       },
       {
         line: 4,
@@ -318,7 +325,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 9,
         watHighlightIndex: 9,
         pointers: { arr: 0, low: 0, high: 4 },
-        memory: [3, 8, 15, 24, 41]
+        memory: [3, 8, 15, 24, 41],
       },
       {
         line: 5,
@@ -326,7 +333,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 10,
         watHighlightIndex: 10,
         pointers: { arr: 0, low: 0, high: 4, mid: 2 },
-        memory: [3, 8, 15, 24, 41]
+        memory: [3, 8, 15, 24, 41],
       },
       {
         line: 6,
@@ -334,15 +341,16 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 11,
         watHighlightIndex: 11,
         pointers: { arr: 0, low: 0, high: 4, mid: 2 },
-        memory: [3, 8, 15, 24, 41]
+        memory: [3, 8, 15, 24, 41],
       },
       {
         line: 7,
-        explanation: 'Check if *mid < key (15 < 24). True! Move low = mid + 1 (index 3, address 0x100c, value 24).',
+        explanation:
+          'Check if *mid < key (15 < 24). True! Move low = mid + 1 (index 3, address 0x100c, value 24).',
         watLine: 13,
         watHighlightIndex: 13,
         pointers: { arr: 0, low: 3, high: 4, mid: 2 },
-        memory: [3, 8, 15, 24, 41]
+        memory: [3, 8, 15, 24, 41],
       },
       {
         line: 4,
@@ -350,7 +358,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 9,
         watHighlightIndex: 9,
         pointers: { arr: 0, low: 3, high: 4 },
-        memory: [3, 8, 15, 24, 41]
+        memory: [3, 8, 15, 24, 41],
       },
       {
         line: 5,
@@ -358,7 +366,7 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 10,
         watHighlightIndex: 10,
         pointers: { arr: 0, low: 3, high: 4, mid: 3 },
-        memory: [3, 8, 15, 24, 41]
+        memory: [3, 8, 15, 24, 41],
       },
       {
         line: 6,
@@ -366,10 +374,10 @@ const C_PROGRAMS: CProgram[] = [
         watLine: 12,
         watHighlightIndex: 12,
         pointers: { arr: 0, low: 3, high: 4, mid: 3 },
-        memory: [3, 8, 15, 24, 41]
-      }
-    ]
-  }
+        memory: [3, 8, 15, 24, 41],
+      },
+    ],
+  },
 ];
 
 interface DevPlaygroundProps {
@@ -379,7 +387,9 @@ interface DevPlaygroundProps {
 import McpToolboxCallout from './McpToolboxCallout';
 
 export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundProps) {
-  const [activeTool, setActiveTool] = useState<'jwt' | 'glass' | 'regex' | 'gen' | 'c_to_wasm' | 'svg_creator' | 'json2ts' | 'cron' | 'theme'>('jwt');
+  const [activeTool, setActiveTool] = useState<
+    'jwt' | 'glass' | 'regex' | 'gen' | 'c_to_wasm' | 'svg_creator' | 'json2ts' | 'cron' | 'theme'
+  >('jwt');
   const [copiedType, setCopiedType] = useState<string | null>(null);
 
   // UTILITY: JSON to TS conversion helper
@@ -396,15 +406,20 @@ export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundP
           else if (Array.isArray(val)) {
             if (val.length === 0) typeStr = 'any[]';
             else {
-              const elemTypes = Array.from(new Set(val.map(item => {
-                if (typeof item === 'object' && item !== null) {
-                  const subName = `${name}_${key.charAt(0).toUpperCase() + key.slice(1)}Item`;
-                  generateInterface(item, subName);
-                  return subName;
-                }
-                return typeof item;
-              })));
-              typeStr = elemTypes.length === 1 ? `${elemTypes[0]}[]` : `(${elemTypes.join(' | ')})[]`;
+              const elemTypes = Array.from(
+                new Set(
+                  val.map(item => {
+                    if (typeof item === 'object' && item !== null) {
+                      const subName = `${name}_${key.charAt(0).toUpperCase() + key.slice(1)}Item`;
+                      generateInterface(item, subName);
+                      return subName;
+                    }
+                    return typeof item;
+                  }),
+                ),
+              );
+              typeStr =
+                elemTypes.length === 1 ? `${elemTypes[0]}[]` : `(${elemTypes.join(' | ')})[]`;
             }
           } else if (typeof val === 'object') {
             const subName = `${name}_${key.charAt(0).toUpperCase() + key.slice(1)}`;
@@ -434,12 +449,29 @@ export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundP
   const parseCron = (cron: string) => {
     const parts = cron.trim().split(/\s+/);
     if (parts.length !== 5) {
-      return { summary: '', nextRuns: [], error: 'Cron expression must contain 5 space-separated fields (minute, hour, day-of-month, month, day-of-week).' };
+      return {
+        summary: '',
+        nextRuns: [],
+        error:
+          'Cron expression must contain 5 space-separated fields (minute, hour, day-of-month, month, day-of-week).',
+      };
     }
     const [min, hour, dom, month, dow] = parts;
     const desc: string[] = [];
-    desc.push(min === '*' ? 'every minute' : min.startsWith('*/') ? `every ${min.slice(2)} minutes` : `at minute ${min}`);
-    desc.push(hour === '*' ? 'every hour' : hour.startsWith('*/') ? `every ${hour.slice(2)} hours` : `at hour ${hour}:00`);
+    desc.push(
+      min === '*'
+        ? 'every minute'
+        : min.startsWith('*/')
+          ? `every ${min.slice(2)} minutes`
+          : `at minute ${min}`,
+    );
+    desc.push(
+      hour === '*'
+        ? 'every hour'
+        : hour.startsWith('*/')
+          ? `every ${hour.slice(2)} hours`
+          : `at hour ${hour}:00`,
+    );
     if (dom !== '*') desc.push(`on day ${dom} of month`);
     if (month !== '*') desc.push(`in month ${month}`);
     if (dow !== '*') desc.push(`on day-of-week ${dow}`);
@@ -490,7 +522,7 @@ export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundP
       <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" />
     </circle>
   </g>
-</svg>`
+</svg>`,
     },
     pulse: {
       name: 'Pulse Wave',
@@ -504,7 +536,7 @@ export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundP
   </path>
   <circle cx="10" cy="50" r="4" fill="#34D399" />
   <circle cx="170" cy="50" r="4" fill="#06b6d4" />
-</svg>`
+</svg>`,
     },
     monogram: {
       name: 'Cyber Monogram DL',
@@ -526,7 +558,7 @@ export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundP
       <animate attributeName="y2" values="-30;30;-30" dur="3s" repeatCount="indefinite" />
     </line>
   </g>
-</svg>`
+</svg>`,
     },
     nodes: {
       name: 'Infinite Grid Spiral',
@@ -545,8 +577,8 @@ export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundP
       <path d="M 50 0 L 0 50 L -50 0 L 0 -50 Z" fill="none" stroke="#334155" stroke-width="1" />
     </g>
   </g>
-</svg>`
-    }
+</svg>`,
+    },
   };
 
   // SVG Creator states
@@ -557,7 +589,11 @@ export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundP
   const [isSvgGenerating, setIsSvgGenerating] = useState<boolean>(false);
   const [svgOrchestrationStep, setSvgOrchestrationStep] = useState<number>(-1);
   const [svgAiLogs, setSvgAiLogs] = useState<{ role: string; content: string }[]>([
-    { role: 'assistant', content: "I am Mewtwo, Lead Architect of the AI Developer Team. Describe the vector asset, monogram, or animation you want to construct, and we'll draft, style, audit, and compile the SVG code." }
+    {
+      role: 'assistant',
+      content:
+        "I am Mewtwo, Lead Architect of the AI Developer Team. Describe the vector asset, monogram, or animation you want to construct, and we'll draft, style, audit, and compile the SVG code.",
+    },
   ]);
 
   const prettifySvg = () => {
@@ -565,7 +601,7 @@ export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundP
     const reg = /(>)(<)(\/*)/g;
     const html = svgCode.replace(reg, '$1\r\n$2$3');
     let pad = 0;
-    html.split('\r\n').forEach((line) => {
+    html.split('\r\n').forEach(line => {
       let indent = 0;
       if (line.match(/.+<\/\w[^>]*>$/)) {
         indent = 0;
@@ -598,17 +634,29 @@ export default function DevPlayground({ theme: _theme = 'dark' }: DevPlaygroundP
     setSvgAiLogs(updatedLogs);
 
     const steps = [
-      { agent: 'Lead Architect Mewtwo', msg: 'Lead Architect Mewtwo is drafting coordinate layout & viewBox grids...' },
-      { agent: 'Coder Porygon2', msg: 'Coder Porygon2 is coding vector paths, shapes, and gradients...' },
-      { agent: 'Security Magnezone', msg: 'Security Magnezone is auditing raw elements for safety compliance...' },
-      { agent: 'DevOps Rotom-Wash', msg: 'DevOps Rotom-Wash is optimizing compilation and wrapping dynamic animation states...' }
+      {
+        agent: 'Lead Architect Mewtwo',
+        msg: 'Lead Architect Mewtwo is drafting coordinate layout & viewBox grids...',
+      },
+      {
+        agent: 'Coder Porygon2',
+        msg: 'Coder Porygon2 is coding vector paths, shapes, and gradients...',
+      },
+      {
+        agent: 'Security Magnezone',
+        msg: 'Security Magnezone is auditing raw elements for safety compliance...',
+      },
+      {
+        agent: 'DevOps Rotom-Wash',
+        msg: 'DevOps Rotom-Wash is optimizing compilation and wrapping dynamic animation states...',
+      },
     ];
 
     for (let i = 0; i < 4; i++) {
       setSvgOrchestrationStep(i);
       setSvgAiLogs(prev => [
         ...prev.filter(l => !l.content.startsWith('[Orchestration]')),
-        { role: 'system', content: `[Orchestration] ${steps[i].msg}` }
+        { role: 'system', content: `[Orchestration] ${steps[i].msg}` },
       ]);
       await new Promise(resolve => setTimeout(resolve, 800));
     }
@@ -627,15 +675,17 @@ ${svgCode}`;
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           prompt: systemInstructions,
-          history: []
-        })
+          history: [],
+        }),
       });
 
       if (!response.ok) throw new Error('API request failed');
       const data = await response.json();
       const rawText = data.reply || '';
 
-      const svgMatch = rawText.match(/```xml([\s\S]*?)```/) || rawText.match(/```html([\s\S]*?)```/) || rawText.match(/```([\s\S]*?)```/) || [null, rawText];
+      const svgMatch = rawText.match(/```xml([\s\S]*?)```/) ||
+        rawText.match(/```html([\s\S]*?)```/) ||
+        rawText.match(/```([\s\S]*?)```/) || [null, rawText];
       let cleanSvg = (svgMatch[1] || rawText).trim();
 
       if (!cleanSvg.startsWith('<svg') && cleanSvg.includes('<svg')) {
@@ -648,7 +698,11 @@ ${svgCode}`;
         setSvgCode(cleanSvg);
         setSvgAiLogs(prev => [
           ...prev.filter(l => !l.content.startsWith('[Orchestration]')),
-          { role: 'assistant', content: 'SVG successfully created, verified, and loaded into your editor by the AI Developer Team.' }
+          {
+            role: 'assistant',
+            content:
+              'SVG successfully created, verified, and loaded into your editor by the AI Developer Team.',
+          },
         ]);
       } else {
         throw new Error('Failed to parse a valid SVG block from AI response');
@@ -656,7 +710,10 @@ ${svgCode}`;
     } catch (err: any) {
       setSvgAiLogs(prev => [
         ...prev.filter(l => !l.content.startsWith('[Orchestration]')),
-        { role: 'assistant', content: `Orchestration warning: The AI Dev team encountered an issue generating the SVG. Fallback error details: ${err.message || err}` }
+        {
+          role: 'assistant',
+          content: `Orchestration warning: The AI Dev team encountered an issue generating the SVG. Fallback error details: ${err.message || err}`,
+        },
       ]);
     } finally {
       setIsSvgGenerating(false);
@@ -679,7 +736,7 @@ ${svgCode}`;
     let timer: any;
     if (isPlaying && compileSuccess) {
       timer = setInterval(() => {
-        setCurrentStepIndex((prev) => {
+        setCurrentStepIndex(prev => {
           if (prev >= selectedProgram.steps.length - 1) {
             setIsPlaying(false);
             return prev;
@@ -714,17 +771,20 @@ ${svgCode}`;
       '[INFO] Optimization level -O3 enabled.',
       '[INFO] Resolving memory bounds: 1 Stack Frame allocated.',
       '[INFO] Mapping pointers to 32-bit offset register arrays...',
-      '[INFO] WebAssembly bytecode output generation complete (216 bytes).'
+      '[INFO] WebAssembly bytecode output generation complete (216 bytes).',
     ];
 
     logs.forEach((log, idx) => {
-      setTimeout(() => {
-        setCompileLogs((prev) => [...prev, log]);
-        if (idx === logs.length - 1) {
-          setIsCompiling(false);
-          setCompileSuccess(true);
-        }
-      }, (idx + 1) * 350);
+      setTimeout(
+        () => {
+          setCompileLogs(prev => [...prev, log]);
+          if (idx === logs.length - 1) {
+            setIsCompiling(false);
+            setCompileSuccess(true);
+          }
+        },
+        (idx + 1) * 350,
+      );
     });
   };
 
@@ -734,21 +794,51 @@ ${svgCode}`;
     secondary: '#34D399',
     glow: 'rgba(34, 211, 238, 0.25)',
     text: 'text-amber-color',
-    bg: 'bg-amber-color/10'
+    bg: 'bg-amber-color/10',
   });
 
   const syncBrandColors = () => {
     const brandColor = localStorage.getItem('linacre_brand_color') || 'cyber';
     if (brandColor === 'ocean' || brandColor === 'cyan') {
-      setActiveColor({ primary: '#38BDF8', secondary: '#2DD4BF', glow: 'rgba(56, 189, 248, 0.22)', text: 'text-cyan', bg: 'bg-cyan/10' });
+      setActiveColor({
+        primary: '#38BDF8',
+        secondary: '#2DD4BF',
+        glow: 'rgba(56, 189, 248, 0.22)',
+        text: 'text-cyan',
+        bg: 'bg-cyan/10',
+      });
     } else if (brandColor === 'matrix' || brandColor === 'emerald') {
-      setActiveColor({ primary: '#2DD4BF', secondary: '#A3E635', glow: 'rgba(45, 212, 191, 0.22)', text: 'text-emerald-color', bg: 'bg-emerald-color/10' });
+      setActiveColor({
+        primary: '#2DD4BF',
+        secondary: '#A3E635',
+        glow: 'rgba(45, 212, 191, 0.22)',
+        text: 'text-emerald-color',
+        bg: 'bg-emerald-color/10',
+      });
     } else if (brandColor === 'violet' || brandColor === 'crimson') {
-      setActiveColor({ primary: '#818CF8', secondary: '#22D3EE', glow: 'rgba(129, 140, 248, 0.22)', text: 'text-purple-color', bg: 'bg-purple-color/10' });
+      setActiveColor({
+        primary: '#818CF8',
+        secondary: '#22D3EE',
+        glow: 'rgba(129, 140, 248, 0.22)',
+        text: 'text-purple-color',
+        bg: 'bg-purple-color/10',
+      });
     } else if (brandColor === 'mono') {
-      setActiveColor({ primary: '#E2F7FA', secondary: '#7DD3FC', glow: 'rgba(226, 247, 250, 0.15)', text: 'text-slate-200', bg: 'bg-slate-800/40' });
+      setActiveColor({
+        primary: '#E2F7FA',
+        secondary: '#7DD3FC',
+        glow: 'rgba(226, 247, 250, 0.15)',
+        text: 'text-slate-200',
+        bg: 'bg-slate-800/40',
+      });
     } else {
-      setActiveColor({ primary: '#22D3EE', secondary: '#34D399', glow: 'rgba(34, 211, 238, 0.22)', text: 'text-amber-color', bg: 'bg-amber-color/10' });
+      setActiveColor({
+        primary: '#22D3EE',
+        secondary: '#34D399',
+        glow: 'rgba(34, 211, 238, 0.22)',
+        text: 'text-amber-color',
+        bg: 'bg-amber-color/10',
+      });
     }
   };
 
@@ -765,9 +855,10 @@ ${svgCode}`;
 
   const handleCopy = (text: string, type: string) => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text)
+      navigator.clipboard
+        .writeText(text)
         .then(() => triggerCopyFeedback(type))
-        .catch((err) => {
+        .catch(err => {
           console.warn('Navigator clipboard copy failed, falling back: ', err);
           fallbackCopyText(text, type);
         });
@@ -777,12 +868,12 @@ ${svgCode}`;
   };
 
   const fallbackCopyText = (text: string, type: string) => {
-    const textArea = document.createElement("textarea");
+    const textArea = document.createElement('textarea');
     textArea.value = text;
-    textArea.style.top = "0";
-    textArea.style.left = "0";
-    textArea.style.position = "fixed";
-    textArea.style.opacity = "0";
+    textArea.style.top = '0';
+    textArea.style.left = '0';
+    textArea.style.position = 'fixed';
+    textArea.style.opacity = '0';
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
@@ -802,7 +893,8 @@ ${svgCode}`;
   // ==========================================
   // UTILITY 1: JWT DECODER & INSPECTOR STATE
   // ==========================================
-  const defaultJwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkRhdmlkIExpbmFjcmUiLCJpYXQiOjE1MTYyMzkwMjIsImV4cCI6MTc1MTYyMzkwMiwiYWRtaW4iOnRydWUsInJvbGVzIjpbIkRldmVsb3BlciIsIkRldk9wcyJdfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+  const defaultJwt =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkRhdmlkIExpbmFjcmUiLCJpYXQiOjE1MTYyMzkwMjIsImV4cCI6MTc1MTYyMzkwMiwiYWRtaW4iOnRydWUsInJvbGVzIjpbIkRldmVsb3BlciIsIkRldk9wcyJdfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
   const [jwtInput, setJwtInput] = useState(defaultJwt);
   const [jwtHeader, setJwtHeader] = useState('');
   const [jwtPayload, setJwtPayload] = useState('');
@@ -820,7 +912,9 @@ ${svgCode}`;
 
     const parts = jwtInput.split('.');
     if (parts.length !== 3) {
-      setJwtError('Invalid JWT: A token must consist of 3 base64url-encoded parts separated by dots (.)');
+      setJwtError(
+        'Invalid JWT: A token must consist of 3 base64url-encoded parts separated by dots (.)',
+      );
       setJwtHeader('');
       setJwtPayload('');
       setJwtExpiryStatus('none');
@@ -836,8 +930,8 @@ ${svgCode}`;
         return decodeURIComponent(
           atob(base64)
             .split('')
-            .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-            .join('')
+            .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+            .join(''),
         );
       };
 
@@ -905,7 +999,11 @@ ${svgCode}`;
       backdropFilter: `blur(${glassBlur}px)`,
       WebkitBackdropFilter: `blur(${glassBlur}px)`,
       border: `${glassBorder}px solid ${border}`,
-      boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 ${glassGlow * 4}px ${glassGlow > 0 ? '1px' : '0px'} ${activeColor.primary}${Math.floor(glassGlow * 20).toString(16).padStart(2, '0')}`
+      boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 ${glassGlow * 4}px ${glassGlow > 0 ? '1px' : '0px'} ${activeColor.primary}${Math.floor(
+        glassGlow * 20,
+      )
+        .toString(16)
+        .padStart(2, '0')}`,
     };
   };
 
@@ -941,7 +1039,9 @@ border-radius: 12px;`;
   // UTILITY 3: REGEX TESTER STATE
   // ==========================================
   const [regexPattern, setRegexPattern] = useState('(\\w+)@(\\w+)\\.(\\w+)');
-  const [regexText, setRegexText] = useState('Contact us at david@linacre.site or engineering@linacre.site for inquiries.');
+  const [regexText, setRegexText] = useState(
+    'Contact us at david@linacre.site or engineering@linacre.site for inquiries.',
+  );
   const [regexFlags, setRegexFlags] = useState('g');
   const [regexMatches, setRegexMatches] = useState<any[]>([]);
   const [regexError, setRegexError] = useState<string | null>(null);
@@ -971,7 +1071,7 @@ border-radius: 12px;`;
           matches.push({
             index: match.index,
             value: match[0],
-            groups: match.slice(1)
+            groups: match.slice(1),
           });
 
           if (match[0] === '') {
@@ -984,7 +1084,7 @@ border-radius: 12px;`;
           matches.push({
             index: match.index,
             value: match[0],
-            groups: match.slice(1)
+            groups: match.slice(1),
           });
         }
       }
@@ -1000,10 +1100,7 @@ border-radius: 12px;`;
   // Highlighting helper for Regex matches
   const renderRegexHighlightedText = () => {
     if (regexError || !regexPattern || regexMatches.length === 0) {
-      return regexText
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+      return regexText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
     try {
@@ -1022,7 +1119,8 @@ border-radius: 12px;`;
         const matchIndex = match.index;
 
         // Append text preceding match
-        output += regexText.slice(lastIndex, matchIndex)
+        output += regexText
+          .slice(lastIndex, matchIndex)
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
           .replace(/>/g, '&gt;');
@@ -1043,17 +1141,15 @@ border-radius: 12px;`;
       }
 
       // Append remaining text
-      output += regexText.slice(lastIndex)
+      output += regexText
+        .slice(lastIndex)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 
       return output;
     } catch (e) {
-      return regexText
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+      return regexText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
   };
 
@@ -1074,14 +1170,14 @@ border-radius: 12px;`;
     try {
       const cryptoObj = window.crypto;
       const uuid = '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, (c: any) =>
-        (c ^ cryptoObj.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        (c ^ (cryptoObj.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16),
       );
       setUuidResult(uuid);
     } catch (e) {
       // Fallback
       const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        const r = Math.random() * 16 | 0;
-        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        const r = (Math.random() * 16) | 0;
+        const v = c === 'x' ? r : (r & 0x3) | 0x8;
         return v.toString(16);
       });
       setUuidResult(uuid);
@@ -1123,7 +1219,8 @@ border-radius: 12px;`;
   }, []);
 
   const getPasswordStrength = () => {
-    if (!passwordResult || passwordResult.includes(' ')) return { label: 'Weak', percent: 20, color: 'bg-rose-500' };
+    if (!passwordResult || passwordResult.includes(' '))
+      return { label: 'Weak', percent: 20, color: 'bg-rose-500' };
 
     let score = 0;
     if (passwordResult.length >= 8) score++;
@@ -1134,7 +1231,8 @@ border-radius: 12px;`;
     if (passSymbols) score++;
 
     if (score <= 3) return { label: 'Weak', percent: 30, color: 'bg-rose-500' };
-    if (score === 4 || score === 5) return { label: 'Medium', percent: 65, color: 'bg-amber-color' };
+    if (score === 4 || score === 5)
+      return { label: 'Medium', percent: 65, color: 'bg-amber-color' };
     return { label: 'Strong', percent: 100, color: 'bg-emerald-color' };
   };
 
@@ -1162,7 +1260,11 @@ border-radius: 12px;`;
   // UTILITY 6: CRON EXPLAINER & BUILDER STATE
   // ==========================================
   const [cronExpr, setCronExpr] = useState('*/15 * * * *');
-  const [cronParsed, setCronParsed] = useState<{ summary: string; nextRuns: string[]; error?: string }>({ summary: '', nextRuns: [] });
+  const [cronParsed, setCronParsed] = useState<{
+    summary: string;
+    nextRuns: string[];
+    error?: string;
+  }>({ summary: '', nextRuns: [] });
 
   useEffect(() => {
     setCronParsed(parseCron(cronExpr));
@@ -1190,7 +1292,8 @@ border-radius: 12px;`;
           Developer Utility Suite
         </h1>
         <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-3xl">
-          Clean, client-side developer tools for daily execution. Fully integrated with your active visual brand configurations, responsive, and secure.
+          Clean, client-side developer tools for daily execution. Fully integrated with your active
+          visual brand configurations, responsive, and secure.
         </p>
       </section>
 
@@ -1212,7 +1315,9 @@ border-radius: 12px;`;
             <Braces className="w-4 h-4 text-cyan" />
             <div className="flex-1">
               <div>JWT Decoder</div>
-              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">Parse, decode & verify</div>
+              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">
+                Parse, decode & verify
+              </div>
             </div>
           </button>
 
@@ -1227,7 +1332,9 @@ border-radius: 12px;`;
             <Sparkles className="w-4 h-4 text-cyan" />
             <div className="flex-1">
               <div>Glassmorphism Builder</div>
-              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">Visual UI CSS generator</div>
+              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">
+                Visual UI CSS generator
+              </div>
             </div>
           </button>
 
@@ -1242,7 +1349,9 @@ border-radius: 12px;`;
             <Search className="w-4 h-4 text-cyan" />
             <div className="flex-1">
               <div>RegEx Matcher</div>
-              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">Real-time matching engine</div>
+              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">
+                Real-time matching engine
+              </div>
             </div>
           </button>
 
@@ -1257,7 +1366,9 @@ border-radius: 12px;`;
             <Key className="w-4 h-4 text-cyan" />
             <div className="flex-1">
               <div>Secure Generator</div>
-              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">UUID v4 & password keys</div>
+              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">
+                UUID v4 & password keys
+              </div>
             </div>
           </button>
 
@@ -1272,7 +1383,9 @@ border-radius: 12px;`;
             <Code className="w-4 h-4 text-cyan" />
             <div className="flex-1">
               <div>C-to-Wasm Compiler</div>
-              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">Wasm memory & pointer visualizer</div>
+              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">
+                Wasm memory & pointer visualizer
+              </div>
             </div>
           </button>
 
@@ -1287,7 +1400,9 @@ border-radius: 12px;`;
             <Sparkles className="w-4 h-4 text-cyan" />
             <div className="flex-1">
               <div>SVG Vector Creator</div>
-              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">Dynamic XML canvas & AI design</div>
+              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">
+                Dynamic XML canvas & AI design
+              </div>
             </div>
           </button>
 
@@ -1302,7 +1417,9 @@ border-radius: 12px;`;
             <Code className="w-4 h-4 text-emerald-color" />
             <div className="flex-1">
               <div>JSON to TS Types</div>
-              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">Infer TypeScript interfaces</div>
+              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">
+                Infer TypeScript interfaces
+              </div>
             </div>
           </button>
 
@@ -1317,7 +1434,9 @@ border-radius: 12px;`;
             <Terminal className="w-4 h-4 text-amber-color" />
             <div className="flex-1">
               <div>Cron Explainer</div>
-              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">Human schedule & next runs</div>
+              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">
+                Human schedule & next runs
+              </div>
             </div>
           </button>
 
@@ -1332,7 +1451,9 @@ border-radius: 12px;`;
             <Sliders className="w-4 h-4 text-purple-color" />
             <div className="flex-1">
               <div>HSL Theme Engine</div>
-              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">Brand HSL sliders & CSS exports</div>
+              <div className="text-[10px] text-muted-foreground/60 font-normal leading-normal mt-0.5">
+                Brand HSL sliders & CSS exports
+              </div>
             </div>
           </button>
         </div>
@@ -1354,7 +1475,9 @@ border-radius: 12px;`;
                   <div className="flex items-center justify-between border-b border-border-color/50 pb-3">
                     <div className="flex items-center gap-2">
                       <Braces className="w-4 h-4 text-amber-color" />
-                      <h2 className="font-display text-base font-bold text-foreground">JWT Decoder & Inspector</h2>
+                      <h2 className="font-display text-base font-bold text-foreground">
+                        JWT Decoder & Inspector
+                      </h2>
                     </div>
                     <button
                       onClick={() => setJwtInput(defaultJwt)}
@@ -1368,21 +1491,25 @@ border-radius: 12px;`;
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                     {/* Input Area */}
                     <div className="space-y-2">
-                      <label className="block text-xs font-mono font-semibold text-muted-foreground">Encoded JWT Token</label>
+                      <label className="block text-xs font-mono font-semibold text-muted-foreground">
+                        Encoded JWT Token
+                      </label>
                       <textarea
                         value={jwtInput}
-                        onChange={(e) => setJwtInput(e.target.value)}
+                        onChange={e => setJwtInput(e.target.value)}
                         placeholder="Paste your encoded JWT here..."
                         className="w-full h-80 p-3 bg-[#031018] text-xs font-mono rounded-lg border border-border-color focus:border-amber-color focus:outline-none resize-none scrollbar-thin text-[#ff79c6] break-all leading-normal"
                         id="jwt-textarea-input"
                       />
 
                       {jwtExpiryStatus !== 'none' && (
-                        <div className={`p-2.5 rounded-md border text-xs font-mono flex items-center gap-2 ${
-                          jwtExpiryStatus === 'valid'
-                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-color'
-                            : 'bg-rose-500/10 border-rose-500/20 text-rose-500'
-                        }`}>
+                        <div
+                          className={`p-2.5 rounded-md border text-xs font-mono flex items-center gap-2 ${
+                            jwtExpiryStatus === 'valid'
+                              ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-color'
+                              : 'bg-rose-500/10 border-rose-500/20 text-rose-500'
+                          }`}
+                        >
                           {jwtExpiryStatus === 'valid' ? (
                             <>
                               <CheckCircle className="w-4 h-4" />
@@ -1410,13 +1537,19 @@ border-radius: 12px;`;
                       {/* Header block */}
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
-                          <label className="block text-xs font-mono font-semibold text-muted-foreground text-cyan">Decoded Header (algorithm & type)</label>
+                          <label className="block text-xs font-mono font-semibold text-muted-foreground text-cyan">
+                            Decoded Header (algorithm & type)
+                          </label>
                           {jwtHeader && (
                             <button
                               onClick={() => handleCopy(jwtHeader, 'header')}
                               className="text-[10px] font-mono text-muted-foreground hover:text-foreground flex items-center gap-1 cursor-pointer"
                             >
-                              {copiedType === 'header' ? <Check className="w-3 h-3 text-emerald-color" /> : <Copy className="w-3 h-3" />}
+                              {copiedType === 'header' ? (
+                                <Check className="w-3 h-3 text-emerald-color" />
+                              ) : (
+                                <Copy className="w-3 h-3" />
+                              )}
                               <span>{copiedType === 'header' ? 'Copied' : 'Copy JSON'}</span>
                             </button>
                           )}
@@ -1426,20 +1559,35 @@ border-radius: 12px;`;
                           aria-label="Decoded JWT header JSON"
                           className="w-full h-24 p-3 bg-[#031018] text-[11px] font-mono rounded-lg border border-border-color overflow-y-auto scrollbar-thin text-amber-color focus:outline-none focus:ring-1 focus:ring-amber-color"
                         >
-                          {jwtHeader ? jwtHeader : <span className="text-muted-foreground/40">// waiting for input...</span>}
+                          {jwtHeader ? (
+                            jwtHeader
+                          ) : (
+                            <span className="text-muted-foreground/40">
+                              // waiting for input...
+                            </span>
+                          )}
                         </pre>
                       </div>
 
                       {/* Payload block */}
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
-                          <label className="block text-xs font-mono font-semibold text-muted-foreground text-purple-color">Decoded Payload (claims & roles)</label>
+                          <label className="block text-xs font-mono font-semibold text-muted-foreground text-purple-color">
+                            Decoded Payload (claims & roles)
+                          </label>
                           {jwtPayload && (
                             <button
-                              onClick={() => { navigator.clipboard.writeText(jwtPayload); triggerCopyFeedback('payload'); }}
+                              onClick={() => {
+                                navigator.clipboard.writeText(jwtPayload);
+                                triggerCopyFeedback('payload');
+                              }}
                               className="text-[10px] font-mono text-muted-foreground hover:text-foreground flex items-center gap-1 cursor-pointer"
                             >
-                              {copiedType === 'payload' ? <Check className="w-3 h-3 text-emerald-color" /> : <Copy className="w-3 h-3" />}
+                              {copiedType === 'payload' ? (
+                                <Check className="w-3 h-3 text-emerald-color" />
+                              ) : (
+                                <Copy className="w-3 h-3" />
+                              )}
                               <span>{copiedType === 'payload' ? 'Copied' : 'Copy JSON'}</span>
                             </button>
                           )}
@@ -1449,7 +1597,13 @@ border-radius: 12px;`;
                           aria-label="Decoded JWT payload JSON"
                           className="w-full h-44 p-3 bg-[#031018] text-[11px] font-mono rounded-lg border border-border-color overflow-y-auto scrollbar-thin text-cyan focus:outline-none focus:ring-1 focus:ring-cyan"
                         >
-                          {jwtPayload ? jwtPayload : <span className="text-muted-foreground/40">// waiting for input...</span>}
+                          {jwtPayload ? (
+                            jwtPayload
+                          ) : (
+                            <span className="text-muted-foreground/40">
+                              // waiting for input...
+                            </span>
+                          )}
                         </pre>
                       </div>
                     </div>
@@ -1463,7 +1617,9 @@ border-radius: 12px;`;
                   <div className="flex items-center justify-between border-b border-border-color/50 pb-3">
                     <div className="flex items-center gap-2">
                       <Sliders className="w-4 h-4 text-amber-color" />
-                      <h2 className="font-display text-base font-bold text-foreground">Glassmorphism & Shadow Builder</h2>
+                      <h2 className="font-display text-base font-bold text-foreground">
+                        Glassmorphism & Shadow Builder
+                      </h2>
                     </div>
                   </div>
 
@@ -1473,7 +1629,9 @@ border-radius: 12px;`;
                       {/* Blur Slider */}
                       <div className="space-y-1.5">
                         <div className="flex justify-between font-semibold">
-                          <label htmlFor="glass-blur-slider" className="text-muted-foreground">Backdrop Blur</label>
+                          <label htmlFor="glass-blur-slider" className="text-muted-foreground">
+                            Backdrop Blur
+                          </label>
                           <span className="text-cyan">{glassBlur}px</span>
                         </div>
                         <input
@@ -1482,7 +1640,7 @@ border-radius: 12px;`;
                           min="0"
                           max="40"
                           value={glassBlur}
-                          onChange={(e) => setGlassBlur(Number(e.target.value))}
+                          onChange={e => setGlassBlur(Number(e.target.value))}
                           className="w-full accent-cyan bg-[#031018] h-1.5 rounded-lg appearance-none cursor-pointer"
                         />
                       </div>
@@ -1490,7 +1648,9 @@ border-radius: 12px;`;
                       {/* Opacity Slider */}
                       <div className="space-y-1.5">
                         <div className="flex justify-between font-semibold">
-                          <label htmlFor="glass-opacity-slider" className="text-muted-foreground">Glass Opacity</label>
+                          <label htmlFor="glass-opacity-slider" className="text-muted-foreground">
+                            Glass Opacity
+                          </label>
                           <span className="text-cyan">{glassOpacity}%</span>
                         </div>
                         <input
@@ -1499,7 +1659,7 @@ border-radius: 12px;`;
                           min="5"
                           max="90"
                           value={glassOpacity}
-                          onChange={(e) => setGlassOpacity(Number(e.target.value))}
+                          onChange={e => setGlassOpacity(Number(e.target.value))}
                           className="w-full accent-cyan bg-[#031018] h-1.5 rounded-lg appearance-none cursor-pointer"
                         />
                       </div>
@@ -1507,7 +1667,9 @@ border-radius: 12px;`;
                       {/* Border Width */}
                       <div className="space-y-1.5">
                         <div className="flex justify-between font-semibold">
-                          <label htmlFor="glass-border-slider" className="text-muted-foreground">Border Stroke</label>
+                          <label htmlFor="glass-border-slider" className="text-muted-foreground">
+                            Border Stroke
+                          </label>
                           <span className="text-cyan">{glassBorder}px</span>
                         </div>
                         <input
@@ -1516,7 +1678,7 @@ border-radius: 12px;`;
                           min="0"
                           max="5"
                           value={glassBorder}
-                          onChange={(e) => setGlassBorder(Number(e.target.value))}
+                          onChange={e => setGlassBorder(Number(e.target.value))}
                           className="w-full accent-cyan bg-[#031018] h-1.5 rounded-lg appearance-none cursor-pointer"
                         />
                       </div>
@@ -1524,7 +1686,9 @@ border-radius: 12px;`;
                       {/* Glow Slider */}
                       <div className="space-y-1.5">
                         <div className="flex justify-between font-semibold">
-                          <label htmlFor="glass-glow-slider" className="text-muted-foreground">Ambient Glow Size</label>
+                          <label htmlFor="glass-glow-slider" className="text-muted-foreground">
+                            Ambient Glow Size
+                          </label>
                           <span className="text-cyan">{glassGlow}px</span>
                         </div>
                         <input
@@ -1533,16 +1697,18 @@ border-radius: 12px;`;
                           min="0"
                           max="12"
                           value={glassGlow}
-                          onChange={(e) => setGlassGlow(Number(e.target.value))}
+                          onChange={e => setGlassGlow(Number(e.target.value))}
                           className="w-full accent-cyan bg-[#031018] h-1.5 rounded-lg appearance-none cursor-pointer"
                         />
                       </div>
 
                       {/* Glass Color Tone selector */}
                       <div className="space-y-1.5">
-                        <span className="block font-semibold text-muted-foreground">Background Color Tone</span>
+                        <span className="block font-semibold text-muted-foreground">
+                          Background Color Tone
+                        </span>
                         <div className="flex gap-2">
-                          {(['dark', 'light', 'brand'] as const).map((color) => (
+                          {(['dark', 'light', 'brand'] as const).map(color => (
                             <button
                               key={color}
                               onClick={() => setGlassColor(color)}
@@ -1564,7 +1730,10 @@ border-radius: 12px;`;
                       <div className="relative h-44 rounded-xl overflow-hidden border border-border-color flex items-center justify-center bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] bg-[#031018]">
                         {/* Decorative floating balls behind card */}
                         <div className="absolute top-6 left-8 w-20 h-20 rounded-full bg-cyan/30 blur-md animate-pulse" />
-                        <div className="absolute bottom-6 right-8 w-20 h-20 rounded-full bg-purple-color/30 blur-md animate-pulse" style={{ animationDuration: '4s' }} />
+                        <div
+                          className="absolute bottom-6 right-8 w-20 h-20 rounded-full bg-purple-color/30 blur-md animate-pulse"
+                          style={{ animationDuration: '4s' }}
+                        />
 
                         {/* Interactive Glass Card preview */}
                         <div
@@ -1572,12 +1741,18 @@ border-radius: 12px;`;
                           className="w-72 p-5 rounded-xl transition-all duration-150 z-10 flex flex-col justify-between"
                         >
                           <div className="flex items-center justify-between">
-                            <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground font-bold">Emblem Node Preview</span>
+                            <span className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground font-bold">
+                              Emblem Node Preview
+                            </span>
                             <Sparkles className="w-3.5 h-3.5 text-amber-color animate-spin-slow" />
                           </div>
                           <div className="space-y-1.5 my-3">
-                            <div className="font-display font-bold text-xs text-foreground uppercase tracking-wide">David Christopher Linacre</div>
-                            <div className="font-mono text-[9px] text-muted-foreground leading-relaxed">Adjust controls to generate code dynamically.</div>
+                            <div className="font-display font-bold text-xs text-foreground uppercase tracking-wide">
+                              David Christopher Linacre
+                            </div>
+                            <div className="font-mono text-[9px] text-muted-foreground leading-relaxed">
+                              Adjust controls to generate code dynamically.
+                            </div>
                           </div>
                           <div className="flex items-center gap-1.5 text-[9px] font-mono text-cyan">
                             <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-color animate-ping" />
@@ -1595,7 +1770,11 @@ border-radius: 12px;`;
                               onClick={() => handleCopy(getGlassCssString(), 'css')}
                               className="text-cyan hover:text-amber-color flex items-center gap-1 cursor-pointer"
                             >
-                              {copiedType === 'css' ? <Check className="w-3 h-3 text-emerald-color" /> : <Copy className="w-3 h-3" />}
+                              {copiedType === 'css' ? (
+                                <Check className="w-3 h-3 text-emerald-color" />
+                              ) : (
+                                <Copy className="w-3 h-3" />
+                              )}
                               <span>{copiedType === 'css' ? 'Copied CSS' : 'Copy CSS'}</span>
                             </button>
                             <span className="text-muted-foreground/30">|</span>
@@ -1603,7 +1782,11 @@ border-radius: 12px;`;
                               onClick={() => handleCopy(getGlassTailwindString(), 'tw')}
                               className="text-cyan hover:text-amber-color flex items-center gap-1 cursor-pointer"
                             >
-                              {copiedType === 'tw' ? <Check className="w-3 h-3 text-emerald-color" /> : <Copy className="w-3 h-3" />}
+                              {copiedType === 'tw' ? (
+                                <Check className="w-3 h-3 text-emerald-color" />
+                              ) : (
+                                <Copy className="w-3 h-3" />
+                              )}
                               <span>{copiedType === 'tw' ? 'Copied HTML' : 'Copy Tailwind'}</span>
                             </button>
                           </div>
@@ -1627,7 +1810,9 @@ border-radius: 12px;`;
                   <div className="flex items-center justify-between border-b border-border-color/50 pb-3">
                     <div className="flex items-center gap-2">
                       <Search className="w-4 h-4 text-amber-color" />
-                      <h2 className="font-display text-base font-bold text-foreground">RegEx Matcher & Highlighting Engine</h2>
+                      <h2 className="font-display text-base font-bold text-foreground">
+                        RegEx Matcher & Highlighting Engine
+                      </h2>
                     </div>
                   </div>
 
@@ -1635,28 +1820,36 @@ border-radius: 12px;`;
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                       {/* Pattern */}
                       <div className="md:col-span-3 space-y-1">
-                        <label className="block text-xs font-semibold text-muted-foreground">Regular Expression Pattern</label>
+                        <label className="block text-xs font-semibold text-muted-foreground">
+                          Regular Expression Pattern
+                        </label>
                         <div className="relative">
-                          <span className="absolute left-3 top-2.5 text-muted-foreground/50">/</span>
+                          <span className="absolute left-3 top-2.5 text-muted-foreground/50">
+                            /
+                          </span>
                           <input
                             type="text"
                             value={regexPattern}
-                            onChange={(e) => setRegexPattern(e.target.value)}
+                            onChange={e => setRegexPattern(e.target.value)}
                             placeholder="Enter regex pattern..."
                             className="w-full pl-5 pr-5 py-2 bg-[#031018] text-xs font-mono rounded-lg border border-border-color focus:border-amber-color focus:outline-none text-[#22D3EE]"
                             id="regex-pattern-input"
                           />
-                          <span className="absolute right-3 top-2.5 text-muted-foreground/50">/</span>
+                          <span className="absolute right-3 top-2.5 text-muted-foreground/50">
+                            /
+                          </span>
                         </div>
                       </div>
 
                       {/* Flags */}
                       <div className="md:col-span-1 space-y-1">
-                        <label className="block text-xs font-semibold text-muted-foreground">Flags</label>
+                        <label className="block text-xs font-semibold text-muted-foreground">
+                          Flags
+                        </label>
                         <input
                           type="text"
                           value={regexFlags}
-                          onChange={(e) => setRegexFlags(e.target.value)}
+                          onChange={e => setRegexFlags(e.target.value)}
                           placeholder="g, i, m..."
                           className="w-full px-3 py-2 bg-[#031018] text-xs font-mono rounded-lg border border-border-color focus:border-amber-color focus:outline-none text-cyan"
                           id="regex-flags-input"
@@ -1673,10 +1866,12 @@ border-radius: 12px;`;
 
                     {/* Test Text */}
                     <div className="space-y-1">
-                      <label className="block text-xs font-semibold text-muted-foreground">Test Text String</label>
+                      <label className="block text-xs font-semibold text-muted-foreground">
+                        Test Text String
+                      </label>
                       <textarea
                         value={regexText}
-                        onChange={(e) => setRegexText(e.target.value)}
+                        onChange={e => setRegexText(e.target.value)}
                         placeholder="Type or paste string to test regex matches..."
                         className="w-full h-24 p-3 bg-[#031018] text-xs font-mono rounded-lg border border-border-color focus:border-amber-color focus:outline-none resize-none scrollbar-thin text-foreground leading-relaxed"
                         id="regex-test-textarea"
@@ -1685,7 +1880,9 @@ border-radius: 12px;`;
 
                     {/* Highlights Output */}
                     <div className="space-y-1.5">
-                      <span className="block text-xs font-semibold text-muted-foreground text-cyan">Real-Time Match Highlights</span>
+                      <span className="block text-xs font-semibold text-muted-foreground text-cyan">
+                        Real-Time Match Highlights
+                      </span>
                       <div
                         className="w-full min-h-16 p-3.5 bg-[#031018]/50 border border-border-color/60 rounded-lg text-xs leading-relaxed overflow-x-auto whitespace-pre-wrap select-text"
                         dangerouslySetInnerHTML={{ __html: renderRegexHighlightedText() }}
@@ -1703,11 +1900,19 @@ border-radius: 12px;`;
                             key={idx}
                             className="px-3.5 py-2 border-b border-border-color/30 flex items-center justify-between hover:bg-muted/10"
                           >
-                            <span className="font-bold text-[10px] text-amber-color bg-amber-color/5 border border-amber-color/15 px-1.5 py-0.5 rounded">Match {idx + 1}</span>
-                            <span className="text-[11px] text-[#ff79c6] font-semibold select-text">"{m.value}"</span>
-                            <span className="text-[10px] text-muted-foreground/60">Index: {m.index}</span>
+                            <span className="font-bold text-[10px] text-amber-color bg-amber-color/5 border border-amber-color/15 px-1.5 py-0.5 rounded">
+                              Match {idx + 1}
+                            </span>
+                            <span className="text-[11px] text-[#ff79c6] font-semibold select-text">
+                              "{m.value}"
+                            </span>
+                            <span className="text-[10px] text-muted-foreground/60">
+                              Index: {m.index}
+                            </span>
                             {m.groups.length > 0 && (
-                              <span className="text-[9px] text-cyan">Groups: {JSON.stringify(m.groups)}</span>
+                              <span className="text-[9px] text-cyan">
+                                Groups: {JSON.stringify(m.groups)}
+                              </span>
                             )}
                           </div>
                         ))}
@@ -1729,7 +1934,9 @@ border-radius: 12px;`;
                   <div className="flex items-center justify-between border-b border-border-color/50 pb-3">
                     <div className="flex items-center gap-2">
                       <Key className="w-4 h-4 text-amber-color" />
-                      <h2 className="font-display text-base font-bold text-foreground">Secure UUID & Password Generator</h2>
+                      <h2 className="font-display text-base font-bold text-foreground">
+                        Secure UUID & Password Generator
+                      </h2>
                     </div>
                     {/* Inner Tabs */}
                     <div className="flex gap-1 border border-border-color/60 rounded-lg p-0.5 bg-[#031018]">
@@ -1766,7 +1973,10 @@ border-radius: 12px;`;
                         className="space-y-4"
                       >
                         <div className="p-5 rounded-lg border border-border-color bg-[#031018] flex items-center justify-between relative group">
-                          <code className="text-sm font-mono font-semibold text-cyan break-all select-all pr-8" id="uuid-output-text">
+                          <code
+                            className="text-sm font-mono font-semibold text-cyan break-all select-all pr-8"
+                            id="uuid-output-text"
+                          >
                             {uuidResult}
                           </code>
                           <div className="flex gap-2 flex-shrink-0">
@@ -1775,7 +1985,11 @@ border-radius: 12px;`;
                               className="p-1.5 rounded hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-all cursor-pointer"
                               title="Copy UUID"
                             >
-                              {copiedType === 'uuid' ? <Check className="w-4 h-4 text-emerald-color" /> : <Copy className="w-4 h-4" />}
+                              {copiedType === 'uuid' ? (
+                                <Check className="w-4 h-4 text-emerald-color" />
+                              ) : (
+                                <Copy className="w-4 h-4" />
+                              )}
                             </button>
                             <button
                               onClick={generateUuid}
@@ -1790,7 +2004,9 @@ border-radius: 12px;`;
                         <div className="text-[11px] font-mono text-muted-foreground/60 leading-normal flex items-start gap-1.5">
                           <Lock className="w-3.5 h-3.5 text-cyan flex-shrink-0 mt-0.5" />
                           <p>
-                            Generates random UUIDs conforming to RFC 4122. Generated using cryptographically secure random number generators (`window.crypto.getRandomValues`) locally in your browser.
+                            Generates random UUIDs conforming to RFC 4122. Generated using
+                            cryptographically secure random number generators
+                            (`window.crypto.getRandomValues`) locally in your browser.
                           </p>
                         </div>
                       </motion.div>
@@ -1803,7 +2019,10 @@ border-radius: 12px;`;
                         className="space-y-4 font-mono text-xs"
                       >
                         <div className="p-5 rounded-lg border border-border-color bg-[#031018] flex items-center justify-between relative">
-                          <code className="text-sm font-mono font-semibold text-cyan break-all select-all pr-8" id="password-output-text">
+                          <code
+                            className="text-sm font-mono font-semibold text-cyan break-all select-all pr-8"
+                            id="password-output-text"
+                          >
                             {passwordResult}
                           </code>
                           <div className="flex gap-2 flex-shrink-0">
@@ -1812,7 +2031,11 @@ border-radius: 12px;`;
                               className="p-1.5 rounded hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-all cursor-pointer"
                               title="Copy Password"
                             >
-                              {copiedType === 'password' ? <Check className="w-4 h-4 text-emerald-color" /> : <Copy className="w-4 h-4" />}
+                              {copiedType === 'password' ? (
+                                <Check className="w-4 h-4 text-emerald-color" />
+                              ) : (
+                                <Copy className="w-4 h-4" />
+                              )}
                             </button>
                             <button
                               onClick={generatePassword}
@@ -1828,7 +2051,9 @@ border-radius: 12px;`;
                         <div className="space-y-1">
                           <div className="flex justify-between text-[10px] font-semibold text-muted-foreground">
                             <span>Password Strength</span>
-                            <span className={getPasswordStrength().color.replace('bg-', 'text-')}>{getPasswordStrength().label}</span>
+                            <span className={getPasswordStrength().color.replace('bg-', 'text-')}>
+                              {getPasswordStrength().label}
+                            </span>
                           </div>
                           <div className="w-full h-1.5 bg-[#031018] rounded-full overflow-hidden">
                             <div
@@ -1842,7 +2067,12 @@ border-radius: 12px;`;
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                           <div className="space-y-1">
                             <div className="flex justify-between font-semibold">
-                              <label htmlFor="password-length-slider" className="text-muted-foreground">Password Length</label>
+                              <label
+                                htmlFor="password-length-slider"
+                                className="text-muted-foreground"
+                              >
+                                Password Length
+                              </label>
                               <span className="text-cyan">{passLength} chars</span>
                             </div>
                             <input
@@ -1851,7 +2081,7 @@ border-radius: 12px;`;
                               min="8"
                               max="64"
                               value={passLength}
-                              onChange={(e) => setPassLength(Number(e.target.value))}
+                              onChange={e => setPassLength(Number(e.target.value))}
                               className="w-full accent-cyan bg-[#031018] h-1.5 rounded-lg appearance-none cursor-pointer"
                             />
                           </div>
@@ -1860,7 +2090,9 @@ border-radius: 12px;`;
                             <button
                               onClick={() => setPassUpper(!passUpper)}
                               className={`py-1.5 px-2 border rounded flex items-center justify-between cursor-pointer ${
-                                passUpper ? 'border-amber-color text-amber-color bg-amber-color/10' : 'border-border-color/60 text-muted-foreground'
+                                passUpper
+                                  ? 'border-amber-color text-amber-color bg-amber-color/10'
+                                  : 'border-border-color/60 text-muted-foreground'
                               }`}
                             >
                               <span>A-Z (Uppercase)</span>
@@ -1870,7 +2102,9 @@ border-radius: 12px;`;
                             <button
                               onClick={() => setPassLower(!passLower)}
                               className={`py-1.5 px-2 border rounded flex items-center justify-between cursor-pointer ${
-                                passLower ? 'border-amber-color text-amber-color bg-amber-color/10' : 'border-border-color/60 text-muted-foreground'
+                                passLower
+                                  ? 'border-amber-color text-amber-color bg-amber-color/10'
+                                  : 'border-border-color/60 text-muted-foreground'
                               }`}
                             >
                               <span>a-z (Lowercase)</span>
@@ -1880,7 +2114,9 @@ border-radius: 12px;`;
                             <button
                               onClick={() => setPassNumbers(!passNumbers)}
                               className={`py-1.5 px-2 border rounded flex items-center justify-between cursor-pointer ${
-                                passNumbers ? 'border-amber-color text-amber-color bg-amber-color/10' : 'border-border-color/60 text-muted-foreground'
+                                passNumbers
+                                  ? 'border-amber-color text-amber-color bg-amber-color/10'
+                                  : 'border-border-color/60 text-muted-foreground'
                               }`}
                             >
                               <span>0-9 (Numbers)</span>
@@ -1890,7 +2126,9 @@ border-radius: 12px;`;
                             <button
                               onClick={() => setPassSymbols(!passSymbols)}
                               className={`py-1.5 px-2 border rounded flex items-center justify-between cursor-pointer ${
-                                passSymbols ? 'border-amber-color text-amber-color bg-amber-color/10' : 'border-border-color/60 text-muted-foreground'
+                                passSymbols
+                                  ? 'border-amber-color text-amber-color bg-amber-color/10'
+                                  : 'border-border-color/60 text-muted-foreground'
                               }`}
                             >
                               <span>!@#$ (Symbols)</span>
@@ -1911,25 +2149,34 @@ border-radius: 12px;`;
                     <div className="flex items-center gap-2">
                       <Code className="w-5 h-5 text-amber-color animate-pulse" />
                       <div>
-                        <h2 className="font-display text-base font-bold text-foreground">C-to-Wasm Compiler & Memory Visualizer</h2>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">Explore how registers, pointer offsets, and stacks behave when compiled into low-level WebAssembly (Wasm) bytecode.</p>
+                        <h2 className="font-display text-base font-bold text-foreground">
+                          C-to-Wasm Compiler & Memory Visualizer
+                        </h2>
+                        <p className="text-[10px] text-muted-foreground mt-0.5">
+                          Explore how registers, pointer offsets, and stacks behave when compiled
+                          into low-level WebAssembly (Wasm) bytecode.
+                        </p>
                       </div>
                     </div>
 
                     {/* Select active algorithm preset */}
                     <div className="flex items-center gap-2 font-mono text-xs">
-                      <label htmlFor="preset-select" className="text-muted-foreground">Preset:</label>
+                      <label htmlFor="preset-select" className="text-muted-foreground">
+                        Preset:
+                      </label>
                       <select
                         id="preset-select"
                         value={selectedProgram.id}
-                        onChange={(e) => {
+                        onChange={e => {
                           const prog = C_PROGRAMS.find(p => p.id === e.target.value);
                           if (prog) setSelectedProgram(prog);
                         }}
                         className="bg-[#020a11] border border-border-color/60 text-foreground text-[10px] rounded px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-amber-color cursor-pointer font-bold"
                       >
                         {C_PROGRAMS.map(p => (
-                          <option key={p.id} value={p.id}>{p.name}</option>
+                          <option key={p.id} value={p.id}>
+                            {p.name}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -1951,7 +2198,9 @@ border-radius: 12px;`;
                             className="overflow-x-auto whitespace-pre focus:outline-none focus:ring-1 focus:ring-amber-color rounded"
                           >
                             {editableCode.split('\n').map((lineText, lineIdx) => {
-                              const isCurrentLine = compileSuccess && selectedProgram.steps[currentStepIndex]?.line === (lineIdx + 1);
+                              const isCurrentLine =
+                                compileSuccess &&
+                                selectedProgram.steps[currentStepIndex]?.line === lineIdx + 1;
                               return (
                                 <div
                                   key={lineIdx}
@@ -1961,7 +2210,9 @@ border-radius: 12px;`;
                                       : 'opacity-75'
                                   }`}
                                 >
-                                  <span className="w-5 text-right opacity-30 select-none text-[10px]">{lineIdx + 1}</span>
+                                  <span className="w-5 text-right opacity-30 select-none text-[10px]">
+                                    {lineIdx + 1}
+                                  </span>
                                   <span>{lineText}</span>
                                 </div>
                               );
@@ -2002,15 +2253,24 @@ border-radius: 12px;`;
                           <span>Compiler Stdout Logs</span>
                         </div>
                         {isCompiling && (
-                          <div className="text-amber-color/80 animate-pulse">[BUSY] clang -O3 --target=wasm32-unknown-unknown ...</div>
+                          <div className="text-amber-color/80 animate-pulse">
+                            [BUSY] clang -O3 --target=wasm32-unknown-unknown ...
+                          </div>
                         )}
                         {compileLogs.map((log, lIdx) => (
-                          <div key={lIdx} className={log.includes('[SUCCESS]') ? 'text-emerald-color font-bold' : ''}>
+                          <div
+                            key={lIdx}
+                            className={
+                              log.includes('[SUCCESS]') ? 'text-emerald-color font-bold' : ''
+                            }
+                          >
                             {log}
                           </div>
                         ))}
                         {!isCompiling && !compileSuccess && (
-                          <div className="text-muted-foreground/40 italic">Standby. Click "Compile to Wasm" to launch compilation pipeline.</div>
+                          <div className="text-muted-foreground/40 italic">
+                            Standby. Click "Compile to Wasm" to launch compilation pipeline.
+                          </div>
                         )}
                       </div>
                     </div>
@@ -2045,7 +2305,11 @@ border-radius: 12px;`;
                                 onClick={() => setIsPlaying(!isPlaying)}
                                 className="px-3 py-1.5 bg-amber-color/15 border border-amber-color text-amber-color rounded hover:bg-amber-color/25 cursor-pointer transition-colors font-bold text-[10px] uppercase tracking-wider flex items-center gap-1"
                               >
-                                {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                                {isPlaying ? (
+                                  <Pause className="w-3.5 h-3.5" />
+                                ) : (
+                                  <Play className="w-3.5 h-3.5" />
+                                )}
                                 <span>{isPlaying ? 'Pause' : 'Autoplay'}</span>
                               </button>
 
@@ -2053,7 +2317,9 @@ border-radius: 12px;`;
                               <button
                                 onClick={() => {
                                   setIsPlaying(false);
-                                  setCurrentStepIndex(prev => Math.min(selectedProgram.steps.length - 1, prev + 1));
+                                  setCurrentStepIndex(prev =>
+                                    Math.min(selectedProgram.steps.length - 1, prev + 1),
+                                  );
                                 }}
                                 disabled={currentStepIndex === selectedProgram.steps.length - 1}
                                 className="p-1.5 border border-border-color/80 hover:text-amber-color disabled:opacity-30 rounded cursor-pointer transition-colors"
@@ -2066,7 +2332,9 @@ border-radius: 12px;`;
 
                           {/* 1. Register Execution Logs dialogue */}
                           <div className="p-3 bg-amber-color/[0.03] border border-amber-color/20 rounded-xl space-y-1.5">
-                            <span className="block text-[8px] text-amber-color font-bold uppercase font-mono tracking-widest">Execution Trace Output</span>
+                            <span className="block text-[8px] text-amber-color font-bold uppercase font-mono tracking-widest">
+                              Execution Trace Output
+                            </span>
                             <p className="text-xs font-mono font-medium leading-relaxed text-[#F5E7C8]">
                               {selectedProgram.steps[currentStepIndex]?.explanation}
                             </p>
@@ -2075,7 +2343,9 @@ border-radius: 12px;`;
                           {/* 2. Visual Memory & Pointer Address Grid (Stack and Heap representation) */}
                           <div className="p-4 bg-[#020a11] border border-border-color rounded-xl space-y-3 font-mono">
                             <div className="flex items-center justify-between text-xs border-b border-border-color/20 pb-2">
-                              <span className="text-muted-foreground uppercase text-[10px] font-bold">Dynamic Wasm linear memory block</span>
+                              <span className="text-muted-foreground uppercase text-[10px] font-bold">
+                                Dynamic Wasm linear memory block
+                              </span>
                               <span className="text-xs text-amber-color">Address base: 0x1000</span>
                             </div>
 
@@ -2083,12 +2353,17 @@ border-radius: 12px;`;
                             <div className="relative pt-6 pb-2">
                               <div className="grid grid-cols-5 gap-3">
                                 {Array.from({ length: 5 }).map((_, mIdx) => {
-                                  const cellPointers = Object.entries(selectedProgram.steps[currentStepIndex]?.pointers || {})
+                                  const cellPointers = Object.entries(
+                                    selectedProgram.steps[currentStepIndex]?.pointers || {},
+                                  )
                                     .filter(([_, ptrIdx]) => ptrIdx === mIdx)
                                     .map(([ptrName, _]) => ptrName);
 
                                   return (
-                                    <div key={mIdx} className="relative flex flex-col items-center min-h-[44px]">
+                                    <div
+                                      key={mIdx}
+                                      className="relative flex flex-col items-center min-h-[44px]"
+                                    >
                                       {cellPointers.length > 0 && (
                                         <div className="absolute bottom-1 flex flex-col items-center space-y-1 animate-bounce">
                                           <div className="flex gap-1">
@@ -2099,15 +2374,17 @@ border-radius: 12px;`;
                                                   pName === 'arr' || pName === 'low'
                                                     ? 'bg-cyan/10 border-cyan text-cyan'
                                                     : pName === 'high'
-                                                    ? 'bg-purple-500/10 border-purple-500 text-purple-400'
-                                                    : 'bg-amber-color/10 border-amber-color text-amber-color'
+                                                      ? 'bg-purple-500/10 border-purple-500 text-purple-400'
+                                                      : 'bg-amber-color/10 border-amber-color text-amber-color'
                                                 }`}
                                               >
                                                 {pName}
                                               </span>
                                             ))}
                                           </div>
-                                          <span className="text-muted-foreground text-[8px] leading-none">▼</span>
+                                          <span className="text-muted-foreground text-[8px] leading-none">
+                                            ▼
+                                          </span>
                                         </div>
                                       )}
                                     </div>
@@ -2118,9 +2395,12 @@ border-radius: 12px;`;
                               {/* Memory boxes */}
                               <div className="grid grid-cols-5 gap-3 mt-1">
                                 {Array.from({ length: 5 }).map((_, mIdx) => {
-                                  const cellValue = selectedProgram.steps[currentStepIndex]?.memory[mIdx];
+                                  const cellValue =
+                                    selectedProgram.steps[currentStepIndex]?.memory[mIdx];
                                   const hexAddress = `0x100${(mIdx * 4).toString(16)}`;
-                                  const hasPointers = Object.values(selectedProgram.steps[currentStepIndex]?.pointers || {}).includes(mIdx);
+                                  const hasPointers = Object.values(
+                                    selectedProgram.steps[currentStepIndex]?.pointers || {},
+                                  ).includes(mIdx);
 
                                   return (
                                     <div
@@ -2131,8 +2411,12 @@ border-radius: 12px;`;
                                           : 'border-border-color/60 bg-[#0a0f1d]/40'
                                       }`}
                                     >
-                                      <div className="text-xs font-bold text-foreground">{cellValue !== undefined ? cellValue : '??'}</div>
-                                      <div className="text-[7px] text-muted-foreground/60 mt-1 font-mono">{hexAddress}</div>
+                                      <div className="text-xs font-bold text-foreground">
+                                        {cellValue !== undefined ? cellValue : '??'}
+                                      </div>
+                                      <div className="text-[7px] text-muted-foreground/60 mt-1 font-mono">
+                                        {hexAddress}
+                                      </div>
                                     </div>
                                   );
                                 })}
@@ -2142,10 +2426,14 @@ border-radius: 12px;`;
 
                           {/* 3. Assembly instruction block (WAT view) */}
                           <div className="space-y-2">
-                            <span className="block text-xs font-mono text-muted-foreground">Compiled WebAssembly Text (WAT instructions)</span>
+                            <span className="block text-xs font-mono text-muted-foreground">
+                              Compiled WebAssembly Text (WAT instructions)
+                            </span>
                             <div className="p-4 bg-[#020a11] border border-border-color rounded-xl h-44 overflow-y-auto scrollbar-thin text-[10px] font-mono leading-relaxed text-[#8be9fd]">
                               {selectedProgram.wat.split('\n').map((watLine, wIdx) => {
-                                const isCurrentWatLine = selectedProgram.steps[currentStepIndex]?.watHighlightIndex === (wIdx + 1);
+                                const isCurrentWatLine =
+                                  selectedProgram.steps[currentStepIndex]?.watHighlightIndex ===
+                                  wIdx + 1;
                                 return (
                                   <div
                                     key={wIdx}
@@ -2155,7 +2443,9 @@ border-radius: 12px;`;
                                         : 'opacity-65'
                                     }`}
                                   >
-                                    <span className="w-5 text-right opacity-20 select-none">{wIdx + 1}</span>
+                                    <span className="w-5 text-right opacity-20 select-none">
+                                      {wIdx + 1}
+                                    </span>
                                     <span>{watLine}</span>
                                   </div>
                                 );
@@ -2167,9 +2457,13 @@ border-radius: 12px;`;
                         <div className="flex flex-col items-center justify-center text-center p-10 border border-border-color/40 bg-[#020a11]/40 rounded-xl min-h-[380px] space-y-4">
                           <Cpu className="w-10 h-10 text-muted-foreground/30 animate-pulse" />
                           <div className="space-y-1">
-                            <h3 className="font-mono text-sm font-bold text-foreground uppercase tracking-wider">Compiler Standby</h3>
+                            <h3 className="font-mono text-sm font-bold text-foreground uppercase tracking-wider">
+                              Compiler Standby
+                            </h3>
                             <p className="font-mono text-[10px] text-muted-foreground max-w-sm leading-relaxed">
-                              C source code is mapped to 32-bit local memory base offsets. Compile the C code above to generate WebAssembly text registers, step animations, and pointer traces.
+                              C source code is mapped to 32-bit local memory base offsets. Compile
+                              the C code above to generate WebAssembly text registers, step
+                              animations, and pointer traces.
                             </p>
                           </div>
                         </div>
@@ -2186,26 +2480,43 @@ border-radius: 12px;`;
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-5 h-5 text-amber-color animate-spin-slow" />
                       <div>
-                        <h2 className="font-display text-base font-bold text-foreground">SVG Vector Creator & AI Designer</h2>
-                        <p className="text-[10px] text-muted-foreground mt-0.5">Draft, style, and animate scalable vector graphics with help from a specialized AI Developer Team.</p>
+                        <h2 className="font-display text-base font-bold text-foreground">
+                          SVG Vector Creator & AI Designer
+                        </h2>
+                        <p className="text-[10px] text-muted-foreground mt-0.5">
+                          Draft, style, and animate scalable vector graphics with help from a
+                          specialized AI Developer Team.
+                        </p>
                       </div>
                     </div>
 
                     {/* Presets dropdown */}
                     <div className="flex items-center gap-2 font-mono text-xs">
-                      <label htmlFor="svg-preset-select" className="text-muted-foreground">Preset:</label>
+                      <label htmlFor="svg-preset-select" className="text-muted-foreground">
+                        Preset:
+                      </label>
                       <select
                         id="svg-preset-select"
-                        value={Object.keys(SVG_PRESETS).find(key => SVG_PRESETS[key as keyof typeof SVG_PRESETS].code.trim() === svgCode.trim()) || ''}
-                        onChange={(e) => {
+                        value={
+                          Object.keys(SVG_PRESETS).find(
+                            key =>
+                              SVG_PRESETS[key as keyof typeof SVG_PRESETS].code.trim() ===
+                              svgCode.trim(),
+                          ) || ''
+                        }
+                        onChange={e => {
                           const preset = SVG_PRESETS[e.target.value as keyof typeof SVG_PRESETS];
                           if (preset) setSvgCode(preset.code);
                         }}
                         className="bg-[#020a11] border border-border-color/60 text-foreground text-[10px] rounded px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-amber-color cursor-pointer font-bold"
                       >
-                        <option value="" disabled>-- Custom SVG --</option>
+                        <option value="" disabled>
+                          -- Custom SVG --
+                        </option>
                         {Object.entries(SVG_PRESETS).map(([key, p]) => (
-                          <option key={key} value={key}>{p.name}</option>
+                          <option key={key} value={key}>
+                            {p.name}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -2237,7 +2548,7 @@ border-radius: 12px;`;
 
                         <textarea
                           value={svgCode}
-                          onChange={(e) => setSvgCode(e.target.value)}
+                          onChange={e => setSvgCode(e.target.value)}
                           placeholder="Write raw SVG XML here..."
                           className="w-full h-[320px] p-3.5 bg-[#020a11] text-xs font-mono rounded-lg border border-border-color/60 focus:border-amber-color focus:outline-none resize-none scrollbar-thin text-cyan leading-relaxed select-text"
                           id="svg-code-editor"
@@ -2274,18 +2585,35 @@ border-radius: 12px;`;
                               <input
                                 type="checkbox"
                                 checked={showSvgGrid}
-                                onChange={(e) => setShowSvgGrid(e.target.checked)}
+                                onChange={e => setShowSvgGrid(e.target.checked)}
                                 className="accent-amber-color rounded cursor-pointer"
                               />
-                              <span className="text-[10px] text-muted-foreground">Grid Pattern</span>
+                              <span className="text-[10px] text-muted-foreground">
+                                Grid Pattern
+                              </span>
                             </label>
                             <span className="text-muted-foreground/30">|</span>
                             {/* Zoom controls */}
                             <div className="flex items-center gap-1 text-[10px]">
-                              <button onClick={() => setSvgZoom(prev => Math.max(50, prev - 10))} className="px-1.5 py-0.5 border border-border-color rounded hover:text-amber-color cursor-pointer">-</button>
+                              <button
+                                onClick={() => setSvgZoom(prev => Math.max(50, prev - 10))}
+                                className="px-1.5 py-0.5 border border-border-color rounded hover:text-amber-color cursor-pointer"
+                              >
+                                -
+                              </button>
                               <span className="text-cyan font-bold">{svgZoom}%</span>
-                              <button onClick={() => setSvgZoom(prev => Math.min(200, prev + 10))} className="px-1.5 py-0.5 border border-border-color rounded hover:text-amber-color cursor-pointer">+</button>
-                              <button onClick={() => setSvgZoom(100)} className="px-1 py-0.5 border border-border-color rounded hover:text-amber-color cursor-pointer font-bold">R</button>
+                              <button
+                                onClick={() => setSvgZoom(prev => Math.min(200, prev + 10))}
+                                className="px-1.5 py-0.5 border border-border-color rounded hover:text-amber-color cursor-pointer"
+                              >
+                                +
+                              </button>
+                              <button
+                                onClick={() => setSvgZoom(100)}
+                                className="px-1 py-0.5 border border-border-color rounded hover:text-amber-color cursor-pointer font-bold"
+                              >
+                                R
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -2299,7 +2627,10 @@ border-radius: 12px;`;
                           }`}
                         >
                           <div
-                            style={{ transform: `scale(${svgZoom / 100})`, transformOrigin: 'center center' }}
+                            style={{
+                              transform: `scale(${svgZoom / 100})`,
+                              transformOrigin: 'center center',
+                            }}
                             className="max-w-full max-h-full transition-transform duration-200 p-4"
                             dangerouslySetInnerHTML={{ __html: svgCode }}
                           />
@@ -2311,29 +2642,33 @@ border-radius: 12px;`;
                         <div className="flex items-center justify-between border-b border-border-color/30 pb-2">
                           <div className="flex items-center gap-1.5">
                             <Bot className="w-4 h-4 text-amber-color" />
-                            <span className="text-[10px] font-bold font-mono uppercase tracking-wider text-foreground">AI Dev Team Orchestrator</span>
+                            <span className="text-[10px] font-bold font-mono uppercase tracking-wider text-foreground">
+                              AI Dev Team Orchestrator
+                            </span>
                           </div>
 
                           {/* Active agent status block */}
                           <div className="flex gap-1.5">
-                            {(['architect', 'coder', 'security', 'devops'] as const).map((role, idx) => {
-                              const isActive = svgOrchestrationStep === idx;
-                              const isFinished = svgOrchestrationStep > idx;
-                              return (
-                                <span
-                                  key={role}
-                                  className={`text-[8px] font-mono px-1.5 py-0.5 rounded border uppercase transition-all ${
-                                    isActive
-                                      ? 'bg-amber-color/10 border-amber-color text-amber-color font-bold animate-pulse'
-                                      : isFinished
-                                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-color'
-                                      : 'bg-muted border-border-color/40 text-muted-foreground/45'
-                                  }`}
-                                >
-                                  {role}
-                                </span>
-                              );
-                            })}
+                            {(['architect', 'coder', 'security', 'devops'] as const).map(
+                              (role, idx) => {
+                                const isActive = svgOrchestrationStep === idx;
+                                const isFinished = svgOrchestrationStep > idx;
+                                return (
+                                  <span
+                                    key={role}
+                                    className={`text-[8px] font-mono px-1.5 py-0.5 rounded border uppercase transition-all ${
+                                      isActive
+                                        ? 'bg-amber-color/10 border-amber-color text-amber-color font-bold animate-pulse'
+                                        : isFinished
+                                          ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-color'
+                                          : 'bg-muted border-border-color/40 text-muted-foreground/45'
+                                    }`}
+                                  >
+                                    {role}
+                                  </span>
+                                );
+                              },
+                            )}
                           </div>
                         </div>
 
@@ -2343,9 +2678,18 @@ border-radius: 12px;`;
                             const isUser = log.role === 'user';
                             const isOrch = log.content.startsWith('[Orchestration]');
                             return (
-                              <div key={idx} className={`${isUser ? 'text-cyan' : isOrch ? 'text-amber-color/90 font-semibold' : 'text-muted-foreground'}`}>
-                                <span className="font-bold">{isUser ? '> David: ' : isOrch ? '> System: ' : '> Team: '}</span>
-                                <span>{isOrch ? log.content.replace('[Orchestration]', '') : log.content}</span>
+                              <div
+                                key={idx}
+                                className={`${isUser ? 'text-cyan' : isOrch ? 'text-amber-color/90 font-semibold' : 'text-muted-foreground'}`}
+                              >
+                                <span className="font-bold">
+                                  {isUser ? '> David: ' : isOrch ? '> System: ' : '> Team: '}
+                                </span>
+                                <span>
+                                  {isOrch
+                                    ? log.content.replace('[Orchestration]', '')
+                                    : log.content}
+                                </span>
                               </div>
                             );
                           })}
@@ -2361,7 +2705,7 @@ border-radius: 12px;`;
                           <input
                             type="text"
                             value={svgAiPrompt}
-                            onChange={(e) => setSvgAiPrompt(e.target.value)}
+                            onChange={e => setSvgAiPrompt(e.target.value)}
                             disabled={isSvgGenerating}
                             placeholder="ask the ai dev team to design or modify the vector..."
                             className="flex-1 px-3 py-1.5 bg-[#020a11] text-xs font-mono rounded-lg border border-border-color/80 focus:border-amber-color focus:outline-none disabled:opacity-50 text-foreground"
@@ -2389,23 +2733,34 @@ border-radius: 12px;`;
                         <Code className="w-4 h-4 text-emerald-color" />
                         <span>JSON to TypeScript Interface Generator</span>
                       </h2>
-                      <p className="text-xs text-muted-foreground mt-0.5">Convert raw JSON objects into strongly-typed TypeScript interfaces client-side.</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        Convert raw JSON objects into strongly-typed TypeScript interfaces
+                        client-side.
+                      </p>
                     </div>
                     <button
                       onClick={() => handleCopy(json2tsOutput, 'json2ts')}
                       className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-color hover:bg-emerald-500/20 font-mono text-xs rounded-lg transition-all flex items-center gap-1.5 cursor-pointer font-bold"
                     >
-                      {copiedType === 'json2ts' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                      <span>{copiedType === 'json2ts' ? 'Interfaces Copied!' : 'Copy TS Interfaces'}</span>
+                      {copiedType === 'json2ts' ? (
+                        <Check className="w-3.5 h-3.5" />
+                      ) : (
+                        <Copy className="w-3.5 h-3.5" />
+                      )}
+                      <span>
+                        {copiedType === 'json2ts' ? 'Interfaces Copied!' : 'Copy TS Interfaces'}
+                      </span>
                     </button>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-mono text-muted-foreground uppercase font-bold tracking-wider">Raw JSON Input</label>
+                      <label className="text-[10px] font-mono text-muted-foreground uppercase font-bold tracking-wider">
+                        Raw JSON Input
+                      </label>
                       <textarea
                         value={json2tsInput}
-                        onChange={(e) => setJson2tsInput(e.target.value)}
+                        onChange={e => setJson2tsInput(e.target.value)}
                         rows={14}
                         placeholder="Paste JSON object here..."
                         className="w-full p-4 bg-[#020a11] border border-border-color rounded-xl font-mono text-xs text-foreground focus:border-emerald-500 focus:outline-none leading-relaxed resize-y"
@@ -2413,7 +2768,9 @@ border-radius: 12px;`;
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-[10px] font-mono text-muted-foreground uppercase font-bold tracking-wider">Inferred TypeScript Code</label>
+                      <label className="text-[10px] font-mono text-muted-foreground uppercase font-bold tracking-wider">
+                        Inferred TypeScript Code
+                      </label>
                       <div className="relative">
                         <pre className="w-full p-4 bg-[#061520] border border-border-color rounded-xl font-mono text-xs text-emerald-300 overflow-x-auto leading-relaxed select-text min-h-[300px]">
                           <code>{json2tsOutput}</code>
@@ -2433,23 +2790,28 @@ border-radius: 12px;`;
                         <Terminal className="w-4 h-4 text-amber-color" />
                         <span>Cron Expression Explainer & Schedule Builder</span>
                       </h2>
-                      <p className="text-xs text-muted-foreground mt-0.5">Parse 5-field cron strings into plain English and inspect upcoming execution times.</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        Parse 5-field cron strings into plain English and inspect upcoming execution
+                        times.
+                      </p>
                     </div>
                   </div>
 
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-mono text-muted-foreground uppercase font-bold tracking-wider">Cron Expression (5 fields: minute hour dom month dow)</label>
+                      <label className="text-[10px] font-mono text-muted-foreground uppercase font-bold tracking-wider">
+                        Cron Expression (5 fields: minute hour dom month dow)
+                      </label>
                       <div className="flex gap-2">
                         <input
                           type="text"
                           value={cronExpr}
-                          onChange={(e) => setCronExpr(e.target.value)}
+                          onChange={e => setCronExpr(e.target.value)}
                           placeholder="e.g. */15 * * * *"
                           className="flex-1 px-4 py-3 bg-[#020a11] border border-border-color rounded-xl font-mono text-sm text-amber-color focus:border-amber-color focus:outline-none"
                         />
                         <div className="flex gap-1">
-                          {['* * * * *', '*/15 * * * *', '0 9 * * 1-5', '0 0 1 * *'].map((preset) => (
+                          {['* * * * *', '*/15 * * * *', '0 9 * * 1-5', '0 0 1 * *'].map(preset => (
                             <button
                               key={preset}
                               onClick={() => setCronExpr(preset)}
@@ -2469,16 +2831,24 @@ border-radius: 12px;`;
                     ) : (
                       <div className="space-y-4">
                         <div className="p-5 bg-amber-color/5 border border-amber-color/20 rounded-xl space-y-2">
-                          <span className="font-mono text-[10px] uppercase font-bold text-amber-color tracking-wider">Human Schedule Summary:</span>
-                          <p className="font-mono text-sm font-bold text-foreground">{cronParsed.summary}</p>
+                          <span className="font-mono text-[10px] uppercase font-bold text-amber-color tracking-wider">
+                            Human Schedule Summary:
+                          </span>
+                          <p className="font-mono text-sm font-bold text-foreground">
+                            {cronParsed.summary}
+                          </p>
                         </div>
 
                         <div className="p-5 bg-muted/15 border border-border-color rounded-xl space-y-3">
-                          <span className="font-mono text-[10px] uppercase font-bold text-muted-foreground tracking-wider">Next 5 Calculated Executions (UTC):</span>
+                          <span className="font-mono text-[10px] uppercase font-bold text-muted-foreground tracking-wider">
+                            Next 5 Calculated Executions (UTC):
+                          </span>
                           <ul className="space-y-1.5 font-mono text-xs text-foreground/90">
                             {cronParsed.nextRuns.map((run, idx) => (
                               <li key={idx} className="flex items-center gap-2">
-                                <span className="w-5 h-5 rounded-full bg-cyan/10 text-cyan text-[10px] font-bold grid place-items-center">{idx + 1}</span>
+                                <span className="w-5 h-5 rounded-full bg-cyan/10 text-cyan text-[10px] font-bold grid place-items-center">
+                                  {idx + 1}
+                                </span>
                                 <span>{run}</span>
                               </li>
                             ))}
@@ -2499,7 +2869,10 @@ border-radius: 12px;`;
                         <Sliders className="w-4 h-4 text-purple-color" />
                         <span>CyberBlue HSL Theme Engine</span>
                       </h2>
-                      <p className="text-xs text-muted-foreground mt-0.5">Tweak brand HSL parameters in real time and copy exact CSS root custom properties.</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        Tweak brand HSL parameters in real time and copy exact CSS root custom
+                        properties.
+                      </p>
                     </div>
                   </div>
 
@@ -2516,14 +2889,16 @@ border-radius: 12px;`;
                           min="0"
                           max="360"
                           value={hslHue}
-                          onChange={(e) => setHslHue(Number(e.target.value))}
+                          onChange={e => setHslHue(Number(e.target.value))}
                           className="w-full cursor-pointer accent-cyan"
                         />
                       </div>
 
                       <div className="space-y-1.5">
                         <div className="flex justify-between font-mono text-xs">
-                          <span className="text-muted-foreground font-bold">Saturation (0% - 100%)</span>
+                          <span className="text-muted-foreground font-bold">
+                            Saturation (0% - 100%)
+                          </span>
                           <span className="text-cyan font-bold">{hslSat}%</span>
                         </div>
                         <input
@@ -2531,14 +2906,16 @@ border-radius: 12px;`;
                           min="0"
                           max="100"
                           value={hslSat}
-                          onChange={(e) => setHslSat(Number(e.target.value))}
+                          onChange={e => setHslSat(Number(e.target.value))}
                           className="w-full cursor-pointer accent-cyan"
                         />
                       </div>
 
                       <div className="space-y-1.5">
                         <div className="flex justify-between font-mono text-xs">
-                          <span className="text-muted-foreground font-bold">Lightness (0% - 100%)</span>
+                          <span className="text-muted-foreground font-bold">
+                            Lightness (0% - 100%)
+                          </span>
                           <span className="text-cyan font-bold">{hslLight}%</span>
                         </div>
                         <input
@@ -2546,21 +2923,23 @@ border-radius: 12px;`;
                           min="0"
                           max="100"
                           value={hslLight}
-                          onChange={(e) => setHslLight(Number(e.target.value))}
+                          onChange={e => setHslLight(Number(e.target.value))}
                           className="w-full cursor-pointer accent-cyan"
                         />
                       </div>
 
                       {/* Quick Presets */}
                       <div className="space-y-2 pt-2 border-t border-border-color/40">
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-bold">Brand Presets:</span>
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-bold">
+                          Brand Presets:
+                        </span>
                         <div className="flex flex-wrap gap-1.5">
                           {[
                             { name: 'CyberBlue', h: 190, s: 90, l: 50 },
                             { name: 'Signal Green', h: 160, s: 84, l: 50 },
                             { name: 'Neon Violet', h: 260, s: 90, l: 65 },
                             { name: 'Amber Gold', h: 38, s: 92, l: 50 },
-                            { name: 'Emerald', h: 142, s: 76, l: 45 }
+                            { name: 'Emerald', h: 142, s: 76, l: 45 },
                           ].map(preset => (
                             <button
                               key={preset.name}
@@ -2585,19 +2964,27 @@ border-radius: 12px;`;
                         style={{
                           borderColor: `hsl(${hslHue}, ${hslSat}%, ${hslLight}%)`,
                           backgroundColor: `hsla(${hslHue}, ${hslSat}%, ${hslLight}%, 0.08)`,
-                          boxShadow: `0 0 20px hsla(${hslHue}, ${hslSat}%, ${hslLight}%, 0.15)`
+                          boxShadow: `0 0 20px hsla(${hslHue}, ${hslSat}%, ${hslLight}%, 0.15)`,
                         }}
                       >
-                        <span className="font-mono text-[10px] uppercase font-bold tracking-wider" style={{ color: `hsl(${hslHue}, ${hslSat}%, ${hslLight}%)` }}>
+                        <span
+                          className="font-mono text-[10px] uppercase font-bold tracking-wider"
+                          style={{ color: `hsl(${hslHue}, ${hslSat}%, ${hslLight}%)` }}
+                        >
                           Live Preview Component
                         </span>
-                        <h3 className="font-display text-lg font-bold text-foreground">Interactive Theme Sample</h3>
-                        <p className="text-xs text-muted-foreground">Adjusting the sliders updates custom CSS properties in real time across the UI design matrix.</p>
+                        <h3 className="font-display text-lg font-bold text-foreground">
+                          Interactive Theme Sample
+                        </h3>
+                        <p className="text-xs text-muted-foreground">
+                          Adjusting the sliders updates custom CSS properties in real time across
+                          the UI design matrix.
+                        </p>
                         <button
                           className="px-4 py-2 font-mono text-xs font-bold rounded-lg transition-all"
                           style={{
                             backgroundColor: `hsl(${hslHue}, ${hslSat}%, ${hslLight}%)`,
-                            color: '#031018'
+                            color: '#031018',
                           }}
                         >
                           Action Button
@@ -2616,7 +3003,11 @@ border-radius: 12px;`;
                           }}
                           className="absolute top-2 right-2 px-3 py-1.5 bg-amber-color hover:bg-amber-glow text-[#031018] font-mono text-[10px] font-bold rounded-lg flex items-center gap-1 cursor-pointer transition-all"
                         >
-                          {copiedHsl ? <Check className="w-3 h-3 text-emerald-color" /> : <Copy className="w-3 h-3" />}
+                          {copiedHsl ? (
+                            <Check className="w-3 h-3 text-emerald-color" />
+                          ) : (
+                            <Copy className="w-3 h-3" />
+                          )}
                           <span>{copiedHsl ? 'Copied!' : 'Copy CSS'}</span>
                         </button>
                       </div>

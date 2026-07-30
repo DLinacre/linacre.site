@@ -12,21 +12,25 @@ export default function FAQ() {
 
   const faqData: FAQItem[] = [
     {
-      question: "Are you available for freelance or contract projects?",
-      answer: "Yes, I am open to select freelance consulting and systems engineering contracts. My primary areas of focus are CI/CD pipelining, cloud migrations (GCP/AWS), backend engineering in Go/Node.js, and containerizing legacy systems. Reach out via the form above with your requirements."
+      question: 'Are you available for freelance or contract projects?',
+      answer:
+        'Yes, I am open to select freelance consulting and systems engineering contracts. My primary areas of focus are CI/CD pipelining, cloud migrations (GCP/AWS), backend engineering in Go/Node.js, and containerizing legacy systems. Reach out via the form above with your requirements.',
     },
     {
-      question: "What is your primary technology stack?",
-      answer: "I specialize in TypeScript/React on the frontend, Go and Node.js on the backend, Docker/Kubernetes for containerization, and Terraform for Infrastructure as Code. I am also highly comfortable with database administration across PostgreSQL, MySQL, and Redis."
+      question: 'What is your primary technology stack?',
+      answer:
+        'I specialize in TypeScript/React on the frontend, Go and Node.js on the backend, Docker/Kubernetes for containerization, and Terraform for Infrastructure as Code. I am also highly comfortable with database administration across PostgreSQL, MySQL, and Redis.',
     },
     {
-      question: "How do you handle project privacy and client security?",
-      answer: "Security is baked into my design process from day one. I never hardcode credentials, using centralized secret architectures instead. I sign NDAs before discussing proprietary details, and all client repositories are fully isolated with strict IAM roles."
+      question: 'How do you handle project privacy and client security?',
+      answer:
+        'Security is baked into my design process from day one. I never hardcode credentials, using centralized secret architectures instead. I sign NDAs before discussing proprietary details, and all client repositories are fully isolated with strict IAM roles.',
     },
     {
-      question: "How can I request access to one of your private projects?",
-      answer: "Click the 'Request Details / Access' button on any project card in the Projects tab. It will automatically populate the contact form with a structured request. Once validated, I can arrange repository access or share architectural documents."
-    }
+      question: 'How can I request access to one of your private projects?',
+      answer:
+        "Click the 'Request Details / Access' button on any project card in the Projects tab. It will automatically populate the contact form with a structured request. Once validated, I can arrange repository access or share architectural documents.",
+    },
   ];
 
   const toggleItem = (idx: number) => {

@@ -87,7 +87,7 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
       const sinY = Math.sin(rotation.current.y);
 
       // Rotate and project points
-      const projected = points.map((p) => {
+      const projected = points.map(p => {
         // Rotate around Y-axis (longitudinal rotation)
         const x1 = p.x * cosY - p.z * sinY;
         const z1 = p.x * sinY + p.z * cosY;
@@ -104,7 +104,7 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
       });
 
       // Render dots
-      projected.forEach((p) => {
+      projected.forEach(p => {
         const depthRatio = (p.pz + radius) / (2 * radius); // 0.0 to 1.0 (back to front)
 
         if (p.pz > -2) {
@@ -210,7 +210,7 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
         className="cursor-grab active:cursor-grabbing transition-all duration-300"
         style={{
           opacity: isHovered ? 1.0 : 0.75,
-          filter: isHovered ? `drop-shadow(0 0 5px ${primaryColor})` : 'none'
+          filter: isHovered ? `drop-shadow(0 0 5px ${primaryColor})` : 'none',
         }}
         title="Drag to spin the globe"
         aria-label="Interactive 3D wireframe globe"

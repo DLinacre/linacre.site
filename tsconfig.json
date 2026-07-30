@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "moduleResolution": "bundler",
     "isolatedModules": true,
@@ -14,9 +10,7 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
     "allowImportingTsExtensions": true,
     "noEmit": true,
@@ -28,10 +22,5 @@
     "forceConsistentCasingInFileNames": true,
     "verbatimModuleSyntax": false
   },
-  "exclude": [
-    "pixel-agents",
-    "mcp",
-    "node_modules",
-    "dist"
-  ]
+  "exclude": ["pixel-agents", "mcp", "node_modules", "dist"]
 }

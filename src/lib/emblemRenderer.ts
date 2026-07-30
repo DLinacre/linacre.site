@@ -14,12 +14,13 @@ export function getEmblemSVG(
   activeMotion: string,
   activePulseSpeed: string,
   glowIntensity: number,
-  customEmblems: CustomEmblem[]
+  customEmblems: CustomEmblem[],
 ): string {
   const shadowSize = glowIntensity * 4;
 
   let styleBlock = '';
-  const speedSeconds = activePulseSpeed === 'fast' ? '1.0s' : activePulseSpeed === 'breathe' ? '5.0s' : '2.5s';
+  const speedSeconds =
+    activePulseSpeed === 'fast' ? '1.0s' : activePulseSpeed === 'breathe' ? '5.0s' : '2.5s';
   const reducedMotionStyle = `
       @media (prefers-reduced-motion: reduce) {
         .g-rotate-cw, .g-rotate-ccw, .scanline-bar, .char-layer, .glowing-eye, .d-pulse-path, .spin-logo-g {

@@ -35,7 +35,12 @@ export default function Footer() {
       {/* Amber pulse-line divider */}
       <div className="linacre-pulse-line w-full" />
 
-      <footer className="w-full bg-background/50 py-12 transition-all" style={{ transitionDuration: 'var(--linacre-duration-base)' }} id="global-footer" role="contentinfo">
+      <footer
+        className="w-full bg-background/50 py-12 transition-all"
+        style={{ transitionDuration: 'var(--linacre-duration-base)' }}
+        id="global-footer"
+        role="contentinfo"
+      >
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Copyright/Author */}

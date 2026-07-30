@@ -59,7 +59,7 @@ const ROUTE_LABEL: Record<string, string> = {
   '/cookie-policy': 'Cookie Policy',
   '/terms': 'Terms',
   '/accessibility': 'Accessibility',
-  '/status': 'Status'
+  '/status': 'Status',
 };
 
 export default function App() {
@@ -67,9 +67,25 @@ export default function App() {
     const pathname = window.location.pathname.replace(/^\/+|\/+$/g, '');
     const hash = window.location.hash.replace(/^#/, '');
     const validTabs = [
-      'toolkit', 'games', 'learn', 'lab', 'dashboard', 'identity', 'playground',
-      'projects', 'agents', 'about', 'contact', 'privacy', 'accessibility', 'blog', 'status',
-      'contact/thanks', 'cookie-policy', 'terms', 'now'
+      'toolkit',
+      'games',
+      'learn',
+      'lab',
+      'dashboard',
+      'identity',
+      'playground',
+      'projects',
+      'agents',
+      'about',
+      'contact',
+      'privacy',
+      'accessibility',
+      'blog',
+      'status',
+      'contact/thanks',
+      'cookie-policy',
+      'terms',
+      'now',
     ];
 
     // Route path -> internal tab id (colons/paths kept as-is where safe).
@@ -116,8 +132,8 @@ export default function App() {
           setActiveTab('home');
           window.history.pushState(null, '', '/');
           window.dispatchEvent(new PopStateEvent('popstate'));
-        }
-      }
+        },
+      },
     ];
 
     if (parts.length === 0) {
@@ -143,12 +159,14 @@ export default function App() {
       paths.push({
         label,
         active: isLast,
-        onClick: isLast ? undefined : () => {
-          const tab = part === 'thanks' ? 'contact-thanks' : part;
-          setActiveTab(tab);
-          window.history.pushState(null, '', runningPath);
-          window.dispatchEvent(new PopStateEvent('popstate'));
-        }
+        onClick: isLast
+          ? undefined
+          : () => {
+              const tab = part === 'thanks' ? 'contact-thanks' : part;
+              setActiveTab(tab);
+              window.history.pushState(null, '', runningPath);
+              window.dispatchEvent(new PopStateEvent('popstate'));
+            },
       });
     });
 
@@ -165,12 +183,26 @@ export default function App() {
     window.addEventListener('offline', handleOffline);
 
     // Secret Konami Code Listener: ↑ ↑ ↓ ↓ ← → ← → b a
-    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    const konamiSequence = [
+      'ArrowUp',
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowLeft',
+      'ArrowRight',
+      'b',
+      'a',
+    ];
     let konamiIndex = 0;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
-      const expected = konamiSequence[konamiIndex].length === 1 ? konamiSequence[konamiIndex].toLowerCase() : konamiSequence[konamiIndex];
+      const expected =
+        konamiSequence[konamiIndex].length === 1
+          ? konamiSequence[konamiIndex].toLowerCase()
+          : konamiSequence[konamiIndex];
 
       if (key === expected) {
         konamiIndex++;
@@ -220,9 +252,9 @@ export default function App() {
     const targetPath = tabToPath(activeTab);
     // Preserve existing search params for /contact/thanks?ref=…
     if (
-      currentPath !== targetPath
-      && !(activeTab === 'blog' && currentPath.startsWith('/blog/'))
-      && !(activeTab === 'contact-thanks' && currentPath === '/contact/thanks')
+      currentPath !== targetPath &&
+      !(activeTab === 'blog' && currentPath.startsWith('/blog/')) &&
+      !(activeTab === 'contact-thanks' && currentPath === '/contact/thanks')
     ) {
       const search = activeTab === 'contact-thanks' ? window.location.search : '';
       window.history.pushState(null, '', `${targetPath}${search}`);
@@ -269,7 +301,7 @@ export default function App() {
     bio: 'Building practical software, open-source tools, and reliable automation systems.',
     glow: 2,
     customPrimary: '#22D3EE',
-    customSecondary: '#34D399'
+    customSecondary: '#34D399',
   });
 
   const syncIdentity = () => {
@@ -306,8 +338,12 @@ export default function App() {
     const motionId = localStorage.getItem('linacre_brand_motion') || 'pulse';
     const pulseSpeed = localStorage.getItem('linacre_brand_pulse_speed') || 'slow';
     const name = localStorage.getItem('linacre_brand_name') || 'DAVID LINACRE';
-    const title = localStorage.getItem('linacre_brand_title') || 'Software engineer · useful tools · AI systems';
-    const bio = localStorage.getItem('linacre_brand_bio') || 'Building practical software, open-source tools, and reliable automation systems.';
+    const title =
+      localStorage.getItem('linacre_brand_title') ||
+      'Software engineer · useful tools · AI systems';
+    const bio =
+      localStorage.getItem('linacre_brand_bio') ||
+      'Building practical software, open-source tools, and reliable automation systems.';
     const glow = Number(localStorage.getItem('linacre_brand_glow') || '2');
     const customPrimary = localStorage.getItem('linacre_brand_custom_primary') || '#22D3EE';
     const customSecondary = localStorage.getItem('linacre_brand_custom_secondary') || '#34D399';
@@ -319,7 +355,19 @@ export default function App() {
       console.error('Failed to parse custom emblems in App.tsx', e);
     }
 
-    setIdentity({ colorId, fontId, frameId, motionId, pulseSpeed, name, title, bio, glow, customPrimary, customSecondary });
+    setIdentity({
+      colorId,
+      fontId,
+      frameId,
+      motionId,
+      pulseSpeed,
+      name,
+      title,
+      bio,
+      glow,
+      customPrimary,
+      customSecondary,
+    });
   };
 
   useEffect(() => {
@@ -382,30 +430,33 @@ export default function App() {
     amber: { primary: '#22D3EE', secondary: '#34D399' },
     cyan: { primary: '#38BDF8', secondary: '#2DD4BF' },
     emerald: { primary: '#2DD4BF', secondary: '#A3E635' },
-    crimson: { primary: '#818CF8', secondary: '#22D3EE' }
+    crimson: { primary: '#818CF8', secondary: '#22D3EE' },
   };
 
   const fontsMap: Record<string, { display: string; mono: string; import: string }> = {
     cyber: {
       display: '"Space Grotesk", "Inter", sans-serif',
       mono: '"JetBrains Mono", monospace',
-      import: "" /* default fonts are self-hosted in /fonts — no external CSS */
+      import: '' /* default fonts are self-hosted in /fonts — no external CSS */,
     },
     neotech: {
       display: '"Orbitron", sans-serif',
       mono: '"Share Tech Mono", monospace',
-      import: "@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Share+Tech+Mono&display=swap');"
+      import:
+        "@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Share+Tech+Mono&display=swap');",
     },
     brutalist: {
       display: '"Plus Jakarta Sans", sans-serif',
       mono: '"Fira Code", monospace',
-      import: "@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Plus+Jakarta+Sans:wght@500;800&display=swap');"
+      import:
+        "@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Plus+Jakarta+Sans:wght@500;800&display=swap');",
     },
     editorial: {
       display: '"Playfair Display", serif',
       mono: '"Fira Mono", monospace',
-      import: "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Fira+Mono&display=swap');"
-    }
+      import:
+        "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Fira+Mono&display=swap');",
+    },
   };
 
   const activeColor = colorsMap[identity.colorId] || colorsMap.cyber;
@@ -418,9 +469,9 @@ export default function App() {
       opacity: 1,
       transition: {
         staggerChildren: 0.08,
-        delayChildren: 0.05
-      }
-    }
+        delayChildren: 0.05,
+      },
+    },
   };
 
   const itemVariants = {
@@ -429,11 +480,11 @@ export default function App() {
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring" as const,
+        type: 'spring' as const,
         stiffness: 110,
-        damping: 14
-      }
-    }
+        damping: 14,
+      },
+    },
   };
 
   const renderEmblem = () => {
@@ -444,15 +495,7 @@ export default function App() {
     const motion = identity.motionId;
     const speed = identity.pulseSpeed;
 
-    const svgString = getEmblemSVG(
-      frame,
-      p,
-      s,
-      motion,
-      speed,
-      glowIntensity,
-      customEmblems
-    );
+    const svgString = getEmblemSVG(frame, p, s, motion, speed, glowIntensity, customEmblems);
 
     return (
       <div
@@ -463,9 +506,14 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-[100dvh] bg-background text-foreground flex flex-col justify-between selection:bg-amber-color/30" style={{ background: 'var(--linacre-gradient-hero)' }}>
+    <div
+      className="min-h-[100dvh] bg-background text-foreground flex flex-col justify-between selection:bg-amber-color/30"
+      style={{ background: 'var(--linacre-gradient-hero)' }}
+    >
       <RouteHead meta={currentMeta} />
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         ${activeFont.import}
         :root, .dark, .light {
           --color-amber-color: ${activeColor.primary} !important;
@@ -473,7 +521,9 @@ export default function App() {
           --font-display: ${activeFont.display} !important;
           --font-mono: ${activeFont.mono} !important;
         }
-      `}} />
+      `,
+        }}
+      />
       <AnimatePresence>
         {isOffline && (
           <motion.div
@@ -484,7 +534,10 @@ export default function App() {
             id="offline-banner"
           >
             <WifiOff className="w-3.5 h-3.5 animate-pulse" />
-            <span>CONNECTIVITY INTERRUPTED: Running in offline mode. Local state and custom projects are preserved.</span>
+            <span>
+              CONNECTIVITY INTERRUPTED: Running in offline mode. Local state and custom projects are
+              preserved.
+            </span>
           </motion.div>
         )}
       </AnimatePresence>
@@ -497,445 +550,505 @@ export default function App() {
         activeColor={activeColor}
       />
 
-      <main id="main-content" role="main" className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-14 space-y-12">
+      <main
+        id="main-content"
+        role="main"
+        className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-14 space-y-12"
+      >
         <ErrorBoundary>
-          {activeTab !== 'home' && (
-            <Breadcrumbs paths={getBreadcrumbPaths()} />
-          )}
-          <Suspense fallback={
-            <div className="py-20 min-h-[100svh] text-center font-mono text-xs text-muted-foreground flex flex-col items-center justify-center gap-3">
-              <div className="w-6 h-6 border-2 border-amber-color border-t-transparent rounded-full animate-spin"></div>
-              <span>Loading interface module...</span>
-            </div>
-          }>
-          <AnimatePresence mode="wait">
-            {activeTab === 'home' && (
-              <motion.div
-                key="home"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.24 }}
-              >
-                <StartPage navigate={setActiveTab} />
-              </motion.div>
-            )}
+          {activeTab !== 'home' && <Breadcrumbs paths={getBreadcrumbPaths()} />}
+          <Suspense
+            fallback={
+              <div className="py-20 min-h-[100svh] text-center font-mono text-xs text-muted-foreground flex flex-col items-center justify-center gap-3">
+                <div className="w-6 h-6 border-2 border-amber-color border-t-transparent rounded-full animate-spin"></div>
+                <span>Loading interface module...</span>
+              </div>
+            }
+          >
+            <AnimatePresence mode="wait">
+              {activeTab === 'home' && (
+                <motion.div
+                  key="home"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.24 }}
+                >
+                  <StartPage navigate={setActiveTab} />
+                </motion.div>
+              )}
 
-            {activeTab === 'toolkit' && (
-            <motion.div
-              key="toolkit"
-              variants={containerVariants}
-              initial="hidden"
-              animate="show"
-              exit={{ opacity: 0, y: -15, transition: { duration: 0.15 } }}
-              className="space-y-12"
-            >
-              {/* Hero Banner Section with Dynamic Identity Integration */}
-              <motion.section
-                variants={itemVariants}
-                className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-12 overflow-hidden"
-                id="toolkit-hero"
-              >
-                {/* Hex-grid subtle background pattern */}
-                <div className="absolute inset-0 linacre-grid-bg opacity-40 pointer-events-none" />
-                {/* Ambient amber orb */}
-                <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full pointer-events-none" style={{ background: `radial-gradient(circle, rgba(34,211,238,0.12) 0%, transparent 70%)` }} />
-
-                <div className="md:col-span-8 space-y-5 text-center md:text-left relative z-10">
-                  <span className="font-mono text-xs text-amber-color tracking-widest uppercase font-semibold bg-amber-color/10 border border-amber-color/20 px-2.5 py-1 rounded-full">
-                    Available for freelance · UK · Remote worldwide
-                  </span>
-                  <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.04em] text-foreground leading-tight">
-                    Full-stack &amp; AI systems engineer — <span className="text-amber-color animate-amber-breathe">available for freelance</span>
-                  </h1>
-                  <h3 className="font-mono text-sm sm:text-base text-amber-color/90 font-medium tracking-wide">
-                    I build reliable React / Go / AI systems for startups who ship fast.
-                  </h3>
-                  <p className="text-sm sm:text-base md:text-md text-muted-foreground leading-[1.65] max-w-2xl">
-                    Systems audits from £1,800. Custom builds from £6,500. Fractional retainer £2,400/mo. NDA-friendly, UK GDPR compliant, replies within 12&nbsp;hours.
-                  </p>
-                  {/* Primary + secondary + tertiary CTA (audit CRO-01 / UX-01) */}
-                  <div className="flex flex-wrap items-center gap-3 pt-2">
-                    <button
-                      onClick={() => { setActiveTab('contact'); }}
-                      data-analytics="hero_start_project"
-                      className="px-5 py-2.5 bg-amber-color text-[#030c14] font-mono text-sm font-bold rounded-lg hover:bg-amber-glow transition-all duration-200 shadow-[0_0_20px_rgba(34,211,238,0.35)] hover:shadow-[0_0_30px_rgba(34,211,238,0.55)] hover:-translate-y-0.5"
-                      id="cta-start-project"
-                    >
-                      Start a project →
-                    </button>
-                    <button
-                      onClick={() => { setActiveTab('projects'); }}
-                      data-analytics="hero_case_studies"
-                      className="px-5 py-2.5 bg-transparent border border-amber-color/40 text-amber-color font-mono text-sm font-bold rounded-lg hover:bg-amber-color/10 hover:border-amber-color transition-all duration-200 hover:-translate-y-0.5"
-                      id="cta-view-projects"
-                    >
-                      View projects
-                    </button>
-                    <button
-                      onClick={() => { setActiveTab('toolkit'); window.scrollTo({ top: 400, behavior: 'smooth' }); }}
-                      data-analytics="hero_toolkit"
-                      className="px-3 py-2.5 text-amber-color/80 hover:text-amber-color font-mono text-sm underline underline-offset-4 decoration-amber-color/30 hover:decoration-amber-color transition-colors"
-                      id="cta-explore-toolkit"
-                    >
-                      Browse free toolkit →
-                    </button>
-                  </div>
-                  {/* Trust strip */}
-                  <div className="pt-3 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[11px] text-muted-foreground">
-                    <span>🔒 UK GDPR</span>
-                    <span>·</span>
-                    <span>Reply &lt; 12h</span>
-                    <span>·</span>
-                    <span>NDA-friendly</span>
-                    <span>·</span>
-                    <span>Shipped 17+ production systems</span>
-                  </div>
-                </div>
-
-                {/* Live Responsive Brand Signature Widget */}
-                <div className="md:col-span-4 flex justify-center items-center relative z-10">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                    className="linacre-surface p-6 rounded-2xl flex flex-col items-center justify-center space-y-4 relative group overflow-hidden w-full max-w-[240px]"
+              {activeTab === 'toolkit' && (
+                <motion.div
+                  key="toolkit"
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="show"
+                  exit={{ opacity: 0, y: -15, transition: { duration: 0.15 } }}
+                  className="space-y-12"
+                >
+                  {/* Hero Banner Section with Dynamic Identity Integration */}
+                  <motion.section
+                    variants={itemVariants}
+                    className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-12 overflow-hidden"
+                    id="toolkit-hero"
                   >
-                    {/* Pulsing ambient radial aura gradient */}
+                    {/* Hex-grid subtle background pattern */}
+                    <div className="absolute inset-0 linacre-grid-bg opacity-40 pointer-events-none" />
+                    {/* Ambient amber orb */}
                     <div
-                      className="absolute -inset-10 opacity-20 group-hover:opacity-35 blur-2xl rounded-full transition-opacity pointer-events-none"
-                      style={{ background: `radial-gradient(circle, ${activeColor.primary} 0%, transparent 70%)` }}
+                      className="absolute -top-20 -left-20 w-72 h-72 rounded-full pointer-events-none"
+                      style={{
+                        background: `radial-gradient(circle, rgba(34,211,238,0.12) 0%, transparent 70%)`,
+                      }}
                     />
 
-                    {/* Rendered Live SVG Monogram Emblem */}
-                    <div className={`relative z-10 select-none ${identity.motionId === 'spin' ? 'animate-spin-slow' : ''}`}>
-                      {renderEmblem()}
+                    <div className="md:col-span-8 space-y-5 text-center md:text-left relative z-10">
+                      <span className="font-mono text-xs text-amber-color tracking-widest uppercase font-semibold bg-amber-color/10 border border-amber-color/20 px-2.5 py-1 rounded-full">
+                        Available for freelance · UK · Remote worldwide
+                      </span>
+                      <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.04em] text-foreground leading-tight">
+                        Full-stack &amp; AI systems engineer —{' '}
+                        <span className="text-amber-color animate-amber-breathe">
+                          available for freelance
+                        </span>
+                      </h1>
+                      <h3 className="font-mono text-sm sm:text-base text-amber-color/90 font-medium tracking-wide">
+                        I build reliable React / Go / AI systems for startups who ship fast.
+                      </h3>
+                      <p className="text-sm sm:text-base md:text-md text-muted-foreground leading-[1.65] max-w-2xl">
+                        Systems audits from £1,800. Custom builds from £6,500. Fractional retainer
+                        £2,400/mo. NDA-friendly, UK GDPR compliant, replies within 12&nbsp;hours.
+                      </p>
+                      {/* Primary + secondary + tertiary CTA (audit CRO-01 / UX-01) */}
+                      <div className="flex flex-wrap items-center gap-3 pt-2">
+                        <button
+                          onClick={() => {
+                            setActiveTab('contact');
+                          }}
+                          data-analytics="hero_start_project"
+                          className="px-5 py-2.5 bg-amber-color text-[#030c14] font-mono text-sm font-bold rounded-lg hover:bg-amber-glow transition-all duration-200 shadow-[0_0_20px_rgba(34,211,238,0.35)] hover:shadow-[0_0_30px_rgba(34,211,238,0.55)] hover:-translate-y-0.5"
+                          id="cta-start-project"
+                        >
+                          Start a project →
+                        </button>
+                        <button
+                          onClick={() => {
+                            setActiveTab('projects');
+                          }}
+                          data-analytics="hero_case_studies"
+                          className="px-5 py-2.5 bg-transparent border border-amber-color/40 text-amber-color font-mono text-sm font-bold rounded-lg hover:bg-amber-color/10 hover:border-amber-color transition-all duration-200 hover:-translate-y-0.5"
+                          id="cta-view-projects"
+                        >
+                          View projects
+                        </button>
+                        <button
+                          onClick={() => {
+                            setActiveTab('toolkit');
+                            window.scrollTo({ top: 400, behavior: 'smooth' });
+                          }}
+                          data-analytics="hero_toolkit"
+                          className="px-3 py-2.5 text-amber-color/80 hover:text-amber-color font-mono text-sm underline underline-offset-4 decoration-amber-color/30 hover:decoration-amber-color transition-colors"
+                          id="cta-explore-toolkit"
+                        >
+                          Browse free toolkit →
+                        </button>
+                      </div>
+                      {/* Trust strip */}
+                      <div className="pt-3 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[11px] text-muted-foreground">
+                        <span>🔒 UK GDPR</span>
+                        <span>·</span>
+                        <span>Reply &lt; 12h</span>
+                        <span>·</span>
+                        <span>NDA-friendly</span>
+                        <span>·</span>
+                        <span>Shipped 17+ production systems</span>
+                      </div>
                     </div>
 
-                    <div className="relative z-10 text-center space-y-1">
-                      <div className="font-display text-[11px] font-bold tracking-wider text-foreground uppercase">
-                        Signature Identity
-                      </div>
-                      <div className="font-mono text-[9px] text-muted-foreground/80 tracking-wider uppercase">
-                        {identity.colorId} · {identity.frameId} · {identity.motionId} · {identity.fontId}
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.section>
+                    {/* Live Responsive Brand Signature Widget */}
+                    <div className="md:col-span-4 flex justify-center items-center relative z-10">
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+                        className="linacre-surface p-6 rounded-2xl flex flex-col items-center justify-center space-y-4 relative group overflow-hidden w-full max-w-[240px]"
+                      >
+                        {/* Pulsing ambient radial aura gradient */}
+                        <div
+                          className="absolute -inset-10 opacity-20 group-hover:opacity-35 blur-2xl rounded-full transition-opacity pointer-events-none"
+                          style={{
+                            background: `radial-gradient(circle, ${activeColor.primary} 0%, transparent 70%)`,
+                          }}
+                        />
 
-              {/* Brand amber pulse-line divider */}
-              <motion.div variants={itemVariants} className="linacre-pulse-line w-full" />
-
-              {/* Typewriter Terminal */}
-              <motion.div variants={itemVariants}>
-                <TerminalIntro />
-              </motion.div>
-
-              {/* Filterable Toolkit directory */}
-              <motion.div variants={itemVariants}>
-                <Toolkit
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                  openPalette={() => (setPaletteLoaded(true), setPaletteOpen(true))}
-                  activeCategory={activeCategory}
-                  setActiveCategory={setActiveCategory}
-                />
-              </motion.div>
-
-              {/* Beautiful Releases Changelog timeline */}
-              <motion.section
-                variants={itemVariants}
-                className="space-y-8 pt-12 border-t border-border-color/50"
-                id="changelog-section"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs text-amber-color bg-amber-color/10 px-2 py-0.5 rounded font-semibold">
-                    Releases
-                  </span>
-                  <h2 className="font-display text-lg font-bold tracking-tight text-foreground">Changelog</h2>
-                </div>
-
-                {/* Vertical line timeline */}
-                <div className="relative pl-6 border-l border-border-color space-y-8" id="changelog-timeline">
-                  {CHANGELOG.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: index * 0.05 }}
-                      className="relative group"
-                      id={`changelog-item-${item.version}`}
-                    >
-                      {/* node dot */}
-                      <span className="absolute -left-[31px] top-1 w-2.5 h-2.5 rounded-full bg-background dark:bg-[#030c14] border-2 border-cyan group-hover:scale-125 transition-transform" />
-
-                      <div className="space-y-1">
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                          <span className="font-mono text-xs font-bold text-cyan">{item.version}</span>
-                          <span className="hidden sm:inline text-xs text-muted-foreground/60 font-semibold">·</span>
-                          <h3 className="font-display text-sm font-bold text-foreground group-hover:text-amber-color transition-colors">
-                            {item.title}
-                          </h3>
+                        {/* Rendered Live SVG Monogram Emblem */}
+                        <div
+                          className={`relative z-10 select-none ${identity.motionId === 'spin' ? 'animate-spin-slow' : ''}`}
+                        >
+                          {renderEmblem()}
                         </div>
-                        <p className="text-xs text-muted-foreground leading-relaxed pl-1 max-w-4xl">
-                          {item.description}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.section>
-            </motion.div>
-          )}
 
-          {activeTab === 'learn' && (
-            <motion.div
-              key="learn"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <Learn />
-            </motion.div>
-          )}
+                        <div className="relative z-10 text-center space-y-1">
+                          <div className="font-display text-[11px] font-bold tracking-wider text-foreground uppercase">
+                            Signature Identity
+                          </div>
+                          <div className="font-mono text-[9px] text-muted-foreground/80 tracking-wider uppercase">
+                            {identity.colorId} · {identity.frameId} · {identity.motionId} ·{' '}
+                            {identity.fontId}
+                          </div>
+                        </div>
+                      </motion.div>
+                    </div>
+                  </motion.section>
 
-          {activeTab === 'lab' && (
-            <motion.div
-              key="lab"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <Lab theme={theme} />
-            </motion.div>
-          )}
+                  {/* Brand amber pulse-line divider */}
+                  <motion.div variants={itemVariants} className="linacre-pulse-line w-full" />
 
-          {activeTab === 'dashboard' && (
-            <motion.div
-              key="dashboard"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <Dashboard />
-            </motion.div>
-          )}
+                  {/* Typewriter Terminal */}
+                  <motion.div variants={itemVariants}>
+                    <TerminalIntro />
+                  </motion.div>
 
-          {activeTab === 'identity' && (
-            <motion.div
-              key="identity"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <IdentityHub />
-            </motion.div>
-          )}
+                  {/* Filterable Toolkit directory */}
+                  <motion.div variants={itemVariants}>
+                    <Toolkit
+                      searchQuery={searchQuery}
+                      setSearchQuery={setSearchQuery}
+                      openPalette={() => (setPaletteLoaded(true), setPaletteOpen(true))}
+                      activeCategory={activeCategory}
+                      setActiveCategory={setActiveCategory}
+                    />
+                  </motion.div>
 
-          {activeTab === 'playground' && (
-            <motion.div
-              key="playground"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <DevPlayground />
-            </motion.div>
-          )}
+                  {/* Beautiful Releases Changelog timeline */}
+                  <motion.section
+                    variants={itemVariants}
+                    className="space-y-8 pt-12 border-t border-border-color/50"
+                    id="changelog-section"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-xs text-amber-color bg-amber-color/10 px-2 py-0.5 rounded font-semibold">
+                        Releases
+                      </span>
+                      <h2 className="font-display text-lg font-bold tracking-tight text-foreground">
+                        Changelog
+                      </h2>
+                    </div>
 
-          {activeTab === 'projects' && (
-            <motion.div
-              key="projects"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <Projects />
-            </motion.div>
-          )}
+                    {/* Vertical line timeline */}
+                    <div
+                      className="relative pl-6 border-l border-border-color space-y-8"
+                      id="changelog-timeline"
+                    >
+                      {CHANGELOG.map((item, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.3, delay: index * 0.05 }}
+                          className="relative group"
+                          id={`changelog-item-${item.version}`}
+                        >
+                          {/* node dot */}
+                          <span className="absolute -left-[31px] top-1 w-2.5 h-2.5 rounded-full bg-background dark:bg-[#030c14] border-2 border-cyan group-hover:scale-125 transition-transform" />
 
-          {activeTab === 'games' && (
-            <motion.div
-              key="games"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <Games />
-            </motion.div>
-          )}
+                          <div className="space-y-1">
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                              <span className="font-mono text-xs font-bold text-cyan">
+                                {item.version}
+                              </span>
+                              <span className="hidden sm:inline text-xs text-muted-foreground/60 font-semibold">
+                                ·
+                              </span>
+                              <h3 className="font-display text-sm font-bold text-foreground group-hover:text-amber-color transition-colors">
+                                {item.title}
+                              </h3>
+                            </div>
+                            <p className="text-xs text-muted-foreground leading-relaxed pl-1 max-w-4xl">
+                              {item.description}
+                            </p>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.section>
+                </motion.div>
+              )}
 
-          {activeTab === 'agents' && (
-            <motion.div
-              key="agents"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <AgentsHub />
-            </motion.div>
-          )}
-
-          {activeTab === 'about' && (
-            <motion.div
-              key="about"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <About />
-            </motion.div>
-          )}
-
-          {activeTab === 'contact' && (
-            <motion.div
-              key="contact"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <Contact />
-            </motion.div>
-          )}
-
-          {activeTab === 'privacy' && (
-            <motion.div
-              key="privacy"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <Privacy />
-            </motion.div>
-          )}
-
-          {activeTab === 'accessibility' && (
-            <motion.div
-              key="accessibility"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <AccessibilityStatement />
-            </motion.div>
-          )}
-
-          {activeTab === 'blog' && (
-            <motion.div
-              key="blog"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <Blog />
-            </motion.div>
-          )}
-
-          {activeTab === 'status' && (
-            <motion.div
-              key="status"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <StatusPage />
-            </motion.div>
-          )}
-
-          {activeTab === 'contact-thanks' && (
-            <motion.div
-              key="contact-thanks"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <ContactThanks />
-            </motion.div>
-          )}
-
-          {activeTab === 'cookie-policy' && (
-            <motion.div
-              key="cookie-policy"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <CookiePolicy />
-            </motion.div>
-          )}
-
-          {activeTab === 'terms' && (
-            <motion.div
-              key="terms"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <Terms />
-            </motion.div>
-          )}
-
-          {activeTab === 'now' && (
-            <motion.div
-              key="now"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            >
-              <Now />
-            </motion.div>
-          )}
-
-          {!['home', 'toolkit', 'games', 'learn', 'lab', 'dashboard', 'identity', 'playground', 'projects', 'agents', 'about', 'contact', 'privacy', 'accessibility', 'blog', 'status', 'contact-thanks', 'cookie-policy', 'terms', 'now'].includes(activeTab) && (
-            <motion.div
-              key="404"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="py-20 text-center space-y-6 max-w-md mx-auto"
-            >
-              <div className="font-mono text-5xl text-amber-color font-bold animate-pulse">&gt; 404</div>
-              <h2 className="font-display text-xl font-bold text-foreground">ROUTE NOT RESOLVED</h2>
-              <p className="text-xs text-muted-foreground font-mono leading-relaxed">
-                The requested URL path could not be located in David's developer directory files.
-              </p>
-              <div className="flex flex-wrap justify-center gap-3">
-                <button
-                  onClick={() => setActiveTab('home')}
-                  className="px-4 py-2 bg-amber-color text-black font-mono text-xs font-bold rounded-lg hover:bg-amber-glow transition-all cursor-pointer"
+              {activeTab === 'learn' && (
+                <motion.div
+                  key="learn"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
                 >
-                  Return home
-                </button>
-                <button
-                  onClick={() => setActiveTab('contact')}
-                  className="px-4 py-2 bg-transparent border border-amber-color/40 text-amber-color font-mono text-xs font-bold rounded-lg hover:bg-amber-color/10 transition-all cursor-pointer"
+                  <Learn />
+                </motion.div>
+              )}
+
+              {activeTab === 'lab' && (
+                <motion.div
+                  key="lab"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
                 >
-                  Start a project
-                </button>
-              </div>
-            </motion.div>
-          )}
-          </AnimatePresence>
-        </Suspense>
+                  <Lab theme={theme} />
+                </motion.div>
+              )}
+
+              {activeTab === 'dashboard' && (
+                <motion.div
+                  key="dashboard"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <Dashboard />
+                </motion.div>
+              )}
+
+              {activeTab === 'identity' && (
+                <motion.div
+                  key="identity"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <IdentityHub />
+                </motion.div>
+              )}
+
+              {activeTab === 'playground' && (
+                <motion.div
+                  key="playground"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <DevPlayground />
+                </motion.div>
+              )}
+
+              {activeTab === 'projects' && (
+                <motion.div
+                  key="projects"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <Projects />
+                </motion.div>
+              )}
+
+              {activeTab === 'games' && (
+                <motion.div
+                  key="games"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <Games />
+                </motion.div>
+              )}
+
+              {activeTab === 'agents' && (
+                <motion.div
+                  key="agents"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <AgentsHub />
+                </motion.div>
+              )}
+
+              {activeTab === 'about' && (
+                <motion.div
+                  key="about"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <About />
+                </motion.div>
+              )}
+
+              {activeTab === 'contact' && (
+                <motion.div
+                  key="contact"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <Contact />
+                </motion.div>
+              )}
+
+              {activeTab === 'privacy' && (
+                <motion.div
+                  key="privacy"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <Privacy />
+                </motion.div>
+              )}
+
+              {activeTab === 'accessibility' && (
+                <motion.div
+                  key="accessibility"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <AccessibilityStatement />
+                </motion.div>
+              )}
+
+              {activeTab === 'blog' && (
+                <motion.div
+                  key="blog"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <Blog />
+                </motion.div>
+              )}
+
+              {activeTab === 'status' && (
+                <motion.div
+                  key="status"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <StatusPage />
+                </motion.div>
+              )}
+
+              {activeTab === 'contact-thanks' && (
+                <motion.div
+                  key="contact-thanks"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <ContactThanks />
+                </motion.div>
+              )}
+
+              {activeTab === 'cookie-policy' && (
+                <motion.div
+                  key="cookie-policy"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <CookiePolicy />
+                </motion.div>
+              )}
+
+              {activeTab === 'terms' && (
+                <motion.div
+                  key="terms"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <Terms />
+                </motion.div>
+              )}
+
+              {activeTab === 'now' && (
+                <motion.div
+                  key="now"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <Now />
+                </motion.div>
+              )}
+
+              {![
+                'home',
+                'toolkit',
+                'games',
+                'learn',
+                'lab',
+                'dashboard',
+                'identity',
+                'playground',
+                'projects',
+                'agents',
+                'about',
+                'contact',
+                'privacy',
+                'accessibility',
+                'blog',
+                'status',
+                'contact-thanks',
+                'cookie-policy',
+                'terms',
+                'now',
+              ].includes(activeTab) && (
+                <motion.div
+                  key="404"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="py-20 text-center space-y-6 max-w-md mx-auto"
+                >
+                  <div className="font-mono text-5xl text-amber-color font-bold animate-pulse">
+                    &gt; 404
+                  </div>
+                  <h2 className="font-display text-xl font-bold text-foreground">
+                    ROUTE NOT RESOLVED
+                  </h2>
+                  <p className="text-xs text-muted-foreground font-mono leading-relaxed">
+                    The requested URL path could not be located in David's developer directory
+                    files.
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    <button
+                      onClick={() => setActiveTab('home')}
+                      className="px-4 py-2 bg-amber-color text-black font-mono text-xs font-bold rounded-lg hover:bg-amber-glow transition-all cursor-pointer"
+                    >
+                      Return home
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('contact')}
+                      className="px-4 py-2 bg-transparent border border-amber-color/40 text-amber-color font-mono text-xs font-bold rounded-lg hover:bg-amber-color/10 transition-all cursor-pointer"
+                    >
+                      Start a project
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Suspense>
         </ErrorBoundary>
       </main>
 
@@ -977,7 +1090,8 @@ export default function App() {
                   Secret Overdrive Unlocked!
                 </h3>
                 <p className="text-[11px] text-foreground/90 font-mono leading-relaxed">
-                  You triggered the Konami Code sequence! Cyber Synthesizer &amp; Arcade Overdrive enabled.
+                  You triggered the Konami Code sequence! Cyber Synthesizer &amp; Arcade Overdrive
+                  enabled.
                 </p>
                 <button
                   onClick={() => setKonamiUnlocked(false)}

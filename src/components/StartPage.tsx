@@ -46,7 +46,8 @@ const products = [
   {
     name: 'Fleatment 🐱',
     eyebrow: 'Cat Flea Index & Finder',
-    description: 'UK cat flea & tick treatment finder with live delivered price comparisons and safety guides.',
+    description:
+      'UK cat flea & tick treatment finder with live delivered price comparisons and safety guides.',
     url: 'https://dlinacre.github.io/Fleatment/',
     action: 'Open Fleatment',
     icon: ShieldCheck,
@@ -55,7 +56,8 @@ const products = [
   {
     name: 'Personal OP Agent',
     eyebrow: 'Zero-setup AI workspace',
-    description: 'Single-file HTML AI workspace and prompt controller running 100% in your browser.',
+    description:
+      'Single-file HTML AI workspace and prompt controller running 100% in your browser.',
     url: '/tools/opagent.html',
     action: 'Launch OP Agent',
     icon: Sparkles,
@@ -64,7 +66,8 @@ const products = [
   {
     name: 'Arena Audit',
     eyebrow: 'Universal audit prompt builder',
-    description: 'Modular browser audit prompt builder for codebases, UX, security, and performance.',
+    description:
+      'Modular browser audit prompt builder for codebases, UX, security, and performance.',
     url: 'https://dlinacre.github.io/a-audit/',
     action: 'Build audit prompt',
     icon: ShieldCheck,
@@ -73,7 +76,8 @@ const products = [
   {
     name: 'Mob Deals',
     eyebrow: 'Make a better choice',
-    description: 'Compare UK SIM-only deals and keep your number with a plain-English switching guide.',
+    description:
+      'Compare UK SIM-only deals and keep your number with a plain-English switching guide.',
     url: 'https://dlinacre.github.io/mob-deals/',
     action: 'Compare mobile deals',
     icon: Smartphone,
@@ -91,7 +95,8 @@ const products = [
   {
     name: 'DKMA Monster',
     eyebrow: 'Keep Android apps alive',
-    description: 'Find exact battery and autostart settings for 15 Android phone families, plus GUI tool.',
+    description:
+      'Find exact battery and autostart settings for 15 Android phone families, plus GUI tool.',
     url: 'https://lin4cre.github.io/dkma-monster/',
     action: 'Fix background apps',
     icon: ShieldCheck,
@@ -100,7 +105,8 @@ const products = [
   {
     name: 'Apex POS',
     eyebrow: 'Run a small business',
-    description: 'Offline-first point of sale with stock, customers, expenses, receipts, and reports.',
+    description:
+      'Offline-first point of sale with stock, customers, expenses, receipts, and reports.',
     url: 'https://dlinacre.github.io/Apex-POS/',
     action: 'Open Apex POS',
     icon: Store,
@@ -120,7 +126,7 @@ function securePassword(length: number) {
   const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*+-=?';
   const random = new Uint32Array(length);
   cryptoApi.getRandomValues(random);
-  return [...random].map((value) => alphabet[value % alphabet.length]).join('');
+  return [...random].map(value => alphabet[value % alphabet.length]).join('');
 }
 
 function relativeTime(date: Date) {
@@ -135,7 +141,8 @@ function relativeTime(date: Date) {
     ['minute', 60],
     ['second', 1],
   ];
-  const [unit, divisor] = units.find(([, value]) => Math.abs(seconds) >= value) || units[units.length - 1];
+  const [unit, divisor] =
+    units.find(([, value]) => Math.abs(seconds) >= value) || units[units.length - 1];
   return formatter.format(Math.round(seconds / divisor), unit);
 }
 
@@ -220,11 +227,13 @@ export default function StartPage({ navigate }: StartPageProps) {
       if (mode === 'encode') {
         const bytes = new TextEncoder().encode(base64Value);
         let binary = '';
-        bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+        bytes.forEach(byte => {
+          binary += String.fromCharCode(byte);
+        });
         setBase64Value(btoa(binary));
       } else {
         const binary = atob(base64Value.replace(/\s/g, ''));
-        const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+        const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
         setBase64Value(new TextDecoder().decode(bytes));
       }
       setBase64Error('');
@@ -240,7 +249,13 @@ export default function StartPage({ navigate }: StartPageProps) {
 
   const selectUtility = (utility: UtilityId) => {
     setActiveUtility(utility);
-    window.setTimeout(() => document.getElementById('quick-utility')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 20);
+    window.setTimeout(
+      () =>
+        document
+          .getElementById('quick-utility')
+          ?.scrollIntoView({ behavior: 'smooth', block: 'center' }),
+      20,
+    );
   };
 
   const handleSmartAction = (event: FormEvent) => {
@@ -283,7 +298,11 @@ export default function StartPage({ navigate }: StartPageProps) {
       window.open(hasProtocol ? value : `https://${value}`, '_blank', 'noopener,noreferrer');
       return;
     }
-    window.open(`https://duckduckgo.com/?q=${encodeURIComponent(value)}`, '_blank', 'noopener,noreferrer');
+    window.open(
+      `https://duckduckgo.com/?q=${encodeURIComponent(value)}`,
+      '_blank',
+      'noopener,noreferrer',
+    );
   };
 
   const accentClasses: Record<(typeof products)[number]['accent'], string> = {
@@ -299,33 +318,52 @@ export default function StartPage({ navigate }: StartPageProps) {
         <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-amber-color/10 blur-3xl pointer-events-none" />
         <div className="relative mx-auto max-w-4xl text-center">
           <div className="mb-6 flex flex-wrap items-center justify-center gap-2 font-mono text-[11px] text-muted-foreground">
-            <span className="rounded-full border border-amber-color/20 bg-amber-color/5 px-3 py-1 text-amber-color">{greeting}</span>
-            <span>{now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
+            <span className="rounded-full border border-amber-color/20 bg-amber-color/5 px-3 py-1 text-amber-color">
+              {greeting}
+            </span>
+            <span>
+              {now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
+            </span>
             <span aria-hidden="true">·</span>
-            <time dateTime={now.toISOString()}>{now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</time>
+            <time dateTime={now.toISOString()}>
+              {now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+            </time>
           </div>
 
-          <h1 id="start-heading" className="font-display text-4xl font-bold tracking-[-0.045em] text-foreground sm:text-5xl lg:text-6xl">
+          <h1
+            id="start-heading"
+            className="font-display text-4xl font-bold tracking-[-0.045em] text-foreground sm:text-5xl lg:text-6xl"
+          >
             Get useful work done <span className="text-amber-color">faster</span>.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-            Search, clean data, generate secure values, convert time, calculate VAT, and launch practical apps. Everything runs locally in your browser — no account, no tracking, no uploads.
+            Search, clean data, generate secure values, convert time, calculate VAT, and launch
+            practical apps. Everything runs locally in your browser — no account, no tracking, no
+            uploads.
           </p>
 
           <form onSubmit={handleSmartAction} className="mx-auto mt-8 max-w-3xl" role="search">
-            <label htmlFor="start-search" className="sr-only">Search the web, open a URL, or run a utility command</label>
+            <label htmlFor="start-search" className="sr-only">
+              Search the web, open a URL, or run a utility command
+            </label>
             <div className="group relative rounded-2xl border border-amber-color/25 bg-[var(--linacre-panel)] p-2 shadow-[0_20px_70px_rgba(0,0,0,0.25)] transition-all focus-within:border-amber-color/60 focus-within:shadow-[0_0_40px_rgba(34,211,238,0.12)]">
-              <Search className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground group-focus-within:text-amber-color" aria-hidden="true" />
+              <Search
+                className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground group-focus-within:text-amber-color"
+                aria-hidden="true"
+              />
               <input
                 id="start-search"
                 value={searchInput}
-                onChange={(event) => setSearchInput(event.target.value)}
+                onChange={event => setSearchInput(event.target.value)}
                 className="h-12 w-full bg-transparent pl-12 pr-28 font-mono text-sm text-foreground placeholder:text-muted-foreground/65 focus:outline-none"
                 placeholder="Search, paste a URL, or type “uuid”…"
                 autoComplete="off"
                 spellCheck={false}
               />
-              <button type="submit" className="absolute right-2 top-2 flex h-12 items-center gap-2 rounded-xl bg-amber-color px-4 font-mono text-xs font-bold text-[#030c14] transition-all hover:bg-amber-glow cursor-pointer">
+              <button
+                type="submit"
+                className="absolute right-2 top-2 flex h-12 items-center gap-2 rounded-xl bg-amber-color px-4 font-mono text-xs font-bold text-[#030c14] transition-all hover:bg-amber-glow cursor-pointer"
+              >
                 Go <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </button>
             </div>
@@ -360,8 +398,15 @@ export default function StartPage({ navigate }: StartPageProps) {
       <section id="quick-utility" className="scroll-mt-28" aria-labelledby="quick-tools-heading">
         <div className="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-color">Works in your browser</span>
-            <h2 id="quick-tools-heading" className="mt-1 font-display text-2xl font-bold tracking-tight text-foreground">Quick tools</h2>
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-color">
+              Works in your browser
+            </span>
+            <h2
+              id="quick-tools-heading"
+              className="mt-1 font-display text-2xl font-bold tracking-tight text-foreground"
+            >
+              Quick tools
+            </h2>
           </div>
           <div className="flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground">
             <ShieldCheck className="h-4 w-4 text-emerald-color" aria-hidden="true" />
@@ -370,8 +415,12 @@ export default function StartPage({ navigate }: StartPageProps) {
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-border-color bg-[var(--linacre-panel)] shadow-[var(--linacre-card-shadow)]">
-          <div className="grid grid-cols-2 border-b border-border-color bg-muted/20 sm:grid-cols-4" role="tablist" aria-label="Quick utilities">
-            {utilities.map((utility) => {
+          <div
+            className="grid grid-cols-2 border-b border-border-color bg-muted/20 sm:grid-cols-4"
+            role="tablist"
+            aria-label="Quick utilities"
+          >
+            {utilities.map(utility => {
               const Icon = utility.icon;
               const isActive = activeUtility === utility.id;
               return (
@@ -383,12 +432,22 @@ export default function StartPage({ navigate }: StartPageProps) {
                   onClick={() => setActiveUtility(utility.id)}
                   className={`relative flex items-center gap-3 border-b border-r border-border-color px-4 py-4 text-left transition-colors sm:border-b-0 ${isActive ? 'bg-amber-color/[0.08] text-foreground' : 'text-muted-foreground hover:bg-muted/30 hover:text-foreground'}`}
                 >
-                  <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-amber-color' : ''}`} aria-hidden="true" />
+                  <Icon
+                    className={`h-4 w-4 shrink-0 ${isActive ? 'text-amber-color' : ''}`}
+                    aria-hidden="true"
+                  />
                   <span>
                     <span className="block font-mono text-xs font-bold">{utility.label}</span>
-                    <span className="mt-0.5 hidden text-[10px] sm:block">{utility.description}</span>
+                    <span className="mt-0.5 hidden text-[10px] sm:block">
+                      {utility.description}
+                    </span>
                   </span>
-                  {isActive && <motion.span layoutId="utility-indicator" className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-amber-color" />}
+                  {isActive && (
+                    <motion.span
+                      layoutId="utility-indicator"
+                      className="absolute inset-x-3 bottom-0 h-0.5 rounded-full bg-amber-color"
+                    />
+                  )}
                 </button>
               );
             })}
@@ -399,31 +458,70 @@ export default function StartPage({ navigate }: StartPageProps) {
               <div id="utility-panel-json" role="tabpanel" className="space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h3 className="font-display text-base font-bold text-foreground">JSON formatter & validator</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">Paste JSON, then make it readable or compact.</p>
+                    <h3 className="font-display text-base font-bold text-foreground">
+                      JSON formatter & validator
+                    </h3>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Paste JSON, then make it readable or compact.
+                    </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <button onClick={() => formatJson(false)} className="rounded-lg bg-amber-color px-3 py-2 font-mono text-xs font-bold text-[#030c14] hover:bg-amber-glow">Format</button>
-                    <button onClick={() => formatJson(true)} className="rounded-lg border border-border-color px-3 py-2 font-mono text-xs text-foreground hover:border-amber-color/40">Minify</button>
-                    <button onClick={() => copyText(jsonValue, 'json')} className="rounded-lg border border-border-color p-2 text-muted-foreground hover:text-foreground" aria-label="Copy JSON">
-                      {copied === 'json' ? <Check className="h-4 w-4 text-emerald-color" /> : <Copy className="h-4 w-4" />}
+                    <button
+                      onClick={() => formatJson(false)}
+                      className="rounded-lg bg-amber-color px-3 py-2 font-mono text-xs font-bold text-[#030c14] hover:bg-amber-glow"
+                    >
+                      Format
                     </button>
-                    <button onClick={() => { setJsonValue(''); setJsonError(''); }} className="rounded-lg border border-border-color p-2 text-muted-foreground hover:text-error" aria-label="Clear JSON">
+                    <button
+                      onClick={() => formatJson(true)}
+                      className="rounded-lg border border-border-color px-3 py-2 font-mono text-xs text-foreground hover:border-amber-color/40"
+                    >
+                      Minify
+                    </button>
+                    <button
+                      onClick={() => copyText(jsonValue, 'json')}
+                      className="rounded-lg border border-border-color p-2 text-muted-foreground hover:text-foreground"
+                      aria-label="Copy JSON"
+                    >
+                      {copied === 'json' ? (
+                        <Check className="h-4 w-4 text-emerald-color" />
+                      ) : (
+                        <Copy className="h-4 w-4" />
+                      )}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setJsonValue('');
+                        setJsonError('');
+                      }}
+                      className="rounded-lg border border-border-color p-2 text-muted-foreground hover:text-error"
+                      aria-label="Clear JSON"
+                    >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
                 <textarea
                   value={jsonValue}
-                  onChange={(event) => { setJsonValue(event.target.value); setJsonError(''); }}
+                  onChange={event => {
+                    setJsonValue(event.target.value);
+                    setJsonError('');
+                  }}
                   className={`min-h-64 w-full resize-y rounded-xl border bg-[#031018] p-4 font-mono text-xs leading-6 text-[#d7dce5] focus:outline-none ${jsonError ? 'border-error' : 'border-border-color focus:border-amber-color/60'}`}
                   placeholder={'{\n  "paste": "your JSON here"\n}'}
                   spellCheck={false}
                   aria-describedby={jsonError ? 'json-error' : undefined}
                 />
                 <div className="flex min-h-5 items-center justify-between gap-4 font-mono text-[10px]">
-                  <span id="json-error" className={jsonError ? 'text-error' : 'text-muted-foreground'}>{jsonError || 'Supports objects, arrays, strings, numbers, booleans, and null.'}</span>
-                  <span className="shrink-0 text-muted-foreground">{jsonValue.length.toLocaleString()} characters</span>
+                  <span
+                    id="json-error"
+                    className={jsonError ? 'text-error' : 'text-muted-foreground'}
+                  >
+                    {jsonError || 'Supports objects, arrays, strings, numbers, booleans, and null.'}
+                  </span>
+                  <span className="shrink-0 text-muted-foreground">
+                    {jsonValue.length.toLocaleString()} characters
+                  </span>
                 </div>
               </div>
             )}
@@ -432,31 +530,70 @@ export default function StartPage({ navigate }: StartPageProps) {
               <div id="utility-panel-base64" role="tabpanel" className="space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h3 className="font-display text-base font-bold text-foreground">Base64 encoder & decoder</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">UTF-8 safe conversion for text and small data snippets.</p>
+                    <h3 className="font-display text-base font-bold text-foreground">
+                      Base64 encoder & decoder
+                    </h3>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      UTF-8 safe conversion for text and small data snippets.
+                    </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <button onClick={() => transformBase64('encode')} className="rounded-lg bg-amber-color px-3 py-2 font-mono text-xs font-bold text-[#030c14] hover:bg-amber-glow">Encode</button>
-                    <button onClick={() => transformBase64('decode')} className="rounded-lg border border-border-color px-3 py-2 font-mono text-xs text-foreground hover:border-amber-color/40">Decode</button>
-                    <button onClick={() => copyText(base64Value, 'base64')} className="rounded-lg border border-border-color p-2 text-muted-foreground hover:text-foreground" aria-label="Copy Base64 value">
-                      {copied === 'base64' ? <Check className="h-4 w-4 text-emerald-color" /> : <Copy className="h-4 w-4" />}
+                    <button
+                      onClick={() => transformBase64('encode')}
+                      className="rounded-lg bg-amber-color px-3 py-2 font-mono text-xs font-bold text-[#030c14] hover:bg-amber-glow"
+                    >
+                      Encode
                     </button>
-                    <button onClick={() => { setBase64Value(''); setBase64Error(''); }} className="rounded-lg border border-border-color p-2 text-muted-foreground hover:text-error" aria-label="Clear Base64 value">
+                    <button
+                      onClick={() => transformBase64('decode')}
+                      className="rounded-lg border border-border-color px-3 py-2 font-mono text-xs text-foreground hover:border-amber-color/40"
+                    >
+                      Decode
+                    </button>
+                    <button
+                      onClick={() => copyText(base64Value, 'base64')}
+                      className="rounded-lg border border-border-color p-2 text-muted-foreground hover:text-foreground"
+                      aria-label="Copy Base64 value"
+                    >
+                      {copied === 'base64' ? (
+                        <Check className="h-4 w-4 text-emerald-color" />
+                      ) : (
+                        <Copy className="h-4 w-4" />
+                      )}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setBase64Value('');
+                        setBase64Error('');
+                      }}
+                      className="rounded-lg border border-border-color p-2 text-muted-foreground hover:text-error"
+                      aria-label="Clear Base64 value"
+                    >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
                 <textarea
                   value={base64Value}
-                  onChange={(event) => { setBase64Value(event.target.value); setBase64Error(''); }}
+                  onChange={event => {
+                    setBase64Value(event.target.value);
+                    setBase64Error('');
+                  }}
                   className={`min-h-64 w-full resize-y rounded-xl border bg-[#031018] p-4 font-mono text-xs leading-6 text-[#d7dce5] focus:outline-none ${base64Error ? 'border-error' : 'border-border-color focus:border-amber-color/60'}`}
                   placeholder="Type plain text to encode, or paste Base64 to decode…"
                   spellCheck={false}
                   aria-describedby={base64Error ? 'base64-error' : undefined}
                 />
                 <div className="flex min-h-5 items-center justify-between gap-4 font-mono text-[10px]">
-                  <span id="base64-error" className={base64Error ? 'text-error' : 'text-muted-foreground'}>{base64Error || 'Conversion happens locally and is never sent to a server.'}</span>
-                  <span className="shrink-0 text-muted-foreground">{base64Value.length.toLocaleString()} characters</span>
+                  <span
+                    id="base64-error"
+                    className={base64Error ? 'text-error' : 'text-muted-foreground'}
+                  >
+                    {base64Error || 'Conversion happens locally and is never sent to a server.'}
+                  </span>
+                  <span className="shrink-0 text-muted-foreground">
+                    {base64Value.length.toLocaleString()} characters
+                  </span>
                 </div>
               </div>
             )}
@@ -465,16 +602,23 @@ export default function StartPage({ navigate }: StartPageProps) {
               <div id="utility-panel-time" role="tabpanel" className="space-y-5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h3 className="font-display text-base font-bold text-foreground">Timestamp converter</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">Enter Unix seconds, milliseconds, an ISO string, or a readable date.</p>
+                    <h3 className="font-display text-base font-bold text-foreground">
+                      Timestamp converter
+                    </h3>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Enter Unix seconds, milliseconds, an ISO string, or a readable date.
+                    </p>
                   </div>
-                  <button onClick={() => setTimestampValue(String(Math.floor(Date.now() / 1000)))} className="flex items-center gap-2 rounded-lg border border-border-color px-3 py-2 font-mono text-xs text-foreground hover:border-amber-color/40">
+                  <button
+                    onClick={() => setTimestampValue(String(Math.floor(Date.now() / 1000)))}
+                    className="flex items-center gap-2 rounded-lg border border-border-color px-3 py-2 font-mono text-xs text-foreground hover:border-amber-color/40"
+                  >
                     <RefreshCw className="h-3.5 w-3.5" /> Use now
                   </button>
                 </div>
                 <input
                   value={timestampValue}
-                  onChange={(event) => setTimestampValue(event.target.value)}
+                  onChange={event => setTimestampValue(event.target.value)}
                   className="h-12 w-full rounded-xl border border-border-color bg-[#031018] px-4 font-mono text-sm text-[#d7dce5] focus:border-amber-color/60 focus:outline-none"
                   placeholder="1721491200 or 2026-07-20T12:00:00Z"
                   spellCheck={false}
@@ -482,28 +626,49 @@ export default function StartPage({ navigate }: StartPageProps) {
                 {parsedTimestamp ? (
                   <div className="grid gap-3 sm:grid-cols-2">
                     {[
-                      ['Local time', parsedTimestamp.toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'long' })],
+                      [
+                        'Local time',
+                        parsedTimestamp.toLocaleString('en-GB', {
+                          dateStyle: 'full',
+                          timeStyle: 'long',
+                        }),
+                      ],
                       ['UTC', parsedTimestamp.toUTCString()],
                       ['ISO 8601', parsedTimestamp.toISOString()],
                       ['Relative', relativeTime(parsedTimestamp)],
                       ['Unix seconds', String(Math.floor(parsedTimestamp.getTime() / 1000))],
                       ['Milliseconds', String(parsedTimestamp.getTime())],
                     ].map(([label, value]) => (
-                      <div key={label} className="rounded-xl border border-border-color bg-muted/15 p-4">
-                        <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{label}</span>
-                        <p className="mt-2 break-words font-mono text-xs leading-5 text-foreground">{value}</p>
+                      <div
+                        key={label}
+                        className="rounded-xl border border-border-color bg-muted/15 p-4"
+                      >
+                        <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                          {label}
+                        </span>
+                        <p className="mt-2 break-words font-mono text-xs leading-5 text-foreground">
+                          {value}
+                        </p>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="rounded-xl border border-error/40 bg-error/5 p-4 font-mono text-xs text-error">Enter a date or timestamp that the browser can understand.</div>
+                  <div className="rounded-xl border border-error/40 bg-error/5 p-4 font-mono text-xs text-error">
+                    Enter a date or timestamp that the browser can understand.
+                  </div>
                 )}
                 <button
-                  onClick={() => parsedTimestamp && copyText(parsedTimestamp.toISOString(), 'timestamp')}
+                  onClick={() =>
+                    parsedTimestamp && copyText(parsedTimestamp.toISOString(), 'timestamp')
+                  }
                   disabled={!parsedTimestamp}
                   className="flex items-center gap-2 rounded-lg bg-amber-color px-3 py-2 font-mono text-xs font-bold text-[#030c14] disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  {copied === 'timestamp' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  {copied === 'timestamp' ? (
+                    <Check className="h-4 w-4" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
                   {copied === 'timestamp' ? 'Copied ISO time' : 'Copy ISO time'}
                 </button>
               </div>
@@ -513,11 +678,15 @@ export default function StartPage({ navigate }: StartPageProps) {
               <div id="utility-panel-generate" role="tabpanel" className="space-y-5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h3 className="font-display text-base font-bold text-foreground">Secure value generator</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">Generated with your browser&apos;s cryptographic random number generator.</p>
+                    <h3 className="font-display text-base font-bold text-foreground">
+                      Secure value generator
+                    </h3>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Generated with your browser&apos;s cryptographic random number generator.
+                    </p>
                   </div>
                   <div className="flex rounded-lg border border-border-color bg-[#031018] p-1">
-                    {(['uuid', 'password'] as const).map((type) => (
+                    {(['uuid', 'password'] as const).map(type => (
                       <button
                         key={type}
                         onClick={() => generateValue(type)}
@@ -530,17 +699,31 @@ export default function StartPage({ navigate }: StartPageProps) {
                 </div>
 
                 <div className="flex min-h-24 items-center gap-3 rounded-xl border border-amber-color/25 bg-[#031018] p-4 sm:p-5">
-                  <code className="min-w-0 flex-1 break-all font-mono text-sm leading-6 text-cyan sm:text-base">{generatedValue}</code>
-                  <button onClick={() => copyText(generatedValue, 'generator')} className="shrink-0 rounded-lg border border-border-color p-2 text-muted-foreground hover:text-foreground" aria-label="Copy generated value">
-                    {copied === 'generator' ? <Check className="h-4 w-4 text-emerald-color" /> : <Copy className="h-4 w-4" />}
+                  <code className="min-w-0 flex-1 break-all font-mono text-sm leading-6 text-cyan sm:text-base">
+                    {generatedValue}
+                  </code>
+                  <button
+                    onClick={() => copyText(generatedValue, 'generator')}
+                    className="shrink-0 rounded-lg border border-border-color p-2 text-muted-foreground hover:text-foreground"
+                    aria-label="Copy generated value"
+                  >
+                    {copied === 'generator' ? (
+                      <Check className="h-4 w-4 text-emerald-color" />
+                    ) : (
+                      <Copy className="h-4 w-4" />
+                    )}
                   </button>
                 </div>
 
                 {generatedType === 'password' && (
                   <div className="max-w-xl space-y-2">
                     <div className="flex items-center justify-between font-mono text-[11px]">
-                      <label htmlFor="password-length" className="text-muted-foreground">Password length</label>
-                      <span className="font-bold text-amber-color">{passwordLength} characters</span>
+                      <label htmlFor="password-length" className="text-muted-foreground">
+                        Password length
+                      </label>
+                      <span className="font-bold text-amber-color">
+                        {passwordLength} characters
+                      </span>
                     </div>
                     <input
                       id="password-length"
@@ -548,7 +731,7 @@ export default function StartPage({ navigate }: StartPageProps) {
                       min="12"
                       max="64"
                       value={passwordLength}
-                      onChange={(event) => {
+                      onChange={event => {
                         const length = Number(event.target.value);
                         setPasswordLength(length);
                         generateValue('password', length);
@@ -558,7 +741,10 @@ export default function StartPage({ navigate }: StartPageProps) {
                   </div>
                 )}
 
-                <button onClick={() => generateValue()} className="flex items-center gap-2 rounded-lg bg-amber-color px-4 py-2 font-mono text-xs font-bold text-[#030c14] hover:bg-amber-glow">
+                <button
+                  onClick={() => generateValue()}
+                  className="flex items-center gap-2 rounded-lg bg-amber-color px-4 py-2 font-mono text-xs font-bold text-[#030c14] hover:bg-amber-glow"
+                >
                   <RefreshCw className="h-4 w-4" /> Generate another
                 </button>
               </div>
@@ -572,10 +758,20 @@ export default function StartPage({ navigate }: StartPageProps) {
       <section aria-labelledby="products-heading">
         <div className="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-color">Built by Linacre</span>
-            <h2 id="products-heading" className="mt-1 font-display text-2xl font-bold tracking-tight text-foreground">Free tools for real jobs</h2>
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-color">
+              Built by Linacre
+            </span>
+            <h2
+              id="products-heading"
+              className="mt-1 font-display text-2xl font-bold tracking-tight text-foreground"
+            >
+              Free tools for real jobs
+            </h2>
           </div>
-          <button onClick={() => navigate('projects')} className="flex items-center gap-1.5 self-start font-mono text-xs font-semibold text-muted-foreground hover:text-amber-color sm:self-auto">
+          <button
+            onClick={() => navigate('projects')}
+            className="flex items-center gap-1.5 self-start font-mono text-xs font-semibold text-muted-foreground hover:text-amber-color sm:self-auto"
+          >
             See every project <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>
@@ -596,14 +792,25 @@ export default function StartPage({ navigate }: StartPageProps) {
                 className="group relative overflow-hidden rounded-2xl border border-border-color bg-[var(--linacre-panel)] p-5 transition-all hover:-translate-y-1 hover:border-amber-color/35 hover:shadow-[var(--linacre-glow-soft)] sm:p-6"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <div className={`flex h-11 w-11 items-center justify-center rounded-xl border ${accentClasses[product.accent]}`}>
+                  <div
+                    className={`flex h-11 w-11 items-center justify-center rounded-xl border ${accentClasses[product.accent]}`}
+                  >
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </div>
-                  <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber-color" aria-hidden="true" />
+                  <ArrowUpRight
+                    className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber-color"
+                    aria-hidden="true"
+                  />
                 </div>
-                <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{product.eyebrow}</p>
-                <h3 className="mt-1 font-display text-xl font-bold text-foreground">{product.name}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{product.description}</p>
+                <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  {product.eyebrow}
+                </p>
+                <h3 className="mt-1 font-display text-xl font-bold text-foreground">
+                  {product.name}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  {product.description}
+                </p>
                 <span className="mt-5 inline-flex items-center gap-1.5 font-mono text-xs font-bold text-amber-color">
                   {product.action} <ExternalLink className="h-3.5 w-3.5" />
                 </span>
@@ -617,26 +824,29 @@ export default function StartPage({ navigate }: StartPageProps) {
         {[
           {
             title: 'Developer toolbox',
-            description: 'JWT decoder, regex tester, secure generators, CSS builder, and SVG workspace.',
+            description:
+              'JWT decoder, regex tester, secure generators, CSS builder, and SVG workspace.',
             action: 'Open playground',
             tab: 'playground',
             icon: Zap,
           },
           {
             title: 'Curated toolkit',
-            description: 'A searchable directory of reliable tools for building, deploying, and designing.',
+            description:
+              'A searchable directory of reliable tools for building, deploying, and designing.',
             action: 'Browse the toolkit',
             tab: 'toolkit',
             icon: Layers,
           },
           {
             title: 'Privacy by default',
-            description: 'Homepage utilities run entirely in your browser. Pasted content is never uploaded.',
+            description:
+              'Homepage utilities run entirely in your browser. Pasted content is never uploaded.',
             action: 'Read the privacy policy',
             tab: 'privacy',
             icon: LockKeyhole,
           },
-        ].map((item) => {
+        ].map(item => {
           const Icon = item.icon;
           return (
             <button
@@ -645,25 +855,44 @@ export default function StartPage({ navigate }: StartPageProps) {
               className="group rounded-2xl border border-border-color bg-muted/15 p-5 text-left transition-colors hover:border-amber-color/30 hover:bg-muted/25"
             >
               <Icon className="h-5 w-5 text-amber-color" aria-hidden="true" />
-              <h2 className="mt-4 font-display text-base font-bold text-foreground">{item.title}</h2>
+              <h2 className="mt-4 font-display text-base font-bold text-foreground">
+                {item.title}
+              </h2>
               <p className="mt-2 text-xs leading-5 text-muted-foreground">{item.description}</p>
               <span className="mt-4 inline-flex items-center gap-1 font-mono text-[11px] font-bold text-amber-color">
-                {item.action} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                {item.action}{' '}
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </button>
           );
         })}
       </section>
 
-      <section className="relative overflow-hidden rounded-2xl border border-amber-color/20 bg-amber-color/[0.06] p-6 sm:p-8" aria-labelledby="toolbox-cta-heading">
+      <section
+        className="relative overflow-hidden rounded-2xl border border-amber-color/20 bg-amber-color/[0.06] p-6 sm:p-8"
+        aria-labelledby="toolbox-cta-heading"
+      >
         <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-amber-color/10 blur-3xl" />
         <div className="relative flex flex-col justify-between gap-6 md:flex-row md:items-center">
           <div className="max-w-2xl">
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-color">Bring the tools to your workflow</span>
-            <h2 id="toolbox-cta-heading" className="mt-2 font-display text-2xl font-bold tracking-tight text-foreground">A tool box for you — and your AI.</h2>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">Private, offline browser utilities that also run as an MCP server — so Claude, Cursor or any agent can call them directly. No sign-up, no tracking.</p>
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-color">
+              Bring the tools to your workflow
+            </span>
+            <h2
+              id="toolbox-cta-heading"
+              className="mt-2 font-display text-2xl font-bold tracking-tight text-foreground"
+            >
+              A tool box for you — and your AI.
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              Private, offline browser utilities that also run as an MCP server — so Claude, Cursor
+              or any agent can call them directly. No sign-up, no tracking.
+            </p>
           </div>
-          <button onClick={() => navigate('toolkit')} className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-amber-color px-5 py-3 font-mono text-sm font-bold text-[#030c14] shadow-[0_0_24px_rgba(34,211,238,0.25)] hover:bg-amber-glow">
+          <button
+            onClick={() => navigate('toolkit')}
+            className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-amber-color px-5 py-3 font-mono text-sm font-bold text-[#030c14] shadow-[0_0_24px_rgba(34,211,238,0.25)] hover:bg-amber-glow"
+          >
             Open the toolkit <ArrowUpRight className="h-4 w-4" />
           </button>
         </div>

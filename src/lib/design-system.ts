@@ -1,4 +1,19 @@
-import { Activity, Bot, BookOpen, Cpu, FileText, FolderCode, Gamepad2, Github, House, Layers, Mail, Sliders, Sparkles, User } from 'lucide-react';
+import {
+  Activity,
+  Bot,
+  BookOpen,
+  Cpu,
+  FileText,
+  FolderCode,
+  Gamepad2,
+  Github,
+  House,
+  Layers,
+  Mail,
+  Sliders,
+  Sparkles,
+  User,
+} from 'lucide-react';
 
 export const primaryNav = [
   { id: 'home', label: 'Start', href: '/', icon: House },
