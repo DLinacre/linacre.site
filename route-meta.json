@@ -19,9 +19,10 @@
       "index": true
     },
     "/games": {
-      "title": "Games | David Linacre — Playable browser games & arcade flyers",
-      "description": "Playable browser games built by David Linacre, including KushCloud flyer and built-in interactive Snake. Free and open source.",
+      "title": "Games | David Linacre — Roblox idle tycoon & playable browser games",
+      "description": "Slime Factory Tycoon, an open-source Roblox idle-tycoon built on a modular Luau service architecture, plus playable browser games including KushCloud and built-in Snake. Free and open source.",
       "canonical": "https://www.linacre.site/games",
+      "image": "https://www.linacre.site/games/slime-factory-tycoon/banner.webp",
       "index": true
     },
     "/about": {

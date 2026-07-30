@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Gamepad2, Play, Heart, ExternalLink, Code2, Sparkles, Trophy, RotateCcw, Volume2, VolumeX } from 'lucide-react';
+import { lazy, Suspense } from 'react';
+
+const GameShowcase = lazy(() => import('./GameShowcase'));
 
 interface GameItem {
   title: string;
@@ -296,6 +299,23 @@ export default function Games() {
         <p className="text-muted-foreground text-sm leading-relaxed">
           Real, playable games made from scratch — zero filler or fake data. Play right in your browser or inspect the source on GitHub.
         </p>
+      </section>
+
+      {/* Flagship project — rendered from the game's own manifest */}
+      <section className="space-y-3" aria-label="Flagship game project">
+        <div className="flex items-center gap-2">
+          <h2 className="font-display text-xl font-bold text-foreground">Flagship project</h2>
+          <span className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-amber-color/10 text-amber-color border border-amber-color/25">
+            In development
+          </span>
+        </div>
+        <Suspense fallback={
+          <div className="rounded-2xl border border-border-color/60 bg-muted/15 h-64 grid place-items-center">
+            <span className="font-mono text-xs text-muted-foreground">Loading project…</span>
+          </div>
+        }>
+          <GameShowcase />
+        </Suspense>
       </section>
 
       {/* Filter Bar & Audio Control */}

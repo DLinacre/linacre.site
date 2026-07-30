@@ -1,0 +1,167 @@
+{
+  "$comment": "Machine-readable project manifest. The linacre.site Games page reads this directly so the website never contains hand-copied game data that can drift. Only verified facts belong here; anything unknown must be null so the site can render 'Not Yet Available'.",
+  "schemaVersion": 1,
+  "slug": "slime-factory-tycoon",
+  "name": "Slime Factory Tycoon",
+  "tagline": "Tap, automate, rebirth \u2014 an idle slime empire built to last.",
+  "description": "An open-source Roblox idle-tycoon built as a production-grade foundation rather than a prototype. Tap the vat to earn Goo, automate production, unlock factory zones, and rebirth for permanent multipliers. Under the hood it's a modular service architecture with a declarative networking layer, session-locked saves, idempotent purchase handling, and a CI balance simulator that plays the game on every commit.",
+  "status": "In development",
+  "statusDetail": "Core systems complete and testable in Roblox Studio. Not yet published to Roblox.",
+  "platform": "Roblox",
+  "engine": "Roblox / Luau",
+  "genre": [
+    "Idle",
+    "Incremental",
+    "Tycoon",
+    "Simulator"
+  ],
+  "devices": [
+    "Phone",
+    "Tablet",
+    "Desktop"
+  ],
+  "links": {
+    "github": "https://github.com/LIN4CRE/slime-factory-tycoon",
+    "roblox": null,
+    "play": null,
+    "devforum": null
+  },
+  "brand": {
+    "logo": "assets/logo.png",
+    "logoWebp": "assets/logo.webp",
+    "banner": "assets/banner.png",
+    "bannerWebp": "assets/banner.webp",
+    "icon": "assets/icon-512.png",
+    "iconWebp": "assets/icon.webp",
+    "colours": {
+      "primary": "#78FF78",
+      "accent": "#FF9628",
+      "background": "#181228",
+      "surface": "#261E3C",
+      "void": "#0E0A18"
+    }
+  },
+  "features": [
+    {
+      "title": "Modular service architecture",
+      "desc": "Auto-discovered services with an explicit init/start/player lifecycle. New systems drop in without editing bootstrap code."
+    },
+    {
+      "title": "Declarative networking",
+      "desc": "Every remote is declared with its validator and rate limit in one table, so validation can't be forgotten and remote names can't be typo'd."
+    },
+    {
+      "title": "Session-locked saves",
+      "desc": "Atomic UpdateAsync locking prevents the cross-server duplication that plagues idle games, with autosave, retry backoff, and shutdown handling."
+    },
+    {
+      "title": "Idempotent purchases",
+      "desc": "ProcessReceipt keyed by PurchaseId with save-before-confirm and rollback, so players are never double-charged or charged for nothing."
+    },
+    {
+      "title": "Achievement framework",
+      "desc": "16 stat-driven achievements that unlock automatically. Bump a stat anywhere and the system works out what it completed."
+    },
+    {
+      "title": "Cosmetics, never pay-to-win",
+      "desc": "15 cosmetics across vat skins, goo colours, trails and titles. The cosmetic service has no access to the economy multiplier by design."
+    },
+    {
+      "title": "Accessibility first",
+      "desc": "Reduced motion, high contrast, 80-150% text scale, and colour-blind modes persist server-side and follow the player across devices."
+    },
+    {
+      "title": "CI balance simulator",
+      "desc": "A dependency-free Python model plays the game on every commit and fails the build if progression drifts into churn territory."
+    }
+  ],
+  "systems": [
+    "Save/load with session locking",
+    "Player progression & rebirth prestige",
+    "Generic inventory framework",
+    "Economy & multiplier pipeline",
+    "Achievements",
+    "Daily reward streaks",
+    "Server-persisted settings",
+    "Procedural audio engine",
+    "Themed UI component library",
+    "Promo codes",
+    "Global leaderboards",
+    "Seasonal event framework"
+  ],
+  "screenshots": [],
+  "changelog": [
+    {
+      "version": "0.3.0",
+      "date": "2026-07-30",
+      "title": "Architecture & brand foundation",
+      "changes": [
+        "Refactored to an auto-discovering service registry with init/start/player lifecycle",
+        "Added declarative Net layer: per-remote validators and rate limits in one table",
+        "Added Validate module rejecting NaN, infinity, oversized strings and type confusion",
+        "Added achievement system with 16 stat-driven unlocks and automatic reward granting",
+        "Added cosmetic framework with 15 items, structurally unable to affect gameplay balance",
+        "Added generic inventory framework with ownership verification and save-size pruning",
+        "Added server-persisted settings with reduced motion, high contrast, text scale and colour-blind modes",
+        "Added pooled procedural audio engine with pentatonic tap combo pitching",
+        "Added themed UI component library with 44px minimum touch targets",
+        "Established visual identity: logo, icon set, banner, and full brand guidelines"
+      ]
+    },
+    {
+      "version": "0.2.0",
+      "date": "2026-07-30",
+      "title": "Automation",
+      "changes": [
+        "Added Rojo project for live Studio sync",
+        "Added CI workflow: lint, balance check, and place-file build artifact",
+        "Added dependency-free Python balance simulator with CI gating",
+        "Added promo code system with server-side validation",
+        "Rebalanced rebirth cost after the simulator found first rebirth at 33 minutes, past the churn point"
+      ]
+    },
+    {
+      "version": "0.1.0",
+      "date": "2026-07-30",
+      "title": "Initial foundation",
+      "changes": [
+        "Core tap-to-earn loop with client prediction and batched remotes",
+        "Five upgrades, six factory zones, rebirth prestige",
+        "Pet hatching with server-side RNG and published odds",
+        "Offline earnings, seven-day daily streak, global leaderboards",
+        "Session-locked DataStore persistence and idempotent receipt handling"
+      ]
+    }
+  ],
+  "roadmap": [
+    {
+      "item": "Seasonal event content",
+      "status": "planned"
+    },
+    {
+      "item": "AnalyticsService funnel instrumentation",
+      "status": "planned"
+    },
+    {
+      "item": "Final art pass on pets and zones",
+      "status": "planned"
+    },
+    {
+      "item": "Roblox publication",
+      "status": "planned"
+    }
+  ],
+  "stats": {
+    "$comment": "Code metrics only. No player counts, visits, ratings or revenue figures are recorded here because the game is unpublished and any such number would be fabricated.",
+    "luauModules": 23,
+    "linesOfLuau": 3696,
+    "achievements": 16,
+    "cosmetics": 15,
+    "zones": 6,
+    "pets": 10,
+    "players": null,
+    "visits": null,
+    "rating": null
+  },
+  "license": "MIT"
+}

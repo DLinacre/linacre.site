@@ -995,7 +995,7 @@ export default function App() {
       <MobileBottomNav
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        openMore={() => setIsPaletteOpen(true)}
+        openMore={() => (setPaletteLoaded(true), setPaletteOpen(true))}
       />
       <Footer />
     </div>
