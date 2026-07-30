@@ -1,17 +1,41 @@
-node_modules
-dist
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+server.js
+*.tsbuildinfo
+
+# Test & coverage
+coverage/
+.vitest-cache/
+
+# Environment & secrets — never commit these
 .env
 .env.*
-.vscode
-public/wallpapers
+!.env.example
+*.key
+*.pem
+
+# Editor & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Tooling caches
+.eslintcache
+.prettiercache
+.vercel/
+.serena/
+
+# Generated assets
+public/wallpapers/
 public/emblem-animated.svg
 public/emblem-static.svg
 public/agent-report.json
 status.txt
-.serena/
 
-.vercel
-.env*
-
-.vercel
-.env*
+# Scratch
+*.log
+*.tmp
