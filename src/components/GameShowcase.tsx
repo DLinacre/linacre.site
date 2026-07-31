@@ -443,6 +443,18 @@ export default function GameShowcase() {
               </a>
             )}
 
+            {manifest.links.play && (
+              <a
+                href={manifest.links.play}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 min-h-[36px] rounded-lg bg-amber-color text-[#030c14] font-mono text-xs font-bold hover:bg-amber-glow transition-all flex items-center gap-1.5"
+              >
+                <Play className="w-3.5 h-3.5 fill-current" />
+                <span>Play Web Demo</span>
+              </a>
+            )}
+
             {hasRoblox ? (
               <a
                 href={manifest.links.roblox!}
@@ -453,9 +465,7 @@ export default function GameShowcase() {
                 <Play className="w-3.5 h-3.5 fill-current" />
                 <span>Play on Roblox</span>
               </a>
-            ) : (
-              /* Deliberately disabled rather than linking somewhere misleading.
-                 The game is not published, so there is nothing honest to link. */
+            ) : !manifest.links.play ? (
               <span
                 aria-disabled="true"
                 title="This game has not been published to Roblox yet"
@@ -464,7 +474,7 @@ export default function GameShowcase() {
                 <Gamepad2 className="w-3.5 h-3.5" />
                 <span>Play — Not Yet Available</span>
               </span>
-            )}
+            ) : null}
           </div>
         </footer>
       </div>

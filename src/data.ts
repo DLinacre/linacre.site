@@ -4,6 +4,16 @@ import { Tool, Project, MCPServer, SkillTemplate, BlogPost } from './types';
 export const TOOLS: Tool[] = [
   // SINGLE-FILE APPS & TOOLS
   {
+    id: 'slime_factory_tycoon',
+    name: 'Slime Factory Tycoon 🟢',
+    category: 'start',
+    description: 'Production-ready open-source Roblox idle tycoon & interactive web demo with pets engine, offline earnings & balance simulator.',
+    url: 'https://lin4cre.github.io/slime-factory-tycoon/',
+    host: 'lin4cre.github.io/slime-factory-tycoon',
+    searchKeywords: 'slime factory tycoon roblox luau game idle simulator pets rebirth linacre',
+    tag: 'Game · Live'
+  },
+  {
     id: 'opagent',
     name: 'Personal OP Agent',
     category: 'start',
