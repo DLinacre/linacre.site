@@ -18,6 +18,16 @@ interface GameItem {
 
 const GAMES_DATA: GameItem[] = [
   {
+    title: 'Slime Factory Tycoon',
+    tagline: 'Production-ready open-source Roblox idle tycoon & interactive web demo',
+    desc: 'Complete server-authoritative Roblox idle tycoon template featuring session-locked DataStores, pets engine, offline earnings, hatch odds display, balance simulator, and automated verification.',
+    tags: ['Roblox', 'Tycoon', 'Idle', 'Simulation', 'Luau'],
+    tech: 'Roblox Luau · Python Sim · TypeScript · HTML5',
+    badge: 'Live',
+    play: 'https://lin4cre.github.io/slime-factory-tycoon/',
+    source: 'https://github.com/LIN4CRE/slime-factory-tycoon'
+  },
+  {
     title: 'KushCloud',
     tagline: 'Chill one-tap browser arcade flyer with synthesized audio',
     desc: 'Pass through procedural obstacles, earn coins, unlock worlds and custom cosmetics. Features Web Audio sound synthesis and a global leaderboard.',
