@@ -27,6 +27,10 @@ export interface Project {
   paypalUrl?: string;
   /** Confirmed live & accessible right now */
   live?: boolean;
+  authorHandle?: string;
+  bannerImage?: string;
+  badgeLabel?: string;
+  actionType?: 'play' | 'open';
 }
 
 export interface ChatMessage {

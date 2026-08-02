@@ -4,12 +4,11 @@ import {
   ArrowRight,
   ExternalLink,
   Github,
-  Globe2,
   Layers3,
+  Play,
   Search,
   ShieldCheck,
   Sparkles,
-  Star,
   X,
   Zap,
 } from 'lucide-react';
@@ -23,14 +22,16 @@ const CATEGORY_META: Record<string, { label: string; colour: string }> = {
 };
 
 const FEATURED_ORDER = [
-  'APKHub',
-  'OmniRoute LLM Engine',
-  'Fleatment 🐱',
-  'Personal OP Agent',
-  'Arena Audit Prompt Builder',
-  'PokeGuru',
-  'Apex POS',
-  'Mob Deals',
+  'KushCloud 🌿',
+  'Depths of Destiny ⚔️',
+  'FaceRater AI ✨',
+  'PokéFlip AI 🎴',
+  'Grumpy Guy AI ಠ_ಠ',
+  'Smart Mail AI ✉️',
+  'Dragon Rush Heroes 🐉',
+  'Pixel Heist 🚨',
+  'Slime Factory Tycoon 🟢',
+  'GlitchArt Engine 🎨',
 ];
 
 function projectRank(project: Project) {
@@ -38,6 +39,99 @@ function projectRank(project: Project) {
   if (featured >= 0) return featured;
   if (project.liveUrl) return 10;
   return 20;
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  const isGame =
+    project.actionType === 'play' ||
+    project.badgeLabel?.includes('Game') ||
+    project.category === 'design';
+  const liveTargetUrl = project.liveUrl || project.url;
+
+  return (
+    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border-color bg-[#061520] shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-cyan/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+      {/* Banner image with overlay badges */}
+      <div className="relative aspect-[2.1/1] w-full overflow-hidden bg-[#031018]">
+        <img
+          src={project.bannerImage || '/og.png'}
+          alt={project.name}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#061520] via-transparent to-black/30" />
+
+        {/* Top-left handle badge */}
+        <span className="absolute left-3 top-3 rounded-md border border-cyan/40 bg-black/75 px-2.5 py-1 font-mono text-[10px] font-bold text-cyan backdrop-blur-md">
+          {project.authorHandle || '@LIN4CRE'}
+        </span>
+
+        {/* Top-right category/status badge */}
+        <span className="absolute right-3 top-3 rounded-md border border-cyan/40 bg-black/75 px-2.5 py-1 font-mono text-[10px] font-bold text-cyan backdrop-blur-md">
+          {project.badgeLabel || project.tag}
+        </span>
+      </div>
+
+      {/* Content body */}
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="font-display text-xl font-bold text-foreground group-hover:text-cyan">
+          {project.name}
+        </h3>
+        <p className="mt-2.5 flex-1 text-sm leading-6 text-muted-foreground line-clamp-3">
+          {project.description}
+        </p>
+
+        {/* Tech tags */}
+        <div className="mt-4 flex flex-wrap gap-1.5 font-mono text-[10px]">
+          {(project.tech || []).slice(0, 4).map(tech => (
+            <span
+              key={tech}
+              className="rounded-md border border-border-color bg-background/50 px-2 py-1 text-muted-foreground"
+            >
+              {tech}
+            </span>
+          ))}
+          {(project.tech || []).length > 4 && (
+            <span className="rounded-md border border-border-color bg-background/50 px-2 py-1 text-muted-foreground">
+              +{(project.tech || []).length - 4}
+            </span>
+          )}
+        </div>
+
+        {/* Action buttons */}
+        <div className="mt-5 flex items-center gap-2 border-t border-border-color pt-4">
+          {liveTargetUrl ? (
+            <a
+              href={liveTargetUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#22D3EE] px-4 py-2.5 font-mono text-xs font-bold text-[#031018] shadow-sm transition-all hover:bg-cyan/90"
+            >
+              {isGame ? (
+                <>
+                  <Play className="h-3.5 w-3.5 fill-current" /> Play Game
+                </>
+              ) : (
+                <>
+                  <ExternalLink className="h-3.5 w-3.5" /> Open App
+                </>
+              )}
+            </a>
+          ) : null}
+
+          {project.repoUrl && (
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-border-color bg-background/50 px-3.5 py-2.5 font-mono text-xs font-bold text-foreground transition-colors hover:border-cyan/50"
+            >
+              <Github className="h-3.5 w-3.5" /> Code
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
+  );
 }
 
 export default function Projects() {
@@ -163,59 +257,9 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-3">
-          {featured.map((project, index) => (
-            <motion.article
-              key={project.name}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: index * 0.06 }}
-              className="group flex flex-col rounded-2xl border border-border-color bg-[var(--linacre-panel)] p-5 transition-all hover:-translate-y-1 hover:border-amber-color/40 hover:shadow-[var(--linacre-glow-soft)]"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-xl border border-amber-color/20 bg-amber-color/10 text-amber-color">
-                  <Star className="h-4 w-4" />
-                </span>
-                <span className="rounded-full border border-emerald-color/20 bg-emerald-color/10 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-wider text-emerald-color">
-                  Featured
-                </span>
-              </div>
-              <h3 className="mt-5 font-display text-xl font-bold text-foreground group-hover:text-amber-color">
-                {project.name}
-              </h3>
-              <p className="mt-2 flex-1 text-sm leading-6 text-muted-foreground">
-                {project.description}
-              </p>
-              <div className="mt-5 flex flex-wrap gap-1.5">
-                {(project.tech || []).slice(0, 4).map(tech => (
-                  <span
-                    key={tech}
-                    className="rounded-full border border-border-color bg-background/40 px-2 py-1 font-mono text-[9px] text-muted-foreground"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-5 flex gap-2 border-t border-border-color pt-4">
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-amber-color px-3 py-2 font-mono text-[10px] font-bold text-[#031018]"
-                  >
-                    Open live <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                )}
-                <button
-                  onClick={() => setSelected(project)}
-                  className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-border-color px-3 py-2 font-mono text-[10px] font-bold text-foreground hover:border-amber-color/50"
-                >
-                  Case study <ArrowRight className="h-3.5 w-3.5" />
-                </button>
-              </div>
-            </motion.article>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto">
+          {featured.map(project => (
+            <ProjectCard key={project.name} project={project} />
           ))}
         </div>
       </section>
@@ -292,72 +336,10 @@ export default function Projects() {
           <span>Public portfolio · reviewed July 2026</span>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {visible.map(project => {
-            const meta = CATEGORY_META[project.category] || CATEGORY_META.build;
-            return (
-              <article
-                key={project.name}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-border-color bg-[var(--linacre-panel)] transition-all hover:border-border-hi hover:shadow-[var(--linacre-glow-soft)]"
-              >
-                <div
-                  className="h-1"
-                  style={{ background: `linear-gradient(90deg, ${meta.colour}, #34D399)` }}
-                />
-                <div className="flex flex-1 flex-col p-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <span
-                        className="font-mono text-[9px] font-bold uppercase tracking-[0.16em]"
-                        style={{ color: meta.colour }}
-                      >
-                        {meta.label}
-                      </span>
-                      <h3 className="mt-1 font-display text-lg font-bold text-foreground">
-                        {project.name}
-                      </h3>
-                    </div>
-                    <div className="flex shrink-0 flex-col items-end gap-1.5">
-                      {project.live && (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-color/10 px-2 py-0.5 font-mono text-[8px] font-bold text-emerald-color">
-                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-color animate-pulse" />
-                          Live
-                        </span>
-                      )}
-                      <span className="max-w-[9rem] truncate rounded-full border border-border-color bg-muted/20 px-2 py-1 font-mono text-[8px] uppercase tracking-wider text-muted-foreground">
-                        {project.tag}
-                      </span>
-                    </div>
-                  </div>
-                  <p className="mt-3 flex-1 text-sm leading-6 text-muted-foreground">
-                    {project.description}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {(project.tech || []).slice(0, 5).map(tech => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-border-color bg-background/40 px-2 py-1 font-mono text-[9px] text-muted-foreground"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="mt-5 flex items-center justify-between gap-3 border-t border-border-color pt-4">
-                    <span className="flex min-w-0 items-center gap-1.5 truncate font-mono text-[9px] text-muted-foreground">
-                      <Globe2 className="h-3 w-3 shrink-0" />
-                      {project.host}
-                    </span>
-                    <button
-                      onClick={() => setSelected(project)}
-                      className="inline-flex shrink-0 items-center gap-1 font-mono text-[10px] font-bold text-amber-color hover:text-amber-glow"
-                    >
-                      Details <ArrowRight className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 max-w-4xl mx-auto">
+          {visible.map(project => (
+            <ProjectCard key={project.name} project={project} />
+          ))}
         </div>
 
         {visible.length === 0 && (

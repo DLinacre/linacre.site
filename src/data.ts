@@ -181,7 +181,231 @@ export const TOOLS: Tool[] = [
 
 export const MANUAL_PROJECTS: Project[] = [
   {
+    name: 'KushCloud 🌿',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'Game · Live App',
+    actionType: 'play',
+    bannerImage: '/banners/kushcloud.png',
+    category: 'design',
+    description:
+      'Chill one-tap browser arcade flyer with four worlds, power-ups, synthesized Web Audio sound, unlockable cosmetics, and global leaderboard.',
+    url: 'https://lin4cre.github.io/KushCloud/',
+    host: 'lin4cre.github.io/KushCloud',
+    tag: 'Browser Game · Live',
+    role: 'Game designer and frontend engineer',
+    challenges:
+      'Deliver responsive arcade controls, progression, sound, and visual variety without relying on heavy external game assets.',
+    solution:
+      'Used Canvas 2D, Web Audio, deterministic game state, adaptive quality, keyboard/touch controls, and a PWA-ready React shell.',
+    tech: ['React', 'TypeScript', 'Vite', 'Canvas 2D', 'Web Audio API'],
+    liveUrl: 'https://lin4cre.github.io/KushCloud/',
+    repoUrl: 'https://github.com/LIN4CRE/KushCloud',
+    live: true,
+  },
+  {
+    name: 'Depths of Destiny ⚔️',
+    authorHandle: '@DLinacre',
+    badgeLabel: 'Game · Live App',
+    actionType: 'play',
+    bannerImage: '/banners/depths-of-destiny.png',
+    category: 'design',
+    description:
+      'Single-file HTML5 roguelike dungeon crawler RPG with 10 floors, 6 classes, 25+ enemy types, Web Audio synth sound, and local score persistence.',
+    url: 'https://dlinacre.github.io/DoD/',
+    host: 'dlinacre.github.io/DoD',
+    tag: 'Single-File HTML5 · Live',
+    role: 'Game developer and systems designer',
+    challenges:
+      'Creating a zero-dependency, full-fledged dungeon crawler RPG in a single HTML file with procedural graphics.',
+    solution:
+      'Engineered procedural canvas drawing routines, custom synth audio synthesizer, inventory matrix, and turn-based combat loop.',
+    tech: ['Vanilla JS', 'Canvas 2D', 'Web Audio API', 'Single-File HTML5'],
+    liveUrl: 'https://dlinacre.github.io/DoD/',
+    repoUrl: 'https://github.com/DLinacre/DoD',
+    live: true,
+  },
+  {
+    name: 'FaceRater AI ✨',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'AI App · Live',
+    actionType: 'open',
+    bannerImage: '/banners/facerater.png',
+    category: 'build',
+    description:
+      'Neutral aesthetic face scoring & instant AI reasoning card generator with shareable 1080×1350 social media layout and live vision metrics.',
+    url: 'https://ai-face-rater-next.vercel.app/',
+    host: 'ai-face-rater-next.vercel.app',
+    tag: 'AI App · Live',
+    role: 'Creator and full-stack engineer',
+    challenges:
+      'Providing instantaneous face aesthetic scoring without complex backend server infrastructure.',
+    solution:
+      'Built a Next.js 15 app leveraging Gemini 2.5 Flash Vision API for facial landmark analysis, symmetry scoring, and instant social card rendering.',
+    tech: ['Next.js 15', 'Gemini 2.5 Flash', 'React 19', 'Tailwind CSS'],
+    liveUrl: 'https://ai-face-rater-next.vercel.app/',
+    repoUrl: 'https://github.com/LIN4CRE/ai-face-rater-next',
+    live: true,
+  },
+  {
+    name: 'PokéFlip AI 🎴',
+    authorHandle: '@DLinacre',
+    badgeLabel: 'AI & Mobile · Live',
+    actionType: 'open',
+    bannerImage: '/banners/pokeflip-ai.png',
+    category: 'build',
+    description:
+      'Real-time Pokémon TCG card arbitrage, valuation & predictive market scanner utilizing Gemini models, live TCGplayer prices, and opportunity radar.',
+    url: 'https://dlinacre.github.io/Pok-Flip-AI/',
+    host: 'dlinacre.github.io/Pok-Flip-AI',
+    tag: 'AI & Mobile · Live',
+    role: 'Lead developer and market algorithm engineer',
+    challenges:
+      'Identifying underpriced Pokémon card listings in real-time across multiple marketplace feeds.',
+    solution:
+      'Integrated Gemini model reasoning with live market pricing feeds, profit margin calculation engines, and mobile-friendly alert radar.',
+    tech: ['React Native', 'Gemini AI', 'TypeScript', 'Tailwind CSS'],
+    liveUrl: 'https://dlinacre.github.io/Pok-Flip-AI/',
+    repoUrl: 'https://github.com/DLinacre/Pok-Flip-AI',
+    live: true,
+  },
+  {
+    name: 'Grumpy Guy AI ಠ_ಠ',
+    authorHandle: '@DLinacre',
+    badgeLabel: 'AI App · Live',
+    actionType: 'open',
+    bannerImage: '/banners/grumpy-guy.png',
+    category: 'build',
+    description:
+      'Your disagreeable AI copilot delivering motivation with complaints. Features custom tone selection (Dry, Brutal, Cynical), Web Speech voice output, and memory.',
+    url: 'https://dlinacre.github.io/gg/',
+    host: 'dlinacre.github.io/gg',
+    tag: 'AI App · Live',
+    role: 'Creator & Prompt Architect',
+    challenges:
+      'Creating a persona-driven AI assistant that maintains comedic snark while offering legitimately helpful code assistance.',
+    solution:
+      'Combined customized prompt persona constraints with Web Speech synthesis, local conversation history, and voice input.',
+    tech: ['React 19', 'TypeScript', 'Vite 7', 'Web Speech API', 'Gemini AI'],
+    liveUrl: 'https://dlinacre.github.io/gg/',
+    repoUrl: 'https://github.com/DLinacre/gg',
+    live: true,
+  },
+  {
+    name: 'Smart Mail AI ✉️',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'AI App · Live',
+    actionType: 'open',
+    bannerImage: '/banners/smart-mail.png',
+    category: 'build',
+    description:
+      'AI-powered unified inbox (Google Gemini) — smart email categorisation, importance detection & multi-account summary generator.',
+    url: 'https://lin4cre.github.io/smart-mail/',
+    host: 'lin4cre.github.io/smart-mail',
+    tag: 'AI App · Live',
+    role: 'Full-stack AI developer',
+    challenges:
+      'Sorting thousands of incoming emails by urgency and context without exposing private credentials.',
+    solution:
+      'Built a client-side inbox scanner powered by Gemini API, importance classification, tag filtering, and mobile Capacitor wrapper.',
+    tech: ['React', 'TypeScript', 'Google Gemini API', 'Capacitor'],
+    liveUrl: 'https://lin4cre.github.io/smart-mail/',
+    repoUrl: 'https://github.com/LIN4CRE/smart-mail',
+    live: true,
+  },
+  {
+    name: 'Dragon Rush Heroes 🐉',
+    authorHandle: '@DLinacre',
+    badgeLabel: 'Game · Live App',
+    actionType: 'play',
+    bannerImage: '/banners/dragon-rush-heroes.webp',
+    category: 'design',
+    description:
+      'Original anime action-RPG card battler — 464 fighters, real-time Arts combat, provably-fair gacha summons, Web Audio soundtracks, and offline save.',
+    url: 'https://dlinacre.github.io/dragon-rush-heroes/',
+    host: 'dlinacre.github.io/dragon-rush-heroes',
+    tag: 'Action RPG · Live',
+    role: 'Game creator and audio engineer',
+    challenges:
+      'Building a feature-packed action RPG card game with hundreds of characters, particle FX, and real-time battle logic.',
+    solution:
+      'Engineered an HTML5 Canvas 2D engine with Web Audio synth soundtrack, Gacha RNG verification, and local state persistence.',
+    tech: ['Vanilla JS', 'Canvas 2D', 'Web Audio', 'Node.js'],
+    liveUrl: 'https://dlinacre.github.io/dragon-rush-heroes/',
+    repoUrl: 'https://github.com/DLinacre/dragon-rush-heroes',
+    live: true,
+  },
+  {
+    name: 'Pixel Heist 🚨',
+    authorHandle: '@DLinacre',
+    badgeLabel: 'Game · Live App',
+    actionType: 'play',
+    bannerImage: '/banners/pixel-heist.png',
+    category: 'design',
+    description:
+      'Cyberpunk stealth heist arcade game with Next.js 15, Phaser 3, and React 19. Features procedural neon vault levels, security lasers, hack terminals, and leaderboards.',
+    url: 'https://dlinacre.github.io/pixel-heist/',
+    host: 'dlinacre.github.io/pixel-heist',
+    tag: 'Phaser 3 Game · Live',
+    role: 'Game architect',
+    challenges:
+      'Combining Phaser 3 canvas scene management with React 19 UI overlays and procedural level generation.',
+    solution:
+      'Designed a hybrid React-Phaser architecture with custom laser collision physics, keycard hacking mechanics, and high scores.',
+    tech: ['React 19', 'Phaser 3', 'TypeScript', 'Next.js 15'],
+    liveUrl: 'https://dlinacre.github.io/pixel-heist/',
+    repoUrl: 'https://github.com/DLinacre/pixel-heist',
+    live: true,
+  },
+  {
+    name: 'Slime Factory Tycoon 🟢',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'Roblox · Source',
+    actionType: 'play',
+    bannerImage: '/banners/slime-factory-tycoon.png',
+    category: 'build',
+    description:
+      'Production-ready open-source Roblox idle-tycoon engine built in server-authoritative Luau with session-locked DataStores, pets engine, offline earnings, and interactive web demo.',
+    url: 'https://lin4cre.github.io/slime-factory-tycoon/',
+    host: 'lin4cre.github.io/slime-factory-tycoon',
+    tag: 'Roblox Engine · Source',
+    role: 'Lead game software engineer',
+    challenges:
+      'Preventing data duplication and race conditions in Roblox server-authoritative tycoon games.',
+    solution:
+      'Engineered a session-locked DataStore framework with automated CI testing, pets engine, offline calculations, and open-source codebase.',
+    tech: ['Luau', 'Roblox Engine', 'DataStores', 'CI Simulator'],
+    liveUrl: 'https://lin4cre.github.io/slime-factory-tycoon/',
+    repoUrl: 'https://github.com/LIN4CRE/slime-factory-tycoon',
+    live: true,
+  },
+  {
+    name: 'GlitchArt Engine 🎨',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'Creative · Live App',
+    actionType: 'open',
+    bannerImage: '/banners/glitchart-engine.png',
+    category: 'design',
+    description:
+      'Procedural digital glitch art engine & image manipulation laboratory with WebGL shaders, real-time parameter controls, canvas exporter, and glitch presets.',
+    url: 'https://lin4cre.github.io/Rain/',
+    host: 'lin4cre.github.io/Rain',
+    tag: 'Creative Tool · Live',
+    role: 'Creative technologist & shader engineer',
+    challenges:
+      'Real-time GPU shader manipulation of uploaded images and video streams in browser.',
+    solution:
+      'Developed custom WebGL shader pipelines for chromatic aberration, CRT scanlines, datamosh simulation, and high-res export.',
+    tech: ['WebGL', 'Canvas 2D', 'TypeScript', 'Vite'],
+    liveUrl: 'https://lin4cre.github.io/Rain/',
+    repoUrl: 'https://github.com/LIN4CRE/Rain',
+    live: true,
+  },
+  {
     name: 'Fleatment 🐱',
+    authorHandle: '@DLinacre',
+    badgeLabel: 'App · Live',
+    actionType: 'open',
+    bannerImage: '/banners/fleatment.png',
     category: 'build',
     description:
       'An open-source UK cat flea & tick treatment finder, live delivered price index, active ingredient strength analyzer, and safety guide.',
@@ -200,6 +424,10 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Personal OP Agent',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'App · Live',
+    actionType: 'open',
+    bannerImage: '/banners/opagent.png',
     category: 'build',
     description:
       'A zero-setup, single-file HTML AI workspace and prompt controller running 100% locally in your browser with context history and model routing.',
@@ -214,9 +442,14 @@ export const MANUAL_PROJECTS: Project[] = [
     tech: ['HTML5', 'Vanilla JS', 'Tailwind CSS', 'Web Storage', 'AI Prompts'],
     liveUrl: '/tools/opagent.html',
     repoUrl: 'https://github.com/LIN4CRE/ev-backend',
+    live: true,
   },
   {
     name: 'Arena Audit Prompt Builder',
+    authorHandle: '@DLinacre',
+    badgeLabel: 'App · Live',
+    actionType: 'open',
+    bannerImage: '/banners/arena-audit.png',
     category: 'build',
     description:
       'A specialized browser audit tool for building systematic prompt checklists across UX, UI, SEO, Accessibility, and Security.',
@@ -235,6 +468,10 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'APKHub',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'App · Live',
+    actionType: 'open',
+    bannerImage: '/banners/apkhub.png',
     category: 'build',
     description:
       'An open-source Android App Store & release indexer that discovers and downloads official APK releases from GitHub & F-Droid with QR installation support.',
@@ -249,9 +486,14 @@ export const MANUAL_PROJECTS: Project[] = [
     tech: ['React 19', 'TypeScript', 'Vite 7', 'Python', 'Android APK', 'PWA'],
     liveUrl: 'https://lin4cre.github.io/APKHub/',
     repoUrl: 'https://github.com/LIN4CRE/APKHub',
+    live: true,
   },
   {
     name: 'OmniRoute LLM Engine',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'DevOps · Source',
+    actionType: 'open',
+    bannerImage: '/banners/omniroute.png',
     category: 'deploy',
     description:
       'Enterprise multi-provider AI model gateway & orchestration suite with fallback routing, load balancing, cost tracking, and streaming SSE endpoints.',
@@ -268,6 +510,10 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'PokeGuru',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'App · Live',
+    actionType: 'open',
+    bannerImage: '/banners/pokeguru.png',
     category: 'build',
     description:
       'A fast Pokémon TCG database with advanced search, UK prices in GBP, set history, chase-card discovery, and a local collection vault.',
@@ -286,6 +532,10 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Apex POS',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'App · Live',
+    actionType: 'open',
+    bannerImage: '/banners/apex-pos.png',
     category: 'build',
     description:
       'An offline-first point-of-sale system for the browser with register, stock, customers, expenses, receipts, and business reporting.',
@@ -304,6 +554,10 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Mob Deals',
+    authorHandle: '@DLinacre',
+    badgeLabel: 'App · Live',
+    actionType: 'open',
+    bannerImage: '/banners/mob-deals.png',
     category: 'build',
     description:
       'A transparent UK SIM-only comparison and switching guide with 64 provider records, public source checks, and plain-English PAC/STAC help.',
@@ -322,6 +576,10 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'DKMA Monster',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'Tools · Open Source',
+    actionType: 'open',
+    bannerImage: '/banners/dkma-monster.png',
     category: 'build',
     description:
       'A practical Android background-app survival toolkit: searchable guidance for 15 OEM families plus CLI, desktop GUI, ADB, root, and Magisk options.',
@@ -340,6 +598,10 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Linacre Uninstaller',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'Android · App',
+    actionType: 'open',
+    bannerImage: '/banners/linacre-uninstaller.png',
     category: 'build',
     description:
       'A downloadable Android cleanup app with searchable app labels, safety tiers, guided review, and a scoped batch-uninstall flow.',
@@ -357,6 +619,10 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Linacre LLM Hub & Benchmarks',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'Dashboard · Live',
+    actionType: 'open',
+    bannerImage: '/banners/linacre-llm-benchmarks.png',
     category: 'deploy',
     description:
       'Automated 24-hour LLM benchmark dashboard and model discovery super-app aggregating speed, pricing, and capability metrics.',
@@ -372,25 +638,11 @@ export const MANUAL_PROJECTS: Project[] = [
     repoUrl: 'https://github.com/LIN4CRE/Linacre-LLM-Benchmarks',
   },
   {
-    name: 'KushCloud',
-    category: 'design',
-    description:
-      'A polished one-tap browser game with four worlds, combo scoring, power-ups, unlockable cosmetics, synthesised audio, and an optional leaderboard.',
-    url: 'https://lin4cre.github.io/KushCloud/',
-    host: 'lin4cre.github.io/KushCloud',
-    tag: 'Browser Game · Live',
-    role: 'Game designer and frontend engineer',
-    challenges:
-      'Deliver responsive arcade controls, progression, sound, and visual variety without relying on heavy external game assets.',
-    solution:
-      'Used Canvas 2D, Web Audio, deterministic game state, adaptive quality, keyboard/touch controls, and a PWA-ready React shell.',
-    tech: ['React', 'TypeScript', 'Canvas 2D', 'Web Audio', 'PWA'],
-    liveUrl: 'https://lin4cre.github.io/KushCloud/',
-    repoUrl: 'https://github.com/LIN4CRE/KushCloud',
-    live: true,
-  },
-  {
     name: 'MyHub Dev Pipeline',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'DevOps · Source',
+    actionType: 'open',
+    bannerImage: '/banners/myhub-pipeline.png',
     category: 'deploy',
     description:
       'A documented Python DevOps reference project covering CI/CD, security checks, DORA-style metrics, anomaly detection, tests, and automated remediation experiments.',
@@ -407,6 +659,10 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Deasy Continuous Command Suite',
+    authorHandle: '@DLinacre',
+    badgeLabel: 'Desktop · Source',
+    actionType: 'open',
+    bannerImage: '/banners/deasy.png',
     category: 'deploy',
     description:
       'Continuous command suite and branch desktop manager for streamlined project deployment and local environment control.',
@@ -423,6 +679,10 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'EV Bot & Voice Architecture',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'Voice AI · Source',
+    actionType: 'open',
+    bannerImage: '/banners/ev-bot.png',
     category: 'deploy',
     description:
       'Voice assistant integration linking Alexa commands to desktop PC macro controls and Gemini-powered conversational responses.',
