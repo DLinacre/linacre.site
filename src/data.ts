@@ -387,8 +387,8 @@ export const MANUAL_PROJECTS: Project[] = [
     category: 'design',
     description:
       'Procedural digital glitch art engine & image manipulation laboratory with WebGL shaders, real-time parameter controls, canvas exporter, and glitch presets.',
-    url: 'https://lin4cre.github.io/Rain/',
-    host: 'lin4cre.github.io/Rain',
+    url: 'https://lin4cre.github.io/GlitchArt/',
+    host: 'lin4cre.github.io/GlitchArt',
     tag: 'Creative Tool · Live',
     role: 'Creative technologist & shader engineer',
     challenges:
@@ -396,8 +396,8 @@ export const MANUAL_PROJECTS: Project[] = [
     solution:
       'Developed custom WebGL shader pipelines for chromatic aberration, CRT scanlines, datamosh simulation, and high-res export.',
     tech: ['WebGL', 'Canvas 2D', 'TypeScript', 'Vite'],
-    liveUrl: 'https://lin4cre.github.io/Rain/',
-    repoUrl: 'https://github.com/LIN4CRE/Rain',
+    liveUrl: 'https://lin4cre.github.io/GlitchArt/',
+    repoUrl: 'https://github.com/LIN4CRE/GlitchArt',
     live: true,
   },
   {
