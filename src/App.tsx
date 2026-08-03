@@ -36,6 +36,9 @@ const CookiePolicy = lazy(() => import('./components/CookiePolicy'));
 const Terms = lazy(() => import('./components/Terms'));
 const Now = lazy(() => import('./components/Now'));
 const LowStakesGuide = lazy(() => import('./components/LowStakesGuide'));
+const MobDealsSwitcher = lazy(() => import('./components/MobDealsSwitcher'));
+const PokeGuruExplorer = lazy(() => import('./components/PokeGuruExplorer'));
+const DkmaGuide = lazy(() => import('./components/DkmaGuide'));
 
 import { BLOG_POSTS } from './data';
 import Breadcrumbs from './components/Breadcrumbs';
@@ -62,6 +65,9 @@ const ROUTE_LABEL: Record<string, string> = {
   '/accessibility': 'Accessibility',
   '/status': 'Status',
   '/low-stakes': 'Low Stakes',
+  '/tools/mob-deals': 'Mob Deals',
+  '/tools/pokeguru': 'PokeGuru',
+  '/tools/dkma': 'DKMA Guide',
 };
 
 export default function App() {
@@ -89,6 +95,9 @@ export default function App() {
       'terms',
       'now',
       'low-stakes',
+      'tools/mob-deals',
+      'tools/pokeguru',
+      'tools/dkma',
     ];
 
     // Route path -> internal tab id (colons/paths kept as-is where safe).
@@ -1007,6 +1016,42 @@ export default function App() {
                 </motion.div>
               )}
 
+              {activeTab === 'tools/mob-deals' && (
+                <motion.div
+                  key="tools-mob-deals"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <MobDealsSwitcher />
+                </motion.div>
+              )}
+
+              {activeTab === 'tools/pokeguru' && (
+                <motion.div
+                  key="tools-pokeguru"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <PokeGuruExplorer />
+                </motion.div>
+              )}
+
+              {activeTab === 'tools/dkma' && (
+                <motion.div
+                  key="tools-dkma"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <DkmaGuide />
+                </motion.div>
+              )}
+
               {![
                 'home',
                 'toolkit',
@@ -1029,6 +1074,9 @@ export default function App() {
                 'terms',
                 'now',
                 'low-stakes',
+                'tools/mob-deals',
+                'tools/pokeguru',
+                'tools/dkma',
               ].includes(activeTab) && (
                 <motion.div
                   key="404"

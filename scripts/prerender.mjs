@@ -129,7 +129,10 @@ const ROUTE_LABEL = {
   '/terms': 'Terms',
   '/accessibility': 'Accessibility',
   '/status': 'Status',
-  '/low-stakes': 'Low Stakes'
+  '/low-stakes': 'Low Stakes',
+  '/tools/mob-deals': 'Mob Deals',
+  '/tools/pokeguru': 'PokeGuru',
+  '/tools/dkma': 'DKMA Guide'
 };
 
 const featured = data.projects.filter(p => p.url).slice(0, 6);

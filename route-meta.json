@@ -148,6 +148,24 @@
       "description": "Interactive micro-stakes calculator, 1p-5p penny slots guide, £5 deposit limits, and UKGC verified operator comparison.",
       "canonical": "https://www.linacre.site/low-stakes",
       "index": true
+    },
+    "/tools/mob-deals": {
+      "title": "Mob Deals — Compare UK SIM-Only Deals & PAC Code Switcher Guide | David Linacre",
+      "description": "Filter UK 5G SIM-only contracts by budget and data allowance. Follow our 3-step PAC code guide to switch networks seamlessly.",
+      "canonical": "https://www.linacre.site/tools/mob-deals",
+      "index": true
+    },
+    "/tools/pokeguru": {
+      "title": "PokeGuru — Search 126+ UK Pokémon TCG Sets & Market Prices | David Linacre",
+      "description": "Browse UK Pokémon TCG set expansion releases, track chase card market values in GBP (£), and evaluate card rarity tier lists.",
+      "canonical": "https://www.linacre.site/tools/pokeguru",
+      "index": true
+    },
+    "/tools/dkma": {
+      "title": "DKMA Guide — Don't Kill My App Android OEM Battery Fix | David Linacre",
+      "description": "Prevent Samsung, Xiaomi, Poco, and OnePlus from silently killing notifications, background sync, and alarms.",
+      "canonical": "https://www.linacre.site/tools/dkma",
+      "index": true
     }
   }
 }

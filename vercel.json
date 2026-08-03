@@ -210,6 +210,18 @@
     {
       "source": "/low-stakes",
       "destination": "/low-stakes/index.html"
+    },
+    {
+      "source": "/tools/mob-deals",
+      "destination": "/tools/mob-deals/index.html"
+    },
+    {
+      "source": "/tools/pokeguru",
+      "destination": "/tools/pokeguru/index.html"
+    },
+    {
+      "source": "/tools/dkma",
+      "destination": "/tools/dkma/index.html"
     }
   ],
   "trailingSlash": false,
