@@ -44,6 +44,16 @@ const utilities: Array<{
 
 const products = [
   {
+    name: 'Low Stakes Guide 2026 🎲',
+    eyebrow: 'Micro-Stakes & £5 Deposits',
+    description:
+      'Stretch £10 further with 1p-5p spins, interactive budget calculators, and UKGC operator benchmarks.',
+    url: '/low-stakes',
+    action: 'Open Low Stakes Guide',
+    icon: Sparkles,
+    accent: 'cyan',
+  },
+  {
     name: 'Fleatment 🐱',
     eyebrow: 'Cat Flea Index & Finder',
     description:

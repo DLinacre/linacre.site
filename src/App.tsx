@@ -35,6 +35,7 @@ const ContactThanks = lazy(() => import('./components/ContactThanks'));
 const CookiePolicy = lazy(() => import('./components/CookiePolicy'));
 const Terms = lazy(() => import('./components/Terms'));
 const Now = lazy(() => import('./components/Now'));
+const LowStakesGuide = lazy(() => import('./components/LowStakesGuide'));
 
 import { BLOG_POSTS } from './data';
 import Breadcrumbs from './components/Breadcrumbs';
@@ -60,6 +61,7 @@ const ROUTE_LABEL: Record<string, string> = {
   '/terms': 'Terms',
   '/accessibility': 'Accessibility',
   '/status': 'Status',
+  '/low-stakes': 'Low Stakes',
 };
 
 export default function App() {
@@ -86,6 +88,7 @@ export default function App() {
       'cookie-policy',
       'terms',
       'now',
+      'low-stakes',
     ];
 
     // Route path -> internal tab id (colons/paths kept as-is where safe).
@@ -992,6 +995,18 @@ export default function App() {
                 </motion.div>
               )}
 
+              {activeTab === 'low-stakes' && (
+                <motion.div
+                  key="low-stakes"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                >
+                  <LowStakesGuide />
+                </motion.div>
+              )}
+
               {![
                 'home',
                 'toolkit',
@@ -1013,6 +1028,7 @@ export default function App() {
                 'cookie-policy',
                 'terms',
                 'now',
+                'low-stakes',
               ].includes(activeTab) && (
                 <motion.div
                   key="404"

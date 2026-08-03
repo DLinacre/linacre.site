@@ -86,7 +86,8 @@ export function contrastRatio(hex1: string, hex2: string): number {
 /** Raise lightness until the colour reaches `target` contrast on `background`. */
 export function fixContrast(hex: string, background: string, target = 4.5): string {
   let candidate = normalizeHex(hex) || '#FFFFFF';
-  let { h, s, l } = hexToHsl(candidate);
+  const { h } = hexToHsl(candidate);
+  let { s, l } = hexToHsl(candidate);
   const guard = 40;
   for (let i = 0; i < guard && contrastRatio(candidate, background) < target; i++) {
     l = Math.min(0.97, l + 0.03);

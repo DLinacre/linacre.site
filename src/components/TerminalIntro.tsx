@@ -23,15 +23,6 @@ export default function TerminalIntro({ onComplete }: TerminalIntroProps) {
     if (el) el.scrollTop = el.scrollHeight;
   }, [renderedLines, currentLineText]);
 
-  // Initial render when prefers-reduced-motion is true
-  useEffect(() => {
-    if (prefersReduced) {
-      skipAnimation();
-    } else {
-      runTypewriter();
-    }
-  }, []);
-
   const skipAnimation = () => {
     setIsSkipped(true);
     setIsTyping(false);
@@ -58,6 +49,7 @@ export default function TerminalIntro({ onComplete }: TerminalIntroProps) {
     const typeLine = async (line: any) => {
       return new Promise<void>(resolve => {
         setIsTyping(true);
+        setCurrentLineText('');
         let charIdx = 0;
         let typedText = '';
 
@@ -69,7 +61,6 @@ export default function TerminalIntro({ onComplete }: TerminalIntroProps) {
           } else {
             clearInterval(typeInterval);
             setIsTyping(false);
-            // Append line to rendered lines list
             setRenderedLines(prev => [...prev, { ...line, text: line.text }]);
             setCurrentLineText('');
             resolve();
@@ -89,11 +80,9 @@ export default function TerminalIntro({ onComplete }: TerminalIntroProps) {
         setRenderedLines(prev => [...prev, { type: 'prompt' }]);
         await new Promise(resolve => setTimeout(resolve, 100));
       } else if (line.type === 'cmd') {
-        // Typing animation for commands
         await typeLine(line);
         await new Promise(resolve => setTimeout(resolve, 300));
       } else if (line.type === 'out') {
-        // Instant render for command output with a small delay
         await new Promise(resolve => setTimeout(resolve, 100));
         setRenderedLines(prev => [...prev, line]);
       }
@@ -104,94 +93,87 @@ export default function TerminalIntro({ onComplete }: TerminalIntroProps) {
     if (onComplete) onComplete();
   };
 
+  // Initial render when prefers-reduced-motion is true
+  useEffect(() => {
+    if (prefersReduced) {
+      skipAnimation();
+    } else {
+      runTypewriter();
+    }
+  }, []);
+
   return (
     <div className="w-full max-w-2xl mx-auto my-8 font-mono" id="intro-terminal">
-      {/* Terminal Container */}
-      <div
-        className="linacre-surface overflow-hidden transition-all"
-        style={{ transitionDuration: 'var(--linacre-duration-base)' }}
-      >
-        {/* Title Bar */}
-        <div className="flex items-center justify-between px-4 py-3 bg-muted dark:bg-[#0B1220] border-b border-amber-color/15 select-none">
+      <div className="linacre-surface overflow-hidden transition-all">
+        {/* Terminal Header Bar */}
+        <div className="flex items-center justify-between border-b border-border-color bg-[#031018] px-4 py-2.5">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-500 transition-colors" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-500 transition-colors" />
+            <div className="flex gap-1.5">
+              <span className="h-3 w-3 rounded-full bg-[#FF5F56]" />
+              <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
+              <span className="h-3 w-3 rounded-full bg-[#27C93F]" />
+            </div>
+            <div className="ml-2 flex items-center gap-1.5 text-xs text-muted-foreground">
+              <TerminalIcon className="h-3.5 w-3.5 text-cyan" />
+              <span>david@linacre: ~ (bash)</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
-            <TerminalIcon className="w-3.5 h-3.5 text-cyan" />
-            <span>david@linacre.site: ~</span>
-          </div>
-          <div className="w-14 text-right">
-            {!isSkipped && (
-              <button
-                onClick={skipAnimation}
-                className="text-[10px] text-muted-foreground hover:text-foreground transition-colors border border-border-color/60 hover:border-border-color bg-background/50 px-1.5 py-0.5 rounded cursor-pointer"
-              >
-                skip
-              </button>
-            )}
-          </div>
+          {!isSkipped && (
+            <button
+              onClick={skipAnimation}
+              className="flex items-center gap-1 text-[11px] font-mono text-cyan hover:text-cyan/80 cursor-pointer"
+            >
+              <Sparkles className="h-3 w-3" />
+              <span>Skip</span>
+            </button>
+          )}
         </div>
 
         {/* Terminal Body */}
         <div
           ref={terminalBodyRef}
-          tabIndex={0}
-          role="region"
-          aria-label="Terminal output"
-          className="p-5 min-h-[280px] max-h-[400px] overflow-y-auto text-sm leading-relaxed space-y-2 select-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
-          style={{ scrollbarColor: 'rgba(34,211,238,0.15) transparent' }}
+          className="max-h-[360px] min-h-[160px] overflow-y-auto p-4 text-xs leading-relaxed"
         >
-          {renderedLines.map((line, idx) => {
-            if (line.type === 'gap') {
-              return <div key={idx} className="h-2" />;
-            }
-            if (line.type === 'prompt') {
+          {renderedLines.map((line, i) => {
+            if (line.type === 'gap') return <div key={i} className="h-2" />;
+            if (line.type === 'prompt')
               return (
-                <div key={idx} className="flex items-center gap-2 text-muted-foreground">
-                  <span className="text-amber-color select-none">$</span>
-                  <span className="w-2 h-4 bg-amber-color animate-pulse" />
+                <div key={i} className="flex items-center gap-1 text-cyan">
+                  <span className="font-bold">david@linacre:~$</span>
+                  <span className="inline-block h-3.5 w-2 bg-cyan animate-pulse" />
                 </div>
               );
-            }
-            if (line.type === 'cmd') {
+            if (line.type === 'cmd')
               return (
-                <div key={idx} className="flex items-start gap-2">
-                  <span className="text-amber-color select-none">$</span>
-                  <span className="text-foreground font-medium">{line.text}</span>
+                <div key={i} className="flex items-center gap-1 text-foreground">
+                  <span className="text-cyan font-bold">david@linacre:~$</span>
+                  <span>{line.text}</span>
                 </div>
               );
-            }
-            if (line.type === 'out') {
-              let textClass = 'text-muted-foreground';
-              if (line.cls === 'dim') textClass = 'text-muted-foreground/60';
-              if (line.cls === 'amb') textClass = 'text-amber-color/90';
-              return (
-                <div key={idx} className={`pl-4 ${textClass}`}>
-                  {line.text}
-                </div>
-              );
-            }
-            return null;
+            return (
+              <div
+                key={i}
+                className={
+                  line.cls === 'dim'
+                    ? 'text-muted-foreground'
+                    : line.cls === 'amb'
+                    ? 'text-cyan font-bold'
+                    : 'text-foreground'
+                }
+              >
+                {line.text}
+              </div>
+            );
           })}
-
-          {/* Current typing line */}
           {isTyping && (
-            <div className="flex items-start gap-2">
-              <span className="text-amber-color select-none">$</span>
-              <span className="text-foreground font-medium">{currentLineText}</span>
-              <span className="w-2 h-4 bg-amber-color animate-pulse" />
+            <div className="flex items-center gap-1 text-foreground">
+              <span className="text-cyan font-bold">david@linacre:~$</span>
+              <span>{currentLineText}</span>
+              <span className="inline-block h-3.5 w-2 bg-cyan animate-pulse" />
             </div>
           )}
         </div>
       </div>
-
-      {/* Subtext info */}
-      <p className="text-[11px] text-center text-muted-foreground mt-3 flex items-center justify-center gap-1.5 select-none">
-        <Sparkles className="w-3 h-3 text-amber-color animate-spin-slow" />
-        <span>Try hovering on category chips in the toolkit below</span>
-      </p>
     </div>
   );
 }

@@ -128,7 +128,8 @@ const ROUTE_LABEL = {
   '/cookie-policy': 'Cookie Policy',
   '/terms': 'Terms',
   '/accessibility': 'Accessibility',
-  '/status': 'Status'
+  '/status': 'Status',
+  '/low-stakes': 'Low Stakes'
 };
 
 const featured = data.projects.filter(p => p.url).slice(0, 6);
