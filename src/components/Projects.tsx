@@ -22,6 +22,7 @@ const CATEGORY_META: Record<string, { label: string; colour: string }> = {
 };
 
 const FEATURED_ORDER = [
+  'Bonny Bats 🦇',
   'KushCloud 🌿',
   'Depths of Destiny ⚔️',
   'FaceRater AI ✨',
@@ -178,6 +179,14 @@ export default function Projects() {
     PROJECTS.find(project => project.name === name),
   ).filter((project): project is Project => Boolean(project));
 
+  // Featured cards are shown above — don't repeat them in the main grid
+  // (unless the visitor is actively searching or filtering).
+  const featuredSet = new Set(featured.map(project => project.name));
+  const isFiltering = query.trim() !== '' || category !== 'all' || liveOnly;
+  const gridProjects = isFiltering
+    ? visible
+    : visible.filter(project => !featuredSet.has(project.name));
+
   const runnableCount = PROJECTS.filter(project => project.liveUrl).length;
   const technologyCount = new Set(PROJECTS.flatMap(project => project.tech || [])).size;
 
@@ -330,19 +339,20 @@ export default function Projects() {
 
         <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
           <span>
-            {visible.length} project{visible.length === 1 ? '' : 's'}
+            {gridProjects.length} project{gridProjects.length === 1 ? '' : 's'}
+            {!isFiltering ? ' · featured shown above' : ''}
             {liveOnly ? ' · live only' : ''}
           </span>
-          <span>Public portfolio · reviewed July 2026</span>
+          <span>Public portfolio · reviewed August 2026</span>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 max-w-4xl mx-auto">
-          {visible.map(project => (
+          {gridProjects.map(project => (
             <ProjectCard key={project.name} project={project} />
           ))}
         </div>
 
-        {visible.length === 0 && (
+        {gridProjects.length === 0 && (
           <div className="rounded-2xl border border-dashed border-border-color p-12 text-center font-mono text-xs text-muted-foreground">
             No selected projects match that search.
           </div>

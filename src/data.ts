@@ -181,11 +181,33 @@ export const TOOLS: Tool[] = [
 
 export const MANUAL_PROJECTS: Project[] = [
   {
+    name: 'Bonny Bats 🦇',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'Web · Live App',
+    actionType: 'open',
+    bannerImage: '/banners/bonny-bats.webp',
+    category: 'build',
+    description:
+      'A friendly, beautifully illustrated guide to bats in buildings — spotting them, staying safe, the law, and humane one-way exclusion. Named after my mum, Bonny.',
+    url: 'https://LIN4CRE.github.io/bonny-bats/',
+    host: 'LIN4CRE.github.io/bonny-bats',
+    tag: 'Web Guide · Live',
+    role: 'Designer and frontend engineer',
+    challenges:
+      'Make a genuinely useful, trustworthy guide about a legally protected species — while keeping it easy for non-experts (and my mum) to read and use.',
+    solution:
+      'One self-contained HTML file with clear step-by-step sections, live seasonal advice, readability controls (text size, high contrast) and a print-friendly layout.',
+    tech: ['HTML', 'CSS', 'JavaScript', 'SVG', 'GitHub Pages'],
+    liveUrl: 'https://LIN4CRE.github.io/bonny-bats/',
+    repoUrl: 'https://github.com/LIN4CRE/bonny-bats',
+    live: true,
+  },
+  {
     name: 'KushCloud 🌿',
     authorHandle: '@LIN4CRE',
     badgeLabel: 'Game · Live App',
     actionType: 'play',
-    bannerImage: '/banners/kushcloud.png',
+    bannerImage: '/banners/kushcloud.webp',
     category: 'design',
     description:
       'Chill one-tap browser arcade flyer with four worlds, power-ups, synthesized Web Audio sound, unlockable cosmetics, and global leaderboard.',
@@ -207,7 +229,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@DLinacre',
     badgeLabel: 'Game · Live App',
     actionType: 'play',
-    bannerImage: '/banners/depths-of-destiny.png',
+    bannerImage: '/banners/depths-of-destiny.webp',
     category: 'design',
     description:
       'Single-file HTML5 roguelike dungeon crawler RPG with 10 floors, 6 classes, 25+ enemy types, Web Audio synth sound, and local score persistence.',
@@ -229,7 +251,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'AI App · Live',
     actionType: 'open',
-    bannerImage: '/banners/facerater.png',
+    bannerImage: '/banners/facerater.webp',
     category: 'build',
     description:
       'Neutral aesthetic face scoring & instant AI reasoning card generator with shareable 1080×1350 social media layout and live vision metrics.',
@@ -251,7 +273,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@DLinacre',
     badgeLabel: 'AI & Mobile · Live',
     actionType: 'open',
-    bannerImage: '/banners/pokeflip-ai.png',
+    bannerImage: '/banners/pokeflip-ai.webp',
     category: 'build',
     description:
       'Real-time Pokémon TCG card arbitrage, valuation & predictive market scanner utilizing Gemini models, live TCGplayer prices, and opportunity radar.',
@@ -273,7 +295,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@DLinacre',
     badgeLabel: 'AI App · Live',
     actionType: 'open',
-    bannerImage: '/banners/grumpy-guy.png',
+    bannerImage: '/banners/grumpy-guy.webp',
     category: 'build',
     description:
       'Your disagreeable AI copilot delivering motivation with complaints. Features custom tone selection (Dry, Brutal, Cynical), Web Speech voice output, and memory.',
@@ -295,7 +317,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'AI App · Live',
     actionType: 'open',
-    bannerImage: '/banners/smart-mail.png',
+    bannerImage: '/banners/smart-mail.webp',
     category: 'build',
     description:
       'AI-powered unified inbox (Google Gemini) — smart email categorisation, importance detection & multi-account summary generator.',
@@ -339,7 +361,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@DLinacre',
     badgeLabel: 'Game · Live App',
     actionType: 'play',
-    bannerImage: '/banners/pixel-heist.png',
+    bannerImage: '/banners/pixel-heist.webp',
     category: 'design',
     description:
       'Cyberpunk stealth heist arcade game with Next.js 15, Phaser 3, and React 19. Features procedural neon vault levels, security lasers, hack terminals, and leaderboards.',
@@ -361,7 +383,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'Roblox · Source',
     actionType: 'play',
-    bannerImage: '/banners/slime-factory-tycoon.png',
+    bannerImage: '/banners/slime-factory-tycoon.webp',
     category: 'build',
     description:
       'Production-ready open-source Roblox idle-tycoon engine built in server-authoritative Luau with session-locked DataStores, pets engine, offline earnings, and interactive web demo.',
@@ -383,7 +405,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'Creative · Live App',
     actionType: 'open',
-    bannerImage: '/banners/glitchart-engine.png',
+    bannerImage: '/banners/glitchart-engine.webp',
     category: 'design',
     description:
       'Procedural digital glitch art engine & image manipulation laboratory with WebGL shaders, real-time parameter controls, canvas exporter, and glitch presets.',
@@ -405,7 +427,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@DLinacre',
     badgeLabel: 'App · Live',
     actionType: 'open',
-    bannerImage: '/banners/fleatment.png',
+    bannerImage: '/banners/fleatment.webp',
     category: 'build',
     description:
       'An open-source UK cat flea & tick treatment finder, live delivered price index, active ingredient strength analyzer, and safety guide.',
@@ -427,7 +449,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'App · Live',
     actionType: 'open',
-    bannerImage: '/banners/opagent.png',
+    bannerImage: '/banners/opagent.webp',
     category: 'build',
     description:
       'A zero-setup, single-file HTML AI workspace and prompt controller running 100% locally in your browser with context history and model routing.',
@@ -449,7 +471,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@DLinacre',
     badgeLabel: 'App · Live',
     actionType: 'open',
-    bannerImage: '/banners/arena-audit.png',
+    bannerImage: '/banners/arena-audit.webp',
     category: 'build',
     description:
       'A specialized browser audit tool for building systematic prompt checklists across UX, UI, SEO, Accessibility, and Security.',
@@ -471,7 +493,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'App · Live',
     actionType: 'open',
-    bannerImage: '/banners/apkhub.png',
+    bannerImage: '/banners/apkhub.webp',
     category: 'build',
     description:
       'An open-source Android App Store & release indexer that discovers and downloads official APK releases from GitHub & F-Droid with QR installation support.',
@@ -493,7 +515,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'DevOps · Source',
     actionType: 'open',
-    bannerImage: '/banners/omniroute.png',
+    bannerImage: '/banners/omniroute.webp',
     category: 'deploy',
     description:
       'Enterprise multi-provider AI model gateway & orchestration suite with fallback routing, load balancing, cost tracking, and streaming SSE endpoints.',
@@ -513,7 +535,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'App · Live',
     actionType: 'open',
-    bannerImage: '/banners/pokeguru.png',
+    bannerImage: '/banners/pokeguru.webp',
     category: 'build',
     description:
       'A fast Pokémon TCG database with advanced search, UK prices in GBP, set history, chase-card discovery, and a local collection vault.',
@@ -535,7 +557,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'App · Live',
     actionType: 'open',
-    bannerImage: '/banners/apex-pos.png',
+    bannerImage: '/banners/apex-pos.webp',
     category: 'build',
     description:
       'An offline-first point-of-sale system for the browser with register, stock, customers, expenses, receipts, and business reporting.',
@@ -557,7 +579,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@DLinacre',
     badgeLabel: 'App · Live',
     actionType: 'open',
-    bannerImage: '/banners/mob-deals.png',
+    bannerImage: '/banners/mob-deals.webp',
     category: 'build',
     description:
       'A transparent UK SIM-only comparison and switching guide with 64 provider records, public source checks, and plain-English PAC/STAC help.',
@@ -579,7 +601,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'Tools · Open Source',
     actionType: 'open',
-    bannerImage: '/banners/dkma-monster.png',
+    bannerImage: '/banners/dkma-monster.webp',
     category: 'build',
     description:
       'A practical Android background-app survival toolkit: searchable guidance for 15 OEM families plus CLI, desktop GUI, ADB, root, and Magisk options.',
@@ -601,7 +623,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'Android · App',
     actionType: 'open',
-    bannerImage: '/banners/linacre-uninstaller.png',
+    bannerImage: '/banners/linacre-uninstaller.webp',
     category: 'build',
     description:
       'A downloadable Android cleanup app with searchable app labels, safety tiers, guided review, and a scoped batch-uninstall flow.',
@@ -622,7 +644,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'Dashboard · Live',
     actionType: 'open',
-    bannerImage: '/banners/linacre-llm-benchmarks.png',
+    bannerImage: '/banners/linacre-llm-benchmarks.webp',
     category: 'deploy',
     description:
       'Automated 24-hour LLM benchmark dashboard and model discovery super-app aggregating speed, pricing, and capability metrics.',
@@ -642,7 +664,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'DevOps · Source',
     actionType: 'open',
-    bannerImage: '/banners/myhub-pipeline.png',
+    bannerImage: '/banners/myhub-pipeline.webp',
     category: 'deploy',
     description:
       'A documented Python DevOps reference project covering CI/CD, security checks, DORA-style metrics, anomaly detection, tests, and automated remediation experiments.',
@@ -662,7 +684,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@DLinacre',
     badgeLabel: 'Desktop · Source',
     actionType: 'open',
-    bannerImage: '/banners/deasy.png',
+    bannerImage: '/banners/deasy.webp',
     category: 'deploy',
     description:
       'Continuous command suite and branch desktop manager for streamlined project deployment and local environment control.',
@@ -682,7 +704,7 @@ export const MANUAL_PROJECTS: Project[] = [
     authorHandle: '@LIN4CRE',
     badgeLabel: 'Voice AI · Source',
     actionType: 'open',
-    bannerImage: '/banners/ev-bot.png',
+    bannerImage: '/banners/ev-bot.webp',
     category: 'deploy',
     description:
       'Voice assistant integration linking Alexa commands to desktop PC macro controls and Gemini-powered conversational responses.',
