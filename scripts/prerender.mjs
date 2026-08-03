@@ -851,7 +851,11 @@ const ROUTE_LASTMOD_SOURCES = {
   '/agents': ['src/components/AgentsHub.tsx'],
   '/lab': ['src/components/Lab.tsx'],
   '/identity': ['src/components/IdentityHub.tsx'],
-  '/work': ['src/components/WorkWithMe.tsx']
+  '/work': ['src/components/WorkWithMe.tsx'],
+  '/low-stakes': ['src/components/LowStakesGuide.tsx'],
+  '/mob-deals': ['src/components/MobDealsSwitcher.tsx'],
+  '/pokeguru': ['src/components/PokeGuruExplorer.tsx'],
+  '/dkma': ['src/components/DkmaGuide.tsx']
 };
 
 function sourceMtimeMs(files = []) {
