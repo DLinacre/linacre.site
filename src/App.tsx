@@ -65,9 +65,9 @@ const ROUTE_LABEL: Record<string, string> = {
   '/accessibility': 'Accessibility',
   '/status': 'Status',
   '/low-stakes': 'Low Stakes',
-  '/tools/mob-deals': 'Mob Deals',
-  '/tools/pokeguru': 'PokeGuru',
-  '/tools/dkma': 'DKMA Guide',
+  '/mob-deals': 'Mob Deals',
+  '/pokeguru': 'PokeGuru',
+  '/dkma': 'DKMA Guide',
 };
 
 export default function App() {
@@ -95,9 +95,9 @@ export default function App() {
       'terms',
       'now',
       'low-stakes',
-      'tools/mob-deals',
-      'tools/pokeguru',
-      'tools/dkma',
+      'mob-deals',
+      'pokeguru',
+      'dkma',
     ];
 
     // Route path -> internal tab id (colons/paths kept as-is where safe).
@@ -1016,9 +1016,9 @@ export default function App() {
                 </motion.div>
               )}
 
-              {activeTab === 'tools/mob-deals' && (
+              {activeTab === 'mob-deals' && (
                 <motion.div
-                  key="tools-mob-deals"
+                  key="mob-deals"
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
@@ -1028,9 +1028,9 @@ export default function App() {
                 </motion.div>
               )}
 
-              {activeTab === 'tools/pokeguru' && (
+              {activeTab === 'pokeguru' && (
                 <motion.div
-                  key="tools-pokeguru"
+                  key="pokeguru"
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
@@ -1040,9 +1040,9 @@ export default function App() {
                 </motion.div>
               )}
 
-              {activeTab === 'tools/dkma' && (
+              {activeTab === 'dkma' && (
                 <motion.div
-                  key="tools-dkma"
+                  key="dkma"
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
@@ -1074,9 +1074,9 @@ export default function App() {
                 'terms',
                 'now',
                 'low-stakes',
-                'tools/mob-deals',
-                'tools/pokeguru',
-                'tools/dkma',
+                'mob-deals',
+                'pokeguru',
+                'dkma',
               ].includes(activeTab) && (
                 <motion.div
                   key="404"

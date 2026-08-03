@@ -88,7 +88,7 @@ const products = [
     eyebrow: 'Make a better choice',
     description:
       'Compare UK SIM-only deals and keep your number with a plain-English switching guide.',
-    url: '/tools/mob-deals',
+    url: '/mob-deals',
     action: 'Compare mobile deals',
     icon: Smartphone,
     accent: 'cyan',
@@ -97,7 +97,7 @@ const products = [
     name: 'PokeGuru',
     eyebrow: 'Search & track',
     description: 'Find Pokémon cards, browse 126 UK sets, and track a collection in GBP.',
-    url: '/tools/pokeguru',
+    url: '/pokeguru',
     action: 'Search Pokémon cards',
     icon: Sparkles,
     accent: 'purple',
@@ -107,7 +107,7 @@ const products = [
     eyebrow: 'Keep Android apps alive',
     description:
       'Find exact battery and autostart settings for 15 Android phone families, plus GUI tool.',
-    url: '/tools/dkma',
+    url: '/dkma',
     action: 'Fix background apps',
     icon: ShieldCheck,
     accent: 'emerald',
