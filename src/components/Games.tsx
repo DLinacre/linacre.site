@@ -15,6 +15,16 @@ interface GameItem {
 
 const GAMES_DATA: GameItem[] = [
   {
+    title: 'AFTERGLOW',
+    tagline: 'Paint with long-exposure light — an original endless light-painting game',
+    desc: 'You don\'t move a character — you leave light on. Hold the shutter and steer glowing pens to burn shimmering trails onto a night sky. Features 10 brushes, 12 palettes, endless procedural shapes, a Daily Challenge, generative Web Audio, star-based unlocks, and a local gallery.',
+    tags: ['Creative', 'Light-painting', 'Endless', 'Generative Audio', 'Zero-dependency'],
+    tech: 'Vanilla JS · HTML5 Canvas · Web Audio · Procedural',
+    badge: 'Live',
+    play: 'https://dlinacre.github.io/afterglow/',
+    source: 'https://github.com/DLinacre/afterglow'
+  },
+  {
     title: 'Pixel Heist',
     tagline: 'Cyberpunk stealth heist arcade game with Phaser 3 & procedural levels',
     desc: 'Infiltrate high-security neon vaults, hack security terminals, dodge laser grids, and escape with the loot. Features responsive controls, Web Audio sound synthesis, daily contracts, and leaderboards.',

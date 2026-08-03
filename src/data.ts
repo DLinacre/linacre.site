@@ -223,6 +223,21 @@ export const TOOLS: Tool[] = [
 
 export const MANUAL_PROJECTS: Project[] = [
   {
+    name: 'AFTERGLOW ✦',
+    category: 'build',
+    description: 'An original, endless light-painting game: you don\'t move a character — you leave light on. Hold the shutter and steer glowing pens to burn long-exposure trails onto a night sky. Features 10 brushes, 12 palettes, endless procedural shapes, a Daily Challenge, generative Web Audio, star-based unlocks, and a local gallery.',
+    url: 'https://dlinacre.github.io/afterglow/',
+    host: 'dlinacre.github.io/afterglow',
+    tag: 'Featured · Live Game',
+    role: 'Creator & Lead Developer',
+    challenges: 'Inventing a genuinely novel core mechanic — persistent long-exposure light-painting as gameplay — then making it endless, teachable, and rewarding for long play sessions on a single mobile-friendly canvas with zero dependencies.',
+    solution: 'Built a dependency-free HTML5 engine with three layered canvases and additive glow blending, a seeded PRNG for deterministic endless levels, a synthesised Web Audio ambient engine, snapshot-based undo/redo, and a registry architecture so brushes, palettes and shapes extend in a single line. Auto-deployed to GitHub Pages via GitHub Actions.',
+    tech: ['JavaScript', 'HTML5 Canvas', 'Web Audio API', 'Procedural Generation', 'GitHub Actions', 'GitHub Pages'],
+    liveUrl: 'https://dlinacre.github.io/afterglow/',
+    repoUrl: 'https://github.com/DLinacre/afterglow',
+    live: true,
+  },
+  {
     name: 'FaceRater AI ✨',
     category: 'build',
     description: 'Neutral aesthetic face scoring viral consumer app. Upload a selfie to receive a 0–100 score with neutral AI vision reasoning, dark/light conic rating ring, local storage history, and 1-tap 1080×1350 image exports.',
