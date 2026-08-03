@@ -206,6 +206,10 @@
     {
       "source": "/terms",
       "destination": "/terms/index.html"
+    },
+    {
+      "source": "/low-stakes",
+      "destination": "/low-stakes/index.html"
     }
   ],
   "trailingSlash": false,
