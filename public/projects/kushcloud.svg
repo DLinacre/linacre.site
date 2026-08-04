@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Project artwork — kushcloud">
+  <defs>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0ab3c" stop-opacity=".15"/>
+      <stop offset="100%" stop-color="#f0ab3c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowT" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#58d5c9" stop-opacity=".12"/>
+      <stop offset="100%" stop-color="#58d5c9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hairline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f0ab3c" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#58d5c9" stop-opacity=".8"/>
+      <stop offset="100%" stop-color="#f0ab3c" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <g id="grid"><path d="M0 0H1200M0 0V630" stroke="#22384a" stroke-opacity=".35" stroke-width="1"/></g>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0e15"/>
+  <g stroke="#22384a" stroke-opacity=".28" stroke-width="1">
+    <line x1="150" y1="0" x2="150" y2="630"/><line x1="300" y1="0" x2="300" y2="630"/><line x1="450" y1="0" x2="450" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/><line x1="750" y1="0" x2="750" y2="630"/><line x1="900" y1="0" x2="900" y2="630"/><line x1="1050" y1="0" x2="1050" y2="630"/>
+    <line x1="0" y1="150" x2="1200" y2="150"/><line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="450" x2="1200" y2="450"/><line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>  <circle cx="480" cy="330" r="280" fill="url(#glowT)"/>
+  <circle cx="820" cy="240" r="200" fill="url(#glowA)"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+<path d="M360 380 a64 64 0 1 1 20 -125 a78 78 0 0 1 128 -26 a60 60 0 1 1 28 151 z" stroke="#58d5c9" stroke-width="4.5"/><circle cx="434" cy="330" r="8" fill="#58d5c9" stroke="none"/><circle cx="494" cy="330" r="8" fill="#58d5c9" stroke="none"/><path d="M446 360 q20 18 44 0" stroke="#58d5c9" stroke-width="4" fill="none"/><path d="M356 452 q60 36 160 20" stroke="#f0ab3c" stroke-width="3.5" stroke-dasharray="2 10"/><path d="M700 208 l3 9 h10 l-6 6 l2 10 -12 -12 l2 -10 -6 -6 h10 z" stroke="#f0ab3c" stroke-width="3" opacity=".85"/><path d="M790 284 l4 12 h13 l-8 8 l3 13 -16 -16 l3 -13 -8 -8 h13 z" stroke="#a78bfa" stroke-width="3" opacity=".85"/><path d="M880 180 l6 14 h16 l-10 10 l4 16 -20 -20 l4 -16 -10 -10 h16 z" stroke="#f0ab3c" stroke-width="3" opacity=".85"/><path d="M760 408 l3 9 h10 l-6 6 l2 10 -12 -12 l2 -10 -6 -6 h10 z" stroke="#a78bfa" stroke-width="3" opacity=".85"/><path d="M660 314 l4 12 h13 l-8 8 l3 13 -16 -16 l3 -13 -8 -8 h13 z" stroke="#f0ab3c" stroke-width="3" opacity=".85"/><path d="M640 500 q140 -60 300 -20" stroke="#f472b6" stroke-width="4" opacity=".8"/><path d="M900 470 l40 10 -12 38z" stroke="#f472b6" stroke-width="4" opacity=".8"/></g>
+  <rect x="120" y="578" width="960" height="2" fill="url(#hairline)"/>
+</svg>

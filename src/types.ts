@@ -27,6 +27,8 @@ export interface Project {
   paypalUrl?: string;
   /** Confirmed live & accessible right now */
   live?: boolean;
+  /** Card artwork served from /public/projects/ (webp photo-style or svg line-art) */
+  artwork?: string;
 }
 
 export interface ChatMessage {

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Project artwork — dkma-monster">
+  <defs>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0ab3c" stop-opacity=".15"/>
+      <stop offset="100%" stop-color="#f0ab3c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowT" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#58d5c9" stop-opacity=".12"/>
+      <stop offset="100%" stop-color="#58d5c9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hairline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f0ab3c" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#58d5c9" stop-opacity=".8"/>
+      <stop offset="100%" stop-color="#f0ab3c" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <g id="grid"><path d="M0 0H1200M0 0V630" stroke="#22384a" stroke-opacity=".35" stroke-width="1"/></g>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0e15"/>
+  <g stroke="#22384a" stroke-opacity=".28" stroke-width="1">
+    <line x1="150" y1="0" x2="150" y2="630"/><line x1="300" y1="0" x2="300" y2="630"/><line x1="450" y1="0" x2="450" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/><line x1="750" y1="0" x2="750" y2="630"/><line x1="900" y1="0" x2="900" y2="630"/><line x1="1050" y1="0" x2="1050" y2="630"/>
+    <line x1="0" y1="150" x2="1200" y2="150"/><line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="450" x2="1200" y2="450"/><line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>  <circle cx="600" cy="320" r="300" fill="url(#glowA)"/>
+  <circle cx="330" cy="250" r="180" fill="url(#glowT)"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+<path d="M720 320 L754 320" stroke="#f0ab3c" stroke-width="14"/><path d="M697 391 L725 411" stroke="#f0ab3c" stroke-width="14"/><path d="M637 434 L648 466" stroke="#f0ab3c" stroke-width="14"/><path d="M563 434 L552 466" stroke="#f0ab3c" stroke-width="14"/><path d="M503 391 L475 411" stroke="#f0ab3c" stroke-width="14"/><path d="M480 320 L446 320" stroke="#f0ab3c" stroke-width="14"/><path d="M503 249 L475 229" stroke="#f0ab3c" stroke-width="14"/><path d="M563 206 L552 174" stroke="#f0ab3c" stroke-width="14"/><path d="M637 206 L648 174" stroke="#f0ab3c" stroke-width="14"/><path d="M697 249 L725 229" stroke="#f0ab3c" stroke-width="14"/><circle cx="600" cy="320" r="120" stroke="#f0ab3c" stroke-width="4.5"/><path d="M600 274 l-26 58 h20 l-14 50 52-66 h-22 l16-42z" stroke="#58d5c9" stroke-width="4.5"/><path d="M542 194 c-30-34-72-30-84 2 24-4 44 6 52 26M658 194 c30-34 72-30 84 2-24-4-44 6-52 26" stroke="#f472b6" stroke-width="4" opacity=".85"/><circle cx="566" cy="256" r="7" fill="#58d5c9" stroke="none"/><circle cx="634" cy="256" r="7" fill="#58d5c9" stroke="none"/><path d="M392 440 l64 64 M456 440 l-64 64" stroke="#58d5c9" stroke-width="5" opacity=".7" transform="translate(196 0)"/><path d="M330 500 h84 l14-20 h-112z" stroke="#58d5c9" stroke-width="4" transform="translate(320 -16)"/><rect x="268" y="232" width="76" height="130" rx="14" stroke="#58d5c9" stroke-width="4"/><path d="M288 232 v-14 h36 v14" stroke="#58d5c9" stroke-width="4"/><path d="M290 292 h32 M290 322 h32" stroke="#58d5c9" stroke-width="4" opacity=".6"/></g>
+  <rect x="120" y="578" width="960" height="2" fill="url(#hairline)"/>
+</svg>

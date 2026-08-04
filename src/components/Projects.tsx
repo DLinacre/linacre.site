@@ -22,7 +22,7 @@ const CATEGORY_META: Record<string, { label: string; colour: string }> = {
   design: { label: 'Interactive', colour: '#818CF8' },
 };
 
-const FEATURED_ORDER = ["PokéFlip AI 🎴", "Nic's Food Decider 🍕", 'APKHub 📱', 'Linacre Uninstaller', 'OmniRoute LLM Engine', 'Fleatment 🐱', 'Personal OP Agent', 'Arena Audit Prompt Builder', 'PokeGuru', 'Apex POS', 'Mob Deals'];
+const FEATURED_ORDER = ['String & Band 🏹', "PokéFlip AI 🎴", "Nic's Food Decider 🍕", 'APKHub 📱', 'Linacre Uninstaller', 'OmniRoute LLM Engine', 'Fleatment 🐱', 'Personal OP Agent', 'Arena Audit Prompt Builder', 'PokeGuru', 'Apex POS', 'Mob Deals'];
 
 function projectRank(project: Project) {
   const featured = FEATURED_ORDER.indexOf(project.name);
@@ -130,8 +130,14 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: index * 0.06 }}
-              className="group flex flex-col rounded-2xl border border-border-color bg-[var(--linacre-panel)] p-5 transition-all hover:-translate-y-1 hover:border-amber-color/40 hover:shadow-[var(--linacre-glow-soft)]"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-border-color bg-[var(--linacre-panel)] p-5 transition-all hover:-translate-y-1 hover:border-amber-color/40 hover:shadow-[var(--linacre-glow-soft)]"
             >
+              {project.artwork && (
+                <div className="relative -mx-5 -mt-5 mb-5 overflow-hidden border-b border-border-color">
+                  <img src={project.artwork} alt="" aria-hidden="true" loading="lazy" className="aspect-[1200/630] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[var(--linacre-panel)] to-transparent" />
+                </div>
+              )}
               <div className="flex items-start justify-between gap-3">
                 <span className="grid h-11 w-11 place-items-center rounded-xl border border-amber-color/20 bg-amber-color/10 text-amber-color"><Star className="h-4 w-4" /></span>
                 <span className="rounded-full border border-emerald-color/20 bg-emerald-color/10 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-wider text-emerald-color">Featured</span>
@@ -201,7 +207,15 @@ export default function Projects() {
             const meta = CATEGORY_META[project.category] || CATEGORY_META.build;
             return (
               <article key={project.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border-color bg-[var(--linacre-panel)] transition-all hover:border-border-hi hover:shadow-[var(--linacre-glow-soft)]">
-                <div className="h-1" style={{ background: `linear-gradient(90deg, ${meta.colour}, #34D399)` }} />
+                {project.artwork ? (
+                  <div className="relative">
+                    <img src={project.artwork} alt="" aria-hidden="true" loading="lazy" className="aspect-[1200/630] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[var(--linacre-panel)] to-transparent" />
+                    <div className="absolute left-0 top-0 h-1 w-full" style={{ background: `linear-gradient(90deg, ${meta.colour}, #34D399)` }} />
+                  </div>
+                ) : (
+                  <div className="h-1" style={{ background: `linear-gradient(90deg, ${meta.colour}, #34D399)` }} />
+                )}
                 <div className="flex flex-1 flex-col p-5">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">

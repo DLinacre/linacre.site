@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Project artwork — myhub-pipeline">
+  <defs>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0ab3c" stop-opacity=".15"/>
+      <stop offset="100%" stop-color="#f0ab3c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowT" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#58d5c9" stop-opacity=".12"/>
+      <stop offset="100%" stop-color="#58d5c9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hairline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f0ab3c" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#58d5c9" stop-opacity=".8"/>
+      <stop offset="100%" stop-color="#f0ab3c" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <g id="grid"><path d="M0 0H1200M0 0V630" stroke="#22384a" stroke-opacity=".35" stroke-width="1"/></g>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0e15"/>
+  <g stroke="#22384a" stroke-opacity=".28" stroke-width="1">
+    <line x1="150" y1="0" x2="150" y2="630"/><line x1="300" y1="0" x2="300" y2="630"/><line x1="450" y1="0" x2="450" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/><line x1="750" y1="0" x2="750" y2="630"/><line x1="900" y1="0" x2="900" y2="630"/><line x1="1050" y1="0" x2="1050" y2="630"/>
+    <line x1="0" y1="150" x2="1200" y2="150"/><line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="450" x2="1200" y2="450"/><line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>  <circle cx="600" cy="320" r="300" fill="url(#glowA)"/>
+  <circle cx="330" cy="260" r="170" fill="url(#glowT)"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+<circle cx="300" cy="315" r="58" stroke="#f0ab3c" stroke-width="4.5"/><circle cx="500" cy="315" r="58" stroke="#f0ab3c" stroke-width="4.5"/><circle cx="700" cy="315" r="58" stroke="#f0ab3c" stroke-width="4.5"/><path d="M358 315 h84 M558 315 h84" stroke="#58d5c9" stroke-width="5"/><path d="M430 315 l-14 -12 v24 z M630 315 l-14 -12 v24 z" fill="#58d5c9" stroke="none"/><path d="M284 300 l12 12 22-24 M484 300 l12 12 22-24 M684 300 l12 12 22-24" stroke="#58d5c9" stroke-width="5"/><path d="M300 373 v28 M500 373 v28 M700 373 v28" stroke="#22384a" stroke-width="3"/><rect x="252" y="430" width="96" height="44" rx="12" stroke="#58d5c9" stroke-width="3"/><rect x="452" y="430" width="96" height="44" rx="12" stroke="#58d5c9" stroke-width="3"/><rect x="652" y="430" width="96" height="44" rx="12" stroke="#58d5c9" stroke-width="3"/><path d="M940 250 L954 250" stroke="#a78bfa" stroke-width="9"/><path d="M928 278 L938 288" stroke="#a78bfa" stroke-width="9"/><path d="M900 290 L900 304" stroke="#a78bfa" stroke-width="9"/><path d="M872 278 L862 288" stroke="#a78bfa" stroke-width="9"/><path d="M860 250 L846 250" stroke="#a78bfa" stroke-width="9"/><path d="M872 222 L862 212" stroke="#a78bfa" stroke-width="9"/><path d="M900 210 L900 196" stroke="#a78bfa" stroke-width="9"/><path d="M928 222 L938 212" stroke="#a78bfa" stroke-width="9"/><circle cx="900" cy="250" r="40" stroke="#a78bfa" stroke-width="3.5"/><circle cx="900" cy="250" r="14" stroke="#a78bfa" stroke-width="3.5"/><path d="M960 420 L974 420" stroke="#a78bfa" stroke-width="9"/><path d="M948 448 L958 458" stroke="#a78bfa" stroke-width="9"/><path d="M920 460 L920 474" stroke="#a78bfa" stroke-width="9"/><path d="M892 448 L882 458" stroke="#a78bfa" stroke-width="9"/><path d="M880 420 L866 420" stroke="#a78bfa" stroke-width="9"/><path d="M892 392 L882 382" stroke="#a78bfa" stroke-width="9"/><path d="M920 380 L920 366" stroke="#a78bfa" stroke-width="9"/><path d="M948 392 L958 382" stroke="#a78bfa" stroke-width="9"/><circle cx="920" cy="420" r="40" stroke="#a78bfa" stroke-width="3.5"/><circle cx="920" cy="420" r="14" stroke="#a78bfa" stroke-width="3.5"/></g>
+  <rect x="120" y="578" width="960" height="2" fill="url(#hairline)"/>
+</svg>

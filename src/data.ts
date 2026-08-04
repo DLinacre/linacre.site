@@ -223,7 +223,24 @@ export const TOOLS: Tool[] = [
 
 export const MANUAL_PROJECTS: Project[] = [
   {
+    name: 'String & Band 🏹',
+    category: 'build',
+    description: 'An offline-first educational knowledge base on the history, materials and craft of archery equipment and slingshots: 18 long-form articles, a 44-material explorer with a live analysis engine, comparison lab, 49-term glossary and fuzzy search — all in one self-contained, dependency-free HTML file.',
+    url: 'https://dlinacre.github.io/string-and-band/',
+    host: 'dlinacre.github.io/string-and-band',
+    tag: 'Featured · Live PWA',
+    role: 'Creator, designer & sole developer',
+    challenges: 'Delivering a premium, genuinely searchable reference — with radar charts, a command palette, fuzzy search and an interactive material rules engine — inside a single portable HTML file with zero dependencies and no build step, while hitting WCAG 2.2 AA and full offline support.',
+    solution: 'Architected a data-driven single-file SPA in vanilla ES2025 with hand-rolled SVG radar and meter charts, a subsequence-scored fuzzy search engine over 107 indexed items, a category-driven material explorer with historical synergy detection, route-level code organisation and a 34-assertion Node smoke-test harness in CI. Deployed to GitHub Pages with service-worker offline caching and a web manifest.',
+    tech: ['HTML5', 'Vanilla ES2025 JS', 'SVG Charts', 'CSS Custom Properties', 'Service Worker', 'PWA', 'GitHub Actions', 'WCAG 2.2 AA'],
+    liveUrl: 'https://dlinacre.github.io/string-and-band/',
+    repoUrl: 'https://github.com/DLinacre/string-and-band',
+    live: true,
+    artwork: '/projects/string-and-band.webp',
+  },
+  {
     name: 'AFTERGLOW ✦',
+    artwork: '/projects/afterglow.webp',
     category: 'build',
     description: 'An original, endless light-painting game: you don\'t move a character — you leave light on. Hold the shutter and steer glowing pens to burn long-exposure trails onto a night sky. Features 10 brushes, 12 palettes, endless procedural shapes, a Daily Challenge, generative Web Audio, star-based unlocks, and a local gallery.',
     url: 'https://dlinacre.github.io/afterglow/',
@@ -239,6 +256,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'FaceRater AI ✨',
+    artwork: '/projects/facerater.webp',
     category: 'build',
     description: 'Neutral aesthetic face scoring viral consumer app. Upload a selfie to receive a 0–100 score with neutral AI vision reasoning, dark/light conic rating ring, local storage history, and 1-tap 1080×1350 image exports.',
     url: 'https://ai-face-rater-next.vercel.app',
@@ -254,6 +272,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Pixel Heist 🚨',
+    artwork: '/projects/pixel-heist.webp',
     category: 'build',
     description: 'Cyberpunk stealth heist arcade game with Next.js 15, Phaser 3, and React 19. Features procedural facility layouts, guard vision-cone AI simulation, interactive lockpicking & wire mini-games, Web Audio synthesis, and HMAC anti-cheat score validation.',
     url: 'https://dlinacre.github.io/pixel-heist/',
@@ -269,6 +288,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Grumpy Guy AI ಠ_ಠ',
+    artwork: '/projects/grumpy-guy-ai.webp',
     category: 'build',
     description: 'Your disagreeable AI copilot delivering motivation with complaints. Features custom tone selection (Dry, Brutal, Supportive), Web Speech synthesis, local storage persistence, and Cloudflare Worker fallback architecture.',
     url: 'https://dlinacre.github.io/grumpy-guy-ai/',
@@ -284,6 +304,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'PokéFlip AI 🎴',
+    artwork: '/projects/pokeflip.webp',
     category: 'build',
     description: 'A real-time Pokémon TCG arbitrage, valuation & predictive market scanner utilizing Gemini models, live eBay API spreads, and Capacitor mobile APK packaging.',
     url: 'https://pok-flip-ai.vercel.app',
@@ -299,6 +320,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: "Nic's Food Decider 🍕",
+    artwork: '/projects/nic-food-decider.webp',
     category: 'build',
     description: 'An intelligent, bias-weighted meal decision web application designed to solve dinner paralysis with cook & takeaway modes, custom filters, and decision history.',
     url: 'https://nic-food-decider.vercel.app',
@@ -314,6 +336,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Fleatment 🐱',
+    artwork: '/projects/fleatment.webp',
     category: 'build',
     description: 'An open-source UK cat flea & tick treatment finder, live delivered price index, active ingredient strength analyzer, and safety guide.',
     url: 'https://dlinacre.github.io/Fleatment/',
@@ -329,6 +352,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Personal OP Agent',
+    artwork: '/projects/opagent.webp',
     category: 'build',
     description: 'A zero-setup, single-file HTML AI workspace and prompt controller running 100% locally in your browser with context history and model routing.',
     url: '/tools/opagent.html',
@@ -343,6 +367,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Arena Audit Prompt Builder',
+    artwork: '/projects/a-audit.webp',
     category: 'build',
     description: 'A specialized browser audit tool for building systematic prompt checklists across UX, UI, SEO, Accessibility, and Security.',
     url: 'https://dlinacre.github.io/a-audit/',
@@ -358,6 +383,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'APKHub 📱',
+    artwork: '/projects/apkhub.webp',
     category: 'build',
     description: 'An open-source Android App Store & release indexer that discovers and downloads official APK releases from GitHub & F-Droid with QR installation support.',
     url: 'https://apkhub-alpha.vercel.app',
@@ -373,6 +399,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'OmniRoute LLM Engine',
+    artwork: '/projects/omniroute.svg',
     category: 'deploy',
     description: 'Enterprise multi-provider AI model gateway & orchestration suite with fallback routing, load balancing, cost tracking, and streaming SSE endpoints.',
     url: 'https://github.com/LIN4CRE/OmniRoute-LLM',
@@ -386,6 +413,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'PokeGuru',
+    artwork: '/projects/pokeguru.svg',
     category: 'build',
     description: 'A fast Pokémon TCG database with advanced search, UK prices in GBP, set history, chase-card discovery, and a local collection vault.',
     url: 'https://lin4cre.github.io/PokeGuru/',
@@ -401,6 +429,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Apex POS',
+    artwork: '/projects/apex-pos.svg',
     category: 'build',
     description: 'An offline-first point-of-sale system for the browser with register, stock, customers, expenses, receipts, and business reporting.',
     url: 'https://dlinacre.github.io/Apex-POS/',
@@ -416,6 +445,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Mob Deals',
+    artwork: '/projects/mob-deals.svg',
     category: 'build',
     description: 'A transparent UK SIM-only comparison and switching guide with 64 provider records, public source checks, and plain-English PAC/STAC help.',
     url: 'https://dlinacre.github.io/mob-deals/',
@@ -431,6 +461,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'DKMA Monster',
+    artwork: '/projects/dkma-monster.svg',
     category: 'build',
     description: 'A practical Android background-app survival toolkit: searchable guidance for 15 OEM families plus CLI, desktop GUI, ADB, root, and Magisk options.',
     url: 'https://lin4cre.github.io/dkma-monster/',
@@ -446,6 +477,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Linacre Uninstaller',
+    artwork: '/projects/linacre-uninstaller.svg',
     category: 'build',
     description: 'A downloadable Android cleanup app with searchable app labels, safety tiers, guided review, and a scoped batch-uninstall flow.',
     url: 'https://github.com/LIN4CRE/LinacreUninstaller/releases/latest',
@@ -460,6 +492,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Linacre LLM Hub & Benchmarks',
+    artwork: '/projects/llm-hub.svg',
     category: 'deploy',
     description: 'Automated 24-hour LLM benchmark dashboard and model discovery super-app aggregating speed, pricing, and capability metrics.',
     url: 'https://lin4cre.github.io/Linacre-LLM-Benchmarks/',
@@ -474,6 +507,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'KushCloud',
+    artwork: '/projects/kushcloud.svg',
     category: 'design',
     description: 'A polished one-tap browser game with four worlds, combo scoring, power-ups, unlockable cosmetics, synthesised audio, and an optional leaderboard.',
     url: 'https://lin4cre.github.io/KushCloud/',
@@ -489,6 +523,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'MyHub Dev Pipeline',
+    artwork: '/projects/myhub-pipeline.svg',
     category: 'deploy',
     description: 'A documented Python DevOps reference project covering CI/CD, security checks, DORA-style metrics, anomaly detection, tests, and automated remediation experiments.',
     url: 'https://github.com/LIN4CRE/myhub-pipeline',
@@ -502,6 +537,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'PayHip Scraper 🔎',
+    artwork: '/projects/payhip-scraper.svg',
     category: 'build',
     description: 'Digital product intelligence for Payhip sellers: scrapes the live marketplace, scores every listing for opportunity, and generates Arena.ai prompts to build a better version.',
     url: 'https://payhipscraper-production.up.railway.app',
@@ -517,6 +553,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'Deasy Continuous Command Suite',
+    artwork: '/projects/deasy.svg',
     category: 'deploy',
     description: 'Continuous command suite and branch desktop manager for streamlined project deployment and local environment control.',
     url: 'https://github.com/DLinacre/Deasy',
@@ -530,6 +567,7 @@ export const MANUAL_PROJECTS: Project[] = [
   },
   {
     name: 'EV Bot & Voice Architecture',
+    artwork: '/projects/ev-bot.svg',
     category: 'deploy',
     description: 'Voice assistant integration linking Alexa commands to desktop PC macro controls and Gemini-powered conversational responses.',
     url: 'https://github.com/LIN4CRE/ev-backend',
