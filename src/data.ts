@@ -223,6 +223,22 @@ export const TOOLS: Tool[] = [
 
 export const MANUAL_PROJECTS: Project[] = [
   {
+    name: 'Whole-Home Ad Blocker',
+    artwork: '/projects/whole-home-adblocker.svg',
+    category: 'deploy',
+    description: 'A one-click Windows installer that turns an always-on PC into an AdGuard Home network ad blocker — interactive setup wizard, live blocking dashboard, preloaded filter lists and encrypted DNS.',
+    url: 'https://github.com/DLinacre/whole-home-adblocker',
+    host: 'github.com/DLinacre/whole-home-adblocker',
+    tag: 'Open Source · MIT',
+    role: 'Product designer and developer',
+    challenges: 'Network-wide ad blocking (Pi-hole / AdGuard Home) normally demands DNS knowledge, YAML editing and Docker familiarity — far out of reach for non-technical households.',
+    solution: 'Wrapped AdGuard Home in Docker behind an interactive PowerShell setup wizard: auto-installs Docker Desktop, asks three plain-English questions (dashboard port, encrypted DNS provider incl. family mode, blocklist strength), bcrypt-seeds a ready-made config with three filter lists, self-heals port conflicts, schedules silent weekly updates, and ships router guides with UK ISP workarounds. Validated in CI with PSScriptAnalyzer and yamllint.',
+    tech: ['PowerShell', 'Docker', 'AdGuard Home', 'Batch', 'GitHub Actions'],
+    liveUrl: 'https://github.com/DLinacre/whole-home-adblocker',
+    repoUrl: 'https://github.com/DLinacre/whole-home-adblocker',
+    live: true,
+  },
+  {
     name: 'String & Band 🏹',
     category: 'build',
     description: 'An offline-first educational knowledge base on the history, materials and craft of archery equipment and slingshots: 18 long-form articles, a 44-material explorer with a live analysis engine, comparison lab, 49-term glossary and fuzzy search — all in one self-contained, dependency-free HTML file.',
