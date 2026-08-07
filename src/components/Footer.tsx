@@ -129,7 +129,7 @@ export default function Footer() {
             {/* Social Links */}
             <div className="flex items-center gap-3">
               <a
-                href="https://github.com/LIN4CRE"
+                href="https://github.com/DLinacre"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 text-muted-foreground hover:text-amber-color hover:bg-amber-color/10 rounded-lg transition-colors focus:outline-none"

@@ -75,7 +75,7 @@ function ProjectCard({ project }: { project: Project }) {
 
         {/* Top-left handle badge */}
         <span className="absolute left-3 top-3 rounded-md border border-cyan/40 bg-black/75 px-2.5 py-1 font-mono text-[10px] font-bold text-cyan backdrop-blur-md">
-          {project.authorHandle || '@LIN4CRE'}
+          {project.authorHandle || '@DLinacre'}
         </span>
 
         {/* Top-right category/status badge */}
@@ -228,7 +228,7 @@ export default function Projects() {
                 Explore selected work <ArrowRight className="h-4 w-4" />
               </a>
               <a
-                href="https://github.com/LIN4CRE"
+                href="https://github.com/DLinacre"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl border border-border-color bg-muted/20 px-4 py-3 font-mono text-xs font-bold text-foreground hover:border-amber-color/50"
@@ -387,7 +387,7 @@ export default function Projects() {
             </p>
           </div>
           <a
-            href="https://github.com/LIN4CRE?tab=repositories"
+            href="https://github.com/DLinacre?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-border-color bg-background/30 px-4 py-3 font-mono text-xs font-bold text-foreground hover:border-amber-color/50"

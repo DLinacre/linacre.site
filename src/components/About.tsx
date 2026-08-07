@@ -133,7 +133,7 @@ export default function About() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="https://github.com/LIN4CRE"
+              href="https://github.com/DLinacre"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-amber-color px-4 py-3 font-mono text-xs font-bold text-[#031018] hover:bg-amber-glow"

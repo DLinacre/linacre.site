@@ -120,13 +120,13 @@ export const TOOLS: Tool[] = [
   },
   {
     id: 'github',
-    name: 'GitHub (LIN4CRE & DLinacre)',
+    name: 'GitHub',
     category: 'start',
     description:
       'Version control, open-source portfolio hosting, Actions CI/CD, and release management.',
     url: 'https://github.com/DLinacre',
     host: 'github.com/DLinacre',
-    searchKeywords: 'github version control repos repositories git dlinacre lin4cre',
+    searchKeywords: 'github version control repos repositories git dlinacre',
     tag: 'Free',
   },
   {
@@ -249,8 +249,8 @@ export const MANUAL_PROJECTS: Project[] = [
     category: 'build',
     description:
       'A friendly, beautifully illustrated guide to bats in buildings — spotting them, staying safe, the law, and humane one-way exclusion. Named after my mum, Bonny.',
-    url: 'https://LIN4CRE.github.io/bonny-bats/',
-    host: 'LIN4CRE.github.io/bonny-bats',
+    url: 'https://dlinacre.github.io/bonny-bats/',
+    host: 'dlinacre.github.io/bonny-bats',
     tag: 'Web Guide · Live',
     role: 'Designer and frontend engineer',
     challenges:
@@ -258,7 +258,7 @@ export const MANUAL_PROJECTS: Project[] = [
     solution:
       'One self-contained HTML file with clear step-by-step sections, live seasonal advice, readability controls (text size, high contrast) and a print-friendly layout.',
     tech: ['HTML', 'CSS', 'JavaScript', 'SVG', 'GitHub Pages'],
-    liveUrl: 'https://LIN4CRE.github.io/bonny-bats/',
+    liveUrl: 'https://dlinacre.github.io/bonny-bats/',
     repoUrl: 'https://github.com/DLinacre/bonny-bats',
     live: true,
   },
@@ -308,28 +308,6 @@ export const MANUAL_PROJECTS: Project[] = [
     live: true,
   },
   {
-    name: 'Depths of Destiny ⚔️',
-    authorHandle: '@DLinacre',
-    badgeLabel: 'Game · Live App',
-    actionType: 'play',
-    bannerImage: '/banners/depths-of-destiny.webp',
-    category: 'design',
-    description:
-      'Single-file HTML5 roguelike dungeon crawler RPG with 10 floors, 6 classes, 25+ enemy types, Web Audio synth sound, and local score persistence.',
-    url: 'https://dlinacre.github.io/DoD/',
-    host: 'dlinacre.github.io/DoD',
-    tag: 'Single-File HTML5 · Live',
-    role: 'Game developer and systems designer',
-    challenges:
-      'Creating a zero-dependency, full-fledged dungeon crawler RPG in a single HTML file with procedural graphics.',
-    solution:
-      'Engineered procedural canvas drawing routines, custom synth audio synthesizer, inventory matrix, and turn-based combat loop.',
-    tech: ['Vanilla JS', 'Canvas 2D', 'Web Audio API', 'Single-File HTML5'],
-    liveUrl: 'https://dlinacre.github.io/DoD/',
-    repoUrl: 'https://github.com/DLinacre/DoD',
-    live: true,
-  },
-  {
     name: 'FaceRater AI ✨',
     authorHandle: '@DLinacre',
     badgeLabel: 'AI App · Live',
@@ -349,7 +327,6 @@ export const MANUAL_PROJECTS: Project[] = [
       'Built a Next.js 15 app leveraging Gemini 2.5 Flash Vision API for facial landmark analysis, symmetry scoring, and instant social card rendering.',
     tech: ['Next.js 15', 'Gemini 2.5 Flash', 'React 19', 'Tailwind CSS'],
     liveUrl: 'https://ai-face-rater-next.vercel.app/',
-    repoUrl: 'https://github.com/DLinacre/ai-face-rater-next',
     live: true,
   },
   {
@@ -362,18 +339,17 @@ export const MANUAL_PROJECTS: Project[] = [
     category: 'build',
     description:
       'Real-time Pokémon TCG card arbitrage, valuation & predictive market scanner utilizing Gemini models, live TCGplayer prices, and opportunity radar.',
-    url: 'https://dlinacre.github.io/Pok-Flip-AI/',
-    host: 'dlinacre.github.io/Pok-Flip-AI',
-    tag: 'AI & Mobile · Live',
+    url: 'https://github.com/DLinacre/Pok-Flip-AI',
+    host: 'github.com/DLinacre/Pok-Flip-AI',
+    tag: 'AI & Mobile · Source',
     role: 'Lead developer and market algorithm engineer',
     challenges:
       'Identifying underpriced Pokémon card listings in real-time across multiple marketplace feeds.',
     solution:
       'Integrated Gemini model reasoning with live market pricing feeds, profit margin calculation engines, and mobile-friendly alert radar.',
     tech: ['React Native', 'Gemini AI', 'TypeScript', 'Tailwind CSS'],
-    liveUrl: 'https://dlinacre.github.io/Pok-Flip-AI/',
     repoUrl: 'https://github.com/DLinacre/Pok-Flip-AI',
-    live: true,
+    live: false,
   },
   {
     name: 'Smart Mail AI ✉️',
@@ -384,8 +360,8 @@ export const MANUAL_PROJECTS: Project[] = [
     category: 'build',
     description:
       'AI-powered unified inbox (Google Gemini) — smart email categorisation, importance detection & multi-account summary generator.',
-    url: 'https://dlinacre.github.io/smart-mail/',
-    host: 'dlinacre.github.io/smart-mail',
+    url: 'https://smart-mail-gamma.vercel.app',
+    host: 'smart-mail-gamma.vercel.app',
     tag: 'AI App · Live',
     role: 'Full-stack AI developer',
     challenges:
@@ -393,7 +369,7 @@ export const MANUAL_PROJECTS: Project[] = [
     solution:
       'Built a client-side inbox scanner powered by Gemini API, importance classification, tag filtering, and mobile Capacitor wrapper.',
     tech: ['React', 'TypeScript', 'Google Gemini API', 'Capacitor'],
-    liveUrl: 'https://dlinacre.github.io/smart-mail/',
+    liveUrl: 'https://smart-mail-gamma.vercel.app',
     repoUrl: 'https://github.com/DLinacre/smart-mail',
     live: true,
   },

@@ -836,7 +836,7 @@ Strict rules:
   app.get("/api/tasks", checkAuth, async (_req, res) => {
     try {
       const fs = await import("fs");
-      const tasksFilePath = path.join("D:", "LIN4CRE", "knowledge-vault", "Ecosystem_Tasks.md");
+      const tasksFilePath = path.join("D:", "DLinacre", "knowledge-vault", "Ecosystem_Tasks.md");
       if (!fs.existsSync(tasksFilePath)) {
         return res.json({ priorities: [], radar: [] });
       }
@@ -1063,7 +1063,7 @@ Strict rules:
 
     // 1. Scan Git Status Task
     if (lowercaseTask.includes("git")) {
-      return exec("git status", { cwd: path.join("D:", "LIN4CRE", "linacre-site-repo") }, (error, stdout, stderr) => {
+      return exec("git status", { cwd: path.join("D:", "DLinacre", "linacre-site") }, (error, stdout, stderr) => {
         if (error) {
           return res.json({ reply: `[Git Scan Error]: ${stderr || error.message}` });
         }

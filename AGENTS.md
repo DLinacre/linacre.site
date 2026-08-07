@@ -21,8 +21,8 @@ vercel.json            (API rewrites and CSP security headers)
 
 ## Rules & Workflows
 
-- **No Artificial Limits** — Use any free tool, any format, any license. Constraints: hardware specs (RTX 3070 Ti, 64GB RAM, D: canonical storage at `D:\LIN4CRE`) and free/open-source tools.
-- **Single Source of Truth** — All active repositories live under `D:\LIN4CRE\`. Desktop app shortcuts are populated at `C:\Users\KingL\Desktop` for 1-by-1 execution and testing.
+- **No Artificial Limits** — Use any free tool, any format, any license. Constraints: hardware specs (RTX 3070 Ti, 64GB RAM, D: canonical storage at `D:\DLinacre`) and free/open-source tools.
+- **Single Source of Truth** — All active repositories live under `D:\DLinacre\`. Desktop app shortcuts are populated at `C:\Users\KingL\Desktop` for 1-by-1 execution and testing.
 - **Build Command:** `npm run build` (Compiles Vite React app + Node server and prerenders 22 static routes).
 - **Local Dev Command:** `npm run dev` (Runs Vite dev server on port 3000).
 - **Deploy Command:** `vercel deploy --prod --yes --project linacre-site-repo --force`

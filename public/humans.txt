@@ -1,7 +1,7 @@
 /* TEAM */
   Engineer & Designer: David Christopher Linacre
   Contact: david [at] linacre.site
-  GitHub: github.com/LIN4CRE
+  GitHub: github.com/DLinacre
   LinkedIn: linkedin.com/in/david-linacre
   From: United Kingdom
 

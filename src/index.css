@@ -417,3 +417,82 @@ button, .btn, .cta, [role="button"] {
   font-size: 0.85em;
   line-height: 1.6;
 }
+
+/* =============================================================================
+   v7.2 — visual polish (branded scrollbar, selection, card lift, CTA glow)
+   ========================================================================== */
+
+/* Branded scrollbar (WebKit) + Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 211, 238, 0.45) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(34, 211, 238, 0.55), rgba(52, 211, 153, 0.4));
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(34, 211, 238, 0.85), rgba(52, 211, 153, 0.6));
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+/* Brand selection colour */
+::selection {
+  background: rgba(34, 211, 238, 0.3);
+  color: inherit;
+}
+
+/* Card lift + glow on hover (surfaces, project & game cards) */
+.linacre-surface,
+article.group {
+  transition: transform var(--linacre-duration-base) var(--linacre-ease),
+    box-shadow var(--linacre-duration-base) var(--linacre-ease),
+    border-color var(--linacre-duration-base) var(--linacre-ease);
+}
+.linacre-surface:hover,
+article.group:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--linacre-glow-soft);
+}
+
+/* Primary CTA glow pulse (reduced-motion safe) */
+@keyframes linacre-cta-pulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(34, 211, 238, 0.35); }
+  50% { box-shadow: 0 0 26px rgba(34, 211, 238, 0.65); }
+}
+a[class*="bg-amber-color"] {
+  animation: linacre-cta-pulse 3.2s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  a[class*="bg-amber-color"] { animation: none; }
+}
+
+/* Logo shimmer on hover */
+#nav-logo:hover .text-foreground {
+  text-shadow: 0 0 14px rgba(34, 211, 238, 0.35);
+}
+
+/* Footer + header link underlines */
+footer a,
+header a {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--linacre-duration-base) var(--linacre-ease);
+}
+footer a:hover,
+header a:hover {
+  background-size: 100% 1px;
+}
