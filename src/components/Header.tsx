@@ -78,7 +78,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
               setActiveTab('home');
               setMobileMenuOpen(false);
             }}
-            className="flex items-center gap-2.5 font-mono font-bold text-lg tracking-tight hover:opacity-90 group focus:outline-none focus:ring-2 focus:ring-cyan/50 rounded p-1 transition-all"
+            className="flex items-center gap-2.5 font-mono font-bold text-lg tracking-tight hover:opacity-90 group focus:outline-none focus:ring-2 focus:ring-cyan/50 rounded p-1 transition-all shrink-0"
             id="nav-logo"
           >
             <div className="relative w-7 h-7 flex items-center justify-center bg-[#061923] border border-amber-color/30 rounded-lg group-hover:border-amber-color transition-colors overflow-hidden">
@@ -98,15 +98,17 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
                 <line x1="12" y1="19" x2="20" y2="19" />
               </svg>
             </div>
-            <div className="flex items-center">
+            <div className="hidden min-[430px]:flex items-center">
               <span className="text-foreground transition-colors">linacre</span>
               <span className="text-amber-color">.</span>
               <span className="text-foreground transition-colors">site</span>
             </div>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
+          {/* Desktop Navigation — xl+ only. Below 1280px the hamburger menu
+              is used, which guarantees the header row can never overflow the
+              viewport (this was the "black stripe on the right" bug). */}
+          <nav className="hidden xl:flex items-center gap-1" aria-label="Primary">
             {coreItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -120,7 +122,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
                     setActiveTab(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`relative px-4 py-2 flex items-center gap-1.5 font-mono text-sm transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-cyan/50 ${
+                  className={`relative px-2.5 py-2 flex items-center gap-1.5 font-mono text-sm transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-cyan/50 ${
                     isActive ? 'text-amber-color font-medium' : 'text-muted-foreground hover:text-foreground'
                   }`}
                   aria-current={isActive ? 'page' : undefined}
@@ -202,16 +204,16 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
               href="https://github.com/LIN4CRE/linacre.site"
               target="_blank"
               rel="noopener noreferrer"
+              className="px-3 py-2 flex items-center gap-1.5 font-mono text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md focus:outline-none"
               id="nav-github"
-              className="px-4 py-2 flex items-center gap-1.5 font-mono text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md focus:outline-none"
             >
               <Github className="w-4 h-4" />
-              <span>GitHub</span>
+              <span className="hidden 2xl:inline">GitHub</span>
             </a>
           </nav>
 
           {/* Action Tools */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {/* Primary CTA — the tool box */}
             <a
               href="/toolkit"
@@ -225,7 +227,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
               id="btn-header-toolkit"
             >
               <Layers className="w-3.5 h-3.5" />
-              <span>Toolkit</span>
+              <span className="hidden xl:inline">Toolkit</span>
             </a>
 
             {/* Interactive Globe Widget */}
@@ -234,7 +236,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
             {/* Command Palette Button */}
             <button
               onClick={openPalette}
-              className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50 flex items-center gap-1.5"
+              className="p-1.5 sm:p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50 flex items-center gap-1.5"
               title="Open Command Palette (Press /)"
               aria-label="Open command palette"
               id="btn-command-palette"
@@ -245,13 +247,14 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
               </kbd>
             </button>
 
-            {/* Sound FX Toggle Button */}
+            {/* Sound FX Toggle Button (hidden on small screens — the header
+                row must never overflow the viewport) */}
             <button
               onClick={() => {
                 const enabled = toggleSoundFx();
                 setSoundOn(enabled);
               }}
-              className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
+              className="hidden md:inline-flex p-1.5 sm:p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
               title={soundOn ? 'Sound FX Enabled (Click to Mute)' : 'Sound FX Muted (Click to Enable)'}
               aria-label="Toggle synthesized sound effects"
               id="btn-sound-toggle"
@@ -265,7 +268,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
                 playClick();
                 toggleTheme();
               }}
-              className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
+              className="p-1.5 sm:p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
               title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
               aria-label="Toggle visual theme"
               id="btn-theme-toggle"
@@ -277,7 +280,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
             <button
               ref={mobileButtonRef}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 md:hidden text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
+              className="p-1.5 sm:p-2 xl:hidden text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50 shrink-0"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav-panel"
@@ -297,7 +300,7 @@ export default function Header({ activeTab, setActiveTab, theme, setTheme, openP
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.15 }}
-            className="md:hidden border-t border-amber-color/10 bg-background/95 backdrop-blur-xl overflow-hidden"
+            className="xl:hidden border-t border-amber-color/10 bg-background/95 backdrop-blur-xl overflow-hidden"
             id="mobile-nav-panel"
             aria-label="Mobile primary navigation"
           >

@@ -139,7 +139,10 @@ body {
   font-family: var(--font-sans);
   transition: background-color var(--linacre-duration-base) var(--linacre-ease),
               color var(--linacre-duration-fast) var(--linacre-ease);
-  overflow-x: hidden;
+  /* clip (not hidden): clips overflowing decorative elements without
+     expanding scrollWidth, so a stripe can never appear on the right edge */
+  overflow-x: clip;
+  scrollbar-gutter: stable;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -147,6 +150,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 /* ── Layout Utility Classes ── */

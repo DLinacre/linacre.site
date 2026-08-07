@@ -253,7 +253,7 @@ export default function App() {
         activeColor={activeColor}
       />
 
-      <main id="main-content" role="main" className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-14 space-y-12">
+      <main id="main-content" role="main" className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-14 pb-28 space-y-12">
         <ErrorBoundary>
           {activeTab !== 'home' && (
             <Breadcrumbs paths={getBreadcrumbPaths()} />

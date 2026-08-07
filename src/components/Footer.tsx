@@ -58,7 +58,7 @@ export default function Footer() {
                 <span>Built with passion and absolute precision</span>
                 <Heart className="w-3 h-3 text-amber-color fill-amber-color linacre-animate-pulse" />
               </div>
-              <div className="flex items-center gap-3 mt-1.5 text-muted-foreground/50">
+              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mt-1.5 text-muted-foreground/50">
                 <button
                   onClick={() => {
                     window.history.pushState({}, '', '/games');

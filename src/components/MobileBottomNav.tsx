@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
-import { Menu } from 'lucide-react';
-import { primaryNav } from '../lib/design-system';
+import { Menu, House, FolderCode, Gamepad2, Layers } from 'lucide-react';
 
 interface MobileBottomNavProps {
   activeTab: string;
@@ -8,11 +7,29 @@ interface MobileBottomNavProps {
   openMore: () => void;
 }
 
+/** Primary destinations for the floating dock (Start · Projects · Games · Toolkit + More). */
+const DOCK_ITEMS = [
+  { id: 'home', label: 'Start', icon: House },
+  { id: 'projects', label: 'Projects', icon: FolderCode },
+  { id: 'games', label: 'Games', icon: Gamepad2 },
+  { id: 'toolkit', label: 'Tools', icon: Layers },
+];
+
+/**
+ * Floating bottom navigation dock.
+ *
+ * v7.1: shown on ALL screen sizes (was mobile-only) — a compact floating
+ * pill on desktop, full-width-ish on phones. Keeps the primary destinations
+ * one thumb-tap away and mirrors the header's core items.
+ */
 export default function MobileBottomNav({ activeTab, setActiveTab, openMore }: MobileBottomNavProps) {
-  const mobileItems = primaryNav.slice(0, 4);
+  const mobileItems = DOCK_ITEMS;
 
   return (
-    <nav className="fixed inset-x-3 bottom-3 z-50 rounded-2xl border border-[var(--linacre-border)] bg-background/88 p-1.5 shadow-[var(--linacre-shadow-float)] backdrop-blur-xl md:hidden" aria-label="Mobile navigation">
+    <nav
+      className="fixed bottom-3 inset-x-3 sm:inset-x-6 z-50 rounded-2xl border border-[var(--linacre-border)] bg-background/88 p-1.5 shadow-[var(--linacre-shadow-float)] backdrop-blur-xl sm:mx-auto sm:max-w-md"
+      aria-label="Primary navigation"
+    >
       <div className="grid grid-cols-5 gap-1">
         {mobileItems.map((item) => {
           const Icon = item.icon;
