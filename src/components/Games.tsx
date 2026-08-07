@@ -18,6 +18,16 @@ interface GameItem {
 
 const GAMES_DATA: GameItem[] = [
   {
+    title: 'Tap & Slap',
+    tagline: 'Dance-mat beat \'em up — tap to kill enemies ON the beat',
+    desc: 'Four neon lanes, one rule: every enemy dies on the downbeat. Tap a pad or hammer the arrows — PERFECT hits build an 8× combo, misses cost health. Original procedural synthwave fight music, daily challenges, leaderboards and comic-action kills. Free, no install.',
+    tags: ['Rhythm', 'Beat \'em up', 'Dance-mat', 'Synthwave', 'Web Audio'],
+    tech: 'Next.js 15 · Phaser 3 · TypeScript · Prisma',
+    badge: 'Live',
+    play: 'https://tap-and-slap.vercel.app',
+    source: 'https://github.com/DLinacre/tap-and-slap'
+  },
+  {
     title: 'Slime Factory Tycoon',
     tagline: 'Production-ready open-source Roblox idle tycoon & interactive web demo',
     desc: 'Complete server-authoritative Roblox idle tycoon template featuring session-locked DataStores, pets engine, offline earnings, hatch odds display, balance simulator, and automated verification.',

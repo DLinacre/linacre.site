@@ -38,10 +38,18 @@ describe('GameShowcase', () => {
 
   it('disables Play until the game is actually published', () => {
     render(<GameShowcase />);
-    if (!manifest.links.roblox) {
+    // The disabled state only applies when there is no Roblox link AND no
+    // web play link. Once either exists, a live Play CTA renders instead.
+    if (!manifest.links.roblox && !manifest.links.play) {
       const cta = screen.getByTitle(/has not been published/i);
       expect(cta).toHaveAttribute('aria-disabled', 'true');
       expect(cta).toHaveTextContent(/Not Yet Available/i);
+    } else {
+      // Published somewhere: a real Play link must be present.
+      expect(screen.getByRole('link', { name: /Play/i })).toHaveAttribute(
+        'href',
+        manifest.links.roblox || manifest.links.play,
+      );
     }
   });
 

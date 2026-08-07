@@ -2,15 +2,34 @@ import { useEffect, useRef, useState } from 'react';
 
 interface InteractiveGlobeProps {
   primaryColor: string;
+  secondaryColor?: string;
+  /** Diameter in CSS pixels. v7.1: default raised 32 → 44 so the globe is actually usable. */
+  size?: number;
 }
 
-export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps) {
+/**
+ * InteractiveGlobe — a draggable, auto-spinning wireframe Earth.
+ *
+ * v7.1: larger, prettier (atmosphere glow, latitude/longitude bands, depth
+ * shading) and wrapped in a link to the Linacre Global Monitor project so
+ * the 🌎 is actually useful, not just decorative.
+ */
+export default function InteractiveGlobe({
+  primaryColor,
+  secondaryColor,
+  size = 44,
+}: InteractiveGlobeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDragging = useRef(false);
+  const draggedDistance = useRef(0);
   const previousMousePosition = useRef({ x: 0, y: 0 });
   const rotation = useRef({ x: 0.3, y: 0 }); // initial tilt and rotation
   const velocity = useRef({ x: 0, y: 0.006 }); // initial spin velocity
   const [isHovered, setIsHovered] = useState(false);
+
+  // Link target: the Linacre Global Monitor project (live world dashboard).
+  const GLOBAL_MONITOR_URL = 'https://github.com/DLinacre/linacre-global-monitor';
+  const accent = secondaryColor ?? '#22d3ee';
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,21 +39,20 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
 
     // Resolution setup for high-DPI screens
     const dpr = window.devicePixelRatio || 1;
-    const size = 32; // diameter in css pixels
     canvas.width = size * dpr;
     canvas.height = size * dpr;
     canvas.style.width = `${size}px`;
     canvas.style.height = `${size}px`;
     ctx.scale(dpr, dpr);
 
-    const radius = size * 0.44;
+    const radius = size * 0.46;
     const centerX = size / 2;
     const centerY = size / 2;
 
     // Generate coordinate dots on a spherical grid
     const points: { x: number; y: number; z: number }[] = [];
-    const latBands = 10;
-    const lngBands = 14;
+    const latBands = 12;
+    const lngBands = 16;
     for (let i = 1; i < latBands; i++) {
       const theta = (i * Math.PI) / latBands - Math.PI / 2; // -pi/2 to pi/2 (exclude poles for cleaner look)
       const sinTheta = Math.sin(theta);
@@ -52,17 +70,42 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
       }
     }
 
+    // Great-circle band points (longitude rings every 45° + equator/2 tropics)
+    const bands: { x: number; y: number; z: number }[] = [];
+    const ringLats = [-0.6, -0.3, 0, 0.3, 0.6];
+    for (const lat of ringLats) {
+      const theta = lat;
+      for (let j = 0; j < 48; j++) {
+        const phi = (j * 2 * Math.PI) / 48;
+        bands.push({
+          x: radius * Math.cos(theta) * Math.sin(phi),
+          y: radius * Math.sin(theta),
+          z: radius * Math.cos(theta) * Math.cos(phi),
+        });
+      }
+    }
+
     let animationFrameId: number;
 
     const render = () => {
       ctx.clearRect(0, 0, size, size);
 
-      // Draw glassmorphic atmosphere backing
+      // Atmosphere glow (radial gradient backing)
+      const glow = ctx.createRadialGradient(centerX, centerY, radius * 0.55, centerX, centerY, radius * 1.15);
+      glow.addColorStop(0, `${primaryColor}22`);
+      glow.addColorStop(0.7, `${primaryColor}0d`);
+      glow.addColorStop(1, `${primaryColor}00`);
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius * 1.15, 0, 2 * Math.PI);
+      ctx.fillStyle = glow;
+      ctx.fill();
+
+      // Glassmorphic atmosphere ring
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-      ctx.fillStyle = `${primaryColor}06`;
+      ctx.fillStyle = `${primaryColor}0a`;
       ctx.fill();
-      ctx.strokeStyle = `${primaryColor}18`;
+      ctx.strokeStyle = `${primaryColor}2e`;
       ctx.lineWidth = 1;
       ctx.stroke();
 
@@ -86,48 +129,53 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
       const cosY = Math.cos(rotation.current.y);
       const sinY = Math.sin(rotation.current.y);
 
-      // Rotate and project points
-      const projected = points.map(p => {
-        // Rotate around Y-axis (longitudinal rotation)
+      const project = (p: { x: number; y: number; z: number }) => {
         const x1 = p.x * cosY - p.z * sinY;
         const z1 = p.x * sinY + p.z * cosY;
-
-        // Rotate around X-axis (latitudinal tilt)
         const y2 = p.y * cosX - z1 * sinX;
         const z2 = p.y * sinX + z1 * cosX;
+        return { px: centerX + x1, py: centerY + y2, pz: z2 };
+      };
 
-        return {
-          px: centerX + x1,
-          py: centerY + y2,
-          pz: z2,
-        };
+      // Render band rings first (behind the dots)
+      bands.forEach((p) => {
+        const { px, py, pz } = project(p);
+        const depthRatio = (pz + radius) / (2 * radius);
+        if (pz > -1) {
+          ctx.beginPath();
+          ctx.arc(px, py, 0.7, 0, 2 * Math.PI);
+          ctx.fillStyle = accent;
+          ctx.globalAlpha = 0.12 + depthRatio * 0.22;
+          ctx.fill();
+        }
       });
 
-      // Render dots
-      projected.forEach(p => {
-        const depthRatio = (p.pz + radius) / (2 * radius); // 0.0 to 1.0 (back to front)
+      // Render dots (front hemisphere brighter & larger)
+      for (const p of points) {
+        const { px, py, pz } = project(p);
+        const depthRatio = (pz + radius) / (2 * radius); // 0.0 to 1.0 (back to front)
 
-        if (p.pz > -2) {
+        if (pz > -2) {
           // Front hemisphere dots: colored, larger, brighter
-          const pointSize = 0.55 + depthRatio * 0.75;
-          const opacity = 0.2 + depthRatio * 0.8;
+          const pointSize = 0.6 + depthRatio * 0.85;
+          const opacity = 0.25 + depthRatio * 0.75;
 
           ctx.beginPath();
-          ctx.arc(p.px, p.py, pointSize, 0, 2 * Math.PI);
+          ctx.arc(px, py, pointSize, 0, 2 * Math.PI);
           ctx.fillStyle = primaryColor;
           ctx.globalAlpha = opacity;
           ctx.fill();
         } else {
           // Back hemisphere dots: small, dim
-          const opacity = 0.06 + depthRatio * 0.14;
+          const opacity = 0.07 + depthRatio * 0.16;
 
           ctx.beginPath();
-          ctx.arc(p.px, p.py, 0.45, 0, 2 * Math.PI);
-          ctx.fillStyle = primaryColor;
+          ctx.arc(px, py, 0.5, 0, 2 * Math.PI);
+          ctx.fillStyle = accent;
           ctx.globalAlpha = opacity;
           ctx.fill();
         }
-      });
+      }
 
       ctx.globalAlpha = 1.0;
       animationFrameId = requestAnimationFrame(render);
@@ -138,6 +186,7 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
     // Event Handlers
     const handleMouseDown = (e: MouseEvent) => {
       isDragging.current = true;
+      draggedDistance.current = 0;
       previousMousePosition.current = { x: e.clientX, y: e.clientY };
     };
 
@@ -145,6 +194,7 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
       if (!isDragging.current) return;
       const deltaX = e.clientX - previousMousePosition.current.x;
       const deltaY = e.clientY - previousMousePosition.current.y;
+      draggedDistance.current += Math.abs(deltaX) + Math.abs(deltaY);
 
       rotation.current.y += deltaX * 0.01;
       rotation.current.x += deltaY * 0.01;
@@ -163,6 +213,7 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 1) {
         isDragging.current = true;
+        draggedDistance.current = 0;
         previousMousePosition.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       }
     };
@@ -196,12 +247,21 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
       canvas.removeEventListener('touchmove', handleTouchMove);
       canvas.removeEventListener('touchend', handleMouseUp);
     };
-  }, [primaryColor]);
+  }, [primaryColor, accent, size]);
 
   return (
-    <div
-      className="flex items-center justify-center select-none shrink-0"
-      style={{ width: '36px', height: '36px' }}
+    <a
+      href={GLOBAL_MONITOR_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center justify-center select-none shrink-0 rounded-full transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan/50"
+      style={{ width: `${size + 8}px`, height: `${size + 8}px` }}
+      title="Linacre Global Monitor — live world dashboard (opens GitHub)"
+      aria-label="Linacre Global Monitor — live geopolitical and environmental dashboard (opens in a new tab)"
+      onClick={(e) => {
+        // A drag is not a click — don't navigate after spinning the globe.
+        if (draggedDistance.current > 6) e.preventDefault();
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -209,12 +269,10 @@ export default function InteractiveGlobe({ primaryColor }: InteractiveGlobeProps
         ref={canvasRef}
         className="cursor-grab active:cursor-grabbing transition-all duration-300"
         style={{
-          opacity: isHovered ? 1.0 : 0.75,
-          filter: isHovered ? `drop-shadow(0 0 5px ${primaryColor})` : 'none',
+          opacity: isHovered ? 1 : 0.8,
+          filter: isHovered ? `drop-shadow(0 0 6px ${primaryColor})` : `drop-shadow(0 0 2px ${primaryColor}66)`,
         }}
-        title="Drag to spin the globe"
-        aria-label="Interactive 3D wireframe globe"
       />
-    </div>
+    </a>
   );
 }

@@ -225,6 +225,28 @@ export const MANUAL_PROJECTS: Project[] = [
     live: true,
   },
   {
+    name: 'Tap & Slap 🥊',
+    authorHandle: '@DLinacre',
+    badgeLabel: 'Game · Live App',
+    actionType: 'play',
+    bannerImage: '/banners/tap-and-slap.webp',
+    category: 'design',
+    description:
+      'A dance-mat beat \'em up: tap to kill enemies exactly on the beat. Four neon lanes, combo multipliers up to 8×, original procedural synthwave fight music, daily challenges and a live leaderboard — keyboard or touch, free in the browser.',
+    url: 'https://tap-and-slap.vercel.app',
+    host: 'tap-and-slap.vercel.app',
+    tag: 'Rhythm brawler · Live',
+    role: 'Creator and lead developer',
+    challenges:
+      'Making rhythm precision feel honest: latency-aware audio scheduling, lane-accurate hit testing with pads on the visible hit line, and feedback for every tap — so PERFECT is achievable by ear, not luck.',
+    solution:
+      'A Next.js 15 + Phaser 3 + TypeScript monolith with a BeatClock-anchored Web Audio scheduler, procedural seeded levels, Prisma + PostgreSQL leaderboards, Auth.js accounts and Playwright E2E coverage.',
+    tech: ['Next.js 15', 'Phaser 3', 'TypeScript', 'Web Audio API', 'Prisma', 'PostgreSQL', 'Auth.js'],
+    liveUrl: 'https://tap-and-slap.vercel.app',
+    repoUrl: 'https://github.com/DLinacre/tap-and-slap',
+    live: true,
+  },
+  {
     name: 'Depths of Destiny ⚔️',
     authorHandle: '@DLinacre',
     badgeLabel: 'Game · Live App',

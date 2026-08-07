@@ -132,7 +132,7 @@ export default function Header({
                 <line x1="12" y1="19" x2="20" y2="19" />
               </svg>
             </div>
-            <div className="flex items-center">
+            <div className="hidden min-[430px]:flex items-center">
               <span className="text-foreground transition-colors">linacre</span>
               <span className="text-amber-color">.</span>
               <span className="text-foreground transition-colors">site</span>
@@ -140,7 +140,7 @@ export default function Header({
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
+          <nav className="hidden xl:flex items-center gap-1" aria-label="Primary">
             {coreItems.map(item => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -154,7 +154,7 @@ export default function Header({
                     setActiveTab(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`relative px-4 py-2 flex items-center gap-1.5 font-mono text-sm transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-cyan/50 ${
+                  className={`relative px-2.5 py-2 flex items-center gap-1.5 font-mono text-sm transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-cyan/50 ${
                     isActive
                       ? 'text-amber-color font-medium'
                       : 'text-muted-foreground hover:text-foreground'
@@ -257,7 +257,7 @@ export default function Header({
           </nav>
 
           {/* Action Tools */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {/* Primary CTA — the tool box */}
             <a
               href="/toolkit"
@@ -271,7 +271,7 @@ export default function Header({
               id="btn-header-toolkit"
             >
               <Layers className="w-3.5 h-3.5" />
-              <span>Toolkit</span>
+              <span className="hidden xl:inline">Toolkit</span>
             </a>
 
             {/* Interactive Globe Widget */}
@@ -280,7 +280,7 @@ export default function Header({
             {/* Command Palette Button */}
             <button
               onClick={openPalette}
-              className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50 flex items-center gap-1.5"
+              className="p-1.5 sm:p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50 flex items-center gap-1.5"
               title="Open Command Palette (Press /)"
               aria-label="Open command palette"
               id="btn-command-palette"
@@ -297,7 +297,7 @@ export default function Header({
                 const enabled = toggleSoundFx();
                 setSoundOn(enabled);
               }}
-              className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
+              className="hidden md:inline-flex p-1.5 sm:p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
               title={
                 soundOn ? 'Sound FX Enabled (Click to Mute)' : 'Sound FX Muted (Click to Enable)'
               }
@@ -317,7 +317,7 @@ export default function Header({
                 playClick();
                 toggleTheme();
               }}
-              className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
+              className="p-1.5 sm:p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
               title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
               aria-label="Toggle visual theme"
               id="btn-theme-toggle"
@@ -333,7 +333,7 @@ export default function Header({
             <button
               ref={mobileButtonRef}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 md:hidden text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50"
+              className="p-1.5 sm:p-2 xl:hidden text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50 shrink-0"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav-panel"
@@ -353,7 +353,7 @@ export default function Header({
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.15 }}
-            className="md:hidden border-t border-amber-color/10 bg-background/95 backdrop-blur-xl overflow-hidden"
+            className="xl:hidden border-t border-amber-color/10 bg-background/95 backdrop-blur-xl overflow-hidden"
             id="mobile-nav-panel"
             aria-label="Mobile primary navigation"
           >
