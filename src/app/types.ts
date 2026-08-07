@@ -4,29 +4,19 @@ export type ThemeMode = 'dark' | 'light';
 
 export type AppTab =
   | 'home'
-  | 'toolkit'
+  | 'tools'
   | 'games'
-  | 'learn'
   | 'lab'
-  | 'dashboard'
   | 'identity'
-  | 'playground'
-  | 'projects'
-  | 'agents'
   | 'about'
   | 'contact'
   | 'privacy'
   | 'accessibility'
-  | 'blog'
-  | 'status'
   | 'contact-thanks'
   | 'cookie-policy'
   | 'terms'
-  | 'now'
-  | 'low-stakes'
   | 'mob-deals'
-  | 'pokeguru'
-  | 'dkma';
+  | 'pokeguru';
 
 export type SetAppTab = Dispatch<SetStateAction<string>> | ((tab: string) => void);
 

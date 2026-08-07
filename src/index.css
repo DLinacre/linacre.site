@@ -496,3 +496,63 @@ footer a:hover,
 header a:hover {
   background-size: 100% 1px;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Logo3D — brand mark: isometric cube emblem + 3D-extruded wordmark.
+   Dark theme is canonical; light theme uses darker ink + pale extrusion.
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  --logo3d-top: #0e7490;
+  --logo3d-mid: #0891b2;
+  --logo3d-bot: #155e75;
+  --logo3d-ext: #d8f0f6;
+  --logo3d-shade: rgba(4, 47, 58, 0.35);
+}
+.dark {
+  --logo3d-top: #ffffff;
+  --logo3d-mid: #a5f3fc;
+  --logo3d-bot: #22d3ee;
+  --logo3d-ext: #06202e;
+  --logo3d-shade: rgba(0, 0, 0, 0.55);
+}
+
+.logo3d {
+  transform-style: preserve-3d;
+}
+
+/* Wordmark: gradient ink + layered extrusion via chained drop-shadows,
+   tilted in perspective for the 3D look. */
+.logo3d-word {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.28rem;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(180deg, var(--logo3d-top) 0%, var(--logo3d-mid) 52%, var(--logo3d-bot) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter:
+    drop-shadow(0 1px 0 var(--logo3d-ext))
+    drop-shadow(0 2px 0 var(--logo3d-ext))
+    drop-shadow(0 3px 0 var(--logo3d-ext))
+    drop-shadow(0 4px 0 var(--logo3d-ext))
+    drop-shadow(0 5px 0 var(--logo3d-ext))
+    drop-shadow(0 7px 12px var(--logo3d-shade));
+  transform: perspective(560px) rotateX(12deg);
+  transform-origin: 50% 100%;
+  transition: transform 0.3s var(--linacre-ease, ease);
+}
+
+.logo3d:hover .logo3d-word {
+  transform: perspective(560px) rotateX(6deg) translateY(-1px);
+}
+
+.logo3d-word-dot {
+  color: transparent;
+}
+
+.logo3d-emblem {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 10px rgba(34, 211, 238, 0.22));
+}

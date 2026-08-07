@@ -77,23 +77,3 @@ export const CHANGELOG: ChangelogItem[] = [
       'Initial release. Plain, clean HTML/CSS terminal-themed landing page, static searchable toolkit index, responsive grid and mobile navigation layouts.',
   },
 ];
-
-export const TERMINAL_LINES = [
-  { type: 'cmd', text: 'whoami' },
-  { type: 'out', text: 'David Christopher Linacre', cls: '' },
-  { type: 'gap' },
-  { type: 'cmd', text: 'cat interests.txt' },
-  { type: 'out', text: 'building things · open source · learning · creating', cls: 'dim' },
-  { type: 'gap' },
-  { type: 'cmd', text: 'echo $STATUS' },
-  { type: 'out', text: '● Shipping v6.0 — CyberBlue, useful-first, verified.', cls: 'amb' },
-  { type: 'gap' },
-  { type: 'cmd', text: 'ls ./this-site/' },
-  {
-    type: 'out',
-    text: 'React · TypeScript · Tailwind CSS v4 · Motion · Express · Brand Kit',
-    cls: 'dim',
-  },
-  { type: 'gap' },
-  { type: 'prompt' },
-];

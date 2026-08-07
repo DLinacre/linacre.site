@@ -3,32 +3,32 @@
 > David Linacre builds reliable web applications, developer tools and automation systems. Full-stack engineer focused on speed, security, and developer experience.
 
 ## Full Content
-- /llms-full.txt — complete site content (services & pricing, FAQs, projects & case studies, full engineering articles, toolkit, learning roadmap), generated at build for AI retrieval.
+- /llms-full.txt — complete site content (services & pricing, full project catalogue, toolkit), generated at build for AI retrieval.
 
 ## About
 - Full name: David Christopher Linacre
 - Location: United Kingdom
 - Contact: david@linacre.site
-- Expertise: React, TypeScript, Go, Docker, AI sandboxes, high-performance systems
+- GitHub: https://github.com/DLinacre
+- Expertise: React, TypeScript, Go, Python, Docker, AI engineering, developer tools
 
 ## Key Pages
-- / — Useful start page and private browser utilities
-- /projects — Open source and production projects
-- /about — Detailed bio and skills
-- /blog — Technical deep-dives
-- /learn — Free learning roadmap
-- /playground — Client-side utilities
-- /contact — Secure enquiry form
-- /work — Services and availability
+- / — Complete project index with search (49 apps, tools, AI products and games)
+- /tools — Private in-browser utilities (JSON, Base64, timestamps, generators, VAT, text tools) + curated directory
+- /games — Playable browser games and Roblox projects
+- /lab — Interactive AI model sandbox
+- /identity — Brand asset exporter (logos, banners, social cards)
+- /about — Detailed bio, skills and changelog
+- /contact — Enquiry form (replies within 12 hours)
 
 ## Notable Projects
-- Mob Deals — Transparent UK SIM-only comparison, public source checks, and PAC/STAC switching help.
+- Whole-Home Ad Blocker — one-click Windows installer for network-wide ad blocking (AdGuard Home).
+- Smart Mail AI — AI-powered unified inbox with smart categorisation (Gemini).
+- Mob Deals — Transparent UK SIM-only comparison and PAC/STAC switching help.
 - PokeGuru — Pokémon TCG search, UK pricing, set history, and local collection tracking.
-- DKMA Monster — Android OEM battery guidance with optional ADB, root, and Magisk automation.
+- APKHub — Open-source Android APK release indexer.
 - Linacre Uninstaller — Safety-tiered Android app review and guided uninstall utility.
-- linacre.site — Private browser tools, an edited project portfolio, and a developer playground.
-
-## Technical Specifications
-- local client-side environment runs on Node.js & React SPA.
-- static endpoints are statically pre-rendered at build-time.
-- rate limits and secure credentials cached via serverless Vercel Edge proxies.
+- Tap & Slap — dance-mat rhythm brawler (Next.js + Phaser 3).
+- KushCloud — one-tap arcade flyer with synthesised audio.
+- Slime Factory Tycoon — open-source Roblox idle-tycoon template.
+- linacre.site — this site: complete project index, private browser tools, and a developer playground.

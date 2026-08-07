@@ -7,164 +7,88 @@
   },
   "routes": {
     "/": {
-      "title": "Linacre Start — Free browser tools that get things done",
-      "description": "A useful start page with private JSON, Base64, VAT, text, URL, SHA-256, timestamp and secure-value tools, plus verified practical apps.",
+      "title": "Linacre.site — every project, tool and game by David Linacre",
+      "description": "The complete index of David Linacre's work: 49 live apps, AI products, developer tools, Roblox projects and browser games, all searchable from one page.",
       "canonical": "https://www.linacre.site/",
       "index": true
     },
-    "/projects": {
-      "title": "Projects | David Linacre — 25 live builds, tools & systems",
-      "description": "Twenty-five curated, verified projects with live products, downloadable releases or inspectable source — including Bonny Bats, Whole-Home Ad Blocker, String & Band, KushCloud and Mob Deals.",
-      "canonical": "https://www.linacre.site/projects",
+    "/tools": {
+      "title": "Tools — browser utilities & curated directory | Linacre.site",
+      "description": "Private, in-browser utilities (JSON, Base64, timestamps, secure generators, VAT, text tools) plus a curated directory of the developer tools David uses daily. No sign-up, no tracking.",
+      "canonical": "https://www.linacre.site/tools",
       "index": true
     },
     "/games": {
-      "title": "Games | David Linacre — Roblox idle tycoon & playable browser games",
-      "description": "Slime Factory Tycoon, an open-source Roblox idle-tycoon built on a modular Luau service architecture, plus playable browser games including KushCloud and built-in Snake. Free and open source.",
+      "title": "Games — playable browser games & Roblox projects | Linacre.site",
+      "description": "Tap & Slap, KushCloud, AFTERGLOW, Pixel Heist, Dragon Rush Heroes, Slime Factory Tycoon and more — free playable games, no install required.",
       "canonical": "https://www.linacre.site/games",
-      "image": "https://www.linacre.site/games/slime-factory-tycoon/banner.webp",
-      "index": true
-    },
-    "/about": {
-      "title": "About David Linacre | Full-stack and AI engineer",
-      "description": "Learn about David Linacre's background in software engineering, technical philosophy, and operational process. Shipped projects, career milestones, and skills matrix.",
-      "canonical": "https://www.linacre.site/about",
-      "index": true
-    },
-    "/toolkit": {
-      "title": "Free developer toolkit | David Linacre",
-      "description": "A curated directory of developer tools for building, deploying, designing and learning.",
-      "canonical": "https://www.linacre.site/toolkit",
-      "index": true
-    },
-    "/learn": {
-      "title": "Learn web development from scratch | David Linacre",
-      "description": "A practical six-step roadmap and free resources for learning web development and shipping full-stack applications.",
-      "canonical": "https://www.linacre.site/learn",
-      "index": true
-    },
-    "/blog": {
-      "title": "Engineering notes | David Linacre",
-      "description": "Practical engineering notes on React theming, interface systems, caching and developer tooling.",
-      "canonical": "https://www.linacre.site/blog",
-      "index": true
-    },
-    "/blog/dynamic-hsl-theme-variables": {
-      "title": "Dynamic HSL Theme Customization | David Linacre",
-      "description": "How to build a theme customization panel using CSS custom properties and HSL in React.",
-      "canonical": "https://www.linacre.site/blog/dynamic-hsl-theme-variables",
-      "index": true,
-      "type": "article",
-      "published": "2026-07-02"
-    },
-    "/blog/optimizing-edge-cdn-caching": {
-      "title": "Optimizing Vercel Edge CDN Caching | David Linacre",
-      "description": "Enforcing cache invalidation rules, immutable assets, and s-maxage controls on Vercel.",
-      "canonical": "https://www.linacre.site/blog/optimizing-edge-cdn-caching",
-      "index": true,
-      "type": "article",
-      "published": "2026-07-08"
-    },
-    "/playground": {
-      "title": "Developer utility playground | David Linacre",
-      "description": "Browser-based developer utilities including token inspection, regular expressions and secure value generation.",
-      "canonical": "https://www.linacre.site/playground",
-      "index": true
-    },
-    "/contact": {
-      "title": "Contact David Linacre | Software and automation projects",
-      "description": "Contact David Linacre about software design, developer tools and automation projects.",
-      "canonical": "https://www.linacre.site/contact",
-      "index": true
-    },
-    "/privacy": {
-      "title": "Privacy policy | linacre.site",
-      "description": "How linacre.site handles information, browser storage and contact requests.",
-      "canonical": "https://www.linacre.site/privacy",
-      "index": true
-    },
-    "/accessibility": {
-      "title": "Accessibility statement | linacre.site",
-      "description": "Accessibility statement, known limitations and feedback route for linacre.site.",
-      "canonical": "https://www.linacre.site/accessibility",
-      "index": true
-    },
-    "/dashboard": {
-      "title": "Private workspace | linacre.site",
-      "description": "",
-      "canonical": "https://www.linacre.site/dashboard",
-      "index": false
-    },
-    "/agents": {
-      "title": "Agents Hub | Autonomous agent playbooks | David Linacre",
-      "description": "Agent workflows, automation playbooks and executor patterns used across the linacre.site toolchain.",
-      "canonical": "https://www.linacre.site/agents",
+      "image": "https://www.linacre.site/og.png",
       "index": true
     },
     "/lab": {
-      "title": "AI Lab | Model sandbox and experiments | David Linacre",
+      "title": "AI Lab — model sandbox and experiments | Linacre.site",
       "description": "An interactive AI lab: chat with models, inspect data structures and explore live experiments in the browser.",
       "canonical": "https://www.linacre.site/lab",
       "index": true
     },
     "/identity": {
-      "title": "CyberBlue Identity Studio | Brand asset exporter | David Linacre",
-      "description": "Create and export coordinated SVG and PNG logos, GitHub banners, avatars and social cards. Endless generated emblems in the free on-device Emblem Lab plus full-spectrum custom colour boxes.",
+      "title": "Identity Studio — brand asset exporter | Linacre.site",
+      "description": "Create and export coordinated SVG and PNG logos, GitHub banners, avatars and social cards. Endless generated emblems plus full-spectrum custom colour boxes.",
       "canonical": "https://www.linacre.site/identity",
       "index": true
     },
-    "/status": {
-      "title": "Status console demo (simulated) | linacre.site",
-      "description": "A UI demo of a status/console page. Values are generated in your browser and do not reflect real infrastructure.",
-      "canonical": "https://www.linacre.site/status",
-      "index": false
+    "/about": {
+      "title": "About David Linacre — full-stack & AI engineer",
+      "description": "David Linacre's background in software engineering, technical philosophy, skills matrix, career timeline and the site changelog.",
+      "canonical": "https://www.linacre.site/about",
+      "index": true
     },
-    "/now": {
-      "title": "What David Linacre is doing now",
-      "description": "Derek Sivers style /now page outlining David Linacre's current projects, learning goals, and recent reading list.",
-      "canonical": "https://www.linacre.site/now",
+    "/contact": {
+      "title": "Contact David Linacre — software & automation projects",
+      "description": "Contact David Linacre about software design, developer tools and automation projects. Replies within 12 hours.",
+      "canonical": "https://www.linacre.site/contact",
       "index": true
     },
     "/contact/thanks": {
-      "title": "Thanks — message received | David Linacre",
+      "title": "Thanks — message received | Linacre.site",
       "description": "Your enquiry has been received. David will reply from david@linacre.site within 12 hours.",
       "canonical": "https://www.linacre.site/contact/thanks",
       "index": false
     },
+    "/privacy": {
+      "title": "Privacy policy | Linacre.site",
+      "description": "How linacre.site handles information, browser storage and contact requests.",
+      "canonical": "https://www.linacre.site/privacy",
+      "index": true
+    },
     "/cookie-policy": {
-      "title": "Cookie & storage policy | linacre.site",
+      "title": "Cookie & storage policy | Linacre.site",
       "description": "How linacre.site uses browser storage and consent under UK GDPR / PECR. No tracking cookies — full disclosure of every key.",
       "canonical": "https://www.linacre.site/cookie-policy",
       "index": true
     },
     "/terms": {
-      "title": "Terms of service | linacre.site",
+      "title": "Terms of service | Linacre.site",
       "description": "Terms of service for David Linacre freelance engineering — engagements, deliverables, liability cap, governing law (England & Wales).",
       "canonical": "https://www.linacre.site/terms",
       "index": true
     },
-    "/low-stakes": {
-      "title": "Low Stakes Guide 2026 — Stretch £10 Further | David Linacre",
-      "description": "Interactive micro-stakes calculator, 1p-5p penny slots guide, £5 deposit limits, and UKGC verified operator comparison.",
-      "canonical": "https://www.linacre.site/low-stakes",
+    "/accessibility": {
+      "title": "Accessibility statement | Linacre.site",
+      "description": "Accessibility statement, known limitations and feedback route for linacre.site.",
+      "canonical": "https://www.linacre.site/accessibility",
       "index": true
     },
     "/mob-deals": {
-      "title": "Mob Deals — Compare UK SIM-Only Deals & PAC Code Switcher Guide | David Linacre",
-      "description": "Filter UK 5G SIM-only contracts by budget and data allowance. Follow our 3-step PAC code guide to switch networks seamlessly.",
+      "title": "Mob Deals — Compare UK SIM-Only Deals & PAC Code Switcher Guide",
+      "description": "Filter UK 5G SIM-only contracts by budget and data allowance. Follow the 3-step PAC code guide to switch networks seamlessly.",
       "canonical": "https://www.linacre.site/mob-deals",
       "index": true
     },
     "/pokeguru": {
-      "title": "PokeGuru — Search 126+ UK Pokémon TCG Sets & Market Prices | David Linacre",
+      "title": "PokeGuru — Search 126+ UK Pokémon TCG Sets & Market Prices",
       "description": "Browse UK Pokémon TCG set expansion releases, track chase card market values in GBP (£), and evaluate card rarity tier lists.",
       "canonical": "https://www.linacre.site/pokeguru",
-      "index": true
-    },
-    "/dkma": {
-      "title": "DKMA Guide — Don't Kill My App Android OEM Battery Fix | David Linacre",
-      "description": "Prevent Samsung, Xiaomi, Poco, and OnePlus from silently killing notifications, background sync, and alarms.",
-      "canonical": "https://www.linacre.site/dkma",
       "index": true
     }
   }

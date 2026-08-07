@@ -118,7 +118,7 @@ export default function McpToolboxCallout({ blurb, className = '' }: McpToolboxC
 
       <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4 font-mono text-[11px]">
         <a
-          href="/toolkit"
+          href="/tools"
           className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1"
         >
           <ExternalLink className="w-3 h-3" /> toolkit

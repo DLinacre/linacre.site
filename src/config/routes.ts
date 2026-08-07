@@ -1,15 +1,10 @@
 import type { AppTab } from '../app/types';
 
 export const ROUTE_LABEL: Record<string, string> = {
-  '/now': 'Now',
-  '/projects': 'Projects',
+  '/': 'Home',
+  '/tools': 'Tools',
   '/games': 'Games',
-  '/toolkit': 'Toolkit',
-  '/learn': 'Learn',
-  '/blog': 'Blog',
-  '/playground': 'Playground',
   '/lab': 'AI Lab',
-  '/agents': 'Agents',
   '/identity': 'Identity',
   '/about': 'About',
   '/contact': 'Contact',
@@ -18,64 +13,41 @@ export const ROUTE_LABEL: Record<string, string> = {
   '/cookie-policy': 'Cookie Policy',
   '/terms': 'Terms',
   '/accessibility': 'Accessibility',
-  '/status': 'Status',
-  '/low-stakes': 'Low Stakes',
   '/mob-deals': 'Mob Deals',
-  '/pokeguru': 'PokeGuru',
-  '/dkma': 'DKMA Guide'
+  '/pokeguru': 'PokeGuru'
 };
 
 export const ROUTE_TAB_IDS = [
-  'toolkit',
+  'tools',
   'games',
-  'learn',
   'lab',
-  'dashboard',
   'identity',
-  'playground',
-  'projects',
-  'agents',
   'about',
   'contact',
   'privacy',
   'accessibility',
-  'blog',
-  'status',
   'contact/thanks',
   'cookie-policy',
   'terms',
-  'now',
-  'low-stakes',
   'mob-deals',
-  'pokeguru',
-  'dkma'
+  'pokeguru'
 ] as const;
 
 export const APP_TABS: readonly AppTab[] = [
   'home',
-  'toolkit',
+  'tools',
   'games',
-  'learn',
   'lab',
-  'dashboard',
   'identity',
-  'playground',
-  'projects',
-  'agents',
   'about',
   'contact',
   'privacy',
   'accessibility',
-  'blog',
-  'status',
   'contact-thanks',
   'cookie-policy',
   'terms',
-  'now',
-  'low-stakes',
   'mob-deals',
-  'pokeguru',
-  'dkma'
+  'pokeguru'
 ];
 
 const routeTabSet = new Set<string>(ROUTE_TAB_IDS);
@@ -99,24 +71,16 @@ export function getTabFromLocation(pathname: string, hash = ''): AppTab | string
   if (normalizedPath === 'terms') return 'terms';
 
   if (routeTabSet.has(normalizedPath)) return normalizedPath;
-  if (normalizedPath.startsWith('blog/')) return 'blog';
   if (routeTabSet.has(normalizedHash)) return normalizedHash;
   if (pathname === '/' || pathname === '') return 'home';
 
-  return 'projects';
+  return 'home';
 }
 
 export function shouldPreserveCurrentPath(activeTab: string, currentPath: string): boolean {
-  return (
-    activeTab === 'blog' && currentPath.startsWith('/blog/')
-  ) || (
-    activeTab === 'contact-thanks' && currentPath === '/contact/thanks'
-  );
+  return activeTab === 'contact-thanks' && currentPath === '/contact/thanks';
 }
 
-export function routeKeyForTab(activeTab: string, pathname: string): string {
-  if (activeTab === 'blog' && pathname.startsWith('/blog/') && pathname.length > 6) {
-    return pathname;
-  }
+export function routeKeyForTab(activeTab: string, _pathname: string): string {
   return tabToPath(activeTab);
 }

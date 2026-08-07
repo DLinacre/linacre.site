@@ -4,18 +4,16 @@ import {
   Search,
   Compass,
   Cpu,
-  BookOpen,
-  Terminal,
-  Hash,
   CornerDownLeft,
   Sparkles,
-  Sliders,
-  Bot,
-  Activity,
-  FileText,
-  FolderCode,
   House,
   Gamepad2,
+  Wrench,
+  User,
+  Mail,
+  Sun,
+  Moon,
+  Globe2,
 } from 'lucide-react';
 import { TOOLS } from '../data';
 import Fuse from 'fuse.js';
@@ -24,28 +22,26 @@ interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
   setActiveTab: (tab: string) => void;
-  setSearchQuery: (query: string) => void;
-  setActiveCategory: (category: any) => void;
+  theme: 'dark' | 'light';
+  setTheme: (theme: 'dark' | 'light') => void;
 }
 
 export default function CommandPalette({
   isOpen,
   onClose,
   setActiveTab,
-  setSearchQuery,
-  setActiveCategory,
+  theme,
+  setTheme,
 }: CommandPaletteProps) {
   const [query, setQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Reset indices on query or open change
   useEffect(() => {
     setActiveIndex(0);
   }, [query, isOpen]);
 
-  // Focus input when opened
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 100);
@@ -67,180 +63,98 @@ export default function CommandPalette({
     keywords?: string;
   }
 
-  // Command lists
+  const go = (tab: string) => {
+    setActiveTab(tab);
+    onClose();
+  };
+
   const navCommands: CommandItem[] = [
     {
       id: 'nav-home',
-      label: 'Go to Useful Start Page',
+      label: 'Go to Start — all projects',
       icon: House,
-      action: () => {
-        setActiveTab('home');
-        onClose();
-      },
-      meta: 'Quick browser tools and free products',
+      action: () => go('home'),
+      meta: 'Search bar and the complete project index',
     },
     {
-      id: 'nav-projects',
-      label: 'Go to Projects Portfolio',
-      icon: FolderCode,
-      action: () => {
-        setActiveTab('projects');
-        onClose();
-      },
-      meta: 'Manage, build, and showcase workspace applications',
+      id: 'nav-tools',
+      label: 'Go to Tools',
+      icon: Wrench,
+      action: () => go('tools'),
+      meta: 'Quick utilities, everyday tools, playground and directory',
     },
     {
       id: 'nav-games',
-      label: 'Go to Playable Browser Games',
+      label: 'Go to Games',
       icon: Gamepad2,
-      action: () => {
-        setActiveTab('games');
-        onClose();
-      },
-      meta: 'Play KushCloud flyer and built-in interactive Snake',
-    },
-    {
-      id: 'nav-toolkit',
-      label: 'Go to Toolkit Directory',
-      icon: Compass,
-      action: () => {
-        setActiveTab('toolkit');
-        onClose();
-      },
-      meta: "View David's curated developer loadout",
-    },
-    {
-      id: 'nav-agents',
-      label: 'Go to AI Autonomous Agents Hub',
-      icon: Bot,
-      action: () => {
-        setActiveTab('agents');
-        onClose();
-      },
-      meta: 'Create, coordinate, and delegate jobs to simulated bot agents',
-    },
-    {
-      id: 'nav-blog',
-      label: 'Go to Technical Case Studies & Blog',
-      icon: FileText,
-      action: () => {
-        setActiveTab('blog');
-        onClose();
-      },
-      meta: 'Deep dives on concurrency, styling and caching architectures',
-    },
-    {
-      id: 'nav-status',
-      label: 'Go to Systems Status Console',
-      icon: Activity,
-      action: () => {
-        setActiveTab('status');
-        onClose();
-      },
-      meta: 'Check live latency, operational checks and simulated loads',
-    },
-    {
-      id: 'nav-learn',
-      label: 'Go to Curriculum & Learn',
-      icon: BookOpen,
-      action: () => {
-        setActiveTab('learn');
-        onClose();
-      },
-      meta: 'Free roadmaps and learning paths',
+      action: () => go('games'),
+      meta: 'Playable browser games and Roblox projects',
     },
     {
       id: 'nav-lab',
-      label: 'Go to AI Dev Assistant Lab',
+      label: 'Go to AI Lab',
       icon: Cpu,
-      action: () => {
-        setActiveTab('lab');
-        onClose();
-      },
+      action: () => go('lab'),
       meta: 'Interactive multi-provider AI terminal',
     },
     {
-      id: 'nav-playground',
-      label: 'Go to Developer Playground',
-      icon: Sliders,
-      action: () => {
-        setActiveTab('playground');
-        onClose();
-      },
-      meta: 'JWT decoder, Glassmorphism builder, RegEx tester, and generators',
-    },
-    {
-      id: 'nav-dashboard',
-      label: "Go to David's Private Dashboard",
-      icon: Terminal,
-      action: () => {
-        setActiveTab('dashboard');
-        onClose();
-      },
-      meta: 'MCP server configurations and private console',
-    },
-    {
       id: 'nav-identity',
-      label: 'Go to Identity & Brand Hub',
+      label: 'Go to Identity Studio',
       icon: Sparkles,
-      action: () => {
-        setActiveTab('identity');
-        onClose();
-      },
-      meta: 'Sleek custom SVG emblems, social banners and embeddable badges',
+      action: () => go('identity'),
+      meta: 'Custom SVG emblems, social banners and badges',
+    },
+    {
+      id: 'nav-about',
+      label: 'Go to About',
+      icon: User,
+      action: () => go('about'),
+      meta: 'Career, skills, timeline and changelog',
+    },
+    {
+      id: 'nav-contact',
+      label: 'Go to Contact',
+      icon: Mail,
+      action: () => go('contact'),
+      meta: 'Start a project or ask a question',
+    },
+    {
+      id: 'nav-mob-deals',
+      label: 'Open Mob Deals',
+      icon: Globe2,
+      action: () => go('mob-deals'),
+      meta: 'Compare UK SIM-only deals',
+    },
+    {
+      id: 'nav-pokeguru',
+      label: 'Open PokeGuru',
+      icon: Globe2,
+      action: () => go('pokeguru'),
+      meta: 'Search Pokémon TCG sets and prices',
     },
   ];
 
-  const catCommands: CommandItem[] = [
+  const actionCommands: CommandItem[] = [
     {
-      id: 'cat-start',
-      label: 'Filter toolkit: start',
+      id: 'act-theme',
+      label: theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme',
+      icon: theme === 'dark' ? Sun : Moon,
       action: () => {
-        setActiveTab('toolkit');
-        setActiveCategory('start');
-        setSearchQuery('');
+        const next = theme === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+        document.documentElement.classList.remove('dark', 'light');
+        document.documentElement.classList.add(next);
+        localStorage.setItem('linacre_theme', next);
         onClose();
       },
-      meta: 'Explore workspace editors, Git VCS, and planners',
-    },
-    {
-      id: 'cat-build',
-      label: 'Filter toolkit: build',
-      action: () => {
-        setActiveTab('toolkit');
-        setActiveCategory('build');
-        setSearchQuery('');
-        onClose();
-      },
-      meta: 'Explore frameworks, databases, auth, and billing',
-    },
-    {
-      id: 'cat-deploy',
-      label: 'Filter toolkit: deploy',
-      action: () => {
-        setActiveTab('toolkit');
-        setActiveCategory('deploy');
-        setSearchQuery('');
-        onClose();
-      },
-      meta: 'Explore cloud hosting platforms and edge servers',
-    },
-    {
-      id: 'cat-design',
-      label: 'Filter toolkit: design',
-      action: () => {
-        setActiveTab('toolkit');
-        setActiveCategory('design');
-        setSearchQuery('');
-        onClose();
-      },
-      meta: 'Explore assets, prototypes, and icons',
+      meta: 'Toggle the visual theme',
+      keywords: 'theme dark light colour color',
     },
   ];
 
   const allSearchableItems: CommandItem[] = [
     ...navCommands,
-    ...catCommands,
+    ...actionCommands,
     ...TOOLS.map(tool => ({
       id: `tool-${tool.id}`,
       label: `Open ${tool.name} (${tool.host})`,
@@ -268,9 +182,8 @@ export default function CommandPalette({
         .search(query)
         .map(res => res.item)
         .slice(0, 10)
-    : [...navCommands, ...catCommands];
+    : [...navCommands, ...actionCommands];
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
@@ -298,7 +211,6 @@ export default function CommandPalette({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, activeIndex, allItems]);
 
-  // Adjust scroll position automatically
   useEffect(() => {
     if (allItems.length === 0) return;
     const activeEl = scrollContainerRef.current?.children[activeIndex] as HTMLElement;
@@ -321,7 +233,6 @@ export default function CommandPalette({
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto" id="command-palette-root">
-          {/* Backdrop Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -329,106 +240,86 @@ export default function CommandPalette({
             onClick={onClose}
             className="fixed inset-0 bg-[#030c14]/75 backdrop-blur-sm transition-opacity"
           />
+          <motion.div
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            transition={{ duration: 0.14 }}
+            className="relative mx-auto mt-20 w-full max-w-xl rounded-2xl border border-amber-color/15 bg-[#08121c] shadow-[0_30px_90px_rgba(0,0,0,0.55)] overflow-hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Command palette"
+          >
+            {/* Search field */}
+            <div className="flex items-center gap-3 border-b border-amber-color/10 px-4">
+              <Search className="h-4 w-4 shrink-0 text-amber-color" aria-hidden="true" />
+              <input
+                ref={inputRef}
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                placeholder="Jump to a page, tool or action…"
+                className="h-14 w-full bg-transparent font-mono text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
+                autoComplete="off"
+                spellCheck={false}
+                aria-label="Search commands"
+              />
+              <kbd className="shrink-0 rounded border border-border-color bg-muted/30 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
+                esc
+              </kbd>
+            </div>
 
-          {/* Dialog Window */}
-          <div className="flex min-h-[100dvh] items-start justify-center p-4 sm:p-6 md:p-20">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: -10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: -10 }}
-              transition={{ duration: 0.15 }}
-              className="relative w-full max-w-xl overflow-hidden rounded-xl bg-muted/95 dark:bg-[#081c28]/95 border border-border-color shadow-2xl flex flex-col"
+            {/* Results */}
+            <div
+              ref={scrollContainerRef}
+              className="max-h-80 overflow-y-auto p-2"
+              role="listbox"
             >
-              {/* Search input line */}
-              <div className="relative border-b border-border-color p-4">
-                <Search className="absolute left-4 top-4.5 w-5 h-5 text-muted-foreground/60" />
-                <input
-                  ref={inputRef}
-                  type="text"
-                  placeholder="type a command or search a tool..."
-                  value={query}
-                  onChange={e => setQuery(e.target.value)}
-                  className="w-full bg-transparent pl-10 pr-4 text-sm font-mono text-foreground placeholder:text-muted-foreground/65 focus:outline-none border-none outline-none"
-                  id="palette-search-input"
-                />
-              </div>
-
-              {/* List container */}
-              <div
-                ref={scrollContainerRef}
-                className="max-h-80 overflow-y-auto p-2 space-y-0.5 select-none scrollbar-thin"
-                id="palette-items-list"
-              >
-                {allItems.map((item, idx) => {
-                  const isHighlighted = idx === activeIndex;
-                  const Icon = item.icon || Hash;
-
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={item.action}
-                      onMouseEnter={() => setActiveIndex(idx)}
-                      className={`w-full flex items-start gap-3 px-3 py-2 rounded-lg text-left transition-all ${
-                        isHighlighted
-                          ? 'bg-amber-color/10 border border-amber-color/20 text-amber-color'
-                          : 'bg-transparent border border-transparent text-muted-foreground'
+              {allItems.length === 0 && (
+                <p className="px-3 py-6 text-center font-mono text-xs text-muted-foreground">
+                  Nothing matches “{query}”.
+                </p>
+              )}
+              {allItems.map((item, index) => {
+                const Icon = item.icon;
+                const active = index === activeIndex;
+                return (
+                  <button
+                    key={item.id}
+                    role="option"
+                    aria-selected={active}
+                    onMouseEnter={() => setActiveIndex(index)}
+                    onClick={item.action}
+                    className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors ${
+                      active ? 'bg-amber-color/10 text-foreground' : 'text-muted-foreground'
+                    }`}
+                  >
+                    <span
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border ${
+                        active
+                          ? 'border-amber-color/40 bg-amber-color/10 text-amber-color'
+                          : 'border-border-color bg-muted/20'
                       }`}
-                      id={`palette-item-${item.id}`}
                     >
-                      <Icon
-                        className={`w-4 h-4 flex-shrink-0 mt-0.5 ${isHighlighted ? 'text-amber-color' : 'text-muted-foreground/50'}`}
-                      />
-                      <div className="flex-1 font-mono text-xs">
-                        <span className="font-semibold">{item.label}</span>
-                        {item.meta && (
-                          <p className="text-[10px] text-muted-foreground/60 leading-normal mt-0.5 line-clamp-1">
-                            {item.meta}
-                          </p>
-                        )}
-                      </div>
-
-                      {isHighlighted && (
-                        <div className="flex items-center gap-1 text-[9px] font-mono text-amber-color/60 bg-amber-color/5 px-1 rounded border border-amber-color/15 self-center">
-                          <span>select</span>
-                          <CornerDownLeft className="w-2.5 h-2.5" />
-                        </div>
+                      {Icon && <Icon className="h-4 w-4" aria-hidden="true" />}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate font-mono text-xs font-semibold text-foreground">
+                        {item.label}
+                      </span>
+                      {item.meta && (
+                        <span className="mt-0.5 block truncate text-[10px] text-muted-foreground">
+                          {item.meta}
+                        </span>
                       )}
-                    </button>
-                  );
-                })}
-
-                {allItems.length === 0 && (
-                  <div className="text-center py-8 font-mono text-xs text-muted-foreground">
-                    No results found for "{query}"
-                  </div>
-                )}
-              </div>
-
-              {/* Footer status guide */}
-              <div className="border-t border-border-color bg-muted/40 dark:bg-[#161b26]/40 px-4 py-2 flex items-center justify-between text-[10px] font-mono text-muted-foreground">
-                <div className="flex items-center gap-4">
-                  <span>
-                    <kbd className="bg-background px-1.5 py-0.5 rounded border border-border-color">
-                      ↑↓
-                    </kbd>{' '}
-                    to navigate
-                  </span>
-                  <span>
-                    <kbd className="bg-background px-1.5 py-0.5 rounded border border-border-color">
-                      Enter
-                    </kbd>{' '}
-                    to select
-                  </span>
-                </div>
-                <span>
-                  <kbd className="bg-background px-1.5 py-0.5 rounded border border-border-color">
-                    Esc
-                  </kbd>{' '}
-                  to close
-                </span>
-              </div>
-            </motion.div>
-          </div>
+                    </span>
+                    {active && (
+                      <CornerDownLeft className="h-3.5 w-3.5 shrink-0 text-amber-color" aria-hidden="true" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
         </div>
       )}
     </AnimatePresence>

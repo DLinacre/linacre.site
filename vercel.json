@@ -1,8 +1,21 @@
 {
   "buildCommand": "npm run build",
   "redirects": [
-    { "source": "/work", "destination": "/toolkit", "permanent": true },
-    { "source": "/book", "destination": "/toolkit", "permanent": true }
+    { "source": "/projects", "destination": "/", "permanent": true },
+    { "source": "/projects/:path*", "destination": "/", "permanent": true },
+    { "source": "/toolkit", "destination": "/tools", "permanent": true },
+    { "source": "/playground", "destination": "/tools", "permanent": true },
+    { "source": "/learn", "destination": "/tools", "permanent": true },
+    { "source": "/blog", "destination": "/", "permanent": true },
+    { "source": "/blog/:path*", "destination": "/", "permanent": true },
+    { "source": "/status", "destination": "/", "permanent": true },
+    { "source": "/now", "destination": "/about", "permanent": true },
+    { "source": "/dashboard", "destination": "/", "permanent": true },
+    { "source": "/low-stakes", "destination": "/", "permanent": true },
+    { "source": "/dkma", "destination": "/", "permanent": true },
+    { "source": "/agents", "destination": "/lab", "permanent": true },
+    { "source": "/work", "destination": "/tools", "permanent": true },
+    { "source": "/book", "destination": "/tools", "permanent": true }
   ],
   "headers": [
     {
@@ -24,7 +37,7 @@
       ]
     },
     {
-      "source": "/(sitemap.xml|robots.txt|llms.txt|llms-full.txt|feed.xml|skills.txt)",
+      "source": "/(sitemap.xml|robots.txt|llms.txt|llms-full.txt|skills.txt)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -42,24 +55,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400"
-        }
-      ]
-    },
-    {
-      "source": "/dashboard",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        }
-      ]
-    },
-    {
-      "source": "/status",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow"
         }
       ]
     },
@@ -128,60 +123,12 @@
       "destination": "/index.html"
     },
     {
-      "source": "/projects",
-      "destination": "/projects/index.html"
+      "source": "/tools",
+      "destination": "/tools/index.html"
     },
     {
       "source": "/games",
       "destination": "/games/index.html"
-    },
-    {
-      "source": "/about",
-      "destination": "/about/index.html"
-    },
-    {
-      "source": "/toolkit",
-      "destination": "/toolkit/index.html"
-    },
-    {
-      "source": "/learn",
-      "destination": "/learn/index.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog/index.html"
-    },
-    {
-      "source": "/blog/dynamic-hsl-theme-variables",
-      "destination": "/blog/dynamic-hsl-theme-variables/index.html"
-    },
-    {
-      "source": "/blog/optimizing-edge-cdn-caching",
-      "destination": "/blog/optimizing-edge-cdn-caching/index.html"
-    },
-    {
-      "source": "/playground",
-      "destination": "/playground/index.html"
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact/index.html"
-    },
-    {
-      "source": "/privacy",
-      "destination": "/privacy/index.html"
-    },
-    {
-      "source": "/accessibility",
-      "destination": "/accessibility/index.html"
-    },
-    {
-      "source": "/dashboard",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/agents",
-      "destination": "/agents/index.html"
     },
     {
       "source": "/lab",
@@ -192,12 +139,20 @@
       "destination": "/identity/index.html"
     },
     {
-      "source": "/status",
-      "destination": "/status/index.html"
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact/index.html"
     },
     {
       "source": "/contact/thanks",
       "destination": "/contact/thanks/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy/index.html"
     },
     {
       "source": "/cookie-policy",
@@ -208,8 +163,8 @@
       "destination": "/terms/index.html"
     },
     {
-      "source": "/low-stakes",
-      "destination": "/low-stakes/index.html"
+      "source": "/accessibility",
+      "destination": "/accessibility/index.html"
     },
     {
       "source": "/mob-deals",
@@ -218,10 +173,6 @@
     {
       "source": "/pokeguru",
       "destination": "/pokeguru/index.html"
-    },
-    {
-      "source": "/dkma",
-      "destination": "/dkma/index.html"
     }
   ],
   "trailingSlash": false,

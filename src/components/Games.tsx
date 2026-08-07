@@ -38,6 +38,16 @@ const GAMES_DATA: GameItem[] = [
     source: 'https://github.com/DLinacre/slime-factory-tycoon'
   },
   {
+    title: 'Dragon Rush Heroes',
+    tagline: 'Anime action-RPG card battler — 464 fighters, real-time Arts combat',
+    desc: 'Summon from 464 hand-drawn fighters, then battle in real time with Arts combos and provably-fair gacha. Fully client-side with local save slots, daily contracts and a synth soundtrack.',
+    tags: ['RPG', 'Cards', 'Anime', 'Gacha', 'Canvas'],
+    tech: 'Vanilla JS · Canvas 2D · Web Audio · Node.js',
+    badge: 'Live',
+    play: 'https://dlinacre.github.io/dragon-rush-heroes/',
+    source: 'https://github.com/DLinacre/dragon-rush-heroes'
+  },
+  {
     title: 'AFTERGLOW',
     tagline: 'Paint with long-exposure light — an original endless light-painting game',
     desc: 'You don\'t move a character — you leave light on. Hold the shutter and steer glowing pens to burn shimmering trails onto a night sky. Features 10 brushes, 12 palettes, endless procedural shapes, a Daily Challenge, generative Web Audio, star-based unlocks, and a local gallery.',

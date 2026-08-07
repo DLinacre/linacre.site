@@ -76,7 +76,7 @@ export default function Footer() {
                 <span>·</span>
                 <button
                   onClick={() => {
-                    window.history.pushState({}, '', '/toolkit');
+                    window.history.pushState({}, '', '/tools');
                     window.dispatchEvent(new PopStateEvent('popstate'));
                   }}
                   className="hover:text-amber-color transition-colors cursor-pointer focus:outline-none"

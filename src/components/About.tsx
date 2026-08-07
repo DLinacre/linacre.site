@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { CHANGELOG } from '../data/core';
 import {
   ArrowUpRight,
   CheckCircle2,
@@ -277,6 +278,30 @@ export default function About() {
                 </p>
               </div>
             </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Site changelog — real release history, kept on the About page */}
+      <section className="space-y-5" aria-labelledby="changelog-title">
+        <div>
+          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-color">
+            Release history
+          </span>
+          <h2 id="changelog-title" className="mt-1 font-display text-2xl font-bold tracking-tight text-foreground">
+            What changed on this site
+          </h2>
+        </div>
+        <div className="relative space-y-6 border-l border-border-color pl-6">
+          {CHANGELOG.map(item => (
+            <div key={item.version} className="relative">
+              <span className="absolute -left-[31px] top-1 h-2.5 w-2.5 rounded-full border-2 border-cyan bg-background dark:bg-[#030c14]" />
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+                <span className="font-mono text-xs font-bold text-cyan">{item.version}</span>
+                <h3 className="font-display text-sm font-bold text-foreground">{item.title}</h3>
+              </div>
+              <p className="mt-1 text-xs leading-6 text-muted-foreground">{item.description}</p>
+            </div>
           ))}
         </div>
       </section>

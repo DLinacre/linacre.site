@@ -11,7 +11,7 @@
 [![Tests](https://img.shields.io/badge/tests-18%20passing-brightgreen)](src/components/__tests__)
 [![WCAG](https://img.shields.io/badge/WCAG_2.2_AA-0%20violations-success)](#accessibility)
 
-**[www.linacre.site](https://www.linacre.site)** · [Toolbox](https://www.linacre.site/toolkit) · [Projects](https://www.linacre.site/projects) · [Games](https://www.linacre.site/games)
+**[www.linacre.site](https://www.linacre.site)** · [Tools](https://www.linacre.site/tools) · [Games](https://www.linacre.site/games) · [About](https://www.linacre.site/about)
 
 </div>
 

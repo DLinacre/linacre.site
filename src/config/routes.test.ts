@@ -4,28 +4,34 @@ import { getTabFromLocation, routeKeyForTab, shouldPreserveCurrentPath, tabToPat
 describe('route configuration contracts', () => {
   it('maps public URL paths to stable internal tab ids', () => {
     expect(getTabFromLocation('/')).toBe('home');
-    expect(getTabFromLocation('/toolkit')).toBe('toolkit');
+    expect(getTabFromLocation('/tools')).toBe('tools');
+    expect(getTabFromLocation('/games')).toBe('games');
+    expect(getTabFromLocation('/mob-deals')).toBe('mob-deals');
     expect(getTabFromLocation('/contact/thanks')).toBe('contact-thanks');
     expect(getTabFromLocation('/cookie-policy')).toBe('cookie-policy');
-    expect(getTabFromLocation('/blog/dynamic-hsl-theme-variables')).toBe('blog');
   });
 
   it('supports legacy hash navigation without overriding known paths', () => {
-    expect(getTabFromLocation('/unknown', '#toolkit')).toBe('toolkit');
-    expect(getTabFromLocation('/projects', '#toolkit')).toBe('projects');
+    expect(getTabFromLocation('/unknown', '#tools')).toBe('tools');
+    expect(getTabFromLocation('/games', '#tools')).toBe('games');
+  });
+
+  it('falls back to home for unknown paths', () => {
+    expect(getTabFromLocation('/projects')).toBe('home');
+    expect(getTabFromLocation('/learn')).toBe('home');
   });
 
   it('serialises tabs back to canonical paths without breaking deep routes', () => {
     expect(tabToPath('home')).toBe('/');
     expect(tabToPath('contact-thanks')).toBe('/contact/thanks');
-    expect(tabToPath('projects')).toBe('/projects');
-    expect(routeKeyForTab('blog', '/blog/dynamic-hsl-theme-variables')).toBe('/blog/dynamic-hsl-theme-variables');
-    expect(routeKeyForTab('blog', '/blog')).toBe('/blog');
+    expect(tabToPath('tools')).toBe('/tools');
+    expect(tabToPath('pokeguru')).toBe('/pokeguru');
+    expect(routeKeyForTab('tools', '/tools')).toBe('/tools');
   });
 
   it('guards paths that must not be rewritten by tab state effects', () => {
-    expect(shouldPreserveCurrentPath('blog', '/blog/dynamic-hsl-theme-variables')).toBe(true);
     expect(shouldPreserveCurrentPath('contact-thanks', '/contact/thanks')).toBe(true);
-    expect(shouldPreserveCurrentPath('projects', '/projects')).toBe(false);
+    expect(shouldPreserveCurrentPath('home', '/')).toBe(false);
+    expect(shouldPreserveCurrentPath('tools', '/tools')).toBe(false);
   });
 });
