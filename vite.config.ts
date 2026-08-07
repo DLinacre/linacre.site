@@ -29,7 +29,7 @@ export default defineConfig(() => {
       hmr: process.env.DISABLE_HMR !== 'true',
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
-      allowedHosts: ['dl', 'poco-f7-1', '.local', '.tailscale.net'],
+      allowedHosts: ['dl', 'poco-f7-1', '.local', '.tailscale.net', '.e2b.app'],
     },
     test: {
       globals: true,
