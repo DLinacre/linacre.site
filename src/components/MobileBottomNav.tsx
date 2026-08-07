@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Menu, House, Gamepad2, Wrench, User } from 'lucide-react';
+import { Command, House, Gamepad2, Wrench, User } from 'lucide-react';
 
 interface MobileBottomNavProps {
   activeTab: string;
@@ -19,13 +19,12 @@ const DOCK_ITEMS = [
  * Floating bottom navigation dock.
  *
  * Shown on ALL screen sizes — a compact floating pill on desktop,
- * full-width-ish on phones. Keeps the primary destinations one tap away;
- * the header stays minimal (logo + globe) as designed.
+ * full-width-ish on phones. Safe-area aware for iOS gesture bars.
  */
 export default function MobileBottomNav({ activeTab, setActiveTab, openMore }: MobileBottomNavProps) {
   return (
     <nav
-      className="fixed bottom-3 inset-x-3 sm:inset-x-6 z-50 rounded-2xl border border-[var(--linacre-border)] bg-background/88 p-1.5 shadow-[var(--linacre-shadow-float)] backdrop-blur-xl sm:mx-auto sm:max-w-md"
+      className="fixed bottom-3 inset-x-3 sm:inset-x-6 z-50 rounded-2xl border border-[var(--linacre-border)] bg-background/88 p-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))] shadow-[var(--linacre-shadow-float)] backdrop-blur-xl sm:mx-auto sm:max-w-md"
       aria-label="Primary navigation"
     >
       <div className="grid grid-cols-5 gap-1">
@@ -46,9 +45,15 @@ export default function MobileBottomNav({ activeTab, setActiveTab, openMore }: M
             </button>
           );
         })}
-        <button type="button" onClick={openMore} className="flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl px-1 text-[10px] font-semibold text-muted-foreground transition-colors hover:text-foreground" aria-label="Open command palette">
-          <Menu className="h-4 w-4" aria-hidden="true" />
-          <span>More</span>
+        <button
+          type="button"
+          onClick={openMore}
+          className="flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl px-1 text-[10px] font-semibold text-muted-foreground transition-colors hover:text-foreground"
+          aria-label="Open command palette (search everything)"
+          title="Search everything — press /"
+        >
+          <Command className="h-4 w-4" aria-hidden="true" />
+          <span>Menu</span>
         </button>
       </div>
     </nav>

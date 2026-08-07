@@ -556,3 +556,38 @@ header a:hover {
 .logo3d-emblem {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 10px rgba(34, 211, 238, 0.22));
 }
+
+/* ── Redesign v8 polish ───────────────────────────────────────────────────
+   Motion-friendly, focus-visible consistent, mobile-safe extras. */
+@media (prefers-reduced-motion: reduce) {
+  .logo3d-word,
+  .logo3d:hover .logo3d-word {
+    transform: none;
+    transition: none;
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Consistent visible focus for the new interactive elements */
+.logo3d:focus-visible,
+.dock-focus:focus-visible {
+  outline: 2px solid var(--color-amber-color);
+  outline-offset: 2px;
+}
+
+/* Line-clamp fallback for older engines (grid cards) */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Bottom dock never sits under the iOS gesture bar */
+@media (display-mode: standalone) {
+  .fixed.bottom-3 {
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+}

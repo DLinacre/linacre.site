@@ -1,8 +1,35 @@
 import { useState, useEffect } from 'react';
-import { Terminal, Github, Heart, ArrowUp, Linkedin, DollarSign } from 'lucide-react';
+import { Terminal, Github, Heart, ArrowUp, Linkedin, Mail } from 'lucide-react';
+
+const EXPLORE_LINKS = [
+  { tab: 'home', label: 'Start' },
+  { tab: 'tools', label: 'Tools' },
+  { tab: 'games', label: 'Games' },
+  { tab: 'lab', label: 'AI Lab' },
+  { tab: 'identity', label: 'Identity Studio' },
+  { tab: 'about', label: 'About' },
+  { tab: 'contact', label: 'Contact' },
+];
+
+const LEGAL_LINKS = [
+  { tab: 'privacy', label: 'Privacy' },
+  { tab: 'cookie-policy', label: 'Cookie Policy' },
+  { tab: 'terms', label: 'Terms' },
+  { tab: 'accessibility', label: 'Accessibility' },
+];
+
+function useNav() {
+  return (tab: string) => {
+    const path = tab === 'home' ? '/' : `/${tab}`;
+    window.history.pushState({}, '', path);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    window.scrollTo({ top: 0, behavior: 'instant' as any });
+  };
+}
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const navigate = useNav();
   const [showTopBtn, setShowTopBtn] = useState(false);
 
   useEffect(() => {
@@ -42,126 +69,90 @@ export default function Footer() {
         role="contentinfo"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            {/* Copyright/Author */}
-            <div className="flex flex-col items-center md:items-start gap-1.5 font-mono text-xs text-muted-foreground/80">
+          <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+            {/* Author */}
+            <div className="flex flex-col gap-1.5 font-mono text-xs text-muted-foreground/80">
               <div className="flex items-center gap-1.5 font-bold text-foreground">
                 <Terminal className="w-3.5 h-3.5 text-amber-color" />
                 <span>david@linacre.site</span>
               </div>
-              <p className="mt-1">
-                &copy; {currentYear} Built with React, TypeScript and Tailwind CSS v4.
+              <p className="mt-1 max-w-sm">
+                &copy; {currentYear} David Linacre. Built with React, TypeScript and Tailwind CSS v4.
               </p>
               <p className="text-[10px] text-muted-foreground/50 mt-0.5">
                 Useful software, clear systems, CyberBlue craft.
               </p>
-            </div>
-
-            {/* Center heart indicator & links */}
-            <div className="text-[10px] font-mono text-muted-foreground/60 flex flex-col items-center gap-1.5">
-              <div className="flex items-center gap-1">
-                <span>Built with passion and absolute precision</span>
-                <Heart className="w-3 h-3 text-amber-color fill-amber-color linacre-animate-pulse" />
-              </div>
-              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mt-1.5 text-muted-foreground/50">
-                <button
-                  onClick={() => {
-                    window.history.pushState({}, '', '/games');
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-                  }}
-                  className="hover:text-amber-color transition-colors cursor-pointer focus:outline-none"
+              <div className="flex items-center gap-3 mt-3">
+                <a
+                  href="https://github.com/DLinacre"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground/60 hover:text-amber-color transition-colors"
+                  aria-label="GitHub — DLinacre"
                 >
-                  Games
-                </button>
-                <span>·</span>
-                <button
-                  onClick={() => {
-                    window.history.pushState({}, '', '/tools');
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-                  }}
-                  className="hover:text-amber-color transition-colors cursor-pointer focus:outline-none"
+                  <Github className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://linkedin.com/in/david-linacre"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground/60 hover:text-amber-color transition-colors"
+                  aria-label="LinkedIn — David Linacre"
                 >
-                  Toolkit
-                </button>
-                <span>·</span>
-                <button
-                  onClick={() => {
-                    window.history.pushState({}, '', '/privacy');
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-                  }}
-                  className="hover:text-amber-color transition-colors cursor-pointer focus:outline-none"
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a
+                  href="mailto:david@linacre.site"
+                  className="text-muted-foreground/60 hover:text-amber-color transition-colors"
+                  aria-label="Email David"
                 >
-                  Privacy Policy
-                </button>
-                <span>·</span>
-                <button
-                  onClick={() => {
-                    window.history.pushState({}, '', '/cookie-policy');
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-                  }}
-                  className="hover:text-amber-color transition-colors cursor-pointer focus:outline-none"
-                >
-                  Cookie Policy
-                </button>
-                <span>·</span>
-                <button
-                  onClick={() => {
-                    window.history.pushState({}, '', '/terms');
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-                  }}
-                  className="hover:text-amber-color transition-colors cursor-pointer focus:outline-none"
-                >
-                  Terms
-                </button>
-                <span>·</span>
-                <button
-                  onClick={() => {
-                    window.history.pushState({}, '', '/accessibility');
-                    window.dispatchEvent(new PopStateEvent('popstate'));
-                  }}
-                  className="hover:text-amber-color transition-colors cursor-pointer focus:outline-none"
-                >
-                  Accessibility
-                </button>
+                  <Mail className="w-4 h-4" />
+                </a>
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="flex items-center gap-3">
-              <a
-                href="https://github.com/DLinacre"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 text-muted-foreground hover:text-amber-color hover:bg-amber-color/10 rounded-lg transition-colors focus:outline-none"
-                title="GitHub Profile"
-                aria-label="GitHub profile"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-              <a
-                href="https://linkedin.com/in/david-linacre"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 text-muted-foreground hover:text-amber-color hover:bg-amber-color/10 rounded-lg transition-colors focus:outline-none"
-                title="LinkedIn Profile"
-                aria-label="LinkedIn profile"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="https://paypal.me/DLinacre16"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 text-muted-foreground hover:text-amber-color hover:bg-amber-color/10 rounded-lg transition-colors focus:outline-none"
-                title="Support on PayPal"
-                aria-label="Support David Linacre on PayPal"
-              >
-                <DollarSign className="w-4 h-4" />
-              </a>
-              <span className="font-mono text-[9px] text-muted-foreground/40 border border-amber-color/15 px-1.5 py-0.5 rounded-md select-none">
-                v7.1.0
-              </span>
-            </div>
+            {/* Explore */}
+            <nav aria-label="Footer — explore">
+              <h2 className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground/60 mb-3">
+                Explore
+              </h2>
+              <ul className="space-y-2">
+                {EXPLORE_LINKS.map(link => (
+                  <li key={link.tab}>
+                    <button
+                      onClick={() => navigate(link.tab)}
+                      className="font-mono text-xs text-muted-foreground/80 hover:text-amber-color transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan/50 rounded"
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* Legal */}
+            <nav aria-label="Footer — legal">
+              <h2 className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground/60 mb-3">
+                Legal
+              </h2>
+              <ul className="space-y-2">
+                {LEGAL_LINKS.map(link => (
+                  <li key={link.tab}>
+                    <button
+                      onClick={() => navigate(link.tab)}
+                      className="font-mono text-xs text-muted-foreground/80 hover:text-amber-color transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan/50 rounded"
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          <div className="mt-10 flex items-center justify-center gap-1.5 text-[10px] font-mono text-muted-foreground/50">
+            <span>Built with passion and absolute precision</span>
+            <Heart className="w-3 h-3 text-amber-color fill-amber-color linacre-animate-pulse" />
           </div>
         </div>
       </footer>

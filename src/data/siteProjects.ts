@@ -27,6 +27,7 @@ export interface SiteProject {
   tags: string[];     // search keywords
   emoji?: string;
   private?: boolean; // hidden from external links (private repo)
+  badge?: 'NEW';     // highlights recently shipped work
 }
 
 export const SITE_PROJECTS: SiteProject[] = [
@@ -42,6 +43,7 @@ export const SITE_PROJECTS: SiteProject[] = [
   },
   {
     name: 'Whole-Home Ad Blocker',
+    badge: 'NEW',
     kind: 'Tool',
     emoji: '🛡️',
     blurb: 'One-click Windows installer that turns an always-on PC into a network-wide ad blocker (AdGuard Home).',
@@ -95,6 +97,7 @@ export const SITE_PROJECTS: SiteProject[] = [
   },
   {
     name: 'Life Hacks',
+    badge: 'NEW',
     kind: 'App',
     emoji: '🚀',
     blurb: 'PWA of clever, well-explained fixes — starting with a DIY capacitive stylus.',
@@ -104,6 +107,7 @@ export const SITE_PROJECTS: SiteProject[] = [
   },
   {
     name: 'MyDIY',
+    badge: 'NEW',
     kind: 'App',
     emoji: '🪑',
     blurb: 'Zero-dependency folding-stool calculator & build guide — React single-file app.',

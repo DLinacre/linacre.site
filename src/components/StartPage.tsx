@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Search, X } from 'lucide-react';
+import { Github, Search, X } from 'lucide-react';
 import ProjectGrid from './ProjectGrid';
 import { SITE_PROJECT_COUNT } from '../data/siteProjects';
 
@@ -49,7 +49,7 @@ export default function StartPage({ navigate }: StartPageProps) {
 
           <h1
             id="start-heading"
-            className="font-display text-4xl font-bold tracking-[-0.045em] text-foreground sm:text-5xl lg:text-6xl"
+            className="font-display text-4xl font-bold tracking-[-0.045em] text-foreground sm:text-5xl lg:text-6xl text-balance"
           >
             Everything I build, <span className="text-amber-color">one search away</span>.
           </h1>
@@ -93,8 +93,8 @@ export default function StartPage({ navigate }: StartPageProps) {
             {[
               ['Play games', 'games'],
               ['Open tools', 'tools'],
-              ['Read about David', 'about'],
-              ['Get in touch', 'contact'],
+              ['AI Lab', 'lab'],
+              ['About', 'about'],
             ].map(([label, tab]) => (
               <button
                 key={tab}
@@ -104,6 +104,14 @@ export default function StartPage({ navigate }: StartPageProps) {
                 {label}
               </button>
             ))}
+            <a
+              href="https://github.com/DLinacre"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 rounded-full border border-amber-color/25 bg-amber-color/5 px-3.5 py-1.5 font-mono text-[11px] text-amber-color transition-colors hover:bg-amber-color/10 hover:border-amber-color/45"
+            >
+              <Github className="h-3.5 w-3.5" /> Source on GitHub
+            </a>
           </div>
         </div>
       </section>

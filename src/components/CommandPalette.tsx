@@ -14,8 +14,10 @@ import {
   Sun,
   Moon,
   Globe2,
+  Github,
 } from 'lucide-react';
 import { TOOLS } from '../data';
+import { SITE_PROJECTS } from '../data/siteProjects';
 import Fuse from 'fuse.js';
 
 interface CommandPaletteProps {
@@ -136,6 +138,17 @@ export default function CommandPalette({
 
   const actionCommands: CommandItem[] = [
     {
+      id: 'act-github',
+      label: 'Open GitHub profile',
+      icon: Github,
+      action: () => {
+        window.open('https://github.com/DLinacre', '_blank', 'noopener');
+        onClose();
+      },
+      meta: 'All source code at github.com/DLinacre',
+      keywords: 'github repos repository source code',
+    },
+    {
       id: 'act-theme',
       label: theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme',
       icon: theme === 'dark' ? Sun : Moon,
@@ -152,9 +165,32 @@ export default function CommandPalette({
     },
   ];
 
+  const projectCommands: CommandItem[] = SITE_PROJECTS.map(p => {
+    const isPrivate = p.kind === 'Private' || p.private;
+    return {
+      id: `proj-${p.name}`,
+      label: `Open ${p.name}`,
+      icon: p.kind === 'Game' ? Gamepad2 : p.kind === 'AI' ? Sparkles : p.kind === 'Tool' ? Wrench : Compass,
+      action: () => {
+        if (isPrivate) {
+          go('contact');
+          return;
+        }
+        const target = p.url || p.repo;
+        if (target) window.open(target, '_blank', 'noopener');
+        onClose();
+      },
+      meta: isPrivate
+        ? `Private · ${p.kind} — contact to discuss access`
+        : `${p.kind} · ${p.blurb.slice(0, 64)}${p.blurb.length > 64 ? '…' : ''}`,
+      keywords: `project ${p.tags.join(' ')} ${p.name}`,
+    };
+  });
+
   const allSearchableItems: CommandItem[] = [
     ...navCommands,
     ...actionCommands,
+    ...projectCommands,
     ...TOOLS.map(tool => ({
       id: `tool-${tool.id}`,
       label: `Open ${tool.name} (${tool.host})`,

@@ -176,6 +176,8 @@ export default function App() {
       </AnimatePresence>
       <Header
         setActiveTab={setActiveTab}
+        theme={theme}
+        setTheme={setTheme}
         activeColor={activeColor}
       />
 
