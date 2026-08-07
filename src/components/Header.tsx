@@ -140,7 +140,7 @@ export default function Header({
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden xl:flex items-center gap-1" aria-label="Primary">
+          <nav className="hidden md:flex items-center gap-0.5 lg:gap-1" aria-label="Primary">
             {coreItems.map(item => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -154,15 +154,15 @@ export default function Header({
                     setActiveTab(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`relative px-2.5 py-2 flex items-center gap-1.5 font-mono text-sm transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-cyan/50 ${
+                  className={`relative px-2 lg:px-2.5 py-2 flex items-center gap-1 lg:gap-1.5 font-mono text-sm transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-cyan/50 ${
                     isActive
                       ? 'text-amber-color font-medium'
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
-                  <Icon className="w-4 h-4" />
-                  <span>{item.label}</span>
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="hidden lg:inline">{item.label}</span>
                   {isActive && (
                     <motion.div
                       layoutId="activeTabUnderline"
@@ -194,7 +194,7 @@ export default function Header({
                 aria-haspopup="true"
                 aria-label="More options menu"
               >
-                <span>More</span>
+                <span className="hidden lg:inline">More</span>
                 <svg
                   className={`w-3.5 h-3.5 transition-transform ${moreOpen ? 'rotate-180' : ''}`}
                   fill="none"
@@ -333,7 +333,7 @@ export default function Header({
             <button
               ref={mobileButtonRef}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 sm:p-2 xl:hidden text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50 shrink-0"
+              className="p-1.5 sm:p-2 md:hidden text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-cyan/50 shrink-0"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav-panel"
@@ -353,7 +353,7 @@ export default function Header({
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.15 }}
-            className="xl:hidden border-t border-amber-color/10 bg-background/95 backdrop-blur-xl overflow-hidden"
+            className="md:hidden border-t border-amber-color/10 bg-background/95 backdrop-blur-xl overflow-hidden"
             id="mobile-nav-panel"
             aria-label="Mobile primary navigation"
           >

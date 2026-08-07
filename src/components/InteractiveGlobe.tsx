@@ -10,14 +10,14 @@ interface InteractiveGlobeProps {
 /**
  * InteractiveGlobe — a draggable, auto-spinning wireframe Earth.
  *
- * v7.1: larger, prettier (atmosphere glow, latitude/longitude bands, depth
- * shading) and wrapped in a link to the Linacre Global Monitor project so
- * the 🌎 is actually useful, not just decorative.
+ * v7.2: back to the compact 32px size (the big globe was too dominant in
+ * the header) and links to the live Linacre Global Monitor SITE (not the
+ * GitHub repo) — drag still spins without navigating.
  */
 export default function InteractiveGlobe({
   primaryColor,
   secondaryColor,
-  size = 44,
+  size = 32,
 }: InteractiveGlobeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDragging = useRef(false);
@@ -27,8 +27,8 @@ export default function InteractiveGlobe({
   const velocity = useRef({ x: 0, y: 0.006 }); // initial spin velocity
   const [isHovered, setIsHovered] = useState(false);
 
-  // Link target: the Linacre Global Monitor project (live world dashboard).
-  const GLOBAL_MONITOR_URL = 'https://github.com/DLinacre/linacre-global-monitor';
+  // Link target: the live Linacre Global Monitor dashboard (not the repo).
+  const GLOBAL_MONITOR_URL = 'https://dlinacre.github.io/linacre-global-monitor/';
   const accent = secondaryColor ?? '#22d3ee';
 
   useEffect(() => {
@@ -256,7 +256,7 @@ export default function InteractiveGlobe({
       rel="noopener noreferrer"
       className="flex items-center justify-center select-none shrink-0 rounded-full transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan/50"
       style={{ width: `${size + 8}px`, height: `${size + 8}px` }}
-      title="Linacre Global Monitor — live world dashboard (opens GitHub)"
+      title="Linacre Global Monitor — live world dashboard"
       aria-label="Linacre Global Monitor — live geopolitical and environmental dashboard (opens in a new tab)"
       onClick={(e) => {
         // A drag is not a click — don't navigate after spinning the globe.
