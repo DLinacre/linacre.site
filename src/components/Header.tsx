@@ -112,7 +112,7 @@ export default function Header({
               setActiveTab('home');
               setMobileMenuOpen(false);
             }}
-            className="flex items-center gap-2.5 font-mono font-bold text-lg tracking-tight hover:opacity-90 group focus:outline-none focus:ring-2 focus:ring-cyan/50 rounded p-1 transition-all"
+            className="flex items-center gap-2.5 font-mono font-bold text-lg tracking-tight hover:opacity-90 group focus:outline-none focus:ring-2 focus:ring-cyan/50 rounded p-1 transition-all shrink-0"
             id="nav-logo"
           >
             <div className="relative w-7 h-7 flex items-center justify-center bg-[#061923] border border-amber-color/30 rounded-lg group-hover:border-amber-color transition-colors overflow-hidden">
@@ -245,14 +245,14 @@ export default function Header({
 
             {/* GitHub external Link */}
             <a
-              href="https://github.com/LIN4CRE/linacre.site"
+              href="https://github.com/DLinacre/linacre.site"
               target="_blank"
               rel="noopener noreferrer"
               id="nav-github"
-              className="px-4 py-2 flex items-center gap-1.5 font-mono text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md focus:outline-none"
+              className="px-3 py-2 flex items-center gap-1.5 font-mono text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md focus:outline-none"
             >
               <Github className="w-4 h-4" />
-              <span>GitHub</span>
+              <span className="hidden 2xl:inline">GitHub</span>
             </a>
           </nav>
 
@@ -399,7 +399,7 @@ export default function Header({
                 <span>Toolkit</span>
               </a>
               <a
-                href="https://github.com/LIN4CRE/linacre.site"
+                href="https://github.com/DLinacre/linacre.site"
                 target="_blank"
                 rel="noopener noreferrer"
                 id="mobile-nav-github"

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Project artwork — ev-bot">
+  <defs>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0ab3c" stop-opacity=".15"/>
+      <stop offset="100%" stop-color="#f0ab3c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowT" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#58d5c9" stop-opacity=".12"/>
+      <stop offset="100%" stop-color="#58d5c9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hairline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f0ab3c" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#58d5c9" stop-opacity=".8"/>
+      <stop offset="100%" stop-color="#f0ab3c" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <g id="grid"><path d="M0 0H1200M0 0V630" stroke="#22384a" stroke-opacity=".35" stroke-width="1"/></g>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0e15"/>
+  <g stroke="#22384a" stroke-opacity=".28" stroke-width="1">
+    <line x1="150" y1="0" x2="150" y2="630"/><line x1="300" y1="0" x2="300" y2="630"/><line x1="450" y1="0" x2="450" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/><line x1="750" y1="0" x2="750" y2="630"/><line x1="900" y1="0" x2="900" y2="630"/><line x1="1050" y1="0" x2="1050" y2="630"/>
+    <line x1="0" y1="150" x2="1200" y2="150"/><line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="450" x2="1200" y2="450"/><line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>  <circle cx="430" cy="320" r="280" fill="url(#glowT)"/>
+  <circle cx="830" cy="300" r="200" fill="url(#glowA)"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+<circle cx="300" cy="315" r="64" stroke="#58d5c9" stroke-width="4.5"/><path d="M300 283 v-22 M282 296 l-16-16 M318 296 l16-16" stroke="#58d5c9" stroke-width="4.5"/><path d="M392 315 L400 317 L408 321 L416 325 L424 327 L432 325 L440 318 L448 307 L456 296 L464 289 L472 287 L480 293 L488 306 L496 322 L504 337 L512 347 L520 349 L528 342 L536 329 L544 313 L552 298 L560 290 L568 288 L576 293 L584 303 L592 314 L600 322 L608 326 L616 325 L624 321 L632 317" stroke="#f0ab3c" stroke-width="4.5"/><rect x="668" y="240" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.95"/><rect x="730" y="240" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.95"/><rect x="792" y="240" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.95"/><rect x="854" y="240" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.95"/><rect x="668" y="296" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.77"/><rect x="730" y="296" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.77"/><rect x="792" y="296" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.77"/><rect x="854" y="296" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.77"/><rect x="668" y="352" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.59"/><rect x="730" y="352" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.59"/><rect x="792" y="352" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.59"/><rect x="854" y="352" width="52" height="46" rx="10" stroke="#a78bfa" stroke-width="3" opacity="0.59"/><path d="M694 278 c10-14 26-14 36-2 M756 334 c8-12 22-12 32-2" stroke="#58d5c9" stroke-width="3.5" opacity=".8"/><path d="M232 262 a74 74 0 0 1 44 106 M368 262 a74 74 0 0 0 -44 106" stroke="#f472b6" stroke-width="3.5" opacity=".8" stroke-dasharray="3 8"/></g>
+  <rect x="120" y="578" width="960" height="2" fill="url(#hairline)"/>
+</svg>

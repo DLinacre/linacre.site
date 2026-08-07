@@ -10,7 +10,7 @@
 ## MCP server
 - Name: linacre-toolbox
 - Transport: stdio
-- Source: https://github.com/LIN4CRE/linacre.site (mcp/)
+- Source: https://github.com/DLinacre/linacre.site (mcp/)
 - Run: `npx -y @linacre/toolbox-mcp`  (or `node mcp/dist/server.js`)
 - Manifest: https://www.linacre.site/.well-known/mcp.json
 

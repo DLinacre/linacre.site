@@ -9,7 +9,7 @@
     "email": "david@linacre.site"
   },
   "license": "MIT",
-  "source": "https://github.com/LIN4CRE/linacre.site",
+  "source": "https://github.com/DLinacre/linacre.site",
   "protocol": "modelcontextprotocol",
   "transport": "stdio",
   "run": {

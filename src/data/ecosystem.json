@@ -52,7 +52,7 @@
     "type": "Node.js App",
     "description": "Flappy bird style arcade game with canvas physics, unlockable skins, and power-ups.",
     "technologies": ["React", "Vite", "Tailwind CSS", "TypeScript"],
-    "remote": "https://github.com/LIN4CRE/KushCloud",
+    "remote": "https://github.com/DLinacre/KushCloud",
     "has_git": true
   },
   {
@@ -60,7 +60,7 @@
     "type": "Node.js App",
     "description": "David Linacre's personal developer site, toolkit directory, learning portal, AI assistant Lab, and private dashboard.",
     "technologies": ["React", "Vite", "Express", "Tailwind CSS", "TypeScript"],
-    "remote": "https://github.com/LIN4CRE/linacre.site.git",
+    "remote": "https://github.com/DLinacre/linacre.site.git",
     "has_git": true
   },
   {
@@ -76,7 +76,7 @@
     "type": "Python App",
     "description": "",
     "technologies": ["Python"],
-    "remote": "https://github.com/LIN4CRE/myhub-pipeline.git",
+    "remote": "https://github.com/DLinacre/myhub-pipeline.git",
     "has_git": true
   },
   {
@@ -92,7 +92,7 @@
     "type": "Node.js App",
     "description": "Pokémon TCG card database with pricing, set browsing, and card scanning",
     "technologies": ["React", "Vite", "Tailwind CSS", "TypeScript"],
-    "remote": "https://github.com/LIN4CRE/PokeGuru.git",
+    "remote": "https://github.com/DLinacre/PokeGuru.git",
     "has_git": true
   },
   {
@@ -124,7 +124,7 @@
     "type": "Live Wallpaper / HTML widget",
     "description": "Lively Wallpaper dual-monitor desktop control center with HUD, clock, CPU/RAM/GPU diagnostics, and workers floor.",
     "technologies": ["HTML", "CSS", "JavaScript"],
-    "remote": "https://github.com/LIN4CRE/linacre-devops-hub.git",
+    "remote": "https://github.com/DLinacre/linacre-devops-hub.git",
     "has_git": true
   }
 ]

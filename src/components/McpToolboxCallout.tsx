@@ -132,7 +132,7 @@ export default function McpToolboxCallout({ blurb, className = '' }: McpToolboxC
           <ExternalLink className="w-3 h-3" /> manifest
         </a>
         <a
-          href="https://github.com/LIN4CRE/linacre.site"
+          href="https://github.com/DLinacre/linacre.site"
           target="_blank"
           rel="noopener noreferrer"
           className="text-muted-foreground hover:text-cyan transition-colors inline-flex items-center gap-1"

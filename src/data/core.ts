@@ -7,6 +7,16 @@ import { ChangelogItem } from '../types';
 
 export const CHANGELOG: ChangelogItem[] = [
   {
+    version: 'v6.5',
+    title: 'Pixel Heist Cyberpunk Arcade & Full AI Products',
+    description: 'Added Pixel Heist — Next.js 15 + Phaser 3 cyberpunk stealth heist game — to the Games Hub; updated Grumpy Guy AI architecture with Tailwind v4, feature modularity, and 125 Vitest tests.'
+  },
+  {
+    version: 'v6.4',
+    title: 'Grumpy Guy AI & GitHub Pages Product Launch',
+    description: 'Added Grumpy Guy AI — motivation with complaints — to the live products index; featured custom reality-check tones, Web Speech synthesis, Vitest test suite, and automated GitHub Actions CI/CD deployment.'
+  },
+  {
     version: 'v6.3',
     title: 'Self-Hosted Offline Fonts & Web Audio Arcade',
     description:

@@ -31,6 +31,8 @@ export interface Project {
   bannerImage?: string;
   badgeLabel?: string;
   actionType?: 'play' | 'open';
+  /** Card artwork served from /public/projects/ (webp photo-style or svg line-art) */
+  artwork?: string;
 }
 
 export interface ChatMessage {

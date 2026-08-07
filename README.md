@@ -5,7 +5,7 @@
 **Developer portal, free browser toolbox, and project showcase.**
 
 [![Live](https://img.shields.io/badge/live-www.linacre.site-22d3ee)](https://www.linacre.site)
-[![CI](https://github.com/LIN4CRE/linacre.site/actions/workflows/ci.yml/badge.svg)](https://github.com/LIN4CRE/linacre.site/actions/workflows/ci.yml)
+[![CI](https://github.com/DLinacre/linacre.site/actions/workflows/ci.yml/badge.svg)](https://github.com/DLinacre/linacre.site/actions/workflows/ci.yml)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)](tsconfig.json)
 [![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=black)](https://react.dev)
 [![Tests](https://img.shields.io/badge/tests-18%20passing-brightgreen)](src/components/__tests__)
@@ -27,7 +27,7 @@ Vercel. It serves three purposes:
 2. **A project showcase** — live builds, downloadable releases, and inspectable
    source.
 3. **A games hub** — playable browser games plus
-   [Slime Factory Tycoon](https://github.com/LIN4CRE/slime-factory-tycoon), an
+   [Slime Factory Tycoon](https://github.com/DLinacre/slime-factory-tycoon), an
    open-source Roblox idle-tycoon.
 
 ---
@@ -74,7 +74,7 @@ measurements.
 **Requirements:** Node 22+ and npm.
 
 ```bash
-git clone https://github.com/LIN4CRE/linacre.site.git
+git clone https://github.com/DLinacre/linacre.site.git
 cd linacre.site
 npm ci
 npm run dev            # http://localhost:3000
@@ -180,7 +180,7 @@ convention and becomes something the build enforces.
 
 Browser-level checks (axe-core, Core Web Vitals) are run with Playwright
 against the live deployment — see the audit in the
-[game repository](https://github.com/LIN4CRE/slime-factory-tycoon/tree/main/audit).
+[game repository](https://github.com/DLinacre/slime-factory-tycoon/tree/main/audit).
 
 ---
 

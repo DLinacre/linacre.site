@@ -20,7 +20,8 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "verify": "npm run typecheck && npm run lint && npm run test"
+    "verify": "npm run typecheck && npm run lint && npm run test",
+    "check": "npm run lint && npm run test && npm run build"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

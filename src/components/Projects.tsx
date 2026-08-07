@@ -33,6 +33,18 @@ const FEATURED_ORDER = [
   'Pixel Heist 🚨',
   'Slime Factory Tycoon 🟢',
   'GlitchArt Engine 🎨',
+  'Whole-Home Ad Blocker',
+  'String & Band 🏹',
+  'Nic',
+  'APKHub 📱',
+  'Linacre Uninstaller',
+  'OmniRoute LLM Engine',
+  'Fleatment 🐱',
+  'Personal OP Agent',
+  'Arena Audit Prompt Builder',
+  'PokeGuru',
+  'Apex POS',
+  'Mob Deals',
 ];
 
 function projectRank(project: Project) {
@@ -54,7 +66,7 @@ function ProjectCard({ project }: { project: Project }) {
       {/* Banner image with overlay badges */}
       <div className="relative aspect-[2.1/1] w-full overflow-hidden bg-[#031018]">
         <img
-          src={project.bannerImage || '/og.png'}
+          src={project.bannerImage || project.artwork || '/og.png'}
           alt={project.name}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

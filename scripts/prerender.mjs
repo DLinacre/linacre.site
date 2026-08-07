@@ -461,6 +461,18 @@ font-family:Inter,ui-sans-serif,system-ui,sans-serif;line-height:1.65;min-height
 #prerender-shell .cta{display:inline-block;background:#22d3ee;color:#030c14;font-weight:700;padding:.6rem 1.1rem;border-radius:8px;margin:.5rem .75rem .5rem 0}
 #prerender-shell .cta.alt{background:transparent;color:#22d3ee;border:1px solid #22d3ee}
 #prerender-shell footer{margin-top:3rem;border-top:1px solid #232838;padding-top:1.25rem;font-size:.85rem;color:#8b93a7}
+/* Skip link — mirrors .skip-link in index.css so the bypass-blocks affordance
+   exists before hydration, not just in the React app. Scoped to the shell so it
+   disappears with it. */
+#prerender-shell .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+#prerender-shell .skip-link:focus,#prerender-shell .skip-link:focus-visible{left:1rem;top:1rem;width:auto;height:auto;
+padding:.6rem 1rem;background:#030c14;color:#22d3ee;border:2px solid #22d3ee;border-radius:8px;z-index:9999;
+font-family:'JetBrains Mono',monospace;font-weight:700;overflow:visible}
+/* Keyboard focus must stay visible on every interactive element in the shell. */
+#prerender-shell a:focus-visible,#prerender-shell button:focus-visible,#prerender-shell input:focus-visible,
+#prerender-shell select:focus-visible,#prerender-shell textarea:focus-visible{outline:2px solid #22d3ee;outline-offset:2px;border-radius:4px}
+/* The shell renders before the app's fonts/JS; respect motion preferences anyway. */
+@media (prefers-reduced-motion: reduce){#prerender-shell *{animation:none!important;transition:none!important}}
 `.trim();
 
 const CTA_BLOCK = `
@@ -492,9 +504,9 @@ no upload, and nothing you paste is sent to a server.</p>
 <p class="meta">Enable JavaScript to use the interactive utilities on this page.</p>
 <h2>Free tools for real jobs</h2>
 <ul>
-  <li><a href="https://lin4cre.github.io/mob-deals/" rel="noopener">Mob Deals</a> — compare UK SIM-only deals and follow a plain-English keep-your-number guide.</li>
-  <li><a href="https://lin4cre.github.io/PokeGuru/" rel="noopener">PokeGuru</a> — search Pokémon cards, browse UK sets and track a collection in GBP.</li>
-  <li><a href="https://lin4cre.github.io/dkma-monster/" rel="noopener">DKMA Monster</a> — find exact Android battery and autostart steps for 15 phone families.</li>
+  <li><a href="https://dlinacre.github.io/mob-deals/" rel="noopener">Mob Deals</a> — compare UK SIM-only deals and follow a plain-English keep-your-number guide.</li>
+  <li><a href="https://dlinacre.github.io/PokeGuru/" rel="noopener">PokeGuru</a> — search Pokémon cards, browse UK sets and track a collection in GBP.</li>
+  <li><a href="https://dlinacre.github.io/dkma-monster/" rel="noopener">DKMA Monster</a> — find exact Android battery and autostart steps for 15 phone families.</li>
   <li><a href="https://dlinacre.github.io/Apex-POS/" rel="noopener">Apex POS</a> — an offline-first point of sale with stock, receipts and reports.</li>
 </ul>
 <h2>More useful areas</h2>
@@ -655,9 +667,16 @@ ${CTA_BLOCK}`;
     <label for="message" style="font-size: 11px; color: #a1a8b8; text-transform: uppercase; font-weight: bold;">Project details *</label>
     <textarea id="message" name="message" required rows="6" placeholder="What are you building? Goals, current stack, constraints, links…" style="background: #030c14; border: 1px solid #2e3545; border-radius: 6px; padding: 10px; color: #e5e5e5; font-size: 14px; resize: vertical;"></textarea>
   </div>
-  <label style="font-size: 12px; color: #a1a8b8;">
-    <input type="checkbox" name="consent" required /> I agree to the <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>. *
-  </label>
+  <!-- The checkbox is explicitly labelled and the policy links sit outside the
+       label: a <label> may not contain interactive content, and nesting links
+       inside one makes the control's accessible name ambiguous. -->
+  <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #a1a8b8;">
+    <input type="checkbox" id="consent" name="consent" required style="margin-top: 3px; flex-shrink: 0;" />
+    <span>
+      <label for="consent">I agree to the Privacy Policy and Terms. *</label>
+      <span class="meta">(<a href="/privacy">read Privacy</a> · <a href="/terms">read Terms</a>)</span>
+    </span>
+  </div>
   <p class="meta">🔒 UK GDPR · Reply &lt; 12h · NDA-friendly</p>
   <button type="submit" style="background: #22d3ee; border: none; border-radius: 6px; padding: 12px; color: #030c14; font-weight: 700; cursor: pointer; font-size: 14px;">Send message →</button>
 </form>
@@ -788,11 +807,12 @@ function snapshot(route, m) {
     route === href ? `<a href="${href}" aria-current="page">${label}</a>` : `<a href="${href}">${label}</a>`).join('\n    ');
   return `<style>${SHELL_CSS}</style>
 <div id="prerender-shell">
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <a class="brand" href="/">&gt; linacre.site</a>
   <nav aria-label="Primary">
     ${nav}
   </nav>
-  <main id="main-content">${pageBody(route, m)}</main>
+  <main id="main-content" tabindex="-1">${pageBody(route, m)}</main>
   <footer>
     <p>© ${new Date().getFullYear()} David Linacre · <a href="https://github.com/LIN4CRE" rel="noopener">GitHub</a> ·
     <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a> · <a href="/accessibility">Accessibility</a> ·
