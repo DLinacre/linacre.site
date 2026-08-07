@@ -1,4 +1,5 @@
 import { execSync } from 'child_process';
+import fs from "fs";
 
 function log(msg: string) {
   console.log(`[📚 Doc Agent] ${msg}`);
@@ -15,7 +16,7 @@ try {
     log(`Audited ${files.length} source files.`);
     log("Ensuring README.md exists and is up to date...");
 
-    const fs = require('fs');
+    
     if (!fs.existsSync('README.md')) {
       fs.writeFileSync('README.md', '# linacre.site\n\nAutomated documentation base.\n');
       log("Generated basic README.md.");

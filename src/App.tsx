@@ -422,7 +422,8 @@ export default function App() {
           return; // Skip if focused on input fields
         }
         e.preventDefault();
-        (setPaletteLoaded(true), setPaletteOpen(true));
+        setPaletteLoaded(true);
+        setPaletteOpen(true);
       }
     };
     window.addEventListener('keydown', handleKeyDown);

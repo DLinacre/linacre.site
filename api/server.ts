@@ -3,6 +3,7 @@ import type { Request, Response, NextFunction } from "express";
 import path from "path";
 import crypto from "crypto";
 import fs from "fs";
+import { exec } from "child_process";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { Redis } from "@upstash/redis";
@@ -342,7 +343,6 @@ app.post("/api/contact", (req, res) => {
 
   // Local file-based backup for dev environments (ignores read-only Vercel tmp/root write errors)
   try {
-    const fs = require("fs");
     const contactsFile = path.join(process.cwd(), "contacts.json");
     const contactsList = fs.existsSync(contactsFile) ? JSON.parse(fs.readFileSync(contactsFile, "utf8")) : [];
     const entryMessage = name ? `Name: ${name}\n\n${message}` : message;
@@ -865,7 +865,7 @@ Strict rules:
           if (!isCompleted) {
             let taskText = line.replace(/^-\s*(\[[x\s]?\])?\s*/i, "").trim();
             // Remove markdown links format [Text](URL) leaving only Text
-            taskText = taskText.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
+            taskText = taskText.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
             if (taskText) {
               if (currentSection === 'priorities') priorities.push(taskText);
               else if (currentSection === 'radar') radar.push(taskText);
@@ -1193,8 +1193,7 @@ Strict rules:
     const tsxBin = process.platform === "win32" ? "tsx.cmd" : "tsx";
 
     try {
-      const { exec } = require("child_process");
-      // Fire and forget so we don't block the UI
+        // Fire and forget so we don't block the UI
       exec(`${tsxBin} "${scriptPath}"`, { cwd: process.cwd() }, (error: any, stdout: any, stderr: any) => {
         if (error) {
           console.error(`[Agent ${agentId}] Error:`, error);
