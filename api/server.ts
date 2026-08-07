@@ -1660,17 +1660,14 @@ Make the SVG viewBox="0 0 100 100" with width="100%" and height="100%".`;
     app.use(express.static(distPath));
 
     const VALID_ROUTES = new Set([
-      '/', '/projects', '/games', '/about', '/toolkit', '/learn', '/blog',
-      '/playground', '/contact', '/privacy', '/accessibility', '/dashboard',
-      '/status', '/agents', '/identity', '/lab', '/work', '/now',
+      '/', '/tools', '/games', '/lab', '/identity', '/about', '/contact',
+      '/privacy', '/accessibility', '/mob-deals', '/pokeguru',
       '/contact/thanks', '/cookie-policy', '/terms'
     ]);
 
     app.get('*', (req, res) => {
       const pathname = req.path.replace(/\/$/, '') || '/';
-      const isBlogDetail = pathname.startsWith('/blog/') && pathname.split('/').length === 3;
-      
-      if (VALID_ROUTES.has(pathname) || isBlogDetail) {
+      if (VALID_ROUTES.has(pathname)) {
         return res.sendFile(path.join(distPath, 'index.html'));
       }
       
