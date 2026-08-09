@@ -14,6 +14,56 @@ export const TOOLS: Tool[] = [
     tag: 'Game · Live'
   },
   {
+    id: 'circuit',
+    name: 'Circuit 🔌',
+    category: 'start',
+    description: 'Rotate every wire until the whole grid lights up — procedural puzzles with a shared daily grid and par.',
+    url: '/games/circuit',
+    host: 'linacre.site/games',
+    searchKeywords: 'circuit puzzle wire rotate grid daily arcade game linacre',
+    tag: 'Game · Live'
+  },
+  {
+    id: 'decrypt',
+    name: 'Decrypt 🔓',
+    category: 'start',
+    description: 'Crack a four-symbol code in eight guesses — pure deduction with a daily streak and challenge links.',
+    url: '/games/decrypt',
+    host: 'linacre.site/games',
+    searchKeywords: 'decrypt code logic mastermind deduction daily streak game linacre',
+    tag: 'Game · Live'
+  },
+  {
+    id: 'pulse',
+    name: 'Pulse 🫀',
+    category: 'start',
+    description: 'Repeat the signal, one step longer each round — solo memory game or pass-and-play duel.',
+    url: '/games/pulse',
+    host: 'linacre.site/games',
+    searchKeywords: 'pulse memory simon signal repeat duel daily game linacre',
+    tag: 'Game · Live'
+  },
+  {
+    id: 'trigger',
+    name: 'Trigger ⚡',
+    category: 'start',
+    description: 'Two-player reflex game on one phone — green means go, amber is a trap. First to five wins.',
+    url: '/games/trigger',
+    host: 'linacre.site/games',
+    searchKeywords: 'trigger reflex two player reaction game duel linacre',
+    tag: 'Game · Live'
+  },
+  {
+    id: 'gridlock',
+    name: 'Gridlock 〰️',
+    category: 'start',
+    description: 'Draw a line, close a square, go again — pass-and-play or take on a chain-aware AI.',
+    url: '/games/gridlock',
+    host: 'linacre.site/games',
+    searchKeywords: 'gridlock dots and boxes strategy two player ai game linacre',
+    tag: 'Game · Live'
+  },
+  {
     id: 'facerater_ai',
     name: 'FaceRater AI ✨',
     category: 'start',
@@ -339,9 +389,9 @@ export const MANUAL_PROJECTS: Project[] = [
     category: 'build',
     description:
       'Real-time Pokémon TCG card arbitrage, valuation & predictive market scanner utilizing Gemini models, live TCGplayer prices, and opportunity radar.',
-    url: 'https://github.com/DLinacre/Pok-Flip-AI',
-    host: 'github.com/DLinacre/Pok-Flip-AI',
-    tag: 'AI & Mobile · Source',
+    url: 'https://pok-flip-ai.vercel.app',
+    host: 'pok-flip-ai.vercel.app',
+    tag: 'AI & Mobile · Live',
     role: 'Lead developer and market algorithm engineer',
     challenges:
       'Identifying underpriced Pokémon card listings in real-time across multiple marketplace feeds.',
@@ -349,7 +399,7 @@ export const MANUAL_PROJECTS: Project[] = [
       'Integrated Gemini model reasoning with live market pricing feeds, profit margin calculation engines, and mobile-friendly alert radar.',
     tech: ['React Native', 'Gemini AI', 'TypeScript', 'Tailwind CSS'],
     repoUrl: 'https://github.com/DLinacre/Pok-Flip-AI',
-    live: false,
+    live: true,
   },
   {
     name: 'Smart Mail AI ✉️',

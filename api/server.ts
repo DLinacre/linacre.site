@@ -1670,7 +1670,16 @@ Make the SVG viewBox="0 0 100 100" with width="100%" and height="100%".`;
       if (VALID_ROUTES.has(pathname)) {
         return res.sendFile(path.join(distPath, 'index.html'));
       }
-      
+
+      // Serve standalone game pages (e.g. /games/circuit → circuit.html)
+      const gameMatch = /^\/games\/([a-z0-9-]+)$/.exec(pathname);
+      if (gameMatch) {
+        const gameHtml = path.join(distPath, 'games', `${gameMatch[1]}.html`);
+        if (fs.existsSync(gameHtml)) {
+          return res.sendFile(gameHtml);
+        }
+      }
+
       // Serve a true 404 for any other path
       res.status(404);
       const custom404 = path.join(distPath, '404.html');

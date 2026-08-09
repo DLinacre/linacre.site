@@ -153,7 +153,7 @@ def make_banner() -> Image.Image:
     for label in ("WEB TOOLS", "ANDROID", "AI SYSTEMS", "DEVOPS"):
         x += chip(draw, (x, 214), label) + 10
 
-    draw.text((342, 278), "github.com/LIN4CRE", font=font(FONT_MONO, 16), fill=(105, 151, 167))
+    draw.text((342, 278), "github.com/DLinacre", font=font(FONT_MONO, 16), fill=(105, 151, 167))
     draw.ellipse((1092, 289, 1102, 299), fill=GREEN)
     draw.text((1112, 285), "SYSTEM ONLINE", font=font(FONT_MONO_BOLD, 14), fill=GREEN)
     return image.convert("RGB")

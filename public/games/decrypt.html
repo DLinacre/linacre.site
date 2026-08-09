@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DECRYPT — crack the code</title>
+<meta name="description" content="Crack a four-symbol code in eight guesses. New code daily, or send a friend your exact code.">
+<meta name="theme-color" content="#1F2430">
+<meta property="og:title" content="DECRYPT">
+<meta property="og:description" content="Crack a four-symbol code in eight guesses.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231F2430'/%3E%3Crect x='14' y='20' width='30' height='30' rx='7' fill='%23DFBFFF'/%3E%3Crect x='54' y='20' width='30' height='30' rx='7' fill='%23FFCC66'/%3E%3Crect x='14' y='58' width='30' height='24' rx='7' fill='%23BAE67E'/%3E%3Crect x='54' y='58' width='30' height='24' rx='7' fill='%23F28779'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#1F2430; --panel:#232834; --line:#2D3440; --ink:#CCCAC2; --muted:#5C6773; --dim:#39414F;
+    --amber:#FFCC66; --blue:#73D0FF; --green:#BAE67E; --violet:#DFBFFF; --red:#F28779; --cyan:#95E6CB;
+    --accent:var(--violet);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);overflow:hidden;
+    font-family:ui-monospace,"JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+    -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
+  }
+  .app{height:100dvh;display:flex;flex-direction:column;gap:clamp(6px,1.6vmin,14px);
+    padding:max(12px,env(safe-area-inset-top)) clamp(12px,3.5vw,22px) max(12px,env(safe-area-inset-bottom));
+    max-width:520px;margin:0 auto}
+
+  header{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+    border-bottom:1px solid var(--line);padding-bottom:8px;flex:0 0 auto}
+  .brand{margin:0;font-size:clamp(15px,4.4vmin,21px);letter-spacing:-.04em;white-space:nowrap}
+  .brand b{color:var(--accent)}
+  .brand span{color:var(--muted);font-weight:400;letter-spacing:.26em;font-size:.5em;margin-left:.6em;vertical-align:middle}
+  .readout{display:flex;gap:clamp(10px,3vw,20px)}
+  .stat{text-align:right;line-height:1.15}
+  .stat .k{display:block;font-size:9px;letter-spacing:.2em;color:var(--muted)}
+  .stat .v{display:block;font-size:15px;font-variant-numeric:tabular-nums}
+
+  .rows{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:2px 0}
+  .row{display:flex;align-items:center;gap:8px;opacity:0;animation:in .25s ease forwards}
+  @keyframes in{to{opacity:1}}
+  .row .no{width:16px;font-size:10px;color:var(--muted);text-align:right;flex:0 0 auto}
+  .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;flex:1 1 auto;min-width:0}
+  .pegs{flex:0 0 34px;display:grid;grid-template-columns:1fr 1fr;gap:3px}
+  .peg{width:11px;height:11px;border-radius:50%;border:1.5px solid var(--dim);justify-self:center}
+  .peg.exact{background:var(--green);border-color:var(--green)}
+  .peg.near{border-color:var(--amber)}
+
+  .sym{
+    all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+    aspect-ratio:1;border-radius:10px;background:var(--panel);border:1px solid var(--line);
+    font-size:clamp(14px,4.6vmin,20px);font-weight:700;color:var(--muted);
+    cursor:pointer;user-select:none;transition:transform .12s ease,box-shadow .2s ease;
+  }
+  .sym[data-s]{color:#1F2430;border-color:transparent}
+  .sym[data-s="0"]{background:var(--blue)}
+  .sym[data-s="1"]{background:var(--amber)}
+  .sym[data-s="2"]{background:var(--green)}
+  .sym[data-s="3"]{background:var(--violet)}
+  .sym[data-s="4"]{background:var(--red)}
+  .sym[data-s="5"]{background:var(--cyan)}
+  .sym.empty{background:transparent;border-style:dashed;border-color:var(--dim)}
+  .sym:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .pad .sym:active{transform:scale(.94)}
+  .row.active .slots .sym{box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 40%,transparent)}
+
+  .pad{flex:0 0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+  .actions{flex:0 0 auto;display:flex;gap:6px}
+  .btn{
+    all:unset;box-sizing:border-box;flex:1 1 auto;min-height:44px;
+    display:inline-flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);border-radius:9px;color:var(--muted);
+    font-size:11px;letter-spacing:.14em;cursor:pointer;
+    transition:color .2s,border-color .2s,background .2s,opacity .2s;
+  }
+  .btn:hover{color:var(--ink);border-color:var(--muted)}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .btn[disabled]{opacity:.35;cursor:not-allowed}
+  .btn.go{color:#1F2430;background:var(--accent);border-color:var(--accent);font-weight:700;flex:2 1 auto}
+  .status{flex:0 0 auto;text-align:center;font-size:10px;letter-spacing:.14em;color:var(--muted);min-height:1.3em;margin:0}
+  .status a{color:var(--accent)}
+
+  .overlay{position:fixed;inset:0;display:grid;place-items:center;padding:20px;z-index:9;
+    background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(6px);
+    opacity:0;pointer-events:none;transition:opacity .28s ease}
+  .overlay.show{opacity:1;pointer-events:auto}
+  .card{width:min(100%,370px);max-height:88dvh;overflow:auto;background:var(--panel);
+    border:1px solid var(--line);border-radius:14px;padding:clamp(18px,5vw,26px);text-align:center}
+  .card h2{margin:0 0 6px;font-size:19px;letter-spacing:-.02em;color:var(--green)}
+  .card.fail h2{color:var(--red)}
+  .card p{margin:0 0 16px;font-size:12px;line-height:1.65;color:var(--muted)}
+  .card .btn{width:100%;margin-top:7px}
+  .reveal{display:grid;grid-template-columns:repeat(4,44px);gap:6px;justify-content:center;margin:0 0 16px}
+  .rules{text-align:left;font-size:12px;line-height:1.75;color:var(--muted);margin:0 0 16px}
+  .rules b{color:var(--ink);font-weight:400}
+  .rules .peg{display:inline-block;vertical-align:-2px;margin:0 3px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1 class="brand"><b>◈</b> DECRYPT <span id="mode-tag">DAILY</span></h1>
+    <div class="readout">
+      <div class="stat"><span class="k">GUESS</span><span class="v" id="s-try">1/8</span></div>
+      <div class="stat"><span class="k">STREAK</span><span class="v" id="s-streak">0</span></div>
+    </div>
+  </header>
+
+  <div class="rows" id="rows"></div>
+
+  <div class="pad" id="pad"></div>
+
+  <div class="actions">
+    <button class="btn" id="b-clear">CLEAR</button>
+    <button class="btn go" id="b-go" disabled>SUBMIT</button>
+    <button class="btn" id="b-help">HOW</button>
+  </div>
+
+  <p class="status" id="status">TAP A SYMBOL TO PLACE IT · TAP A SLOT TO TAKE IT BACK</p>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="card" id="card">
+    <h2 id="ov-title">DECRYPTED</h2>
+    <div class="reveal" id="ov-reveal"></div>
+    <p id="ov-sub">Cracked in 4 guesses.</p>
+    <div class="rules" id="ov-rules" hidden>
+      <b>The code</b> is four symbols long. Symbols can repeat.<br><br>
+      <b><span class="peg exact"></span> filled</b> — one symbol is right and in the right slot.<br>
+      <b><span class="peg near"></span> hollow</b> — right symbol, wrong slot.<br><br>
+      Pegs are not in slot order — they tell you how many, never which.<br><br>
+      <b>Daily</b> is the same code for everyone. <b>Challenge</b> makes a link that drops a friend on your exact code.
+    </div>
+    <button class="btn go" id="ov-btn">NEXT CODE</button>
+    <button class="btn" id="ov-share">COPY RESULT</button>
+    <button class="btn" id="ov-close">BACK</button>
+  </div>
+</div>
+
+<div class="sr" id="live" role="status" aria-live="polite"></div>
+
+<script src="/games/decrypt.js" defer></script>
+</body>
+</html>

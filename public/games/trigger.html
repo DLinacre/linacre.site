@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TRIGGER — one phone, two thumbs</title>
+<meta name="description" content="Put a phone between you. When the screen goes green, hit your half first. Fake signals punish itchy thumbs.">
+<meta name="theme-color" content="#1F2430">
+<meta property="og:title" content="TRIGGER">
+<meta property="og:description" content="One phone, two thumbs, first to five.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231F2430'/%3E%3Crect x='16' y='16' width='68' height='30' rx='9' fill='%23BAE67E'/%3E%3Crect x='16' y='54' width='68' height='30' rx='9' fill='%23F28779'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#1F2430; --panel:#232834; --line:#2D3440; --ink:#CCCAC2; --muted:#5C6773; --dim:#39414F;
+    --amber:#FFCC66; --green:#BAE67E; --red:#F28779; --blue:#73D0FF; --accent:var(--amber);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);overflow:hidden;
+    font-family:ui-monospace,"JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+    -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
+    user-select:none;
+  }
+  .app{height:100dvh;display:flex;flex-direction:column}
+
+  .arena{flex:1 1 auto;display:flex;flex-direction:column;min-height:0;gap:3px;padding:3px}
+  .side{
+    flex:1 1 0;min-height:0;position:relative;
+    display:grid;place-items:center;text-align:center;
+    border-radius:14px;background:var(--panel);border:1px solid var(--line);
+    touch-action:manipulation;cursor:pointer;
+    transition:background .12s linear,border-color .12s linear;
+  }
+  .side.flip{transform:rotate(180deg)}
+  .side .label{font-size:11px;letter-spacing:.24em;color:var(--muted);position:absolute;top:12px;left:0;right:0}
+  .side .msg{font-size:clamp(16px,5.5vmin,26px);letter-spacing:.1em;padding:0 14px;line-height:1.5}
+  .side .sub{display:block;font-size:11px;letter-spacing:.18em;color:var(--muted);margin-top:10px}
+  .side .pips{position:absolute;bottom:12px;left:0;right:0;display:flex;gap:6px;justify-content:center}
+  .pip{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--dim)}
+  .pip.on{background:var(--accent);border-color:var(--accent)}
+
+  .side.go{background:#2A3A2C;border-color:var(--green)}
+  .side.go .msg{color:var(--green)}
+  .side.fake{background:#3A342A;border-color:var(--amber)}
+  .side.fake .msg{color:var(--amber)}
+  .side.bad{background:#3A2A2A;border-color:var(--red)}
+  .side.bad .msg{color:var(--red)}
+  .side.win .msg{color:var(--green)}
+  .side.dead{opacity:.45}
+
+  .bar{
+    flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:8px;
+    padding:8px clamp(10px,3vw,18px) max(8px,env(safe-area-inset-bottom));
+  }
+  .score{font-size:15px;letter-spacing:.16em;font-variant-numeric:tabular-nums;color:var(--muted)}
+  .score b{color:var(--ink)}
+  .btns{display:flex;gap:6px}
+  .btn{
+    all:unset;box-sizing:border-box;padding:8px 11px;min-height:40px;
+    display:inline-flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);border-radius:9px;color:var(--muted);
+    font-size:10.5px;letter-spacing:.14em;cursor:pointer;
+    transition:color .2s,border-color .2s,background .2s;
+  }
+  .btn:hover{color:var(--ink);border-color:var(--muted)}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .btn[aria-pressed="true"]{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+  .btn.go{color:#1F2430;background:var(--accent);border-color:var(--accent);font-weight:700}
+
+  .overlay{position:fixed;inset:0;display:grid;place-items:center;padding:20px;z-index:9;
+    background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(6px);
+    opacity:0;pointer-events:none;transition:opacity .28s ease}
+  .overlay.show{opacity:1;pointer-events:auto}
+  .card{width:min(100%,370px);max-height:88dvh;overflow:auto;background:var(--panel);
+    border:1px solid var(--line);border-radius:14px;padding:clamp(18px,5vw,26px);text-align:center}
+  .card h2{margin:0 0 6px;font-size:19px;letter-spacing:-.02em;color:var(--green)}
+  .card p{margin:0 0 16px;font-size:12px;line-height:1.7;color:var(--muted)}
+  .card .btn{width:100%;margin-top:7px}
+  .big{font-size:42px;color:var(--ink);margin:4px 0 10px;font-variant-numeric:tabular-nums}
+  .rules{text-align:left;font-size:12px;line-height:1.8;color:var(--muted);margin:0 0 16px}
+  .rules b{color:var(--ink);font-weight:400}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="arena" id="arena">
+    <div class="side flip" id="side0" role="button" tabindex="0" aria-label="Player one half">
+      <span class="label">PLAYER 1</span>
+      <span class="msg" id="msg0">TAP START</span>
+      <span class="pips" id="pips0"></span>
+    </div>
+    <div class="side" id="side1" role="button" tabindex="0" aria-label="Player two half">
+      <span class="label">PLAYER 2</span>
+      <span class="msg" id="msg1">TAP START</span>
+      <span class="pips" id="pips1"></span>
+    </div>
+  </div>
+
+  <div class="bar">
+    <span class="score" id="score">◈ TRIGGER</span>
+    <div class="btns">
+      <button class="btn go" id="b-start">START</button>
+      <button class="btn" id="b-mode" aria-pressed="true">DUEL</button>
+      <button class="btn" id="b-sound" aria-pressed="true">SOUND</button>
+      <button class="btn" id="b-help">HOW</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="card" id="card">
+    <h2 id="ov-title">PLAYER 1 WINS</h2>
+    <p class="big" id="ov-big" hidden>0</p>
+    <p id="ov-sub">Five rounds to nothing.</p>
+    <div class="rules" id="ov-rules" hidden>
+      <b>Duel.</b> Lay the phone flat between you. Each of you owns one half — the top half reads upside down on purpose.<br><br>
+      <b>Wait for green.</b> First thumb down on their own half takes the round. First to five takes the match.<br><br>
+      <b>Amber is a trap.</b> It looks like the signal but isn't. Tap on amber, or tap before anything shows, and you hand over the round.<br><br>
+      <b>Solo</b> drops the second half and times your reaction over five signals.<br><br>
+      Keyboard: <b>A</b> for player one, <b>L</b> for player two.
+    </div>
+    <button class="btn go" id="ov-btn">REMATCH</button>
+    <button class="btn" id="ov-share" hidden>COPY RESULT</button>
+    <button class="btn" id="ov-close" hidden>BACK</button>
+  </div>
+</div>
+
+<div class="sr" id="live" role="status" aria-live="polite"></div>
+
+<script src="/games/trigger.js" defer></script>
+</body>
+</html>

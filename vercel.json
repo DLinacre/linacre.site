@@ -131,6 +131,26 @@
       "destination": "/games/index.html"
     },
     {
+      "source": "/games/circuit",
+      "destination": "/games/circuit.html"
+    },
+    {
+      "source": "/games/decrypt",
+      "destination": "/games/decrypt.html"
+    },
+    {
+      "source": "/games/pulse",
+      "destination": "/games/pulse.html"
+    },
+    {
+      "source": "/games/trigger",
+      "destination": "/games/trigger.html"
+    },
+    {
+      "source": "/games/gridlock",
+      "destination": "/games/gridlock.html"
+    },
+    {
       "source": "/lab",
       "destination": "/lab/index.html"
     },

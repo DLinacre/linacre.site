@@ -11,6 +11,8 @@ export const data = {
     name: p.name, kind: p.kind, blurb: p.blurb,
     url: p.url || null, repo: p.repo || null,
     tags: p.tags ?? [], emoji: p.emoji ?? null, private: !!p.private,
+    artwork: p.artwork ?? null, featured: !!p.featured,
+    tech: p.tech ?? [], year: p.year ?? null,
   })),
   tools: TOOLS.map(t => ({
     name: t.name, category: (t as any).category ?? '', description: (t as any).description ?? '',

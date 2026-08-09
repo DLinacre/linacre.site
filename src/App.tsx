@@ -1,5 +1,5 @@
 import { useState, useEffect, lazy, Suspense, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, MotionConfig } from 'motion/react';
 import { WifiOff } from 'lucide-react';
 import Header from './components/Header';
 import MobileBottomNav from './components/MobileBottomNav';
@@ -149,7 +149,8 @@ export default function App() {
   const activeFont = useMemo(() => resolveFontScheme(identity.fontId), [identity.fontId]);
 
   return (
-    <div className="min-h-[100dvh] bg-background text-foreground flex flex-col justify-between selection:bg-amber-color/30" style={{ background: 'var(--linacre-gradient-hero)' }}>
+    <MotionConfig reducedMotion="user">
+      <div className="min-h-[100dvh] bg-background text-foreground flex flex-col justify-between selection:bg-amber-color/30" style={{ background: 'var(--linacre-gradient-hero)' }}>
       <RouteHead meta={currentMeta} />
       <style dangerouslySetInnerHTML={{ __html: `
         ${activeFont.import}
@@ -453,6 +454,7 @@ export default function App() {
         openMore={openPalette}
       />
       <Footer />
-    </div>
+      </div>
+    </MotionConfig>
   );
 }

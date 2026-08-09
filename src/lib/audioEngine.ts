@@ -11,14 +11,17 @@ try {
   if (saved !== null) {
     soundEnabled = saved === 'true';
   }
-} catch (e) {
+} catch (_e) {
   // Local storage unavailable
 }
 
 function getAudioContext(): AudioContext | null {
   if (typeof window === 'undefined') return null;
   if (!audioCtx) {
-    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    type AudioContextCtor = typeof AudioContext;
+  const AudioContextClass: AudioContextCtor | undefined =
+    window.AudioContext ||
+    (window as unknown as { webkitAudioContext?: AudioContextCtor }).webkitAudioContext;
     if (AudioContextClass) {
       audioCtx = new AudioContextClass();
     }
@@ -33,7 +36,7 @@ export function toggleSoundFx(): boolean {
   soundEnabled = !soundEnabled;
   try {
     localStorage.setItem('linacre_sound_fx', String(soundEnabled));
-  } catch (e) {}
+  } catch (_e) {}
   if (soundEnabled) {
     playChime();
   }
@@ -64,7 +67,7 @@ export function playClick() {
 
     osc.start();
     osc.stop(ctx.currentTime + 0.03);
-  } catch (e) {}
+  } catch (_e) {}
 }
 
 export function playChime() {
@@ -90,7 +93,7 @@ export function playChime() {
       osc.start(now + idx * 0.05);
       osc.stop(now + idx * 0.05 + 0.2);
     });
-  } catch (e) {}
+  } catch (_e) {}
 }
 
 export function playKonamiSound() {
@@ -116,5 +119,5 @@ export function playKonamiSound() {
       osc.start(now + idx * 0.07);
       osc.stop(now + idx * 0.07 + 0.25);
     });
-  } catch (e) {}
+  } catch (_e) {}
 }

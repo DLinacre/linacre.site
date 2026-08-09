@@ -251,6 +251,9 @@ const CTA_BLOCK = `
 function pageBody(route) {
   switch (route) {
     case '/': {
+      const featured = publicProjects.filter(p => p.featured);
+      const featuredRows = featured.map(p =>
+        `  <li><a href="${esc(p.url)}" rel="noopener">${esc(p.name)}</a> <span class="meta">[${esc(p.kind)}]${p.tech && p.tech.length ? ` · ${esc(p.tech.slice(0, 3).join(' · '))}` : ''}</span> — ${esc(p.blurb)}</li>`).join('\n');
       const rows = publicProjects.map((p, i) =>
         `  <li><a href="${esc(p.url)}" rel="noopener">${esc(p.name)}</a> <span class="meta">[${esc(p.kind)}]</span> — ${esc(p.blurb)}</li>`).join('\n');
       return `
@@ -258,6 +261,10 @@ function pageBody(route) {
 <p>${publicProjects.length} live apps, AI products, developer tools and games, ordered by usefulness.
 Every project below is real, shipped, and either live on the web or open source on GitHub.
 Use the search bar on the page to filter the full catalogue.</p>
+<h2>Featured work</h2>
+<ul>
+${featuredRows}
+</ul>
 <h2>All projects</h2>
 <ul>
 ${rows}

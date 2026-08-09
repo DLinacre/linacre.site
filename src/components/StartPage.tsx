@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Github, Search, X } from 'lucide-react';
 import ProjectGrid from './ProjectGrid';
+import FeaturedSpotlight from './FeaturedSpotlight';
 import { SITE_PROJECT_COUNT } from '../data/siteProjects';
 
 interface StartPageProps {
@@ -115,6 +116,9 @@ export default function StartPage({ navigate }: StartPageProps) {
           </div>
         </div>
       </section>
+
+      {/* Featured flagship projects */}
+      <FeaturedSpotlight />
 
       {/* Complete compact project display */}
       <ProjectGrid query={query} setQuery={setQuery} />

@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Gamepad2, Play, Heart, Code2, Sparkles, RotateCcw, Volume2, VolumeX } from 'lucide-react';
-import { lazy, Suspense } from 'react';
-
-const GameShowcase = lazy(() => import('./GameShowcase'));
 
 interface GameItem {
   title: string;
@@ -18,16 +15,6 @@ interface GameItem {
 
 const GAMES_DATA: GameItem[] = [
   {
-    title: 'Tap & Slap',
-    tagline: 'Dance-mat beat \'em up — tap to kill enemies ON the beat',
-    desc: 'Four neon lanes, one rule: every enemy dies on the downbeat. Tap a pad or hammer the arrows — PERFECT hits build an 8× combo, misses cost health. Original procedural synthwave fight music, daily challenges, leaderboards and comic-action kills. Free, no install.',
-    tags: ['Rhythm', 'Beat \'em up', 'Dance-mat', 'Synthwave', 'Web Audio'],
-    tech: 'Next.js 15 · Phaser 3 · TypeScript · Prisma',
-    badge: 'Live',
-    play: 'https://tap-and-slap.vercel.app',
-    source: 'https://github.com/DLinacre/tap-and-slap'
-  },
-  {
     title: 'Slime Factory Tycoon',
     tagline: 'Production-ready open-source Roblox idle tycoon & interactive web demo',
     desc: 'Complete server-authoritative Roblox idle tycoon template featuring session-locked DataStores, pets engine, offline earnings, hatch odds display, balance simulator, and automated verification.',
@@ -35,37 +22,7 @@ const GAMES_DATA: GameItem[] = [
     tech: 'Roblox Luau · Python Sim · TypeScript · HTML5',
     badge: 'Live',
     play: 'https://dlinacre.github.io/slime-factory-tycoon/',
-    source: 'https://github.com/DLinacre/slime-factory-tycoon'
-  },
-  {
-    title: 'Dragon Rush Heroes',
-    tagline: 'Anime action-RPG card battler — 464 fighters, real-time Arts combat',
-    desc: 'Summon from 464 hand-drawn fighters, then battle in real time with Arts combos and provably-fair gacha. Fully client-side with local save slots, daily contracts and a synth soundtrack.',
-    tags: ['RPG', 'Cards', 'Anime', 'Gacha', 'Canvas'],
-    tech: 'Vanilla JS · Canvas 2D · Web Audio · Node.js',
-    badge: 'Live',
-    play: 'https://dlinacre.github.io/dragon-rush-heroes/',
-    source: 'https://github.com/DLinacre/dragon-rush-heroes'
-  },
-  {
-    title: 'AFTERGLOW',
-    tagline: 'Paint with long-exposure light — an original endless light-painting game',
-    desc: 'You don\'t move a character — you leave light on. Hold the shutter and steer glowing pens to burn shimmering trails onto a night sky. Features 10 brushes, 12 palettes, endless procedural shapes, a Daily Challenge, generative Web Audio, star-based unlocks, and a local gallery.',
-    tags: ['Creative', 'Light-painting', 'Endless', 'Generative Audio', 'Zero-dependency'],
-    tech: 'Vanilla JS · HTML5 Canvas · Web Audio · Procedural',
-    badge: 'Live',
-    play: 'https://dlinacre.github.io/afterglow/',
-    source: 'https://github.com/DLinacre/afterglow'
-  },
-  {
-    title: 'Pixel Heist',
-    tagline: 'Cyberpunk stealth heist arcade game with Phaser 3 & procedural levels',
-    desc: 'Infiltrate high-security neon vaults, hack security terminals, dodge laser grids, and escape with the loot. Features responsive controls, Web Audio sound synthesis, daily contracts, and leaderboards.',
-    tags: ['Arcade', 'Stealth', 'Phaser 3', 'Cyberpunk', 'Procedural'],
-    tech: 'React 19 · Phaser 3 · TypeScript · Tailwind CSS',
-    badge: 'Live',
-    play: 'https://dlinacre.github.io/pixel-heist/',
-    source: 'https://github.com/DLinacre/pixel-heist'
+    source: 'https://github.com/DLinacre/slime-factory-tycoon',
   },
   {
     title: 'KushCloud',
@@ -76,6 +33,56 @@ const GAMES_DATA: GameItem[] = [
     badge: 'Live',
     play: 'https://dlinacre.github.io/KushCloud/',
     source: 'https://github.com/DLinacre/KushCloud',
+  },
+  {
+    title: 'Circuit',
+    tagline: 'Rotate every wire until the whole grid lights up',
+    desc: 'Procedurally generated spanning-tree puzzles that are always solvable and never start solved. Par is the true minimum turn count, so there is a reason to replay a board. New daily grid shared by everyone.',
+    tags: ['Puzzle', 'Daily', 'Touch-friendly', 'Offline'],
+    tech: 'Vanilla JS \u00b7 SVG \u00b7 Web Audio',
+    badge: 'Live',
+    play: '/games/circuit',
+    source: 'https://github.com/DLinacre/linacre.site',
+  },
+  {
+    title: 'Decrypt',
+    tagline: 'Crack a four-symbol code in eight guesses',
+    desc: 'Pure deduction \u2014 filled pegs mean right symbol, right slot; hollow pegs mean right symbol, wrong slot. Daily code with a streak counter, plus challenge links that put a friend on your exact code.',
+    tags: ['Logic', 'Daily', 'Challenge links'],
+    tech: 'Vanilla JS \u00b7 Seeded RNG \u00b7 Web Audio',
+    badge: 'Live',
+    play: '/games/decrypt',
+    source: 'https://github.com/DLinacre/linacre.site',
+  },
+  {
+    title: 'Pulse',
+    tagline: 'Repeat the signal, one step longer each round',
+    desc: 'Nine pads, each with its own note. The daily signal is identical for everyone, so scores compare directly. Duel mode is pass-and-play: repeat what is there, then add a step of your own.',
+    tags: ['Memory', 'Duel', 'Daily', 'Web Audio'],
+    tech: 'Vanilla JS \u00b7 Seeded RNG \u00b7 Web Audio',
+    badge: 'Live',
+    play: '/games/pulse',
+    source: 'https://github.com/DLinacre/linacre.site',
+  },
+  {
+    title: 'Trigger',
+    tagline: 'One phone flat on the table, two thumbs',
+    desc: 'A half each, the top half deliberately upside down. Green means go, first thumb down takes the round, first to five takes the match. Amber signals are traps that punish itchy thumbs. Solo mode times your reaction over five signals.',
+    tags: ['2 player', 'Reflex', 'One device'],
+    tech: 'Vanilla JS \u00b7 performance.now() \u00b7 Vibration API',
+    badge: 'Live',
+    play: '/games/trigger',
+    source: 'https://github.com/DLinacre/linacre.site',
+  },
+  {
+    title: 'Gridlock',
+    tagline: 'Draw a line, close a square, go again',
+    desc: 'Territory duel on a 3\u00d73 to 5\u00d75 board. Pass the phone, or take on an AI that grabs free squares, refuses to hand you a third side, and gives away the shortest chain it can when forced.',
+    tags: ['2 player', 'Strategy', 'Vs AI'],
+    tech: 'Vanilla JS \u00b7 SVG \u00b7 Chain-aware AI',
+    badge: 'Live',
+    play: '/games/gridlock',
+    source: 'https://github.com/DLinacre/linacre.site',
   },
   {
     title: 'Snake',
@@ -389,25 +396,6 @@ export default function Games() {
         </p>
       </section>
 
-      {/* Flagship project — rendered from the game's own manifest */}
-      <section className="space-y-3" aria-label="Flagship game project">
-        <div className="flex items-center gap-2">
-          <h2 className="font-display text-xl font-bold text-foreground">Flagship project</h2>
-          <span className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-amber-color/10 text-amber-color border border-amber-color/25">
-            In development
-          </span>
-        </div>
-        <Suspense
-          fallback={
-            <div className="rounded-2xl border border-border-color/60 bg-muted/15 h-64 grid place-items-center">
-              <span className="font-mono text-xs text-muted-foreground">Loading project…</span>
-            </div>
-          }
-        >
-          <GameShowcase />
-        </Suspense>
-      </section>
-
       {/* Filter Bar & Audio Control */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border-color pb-6">
         <div className="flex items-center gap-2">
@@ -544,8 +532,8 @@ export default function Games() {
                   ) : (
                     <a
                       href={game.play}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target={game.play.startsWith('/') ? undefined : '_blank'}
+                      rel={game.play.startsWith('/') ? undefined : 'noopener noreferrer'}
                       className="px-3 py-1.5 rounded-lg bg-amber-color text-[#030c14] font-mono text-xs font-bold hover:bg-amber-glow transition-all flex items-center gap-1"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" />
