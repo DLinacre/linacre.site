@@ -11,6 +11,7 @@ interface GameItem {
   badge: 'Live' | 'Built-in' | 'In development';
   play: string;
   source: string;
+  thumb?: string; // 16:9 banner artwork, rendered as the card thumbnail
 }
 
 const GAMES_DATA: GameItem[] = [
@@ -20,7 +21,8 @@ const GAMES_DATA: GameItem[] = [
     desc: 'Complete server-authoritative Roblox idle tycoon template featuring session-locked DataStores, pets engine, offline earnings, hatch odds display, balance simulator, and automated verification.',
     tags: ['Roblox', 'Tycoon', 'Idle', 'Simulation', 'Luau'],
     tech: 'Roblox Luau · Python Sim · TypeScript · HTML5',
-    badge: 'Live',
+    badge: 'In development',
+    thumb: '/banners/slime-factory-tycoon.webp',
     play: 'https://dlinacre.github.io/slime-factory-tycoon/',
     source: 'https://github.com/DLinacre/slime-factory-tycoon',
   },
@@ -31,15 +33,60 @@ const GAMES_DATA: GameItem[] = [
     tags: ['Arcade', 'One-tap', 'Web Audio', 'Leaderboard'],
     tech: 'React · TypeScript · Vite · Canvas 2D',
     badge: 'Live',
+    thumb: '/banners/kushcloud.webp',
     play: 'https://dlinacre.github.io/KushCloud/',
     source: 'https://github.com/DLinacre/KushCloud',
+  },
+  {
+    title: 'Tap & Slap',
+    tagline: "Dance-mat beat 'em up — tap to kill enemies ON the beat",
+    desc: "Four neon lanes, one rule: every enemy dies on the downbeat. Tap a pad or hammer the arrows — PERFECT hits build an 8× combo, misses cost health. Original procedural synthwave fight music, daily challenges and leaderboards.",
+    tags: ['Rhythm', "Beat 'em up", 'Dance-mat', 'Synthwave', 'Web Audio'],
+    tech: 'Next.js 15 · Phaser 3 · TypeScript · Prisma',
+    badge: 'Live',
+    thumb: '/banners/tap-and-slap.webp',
+    play: 'https://tap-and-slap.vercel.app',
+    source: 'https://github.com/DLinacre/tap-and-slap',
+  },
+  {
+    title: 'AFTERGLOW',
+    tagline: 'Paint with long-exposure light — an original endless light-painting game',
+    desc: 'Swing your light trail through the dark and chase the glow. A relaxed, original arcade experience with procedural palettes and unlockable trails.',
+    tags: ['Arcade', 'Light-painting', 'Casual', 'Canvas 2D'],
+    tech: 'Vanilla JS · Canvas 2D · Web Audio',
+    badge: 'Live',
+    thumb: '/projects/afterglow.webp',
+    play: 'https://dlinacre.github.io/afterglow/',
+    source: 'https://github.com/DLinacre/afterglow',
+  },
+  {
+    title: 'Pixel Heist',
+    tagline: 'Cyberpunk stealth-heist arcade — hack terminals, dodge lasers, escape with loot',
+    desc: 'Procedural neon vault levels with security lasers and hack terminals. Sneak, hack and sprint your way out — leaderboards included.',
+    tags: ['Stealth', 'Cyberpunk', 'Arcade', 'Leaderboard'],
+    tech: 'Next.js 15 · Phaser 3 · React 19 · TypeScript',
+    badge: 'Live',
+    thumb: '/banners/pixel-heist.webp',
+    play: 'https://dlinacre.github.io/pixel-heist/',
+    source: 'https://github.com/DLinacre/pixel-heist',
+  },
+  {
+    title: 'Dragon Rush Heroes',
+    tagline: 'Anime action-RPG card battler — 464 fighters, real-time Arts combat',
+    desc: 'Provably-fair gacha summons, Web Audio soundtracks and an offline save. Assemble your roster and battle through the rush.',
+    tags: ['Card battler', 'Action RPG', 'Anime', 'Web Audio'],
+    tech: 'Vanilla JS · Canvas 2D · Web Audio',
+    badge: 'Live',
+    thumb: '/banners/dragon-rush-heroes.webp',
+    play: 'https://dlinacre.github.io/dragon-rush-heroes/',
+    source: 'https://github.com/DLinacre/dragon-rush-heroes',
   },
   {
     title: 'Circuit',
     tagline: 'Rotate every wire until the whole grid lights up',
     desc: 'Procedurally generated spanning-tree puzzles that are always solvable and never start solved. Par is the true minimum turn count, so there is a reason to replay a board. New daily grid shared by everyone.',
     tags: ['Puzzle', 'Daily', 'Touch-friendly', 'Offline'],
-    tech: 'Vanilla JS \u00b7 SVG \u00b7 Web Audio',
+    tech: 'Vanilla JS · SVG · Web Audio',
     badge: 'Live',
     play: '/games/circuit',
     source: 'https://github.com/DLinacre/linacre.site',
@@ -47,9 +94,9 @@ const GAMES_DATA: GameItem[] = [
   {
     title: 'Decrypt',
     tagline: 'Crack a four-symbol code in eight guesses',
-    desc: 'Pure deduction \u2014 filled pegs mean right symbol, right slot; hollow pegs mean right symbol, wrong slot. Daily code with a streak counter, plus challenge links that put a friend on your exact code.',
+    desc: 'Pure deduction — filled pegs mean right symbol, right slot; hollow pegs mean right symbol, wrong slot. Daily code with a streak counter, plus challenge links that put a friend on your exact code.',
     tags: ['Logic', 'Daily', 'Challenge links'],
-    tech: 'Vanilla JS \u00b7 Seeded RNG \u00b7 Web Audio',
+    tech: 'Vanilla JS · Seeded RNG · Web Audio',
     badge: 'Live',
     play: '/games/decrypt',
     source: 'https://github.com/DLinacre/linacre.site',
@@ -59,7 +106,7 @@ const GAMES_DATA: GameItem[] = [
     tagline: 'Repeat the signal, one step longer each round',
     desc: 'Nine pads, each with its own note. The daily signal is identical for everyone, so scores compare directly. Duel mode is pass-and-play: repeat what is there, then add a step of your own.',
     tags: ['Memory', 'Duel', 'Daily', 'Web Audio'],
-    tech: 'Vanilla JS \u00b7 Seeded RNG \u00b7 Web Audio',
+    tech: 'Vanilla JS · Seeded RNG · Web Audio',
     badge: 'Live',
     play: '/games/pulse',
     source: 'https://github.com/DLinacre/linacre.site',
@@ -69,7 +116,7 @@ const GAMES_DATA: GameItem[] = [
     tagline: 'One phone flat on the table, two thumbs',
     desc: 'A half each, the top half deliberately upside down. Green means go, first thumb down takes the round, first to five takes the match. Amber signals are traps that punish itchy thumbs. Solo mode times your reaction over five signals.',
     tags: ['2 player', 'Reflex', 'One device'],
-    tech: 'Vanilla JS \u00b7 performance.now() \u00b7 Vibration API',
+    tech: 'Vanilla JS · performance.now() · Vibration API',
     badge: 'Live',
     play: '/games/trigger',
     source: 'https://github.com/DLinacre/linacre.site',
@@ -77,9 +124,9 @@ const GAMES_DATA: GameItem[] = [
   {
     title: 'Gridlock',
     tagline: 'Draw a line, close a square, go again',
-    desc: 'Territory duel on a 3\u00d73 to 5\u00d75 board. Pass the phone, or take on an AI that grabs free squares, refuses to hand you a third side, and gives away the shortest chain it can when forced.',
+    desc: 'Territory duel on a 3×3 to 5×5 board. Pass the phone, or take on an AI that grabs free squares, refuses to hand you a third side, and gives away the shortest chain it can when forced.',
     tags: ['2 player', 'Strategy', 'Vs AI'],
-    tech: 'Vanilla JS \u00b7 SVG \u00b7 Chain-aware AI',
+    tech: 'Vanilla JS · SVG · Chain-aware AI',
     badge: 'Live',
     play: '/games/gridlock',
     source: 'https://github.com/DLinacre/linacre.site',
@@ -119,6 +166,7 @@ export default function Games() {
   const [gameState, setGameState] = useState<'idle' | 'run' | 'over'>('idle');
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const closeSnakeRef = useRef<HTMLButtonElement>(null);
   const dirRef = useRef({ x: 1, y: 0 });
   const queueRef = useRef<{ x: number; y: number }[]>([]);
   const snakeRef = useRef<{ x: number; y: number }[]>([]);
@@ -379,6 +427,25 @@ export default function Games() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [snakeOpen, gameState]);
 
+  // Dialog semantics: focus the close button on open, restore focus on close,
+  // and pause the loop when the tab is hidden (WCAG 2.2.2 / battery).
+  useEffect(() => {
+    if (snakeOpen) {
+      closeSnakeRef.current?.focus();
+      return;
+    }
+    const playBtn = document.querySelector<HTMLButtonElement>('[data-play-snake]');
+    playBtn?.focus();
+  }, [snakeOpen]);
+
+  useEffect(() => {
+    const onVisibility = () => {
+      if (document.hidden) setGameState(s => (s === 'run' ? 'idle' : s));
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => document.removeEventListener('visibilitychange', onVisibility);
+  }, []);
+
   return (
     <div className="space-y-10">
       {/* Hero Header */}
@@ -454,30 +521,53 @@ export default function Games() {
         {filteredGames.map(game => {
           const isFav = favs.includes(game.title);
           const isBuiltIn = game.play === '#snake';
+          const badgeClasses =
+            game.badge === 'In development'
+              ? 'bg-amber-color/10 text-amber-color border-amber-color/30'
+              : isBuiltIn
+                ? 'bg-purple-500/10 text-purple-400 border-purple-500/20'
+                : 'bg-emerald-500/10 text-emerald-color border-emerald-500/20';
 
           return (
             <motion.div
               key={game.title}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-muted/20 dark:bg-[#0B1220]/80 border border-amber-color/15 rounded-2xl p-6 flex flex-col justify-between space-y-4 hover:border-amber-color/40 transition-all shadow-[var(--linacre-card-shadow)]"
+              className="bg-muted/20 dark:bg-[#0B1220]/80 border border-amber-color/15 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-amber-color/40 transition-all shadow-[var(--linacre-card-shadow)]"
             >
+              {game.thumb && (
+                <div className="relative aspect-video overflow-hidden border-b border-border-color/50 bg-muted/30">
+                  <img
+                    src={game.thumb}
+                    alt={`${game.title} banner`}
+                    width={1200}
+                    height={675}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover"
+                  />
+                  {game.badge === 'In development' && (
+                    <span className="absolute top-2.5 left-2.5 font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-black/60 text-amber-color border border-amber-color/40 backdrop-blur-sm">
+                      Open source · in development
+                    </span>
+                  )}
+                </div>
+              )}
+              <div className="p-6 flex flex-col justify-between space-y-4 flex-1">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span
-                    className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
-                      isBuiltIn
-                        ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20'
-                        : 'bg-emerald-500/10 text-emerald-color border border-emerald-500/20'
-                    }`}
+                    className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${badgeClasses}`}
                   >
                     {game.badge}
                   </span>
 
                   <button
                     onClick={() => toggleFav(game.title)}
+                    aria-pressed={isFav}
+                    aria-label={isFav ? `Remove ${game.title} from favourites` : `Add ${game.title} to favourites`}
+                    title={isFav ? 'Remove from favourites' : 'Add to favourites'}
                     className="p-1.5 rounded-lg hover:bg-muted/60 transition-colors cursor-pointer"
-                    title="Toggle favourite"
                   >
                     <Heart
                       className={`w-4 h-4 ${isFav ? 'text-rose-400 fill-rose-400' : 'text-muted-foreground'}`}
@@ -524,6 +614,7 @@ export default function Games() {
                         setSnakeOpen(true);
                         startSnake();
                       }}
+                      data-play-snake
                       className="px-3 py-1.5 rounded-lg bg-amber-color text-[#030c14] font-mono text-xs font-bold hover:bg-amber-glow transition-all flex items-center gap-1 cursor-pointer"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" />
@@ -542,6 +633,7 @@ export default function Games() {
                   )}
                 </div>
               </div>
+              </div>
             </motion.div>
           );
         })}
@@ -549,16 +641,22 @@ export default function Games() {
 
       {/* Embedded Snake Game Modal */}
       {snakeOpen && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-background/80 backdrop-blur-md p-4">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="snake-modal-title"
+          className="fixed inset-0 z-50 grid place-items-center bg-background/80 backdrop-blur-md p-4"
+        >
           <div className="bg-[#0a0f1c] border border-amber-color/30 rounded-2xl p-6 max-w-md w-full shadow-2xl relative space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 font-display font-bold text-lg text-foreground">
                 <Gamepad2 className="w-5 h-5 text-amber-color" />
-                <span>
+                <span id="snake-modal-title">
                   SNAKE <span className="font-mono text-xs text-amber-color">· BUILT-IN</span>
                 </span>
               </div>
               <button
+                ref={closeSnakeRef}
                 onClick={() => setSnakeOpen(false)}
                 className="p-1 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground cursor-pointer font-mono text-xs"
               >
@@ -587,7 +685,11 @@ export default function Games() {
               width={400}
               height={400}
               className="w-full aspect-square bg-[#04060c] rounded-xl border border-border-color"
-            />
+            >
+              <p className="sr-only">
+                Snake game — use arrow keys or WASD to steer, Enter to restart, Escape to close.
+              </p>
+            </canvas>
 
             <p className="font-mono text-[10px] text-muted-foreground text-center">
               USE ARROW KEYS / WASD / SWIPE TO MOVE · ENTER TO RETRY · ESC TO QUIT

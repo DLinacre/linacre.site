@@ -14,13 +14,13 @@
     },
     "/tools": {
       "title": "Tools — browser utilities & curated directory | Linacre.site",
-      "description": "Private, in-browser utilities (JSON, Base64, timestamps, secure generators, VAT, text tools) plus a curated directory of the developer tools David uses daily. No sign-up, no tracking.",
+      "description": "Private, in-browser utilities (JSON, Base64, timestamps, secure generators, VAT, text tools) plus a curated directory of developer tools. No sign-up, no tracking.",
       "canonical": "https://www.linacre.site/tools",
       "index": true
     },
     "/games": {
       "title": "Games — playable browser games & Roblox projects | Linacre.site",
-      "description": "Tap & Slap, KushCloud, AFTERGLOW, Pixel Heist, Dragon Rush Heroes, Slime Factory Tycoon and more — free playable games, no install required.",
+      "description": "Tap & Slap, KushCloud, AFTERGLOW, Pixel Heist, Dragon Rush Heroes, Slime Factory Tycoon, the daily arcade pack and Snake — free playable games, no install required.",
       "canonical": "https://www.linacre.site/games",
       "image": "https://www.linacre.site/og.png",
       "index": true
@@ -33,7 +33,7 @@
     },
     "/identity": {
       "title": "Identity Studio — brand asset exporter | Linacre.site",
-      "description": "Create and export coordinated SVG and PNG logos, GitHub banners, avatars and social cards. Endless generated emblems plus full-spectrum custom colour boxes.",
+      "description": "Create and export coordinated SVG and PNG logos, GitHub banners, avatars and social cards — endless generated emblems, full-spectrum colour boxes.",
       "canonical": "https://www.linacre.site/identity",
       "index": true
     },
