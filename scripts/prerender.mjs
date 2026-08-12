@@ -381,13 +381,16 @@ ${CTA_BLOCK}`;
 }
 
 function buildShell(route, m) {
+  const hreflang = route === '/'
+    ? ''
+    : `    <link rel="alternate" hreflang="en-GB" href="${m.canonical}" />\n    <link rel="alternate" hreflang="x-default" href="${m.canonical}" />\n`;
   return `<!doctype html>
 <html lang="en-GB" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     ${headFor(route, m)}
-  </head>
+${hreflang}  </head>
   <body>
     <div id="root">
       <div id="prerender-shell">
