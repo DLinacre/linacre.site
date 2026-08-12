@@ -1,7 +1,7 @@
 // linacre.site service worker
-// v11 — Self-hosted local fonts, dedicated Games Hub, curated loadout, and 100% real CV data.
+// v14 — refreshed precache list for the consolidated route set (v8).
 // Keep API + cross-origin requests untouched (Lab streaming still works).
-var CACHE = "linacre-v13";
+var CACHE = "linacre-v14";
 var OFFLINE_URL = "offline.html";
 var URLS = [
   ".",
@@ -10,12 +10,16 @@ var URLS = [
   "404.html",
   "500.html",
   "offline.html",
-  "about", "contact", "contact/thanks", "book",
-  "privacy", "cookie-policy", "terms",
-  "accessibility", "blog", "status",
-  "agents", "lab", "identity",
-  "projects", "games", "toolkit", "learn",
-  "playground", "work",
+  "about", "contact", "contact/thanks",
+  "privacy", "cookie-policy", "terms", "accessibility",
+  "lab", "identity", "games", "tools",
+  "mob-deals", "pokeguru",
+  "games/circuit", "games/circuit.js",
+  "games/decrypt", "games/decrypt.js",
+  "games/pulse", "games/pulse.js",
+  "games/trigger", "games/trigger.js",
+  "games/gridlock", "games/gridlock.js",
+  "games/slime-factory-tycoon/banner.webp",
   "tools/opagent.html",
   "tools/arena-audit.html",
   "tools/apk-hub.html",

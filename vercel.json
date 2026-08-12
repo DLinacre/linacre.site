@@ -14,8 +14,8 @@
     { "source": "/low-stakes", "destination": "/", "permanent": true },
     { "source": "/dkma", "destination": "/", "permanent": true },
     { "source": "/agents", "destination": "/lab", "permanent": true },
-    { "source": "/work", "destination": "/tools", "permanent": true },
-    { "source": "/book", "destination": "/tools", "permanent": true }
+    { "source": "/work", "destination": "/contact", "permanent": true },
+    { "source": "/book", "destination": "/contact", "permanent": true }
   ],
   "headers": [
     {
@@ -64,6 +64,15 @@
         {
           "key": "X-Robots-Tag",
           "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/tools/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://play.pokemonshowdown.com https://*.githubusercontent.com https://www.linacre.site; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://generativelanguage.googleapis.com https://*.googleapis.com https://api.openai.com https://api.anthropic.com https://vercel.live wss:; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
         }
       ]
     },

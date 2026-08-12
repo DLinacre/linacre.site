@@ -1,7 +1,7 @@
 {
-  "name": "Linacre Start — CyberBlue Browser Tools",
-  "short_name": "Linacre Start",
-  "description": "Private browser utilities, verified practical apps, and an edited CyberBlue project portfolio.",
+  "name": "Linacre — Tools, Games & Projects",
+  "short_name": "Linacre",
+  "description": "Private browser utilities, playable games, AI tools and David Linacre's project catalogue — no sign-up, no tracking.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -29,34 +29,34 @@
   ],
   "shortcuts": [
     {
+      "name": "Play Games",
+      "short_name": "Games",
+      "description": "Playable browser games — no install, no tracking",
+      "url": "/games",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Browser Tools",
+      "short_name": "Tools",
+      "description": "Private in-browser utilities and the curated directory",
+      "url": "/tools",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
       "name": "Work with Me",
       "short_name": "Work",
-      "description": "View services, audits, and book a call with David",
-      "url": "/work",
-      "icons": [
-        {
-          "src": "icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "Projects Hub",
-      "short_name": "Projects",
-      "description": "View public projects and case studies",
-      "url": "/projects",
-      "icons": [
-        {
-          "src": "icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "Developer Toolkit",
-      "short_name": "Toolkit",
-      "description": "Browse developer tools and utility filters",
-      "url": "/toolkit",
+      "description": "Contact David about audits, builds and retainers",
+      "url": "/contact",
       "icons": [
         {
           "src": "icon-192.png",

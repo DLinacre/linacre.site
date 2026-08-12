@@ -1,10 +1,30 @@
+# robots.txt — linacre.site
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /dashboard
 Disallow: /contact/thanks
+Disallow: /404
+Disallow: /500
+Disallow: /offline
 
+# AI / LLM crawlers — explicit policy
 User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 User-agent: CCBot
