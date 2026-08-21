@@ -106,7 +106,7 @@ linacre.site/
 ├── api/
 │   └── server.ts              Express API (contact, status, proxies)
 ├── scripts/
-│   ├── prerender.mjs          Static-renders 22 routes + sitemap, feeds, llms.txt
+│   ├── prerender.mjs          Static-renders 22 routes + sitemap.xml + llms-full.txt
 │   └── agents/                Maintenance tooling
 ├── src/
 │   ├── App.tsx                Shell: routing, theming, layout

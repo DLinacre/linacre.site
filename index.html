@@ -13,8 +13,13 @@
     <meta name="theme-color" content="#030c14" />
     <meta name="color-scheme" content="dark light" />
 
-    <!-- Preconnect / DNS-prefetch (audit Performance) -->
-    <!-- Fonts are self-hosted: no external preconnects needed. -->
+    <!-- Preconnect / DNS-prefetch (Performance) -->
+    <!-- Default fonts are self-hosted, but custom themes load Google Fonts via
+         @import (src/config/brand.ts), and the AI Lab pulls sprites from
+         Pokémon Showdown — warm those connections up early. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://play.pokemonshowdown.com" />
 
     <!-- Critical self-hosted fonts -->
     <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -33,8 +38,6 @@
     <link rel="alternate" hreflang="en-GB" href="https://www.linacre.site/" />
     <link rel="alternate" hreflang="x-default" href="https://www.linacre.site/" />
 
-    <!-- RSS -->
-    <link rel="alternate" type="application/rss+xml" title="Linacre engineering notes" href="https://www.linacre.site/feed.xml" />
   </head>
   <body>
     <div id="root" style="min-height:100svh"><!--ROUTE_CONTENT--></div>
