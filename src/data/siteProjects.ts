@@ -57,7 +57,7 @@ export const SITE_PROJECTS: SiteProject[] = [
     artwork: '/banners/helix.webp',
     blurb: 'Watch a living population of tiny programs evolve — no install, nothing leaves the browser.',
     url: '/helix',
-    repo: 'https://github.com/DLinacre/linacre.site',
+    repo: 'https://github.com/DLinacre/helix',
     tags: ['evolution', 'simulation', 'canvas', 'offline', 'generative'],
     featured: true,
     highlights: [
