@@ -34,16 +34,36 @@ button, input { font-family: inherit; }
   pointer-events: none;
   position: fixed; inset: 0;
   background:
-    radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(5,7,10,0.55) 100%),
-    linear-gradient(180deg, rgba(5,7,10,0.28), transparent 18%, transparent 78%, rgba(5,7,10,0.55));
+    radial-gradient(ellipse at 50% 48%, transparent 38%, rgba(4,6,9,0.62) 100%),
+    linear-gradient(180deg, rgba(4,6,9,0.35), transparent 16%, transparent 80%, rgba(4,6,9,0.62));
   z-index: 2;
 }
 .grain {
   pointer-events: none;
-  position: fixed; inset: 0; z-index: 3; opacity: 0.05;
-  background-image: radial-gradient(rgba(232,226,214,0.5) 0.55px, transparent 0.65px);
+  position: fixed; inset: 0; z-index: 3; opacity: 0.045;
+  background-image: radial-gradient(rgba(232,226,214,0.55) 0.55px, transparent 0.65px);
   background-size: 3px 3px;
 }
+.ghost-epoch {
+  position: fixed; left: 50%; bottom: 28%;
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: none;
+  font-family: var(--display);
+  font-size: clamp(64px, 14vw, 160px);
+  letter-spacing: 0.18em;
+  color: rgba(232, 226, 214, 0.045);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.top, .dock, .hint {
+  transition: opacity 1.4s ease, transform 1.4s ease;
+}
+body.theatre .top { opacity: 0; pointer-events: none; }
+body.theatre .dock { opacity: 0; pointer-events: none; transform: translateY(12px); }
+body.theatre .hint { opacity: 0; }
+body.theatre .ghost-epoch { color: rgba(232, 226, 214, 0.07); }
 
 .hud { position: fixed; z-index: 5; pointer-events: none; }
 .hud > * { pointer-events: auto; }
