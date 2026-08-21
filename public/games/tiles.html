@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TILES — slide, merge, reach 2048</title>
+<meta name="description" content="The classic sliding-tile puzzle: swipe or use the arrow keys to merge matching tiles and reach 2048. Plays in your browser, best score saved locally.">
+<meta name="theme-color" content="#1F2430">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TILES — 2048">
+<meta property="og:description" content="Slide. Merge. Reach 2048.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231F2430'/%3E%3Crect x='24' y='24' width='24' height='24' rx='5' fill='%23FFCC66'/%3E%3Crect x='52' y='24' width='24' height='24' rx='5' fill='%23F29E74'/%3E%3Crect x='24' y='52' width='24' height='24' rx='5' fill='%23F29E74'/%3E%3Crect x='52' y='52' width='24' height='24' rx='5' fill='%23BAE67E'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#1F2430; --panel:#232834; --line:#2D3440;
+    --ink:#CCCAC2; --muted:#5C6773; --dim:#39414F;
+    --board:#141822; --cell:#1B1F2A;
+    --radius:8px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:ui-monospace,"JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+    -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow:hidden}
+  .app{height:100dvh;display:flex;flex-direction:column;gap:clamp(6px,1.6vmin,16px);
+    padding:max(12px,env(safe-area-inset-top)) clamp(12px,3vw,24px) max(12px,env(safe-area-inset-bottom))}
+  header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex:0 0 auto;
+    border-bottom:1px solid var(--line);padding-bottom:clamp(6px,1.6vmin,12px)}
+  .brand{font-size:clamp(15px,4.2vmin,22px);font-weight:700;letter-spacing:-.04em;margin:0;white-space:nowrap}
+  .brand b{color:var(--gold,#FFCC66)} .brand span{color:var(--muted);font-weight:400;letter-spacing:.28em;font-size:.5em;margin-left:.7em}
+  .readout{display:flex;gap:clamp(10px,3vw,22px);align-items:baseline}
+  .stat{text-align:right;line-height:1.15}
+  .stat .k{display:block;font-size:9px;letter-spacing:.22em;color:var(--muted)}
+  .stat .v{display:block;font-size:clamp(13px,3.4vmin,17px);font-variant-numeric:tabular-nums}
+  .stat .v.best{color:var(--gold,#FFCC66)}
+  .stage{flex:1 1 auto;display:grid;place-items:center;position:relative;min-height:0}
+  .board{position:relative;width:min(100%,480px);max-height:100%;aspect-ratio:1;margin:auto;
+    display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);
+    gap:clamp(6px,1.8vmin,12px);padding:clamp(6px,1.8vmin,12px);background:var(--board);border-radius:12px;touch-action:none}
+  .cell{background:var(--cell);border-radius:var(--radius)}
+  .tile{position:absolute;display:grid;place-items:center;border-radius:var(--radius);
+    font-weight:800;font-variant-numeric:tabular-nums;line-height:1;
+    transition:transform .12s ease-in-out;will-change:transform;
+    font-size:clamp(16px,6vmin,34px)}
+  .tile.pop{animation:pop .18s ease}
+  @keyframes pop{0%{transform:scale(.6)}70%{transform:scale(1.1)}100%{transform:scale(1)}}
+  .tile.merged{animation:merge .2s ease}
+  @keyframes merge{0%{transform:scale(1)}50%{transform:scale(1.22)}100%{transform:scale(1)}}
+  .controls{flex:0 0 auto;display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+  .btn{all:unset;box-sizing:border-box;padding:9px 12px;min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:11px;letter-spacing:.14em;cursor:pointer;
+    transition:color .2s,border-color .2s,background .2s}
+  .btn:hover{color:var(--ink);border-color:var(--muted)}
+  .btn:focus-visible{outline:2px solid var(--gold,#FFCC66);outline-offset:2px}
+  .btn.primary{color:var(--bg);background:var(--gold,#FFCC66);border-color:var(--gold,#FFCC66);font-weight:700}
+  .hint-line{flex:0 0 auto;text-align:center;font-size:10px;letter-spacing:.14em;color:var(--muted);min-height:1.2em;margin:0}
+  .overlay{position:fixed;inset:0;display:grid;place-items:center;padding:24px;
+    background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(6px);
+    opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:10}
+  .overlay.show{opacity:1;pointer-events:auto}
+  .card{width:min(100%,380px);max-height:88dvh;overflow:auto;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:clamp(20px,5vw,28px);text-align:center}
+  .card h2{margin:0 0 6px;font-size:20px;letter-spacing:-.02em;color:var(--gold,#FFCC66)}
+  .card p{margin:0 0 18px;font-size:12px;color:var(--muted);letter-spacing:.06em;line-height:1.6}
+  .card .btn{width:100%}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important;animation-duration:.01ms !important}}
+  @media (max-height:520px){.brand span{display:none}.controls .btn{min-height:36px;padding:6px 10px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1 class="brand"><b>▦</b> TILES <span>2048</span></h1>
+    <div class="readout">
+      <div class="stat"><span class="k">SCORE</span><span class="v" id="s-score">0</span></div>
+      <div class="stat"><span class="k">BEST</span><span class="v best" id="s-best">0</span></div>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div class="board" id="board" role="grid" aria-label="2048 game board"></div>
+  </div>
+
+  <p class="hint-line" id="status">SWIPE OR USE ARROW KEYS TO SLIDE THE TILES</p>
+
+  <div class="controls">
+    <button class="btn" id="b-sound" aria-pressed="false">SOUND</button>
+    <button class="btn primary" id="b-new">NEW GAME</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="card" id="card">
+    <h2 id="ov-title">2048!</h2>
+    <p id="ov-sub">You reached 2048. Keep going for a higher score, or start fresh.</p>
+    <button class="btn primary" id="ov-continue">KEEP GOING</button>
+    <button class="btn" id="ov-new" style="margin-top:8px">NEW GAME</button>
+  </div>
+</div>
+
+<div class="sr" id="live" role="status" aria-live="polite"></div>
+<script src="/games/tiles.js" defer></script>
+</body>
+</html>

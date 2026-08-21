@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MINES — clear the field, avoid the mines</title>
+<meta name="description" content="A classic minesweeper. Flag the mines, clear every safe cell, beat your best time on three board sizes. Plays in your browser, no downloads.">
+<meta name="theme-color" content="#1F2430">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MINES">
+<meta property="og:description" content="Flag the mines. Clear the field. A classic logic game.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231F2430'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23F28779'/%3E%3Cg stroke='%23CCCAC2' stroke-width='5'%3E%3Cpath d='M50 22v56M22 50h56M30 30l40 40M70 30L30 70'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#1F2430; --panel:#232834; --line:#2D3440;
+    --ink:#CCCAC2; --muted:#5C6773; --dim:#39414F;
+    --flag:#F28779; --mine:#5C6773; --boom:#F28779;
+    --n1:#73D0FF; --n2:#BAE67E; --n3:#FFCC66; --n4:#F29E74;
+    --n5:#F28779; --n6:#D4BFFF; --n7:#FFD580; --n8:#CCCAC2;
+    --radius:8px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:ui-monospace,"JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+    -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow:hidden}
+  .app{height:100dvh;display:flex;flex-direction:column;gap:clamp(6px,1.6vmin,14px);
+    padding:max(12px,env(safe-area-inset-top)) clamp(12px,3vw,24px) max(12px,env(safe-area-inset-bottom))}
+  header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex:0 0 auto;
+    border-bottom:1px solid var(--line);padding-bottom:clamp(6px,1.6vmin,12px)}
+  .brand{font-size:clamp(15px,4.2vmin,22px);font-weight:700;letter-spacing:-.04em;margin:0;white-space:nowrap}
+  .brand b{color:var(--flag)} .brand span{color:var(--muted);font-weight:400;letter-spacing:.28em;font-size:.5em;margin-left:.7em}
+  .readout{display:flex;gap:clamp(10px,3vw,22px);align-items:baseline}
+  .stat{text-align:right;line-height:1.15}
+  .stat .k{display:block;font-size:9px;letter-spacing:.22em;color:var(--muted)}
+  .stat .v{display:block;font-size:clamp(13px,3.4vmin,17px);font-variant-numeric:tabular-nums}
+  .stat .v.warn{color:var(--flag)}
+  .stage{flex:1 1 auto;display:grid;place-items:center;position:relative;min-height:0}
+  .board{display:grid;gap:2px;width:min(100%,640px);max-height:100%;aspect-ratio:var(--ar,1);margin:auto;touch-action:manipulation}
+  .cell{all:unset;position:relative;display:grid;place-items:center;aspect-ratio:1;
+    background:var(--panel);border-radius:4px;cursor:pointer;user-select:none;
+    font-size:clamp(11px,3.2vmin,18px);font-weight:700;font-variant-numeric:tabular-nums;
+    transition:background .12s ease;touch-action:manipulation;-webkit-touch-callout:none}
+  .cell:hover{background:#2A3040}
+  .cell:focus-visible{outline:2px solid var(--n2);outline-offset:1px;z-index:2}
+  .cell.open{background:#1B1F2A;cursor:default}
+  .cell.open:hover{background:#1B1F2A}
+  .cell.n1{color:var(--n1)} .cell.n2{color:var(--n2)} .cell.n3{color:var(--n3)} .cell.n4{color:var(--n4)}
+  .cell.n5{color:var(--n5)} .cell.n6{color:var(--n6)} .cell.n7{color:var(--n7)} .cell.n8{color:var(--n8)}
+  .cell.flagged::after{content:"⚑";color:var(--flag);font-size:clamp(12px,3.4vmin,20px)}
+  .cell.mine{background:#3A2A2E}
+  .cell.mine::after{content:"✸";color:var(--boom)}
+  .cell.boom{background:var(--boom)}
+  .cell.wrong::after{content:"✕";color:var(--muted)}
+  .controls{flex:0 0 auto;display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+  .btn{all:unset;box-sizing:border-box;padding:9px 12px;min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:11px;letter-spacing:.14em;cursor:pointer;
+    transition:color .2s,border-color .2s,background .2s}
+  .btn:hover{color:var(--ink);border-color:var(--muted)}
+  .btn:focus-visible{outline:2px solid var(--n2);outline-offset:2px}
+  .btn[aria-pressed="true"]{color:var(--n2);border-color:color-mix(in srgb,var(--n2) 45%,transparent)}
+  .btn.primary{color:var(--bg);background:var(--n2);border-color:var(--n2);font-weight:700}
+  .hint-line{flex:0 0 auto;text-align:center;font-size:10px;letter-spacing:.14em;color:var(--muted);min-height:1.2em;margin:0}
+  .overlay{position:fixed;inset:0;display:grid;place-items:center;padding:24px;
+    background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(6px);
+    opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:10}
+  .overlay.show{opacity:1;pointer-events:auto}
+  .card{width:min(100%,380px);max-height:88dvh;overflow:auto;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:clamp(20px,5vw,28px);text-align:center}
+  .card h2{margin:0 0 6px;font-size:20px;letter-spacing:-.02em;color:var(--n2)}
+  .card.fail h2{color:var(--boom)}
+  .card p{margin:0 0 18px;font-size:12px;color:var(--muted);letter-spacing:.06em;line-height:1.6}
+  .card .btn{width:100%}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important;animation-duration:.01ms !important}}
+  @media (max-height:520px){.brand span{display:none}.controls .btn{min-height:36px;padding:6px 10px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1 class="brand"><b>✸</b> MINES <span id="mode-tag">EASY</span></h1>
+    <div class="readout">
+      <div class="stat"><span class="k">MINES</span><span class="v" id="s-mines">10</span></div>
+      <div class="stat"><span class="k">TIME</span><span class="v" id="s-time">0</span></div>
+      <div class="stat"><span class="k">BEST</span><span class="v" id="s-best">—</span></div>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div class="board" id="board" role="grid" aria-label="Minesweeper board"></div>
+  </div>
+
+  <p class="hint-line" id="status">TAP TO REVEAL · LONG-PRESS OR RIGHT-CLICK TO FLAG</p>
+
+  <div class="controls">
+    <button class="btn" id="b-easy" aria-pressed="true">EASY</button>
+    <button class="btn" id="b-medium" aria-pressed="false">MEDIUM</button>
+    <button class="btn" id="b-hard" aria-pressed="false">HARD</button>
+    <button class="btn" id="b-flag" aria-pressed="false">⚑ FLAG</button>
+    <button class="btn" id="b-sound" aria-pressed="false">SOUND</button>
+    <button class="btn primary" id="b-new">NEW</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="card" id="card">
+    <h2 id="ov-title">FIELD CLEARED</h2>
+    <p id="ov-sub">All safe cells revealed.</p>
+    <div class="scores" id="ov-scores" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:0 0 20px">
+      <div style="border:1px solid var(--line);border-radius:8px;padding:10px 4px"><span class="k" style="display:block;font-size:9px;letter-spacing:.2em;color:var(--muted)">TIME</span><span class="v" id="ov-time" style="display:block;font-size:17px;font-variant-numeric:tabular-nums;margin-top:4px">0</span></div>
+      <div style="border:1px solid var(--line);border-radius:8px;padding:10px 4px"><span class="k" style="display:block;font-size:9px;letter-spacing:.2em;color:var(--muted)">BEST</span><span class="v" id="ov-best" style="display:block;font-size:17px;font-variant-numeric:tabular-nums;margin-top:4px">—</span></div>
+    </div>
+    <button class="btn primary" id="ov-btn">PLAY AGAIN</button>
+  </div>
+</div>
+
+<div class="sr" id="live" role="status" aria-live="polite"></div>
+<script src="/games/mines.js" defer></script>
+</body>
+</html>

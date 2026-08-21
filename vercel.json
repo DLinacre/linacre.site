@@ -156,6 +156,14 @@
       "destination": "/games/trigger.html"
     },
     {
+      "source": "/games/tiles",
+      "destination": "/games/tiles.html"
+    },
+    {
+      "source": "/games/mines",
+      "destination": "/games/mines.html"
+    },
+    {
       "source": "/games/gridlock",
       "destination": "/games/gridlock.html"
     },

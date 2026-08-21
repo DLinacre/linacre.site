@@ -8,7 +8,8 @@ interface GameItem {
   desc: string;
   tags: string[];
   tech: string;
-  badge: 'Live' | 'Built-in' | 'In development';
+  badge: 'Live' | 'Built-in';
+  genre: string;
   play: string;
   source: string;
   thumb?: string; // 16:9 banner artwork, rendered as the card thumbnail
@@ -16,29 +17,104 @@ interface GameItem {
 
 const GAMES_DATA: GameItem[] = [
   {
-    title: 'Slime Factory Tycoon',
-    tagline: 'Production-ready open-source Roblox idle tycoon & interactive web demo',
-    desc: 'Complete server-authoritative Roblox idle tycoon template featuring session-locked DataStores, pets engine, offline earnings, hatch odds display, balance simulator, and automated verification.',
-    tags: ['Roblox', 'Tycoon', 'Idle', 'Simulation', 'Luau'],
-    tech: 'Roblox Luau · Python Sim · TypeScript · HTML5',
-    badge: 'In development',
-    thumb: '/banners/slime-factory-tycoon.webp',
-    play: 'https://dlinacre.github.io/slime-factory-tycoon/',
-    source: 'https://github.com/DLinacre/slime-factory-tycoon',
+    title: 'Tiles',
+    genre: 'Puzzle',
+    tagline: '2048 — slide, merge and reach the winning tile',
+    desc: 'The classic sliding-tile puzzle: swipe or use the arrow keys to merge matching numbers and reach 2048. Best score saved locally, silky tile animations and synth blips.',
+    tags: ['2048', 'Sliding', 'Numbers', 'Touch', 'Offline'],
+    tech: 'Vanilla JS · CSS Grid · Web Audio',
+    badge: 'Built-in',
+    thumb: '/banners/tiles.webp',
+    play: '/games/tiles',
+    source: 'https://github.com/DLinacre/linacre.site',
   },
   {
-    title: 'KushCloud',
-    tagline: 'Chill one-tap browser arcade flyer with synthesized audio',
-    desc: 'Pass through procedural obstacles, earn coins, unlock worlds and custom cosmetics. Features Web Audio sound synthesis and a global leaderboard.',
-    tags: ['Arcade', 'One-tap', 'Web Audio', 'Leaderboard'],
-    tech: 'React · TypeScript · Vite · Canvas 2D',
-    badge: 'Live',
-    thumb: '/banners/kushcloud.webp',
-    play: 'https://dlinacre.github.io/KushCloud/',
-    source: 'https://github.com/DLinacre/KushCloud',
+    title: 'Mines',
+    genre: 'Puzzle',
+    tagline: 'Classic minesweeper — flag the mines, clear the field',
+    desc: 'The timeless logic game: reveal safe cells, flag the mines, beat your best time. Three board sizes, a guaranteed-safe first click, and best times saved per difficulty.',
+    tags: ['Minesweeper', 'Logic', 'Classic', 'Touch', 'Offline'],
+    tech: 'Vanilla JS · Web Audio',
+    badge: 'Built-in',
+    thumb: '/banners/mines.webp',
+    play: '/games/mines',
+    source: 'https://github.com/DLinacre/linacre.site',
+  },
+  {
+    title: 'Circuit',
+    genre: 'Puzzle',
+    tagline: 'Rotate every wire until the whole grid lights up',
+    desc: 'Procedurally generated spanning-tree puzzles that are always solvable and never start solved. Par is the true minimum turn count, so there is a reason to replay a board. New daily grid shared by everyone.',
+    tags: ['Puzzle', 'Daily', 'Touch-friendly', 'Offline'],
+    tech: 'Vanilla JS · SVG · Web Audio',
+    badge: 'Built-in',
+    thumb: '/banners/circuit.webp',
+    play: '/games/circuit',
+    source: 'https://github.com/DLinacre/linacre.site',
+  },
+  {
+    title: 'Decrypt',
+    genre: 'Puzzle',
+    tagline: 'Crack a four-symbol code in eight guesses',
+    desc: 'Pure deduction — filled pegs mean right symbol, right slot; hollow pegs mean right symbol, wrong slot. Daily code with a streak counter, plus challenge links that put a friend on your exact code.',
+    tags: ['Logic', 'Daily', 'Challenge links'],
+    tech: 'Vanilla JS · Seeded RNG · Web Audio',
+    badge: 'Built-in',
+    thumb: '/banners/decrypt.webp',
+    play: '/games/decrypt',
+    source: 'https://github.com/DLinacre/linacre.site',
+  },
+  {
+    title: 'Pulse',
+    genre: 'Puzzle',
+    tagline: 'Repeat the signal, one step longer each round',
+    desc: 'Nine pads, each with its own note. The daily signal is identical for everyone, so scores compare directly. Duel mode is pass-and-play: repeat what is there, then add a step of your own.',
+    tags: ['Memory', 'Duel', 'Daily', 'Web Audio'],
+    tech: 'Vanilla JS · Seeded RNG · Web Audio',
+    badge: 'Built-in',
+    thumb: '/banners/pulse.webp',
+    play: '/games/pulse',
+    source: 'https://github.com/DLinacre/linacre.site',
+  },
+  {
+    title: 'Trigger',
+    genre: '2-Player',
+    tagline: 'One phone flat on the table, two thumbs',
+    desc: 'A half each, the top half deliberately upside down. Green means go, first thumb down takes the round, first to five takes the match. Amber signals are traps that punish itchy thumbs. Solo mode times your reaction over five signals.',
+    tags: ['2 player', 'Reflex', 'One device'],
+    tech: 'Vanilla JS · performance.now() · Vibration API',
+    badge: 'Built-in',
+    thumb: '/banners/trigger.webp',
+    play: '/games/trigger',
+    source: 'https://github.com/DLinacre/linacre.site',
+  },
+  {
+    title: 'Gridlock',
+    genre: '2-Player',
+    tagline: 'Draw a line, close a square, go again',
+    desc: 'Territory duel on a 3×3 to 5×5 board. Pass the phone, or take on an AI that grabs free squares, refuses to hand you a third side, and gives away the shortest chain it can when forced.',
+    tags: ['2 player', 'Strategy', 'Vs AI'],
+    tech: 'Vanilla JS · SVG · Chain-aware AI',
+    badge: 'Built-in',
+    thumb: '/banners/gridlock.webp',
+    play: '/games/gridlock',
+    source: 'https://github.com/DLinacre/linacre.site',
+  },
+  {
+    title: 'Snake',
+    genre: 'Arcade',
+    tagline: 'Classic arcade Snake built into the page',
+    desc: 'Built in vanilla JavaScript on Canvas 2D: direction queueing, speed scaling, local high score persistence, touch swipe gestures, and Web Audio synthesised sound blips.',
+    tags: ['Arcade', 'Built-in', 'Touch-friendly', 'Web Audio'],
+    tech: 'Vanilla JS · Canvas 2D · Web Audio',
+    badge: 'Built-in',
+    thumb: '/banners/snake.webp',
+    play: '#snake',
+    source: 'https://github.com/DLinacre/linacre.site',
   },
   {
     title: 'Tap & Slap',
+    genre: 'Rhythm',
     tagline: "Dance-mat beat 'em up — tap to kill enemies ON the beat",
     desc: "Four neon lanes, one rule: every enemy dies on the downbeat. Tap a pad or hammer the arrows — PERFECT hits build an 8× combo, misses cost health. Original procedural synthwave fight music, daily challenges and leaderboards.",
     tags: ['Rhythm', "Beat 'em up", 'Dance-mat', 'Synthwave', 'Web Audio'],
@@ -49,18 +125,8 @@ const GAMES_DATA: GameItem[] = [
     source: 'https://github.com/DLinacre/tap-and-slap',
   },
   {
-    title: 'AFTERGLOW',
-    tagline: 'Paint with long-exposure light — an original endless light-painting game',
-    desc: 'Swing your light trail through the dark and chase the glow. A relaxed, original arcade experience with procedural palettes and unlockable trails.',
-    tags: ['Arcade', 'Light-painting', 'Casual', 'Canvas 2D'],
-    tech: 'Vanilla JS · Canvas 2D · Web Audio',
-    badge: 'Live',
-    thumb: '/projects/afterglow.webp',
-    play: 'https://dlinacre.github.io/afterglow/',
-    source: 'https://github.com/DLinacre/afterglow',
-  },
-  {
     title: 'Pixel Heist',
+    genre: 'Arcade',
     tagline: 'Cyberpunk stealth-heist arcade — hack terminals, dodge lasers, escape with loot',
     desc: 'Procedural neon vault levels with security lasers and hack terminals. Sneak, hack and sprint your way out — leaderboards included.',
     tags: ['Stealth', 'Cyberpunk', 'Arcade', 'Leaderboard'],
@@ -72,6 +138,7 @@ const GAMES_DATA: GameItem[] = [
   },
   {
     title: 'Dragon Rush Heroes',
+    genre: 'RPG',
     tagline: 'Anime action-RPG card battler — 464 fighters, real-time Arts combat',
     desc: 'Provably-fair gacha summons, Web Audio soundtracks and an offline save. Assemble your roster and battle through the rush.',
     tags: ['Card battler', 'Action RPG', 'Anime', 'Web Audio'],
@@ -82,69 +149,36 @@ const GAMES_DATA: GameItem[] = [
     source: 'https://github.com/DLinacre/dragon-rush-heroes',
   },
   {
-    title: 'Circuit',
-    tagline: 'Rotate every wire until the whole grid lights up',
-    desc: 'Procedurally generated spanning-tree puzzles that are always solvable and never start solved. Par is the true minimum turn count, so there is a reason to replay a board. New daily grid shared by everyone.',
-    tags: ['Puzzle', 'Daily', 'Touch-friendly', 'Offline'],
-    tech: 'Vanilla JS · SVG · Web Audio',
+    title: 'KushCloud',
+    genre: 'Arcade',
+    tagline: 'Chill one-tap browser arcade flyer with synthesized audio',
+    desc: 'Pass through procedural obstacles, earn coins, unlock worlds and custom cosmetics. Features Web Audio sound synthesis and a global leaderboard.',
+    tags: ['Arcade', 'One-tap', 'Web Audio', 'Leaderboard'],
+    tech: 'React · TypeScript · Vite · Canvas 2D',
     badge: 'Live',
-    play: '/games/circuit',
-    source: 'https://github.com/DLinacre/linacre.site',
+    thumb: '/banners/kushcloud.webp',
+    play: 'https://dlinacre.github.io/KushCloud/',
+    source: 'https://github.com/DLinacre/KushCloud',
   },
   {
-    title: 'Decrypt',
-    tagline: 'Crack a four-symbol code in eight guesses',
-    desc: 'Pure deduction — filled pegs mean right symbol, right slot; hollow pegs mean right symbol, wrong slot. Daily code with a streak counter, plus challenge links that put a friend on your exact code.',
-    tags: ['Logic', 'Daily', 'Challenge links'],
-    tech: 'Vanilla JS · Seeded RNG · Web Audio',
-    badge: 'Live',
-    play: '/games/decrypt',
-    source: 'https://github.com/DLinacre/linacre.site',
-  },
-  {
-    title: 'Pulse',
-    tagline: 'Repeat the signal, one step longer each round',
-    desc: 'Nine pads, each with its own note. The daily signal is identical for everyone, so scores compare directly. Duel mode is pass-and-play: repeat what is there, then add a step of your own.',
-    tags: ['Memory', 'Duel', 'Daily', 'Web Audio'],
-    tech: 'Vanilla JS · Seeded RNG · Web Audio',
-    badge: 'Live',
-    play: '/games/pulse',
-    source: 'https://github.com/DLinacre/linacre.site',
-  },
-  {
-    title: 'Trigger',
-    tagline: 'One phone flat on the table, two thumbs',
-    desc: 'A half each, the top half deliberately upside down. Green means go, first thumb down takes the round, first to five takes the match. Amber signals are traps that punish itchy thumbs. Solo mode times your reaction over five signals.',
-    tags: ['2 player', 'Reflex', 'One device'],
-    tech: 'Vanilla JS · performance.now() · Vibration API',
-    badge: 'Live',
-    play: '/games/trigger',
-    source: 'https://github.com/DLinacre/linacre.site',
-  },
-  {
-    title: 'Gridlock',
-    tagline: 'Draw a line, close a square, go again',
-    desc: 'Territory duel on a 3×3 to 5×5 board. Pass the phone, or take on an AI that grabs free squares, refuses to hand you a third side, and gives away the shortest chain it can when forced.',
-    tags: ['2 player', 'Strategy', 'Vs AI'],
-    tech: 'Vanilla JS · SVG · Chain-aware AI',
-    badge: 'Live',
-    play: '/games/gridlock',
-    source: 'https://github.com/DLinacre/linacre.site',
-  },
-  {
-    title: 'Snake',
-    tagline: 'Classic arcade Snake built into the page',
-    desc: 'Built in vanilla JavaScript on Canvas 2D: direction queueing, speed scaling, local high score persistence, touch swipe gestures, and Web Audio synthesised sound blips.',
-    tags: ['Arcade', 'Built-in', 'Touch-friendly', 'Web Audio'],
+    title: 'AFTERGLOW',
+    genre: 'Arcade',
+    tagline: 'Paint with long-exposure light — an original endless light-painting game',
+    desc: 'Swing your light trail through the dark and chase the glow. A relaxed, original arcade experience with procedural palettes and unlockable trails.',
+    tags: ['Arcade', 'Light-painting', 'Casual', 'Canvas 2D'],
     tech: 'Vanilla JS · Canvas 2D · Web Audio',
-    badge: 'Built-in',
-    play: '#snake',
-    source: 'https://github.com/DLinacre/linacre.site',
+    badge: 'Live',
+    thumb: '/projects/afterglow.webp',
+    play: 'https://dlinacre.github.io/afterglow/',
+    source: 'https://github.com/DLinacre/afterglow',
   },
 ];
 
+const GENRES = ['All', 'Arcade', 'Puzzle', '2-Player', 'Rhythm', 'RPG'];
+
 export default function Games() {
   const [filter, setFilter] = useState<'all' | 'favs'>('all');
+  const [genre, setGenre] = useState<string>('All');
   const [favs, setFavs] = useState<string[]>(() => {
     try {
       return JSON.parse(localStorage.getItem('dlg_favs') || '[]');
@@ -246,6 +280,7 @@ export default function Games() {
 
   const filteredGames = GAMES_DATA.filter(g => {
     if (filter === 'favs') return favs.includes(g.title);
+    if (genre !== 'All') return g.genre === genre;
     return true;
   });
 
@@ -516,17 +551,33 @@ export default function Games() {
         </div>
       </div>
 
+      {/* Genre filter */}
+      <div className="flex flex-wrap items-center gap-2 -mt-2" role="group" aria-label="Filter games by genre">
+        {GENRES.map(g => (
+          <button
+            key={g}
+            onClick={() => setGenre(g)}
+            aria-pressed={genre === g}
+            className={`px-3 py-1.5 font-mono text-xs rounded-lg border transition-all cursor-pointer ${
+              genre === g
+                ? 'bg-amber-color/10 border-amber-color text-amber-color font-bold shadow-[0_0_12px_rgba(251,191,36,0.15)]'
+                : 'bg-muted/30 border-border-color text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            {g}
+          </button>
+        ))}
+      </div>
+
       {/* Games Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filteredGames.map(game => {
           const isFav = favs.includes(game.title);
           const isBuiltIn = game.play === '#snake';
           const badgeClasses =
-            game.badge === 'In development'
-              ? 'bg-amber-color/10 text-amber-color border-amber-color/30'
-              : isBuiltIn
-                ? 'bg-purple-500/10 text-purple-400 border-purple-500/20'
-                : 'bg-emerald-500/10 text-emerald-color border-emerald-500/20';
+            game.badge === 'Built-in'
+              ? 'bg-purple-500/10 text-purple-400 border-purple-500/20'
+              : 'bg-emerald-500/10 text-emerald-color border-emerald-500/20';
 
           return (
             <motion.div
@@ -546,11 +597,6 @@ export default function Games() {
                     decoding="async"
                     className="w-full h-full object-cover"
                   />
-                  {game.badge === 'In development' && (
-                    <span className="absolute top-2.5 left-2.5 font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-black/60 text-amber-color border border-amber-color/40 backdrop-blur-sm">
-                      Open source · in development
-                    </span>
-                  )}
                 </div>
               )}
               <div className="p-6 flex flex-col justify-between space-y-4 flex-1">
