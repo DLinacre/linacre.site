@@ -26,6 +26,7 @@ vercel.json            (API rewrites and CSP security headers)
 - **Build Command:** `npm run build` (Compiles Vite React app + Node server and prerenders 22 static routes).
 - **Local Dev Command:** `npm run dev` (Runs Vite dev server on port 3000).
 - **Deploy Command:** `vercel deploy --prod --yes --project linacre-site-repo --force`
+- **Auto-deploy:** `.github/workflows/deploy.yml` deploys to Vercel on every push to `main` (and via manual dispatch) once `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` are set as GitHub repo secrets.
 - **Verification:** Run `npm run build` and test `http://localhost:3000/`.
 - **Secrets Workflow:** Centralized secrets via Windows Environment Variables & `.env` files. Every project includes `.env` protected by strict `.gitignore` rules (`.env`, `.env*`, `*.key`) so secrets are never pushed to Git/GitHub.
 

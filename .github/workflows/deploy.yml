@@ -1,0 +1,40 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy production to Vercel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Vercel credentials
+        id: check
+        run: |
+          if [ -n "${{ secrets.VERCEL_TOKEN }}" ] && [ -n "${{ secrets.VERCEL_ORG_ID }}" ] && [ -n "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Vercel secrets not configured — skipping deploy. Add VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID to enable auto-deploy."
+          fi
+
+      - name: Checkout
+        if: steps.check.outputs.available == 'true'
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel
+        if: steps.check.outputs.available == 'true'
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-project-name: linacre-site-repo
+          vercel-args: '--prod --yes'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
