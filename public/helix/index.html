@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>HELIX — watch a universe build itself</title>
+  <meta name="description" content="A living population of tiny programs evolving in your browser. No account, no install, nothing leaves this device." />
+  <meta name="theme-color" content="#05070a" />
+  <meta property="og:title" content="HELIX — Infinite Self-Building System" />
+  <meta property="og:description" content="Sit with a generation of programs as they compete, cross and collapse. A Linacre observatory." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.linacre.site/helix" />
+  <meta property="og:image" content="https://www.linacre.site/banners/helix.webp" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2305070a' width='32' height='32'/%3E%3Cpath d='M8 4c8 6 8 18 0 24' stroke='%23d4a05a' fill='none' stroke-width='2'/%3E%3Cpath d='M24 4c-8 6-8 18 0 24' stroke='%236ed6c2' fill='none' stroke-width='2'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="stage" aria-label="Living population of evolving programs"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="hud top">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 56 40" aria-hidden="true">
+        <path class="a" d="M10 4 C26 12 26 28 10 36" />
+        <path class="b" d="M46 4 C30 12 30 28 46 36" />
+        <line x1="16" y1="10" x2="40" y2="10" />
+        <line x1="18" y1="16" x2="38" y2="16" />
+        <line x1="18" y1="24" x2="38" y2="24" />
+        <line x1="16" y1="30" x2="40" y2="30" />
+      </svg>
+      <div>
+        <div class="word">HELIX</div>
+        <div class="sub">Observatory · <a href="https://www.linacre.site/">linacre.site</a></div>
+      </div>
+    </div>
+    <div class="readout">
+      <div class="stat"><span class="k">epoch</span><span class="v" id="s-epoch">00000</span></div>
+      <div class="stat"><span class="k">status</span><span class="v pill running" id="s-status"><i></i>live</span></div>
+      <div class="stat"><span class="k">best</span><span class="v" id="s-best">0.000</span></div>
+      <div class="stat"><span class="k">species</span><span class="v" id="s-sp">0</span></div>
+      <div class="stat"><span class="k">diversity</span><span class="v" id="s-div">0.000</span></div>
+    </div>
+  </header>
+
+  <p class="hint" id="hint">drag to orbit · scroll to approach · click a light</p>
+
+  <aside class="drawer" id="drawer" hidden>
+    <h2 id="ins-title">Champion</h2>
+    <div class="kv" id="ins-kv"></div>
+    <div class="genes" id="ins-genes"></div>
+    <h2>Recent events</h2>
+    <ol class="events" id="events"></ol>
+    <h2>Hall of fame</h2>
+    <ol class="hall" id="hall"></ol>
+  </aside>
+
+  <footer class="dock">
+    <button class="btn primary" id="b-toggle">Pause</button>
+    <button class="btn" id="b-bang">Collapse</button>
+    <button class="btn" id="b-new">New universe</button>
+    <button class="btn" id="b-details" aria-pressed="false">Details</button>
+    <button class="btn" id="b-sound" aria-pressed="false">Sound</button>
+    <button class="btn" id="b-help">How</button>
+    <label class="speed">
+      tempo
+      <input id="speed" type="range" min="50" max="1400" step="10" value="280" />
+      <span id="speed-label">280ms</span>
+    </label>
+    <a class="home-link" href="https://www.linacre.site/">← all projects</a>
+  </footer>
+
+  <div class="overlay" id="welcome">
+    <div class="card">
+      <h1>HELIX</h1>
+      <p>A population of tiny programs is already alive in this page. Each coloured light is an organism. The double helix is whoever is winning.</p>
+      <p class="rules">They compete, cross, and mutate. When the crowd becomes too alike the universe collapses — and is reborn from what already worked. Nothing is uploaded. You can sit and watch, or steer it from the bar below.</p>
+      <button class="btn primary" id="b-enter">Enter the observatory</button>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tip" hidden></div>
+  <div class="sr" id="live" role="status" aria-live="polite"></div>
+
+  <script src="engine.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

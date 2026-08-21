@@ -210,6 +210,14 @@
     {
       "source": "/pokeguru",
       "destination": "/pokeguru/index.html"
+    },
+    {
+      "source": "/helix",
+      "destination": "/helix/index.html"
+    },
+    {
+      "source": "/helix/",
+      "destination": "/helix/index.html"
     }
   ],
   "trailingSlash": false,

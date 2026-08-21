@@ -134,6 +134,16 @@ export default function CommandPalette({
       action: () => go('pokeguru'),
       meta: 'Search Pokémon TCG sets and prices',
     },
+    {
+      id: 'nav-helix',
+      label: 'Open HELIX observatory',
+      icon: Sparkles,
+      action: () => {
+        window.location.href = '/helix';
+      },
+      meta: 'Watch a population of programs evolve in the browser',
+      keywords: 'helix evolution dna genome simulation observatory',
+    },
   ];
 
   const actionCommands: CommandItem[] = [
