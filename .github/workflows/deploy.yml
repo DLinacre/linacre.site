@@ -26,7 +26,7 @@ jobs:
 
       - name: Checkout
         if: steps.check.outputs.available == 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Deploy to Vercel
         if: steps.check.outputs.available == 'true'
