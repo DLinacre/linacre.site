@@ -21,9 +21,9 @@ cache:
 typecheck_and_test:
   stage: verify
   script:
-    - npm ci --prefer-offline || npm install
-    - npx tsc --noEmit
-    - npx vitest run --passWithNoTests
+    - npm ci
+    - npm run typecheck
+    - npm test
 
 build_site:
   stage: build
