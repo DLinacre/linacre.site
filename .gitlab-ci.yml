@@ -5,6 +5,7 @@
 
 stages:
   - verify
+  - security
   - build
   - deploy
 
@@ -24,6 +25,16 @@ typecheck_and_test:
     - npm ci
     - npm run typecheck
     - npm test
+
+security_audit:
+  stage: security
+  script:
+    - $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    - Write-Host "==> Running Gitleaks Secret Detection..."
+    - gitleaks detect --source "." --no-git --redact -v
+    - Write-Host "==> Running Trivy Dependency & Vulnerability Scan..."
+    - trivy fs --severity HIGH,CRITICAL --exit-code 0 .
+  allow_failure: true
 
 build_site:
   stage: build
