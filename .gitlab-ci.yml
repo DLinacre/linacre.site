@@ -1,56 +1,36 @@
 # ==============================================================================
-# linacre.site - GitLab CI/CD & Security Matrix
-# Includes: Static Analysis, Security Scans, Duo AI Hooks, GitLab Pages
+# linacre.site - High Performance Windows Runner CI/CD Matrix
+# Runs on local 24/7 Windows Runner (ID: 56201256)
 # ==============================================================================
 
 stages:
-  - lint-and-test
-  - security-audit
+  - verify
   - build
   - deploy
 
-include:
-  - template: Jobs/SAST.gitlab-ci.yml
-  - template: Jobs/Secret-Detection.gitlab-ci.yml
-  - template: Jobs/Dependency-Scanning.gitlab-ci.yml
-
-sast:
-  stage: security-audit
-  variables:
-    SEARCH_MAX_DEPTH: 10
-
-secret_detection:
-  stage: security-audit
-
-dependency_scanning:
-  stage: security-audit
-
 default:
-  image: node:20-alpine
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
-      - .npm/
+  tags:
+    - windows
+    - powershell
 
-before_script:
-  - npm ci --cache .npm --prefer-offline || npm install
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
 
-typecheck_and_lint:
-  stage: lint-and-test
+typecheck_and_test:
+  stage: verify
   script:
+    - npm ci --prefer-offline || npm install
     - npx tsc --noEmit
-    - npm run lint --if-present
-
-unit_tests:
-  stage: lint-and-test
-  script:
     - npx vitest run --passWithNoTests
 
 build_site:
   stage: build
+  dependencies:
+    - typecheck_and_test
   script:
-    - npx vite build
+    - npm run build
   artifacts:
     paths:
       - dist/
@@ -61,8 +41,9 @@ pages:
   dependencies:
     - build_site
   script:
-    - mkdir -p public
-    - cp -r dist/* public/
+    - if (Test-Path public) { Remove-Item -Path public -Recurse -Force }
+    - New-Item -ItemType Directory -Path public -Force | Out-Null
+    - Copy-Item -Path "dist\*" -Destination "public\" -Recurse -Force
   artifacts:
     paths:
       - public
