@@ -50,6 +50,18 @@ export const SITE_PROJECTS: SiteProject[] = [
     year: 2024,
   },
   {
+    name: 'Bonny Bakes',
+    badge: 'NEW',
+    kind: 'App',
+    emoji: '🧁',
+    blurb: 'Simple bakes. Happy hearts. Cosy home-baking recipes with quantity scaling, shopping lists, and print-friendly cards.',
+    url: 'https://dlinacre.github.io/bonny-bakes/',
+    repo: 'https://github.com/DLinacre/bonny-bakes',
+    tags: ['baking', 'recipes', 'calculator', 'offline', 'food', 'pwa'],
+    tech: ['HTML5', 'Vanilla JS', 'CSS3', 'Web Storage'],
+    year: 2026,
+  },
+  {
     name: 'HELIX',
     badge: 'NEW',
     kind: 'App',
