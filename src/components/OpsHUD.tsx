@@ -3,24 +3,21 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   Activity,
   Server,
-  ShieldCheck,
   HardDrive,
   GitBranch,
-  Terminal,
   Search,
   ExternalLink,
   Copy,
   Check,
   Cpu,
   Layers,
-  Sparkles,
   Smartphone,
   Globe,
   Bot,
   Wrench,
   Archive,
 } from 'lucide-react';
-import { SITE_PROJECTS, type SiteProject } from '../data/siteProjects';
+import { SITE_PROJECTS } from '../data/siteProjects';
 
 interface SubgroupMeta {
   id: string;
