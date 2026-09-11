@@ -14,6 +14,9 @@ default:
     - windows
     - powershell
 
+variables:
+  GIT_CLEAN_FLAGS: "none"
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
