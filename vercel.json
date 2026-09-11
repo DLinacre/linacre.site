@@ -1,5 +1,7 @@
 {
   "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
   "redirects": [
     { "source": "/projects", "destination": "/", "permanent": true },
     { "source": "/projects/:path*", "destination": "/", "permanent": true },
