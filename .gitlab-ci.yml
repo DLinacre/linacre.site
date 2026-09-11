@@ -1,0 +1,20 @@
+# GitLab Ultimate Security & AI Vulnerability Scan Matrix
+stages:
+  - test
+  - security-audit
+
+include:
+  - template: Jobs/SAST.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+
+sast:
+  stage: security-audit
+  variables:
+    SEARCH_MAX_DEPTH: 10
+
+secret_detection:
+  stage: security-audit
+
+dependency_scanning:
+  stage: security-audit
