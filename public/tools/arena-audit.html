@@ -3886,8 +3886,11 @@
 
         H(`Audit categories to complete`);
         P(``);
+        const includeScores = dels.some(d => d.id === 'scores');
         P(
-          `Produce detailed findings for **each selected category** below. Score each completed category out of 100.`,
+          includeScores
+            ? `Produce detailed findings for **each selected category** below. Score each completed category out of 100.`
+            : `Produce detailed findings for **each selected category** below.`,
         );
         P(``);
 
@@ -3917,20 +3920,22 @@
           P(``);
         }
 
-        H(`Scoring`);
-        P(``);
-        P(`Score each completed category out of 100. Also provide:`);
-        B(`Overall ${t.noun} score`);
-        cats.forEach(c => B(`${c.name} score`));
-        P(``);
+        if (includeScores) {
+          H(`Scoring`);
+          P(``);
+          P(`Score each completed category out of 100. Also provide:`);
+          B(`Overall ${t.noun} score`);
+          cats.forEach(c => B(`${c.name} score`));
+          P(``);
+        }
 
         H(`Required deliverables`);
         P(``);
         if (dels.length) dels.forEach(d => B(d.name));
-        else B('A clear written audit with prioritised next steps');
+        else B('A focused written audit addressing the selected categories and constraints');
         P(``);
 
-        if (!dels.length || dels.some(d => d.id === 'action')) {
+        if (dels.some(d => d.id === 'action')) {
           P(`### Action plan structure`);
           P(``);
           B('**Immediate (Today)** — quick wins');
@@ -3940,7 +3945,7 @@
           P(``);
         }
 
-        if (!dels.length || dels.some(d => d.id === 'tasks')) {
+        if (dels.some(d => d.id === 'tasks')) {
           P(`### Task format (GitHub Issues style)`);
           P(``);
           P(
@@ -3949,7 +3954,7 @@
           P(``);
         }
 
-        if (!dels.length || dels.some(d => d.id === 'assets' || d.id === 'snippets')) {
+        if (dels.some(d => d.id === 'assets' || d.id === 'snippets')) {
           P(`### Ready-to-implement assets`);
           P(``);
           P(`Where possible, generate production-ready content such as:`);
@@ -3957,7 +3962,7 @@
           P(``);
         }
 
-        if (!dels.length || dels.some(d => d.id === 'zip') || adv.workspace) {
+        if (dels.some(d => d.id === 'zip') || adv.workspace) {
           P(`### Workspace / package structure`);
           P(``);
           if (adv.workspace) {
@@ -5154,6 +5159,16 @@
         $('#targetType').value = state.typeManual;
         onTypeChange(state.typeManual, { resetTouches: !state.persistLocal });
       }
+
+      window.ArenaAudit = {
+        state,
+        buildPrompt,
+        saveCustomPreset,
+        loadCustomPreset,
+        getCustomPresets,
+        update,
+        onTypeChange,
+      };
 
       init();
       applySharedState();
