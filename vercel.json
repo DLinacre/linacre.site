@@ -218,6 +218,10 @@
     {
       "source": "/helix/",
       "destination": "/helix/index.html"
+    },
+    {
+      "source": "/((?!api/|games/|tools/|assets/|.*\\..*).*)",
+      "destination": "/index.html"
     }
   ],
   "trailingSlash": false,

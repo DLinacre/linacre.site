@@ -1,7 +1,13 @@
-# GitLab Ultimate Security & AI Vulnerability Scan Matrix
+# ==============================================================================
+# linacre.site - GitLab CI/CD & Security Matrix
+# Includes: Static Analysis, Security Scans, Duo AI Hooks, GitLab Pages
+# ==============================================================================
+
 stages:
-  - test
+  - lint-and-test
   - security-audit
+  - build
+  - deploy
 
 include:
   - template: Jobs/SAST.gitlab-ci.yml
@@ -18,3 +24,47 @@ secret_detection:
 
 dependency_scanning:
   stage: security-audit
+
+default:
+  image: node:20-alpine
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+      - .npm/
+
+before_script:
+  - npm ci --cache .npm --prefer-offline || npm install
+
+typecheck_and_lint:
+  stage: lint-and-test
+  script:
+    - npx tsc --noEmit
+    - npm run lint --if-present
+
+unit_tests:
+  stage: lint-and-test
+  script:
+    - npx vitest run --passWithNoTests
+
+build_site:
+  stage: build
+  script:
+    - npx vite build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 3 days
+
+pages:
+  stage: deploy
+  dependencies:
+    - build_site
+  script:
+    - mkdir -p public
+    - cp -r dist/* public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
