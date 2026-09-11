@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0"
     />
     <meta
       name="description"
@@ -3385,23 +3385,30 @@
           },
           async *chat(messages, model = null) {
             model = model || this.pref;
-            if (model === 'ev-backend' || this.pref === 'ev-backend') {
+            if (model === 'ev-backend') {
               yield* this.evBackend(messages);
               return;
             }
             const retry = Store.get('auto_retry') !== false;
-            const tries = retry ? [model, ...this.models.filter(x => x !== model)] : [model];
+            const tries = retry
+              ? [...new Set([model, ...this.models.filter(x => x !== 'ev-backend')])].slice(0, CONFIG.maxRetries + 1)
+              : [model];
             let lastErr = null;
             for (const m of tries) {
+              let receivedText = false;
               try {
                 const it = await this._stream(m, messages);
+                for await (const chunk of it) {
+                  receivedText = receivedText || Boolean(chunk.text);
+                  yield chunk;
+                }
                 this.pref = m;
                 Store.set('preferred_model', m);
-                yield* it;
                 return;
               } catch (e) {
                 lastErr = e;
-                if (e.name === 'AbortError') throw e;
+                // Never append another model's answer to a partially streamed reply.
+                if (e.name === 'AbortError' || receivedText) throw e;
                 if (retry) {
                   App.toast(`${m} failed. Trying fallback...`, 'warn');
                   await sleep(600);
@@ -3419,35 +3426,56 @@
               body: JSON.stringify(body),
               signal: this.ctrl.signal,
             });
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            if (!res.ok) throw new Error(`AI provider returned HTTP ${res.status}`);
+            if ((res.headers.get('content-type') || '').includes('application/json')) {
+              const data = await res.json();
+              const content = data.choices?.[0]?.message?.content;
+              if (typeof content !== 'string') throw new Error('AI provider returned no message');
+              return (async function* () { yield { text: content, model }; })();
+            }
+            if (!res.body) throw new Error('AI provider returned an empty response');
             const reader = res.body.getReader();
-            const decoder = new TextDecoder();
-            let buf = '';
-            return {
-              async next() {
+            return (async function* () {
+              const decoder = new TextDecoder();
+              let buffer = '';
+              let dataLines = [];
+              let receivedText = false;
+              try {
                 while (true) {
                   const { done, value } = await reader.read();
-                  if (done) return { done: true };
-                  buf += decoder.decode(value, { stream: true });
-                  const lines = buf.split('\n');
-                  buf = lines.pop();
-                  for (const line of lines) {
-                    const t = line.trim();
-                    if (!t || !t.startsWith('data: ')) continue;
-                    const d = t.slice(6);
-                    if (d === '[DONE]') return { done: true };
-                    try {
-                      const j = JSON.parse(d);
-                      const c = j.choices?.[0]?.delta?.content;
-                      if (c) return { done: false, value: { text: c, model } };
-                    } catch (e) {}
+                  buffer += done ? decoder.decode() + '\n\n' : decoder.decode(value, { stream: true });
+                  let newline;
+                  while ((newline = buffer.indexOf('\n')) !== -1) {
+                    const line = buffer.slice(0, newline).replace(/\r$/, '');
+                    buffer = buffer.slice(newline + 1);
+                    if (line.startsWith('data:')) {
+                      dataLines.push(line.slice(5).replace(/^ /, ''));
+                    } else if (line === '' && dataLines.length) {
+                      const payload = dataLines.join('\n');
+                      dataLines = [];
+                      if (payload.trim() === '[DONE]') {
+                        if (!receivedText) throw new Error('AI stream ended without a message');
+                        return;
+                      }
+                      const event = JSON.parse(payload);
+                      if (event.error) throw new Error('AI provider reported a stream error');
+                      const content = event.choices?.[0]?.delta?.content;
+                      if (typeof content === 'string' && content.length) {
+                        receivedText = true;
+                        yield { text: content, model };
+                      }
+                    }
+                  }
+                  if (done) {
+                    if (!receivedText) throw new Error('AI provider returned no readable stream text');
+                    break;
                   }
                 }
-              },
-              [Symbol.asyncIterator]() {
-                return this;
-              },
-            };
+              } finally {
+                try { await reader.cancel(); } catch { /* stream already closed or aborted */ }
+                reader.releaseLock();
+              }
+            })();
           },
           stop() {
             this.ctrl?.abort();
@@ -4840,11 +4868,11 @@
             const footer = $('#tool-footer');
             body.innerHTML = '';
             footer.innerHTML = '';
-            const runner = this[id];
-            if (!runner) {
+            const runner = this['setup_' + id] || this[id];
+            if (typeof runner !== 'function') {
               body.innerHTML =
                 '<p>Tool UI not yet implemented. You can still use the workspace to run this manually.</p>';
-            } else runner(body, footer);
+            } else runner.call(this, body, footer);
             Modal.open('tool');
           },
           addIO(body, label = 'Input') {
@@ -4931,7 +4959,7 @@
               $('#tool-output').textContent = 'Error: ' + e.message;
             }
           },
-          b64(body, footer) {
+          setup_b64(body, footer) {
             const { inp, out } = this.addIO(body, 'Text or base64...');
             this.setButtons(footer, [
               { label: 'Encode', onclick: 'ToolRunner.b64("encode")' },
@@ -4949,7 +4977,7 @@
               $('#tool-output').textContent = 'Error: ' + e.message;
             }
           },
-          urlenc(body, footer) {
+          setup_urlenc(body, footer) {
             const { inp, out } = this.addIO(body, 'Text or encoded URL...');
             this.setButtons(footer, [
               { label: 'Encode', onclick: 'ToolRunner.urlenc("encode")' },
@@ -4961,7 +4989,7 @@
             $('#tool-output').textContent =
               mode === 'encode' ? encodeURIComponent(v) : decodeURIComponent(v);
           },
-          hash(body, footer) {
+          setup_hash(body, footer) {
             const { inp, out } = this.addIO(body, 'Text to hash...');
             this.setButtons(footer, [{ label: 'SHA-256', onclick: 'ToolRunner.hash()' }]);
           },
@@ -4976,7 +5004,7 @@
             const s = [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
             $('#tool-output').textContent = `SHA-256: ${s}`;
           },
-          uuid(body, footer) {
+          setup_uuid(body, footer) {
             const { inp, out } = this.addIO(body, '');
             inp.style.display = 'none';
             this.setButtons(footer, [{ label: 'Generate UUIDs', onclick: 'ToolRunner.uuid()' }]);
@@ -5003,7 +5031,7 @@
             for (let i = 0; i < len; i++) out += chars[Math.floor(Math.random() * chars.length)];
             $('#tool-output').textContent = out;
           },
-          calc(body, footer) {
+          setup_calc(body, footer) {
             const { inp, out } = this.addIO(body, 'e.g. 2 + 2 * (3 ^ 2)');
             this.setButtons(footer, [{ label: 'Evaluate', onclick: 'ToolRunner.calc()' }]);
           },
@@ -5035,7 +5063,7 @@
           mdtohtml() {
             $('#tool-output').innerHTML = md($('#tool-input').value);
           },
-          lorem(body, footer) {
+          setup_lorem(body, footer) {
             body.innerHTML =
               '<label>Paragraphs</label><input type="number" id="lorem-n" value="3" min="1" max="20"><div class="tool-output" id="tool-output"></div>';
             this.setButtons(footer, [{ label: 'Generate', onclick: 'ToolRunner.lorem()' }]);
@@ -5046,7 +5074,7 @@
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
             $('#tool-output').textContent = Array.from({ length: n }, () => text).join('\n\n');
           },
-          regex(body, footer) {
+          setup_regex(body, footer) {
             body.innerHTML =
               '<label>Regex</label><input type="text" id="regex-pat" placeholder="e.g. [a-z]+"><label>Test string</label><textarea id="regex-input" rows="3"></textarea><div class="tool-output" id="tool-output"></div>';
             this.setButtons(footer, [{ label: 'Test', onclick: 'ToolRunner.regex()' }]);
@@ -5100,7 +5128,7 @@
               )
               .join('');
           },
-          qr(body, footer) {
+          setup_qr(body, footer) {
             const { inp, out } = this.addIO(body, 'Text or URL for QR code...');
             this.setButtons(footer, [{ label: 'Generate QR', onclick: 'ToolRunner.qr()' }]);
           },
@@ -5130,7 +5158,7 @@
               $('#tool-output').textContent = 'Error: ' + e.message;
             }
           },
-          diff(body, footer) {
+          setup_diff(body, footer) {
             body.innerHTML =
               '<label>Text A</label><textarea id="diff-a" rows="3"></textarea><label>Text B</label><textarea id="diff-b" rows="3"></textarea><div class="tool-output" id="tool-output"></div>';
             this.setButtons(footer, [{ label: 'Diff', onclick: 'ToolRunner.diff()' }]);
@@ -5163,7 +5191,7 @@
               $('#tool-output').textContent = div.textContent;
             }
           },
-          jwt(body, footer) {
+          setup_jwt(body, footer) {
             const { inp, out } = this.addIO(body, 'Paste JWT...');
             this.setButtons(footer, [{ label: 'Decode', onclick: 'ToolRunner.jwt()' }]);
           },
@@ -5178,7 +5206,7 @@
               $('#tool-output').textContent = 'Invalid JWT';
             }
           },
-          cron(body, footer) {
+          setup_cron(body, footer) {
             const { inp, out } = this.addIO(body, 'e.g. 0 9 * * 1');
             this.setButtons(footer, [{ label: 'Explain', onclick: 'ToolRunner.cron()' }]);
           },
@@ -5191,7 +5219,7 @@
             }
             $('#tool-output').textContent = v.map((f, i) => `${labels[i]}: ${f}`).join('\n');
           },
-          tts(body, footer) {
+          setup_tts(body, footer) {
             const { inp, out } = this.addIO(body, 'Text to speak...');
             this.setButtons(footer, [{ label: 'Speak', onclick: 'ToolRunner.tts()' }]);
           },
@@ -5200,7 +5228,7 @@
             speechSynthesis.speak(u);
             $('#tool-output').textContent = 'Speaking...';
           },
-          stt(body, footer) {
+          setup_stt(body, footer) {
             body.innerHTML =
               '<div class="tool-output" id="tool-output">Click Start and speak...</div>';
             this.setButtons(footer, [{ label: 'Start', onclick: 'ToolRunner.stt()' }]);
@@ -5312,7 +5340,7 @@
             const c = $('#tool-canvas');
             if (c) c.getContext('2d').clearRect(0, 0, c.width, c.height);
           },
-          chart(body, footer) {
+          setup_chart(body, footer) {
             const { inp, out } = this.addIO(body, 'Comma-separated numbers e.g. 10,25,40,15');
             this.setButtons(footer, [{ label: 'Draw', onclick: 'ToolRunner.chart()' }]);
           },
@@ -5373,7 +5401,7 @@
               $('#tool-output').textContent += 'Error: ' + e.message;
             }
           },
-          minify(body, footer) {
+          setup_minify(body, footer) {
             const { inp, out } = this.addIO(body, 'CSS or JS to minify...');
             this.setButtons(footer, [{ label: 'Minify', onclick: 'ToolRunner.minify()' }]);
           },
@@ -5469,7 +5497,7 @@
             $('#tool-output').innerHTML =
               `<table style="border-collapse:collapse">${rows.map(r => `<tr>${r}</tr>`).join('')}</table>`;
           },
-          encrypt(body, footer) {
+          setup_encrypt(body, footer) {
             const { inp, out } = this.addIO(body, 'Text to encrypt...');
             body.insertAdjacentHTML(
               'afterbegin',
@@ -5589,7 +5617,7 @@
             Store.set('ai_chat_log', $('#tool-output').textContent);
             $('#tool-input').value = '';
           },
-          time(body, footer) {
+          setup_time(body, footer) {
             body.innerHTML = '<div class="tool-output" id="tool-output"></div>';
             this.setButtons(footer, [{ label: 'Now', onclick: 'ToolRunner.time()' }]);
             this.time();
