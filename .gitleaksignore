@@ -1,0 +1,7 @@
+# Gitleaks ignore list for verified false positives (localStorage keys & offline demo JWTs)
+src/components/ConsentBanner.tsx:generic-api-key:6
+src/components/ConsentBanner.tsx:generic-api-key:12
+public/games/pulse.js:generic-api-key:5
+public/games/decrypt.js:generic-api-key:7
+src/components/CookiePolicy.tsx:generic-api-key:18
+src/components/DevPlayground.tsx:jwt:897

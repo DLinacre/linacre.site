@@ -1,0 +1,9 @@
+[allowlist]
+description = "Allowlist for public demo JWTs, localStorage keys, and built dist assets"
+paths = [
+  '''src/components/ConsentBanner\.tsx''',
+  '''src/components/CookiePolicy\.tsx''',
+  '''src/components/DevPlayground\.tsx''',
+  '''public/games/.*''',
+  '''dist/.*''',
+]
