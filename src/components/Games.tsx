@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Gamepad2, Play, Heart, Code2, Sparkles, RotateCcw, Volume2, VolumeX } from 'lucide-react';
+import { Gamepad2, Play, Heart, Code2, Sparkles, RotateCcw, Volume2, VolumeX, ExternalLink, X } from 'lucide-react';
 
 interface GameItem {
   title: string;
@@ -188,6 +188,8 @@ export default function Games() {
   });
 
   const [muted, setMuted] = useState<boolean>(() => localStorage.getItem('dlg_muted') === 'true');
+  const [activeArcadeGame, setActiveArcadeGame] = useState<GameItem | null>(null);
+  const [iframeKey, setIframeKey] = useState(0);
   const [snakeOpen, setSnakeOpen] = useState(false);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(() => {
@@ -430,12 +432,18 @@ export default function Games() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!snakeOpen) return;
       const k = e.key.toLowerCase();
       if (k === 'escape') {
-        setSnakeOpen(false);
-        return;
+        if (activeArcadeGame) {
+          setActiveArcadeGame(null);
+          return;
+        }
+        if (snakeOpen) {
+          setSnakeOpen(false);
+          return;
+        }
       }
+      if (!snakeOpen) return;
       if (k === 'enter') {
         e.preventDefault();
         if (gameState !== 'run') startSnake();
@@ -460,7 +468,7 @@ export default function Games() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [snakeOpen, gameState]);
+  }, [snakeOpen, activeArcadeGame, gameState]);
 
   // Dialog semantics: focus the close button on open, restore focus on close,
   // and pause the loop when the tab is hidden (WCAG 2.2.2 / battery).
@@ -665,10 +673,15 @@ export default function Games() {
                     {isBuiltIn ? (
                       <button
                         onClick={() => {
-                          setSnakeOpen(true);
-                          startSnake();
+                          if (game.play === '#snake' || game.title === 'Snake') {
+                            setSnakeOpen(true);
+                            startSnake();
+                          } else {
+                            setActiveArcadeGame(game);
+                            setIframeKey(0);
+                          }
                         }}
-                        data-play-snake
+                        data-play-snake={game.title === 'Snake' ? '' : undefined}
                         className="px-3 py-1.5 rounded-lg bg-amber-color text-[#030c14] font-mono text-xs font-bold hover:bg-amber-glow transition-all flex items-center gap-1 cursor-pointer"
                       >
                         <Play className="w-3.5 h-3.5 fill-current" />
@@ -748,6 +761,87 @@ export default function Games() {
             <p className="font-mono text-[10px] text-muted-foreground text-center">
               USE ARROW KEYS / WASD / SWIPE TO MOVE · ENTER TO RETRY · ESC TO QUIT
             </p>
+          </div>
+        </div>
+      )}
+
+      {/* Universal In-Browser Arcade Modal Player */}
+      {activeArcadeGame && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="arcade-modal-title"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-md p-2 sm:p-4 md:p-6"
+        >
+          <div className="bg-[#0a0f1c] border border-amber-color/30 rounded-2xl w-full max-w-5xl h-[90vh] max-h-[860px] flex flex-col shadow-2xl overflow-hidden relative">
+            {/* Top Header */}
+            <div className="px-4 py-3 bg-muted/30 border-b border-border-color/60 flex items-center justify-between gap-3 shrink-0">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="p-1.5 rounded-lg bg-amber-color/10 border border-amber-color/30 text-amber-color shrink-0">
+                  <Gamepad2 className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 id="arcade-modal-title" className="font-display font-bold text-base text-foreground truncate">
+                      {activeArcadeGame.title}
+                    </h3>
+                    <span className="font-mono text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-amber-color/10 text-amber-color border border-amber-color/30 shrink-0">
+                      {activeArcadeGame.genre}
+                    </span>
+                  </div>
+                  <p className="font-mono text-[11px] text-muted-foreground truncate hidden sm:block">
+                    {activeArcadeGame.tagline}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0 font-mono text-xs">
+                <button
+                  onClick={() => setIframeKey(k => k + 1)}
+                  title="Restart Game"
+                  className="px-2.5 py-1.5 rounded-lg border border-border-color hover:border-amber-color/40 text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-all flex items-center gap-1.5 cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Restart</span>
+                </button>
+
+                <a
+                  href={activeArcadeGame.play.endsWith('.html') ? activeArcadeGame.play : `${activeArcadeGame.play}.html`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Open in new window"
+                  className="px-2.5 py-1.5 rounded-lg border border-border-color hover:border-amber-color/40 text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-all flex items-center gap-1.5"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Popout</span>
+                </a>
+
+                <button
+                  onClick={() => setActiveArcadeGame(null)}
+                  aria-label="Close Arcade Modal"
+                  className="p-1.5 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground cursor-pointer transition-colors ml-1"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Embedded Game Iframe */}
+            <div className="w-full flex-1 bg-[#04060c] relative">
+              <iframe
+                key={iframeKey}
+                src={activeArcadeGame.play.endsWith('.html') ? activeArcadeGame.play : `${activeArcadeGame.play}.html`}
+                title={activeArcadeGame.title}
+                className="w-full h-full border-0"
+                allow="autoplay; fullscreen; vibrate"
+              />
+            </div>
+
+            {/* Footer Bar */}
+            <div className="px-4 py-2 bg-muted/20 border-t border-border-color/40 flex items-center justify-between text-[11px] font-mono text-muted-foreground shrink-0">
+              <span className="truncate">{activeArcadeGame.tech}</span>
+              <span className="shrink-0">ESC TO CLOSE</span>
+            </div>
           </div>
         </div>
       )}
