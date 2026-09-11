@@ -288,7 +288,10 @@ export default function About() {
           <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-color">
             Release history
           </span>
-          <h2 id="changelog-title" className="mt-1 font-display text-2xl font-bold tracking-tight text-foreground">
+          <h2
+            id="changelog-title"
+            className="mt-1 font-display text-2xl font-bold tracking-tight text-foreground"
+          >
             What changed on this site
           </h2>
         </div>

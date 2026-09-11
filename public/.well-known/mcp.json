@@ -27,14 +27,29 @@
   "tools": [
     { "name": "json_format", "description": "Validate, pretty-print, or minify JSON." },
     { "name": "base64", "description": "Encode/decode Base64 (URL-safe optional)." },
-    { "name": "jwt_decode", "description": "Decode a JWT header + payload (no signature verification)." },
-    { "name": "regex_test", "description": "Test a JS regex against text; returns matches, indices, named groups." },
+    {
+      "name": "jwt_decode",
+      "description": "Decode a JWT header + payload (no signature verification)."
+    },
+    {
+      "name": "regex_test",
+      "description": "Test a JS regex against text; returns matches, indices, named groups."
+    },
     { "name": "hash", "description": "sha256 / sha1 / sha512 / md5 of input text." },
     { "name": "uuid_generate", "description": "Generate 1–100 random UUID v4 values." },
-    { "name": "password_generate", "description": "CSPRNG password with configurable character classes." },
+    {
+      "name": "password_generate",
+      "description": "CSPRNG password with configurable character classes."
+    },
     { "name": "uk_vat", "description": "Add or remove UK VAT (default 20%)." },
-    { "name": "url_clean", "description": "Remove utm_*, fbclid, gclid and 25+ tracking parameters from a URL." },
+    {
+      "name": "url_clean",
+      "description": "Remove utm_*, fbclid, gclid and 25+ tracking parameters from a URL."
+    },
     { "name": "timestamp_convert", "description": "Convert Unix timestamps to ISO/UTC and back." },
-    { "name": "text_tools", "description": "stats, case changes, trim, dedupe/sort/reverse lines, slugify." }
+    {
+      "name": "text_tools",
+      "description": "stats, case changes, trim, dedupe/sort/reverse lines, slugify."
+    }
   ]
 }

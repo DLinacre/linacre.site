@@ -14,7 +14,10 @@ export default function FeaturedSpotlight() {
   return (
     <section aria-labelledby="featured-heading" className="scroll-mt-24">
       <div className="mb-3 flex items-center gap-2">
-        <h2 id="featured-heading" className="font-display text-sm font-bold uppercase tracking-wider text-muted-foreground">
+        <h2
+          id="featured-heading"
+          className="font-display text-sm font-bold uppercase tracking-wider text-muted-foreground"
+        >
           Featured work
         </h2>
         <span className="h-px flex-1 bg-border-color" />
@@ -52,7 +55,10 @@ export default function FeaturedSpotlight() {
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : (
-                  <span className="grid h-full w-full place-items-center text-4xl" aria-hidden="true">
+                  <span
+                    className="grid h-full w-full place-items-center text-4xl"
+                    aria-hidden="true"
+                  >
                     {p.emoji ?? '📦'}
                   </span>
                 )}
@@ -69,7 +75,10 @@ export default function FeaturedSpotlight() {
                 {p.tech && p.tech.length > 0 && (
                   <div className="mt-auto flex flex-wrap gap-1 pt-1.5">
                     {p.tech.slice(0, 2).map(t => (
-                      <span key={t} className="rounded bg-muted/40 px-1.5 py-0.5 font-mono text-[9px] text-muted-foreground">
+                      <span
+                        key={t}
+                        className="rounded bg-muted/40 px-1.5 py-0.5 font-mono text-[9px] text-muted-foreground"
+                      >
                         {t}
                       </span>
                     ))}

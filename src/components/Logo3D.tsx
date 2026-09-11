@@ -32,16 +32,37 @@ export default function Logo3D({ onNavigate, size = 28 }: Logo3DProps) {
       >
         <svg viewBox="0 0 32 32" width={size} height={size} fill="none">
           <defs>
-            <linearGradient id="lg3d-top" x1="4" y1="3" x2="28" y2="17" gradientUnits="userSpaceOnUse">
+            <linearGradient
+              id="lg3d-top"
+              x1="4"
+              y1="3"
+              x2="28"
+              y2="17"
+              gradientUnits="userSpaceOnUse"
+            >
               <stop offset="0%" stopColor="#a5f3fc" />
               <stop offset="45%" stopColor="#22d3ee" />
               <stop offset="100%" stopColor="#0891b2" />
             </linearGradient>
-            <linearGradient id="lg3d-left" x1="4" y1="10" x2="16" y2="29" gradientUnits="userSpaceOnUse">
+            <linearGradient
+              id="lg3d-left"
+              x1="4"
+              y1="10"
+              x2="16"
+              y2="29"
+              gradientUnits="userSpaceOnUse"
+            >
               <stop offset="0%" stopColor="#0e2a3a" />
               <stop offset="100%" stopColor="#071b28" />
             </linearGradient>
-            <linearGradient id="lg3d-right" x1="28" y1="10" x2="16" y2="29" gradientUnits="userSpaceOnUse">
+            <linearGradient
+              id="lg3d-right"
+              x1="28"
+              y1="10"
+              x2="16"
+              y2="29"
+              gradientUnits="userSpaceOnUse"
+            >
               <stop offset="0%" stopColor="#11536b" />
               <stop offset="100%" stopColor="#0a2c3e" />
             </linearGradient>

@@ -61,7 +61,15 @@ function Artwork({ project, className }: { project: SiteProject; className: stri
   );
 }
 
-function ProjectCard({ project, index, onOpen }: { project: SiteProject; index: number; onOpen: (p: SiteProject) => void }) {
+function ProjectCard({
+  project,
+  index,
+  onOpen,
+}: {
+  project: SiteProject;
+  index: number;
+  onOpen: (p: SiteProject) => void;
+}) {
   const meta = KIND_META[project.kind];
   const href = project.url || project.repo;
   const isPrivate = project.kind === 'Private' || project.private;
@@ -102,7 +110,9 @@ function ProjectCard({ project, index, onOpen }: { project: SiteProject; index: 
                 New
               </span>
             )}
-            <span className={`shrink-0 rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${meta.chip}`}>
+            <span
+              className={`shrink-0 rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${meta.chip}`}
+            >
               {meta.label}
             </span>
           </div>
@@ -112,7 +122,10 @@ function ProjectCard({ project, index, onOpen }: { project: SiteProject; index: 
           {project.tech && project.tech.length > 0 && (
             <div className="mt-1.5 flex flex-wrap gap-1">
               {project.tech.slice(0, 3).map(t => (
-                <span key={t} className="rounded bg-muted/40 px-1.5 py-0.5 font-mono text-[9px] text-muted-foreground">
+                <span
+                  key={t}
+                  className="rounded bg-muted/40 px-1.5 py-0.5 font-mono text-[9px] text-muted-foreground"
+                >
                   {t}
                 </span>
               ))}
@@ -163,7 +176,13 @@ function ProjectCard({ project, index, onOpen }: { project: SiteProject; index: 
   );
 }
 
-export default function ProjectGrid({ query, setQuery }: { query: string; setQuery: (q: string) => void }) {
+export default function ProjectGrid({
+  query,
+  setQuery,
+}: {
+  query: string;
+  setQuery: (q: string) => void;
+}) {
   const [filter, setFilter] = useState<ProjectKind | 'all'>('all');
   const [techFilter, setTechFilter] = useState<string>('all');
   const [sort, setSort] = useState<SortMode>('useful');
@@ -228,7 +247,8 @@ export default function ProjectGrid({ query, setQuery }: { query: string; setQue
           <span className="h-1.5 w-1.5 rounded-full bg-cyan" /> {stats.live} live apps
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-color" /> {stats.openSource} open source
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-color" /> {stats.openSource} open
+          source
         </span>
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-amber-color" /> {stats.games} games
@@ -239,7 +259,10 @@ export default function ProjectGrid({ query, setQuery }: { query: string; setQue
       </div>
 
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <h2 id="all-projects-heading" className="font-display text-xl font-bold tracking-tight text-foreground">
+        <h2
+          id="all-projects-heading"
+          className="font-display text-xl font-bold tracking-tight text-foreground"
+        >
           All projects
           <span className="ml-2 align-middle font-mono text-[11px] font-semibold text-muted-foreground">
             {SITE_PROJECTS.length} total
@@ -247,11 +270,17 @@ export default function ProjectGrid({ query, setQuery }: { query: string; setQue
         </h2>
         <div className="flex flex-wrap items-center gap-2">
           {/* Sort control */}
-          <div className="flex rounded-lg border border-border-color bg-muted/15 p-0.5" role="group" aria-label="Sort projects">
+          <div
+            className="flex rounded-lg border border-border-color bg-muted/15 p-0.5"
+            role="group"
+            aria-label="Sort projects"
+          >
             <button
               onClick={() => setSort('useful')}
               className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-[11px] font-semibold transition-colors cursor-pointer ${
-                sort === 'useful' ? 'bg-amber-color/15 text-amber-color' : 'text-muted-foreground hover:text-foreground'
+                sort === 'useful'
+                  ? 'bg-amber-color/15 text-amber-color'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
               aria-pressed={sort === 'useful'}
             >
@@ -260,7 +289,9 @@ export default function ProjectGrid({ query, setQuery }: { query: string; setQue
             <button
               onClick={() => setSort('new')}
               className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-[11px] font-semibold transition-colors cursor-pointer ${
-                sort === 'new' ? 'bg-amber-color/15 text-amber-color' : 'text-muted-foreground hover:text-foreground'
+                sort === 'new'
+                  ? 'bg-amber-color/15 text-amber-color'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
               aria-pressed={sort === 'new'}
             >
@@ -269,7 +300,9 @@ export default function ProjectGrid({ query, setQuery }: { query: string; setQue
             <button
               onClick={() => setSort('az')}
               className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-[11px] font-semibold transition-colors cursor-pointer ${
-                sort === 'az' ? 'bg-amber-color/15 text-amber-color' : 'text-muted-foreground hover:text-foreground'
+                sort === 'az'
+                  ? 'bg-amber-color/15 text-amber-color'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
               aria-pressed={sort === 'az'}
             >
@@ -293,7 +326,11 @@ export default function ProjectGrid({ query, setQuery }: { query: string; setQue
       </p>
 
       {/* Kind filter chips */}
-      <div className="mb-2 flex flex-wrap gap-1.5" role="group" aria-label="Filter projects by type">
+      <div
+        className="mb-2 flex flex-wrap gap-1.5"
+        role="group"
+        aria-label="Filter projects by type"
+      >
         {FILTERS.map(f => (
           <button
             key={f.id}
@@ -317,7 +354,11 @@ export default function ProjectGrid({ query, setQuery }: { query: string; setQue
 
       {/* Tech / stack filter chips */}
       {techOptions.length > 1 && (
-        <div className="mb-5 flex flex-wrap gap-1.5" role="group" aria-label="Filter projects by stack">
+        <div
+          className="mb-5 flex flex-wrap gap-1.5"
+          role="group"
+          aria-label="Filter projects by stack"
+        >
           <span className="mr-1 self-center font-mono text-[10px] uppercase tracking-wider text-muted-foreground/70">
             Stack
           </span>
@@ -342,11 +383,16 @@ export default function ProjectGrid({ query, setQuery }: { query: string; setQue
         <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border-color py-14 text-center">
           <Search className="h-6 w-6 text-muted-foreground/50" aria-hidden="true" />
           <p className="font-mono text-xs text-muted-foreground">
-            No projects match{query ? ` “${query}”` : ''}{filter !== 'all' ? ` in ${filter}` : ''}
+            No projects match{query ? ` “${query}”` : ''}
+            {filter !== 'all' ? ` in ${filter}` : ''}
             {techFilter !== 'all' ? ` for ${techFilter}` : ''}.
           </p>
           <button
-            onClick={() => { setQuery(''); setFilter('all'); setTechFilter('all'); }}
+            onClick={() => {
+              setQuery('');
+              setFilter('all');
+              setTechFilter('all');
+            }}
             className="rounded-lg bg-amber-color px-3 py-1.5 font-mono text-xs font-bold text-[#030c14] hover:bg-amber-glow"
           >
             Reset
@@ -361,9 +407,15 @@ export default function ProjectGrid({ query, setQuery }: { query: string; setQue
       )}
 
       <p className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[10px] text-muted-foreground/70">
-        <span className="inline-flex items-center gap-1"><Github className="h-3 w-3" /> Source on github.com/DLinacre</span>
-        <span className="inline-flex items-center gap-1"><ExternalLink className="h-3 w-3" /> Live apps open in a new tab</span>
-        <span className="inline-flex items-center gap-1"><Lock className="h-3 w-3" /> Private work stays private</span>
+        <span className="inline-flex items-center gap-1">
+          <Github className="h-3 w-3" /> Source on github.com/DLinacre
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <ExternalLink className="h-3 w-3" /> Live apps open in a new tab
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <Lock className="h-3 w-3" /> Private work stays private
+        </span>
       </p>
 
       {/* Project detail modal */}

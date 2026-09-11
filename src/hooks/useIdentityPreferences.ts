@@ -18,7 +18,7 @@ function syncQueryParamsToStorage() {
     ['brand_glow', 'linacre_brand_glow'],
     ['brand_name', 'linacre_brand_name'],
     ['brand_primary', 'linacre_brand_custom_primary'],
-    ['brand_secondary', 'linacre_brand_custom_secondary']
+    ['brand_secondary', 'linacre_brand_custom_secondary'],
   ];
 
   mappings.forEach(([paramKey, storageKey]) => {
@@ -34,7 +34,8 @@ function readIdentity(): IdentityPreferences {
   const colorId = !storedColor || storedColor === 'amber' ? DEFAULT_IDENTITY.colorId : storedColor;
 
   // Preserve legacy shared links while normalising future stored values.
-  if (storedColor === 'amber') localStorage.setItem('linacre_brand_color', DEFAULT_IDENTITY.colorId);
+  if (storedColor === 'amber')
+    localStorage.setItem('linacre_brand_color', DEFAULT_IDENTITY.colorId);
 
   return {
     colorId,
@@ -47,7 +48,7 @@ function readIdentity(): IdentityPreferences {
     bio: safeGet('linacre_brand_bio', DEFAULT_IDENTITY.bio),
     glow: Number(localStorage.getItem('linacre_brand_glow') || DEFAULT_IDENTITY.glow),
     customPrimary: safeGet('linacre_brand_custom_primary', DEFAULT_IDENTITY.customPrimary),
-    customSecondary: safeGet('linacre_brand_custom_secondary', DEFAULT_IDENTITY.customSecondary)
+    customSecondary: safeGet('linacre_brand_custom_secondary', DEFAULT_IDENTITY.customSecondary),
   };
 }
 

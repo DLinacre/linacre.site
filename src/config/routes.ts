@@ -14,7 +14,7 @@ export const ROUTE_LABEL: Record<string, string> = {
   '/terms': 'Terms',
   '/accessibility': 'Accessibility',
   '/mob-deals': 'Mob Deals',
-  '/pokeguru': 'PokeGuru'
+  '/pokeguru': 'PokeGuru',
 };
 
 export const ROUTE_TAB_IDS = [
@@ -30,7 +30,7 @@ export const ROUTE_TAB_IDS = [
   'cookie-policy',
   'terms',
   'mob-deals',
-  'pokeguru'
+  'pokeguru',
 ] as const;
 
 export const APP_TABS: readonly AppTab[] = [
@@ -47,7 +47,7 @@ export const APP_TABS: readonly AppTab[] = [
   'cookie-policy',
   'terms',
   'mob-deals',
-  'pokeguru'
+  'pokeguru',
 ];
 
 const routeTabSet = new Set<string>(ROUTE_TAB_IDS);

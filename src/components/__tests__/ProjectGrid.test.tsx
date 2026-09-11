@@ -31,7 +31,9 @@ describe('ProjectGrid', () => {
     const noArtwork = SITE_PROJECTS.find(p => !p.private && !p.artwork && p.url);
     expect(noArtwork).toBeDefined();
     // The project name still renders as a card button regardless of artwork.
-    const card = screen.getByRole('button', { name: new RegExp(`View details for ${noArtwork!.name}`) });
+    const card = screen.getByRole('button', {
+      name: new RegExp(`View details for ${noArtwork!.name}`),
+    });
     expect(card).toBeInTheDocument();
   });
 
@@ -39,7 +41,9 @@ describe('ProjectGrid', () => {
     const user = userEvent.setup();
     render(<ProjectGrid query="" setQuery={() => {}} />);
 
-    const card = screen.getByRole('button', { name: new RegExp(`View details for ${sample!.name}`) });
+    const card = screen.getByRole('button', {
+      name: new RegExp(`View details for ${sample!.name}`),
+    });
     await user.click(card);
 
     // Dialog should be present and describe the project.

@@ -37,7 +37,7 @@ async function askAI(prompt: string): Promise<string> {
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt, history: [] })
+      body: JSON.stringify({ prompt, history: [] }),
     });
     if (!res.ok) throw new Error(`API returned ${res.status}`);
     const data = await res.json();
@@ -60,7 +60,7 @@ async function main() {
     status: 'clean',
     gitStatus: 'clean',
     compilerStatus: 'pass',
-    actionsTaken: []
+    actionsTaken: [],
   };
 
   // 1. Check Git
@@ -89,7 +89,9 @@ async function main() {
     // If the system is broken, we enforce the "clean and professional" rule
     log('Compiler failed. Reverting dirty state to enforce strict quality gate.');
     runCmd('git restore .');
-    report.actionsTaken.push('Quality Gate failed: ran git restore . to delete unverified changes.');
+    report.actionsTaken.push(
+      'Quality Gate failed: ran git restore . to delete unverified changes.',
+    );
     report.status = 'reverted';
   } else {
     report.actionsTaken.push('Compiler check passed.');
@@ -103,9 +105,11 @@ async function main() {
       const updates = JSON.parse(outdatedRes.out);
       const packages = Object.keys(updates);
       if (packages.length > 0) {
-        report.actionsTaken.push(`Found ${packages.length} packages to upgrade. Ignoring auto-upgrade to prevent breaking changes without human review.`);
+        report.actionsTaken.push(
+          `Found ${packages.length} packages to upgrade. Ignoring auto-upgrade to prevent breaking changes without human review.`,
+        );
       }
-    } catch(e) {}
+    } catch (e) {}
   }
 
   // 5. Trigger Daily Automations

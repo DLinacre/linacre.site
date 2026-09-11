@@ -9,17 +9,8 @@
   "statusDetail": "Core systems complete. Download the .rbxlx and open it in Roblox Studio. Not yet published to Roblox.",
   "platform": "Roblox",
   "engine": "Roblox / Luau",
-  "genre": [
-    "Idle",
-    "Incremental",
-    "Tycoon",
-    "Simulator"
-  ],
-  "devices": [
-    "Phone",
-    "Tablet",
-    "Desktop"
-  ],
+  "genre": ["Idle", "Incremental", "Tycoon", "Simulator"],
+  "devices": ["Phone", "Tablet", "Desktop"],
   "links": {
     "github": "https://github.com/DLinacre/slime-factory-tycoon",
     "roblox": null,

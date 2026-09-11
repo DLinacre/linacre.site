@@ -16,13 +16,13 @@ function runCmd(cmd: string) {
   }
 }
 
-log("Starting Release Management...");
+log('Starting Release Management...');
 
 try {
   // Check if working directory is clean
   const status = runCmd('git status --porcelain');
   if (status.length > 0) {
-    log("Working directory is not clean. Aborting automated release.");
+    log('Working directory is not clean. Aborting automated release.');
     process.exit(0);
   }
 
@@ -32,11 +32,10 @@ try {
   if (fs.existsSync('package.json')) {
     const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
     log(`Current version is ${pkg.version}`);
-    log("Release agent verified version and tags. (Auto-bump is gated behind strict checks).");
+    log('Release agent verified version and tags. (Auto-bump is gated behind strict checks).');
   }
-
 } catch (err: any) {
   log(`Warning: ${err.message}`);
 }
 
-log("Release Management Complete.");
+log('Release Management Complete.');

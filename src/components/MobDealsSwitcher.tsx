@@ -62,7 +62,7 @@ export default function MobDealsSwitcher() {
   const [minData, setMinData] = useState<number>(30);
 
   const filteredPlans = SIM_PLANS.filter(
-    plan => plan.monthlyCost <= maxBudget && plan.dataGb >= minData
+    plan => plan.monthlyCost <= maxBudget && plan.dataGb >= minData,
   );
 
   const pacSteps = [
@@ -95,7 +95,8 @@ export default function MobDealsSwitcher() {
             Compare UK SIM-Only Deals & Keep Your Number
           </h1>
           <p className="text-lg text-slate-300 leading-relaxed">
-            Filter 5G UK SIM-only contracts by monthly budget and data allowance. Follow our 3-step PAC code guide to switch networks seamlessly without losing your number.
+            Filter 5G UK SIM-only contracts by monthly budget and data allowance. Follow our 3-step
+            PAC code guide to switch networks seamlessly without losing your number.
           </p>
         </div>
       </section>
@@ -163,9 +164,7 @@ export default function MobDealsSwitcher() {
             key={plan.network}
             whileHover={{ y: -4 }}
             className={`flex flex-col justify-between rounded-2xl border p-6 space-y-4 shadow-lg transition-all ${
-              plan.recommended
-                ? 'border-cyan/50 bg-[#061e30]'
-                : 'border-border-color bg-[#071927]'
+              plan.recommended ? 'border-cyan/50 bg-[#061e30]' : 'border-border-color bg-[#071927]'
             }`}
           >
             <div className="space-y-3">
@@ -218,14 +217,21 @@ export default function MobDealsSwitcher() {
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-slate-100">Keep Your Mobile Number (PAC Guide)</h2>
-            <p className="text-sm text-slate-400">UK Ofcom standard process for 100% free number transfers</p>
+            <h2 className="text-xl font-bold text-slate-100">
+              Keep Your Mobile Number (PAC Guide)
+            </h2>
+            <p className="text-sm text-slate-400">
+              UK Ofcom standard process for 100% free number transfers
+            </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {pacSteps.map(s => (
-            <div key={s.step} className="p-5 rounded-xl bg-[#041019] border border-border-color space-y-3">
+            <div
+              key={s.step}
+              className="p-5 rounded-xl bg-[#041019] border border-border-color space-y-3"
+            >
               <div className="flex items-center justify-between">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-cyan/10 border border-cyan/30 text-cyan text-sm font-bold font-mono">
                   {s.step}

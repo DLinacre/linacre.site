@@ -1,16 +1,50 @@
 /* HELIX — in-browser evolution engine. No server required. */
 (function (root) {
-  "use strict";
+  'use strict';
 
   const OPCODES = [
-    "SEED", "HASH", "XOR", "PERM", "FOLD", "EXPAND", "REFLECT", "BRANCH",
-    "CROSS", "EMIT", "ABSORB", "SHIFT", "BLEND", "GUARD", "ECHO", "SPLIT",
-    "ROT", "MIX", "CLAMP", "FUSE",
+    'SEED',
+    'HASH',
+    'XOR',
+    'PERM',
+    'FOLD',
+    'EXPAND',
+    'REFLECT',
+    'BRANCH',
+    'CROSS',
+    'EMIT',
+    'ABSORB',
+    'SHIFT',
+    'BLEND',
+    'GUARD',
+    'ECHO',
+    'SPLIT',
+    'ROT',
+    'MIX',
+    'CLAMP',
+    'FUSE',
   ];
   const COSTS = {
-    SEED: 2, HASH: 6, XOR: 3, PERM: 4, FOLD: 5, EXPAND: 5, REFLECT: 3, BRANCH: 2,
-    CROSS: 4, EMIT: 3, ABSORB: 3, SHIFT: 2, BLEND: 4, GUARD: 1, ECHO: 2, SPLIT: 4,
-    ROT: 2, MIX: 4, CLAMP: 2, FUSE: 5,
+    SEED: 2,
+    HASH: 6,
+    XOR: 3,
+    PERM: 4,
+    FOLD: 5,
+    EXPAND: 5,
+    REFLECT: 3,
+    BRANCH: 2,
+    CROSS: 4,
+    EMIT: 3,
+    ABSORB: 3,
+    SHIFT: 2,
+    BLEND: 4,
+    GUARD: 1,
+    ECHO: 2,
+    SPLIT: 4,
+    ROT: 2,
+    MIX: 4,
+    CLAMP: 2,
+    FUSE: 5,
   };
   const OP_INDEX = Object.fromEntries(OPCODES.map((n, i) => [n, i]));
 
@@ -52,7 +86,7 @@
   }
 
   function hex8(n) {
-    return (n >>> 0).toString(16).padStart(8, "0");
+    return (n >>> 0).toString(16).padStart(8, '0');
   }
 
   function newId(rng) {
@@ -78,21 +112,25 @@
   }
 
   function encodeGenome(genes) {
-    return genes.map((g) => OPCODES[g.op] + ":" + g.param.toString(16).padStart(2, "0")).join("|");
+    return genes.map(g => OPCODES[g.op] + ':' + g.param.toString(16).padStart(2, '0')).join('|');
   }
 
   function decodeGenome(text) {
     if (!text) return [];
-    return text.split("|").filter(Boolean).map((tok) => {
-      const [name, hx] = tok.split(":");
-      return gene(OP_INDEX[name] || 0, parseInt(hx || "0", 16) || 0);
-    });
+    return text
+      .split('|')
+      .filter(Boolean)
+      .map(tok => {
+        const [name, hx] = tok.split(':');
+        return gene(OP_INDEX[name] || 0, parseInt(hx || '0', 16) || 0);
+      });
   }
 
   function randomGenome(rng) {
     const n = CFG.genomeMin + Math.floor(rng() * (CFG.genomeMax - CFG.genomeMin + 1));
     const genes = [];
-    for (let i = 0; i < n; i++) genes.push(gene(Math.floor(rng() * OPCODES.length), Math.floor(rng() * 256)));
+    for (let i = 0; i < n; i++)
+      genes.push(gene(Math.floor(rng() * OPCODES.length), Math.floor(rng() * 256)));
     return genes;
   }
 
@@ -107,7 +145,7 @@
   }
 
   function copyGenes(genes) {
-    return genes.map((g) => ({ op: g.op, param: g.param }));
+    return genes.map(g => ({ op: g.op, param: g.param }));
   }
 
   function genomeDist(a, b) {
@@ -130,7 +168,11 @@
       }
     }
     if (rng() < rate * 0.6 && g.length < CFG.genomeMax) {
-      g.splice(Math.floor(rng() * (g.length + 1)), 0, gene(Math.floor(rng() * OPCODES.length), Math.floor(rng() * 256)));
+      g.splice(
+        Math.floor(rng() * (g.length + 1)),
+        0,
+        gene(Math.floor(rng() * OPCODES.length), Math.floor(rng() * 256)),
+      );
       changes++;
     }
     if (rng() < rate * 0.4 && g.length > CFG.genomeMin) {
@@ -173,111 +215,128 @@
     for (let i = 0; i < n; i++) tape[i] = env[i % env.length];
     const out = [];
     let energy = CFG.energy;
-    let a = 0, b = 0, ip = 0, steps = 0;
+    let a = 0,
+      b = 0,
+      ip = 0,
+      steps = 0;
     let i = 0;
     let skip = false;
-    const spend = (c) => {
-      if (energy < c) { energy = 0; return false; }
+    const spend = c => {
+      if (energy < c) {
+        energy = 0;
+        return false;
+      }
       energy -= c;
       return true;
     };
-    const emit = (v) => { if (out.length < CFG.out) out.push(v & 255); };
+    const emit = v => {
+      if (out.length < CFG.out) out.push(v & 255);
+    };
 
     while (i < genes.length && energy > 0) {
-      if (skip) { skip = false; i++; continue; }
+      if (skip) {
+        skip = false;
+        i++;
+        continue;
+      }
       const g = genes[i];
       const name = OPCODES[g.op];
       const p = g.param;
       if (!spend(COSTS[name] || 3)) break;
       steps++;
-      if (name === "SEED") {
+      if (name === 'SEED') {
         const h = hash32(String.fromCharCode(...tape.subarray(0, 16)) + p);
         for (let k = 0; k < 16; k++) tape[k % n] ^= (h >>> ((k % 4) * 8)) & 255;
         a = h & 255;
-      } else if (name === "HASH") {
-        const h = hash32(String.fromCharCode(...tape) + p + "," + a);
+      } else if (name === 'HASH') {
+        const h = hash32(String.fromCharCode(...tape) + p + ',' + a);
         const span = 16 + (p % 16);
         for (let k = 0; k < span; k++) tape[k % n] = (h >>> ((k % 4) * 8)) & 255;
         b = (h >>> 8) & 255;
-      } else if (name === "XOR") {
+      } else if (name === 'XOR') {
         for (let k = 0; k < n; k++) tape[k] ^= (p + k * a) & 255;
-      } else if (name === "PERM") {
+      } else if (name === 'PERM') {
         const step = (p % (n - 1)) + 1;
         const nxt = new Uint8Array(n);
         for (let k = 0; k < n; k++) nxt[k] = tape[(k * step) % n];
         tape.set(nxt);
-      } else if (name === "FOLD") {
+      } else if (name === 'FOLD') {
         const half = n >> 1;
         for (let k = 0; k < half; k++) tape[k] = (tape[k] + tape[k + half] + p) & 255;
         for (let k = half; k < n; k++) tape[k] = tape[k - half] ^ p;
-      } else if (name === "EXPAND") {
+      } else if (name === 'EXPAND') {
         const half = Math.max(1, n >> 1);
         const src = tape.slice(0, half);
         for (let k = 0; k < n; k++) tape[k] = (src[k % src.length] + k * p) & 255;
-      } else if (name === "REFLECT") {
+      } else if (name === 'REFLECT') {
         tape.reverse();
         for (let k = 0; k < n; k++) tape[k] ^= (p * (k + 1)) & 255;
-      } else if (name === "BRANCH") {
+      } else if (name === 'BRANCH') {
         a = (a + p + tape[p % n]) & 255;
-      } else if (name === "CROSS") {
+      } else if (name === 'CROSS') {
         for (let k = 0; k < n - 1; k += 2) {
-          const x = tape[k], y = tape[k + 1];
+          const x = tape[k],
+            y = tape[k + 1];
           tape[k] = (x & p) | (y & (~p & 255));
           tape[k + 1] = (y & p) | (x & (~p & 255));
         }
-      } else if (name === "EMIT") {
+      } else if (name === 'EMIT') {
         const idx = (a + p) % n;
         emit(tape[idx]);
         emit(tape[(idx + b) % n]);
         a = tape[idx];
-      } else if (name === "ABSORB") {
+      } else if (name === 'ABSORB') {
         const v = env[ip % env.length];
         ip++;
         tape[p % n] ^= v;
         b = v;
-      } else if (name === "SHIFT") {
+      } else if (name === 'SHIFT') {
         const k = (p % 7) + 1;
         for (let t = 0; t < n; t++) tape[t] = ((tape[t] << k) | (tape[t] >> (8 - k))) & 255;
-      } else if (name === "BLEND") {
+      } else if (name === 'BLEND') {
         const nxt = tape.slice();
         for (let t = 0; t < n; t++) tape[t] = (nxt[t] * (256 - p) + nxt[(t + 1) % n] * p) >> 8;
-      } else if (name === "GUARD") {
+      } else if (name === 'GUARD') {
         b = energy & 255;
-      } else if (name === "ECHO") {
+      } else if (name === 'ECHO') {
         if (out.length) {
           const last = out[out.length - 1];
           tape[p % n] = last;
           emit(last ^ p);
         } else emit(tape[p % n]);
-      } else if (name === "SPLIT") {
+      } else if (name === 'SPLIT') {
         const mid = n >> 1;
         const left = tape.slice(0, mid);
         const right = tape.slice(mid);
         for (let t = 0; t < mid; t++) tape[t] = left[t] ^ right[t % right.length] ^ p;
-        for (let t = mid; t < n; t++) tape[t] = (right[(t - mid) % right.length] + left[t % left.length]) & 255;
-      } else if (name === "ROT") {
+        for (let t = mid; t < n; t++)
+          tape[t] = (right[(t - mid) % right.length] + left[t % left.length]) & 255;
+      } else if (name === 'ROT') {
         const k = p % n;
         const nxt = new Uint8Array(n);
         nxt.set(tape.subarray(k), 0);
         nxt.set(tape.subarray(0, k), n - k);
         tape.set(nxt);
-      } else if (name === "MIX") {
-        const h = hash32(String.fromCharCode(p, a, b) + String.fromCharCode(...tape.subarray(0, 16)));
+      } else if (name === 'MIX') {
+        const h = hash32(
+          String.fromCharCode(p, a, b) + String.fromCharCode(...tape.subarray(0, 16)),
+        );
         for (let t = 0; t < n; t++) tape[t] ^= ((h >>> ((t % 4) * 8)) ^ (t * p)) & 255;
-      } else if (name === "CLAMP") {
-        const lo = Math.min(p, 255 - p), hi = Math.max(p, 255 - p);
+      } else if (name === 'CLAMP') {
+        const lo = Math.min(p, 255 - p),
+          hi = Math.max(p, 255 - p);
         for (let t = 0; t < n; t++) {
           if (tape[t] < lo) tape[t] = lo;
           else if (tape[t] > hi) tape[t] = hi;
         }
-      } else if (name === "FUSE") {
-        const h = hash32(String.fromCharCode(...tape.subarray(0, 24)) + out.join(",") + p);
+      } else if (name === 'FUSE') {
+        const h = hash32(String.fromCharCode(...tape.subarray(0, 24)) + out.join(',') + p);
         for (let t = 0; t < 8; t++) tape[(a + t) % n] ^= (h >>> ((t % 4) * 8)) & 255;
         emit((h >>> 16) & 255);
         a = (h >>> 8) & 255;
       }
-      if (name === "GUARD" && energy < (p / 255) * CFG.energy) skip = true;
-      if (name === "BRANCH" && (a ^ p) & 1) {
+      if (name === 'GUARD' && energy < (p / 255) * CFG.energy) skip = true;
+      if (name === 'BRANCH' && (a ^ p) & 1) {
         i += 1 + (p % 3);
         continue;
       }
@@ -285,13 +344,14 @@
     }
 
     const output = out.length ? Uint8Array.from(out) : tape.slice(0, 16);
-    const artifact = hex8(hash32(String.fromCharCode(...output) + String.fromCharCode(...tape.subarray(0, 8)))) +
-      hex8(hash32("x" + String.fromCharCode(...output)));
+    const artifact =
+      hex8(hash32(String.fromCharCode(...output) + String.fromCharCode(...tape.subarray(0, 8)))) +
+      hex8(hash32('x' + String.fromCharCode(...output)));
     const used = CFG.energy - energy;
     const ent = shannon(output);
     let repeats = 0;
     for (let t = 1; t < output.length; t++) if (output[t] === output[t - 1]) repeats++;
-    const structure = 1 - Math.abs((repeats / Math.max(1, output.length)) - 0.18) / 0.82;
+    const structure = 1 - Math.abs(repeats / Math.max(1, output.length) - 0.18) / 0.82;
     return {
       artifact: artifact.slice(0, 16),
       energy,
@@ -333,18 +393,23 @@
     }
     const clean = r.halted ? 1 : 0.35;
     const lenPref = Math.max(0.2, 1 - Math.abs(org.genes.length - 14) / 20);
-    org.fit = Math.max(0, Math.min(1.5,
-      0.34 * org.nov + 0.24 * org.eff + 0.22 * org.str + 0.10 * clean + 0.10 * lenPref
-    ));
+    org.fit = Math.max(
+      0,
+      Math.min(1.5, 0.34 * org.nov + 0.24 * org.eff + 0.22 * org.str + 0.1 * clean + 0.1 * lenPref),
+    );
   }
 
   function assignSpecies(pop) {
     const cents = [];
     for (const org of pop) {
-      let best = 1e9, assigned = -1;
+      let best = 1e9,
+        assigned = -1;
       for (let i = 0; i < cents.length; i++) {
         const d = genomeDist(org.genes, cents[i]);
-        if (d < 0.45 && d < best) { best = d; assigned = i; }
+        if (d < 0.45 && d < best) {
+          best = d;
+          assigned = i;
+        }
       }
       if (assigned < 0) {
         assigned = cents.length;
@@ -358,7 +423,8 @@
   function diversity(pop) {
     if (pop.length < 2) return 0;
     const step = Math.max(1, (pop.length / 12) | 0);
-    let tot = 0, n = 0;
+    let tot = 0,
+      n = 0;
     for (let i = 0; i < pop.length; i += step) {
       for (let j = i + 1; j < pop.length; j += step) {
         tot += genomeDist(pop[i].genes, pop[j].genes);
@@ -436,8 +502,14 @@
       sp: 0,
       parents: opts.parents || [],
       genes: clampGenome(opts.genes || randomGenome(this.rng)),
-      fit: 0, nov: 0, eff: 0, str: 0, ent: 0, energy: 0, steps: 0,
-      art: "",
+      fit: 0,
+      nov: 0,
+      eff: 0,
+      str: 0,
+      ent: 0,
+      energy: 0,
+      steps: 0,
+      art: '',
       halted: true,
       elite: !!opts.elite,
       birth: opts.birth || 0,
@@ -461,14 +533,17 @@
   };
 
   Universe.prototype.recompute = function () {
-    const fits = this.pop.map((o) => o.fit);
-    const dna = this.pop.map((o) => o.genes.length);
+    const fits = this.pop.map(o => o.fit);
+    const dna = this.pop.map(o => o.genes.length);
     const best = fits.length ? Math.max.apply(null, fits) : 0;
     const mean = fits.length ? fits.reduce((a, b) => a + b, 0) / fits.length : 0;
     const div = diversity(this.pop);
     const dnaMean = dna.length ? dna.reduce((a, b) => a + b, 0) / dna.length : 0;
     this.metrics = {
-      best, mean, diversity: div, dna_mean: dnaMean,
+      best,
+      mean,
+      diversity: div,
+      dna_mean: dnaMean,
       complexity: best * Math.max(1, dnaMean) * (1 + this.species / 10) * Math.log1p(this.epoch),
     };
   };
@@ -483,12 +558,14 @@
     this.hall.push(row);
     this.hall.sort((a, b) => b.fit - a.fit);
     const seen = new Set();
-    this.hall = this.hall.filter((h) => {
-      const k = h.art + h.id;
-      if (seen.has(k)) return false;
-      seen.add(k);
-      return true;
-    }).slice(0, CFG.hall);
+    this.hall = this.hall
+      .filter(h => {
+        const k = h.art + h.id;
+        if (seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      })
+      .slice(0, CFG.hall);
   };
 
   Universe.prototype.ignite = function () {
@@ -496,7 +573,7 @@
     for (let i = 0; i < CFG.pop; i++) this.pop.push(this.makeOrg({ birth: 0 }));
     this.epoch = 0;
     this.env = this.freshEnv();
-    this.note("genesis", "A cold tape. " + CFG.pop + " organisms seeded.");
+    this.note('genesis', 'A cold tape. ' + CFG.pop + ' organisms seeded.');
     this.evaluateAll();
     this.pushHistory();
   };
@@ -507,10 +584,17 @@
     const births = [];
     for (let i = 0; i < CFG.elite && i < ranked.length; i++) {
       const e = ranked[i];
-      children.push(this.makeOrg({
-        id: e.id, gen: e.gen, genes: copyGenes(e.genes),
-        parents: e.parents, elite: true, birth: e.birth, muts: e.muts,
-      }));
+      children.push(
+        this.makeOrg({
+          id: e.id,
+          gen: e.gen,
+          genes: copyGenes(e.genes),
+          parents: e.parents,
+          elite: true,
+          birth: e.birth,
+          muts: e.muts,
+        }),
+      );
     }
     while (children.length < CFG.pop) {
       const p1 = tournament(this.pop, this.rng);
@@ -527,7 +611,11 @@
       }
       const m = mutate(genes, this.rng, CFG.mutate);
       const child = this.makeOrg({
-        gen, genes: m.genes, parents, birth: this.epoch, muts: m.muts,
+        gen,
+        genes: m.genes,
+        parents,
+        birth: this.epoch,
+        muts: m.muts,
       });
       children.push(child);
       births.push({ id: child.id, from: parents[0] });
@@ -543,20 +631,31 @@
 
   Universe.prototype.bigBang = function () {
     const champ = this.champion();
-    if (champ) this.lineage.push({ genome: encodeGenome(champ.genes), fit: champ.fit, epoch: this.epoch });
+    if (champ)
+      this.lineage.push({ genome: encodeGenome(champ.genes), fit: champ.fit, epoch: this.epoch });
     if (this.lineage.length > 16) this.lineage = this.lineage.slice(-16);
-    const seeds = this.lineage.slice().sort((a, b) => b.fit - a.fit).map((l) => l.genome);
+    const seeds = this.lineage
+      .slice()
+      .sort((a, b) => b.fit - a.fit)
+      .map(l => l.genome);
     if (!seeds.length && champ) seeds.push(encodeGenome(champ.genes));
-    this.note("big_bang",
-      "Collapse at diversity " + this.metrics.diversity.toFixed(3) +
-      (champ ? ". Champion " + champ.id + " folded into lineage memory." : ".")
+    this.note(
+      'big_bang',
+      'Collapse at diversity ' +
+        this.metrics.diversity.toFixed(3) +
+        (champ ? '. Champion ' + champ.id + ' folded into lineage memory.' : '.'),
     );
     const next = [];
     for (let i = 0; i < Math.min(4, seeds.length); i++) {
       const m = mutate(decodeGenome(seeds[i]), this.rng, 0.12);
-      next.push(this.makeOrg({
-        genes: m.genes, parents: champ ? [champ.id] : [], birth: this.epoch, muts: m.muts,
-      }));
+      next.push(
+        this.makeOrg({
+          genes: m.genes,
+          parents: champ ? [champ.id] : [],
+          birth: this.epoch,
+          muts: m.muts,
+        }),
+      );
     }
     while (next.length < CFG.pop) {
       if (this.rng() < 0.45 && seeds.length) {
@@ -600,9 +699,9 @@
     const ranked = this.pop.slice().sort((a, b) => b.fit - a.fit);
     const champ = ranked[0] || null;
     return {
-      version: "2.1.0",
+      version: '2.1.0',
       epoch: this.epoch,
-      status: this.paused ? "paused" : "running",
+      status: this.paused ? 'paused' : 'running',
       interval: this.interval / 1000,
       uptime: (Date.now() - this.started) / 1000,
       population: this.pop.length,
@@ -615,8 +714,8 @@
       hall: this.hall.slice(),
       bang: this.bangFlash,
       births: this.lastBirths,
-      home: "browser",
-      source: "local",
+      home: 'browser',
+      source: 'local',
     };
   };
 
@@ -624,22 +723,29 @@
     try {
       const data = {
         epoch: this.epoch,
-        pop: this.pop.map((o) => ({
-          id: o.id, gen: o.gen, parents: o.parents, genes: encodeGenome(o.genes),
-          elite: o.elite, birth: o.birth, muts: o.muts,
+        pop: this.pop.map(o => ({
+          id: o.id,
+          gen: o.gen,
+          parents: o.parents,
+          genes: encodeGenome(o.genes),
+          elite: o.elite,
+          birth: o.birth,
+          muts: o.muts,
         })),
         lineage: this.lineage,
         hall: this.hall,
         history: this.history,
         events: this.events.slice(-12),
       };
-      localStorage.setItem("helix-universe-v2", JSON.stringify(data));
-    } catch (_) { /* private mode */ }
+      localStorage.setItem('helix-universe-v2', JSON.stringify(data));
+    } catch (_) {
+      /* private mode */
+    }
   };
 
   Universe.prototype.restore = function () {
     try {
-      const raw = localStorage.getItem("helix-universe-v2");
+      const raw = localStorage.getItem('helix-universe-v2');
       if (!raw) return false;
       const data = JSON.parse(raw);
       if (!data.pop || !data.pop.length) return false;
@@ -648,11 +754,18 @@
       this.hall = data.hall || [];
       this.history = data.history || this.history;
       this.events = data.events || [];
-      this.pop = data.pop.map((o) => this.makeOrg({
-        id: o.id, gen: o.gen, parents: o.parents || [],
-        genes: decodeGenome(o.genes), elite: o.elite, birth: o.birth, muts: o.muts,
-      }));
-      this.note("resume", "Resumed " + this.pop.length + " organisms at epoch " + this.epoch + ".");
+      this.pop = data.pop.map(o =>
+        this.makeOrg({
+          id: o.id,
+          gen: o.gen,
+          parents: o.parents || [],
+          genes: decodeGenome(o.genes),
+          elite: o.elite,
+          birth: o.birth,
+          muts: o.muts,
+        }),
+      );
+      this.note('resume', 'Resumed ' + this.pop.length + ' organisms at epoch ' + this.epoch + '.');
       this.evaluateAll();
       return true;
     } catch (_) {
@@ -667,4 +780,4 @@
     decodeGenome,
     hash32,
   };
-})(typeof window !== "undefined" ? window : globalThis);
+})(typeof window !== 'undefined' ? window : globalThis);

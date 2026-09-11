@@ -116,7 +116,7 @@ const GAMES_DATA: GameItem[] = [
     title: 'Tap & Slap',
     genre: 'Rhythm',
     tagline: "Dance-mat beat 'em up — tap to kill enemies ON the beat",
-    desc: "Four neon lanes, one rule: every enemy dies on the downbeat. Tap a pad or hammer the arrows — PERFECT hits build an 8× combo, misses cost health. Original procedural synthwave fight music, daily challenges and leaderboards.",
+    desc: 'Four neon lanes, one rule: every enemy dies on the downbeat. Tap a pad or hammer the arrows — PERFECT hits build an 8× combo, misses cost health. Original procedural synthwave fight music, daily challenges and leaderboards.',
     tags: ['Rhythm', "Beat 'em up", 'Dance-mat', 'Synthwave', 'Web Audio'],
     tech: 'Next.js 15 · Phaser 3 · TypeScript · Prisma',
     badge: 'Live',
@@ -552,7 +552,11 @@ export default function Games() {
       </div>
 
       {/* Genre filter */}
-      <div className="flex flex-wrap items-center gap-2 -mt-2" role="group" aria-label="Filter games by genre">
+      <div
+        className="flex flex-wrap items-center gap-2 -mt-2"
+        role="group"
+        aria-label="Filter games by genre"
+      >
         {GENRES.map(g => (
           <button
             key={g}
@@ -600,85 +604,89 @@ export default function Games() {
                 </div>
               )}
               <div className="p-6 flex flex-col justify-between space-y-4 flex-1">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span
-                    className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${badgeClasses}`}
-                  >
-                    {game.badge}
-                  </span>
-
-                  <button
-                    onClick={() => toggleFav(game.title)}
-                    aria-pressed={isFav}
-                    aria-label={isFav ? `Remove ${game.title} from favourites` : `Add ${game.title} to favourites`}
-                    title={isFav ? 'Remove from favourites' : 'Add to favourites'}
-                    className="p-1.5 rounded-lg hover:bg-muted/60 transition-colors cursor-pointer"
-                  >
-                    <Heart
-                      className={`w-4 h-4 ${isFav ? 'text-rose-400 fill-rose-400' : 'text-muted-foreground'}`}
-                    />
-                  </button>
-                </div>
-
-                <div>
-                  <h3 className="font-display text-xl font-bold text-foreground">{game.title}</h3>
-                  <p className="font-mono text-xs text-amber-color mt-0.5">{game.tagline}</p>
-                </div>
-
-                <p className="text-xs text-muted-foreground leading-relaxed">{game.desc}</p>
-
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {game.tags.map(t => (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
                     <span
-                      key={t}
-                      className="font-mono text-[10px] bg-muted/40 px-2 py-0.5 rounded border border-border-color/50 text-muted-foreground"
+                      className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${badgeClasses}`}
                     >
-                      {t}
+                      {game.badge}
                     </span>
-                  ))}
-                </div>
-              </div>
 
-              <div className="pt-4 border-t border-border-color/50 flex items-center justify-between gap-3 font-mono text-xs">
-                <span className="text-[10px] text-muted-foreground">{game.tech}</span>
-
-                <div className="flex items-center gap-2">
-                  <a
-                    href={game.source}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-1.5 rounded-lg border border-border-color hover:border-amber-color/40 text-foreground text-xs font-mono font-bold hover:bg-muted/40 transition-all flex items-center gap-1"
-                  >
-                    <Code2 className="w-3.5 h-3.5" />
-                    <span>Code</span>
-                  </a>
-
-                  {isBuiltIn ? (
                     <button
-                      onClick={() => {
-                        setSnakeOpen(true);
-                        startSnake();
-                      }}
-                      data-play-snake
-                      className="px-3 py-1.5 rounded-lg bg-amber-color text-[#030c14] font-mono text-xs font-bold hover:bg-amber-glow transition-all flex items-center gap-1 cursor-pointer"
+                      onClick={() => toggleFav(game.title)}
+                      aria-pressed={isFav}
+                      aria-label={
+                        isFav
+                          ? `Remove ${game.title} from favourites`
+                          : `Add ${game.title} to favourites`
+                      }
+                      title={isFav ? 'Remove from favourites' : 'Add to favourites'}
+                      className="p-1.5 rounded-lg hover:bg-muted/60 transition-colors cursor-pointer"
                     >
-                      <Play className="w-3.5 h-3.5 fill-current" />
-                      <span>Play Now</span>
+                      <Heart
+                        className={`w-4 h-4 ${isFav ? 'text-rose-400 fill-rose-400' : 'text-muted-foreground'}`}
+                      />
                     </button>
-                  ) : (
-                    <a
-                      href={game.play}
-                      target={game.play.startsWith('/') ? undefined : '_blank'}
-                      rel={game.play.startsWith('/') ? undefined : 'noopener noreferrer'}
-                      className="px-3 py-1.5 rounded-lg bg-amber-color text-[#030c14] font-mono text-xs font-bold hover:bg-amber-glow transition-all flex items-center gap-1"
-                    >
-                      <Play className="w-3.5 h-3.5 fill-current" />
-                      <span>Play Game</span>
-                    </a>
-                  )}
+                  </div>
+
+                  <div>
+                    <h3 className="font-display text-xl font-bold text-foreground">{game.title}</h3>
+                    <p className="font-mono text-xs text-amber-color mt-0.5">{game.tagline}</p>
+                  </div>
+
+                  <p className="text-xs text-muted-foreground leading-relaxed">{game.desc}</p>
+
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {game.tags.map(t => (
+                      <span
+                        key={t}
+                        className="font-mono text-[10px] bg-muted/40 px-2 py-0.5 rounded border border-border-color/50 text-muted-foreground"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+
+                <div className="pt-4 border-t border-border-color/50 flex items-center justify-between gap-3 font-mono text-xs">
+                  <span className="text-[10px] text-muted-foreground">{game.tech}</span>
+
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={game.source}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 rounded-lg border border-border-color hover:border-amber-color/40 text-foreground text-xs font-mono font-bold hover:bg-muted/40 transition-all flex items-center gap-1"
+                    >
+                      <Code2 className="w-3.5 h-3.5" />
+                      <span>Code</span>
+                    </a>
+
+                    {isBuiltIn ? (
+                      <button
+                        onClick={() => {
+                          setSnakeOpen(true);
+                          startSnake();
+                        }}
+                        data-play-snake
+                        className="px-3 py-1.5 rounded-lg bg-amber-color text-[#030c14] font-mono text-xs font-bold hover:bg-amber-glow transition-all flex items-center gap-1 cursor-pointer"
+                      >
+                        <Play className="w-3.5 h-3.5 fill-current" />
+                        <span>Play Now</span>
+                      </button>
+                    ) : (
+                      <a
+                        href={game.play}
+                        target={game.play.startsWith('/') ? undefined : '_blank'}
+                        rel={game.play.startsWith('/') ? undefined : 'noopener noreferrer'}
+                        className="px-3 py-1.5 rounded-lg bg-amber-color text-[#030c14] font-mono text-xs font-bold hover:bg-amber-glow transition-all flex items-center gap-1"
+                      >
+                        <Play className="w-3.5 h-3.5 fill-current" />
+                        <span>Play Game</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             </motion.div>
           );

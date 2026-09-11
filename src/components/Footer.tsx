@@ -77,7 +77,8 @@ export default function Footer() {
                 <span>david@linacre.site</span>
               </div>
               <p className="mt-1 max-w-sm">
-                &copy; {currentYear} David Linacre. Built with React, TypeScript and Tailwind CSS v4.
+                &copy; {currentYear} David Linacre. Built with React, TypeScript and Tailwind CSS
+                v4.
               </p>
               <p className="text-[10px] text-muted-foreground/50 mt-0.5">
                 Useful software, clear systems, CyberBlue craft.

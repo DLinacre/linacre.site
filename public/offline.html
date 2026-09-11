@@ -1,63 +1,128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offline — linacre.site</title>
-<meta name="theme-color" content="#030c14">
-<meta name="description" content="You&#39;re offline — try again once your connection is back.">
-<meta name="robots" content="noindex,nofollow">
-<style>
-  :root {
-    --bg: #030c14; --amber: #22D3EE; --cyan: #5ccfe6; --text: #e6e9ef;
-    --muted: #a1a8b8;
-    --mono: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg); color: var(--text);
-    font-family: var(--mono); display: flex; align-items: center;
-    justify-content: center; min-height: 100vh; padding: 24px;
-    background-image: radial-gradient(60rem 40rem at 50% -10%, rgba(255,180,84,.06), transparent 60%);
-  }
-  .wrap { text-align: center; max-width: 460px; }
-  .glyph { font-size: 3.5rem; color: var(--amber); line-height: 1; margin-bottom: 12px; }
-  .msg { color: var(--text); margin: 8px 0; font-size: 1.05rem; line-height: 1.5; font-weight: 600; }
-  .sub { color: var(--muted); margin: 4px 0 24px; font-size: 0.85rem; line-height: 1.5; }
-  button, a {
-    color: var(--cyan); text-decoration: none; padding: 12px 20px;
-    border: 1px solid rgba(92,207,230,.3); border-radius: 8px;
-    display: inline-block; font-size: 0.9rem; font-weight: 500;
-    background: transparent; font-family: inherit; cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  button.primary, a.primary {
-    background: var(--amber); color: #030c14; border-color: var(--amber);
-  }
-  button:hover, a:hover { transform: translateY(-1px); }
-  button:focus-visible, a:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
-  .row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-  @media (prefers-reduced-motion: reduce) {
-    button, a { transition: none; }
-  }
-</style>
-</head>
-<body>
-<div class="wrap">
-  <div class="glyph" aria-hidden="true">/&nbsp;/&nbsp;/</div>
-  <p class="msg">You&#39;re offline</p>
-  <p class="sub">
-    linacre.site can&#39;t reach the network right now. Cached pages you&#39;ve
-    already visited should still work &mdash; try navigating there, or retry
-    once you&#39;re back online.
-  </p>
-  <div class="row">
-    <button class="primary" onclick="location.reload()">Retry</button>
-    <a href="/">Return home</a>
-  </div>
-</div>
-<script>
-  window.addEventListener('online', function () { location.reload(); });
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offline — linacre.site</title>
+    <meta name="theme-color" content="#030c14" />
+    <meta
+      name="description"
+      content="You&#39;re offline — try again once your connection is back."
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <style>
+      :root {
+        --bg: #030c14;
+        --amber: #22d3ee;
+        --cyan: #5ccfe6;
+        --text: #e6e9ef;
+        --muted: #a1a8b8;
+        --mono: ui-monospace, 'SF Mono', 'JetBrains Mono', monospace;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--mono);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+        background-image: radial-gradient(
+          60rem 40rem at 50% -10%,
+          rgba(255, 180, 84, 0.06),
+          transparent 60%
+        );
+      }
+      .wrap {
+        text-align: center;
+        max-width: 460px;
+      }
+      .glyph {
+        font-size: 3.5rem;
+        color: var(--amber);
+        line-height: 1;
+        margin-bottom: 12px;
+      }
+      .msg {
+        color: var(--text);
+        margin: 8px 0;
+        font-size: 1.05rem;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+      .sub {
+        color: var(--muted);
+        margin: 4px 0 24px;
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+      button,
+      a {
+        color: var(--cyan);
+        text-decoration: none;
+        padding: 12px 20px;
+        border: 1px solid rgba(92, 207, 230, 0.3);
+        border-radius: 8px;
+        display: inline-block;
+        font-size: 0.9rem;
+        font-weight: 500;
+        background: transparent;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      button.primary,
+      a.primary {
+        background: var(--amber);
+        color: #030c14;
+        border-color: var(--amber);
+      }
+      button:hover,
+      a:hover {
+        transform: translateY(-1px);
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid var(--amber);
+        outline-offset: 2px;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        button,
+        a {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="glyph" aria-hidden="true">/&nbsp;/&nbsp;/</div>
+      <p class="msg">You&#39;re offline</p>
+      <p class="sub">
+        linacre.site can&#39;t reach the network right now. Cached pages you&#39;ve already visited
+        should still work &mdash; try navigating there, or retry once you&#39;re back online.
+      </p>
+      <div class="row">
+        <button class="primary" onclick="location.reload()">Retry</button>
+        <a href="/">Return home</a>
+      </div>
+    </div>
+    <script>
+      window.addEventListener('online', function () {
+        location.reload();
+      });
+    </script>
+  </body>
 </html>

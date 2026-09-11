@@ -9,10 +9,30 @@ import { ToolCategory } from '../types';
 type ToolSection = 'quick' | 'everyday' | 'playground' | 'directory';
 
 const SECTIONS: Array<{ id: ToolSection; label: string; icon: typeof Braces; blurb: string }> = [
-  { id: 'quick', label: 'Quick tools', icon: Wand2, blurb: 'JSON, Base64, timestamps, secure generators' },
-  { id: 'everyday', label: 'Everyday', icon: Layers, blurb: 'VAT, text cleaning, SHA-256, URL cleaner' },
-  { id: 'playground', label: 'Playground', icon: Braces, blurb: 'JWT decode, regex, JSON→TS, cron, more' },
-  { id: 'directory', label: 'Directory', icon: Compass, blurb: 'Curated free tools for build, deploy & design' },
+  {
+    id: 'quick',
+    label: 'Quick tools',
+    icon: Wand2,
+    blurb: 'JSON, Base64, timestamps, secure generators',
+  },
+  {
+    id: 'everyday',
+    label: 'Everyday',
+    icon: Layers,
+    blurb: 'VAT, text cleaning, SHA-256, URL cleaner',
+  },
+  {
+    id: 'playground',
+    label: 'Playground',
+    icon: Braces,
+    blurb: 'JWT decode, regex, JSON→TS, cron, more',
+  },
+  {
+    id: 'directory',
+    label: 'Directory',
+    icon: Compass,
+    blurb: 'Curated free tools for build, deploy & design',
+  },
 ];
 
 interface ToolsProps {

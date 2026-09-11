@@ -22,19 +22,19 @@ deployed **manually** (`vercel deploy --prod`).
 
 - `AGENTS.md` documents the deploy as a **manual command**:
   `vercel deploy --prod --yes --project linacre-site-repo --force`.
-- `.github/workflows/ci.yml` runs *Typecheck → Lint → Test → Build* and uploads
+- `.github/workflows/ci.yml` runs _Typecheck → Lint → Test → Build_ and uploads
   a `dist` artifact. It has **no deploy step**.
 - On the latest commit there is exactly **one** check run — GitHub Actions —
   and **no Vercel check**, confirming Vercel is not connected for auto-deploys.
 
 ### Evidence of drift (live vs. `main`)
 
-| Item | Live site | `main` branch |
-|---|---|---|
-| `/tools` | **404** | Correctly defined in `route-meta.json` + `vercel.json` |
-| "Low Stakes Guide" card | Still shown | Removed (0 references; `/low-stakes → /` redirect) |
-| Games hub (12 games) | Not visible | Added in `31f7b60` |
-| Project showcase upgrade | Not visible | Added in `186851a` |
+| Item                     | Live site   | `main` branch                                          |
+| ------------------------ | ----------- | ------------------------------------------------------ |
+| `/tools`                 | **404**     | Correctly defined in `route-meta.json` + `vercel.json` |
+| "Low Stakes Guide" card  | Still shown | Removed (0 references; `/low-stakes → /` redirect)     |
+| Games hub (12 games)     | Not visible | Added in `31f7b60`                                     |
+| Project showcase upgrade | Not visible | Added in `186851a`                                     |
 
 Each discrepancy is resolved by deploying the current `main` — nothing needs to
 be re-coded.
@@ -61,19 +61,19 @@ be re-coded.
 
 ## 3. Prioritised fix list
 
-1. **Deploy current `main`** *(highest impact, no code needed)*
+1. **Deploy current `main`** _(highest impact, no code needed)_
    - Fixes the `/tools` 404.
    - Ships the games hub + project showcase upgrade.
    - Removes the stale "Low Stakes Guide" card.
    - Puts the new PixelPoke Arena project live.
 
-2. **Enable auto-deploy** *(prevents recurrence)*
+2. **Enable auto-deploy** _(prevents recurrence)_
    - `deploy.yml` has been added (Vercel action, gated on secrets being present).
    - Requires 3 GitHub secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`,
      `VERCEL_PROJECT_ID` (from the Vercel dashboard → project → Settings →
      General, and a token from Settings → Tokens).
 
-3. **Optional hardening** *(no action needed, listed for completeness)*
+3. **Optional hardening** _(no action needed, listed for completeness)_
    - `src/components/Lab.tsx` (3101 lines), `DevPlayground.tsx` (2636),
      `AgentsHub.tsx` (2154), `IdentityHub.tsx` (1453) are large and would
      benefit from splitting — see `REFACTOR_REPORT.md`.

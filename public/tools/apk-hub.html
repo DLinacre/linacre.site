@@ -1,340 +1,355 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EV-Bot Quick Launch Hub</title>
-  <style>
-    :root {
-      --bg: #0b0c16;
-      --panel: rgba(18, 20, 38, 0.7);
-      --border: rgba(255, 255, 255, 0.08);
-      --accent: #00e5a0;
-      --accent-glow: rgba(0, 229, 160, 0.25);
-      --text: #f1f3f9;
-      --text-dim: #94a3b8;
-      --radius: 16px;
-      --font: 'Outfit', 'Inter', -apple-system, sans-serif;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EV-Bot Quick Launch Hub</title>
+    <style>
+      :root {
+        --bg: #0b0c16;
+        --panel: rgba(18, 20, 38, 0.7);
+        --border: rgba(255, 255, 255, 0.08);
+        --accent: #00e5a0;
+        --accent-glow: rgba(0, 229, 160, 0.25);
+        --text: #f1f3f9;
+        --text-dim: #94a3b8;
+        --radius: 16px;
+        --font: 'Outfit', 'Inter', -apple-system, sans-serif;
+      }
 
-    body {
-      background-color: var(--bg);
-      background-image: radial-gradient(circle at 10% 20%, rgba(0, 229, 160, 0.08) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
-      color: var(--text);
-      font-family: var(--font);
-      margin: 0;
-      padding: 40px 20px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-sizing: border-box;
-    }
+      body {
+        background-color: var(--bg);
+        background-image:
+          radial-gradient(circle at 10% 20%, rgba(0, 229, 160, 0.08) 0%, transparent 40%),
+          radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+        color: var(--text);
+        font-family: var(--font);
+        margin: 0;
+        padding: 40px 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+      }
 
-    .container {
-      max-width: 900px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
+      .container {
+        max-width: 900px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
 
-    header {
-      text-align: center;
-      margin-bottom: 10px;
-    }
+      header {
+        text-align: center;
+        margin-bottom: 10px;
+      }
 
-    h1 {
-      font-size: 32px;
-      font-weight: 800;
-      margin: 0 0 8px 0;
-      background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: -0.02em;
-    }
+      h1 {
+        font-size: 32px;
+        font-weight: 800;
+        margin: 0 0 8px 0;
+        background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.02em;
+      }
 
-    .subtitle {
-      font-size: 16px;
-      color: var(--text-dim);
-      margin: 0;
-    }
+      .subtitle {
+        font-size: 16px;
+        color: var(--text-dim);
+        margin: 0;
+      }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    @media (max-width: 768px) {
       .grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
       }
-    }
 
-    .card {
-      background: var(--panel);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 30px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .card:hover {
-      border-color: rgba(0, 229, 160, 0.25);
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #fff;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 12px;
-    }
-
-    .status-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .status-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 14px;
-    }
-
-    .status-label {
-      color: var(--text-dim);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .badge {
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .badge-success {
-      background: rgba(16, 185, 129, 0.15);
-      color: #10b981;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .badge-running {
-      background: rgba(0, 229, 160, 0.15);
-      color: var(--accent);
-      border: 1px solid rgba(0, 229, 160, 0.3);
-    }
-
-    .qr-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 20px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-    }
-
-    .qr-code {
-      background: white;
-      padding: 10px;
-      border-radius: 8px;
-      width: 200px;
-      height: 200px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .qr-caption {
-      font-size: 12px;
-      color: var(--text-dim);
-      max-width: 220px;
-      line-height: 1.4;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: linear-gradient(135deg, var(--accent) 0%, #00b880 100%);
-      color: #0b0c16;
-      text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 14px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: none;
-      box-shadow: 0 4px 14px var(--accent-glow);
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 229, 160, 0.4);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      border: 1px solid var(--border);
-      box-shadow: none;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-      box-shadow: none;
-    }
-
-    .btn-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .instructions {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--text-dim);
-    }
-
-    .instructions code {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-family: monospace;
-      font-size: 13px;
-    }
-
-    .step-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding-left: 20px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>EV-Bot Launch & Setup Hub</h1>
-      <p class="subtitle">Quickly link and deploy your Jarvis-style AI companion</p>
-    </header>
-
-    <div class="grid">
-      <!-- Card 1: System Status & Downloads -->
-      <div class="card">
-        <h2 class="card-title">🖥️ System Status & Installer</h2>
-        <div class="status-list">
-          <div class="status-item">
-            <span class="status-label">🟢 EV-Bot Backend</span>
-            <span class="badge badge-success">Running</span>
-          </div>
-          <div class="status-item">
-            <span class="status-label">📡 ngrok Secure Tunnel</span>
-            <span class="badge badge-running" id="tunnel-status">Resolving...</span>
-          </div>
-          <div class="status-item">
-            <span class="status-label">🎙️ Alexa Skill Gateway</span>
-            <span class="badge badge-success">Active</span>
-          </div>
-        </div>
-
-        <p class="instructions">
-          To control your PC via Alexa or mobile shortcuts, get the official companion apps:
-        </p>
-
-        <div class="btn-grid">
-          <a class="btn" href="/downloads/Aura-Companion-Portable-1.0.0.exe" download>
-            🪟 Portable EXE
-          </a>
-          <a class="btn btn-secondary" href="/downloads/Aura-Companion-Setup-1.0.0.exe" download>
-            ⚙️ Windows Setup
-          </a>
-        </div>
-      </div>
-
-      <!-- Card 2: Mobile App QR Link -->
-      <div class="card" style="align-items: center; justify-content: center;">
-        <h2 class="card-title" style="width: 100%;">📱 Scan to Get Android App</h2>
-        <div class="qr-container">
-          <img class="qr-code" id="apk-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:8000/downloads/Aura-Companion-Portable-1.0.0.exe" alt="APK QR Code">
-          <div class="qr-caption" id="qr-text">
-            Scan this QR code with your phone to download the Android APK instantly over the secure tunnel.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Quick Start Instructions Card -->
-    <div class="card">
-      <h2 class="card-title">🚀 3-Step Integration Guide</h2>
-      <ol class="step-list instructions">
-        <li>
-          <strong>Scan & Install Android App:</strong> Scan the QR code above on your Android device, download, and install the <code>app-debug.apk</code>.
-        </li>
-        <li>
-          <strong>Link Desktop Companion:</strong> Run the Windows Desktop companion EXE, which will auto-connect to this running stack.
-        </li>
-        <li>
-          <strong>Activate Alexa:</strong> Say: <code>"Alexa, open ev-bot"</code> or command your desktop with custom shortcuts via your mobile.
-        </li>
-      </ol>
-    </div>
-  </div>
-
-  <script>
-    async function updateDashboard() {
-      // Find out current ngrok tunnel URL
-      try {
-        const res = await fetch('/api/v1/health');
-        if (res.ok) {
-          // Dynamic configuration of QR Code using current host URL
-          const currentOrigin = window.location.origin;
-          const apkDownloadUrl = currentOrigin + '/downloads/Aura-Companion-Portable-1.0.0.exe';
-          
-          document.getElementById('apk-qr').src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(apkDownloadUrl);
-          document.getElementById('qr-text').innerText = 'Scan to download the app directly. Deployed at: ' + currentOrigin;
-          
-          if (currentOrigin.includes('ngrok-free.app') || currentOrigin.includes('ev-bot.uk')) {
-            document.getElementById('tunnel-status').innerText = 'Online';
-            document.getElementById('tunnel-status').className = 'badge badge-success';
-          } else {
-            document.getElementById('tunnel-status').innerText = 'Local Only';
-            document.getElementById('tunnel-status').className = 'badge badge-running';
-          }
+      @media (max-width: 768px) {
+        .grid {
+          grid-template-columns: 1fr;
         }
-      } catch (e) {
-        console.error(e);
       }
-    }
-    updateDashboard();
-  </script>
-</body>
+
+      .card {
+        background: var(--panel);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .card:hover {
+        border-color: rgba(0, 229, 160, 0.25);
+      }
+
+      .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #fff;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 12px;
+      }
+
+      .status-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .status-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+      }
+
+      .status-label {
+        color: var(--text-dim);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .badge {
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .badge-success {
+        background: rgba(16, 185, 129, 0.15);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+
+      .badge-running {
+        background: rgba(0, 229, 160, 0.15);
+        color: var(--accent);
+        border: 1px solid rgba(0, 229, 160, 0.3);
+      }
+
+      .qr-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 20px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border);
+      }
+
+      .qr-code {
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        width: 200px;
+        height: 200px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .qr-caption {
+        font-size: 12px;
+        color: var(--text-dim);
+        max-width: 220px;
+        line-height: 1.4;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: linear-gradient(135deg, var(--accent) 0%, #00b880 100%);
+        color: #0b0c16;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 4px 14px var(--accent-glow);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 229, 160, 0.4);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        color: #fff;
+        border: 1px solid var(--border);
+        box-shadow: none;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: none;
+      }
+
+      .btn-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .instructions {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-dim);
+      }
+
+      .instructions code {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 13px;
+      }
+
+      .step-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>EV-Bot Launch & Setup Hub</h1>
+        <p class="subtitle">Quickly link and deploy your Jarvis-style AI companion</p>
+      </header>
+
+      <div class="grid">
+        <!-- Card 1: System Status & Downloads -->
+        <div class="card">
+          <h2 class="card-title">🖥️ System Status & Installer</h2>
+          <div class="status-list">
+            <div class="status-item">
+              <span class="status-label">🟢 EV-Bot Backend</span>
+              <span class="badge badge-success">Running</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">📡 ngrok Secure Tunnel</span>
+              <span class="badge badge-running" id="tunnel-status">Resolving...</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">🎙️ Alexa Skill Gateway</span>
+              <span class="badge badge-success">Active</span>
+            </div>
+          </div>
+
+          <p class="instructions">
+            To control your PC via Alexa or mobile shortcuts, get the official companion apps:
+          </p>
+
+          <div class="btn-grid">
+            <a class="btn" href="/downloads/Aura-Companion-Portable-1.0.0.exe" download>
+              🪟 Portable EXE
+            </a>
+            <a class="btn btn-secondary" href="/downloads/Aura-Companion-Setup-1.0.0.exe" download>
+              ⚙️ Windows Setup
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Mobile App QR Link -->
+        <div class="card" style="align-items: center; justify-content: center">
+          <h2 class="card-title" style="width: 100%">📱 Scan to Get Android App</h2>
+          <div class="qr-container">
+            <img
+              class="qr-code"
+              id="apk-qr"
+              src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:8000/downloads/Aura-Companion-Portable-1.0.0.exe"
+              alt="APK QR Code"
+            />
+            <div class="qr-caption" id="qr-text">
+              Scan this QR code with your phone to download the Android APK instantly over the
+              secure tunnel.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Start Instructions Card -->
+      <div class="card">
+        <h2 class="card-title">🚀 3-Step Integration Guide</h2>
+        <ol class="step-list instructions">
+          <li>
+            <strong>Scan & Install Android App:</strong> Scan the QR code above on your Android
+            device, download, and install the <code>app-debug.apk</code>.
+          </li>
+          <li>
+            <strong>Link Desktop Companion:</strong> Run the Windows Desktop companion EXE, which
+            will auto-connect to this running stack.
+          </li>
+          <li>
+            <strong>Activate Alexa:</strong> Say: <code>"Alexa, open ev-bot"</code> or command your
+            desktop with custom shortcuts via your mobile.
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <script>
+      async function updateDashboard() {
+        // Find out current ngrok tunnel URL
+        try {
+          const res = await fetch('/api/v1/health');
+          if (res.ok) {
+            // Dynamic configuration of QR Code using current host URL
+            const currentOrigin = window.location.origin;
+            const apkDownloadUrl = currentOrigin + '/downloads/Aura-Companion-Portable-1.0.0.exe';
+
+            document.getElementById('apk-qr').src =
+              'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' +
+              encodeURIComponent(apkDownloadUrl);
+            document.getElementById('qr-text').innerText =
+              'Scan to download the app directly. Deployed at: ' + currentOrigin;
+
+            if (currentOrigin.includes('ngrok-free.app') || currentOrigin.includes('ev-bot.uk')) {
+              document.getElementById('tunnel-status').innerText = 'Online';
+              document.getElementById('tunnel-status').className = 'badge badge-success';
+            } else {
+              document.getElementById('tunnel-status').innerText = 'Local Only';
+              document.getElementById('tunnel-status').className = 'badge badge-running';
+            }
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      updateDashboard();
+    </script>
+  </body>
 </html>

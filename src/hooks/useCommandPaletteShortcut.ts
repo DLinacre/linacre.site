@@ -3,7 +3,9 @@ import { useEffect } from 'react';
 function isTextEntryElement(element: Element | null): boolean {
   if (!element) return false;
   const tagName = element.tagName;
-  return tagName === 'INPUT' || tagName === 'TEXTAREA' || (element as HTMLElement).isContentEditable;
+  return (
+    tagName === 'INPUT' || tagName === 'TEXTAREA' || (element as HTMLElement).isContentEditable
+  );
 }
 
 export function useCommandPaletteShortcut(openPalette: () => void) {

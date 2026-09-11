@@ -1,330 +1,705 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DKMA Monster — Desktop</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0b0b0d; --panel:#15151c; --panel2:#1b1b24; --line:#26262f;
-    --text:#f4f2ee; --muted:#9a9aa6; --primary:#f5a524; --primary2:#ff8f00;
-    --ok:#3ddc84; --warn:#f5a524; --err:#ff5c6c; --chip:#1b1b24;
-    --glow:0 0 22px rgba(245,165,36,.30); --glow-sm:0 0 12px rgba(245,165,36,.22);
-    --mono:ui-monospace,'JetBrains Mono',Menlo,Consolas,monospace;
-    --sans:'Space Grotesk','Segoe UI',Roboto,system-ui,-apple-system,sans-serif;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:var(--sans);color:var(--text);
-       background:var(--bg);
-       background-image:radial-gradient(1100px 460px at 85% -10%,rgba(245,165,36,.10),transparent 60%);
-       background-attachment:fixed;}
-  header{display:flex;align-items:center;gap:14px;padding:14px 26px;position:sticky;top:0;z-index:20;
-         border-bottom:1px solid var(--line);background:rgba(11,11,13,.72);
-         backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);}
-  header .logo{width:34px;height:34px;display:grid;place-items:center;font-size:14px;font-weight:800;color:#0b0b0d;
-         background:linear-gradient(135deg,#f5a524,#ff8f00);box-shadow:var(--glow-sm);
-         clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0% 50%);
-         animation:breathe 3.6s ease-in-out infinite}
-  @keyframes breathe{0%,100%{box-shadow:0 0 10px rgba(245,165,36,.20)}50%{box-shadow:0 0 22px rgba(245,165,36,.45)}}
-  header h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.2px}
-  header .tag{font-size:12px;color:var(--muted);margin-left:auto;font-family:var(--mono)}
-  .pulse{height:1px;border:0;margin:0;background:linear-gradient(90deg,transparent,var(--primary),transparent);
-         opacity:.5;box-shadow:0 0 8px rgba(245,165,36,.4)}
-  .wrap{max-width:1080px;margin:0 auto;padding:24px;display:grid;
-        grid-template-columns:1fr 1fr;gap:20px;}
-  @media(max-width:840px){.wrap{grid-template-columns:1fr}}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;}
-  .card h2{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--primary);
-           margin:0 0 12px;font-weight:700;font-family:var(--mono);}
-  .full{grid-column:1/-1}
-  select,button,input{font:inherit}
-  select{width:100%;padding:11px 12px;background:var(--panel2);color:var(--text);
-         border:1px solid var(--line);border-radius:10px;}
-  .btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;
-       padding:11px 16px;border-radius:10px;border:1px solid var(--line);
-       background:var(--panel2);color:var(--text);cursor:pointer;font-weight:600;}
-  .btn:hover{border-color:var(--primary)}
-  .btn.primary{background:linear-gradient(135deg,var(--primary),var(--primary2));
-               border:none;color:#0b0b0d;box-shadow:var(--glow-sm)}
-  .btn.primary:hover{box-shadow:var(--glow)}
-  .btn.primary:disabled{opacity:.45;cursor:not-allowed}
-  .btn.ghost{background:transparent}
-  .row{display:flex;gap:10px;align-items:center}
-  .row.wrap{flex-wrap:wrap}
-  .muted{color:var(--muted);font-size:13px;line-height:1.5}
-  .chip{display:inline-flex;gap:6px;align-items:center;background:var(--chip);
-        border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:12px;}
-  .dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}
-  .dot.ok{background:var(--ok)} .dot.warn{background:var(--warn)} .dot.err{background:var(--err)}
-  .device{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);
-          margin-bottom:10px;cursor:pointer}
-  .device.sel{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary),var(--glow-sm)}
-  .device .name{font-weight:700}
-  .device .sub{color:var(--muted);font-size:12px;margin-top:2px}
-  .step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--line);
-        border-radius:12px;background:var(--panel2);margin-bottom:10px}
-  .step .badge{width:26px;height:26px;border-radius:50%;background:var(--chip);
-        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:0 0 auto}
-  .step.done .badge{background:var(--ok);color:#04140a}
-  .step .t{font-weight:600}
-  .step .grow{flex:1}
-  .step .open{padding:7px 12px;font-size:13px}
-  .verify{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px}
-  .kv{font-size:13px}
-  .kv b{color:var(--text)} .kv span{color:var(--muted)}
-  #log{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;
-       background:#0b0e1a;border:1px solid var(--line);border-radius:10px;padding:12px;
-       max-height:220px;overflow:auto;white-space:pre-wrap;color:#c7cbf0}
-  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
-  .pill{font-size:12px;color:var(--muted)}
-  label.check{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);cursor:pointer}
-  .banner{padding:10px 12px;border-radius:10px;font-size:13px;margin-bottom:12px}
-  .banner.err{background:rgba(255,92,122,.12);border:1px solid var(--err);color:#ffd0da}
-  .banner.ok{background:rgba(55,214,122,.10);border:1px solid var(--ok);color:#c8f4d9}
-  .spin{width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--primary);
-        border-radius:50%;display:inline-block;animation:s .7s linear infinite}
-  @keyframes s{to{transform:rotate(360deg)}}
-  footer{max-width:1080px;margin:0 auto;padding:8px 24px 30px;color:var(--muted);font-size:12px;line-height:1.6}
-  code{background:var(--chip);padding:1px 6px;border-radius:5px}
-</style>
-</head>
-<body>
-<header>
-  <span class="logo">DK</span>
-  <h1>DKMA Monster <span class="pill" style="color:var(--muted);font-weight:400">· Desktop</span></h1>
-  <span class="tag">plug in phone → pick app → click Fix</span>
-</header>
-<hr class="pulse">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DKMA Monster — Desktop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b0b0d;
+        --panel: #15151c;
+        --panel2: #1b1b24;
+        --line: #26262f;
+        --text: #f4f2ee;
+        --muted: #9a9aa6;
+        --primary: #f5a524;
+        --primary2: #ff8f00;
+        --ok: #3ddc84;
+        --warn: #f5a524;
+        --err: #ff5c6c;
+        --chip: #1b1b24;
+        --glow: 0 0 22px rgba(245, 165, 36, 0.3);
+        --glow-sm: 0 0 12px rgba(245, 165, 36, 0.22);
+        --mono: ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace;
+        --sans: 'Space Grotesk', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--sans);
+        color: var(--text);
+        background: var(--bg);
+        background-image: radial-gradient(
+          1100px 460px at 85% -10%,
+          rgba(245, 165, 36, 0.1),
+          transparent 60%
+        );
+        background-attachment: fixed;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 26px;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid var(--line);
+        background: rgba(11, 11, 13, 0.72);
+        backdrop-filter: blur(12px) saturate(140%);
+        -webkit-backdrop-filter: blur(12px) saturate(140%);
+      }
+      header .logo {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        font-size: 14px;
+        font-weight: 800;
+        color: #0b0b0d;
+        background: linear-gradient(135deg, #f5a524, #ff8f00);
+        box-shadow: var(--glow-sm);
+        clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+        animation: breathe 3.6s ease-in-out infinite;
+      }
+      @keyframes breathe {
+        0%,
+        100% {
+          box-shadow: 0 0 10px rgba(245, 165, 36, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 22px rgba(245, 165, 36, 0.45);
+        }
+      }
+      header h1 {
+        font-size: 16px;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      header .tag {
+        font-size: 12px;
+        color: var(--muted);
+        margin-left: auto;
+        font-family: var(--mono);
+      }
+      .pulse {
+        height: 1px;
+        border: 0;
+        margin: 0;
+        background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        opacity: 0.5;
+        box-shadow: 0 0 8px rgba(245, 165, 36, 0.4);
+      }
+      .wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      @media (max-width: 840px) {
+        .wrap {
+          grid-template-columns: 1fr;
+        }
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px;
+      }
+      .card h2 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--primary);
+        margin: 0 0 12px;
+        font-weight: 700;
+        font-family: var(--mono);
+      }
+      .full {
+        grid-column: 1/-1;
+      }
+      select,
+      button,
+      input {
+        font: inherit;
+      }
+      select {
+        width: 100%;
+        padding: 11px 12px;
+        background: var(--panel2);
+        color: var(--text);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        padding: 11px 16px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: var(--panel2);
+        color: var(--text);
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .btn:hover {
+        border-color: var(--primary);
+      }
+      .btn.primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary2));
+        border: none;
+        color: #0b0b0d;
+        box-shadow: var(--glow-sm);
+      }
+      .btn.primary:hover {
+        box-shadow: var(--glow);
+      }
+      .btn.primary:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .btn.ghost {
+        background: transparent;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .row.wrap {
+        flex-wrap: wrap;
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .chip {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        background: var(--chip);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px 11px;
+        font-size: 12px;
+      }
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--muted);
+      }
+      .dot.ok {
+        background: var(--ok);
+      }
+      .dot.warn {
+        background: var(--warn);
+      }
+      .dot.err {
+        background: var(--err);
+      }
+      .device {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--panel2);
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
+      .device.sel {
+        border-color: var(--primary);
+        box-shadow:
+          0 0 0 1px var(--primary),
+          var(--glow-sm);
+      }
+      .device .name {
+        font-weight: 700;
+      }
+      .device .sub {
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 2px;
+      }
+      .step {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--panel2);
+        margin-bottom: 10px;
+      }
+      .step .badge {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--chip);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 13px;
+        flex: 0 0 auto;
+      }
+      .step.done .badge {
+        background: var(--ok);
+        color: #04140a;
+      }
+      .step .t {
+        font-weight: 600;
+      }
+      .step .grow {
+        flex: 1;
+      }
+      .step .open {
+        padding: 7px 12px;
+        font-size: 13px;
+      }
+      .verify {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+      .kv {
+        font-size: 13px;
+      }
+      .kv b {
+        color: var(--text);
+      }
+      .kv span {
+        color: var(--muted);
+      }
+      #log {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+        background: #0b0e1a;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px;
+        max-height: 220px;
+        overflow: auto;
+        white-space: pre-wrap;
+        color: #c7cbf0;
+      }
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 12px;
+      }
+      .pill {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      label.check {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 13px;
+        color: var(--muted);
+        cursor: pointer;
+      }
+      .banner {
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 13px;
+        margin-bottom: 12px;
+      }
+      .banner.err {
+        background: rgba(255, 92, 122, 0.12);
+        border: 1px solid var(--err);
+        color: #ffd0da;
+      }
+      .banner.ok {
+        background: rgba(55, 214, 122, 0.1);
+        border: 1px solid var(--ok);
+        color: #c8f4d9;
+      }
+      .spin {
+        width: 14px;
+        height: 14px;
+        border: 2px solid var(--line);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        display: inline-block;
+        animation: s 0.7s linear infinite;
+      }
+      @keyframes s {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      footer {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 8px 24px 30px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+      code {
+        background: var(--chip);
+        padding: 1px 6px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="logo">DK</span>
+      <h1>
+        DKMA Monster
+        <span class="pill" style="color: var(--muted); font-weight: 400">· Desktop</span>
+      </h1>
+      <span class="tag">plug in phone → pick app → click Fix</span>
+    </header>
+    <hr class="pulse" />
 
-<div class="wrap">
-  <!-- Devices -->
-  <div class="card">
-    <h2>1 · Device</h2>
-    <div id="deviceBanner"></div>
-    <div id="devices" class="muted">Scanning…</div>
-    <div class="toolbar">
-      <button class="btn ghost" onclick="loadDevices()">↻ Rescan</button>
-      <span id="devSpin"></span>
+    <div class="wrap">
+      <!-- Devices -->
+      <div class="card">
+        <h2>1 · Device</h2>
+        <div id="deviceBanner"></div>
+        <div id="devices" class="muted">Scanning…</div>
+        <div class="toolbar">
+          <button class="btn ghost" onclick="loadDevices()">↻ Rescan</button>
+          <span id="devSpin"></span>
+        </div>
+      </div>
+
+      <!-- App -->
+      <div class="card">
+        <h2>2 · App to protect</h2>
+        <select id="pkg" onchange="onPkgChange()" disabled>
+          <option>Select a device first…</option>
+        </select>
+        <div class="toolbar">
+          <input
+            id="filter"
+            placeholder="filter packages…"
+            oninput="renderPkgOptions()"
+            style="
+              flex: 1;
+              padding: 9px 11px;
+              background: var(--panel2);
+              color: var(--text);
+              border: 1px solid var(--line);
+              border-radius: 10px;
+            "
+            disabled
+          />
+        </div>
+        <div id="oemChip" class="row wrap" style="margin-top: 12px"></div>
+      </div>
+
+      <!-- Steps -->
+      <div class="card full">
+        <h2>3 · Keep-alive steps</h2>
+        <div id="steps" class="muted">Pick a device and app to see the tailored steps.</div>
+        <div class="toolbar">
+          <button id="fixBtn" class="btn primary" onclick="runFix(false)" disabled>
+            ⚡ Fix everything
+          </button>
+          <button id="dryBtn" class="btn" onclick="runFix(true)" disabled>Dry run</button>
+          <label class="check"><span id="fixSpin"></span></label>
+          <span class="pill" id="fixStatus"></span>
+        </div>
+        <div id="verify" class="verify"></div>
+      </div>
+
+      <!-- Log -->
+      <div class="card full">
+        <h2>Activity log</h2>
+        <div id="log">Ready.</div>
+      </div>
     </div>
-  </div>
 
-  <!-- App -->
-  <div class="card">
-    <h2>2 · App to protect</h2>
-    <select id="pkg" onchange="onPkgChange()" disabled>
-      <option>Select a device first…</option>
-    </select>
-    <div class="toolbar">
-      <input id="filter" placeholder="filter packages…" oninput="renderPkgOptions()"
-        style="flex:1;padding:9px 11px;background:var(--panel2);color:var(--text);
-               border:1px solid var(--line);border-radius:10px" disabled>
-    </div>
-    <div id="oemChip" class="row wrap" style="margin-top:12px"></div>
-  </div>
+    <hr class="pulse" />
+    <footer>
+      Grants (Doze whitelist, standby bucket, background appops) are applied automatically.
+      Autostart / OEM-optimization / protected-app toggles have <b>no public API</b>, so those steps
+      open the exact vendor screen for you to confirm — the honest ceiling without root. Reference:
+      <code>dontkillmyapp.com</code><br />
+      <strong>Built by David Linacre</strong> ·
+      <a href="https://www.linacre.site/" style="color: var(--primary)">linacre.site</a>
+    </footer>
 
-  <!-- Steps -->
-  <div class="card full">
-    <h2>3 · Keep-alive steps</h2>
-    <div id="steps" class="muted">Pick a device and app to see the tailored steps.</div>
-    <div class="toolbar">
-      <button id="fixBtn" class="btn primary" onclick="runFix(false)" disabled>⚡ Fix everything</button>
-      <button id="dryBtn" class="btn" onclick="runFix(true)" disabled>Dry run</button>
-      <label class="check"><span id="fixSpin"></span></label>
-      <span class="pill" id="fixStatus"></span>
-    </div>
-    <div id="verify" class="verify"></div>
-  </div>
+    <script>
+      let state = {
+        devices: [],
+        device: null,
+        packages: [],
+        pkg: null,
+        steps: [],
+        stepDone: {},
+        stepVerify: {},
+      };
 
-  <!-- Log -->
-  <div class="card full">
-    <h2>Activity log</h2>
-    <div id="log">Ready.</div>
-  </div>
-</div>
+      function log(msg) {
+        const el = document.getElementById('log');
+        const t = new Date().toLocaleTimeString();
+        el.textContent += `\n[${t}] ${msg}`;
+        el.scrollTop = el.scrollHeight;
+      }
+      async function api(path, opts) {
+        const r = await fetch(path, opts);
+        const j = await r.json();
+        if (j.error) throw new Error(j.error);
+        return j;
+      }
+      function spin(id, on) {
+        document.getElementById(id).innerHTML = on ? '<span class="spin"></span>' : '';
+      }
 
-<hr class="pulse">
-<footer>
-  Grants (Doze whitelist, standby bucket, background appops) are applied automatically.
-  Autostart / OEM-optimization / protected-app toggles have <b>no public API</b>, so
-  those steps open the exact vendor screen for you to confirm — the honest ceiling
-  without root. Reference: <code>dontkillmyapp.com</code><br>
-  <strong>Built by David Linacre</strong> · <a href="https://www.linacre.site/" style="color:var(--primary)">linacre.site</a>
-</footer>
-
-<script>
-let state = { devices:[], device:null, packages:[], pkg:null, steps:[], stepDone:{}, stepVerify:{} };
-
-function log(msg){
-  const el=document.getElementById('log');
-  const t=new Date().toLocaleTimeString();
-  el.textContent += `\n[${t}] ${msg}`;
-  el.scrollTop=el.scrollHeight;
-}
-async function api(path, opts){
-  const r=await fetch(path, opts);
-  const j=await r.json();
-  if(j.error) throw new Error(j.error);
-  return j;
-}
-function spin(id,on){ document.getElementById(id).innerHTML = on?'<span class="spin"></span>':''; }
-
-// ---------- devices ----------
-async function loadDevices(){
-  spin('devSpin',true);
-  document.getElementById('deviceBanner').innerHTML='';
-  try{
-    const j=await api('/api/devices');
-    state.devices=j.devices;
-    if(!state.devices.length){
-      document.getElementById('devices').innerHTML=
-        '<div class="muted">No authorized devices found.<br>Enable <b>USB debugging</b> and accept the prompt on the phone, then Rescan.</div>';
-      state.device=null; refreshControls();
-      return;
-    }
-    renderDevices();
-    if(!state.device){ selectDevice(state.devices[0].serial); }
-  }catch(e){
-    document.getElementById('deviceBanner').innerHTML=
-      `<div class="banner err">⚠ ${e.message}. Is <code>adb</code> installed and on PATH?</div>`;
-    document.getElementById('devices').innerHTML='';
-  }finally{ spin('devSpin',false); }
-}
-function renderDevices(){
-  document.getElementById('devices').innerHTML = state.devices.map(d=>`
-    <div class="device ${state.device===d.serial?'sel':''}" onclick="selectDevice('${d.serial}')">
+      // ---------- devices ----------
+      async function loadDevices() {
+        spin('devSpin', true);
+        document.getElementById('deviceBanner').innerHTML = '';
+        try {
+          const j = await api('/api/devices');
+          state.devices = j.devices;
+          if (!state.devices.length) {
+            document.getElementById('devices').innerHTML =
+              '<div class="muted">No authorized devices found.<br>Enable <b>USB debugging</b> and accept the prompt on the phone, then Rescan.</div>';
+            state.device = null;
+            refreshControls();
+            return;
+          }
+          renderDevices();
+          if (!state.device) {
+            selectDevice(state.devices[0].serial);
+          }
+        } catch (e) {
+          document.getElementById('deviceBanner').innerHTML =
+            `<div class="banner err">⚠ ${e.message}. Is <code>adb</code> installed and on PATH?</div>`;
+          document.getElementById('devices').innerHTML = '';
+        } finally {
+          spin('devSpin', false);
+        }
+      }
+      function renderDevices() {
+        document.getElementById('devices').innerHTML = state.devices
+          .map(
+            d => `
+    <div class="device ${state.device === d.serial ? 'sel' : ''}" onclick="selectDevice('${d.serial}')">
       <div class="name">${d.manufacturer} ${d.model}</div>
       <div class="sub">${d.oem_label} · Android ${d.android} · ${d.serial}</div>
-    </div>`).join('');
-}
-async function selectDevice(serial){
-  state.device=serial; state.pkg=null; state.steps=[]; state.stepDone={}; state.stepVerify={};
-  renderDevices(); renderSteps(); document.getElementById('oemChip').innerHTML='';
-  document.getElementById('verify').innerHTML='';
-  const sel=document.getElementById('pkg');
-  sel.disabled=true; sel.innerHTML='<option>Loading apps…</option>';
-  document.getElementById('filter').disabled=true;
-  log('Selected device '+serial+', loading installed apps…');
-  try{
-    const j=await api('/api/packages?serial='+encodeURIComponent(serial));
-    state.packages=j.packages;
-    document.getElementById('filter').disabled=false;
-    renderPkgOptions();
-    log(state.packages.length+' user apps found.');
-  }catch(e){ log('Error loading packages: '+e.message); }
-  refreshControls();
-}
-function renderPkgOptions(){
-  const f=(document.getElementById('filter').value||'').toLowerCase();
-  const list=state.packages.filter(p=>p.toLowerCase().includes(f));
-  const sel=document.getElementById('pkg');
-  sel.disabled=false;
-  sel.innerHTML='<option value="">— choose an app —</option>'+
-    list.map(p=>`<option value="${p}" ${state.pkg===p?'selected':''}>${p}</option>`).join('');
-}
-async function onPkgChange(){
-  state.pkg=document.getElementById('pkg').value||null;
-  state.steps=[]; state.stepDone={}; state.stepVerify={};
-  document.getElementById('verify').innerHTML='';
-  if(!state.pkg){ renderSteps(); refreshControls(); return; }
-  log('Inspecting '+state.pkg+'…');
-  try{
-    const j=await api('/api/inspect?serial='+encodeURIComponent(state.device)+
-                      '&package='+encodeURIComponent(state.pkg));
-    state.steps=j.steps;
-    document.getElementById('oemChip').innerHTML=
-      `<span class="chip"><span class="dot ok"></span>${j.oem_label}</span>`+
-      `<span class="chip">${j.steps.length} steps</span>`;
-    renderSteps();
-    renderVerify(j.verify);
-    log('Detected '+j.oem_label+' · '+j.steps.length+' tailored steps.');
-  }catch(e){ log('Inspect failed: '+e.message); }
-  refreshControls();
-}
-function renderSteps(){
-  const el=document.getElementById('steps');
-  if(!state.steps.length){
-    el.className='muted';
-    el.textContent = state.pkg? 'No steps.' : 'Pick a device and app to see the tailored steps.';
-    return;
-  }
-  el.className='';
-  el.innerHTML = state.steps.map((s,i)=>{
-    const v = state.stepVerify[s.id];
-    let pill = '';
-    if(v){
-      if(!v.verifiable) pill = '<span class="chip" title="No readable state on this OEM">confirm manually</span>';
-      else if(v.status==='verified') pill = '<span class="chip"><span class="dot ok"></span>verified</span>';
-      else pill = '<span class="chip"><span class="dot warn"></span>not confirmed</span>';
-    }
-    const done = state.stepDone[s.id] || (v && v.status==='verified');
-    return `
-    <div class="step ${done?'done':''}">
-      <div class="badge">${done?'✓':(i+1)}</div>
+    </div>`,
+          )
+          .join('');
+      }
+      async function selectDevice(serial) {
+        state.device = serial;
+        state.pkg = null;
+        state.steps = [];
+        state.stepDone = {};
+        state.stepVerify = {};
+        renderDevices();
+        renderSteps();
+        document.getElementById('oemChip').innerHTML = '';
+        document.getElementById('verify').innerHTML = '';
+        const sel = document.getElementById('pkg');
+        sel.disabled = true;
+        sel.innerHTML = '<option>Loading apps…</option>';
+        document.getElementById('filter').disabled = true;
+        log('Selected device ' + serial + ', loading installed apps…');
+        try {
+          const j = await api('/api/packages?serial=' + encodeURIComponent(serial));
+          state.packages = j.packages;
+          document.getElementById('filter').disabled = false;
+          renderPkgOptions();
+          log(state.packages.length + ' user apps found.');
+        } catch (e) {
+          log('Error loading packages: ' + e.message);
+        }
+        refreshControls();
+      }
+      function renderPkgOptions() {
+        const f = (document.getElementById('filter').value || '').toLowerCase();
+        const list = state.packages.filter(p => p.toLowerCase().includes(f));
+        const sel = document.getElementById('pkg');
+        sel.disabled = false;
+        sel.innerHTML =
+          '<option value="">— choose an app —</option>' +
+          list
+            .map(p => `<option value="${p}" ${state.pkg === p ? 'selected' : ''}>${p}</option>`)
+            .join('');
+      }
+      async function onPkgChange() {
+        state.pkg = document.getElementById('pkg').value || null;
+        state.steps = [];
+        state.stepDone = {};
+        state.stepVerify = {};
+        document.getElementById('verify').innerHTML = '';
+        if (!state.pkg) {
+          renderSteps();
+          refreshControls();
+          return;
+        }
+        log('Inspecting ' + state.pkg + '…');
+        try {
+          const j = await api(
+            '/api/inspect?serial=' +
+              encodeURIComponent(state.device) +
+              '&package=' +
+              encodeURIComponent(state.pkg),
+          );
+          state.steps = j.steps;
+          document.getElementById('oemChip').innerHTML =
+            `<span class="chip"><span class="dot ok"></span>${j.oem_label}</span>` +
+            `<span class="chip">${j.steps.length} steps</span>`;
+          renderSteps();
+          renderVerify(j.verify);
+          log('Detected ' + j.oem_label + ' · ' + j.steps.length + ' tailored steps.');
+        } catch (e) {
+          log('Inspect failed: ' + e.message);
+        }
+        refreshControls();
+      }
+      function renderSteps() {
+        const el = document.getElementById('steps');
+        if (!state.steps.length) {
+          el.className = 'muted';
+          el.textContent = state.pkg
+            ? 'No steps.'
+            : 'Pick a device and app to see the tailored steps.';
+          return;
+        }
+        el.className = '';
+        el.innerHTML = state.steps
+          .map((s, i) => {
+            const v = state.stepVerify[s.id];
+            let pill = '';
+            if (v) {
+              if (!v.verifiable)
+                pill =
+                  '<span class="chip" title="No readable state on this OEM">confirm manually</span>';
+              else if (v.status === 'verified')
+                pill = '<span class="chip"><span class="dot ok"></span>verified</span>';
+              else pill = '<span class="chip"><span class="dot warn"></span>not confirmed</span>';
+            }
+            const done = state.stepDone[s.id] || (v && v.status === 'verified');
+            return `
+    <div class="step ${done ? 'done' : ''}">
+      <div class="badge">${done ? '✓' : i + 1}</div>
       <div class="grow"><div class="t">${s.title}</div><div class="pillrow">${pill}</div></div>
       <button class="btn open" onclick="openStep('${s.id}')">Open ›</button>
       <button class="btn open" onclick="verifyStep('${s.id}')">Verify</button>
-    </div>`;}).join('');
-}
-function renderVerify(v){
-  if(!v){document.getElementById('verify').innerHTML='';return;}
-  document.getElementById('verify').innerHTML=
-    `<div class="kv"><span>Doze whitelist:</span> <b>${v.in_doze_whitelist?'yes ✓':'no'}</b></div>`+
-    `<div class="kv"><span>Standby bucket:</span> <b>${v.standby_bucket||'—'}</b></div>`;
-}
-async function openStep(id){
-  log('Opening step "'+id+'" on device…');
-  try{
-    const j=await api('/api/open-step',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({serial:state.device,package:state.pkg,step_id:id})});
-    state.stepDone[id]=j.opened;
-    if(j.verify) state.stepVerify[id]=j.verify;
-    renderSteps();
-    log(j.opened? ('Opened: '+(j.detail||id)) : 'Could not open '+id);
-  }catch(e){ log('open-step failed: '+e.message); }
-}
-async function verifyStep(id){
-  log('Verifying step "'+id+'"…');
-  try{
-    const j=await api('/api/verify-step',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({serial:state.device,package:state.pkg,step_id:id})});
-    state.stepVerify[id]=j.verify;
-    renderSteps();
-    if(!j.verify.verifiable) log('  '+id+': no readable state — confirm manually.');
-    else if(j.verify.status==='verified') log('  '+id+': verified ✓ '+j.verify.checks.map(c=>c.detail).join('; '));
-    else log('  '+id+': not confirmed — '+j.verify.checks.filter(c=>!c.ok).map(c=>c.name+' '+c.detail).join('; '));
-  }catch(e){ log('verify-step failed: '+e.message); }
-}
-async function runFix(dry){
-  if(!state.device||!state.pkg) return;
-  spin('fixSpin',true);
-  document.getElementById('fixStatus').textContent = dry?'planning…':'applying…';
-  log((dry?'DRY RUN':'FIX')+' starting for '+state.pkg+'…');
-  try{
-    const j=await api('/api/fix',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({serial:state.device,package:state.pkg,dry_run:dry})});
-    const g=j.grants.filter(x=>x.ok).length;
-    log(`grants: ${g}/${j.grants.length} ok`);
-    j.steps.forEach(s=>{ state.stepDone[s.id]=s.opened; if(s.verify) state.stepVerify[s.id]=s.verify; });
-    renderSteps(); renderVerify(j.verify);
-    if(dry){ log('planned commands:'); j.planned_commands.forEach(c=>log('  '+c)); }
-    document.getElementById('fixStatus').innerHTML = j.success
-      ? '<span style="color:var(--ok)">✓ '+(dry?'plan complete':'done')+'</span>'
-      : '<span style="color:var(--warn)">partial — check log</span>';
-    log((dry?'Dry run':'Fix')+' complete. success='+j.success);
-  }catch(e){
-    document.getElementById('fixStatus').innerHTML='<span style="color:var(--err)">error</span>';
-    log('fix failed: '+e.message);
-  }finally{ spin('fixSpin',false); }
-}
-function refreshControls(){
-  const ready = !!(state.device && state.pkg);
-  document.getElementById('fixBtn').disabled=!ready;
-  document.getElementById('dryBtn').disabled=!ready;
-}
-loadDevices();
-</script>
-</body>
+    </div>`;
+          })
+          .join('');
+      }
+      function renderVerify(v) {
+        if (!v) {
+          document.getElementById('verify').innerHTML = '';
+          return;
+        }
+        document.getElementById('verify').innerHTML =
+          `<div class="kv"><span>Doze whitelist:</span> <b>${v.in_doze_whitelist ? 'yes ✓' : 'no'}</b></div>` +
+          `<div class="kv"><span>Standby bucket:</span> <b>${v.standby_bucket || '—'}</b></div>`;
+      }
+      async function openStep(id) {
+        log('Opening step "' + id + '" on device…');
+        try {
+          const j = await api('/api/open-step', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ serial: state.device, package: state.pkg, step_id: id }),
+          });
+          state.stepDone[id] = j.opened;
+          if (j.verify) state.stepVerify[id] = j.verify;
+          renderSteps();
+          log(j.opened ? 'Opened: ' + (j.detail || id) : 'Could not open ' + id);
+        } catch (e) {
+          log('open-step failed: ' + e.message);
+        }
+      }
+      async function verifyStep(id) {
+        log('Verifying step "' + id + '"…');
+        try {
+          const j = await api('/api/verify-step', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ serial: state.device, package: state.pkg, step_id: id }),
+          });
+          state.stepVerify[id] = j.verify;
+          renderSteps();
+          if (!j.verify.verifiable) log('  ' + id + ': no readable state — confirm manually.');
+          else if (j.verify.status === 'verified')
+            log('  ' + id + ': verified ✓ ' + j.verify.checks.map(c => c.detail).join('; '));
+          else
+            log(
+              '  ' +
+                id +
+                ': not confirmed — ' +
+                j.verify.checks
+                  .filter(c => !c.ok)
+                  .map(c => c.name + ' ' + c.detail)
+                  .join('; '),
+            );
+        } catch (e) {
+          log('verify-step failed: ' + e.message);
+        }
+      }
+      async function runFix(dry) {
+        if (!state.device || !state.pkg) return;
+        spin('fixSpin', true);
+        document.getElementById('fixStatus').textContent = dry ? 'planning…' : 'applying…';
+        log((dry ? 'DRY RUN' : 'FIX') + ' starting for ' + state.pkg + '…');
+        try {
+          const j = await api('/api/fix', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ serial: state.device, package: state.pkg, dry_run: dry }),
+          });
+          const g = j.grants.filter(x => x.ok).length;
+          log(`grants: ${g}/${j.grants.length} ok`);
+          j.steps.forEach(s => {
+            state.stepDone[s.id] = s.opened;
+            if (s.verify) state.stepVerify[s.id] = s.verify;
+          });
+          renderSteps();
+          renderVerify(j.verify);
+          if (dry) {
+            log('planned commands:');
+            j.planned_commands.forEach(c => log('  ' + c));
+          }
+          document.getElementById('fixStatus').innerHTML = j.success
+            ? '<span style="color:var(--ok)">✓ ' + (dry ? 'plan complete' : 'done') + '</span>'
+            : '<span style="color:var(--warn)">partial — check log</span>';
+          log((dry ? 'Dry run' : 'Fix') + ' complete. success=' + j.success);
+        } catch (e) {
+          document.getElementById('fixStatus').innerHTML =
+            '<span style="color:var(--err)">error</span>';
+          log('fix failed: ' + e.message);
+        } finally {
+          spin('fixSpin', false);
+        }
+      }
+      function refreshControls() {
+        const ready = !!(state.device && state.pkg);
+        document.getElementById('fixBtn').disabled = !ready;
+        document.getElementById('dryBtn').disabled = !ready;
+      }
+      loadDevices();
+    </script>
+  </body>
 </html>
