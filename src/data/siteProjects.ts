@@ -255,8 +255,9 @@ export const SITE_PROJECTS: SiteProject[] = [
     emoji: '🛠️',
     artwork: '/banners/arena-audit.webp',
     blurb: 'Modular browser audit-prompt builder for codebases, UX, security and performance.',
-    url: 'https://dlinacre.github.io/a-audit/',
+    url: '/tools/arena-audit.html',
     repo: 'https://github.com/DLinacre/a-audit',
+    featured: true,
     tags: ['audit', 'prompts', 'code', 'ux', 'security'],
   },
   {

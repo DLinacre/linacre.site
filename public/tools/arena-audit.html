@@ -1517,7 +1517,7 @@
                   id="productName"
                   class="input"
                   type="text"
-                  value="Linacre"
+                  value=""
                   placeholder="Auto from target if empty"
                 />
               </div>
@@ -4645,6 +4645,8 @@
           name: name.trim(),
           cats: { ...state.cats },
           roles: { ...state.roles },
+          dels: { ...state.dels },
+          adv: { ...state.adv },
           depth: state.depth,
           style: state.style,
         };
@@ -4660,13 +4662,32 @@
       function loadCustomPreset(id) {
         const presets = getCustomPresets();
         const p = presets[id];
-        if (!p) return;
-        state.cats = { ...p.cats };
-        state.roles = { ...p.roles };
-        state.depth = p.depth;
-        state.style = p.style;
+        if (!p || typeof p !== 'object') return;
+        // Mutate existing maps: checkbox handlers retain references to these objects.
+        // Older presets omit deliverables/advanced settings; keep current values then.
+        ['cats', 'roles', 'dels', 'adv'].forEach(key => {
+          const saved = p[key];
+          if (!saved || typeof saved !== 'object' || Array.isArray(saved)) return;
+          Object.keys(state[key]).forEach(option => {
+            if (Object.prototype.hasOwnProperty.call(saved, option) &&
+                typeof saved[option] === 'boolean') {
+              state[key][option] = saved[option];
+            }
+          });
+        });
+        if (['focused', 'full', 'forensic'].includes(p.depth)) state.depth = p.depth;
+        if (['concise', 'detailed', 'agent'].includes(p.style)) state.style = p.style;
+        state.catsTouched = true;
+        state.rolesTouched = true;
         state.preset = id;
         renderAdv();
+        renderChips($('#deliverableGrid'), DELIVERABLES, state.dels);
+        document.querySelectorAll('#depthSeg .seg-btn').forEach(button =>
+          button.classList.toggle('active', button.dataset.depth === state.depth),
+        );
+        document.querySelectorAll('#styleSeg .seg-btn').forEach(button =>
+          button.classList.toggle('active', button.dataset.style === state.style),
+        );
         update();
         showToast(`Loaded preset: ${p.name}`);
       }
