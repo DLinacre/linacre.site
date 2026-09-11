@@ -72,6 +72,25 @@ export const SITE_PROJECTS: SiteProject[] = [
     year: 2026,
   },
   {
+    name: 'CubeLab',
+    badge: 'NEW',
+    kind: 'App',
+    emoji: '🧊',
+    artwork: '/banners/cubelab.webp',
+    blurb:
+      "Free offline-first Rubik's Cube solver and trainer — animated 3D solutions, beginner guide, verified algorithms, drills, timer and stats.",
+    url: 'https://dlinacre.github.io/cubelab/',
+    repo: 'https://github.com/DLinacre/cubelab',
+    tags: ['rubiks-cube', 'solver', 'puzzle', 'timer', 'pwa', 'offline', '3d'],
+    highlights: [
+      'Kociemba-class solver with an animated 3D step-by-step walkthrough.',
+      'Beginner method guide, verified algorithm library and mistake-detecting drills.',
+      'Speedcubing timer with WCA averages, stats charts and a full offline PWA.',
+    ],
+    tech: ['React', 'TypeScript', 'Three.js', 'PWA'],
+    year: 2026,
+  },
+  {
     name: 'HELIX',
     badge: 'NEW',
     kind: 'App',
