@@ -41,6 +41,7 @@ const CookiePolicy = lazy(() => import('./components/CookiePolicy'));
 const Terms = lazy(() => import('./components/Terms'));
 const MobDealsSwitcher = lazy(() => import('./components/MobDealsSwitcher'));
 const PokeGuruExplorer = lazy(() => import('./components/PokeGuruExplorer'));
+const OpsHUD = lazy(() => import('./components/OpsHUD'));
 
 import Breadcrumbs from './components/Breadcrumbs';
 
@@ -384,6 +385,18 @@ export default function App() {
                     transition={{ type: 'spring', stiffness: 100, damping: 15 }}
                   >
                     <PokeGuruExplorer />
+                  </motion.div>
+                )}
+
+                {activeTab === 'ops' && (
+                  <motion.div
+                    key="ops"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                  >
+                    <OpsHUD />
                   </motion.div>
                 )}
 

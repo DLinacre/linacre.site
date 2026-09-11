@@ -410,6 +410,12 @@ ${CTA_BLOCK}`;
 <p>Browse UK Pokémon TCG set expansions, track chase-card market values in GBP and evaluate rarity tiers. Enable JavaScript to use the search.</p>
 ${CTA_BLOCK}`;
 
+    case '/ops':
+      return `
+<h1>Ecosystem Operations HUD</h1>
+<p>Unified operations HUD for David Linacre's 60 repositories across GitHub and GitLab Ultimate, CI/CD telemetry, and one-click automation controls. Enable JavaScript to interact with the HUD.</p>
+${CTA_BLOCK}`;
+
     default:
       return `
 <h1>${esc(meta.routes[route]?.title.split(' — ')[0] || 'linacre.site')}</h1>
@@ -475,6 +481,7 @@ const ROUTE_LASTMOD_SOURCES = {
   '/accessibility': ['src/components/AccessibilityStatement.tsx'],
   '/mob-deals': ['src/components/MobDealsSwitcher.tsx'],
   '/pokeguru': ['src/components/PokeGuruExplorer.tsx'],
+  '/ops': ['src/components/OpsHUD.tsx', 'src/data/siteProjects.ts'],
 };
 
 function sourceMtimeMs(files = []) {

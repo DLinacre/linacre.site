@@ -212,6 +212,10 @@
       "destination": "/pokeguru/index.html"
     },
     {
+      "source": "/ops",
+      "destination": "/ops/index.html"
+    },
+    {
       "source": "/helix",
       "destination": "/helix/index.html"
     },

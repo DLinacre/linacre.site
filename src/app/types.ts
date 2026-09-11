@@ -16,7 +16,8 @@ export type AppTab =
   | 'cookie-policy'
   | 'terms'
   | 'mob-deals'
-  | 'pokeguru';
+  | 'pokeguru'
+  | 'ops';
 
 export type SetAppTab = Dispatch<SetStateAction<string>> | ((tab: string) => void);
 

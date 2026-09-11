@@ -90,6 +90,12 @@
       "description": "Browse UK Pokémon TCG set expansion releases, track chase card market values in GBP (£), and evaluate card rarity tier lists.",
       "canonical": "https://www.linacre.site/pokeguru",
       "index": true
+    },
+    "/ops": {
+      "title": "Ecosystem Operations HUD — live infrastructure & repository sync | Linacre.site",
+      "description": "Unified Operations HUD for David Linacre's 60 repositories across GitHub and GitLab Ultimate, CI/CD telemetry, and one-click automation controls.",
+      "canonical": "https://www.linacre.site/ops",
+      "index": true
     }
   }
 }

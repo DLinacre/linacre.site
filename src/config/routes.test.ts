@@ -9,11 +9,13 @@ describe('route configuration contracts', () => {
     expect(getTabFromLocation('/mob-deals')).toBe('mob-deals');
     expect(getTabFromLocation('/contact/thanks')).toBe('contact-thanks');
     expect(getTabFromLocation('/cookie-policy')).toBe('cookie-policy');
+    expect(getTabFromLocation('/ops')).toBe('ops');
   });
 
   it('supports legacy hash navigation without overriding known paths', () => {
     expect(getTabFromLocation('/unknown', '#tools')).toBe('tools');
     expect(getTabFromLocation('/games', '#tools')).toBe('games');
+    expect(getTabFromLocation('/unknown', '#ops')).toBe('ops');
   });
 
   it('falls back to home for unknown paths', () => {
@@ -26,7 +28,9 @@ describe('route configuration contracts', () => {
     expect(tabToPath('contact-thanks')).toBe('/contact/thanks');
     expect(tabToPath('tools')).toBe('/tools');
     expect(tabToPath('pokeguru')).toBe('/pokeguru');
+    expect(tabToPath('ops')).toBe('/ops');
     expect(routeKeyForTab('tools', '/tools')).toBe('/tools');
+    expect(routeKeyForTab('ops', '/ops')).toBe('/ops');
   });
 
   it('guards paths that must not be rewritten by tab state effects', () => {
