@@ -90,7 +90,10 @@ export default function StartPage({ navigate }: StartPageProps) {
           </div>
 
           {/* Quick destinations */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2" aria-label="Quick destinations">
+          <div
+            className="mt-5 flex flex-wrap items-center justify-center gap-2"
+            aria-label="Quick destinations"
+          >
             {[
               ['Play games', 'games'],
               ['Open tools', 'tools'],

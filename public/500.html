@@ -1,60 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>500 — server error | linacre.site</title>
-<meta name="theme-color" content="#030c14">
-<meta name="description" content="Server error — linacre.site">
-<meta name="robots" content="noindex,nofollow">
-<style>
-  :root {
-    --bg: #030c14; --amber: #22D3EE; --cyan: #5ccfe6; --text: #e6e9ef;
-    --muted: #a1a8b8; --danger: #f87171;
-    --mono: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg); color: var(--text);
-    font-family: var(--mono); display: flex; align-items: center;
-    justify-content: center; min-height: 100vh; padding: 24px;
-    background-image: radial-gradient(60rem 40rem at 50% -10%, rgba(248,113,113,.08), transparent 60%);
-  }
-  .wrap { text-align: center; max-width: 480px; }
-  .code {
-    font-size: 6rem; font-weight: 700; color: var(--danger); line-height: 1;
-  }
-  .msg { color: var(--text); margin: 16px 0 8px; font-size: 1rem; line-height: 1.5; }
-  .sub { color: var(--muted); margin: 0 0 24px; font-size: 0.85rem; line-height: 1.5; }
-  .row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-  a {
-    color: var(--cyan); text-decoration: none; padding: 12px 20px;
-    border: 1px solid rgba(92,207,230,.3); border-radius: 8px;
-    display: inline-block; font-size: 0.85rem; font-weight: 500;
-    transition: all 0.2s ease;
-  }
-  a.primary {
-    background: var(--amber); color: #030c14; border-color: var(--amber);
-  }
-  a:hover { transform: translateY(-1px); }
-  a:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
-  @media (prefers-reduced-motion: reduce) {
-    a { transition: none; }
-  }
-</style>
-</head>
-<body>
-<div class="wrap">
-  <p class="code">500</p>
-  <p class="msg">Something broke on our side.</p>
-  <p class="sub">
-    The server hit an unexpected error. Refresh, or try again in a minute.
-    If it keeps happening, email <a style="padding:0;border:0;color:var(--amber)" href="mailto:david@linacre.site">david@linacre.site</a>.
-  </p>
-  <div class="row">
-    <a class="primary" href="/">Return home</a>
-    <a href="/status">Check status</a>
-  </div>
-</div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>500 — server error | linacre.site</title>
+    <meta name="theme-color" content="#030c14" />
+    <meta name="description" content="Server error — linacre.site" />
+    <meta name="robots" content="noindex,nofollow" />
+    <style>
+      :root {
+        --bg: #030c14;
+        --amber: #22d3ee;
+        --cyan: #5ccfe6;
+        --text: #e6e9ef;
+        --muted: #a1a8b8;
+        --danger: #f87171;
+        --mono: ui-monospace, 'SF Mono', 'JetBrains Mono', monospace;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--mono);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+        background-image: radial-gradient(
+          60rem 40rem at 50% -10%,
+          rgba(248, 113, 113, 0.08),
+          transparent 60%
+        );
+      }
+      .wrap {
+        text-align: center;
+        max-width: 480px;
+      }
+      .code {
+        font-size: 6rem;
+        font-weight: 700;
+        color: var(--danger);
+        line-height: 1;
+      }
+      .msg {
+        color: var(--text);
+        margin: 16px 0 8px;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+      .sub {
+        color: var(--muted);
+        margin: 0 0 24px;
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+      a {
+        color: var(--cyan);
+        text-decoration: none;
+        padding: 12px 20px;
+        border: 1px solid rgba(92, 207, 230, 0.3);
+        border-radius: 8px;
+        display: inline-block;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+      a.primary {
+        background: var(--amber);
+        color: #030c14;
+        border-color: var(--amber);
+      }
+      a:hover {
+        transform: translateY(-1px);
+      }
+      a:focus-visible {
+        outline: 3px solid var(--amber);
+        outline-offset: 2px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        a {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p class="code">500</p>
+      <p class="msg">Something broke on our side.</p>
+      <p class="sub">
+        The server hit an unexpected error. Refresh, or try again in a minute. If it keeps
+        happening, email
+        <a style="padding: 0; border: 0; color: var(--amber)" href="mailto:david@linacre.site"
+          >david@linacre.site</a
+        >.
+      </p>
+      <div class="row">
+        <a class="primary" href="/">Return home</a>
+        <a href="/status">Check status</a>
+      </div>
+    </div>
+  </body>
 </html>

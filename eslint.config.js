@@ -16,11 +16,14 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       // Unused vars are already caught by tsc; here we allow the _ convention.
-      '@typescript-eslint/no-unused-vars': ['warn', {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_',
-      }],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
       // This codebase uses `any` at a few genuine boundaries (Express, SDKs).
       // Warn rather than error so it stays visible without blocking CI.
       '@typescript-eslint/no-explicit-any': 'warn',

@@ -180,7 +180,14 @@ export default function CommandPalette({
     return {
       id: `proj-${p.name}`,
       label: `Open ${p.name}`,
-      icon: p.kind === 'Game' ? Gamepad2 : p.kind === 'AI' ? Sparkles : p.kind === 'Tool' ? Wrench : Compass,
+      icon:
+        p.kind === 'Game'
+          ? Gamepad2
+          : p.kind === 'AI'
+            ? Sparkles
+            : p.kind === 'Tool'
+              ? Wrench
+              : Compass,
       action: () => {
         if (isPrivate) {
           go('contact');
@@ -315,11 +322,7 @@ export default function CommandPalette({
             </div>
 
             {/* Results */}
-            <div
-              ref={scrollContainerRef}
-              className="max-h-80 overflow-y-auto p-2"
-              role="listbox"
-            >
+            <div ref={scrollContainerRef} className="max-h-80 overflow-y-auto p-2" role="listbox">
               {allItems.length === 0 && (
                 <p className="px-3 py-6 text-center font-mono text-xs text-muted-foreground">
                   Nothing matches “{query}”.
@@ -359,7 +362,10 @@ export default function CommandPalette({
                       )}
                     </span>
                     {active && (
-                      <CornerDownLeft className="h-3.5 w-3.5 shrink-0 text-amber-color" aria-hidden="true" />
+                      <CornerDownLeft
+                        className="h-3.5 w-3.5 shrink-0 text-amber-color"
+                        aria-hidden="true"
+                      />
                     )}
                   </button>
                 );

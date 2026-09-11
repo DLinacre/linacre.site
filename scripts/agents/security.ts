@@ -17,7 +17,7 @@ function runCmd(cmd: string) {
   }
 }
 
-log("Starting Security Audit...");
+log('Starting Security Audit...');
 
 const rootDir = process.cwd();
 const gitignorePath = path.join(rootDir, '.gitignore');
@@ -26,21 +26,21 @@ const gitignorePath = path.join(rootDir, '.gitignore');
 if (fs.existsSync(gitignorePath)) {
   const content = fs.readFileSync(gitignorePath, 'utf-8');
   if (!content.includes('.env')) {
-    log("CRITICAL VULNERABILITY: .env is missing from .gitignore!");
-    log("Auto-patching .gitignore...");
+    log('CRITICAL VULNERABILITY: .env is missing from .gitignore!');
+    log('Auto-patching .gitignore...');
     fs.appendFileSync(gitignorePath, '\n.env\n');
   } else {
-    log(".env is safely secured in .gitignore.");
+    log('.env is safely secured in .gitignore.');
   }
 }
 
 // 2. NPM Audit
-log("Running NPM Audit...");
+log('Running NPM Audit...');
 const auditPassed = runCmd('npm audit --audit-level=high');
 if (!auditPassed) {
   log("High severity vulnerabilities found! Please review 'npm audit' manually.");
 } else {
-  log("No high severity vulnerabilities found.");
+  log('No high severity vulnerabilities found.');
 }
 
-log("Security Audit Complete.");
+log('Security Audit Complete.');

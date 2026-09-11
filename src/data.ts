@@ -7,121 +7,138 @@ export const TOOLS: Tool[] = [
     id: 'slime_factory_tycoon',
     name: 'Slime Factory Tycoon 🟢',
     category: 'start',
-    description: 'Production-ready open-source Roblox idle tycoon & interactive web demo with pets engine, offline earnings & balance simulator.',
+    description:
+      'Production-ready open-source Roblox idle tycoon & interactive web demo with pets engine, offline earnings & balance simulator.',
     url: 'https://dlinacre.github.io/slime-factory-tycoon/',
     host: 'dlinacre.github.io/slime-factory-tycoon',
     searchKeywords: 'slime factory tycoon roblox luau game idle simulator pets rebirth linacre',
-    tag: 'Game · Live'
+    tag: 'Game · Live',
   },
   {
     id: 'circuit',
     name: 'Circuit 🔌',
     category: 'start',
-    description: 'Rotate every wire until the whole grid lights up — procedural puzzles with a shared daily grid and par.',
+    description:
+      'Rotate every wire until the whole grid lights up — procedural puzzles with a shared daily grid and par.',
     url: '/games/circuit',
     host: 'linacre.site/games',
     searchKeywords: 'circuit puzzle wire rotate grid daily arcade game linacre',
-    tag: 'Game · Live'
+    tag: 'Game · Live',
   },
   {
     id: 'decrypt',
     name: 'Decrypt 🔓',
     category: 'start',
-    description: 'Crack a four-symbol code in eight guesses — pure deduction with a daily streak and challenge links.',
+    description:
+      'Crack a four-symbol code in eight guesses — pure deduction with a daily streak and challenge links.',
     url: '/games/decrypt',
     host: 'linacre.site/games',
     searchKeywords: 'decrypt code logic mastermind deduction daily streak game linacre',
-    tag: 'Game · Live'
+    tag: 'Game · Live',
   },
   {
     id: 'pulse',
     name: 'Pulse 🫀',
     category: 'start',
-    description: 'Repeat the signal, one step longer each round — solo memory game or pass-and-play duel.',
+    description:
+      'Repeat the signal, one step longer each round — solo memory game or pass-and-play duel.',
     url: '/games/pulse',
     host: 'linacre.site/games',
     searchKeywords: 'pulse memory simon signal repeat duel daily game linacre',
-    tag: 'Game · Live'
+    tag: 'Game · Live',
   },
   {
     id: 'trigger',
     name: 'Trigger ⚡',
     category: 'start',
-    description: 'Two-player reflex game on one phone — green means go, amber is a trap. First to five wins.',
+    description:
+      'Two-player reflex game on one phone — green means go, amber is a trap. First to five wins.',
     url: '/games/trigger',
     host: 'linacre.site/games',
     searchKeywords: 'trigger reflex two player reaction game duel linacre',
-    tag: 'Game · Live'
+    tag: 'Game · Live',
   },
   {
     id: 'gridlock',
     name: 'Gridlock 〰️',
     category: 'start',
-    description: 'Draw a line, close a square, go again — pass-and-play or take on a chain-aware AI.',
+    description:
+      'Draw a line, close a square, go again — pass-and-play or take on a chain-aware AI.',
     url: '/games/gridlock',
     host: 'linacre.site/games',
     searchKeywords: 'gridlock dots and boxes strategy two player ai game linacre',
-    tag: 'Game · Live'
+    tag: 'Game · Live',
   },
   {
     id: 'facerater_ai',
     name: 'FaceRater AI ✨',
     category: 'start',
-    description: 'Neutral aesthetic face scoring & instant AI reasoning card with shareable TikTok/Instagram 1080x1350 layouts.',
+    description:
+      'Neutral aesthetic face scoring & instant AI reasoning card with shareable TikTok/Instagram 1080x1350 layouts.',
     url: 'https://ai-face-rater-next.vercel.app',
     host: 'ai-face-rater-next.vercel.app',
-    searchKeywords: 'face rater ai aesthetic scoring vision selfie ratings viral tiktok vercel dlinacre',
-    tag: 'App · Live'
+    searchKeywords:
+      'face rater ai aesthetic scoring vision selfie ratings viral tiktok vercel dlinacre',
+    tag: 'App · Live',
   },
   {
     id: 'pixel_heist',
     name: 'Pixel Heist 🚨',
     category: 'start',
-    description: 'Cyberpunk stealth heist arcade game built with React 19 & Phaser 3. Procedural neon vaults, guard AI, laser grids & HMAC high scores.',
+    description:
+      'Cyberpunk stealth heist arcade game built with React 19 & Phaser 3. Procedural neon vaults, guard AI, laser grids & HMAC high scores.',
     url: 'https://dlinacre.github.io/pixel-heist/',
     host: 'dlinacre.github.io/pixel-heist',
-    searchKeywords: 'pixel heist game stealth phaser cyberpunk arcade arcade game procedural lockpicking dlinacre github pages',
-    tag: 'Game · Live'
+    searchKeywords:
+      'pixel heist game stealth phaser cyberpunk arcade arcade game procedural lockpicking dlinacre github pages',
+    tag: 'Game · Live',
   },
   {
     id: 'grumpy_guy_ai',
     name: 'Grumpy Guy AI ಠ_ಠ',
     category: 'start',
-    description: 'Your disagreeable AI copilot — motivation, with complaints. Reality checks with custom tones & speech synthesis.',
+    description:
+      'Your disagreeable AI copilot — motivation, with complaints. Reality checks with custom tones & speech synthesis.',
     url: 'https://dlinacre.github.io/grumpy-guy-ai/',
     host: 'dlinacre.github.io/grumpy-guy-ai',
-    searchKeywords: 'grumpy guy ai motivation copilot disagreeable reality check react vite speak synthesis dlinacre github pages',
-    tag: 'App · Live'
+    searchKeywords:
+      'grumpy guy ai motivation copilot disagreeable reality check react vite speak synthesis dlinacre github pages',
+    tag: 'App · Live',
   },
   {
     id: 'poke_flip_ai',
     name: 'PokéFlip AI',
     category: 'start',
-    description: 'Real-time arbitrage, high-frequency card flipping & predictive TCG valuation engine powered by Gemini.',
+    description:
+      'Real-time arbitrage, high-frequency card flipping & predictive TCG valuation engine powered by Gemini.',
     url: 'https://pok-flip-ai.vercel.app',
     host: 'pok-flip-ai.vercel.app',
-    searchKeywords: 'poke flip ai pokemon tcg arbitrage valuation high frequency trading gemini cardmarket ebay',
-    tag: 'App · Live'
+    searchKeywords:
+      'poke flip ai pokemon tcg arbitrage valuation high frequency trading gemini cardmarket ebay',
+    tag: 'App · Live',
   },
   {
     id: 'nic_food_decider',
     name: "Nic's Food Decider",
     category: 'start',
-    description: 'One-click decision engine for dinner — cook or takeaway with weighted preferences & dietary filters.',
+    description:
+      'One-click decision engine for dinner — cook or takeaway with weighted preferences & dietary filters.',
     url: 'https://nic-food-decider.vercel.app',
     host: 'nic-food-decider.vercel.app',
     searchKeywords: 'nic food decider dinner meal decision takeaway cook recipes flask vercel',
-    tag: 'App · Live'
+    tag: 'App · Live',
   },
   {
     id: 'payhip_scraper',
     name: 'PayHip Scraper',
     category: 'start',
-    description: 'Digital product intelligence for Payhip: live marketplace scraping, deterministic scoring & Arena.ai prompts.',
+    description:
+      'Digital product intelligence for Payhip: live marketplace scraping, deterministic scoring & Arena.ai prompts.',
     url: 'https://payhipscraper-production.up.railway.app',
     host: 'payhipscraper-production.up.railway.app',
-    searchKeywords: 'payhip scraper digital product intelligence market research arena ai node railway',
-    tag: 'App · Live'
+    searchKeywords:
+      'payhip scraper digital product intelligence market research arena ai node railway',
+    tag: 'App · Live',
   },
   {
     id: 'opagent',
@@ -343,7 +360,7 @@ export const MANUAL_PROJECTS: Project[] = [
     artwork: '/projects/tap-and-slap.webp',
     category: 'design',
     description:
-      'A dance-mat beat \'em up: tap to kill enemies exactly on the beat. Four neon lanes, combo multipliers up to 8×, original procedural synthwave fight music, daily challenges and a live leaderboard — keyboard or touch, free in the browser.',
+      "A dance-mat beat 'em up: tap to kill enemies exactly on the beat. Four neon lanes, combo multipliers up to 8×, original procedural synthwave fight music, daily challenges and a live leaderboard — keyboard or touch, free in the browser.",
     url: 'https://tap-and-slap.vercel.app',
     host: 'tap-and-slap.vercel.app',
     tag: 'Rhythm brawler · Live',
@@ -352,7 +369,15 @@ export const MANUAL_PROJECTS: Project[] = [
       'Making rhythm precision feel honest: latency-aware audio scheduling, lane-accurate hit testing with pads on the visible hit line, and feedback for every tap — so PERFECT is achievable by ear, not luck.',
     solution:
       'A Next.js 15 + Phaser 3 + TypeScript monolith with a BeatClock-anchored Web Audio scheduler, procedural seeded levels, Prisma + PostgreSQL leaderboards, Auth.js accounts and Playwright E2E coverage.',
-    tech: ['Next.js 15', 'Phaser 3', 'TypeScript', 'Web Audio API', 'Prisma', 'PostgreSQL', 'Auth.js'],
+    tech: [
+      'Next.js 15',
+      'Phaser 3',
+      'TypeScript',
+      'Web Audio API',
+      'Prisma',
+      'PostgreSQL',
+      'Auth.js',
+    ],
     liveUrl: 'https://tap-and-slap.vercel.app',
     repoUrl: 'https://github.com/DLinacre/tap-and-slap',
     live: true,
@@ -448,13 +473,16 @@ export const MANUAL_PROJECTS: Project[] = [
     name: 'Whole-Home Ad Blocker',
     artwork: '/projects/whole-home-adblocker.svg',
     category: 'deploy',
-    description: 'A one-click Windows installer that turns an always-on PC into an AdGuard Home network ad blocker — interactive setup wizard, live blocking dashboard, preloaded filter lists and encrypted DNS.',
+    description:
+      'A one-click Windows installer that turns an always-on PC into an AdGuard Home network ad blocker — interactive setup wizard, live blocking dashboard, preloaded filter lists and encrypted DNS.',
     url: 'https://github.com/DLinacre/whole-home-adblocker',
     host: 'github.com/DLinacre/whole-home-adblocker',
     tag: 'Open Source · MIT',
     role: 'Product designer and developer',
-    challenges: 'Network-wide ad blocking (Pi-hole / AdGuard Home) normally demands DNS knowledge, YAML editing and Docker familiarity — far out of reach for non-technical households.',
-    solution: 'Wrapped AdGuard Home in Docker behind an interactive PowerShell setup wizard: auto-installs Docker Desktop, asks three plain-English questions (dashboard port, encrypted DNS provider incl. family mode, blocklist strength), bcrypt-seeds a ready-made config with three filter lists, self-heals port conflicts, schedules silent weekly updates, and ships router guides with UK ISP workarounds. Validated in CI with PSScriptAnalyzer and yamllint.',
+    challenges:
+      'Network-wide ad blocking (Pi-hole / AdGuard Home) normally demands DNS knowledge, YAML editing and Docker familiarity — far out of reach for non-technical households.',
+    solution:
+      'Wrapped AdGuard Home in Docker behind an interactive PowerShell setup wizard: auto-installs Docker Desktop, asks three plain-English questions (dashboard port, encrypted DNS provider incl. family mode, blocklist strength), bcrypt-seeds a ready-made config with three filter lists, self-heals port conflicts, schedules silent weekly updates, and ships router guides with UK ISP workarounds. Validated in CI with PSScriptAnalyzer and yamllint.',
     tech: ['PowerShell', 'Docker', 'AdGuard Home', 'Batch', 'GitHub Actions'],
     liveUrl: 'https://github.com/DLinacre/whole-home-adblocker',
     repoUrl: 'https://github.com/DLinacre/whole-home-adblocker',
@@ -463,14 +491,26 @@ export const MANUAL_PROJECTS: Project[] = [
   {
     name: 'String & Band 🏹',
     category: 'build',
-    description: 'An offline-first educational knowledge base on the history, materials and craft of archery equipment and slingshots: 18 long-form articles, a 44-material explorer with a live analysis engine, comparison lab, 49-term glossary and fuzzy search — all in one self-contained, dependency-free HTML file.',
+    description:
+      'An offline-first educational knowledge base on the history, materials and craft of archery equipment and slingshots: 18 long-form articles, a 44-material explorer with a live analysis engine, comparison lab, 49-term glossary and fuzzy search — all in one self-contained, dependency-free HTML file.',
     url: 'https://dlinacre.github.io/string-and-band/',
     host: 'dlinacre.github.io/string-and-band',
     tag: 'Featured · Live PWA',
     role: 'Creator, designer & sole developer',
-    challenges: 'Delivering a premium, genuinely searchable reference — with radar charts, a command palette, fuzzy search and an interactive material rules engine — inside a single portable HTML file with zero dependencies and no build step, while hitting WCAG 2.2 AA and full offline support.',
-    solution: 'Architected a data-driven single-file SPA in vanilla ES2025 with hand-rolled SVG radar and meter charts, a subsequence-scored fuzzy search engine over 107 indexed items, a category-driven material explorer with historical synergy detection, route-level code organisation and a 34-assertion Node smoke-test harness in CI. Deployed to GitHub Pages with service-worker offline caching and a web manifest.',
-    tech: ['HTML5', 'Vanilla ES2025 JS', 'SVG Charts', 'CSS Custom Properties', 'Service Worker', 'PWA', 'GitHub Actions', 'WCAG 2.2 AA'],
+    challenges:
+      'Delivering a premium, genuinely searchable reference — with radar charts, a command palette, fuzzy search and an interactive material rules engine — inside a single portable HTML file with zero dependencies and no build step, while hitting WCAG 2.2 AA and full offline support.',
+    solution:
+      'Architected a data-driven single-file SPA in vanilla ES2025 with hand-rolled SVG radar and meter charts, a subsequence-scored fuzzy search engine over 107 indexed items, a category-driven material explorer with historical synergy detection, route-level code organisation and a 34-assertion Node smoke-test harness in CI. Deployed to GitHub Pages with service-worker offline caching and a web manifest.',
+    tech: [
+      'HTML5',
+      'Vanilla ES2025 JS',
+      'SVG Charts',
+      'CSS Custom Properties',
+      'Service Worker',
+      'PWA',
+      'GitHub Actions',
+      'WCAG 2.2 AA',
+    ],
     liveUrl: 'https://dlinacre.github.io/string-and-band/',
     repoUrl: 'https://github.com/DLinacre/string-and-band',
     live: true,
@@ -480,14 +520,24 @@ export const MANUAL_PROJECTS: Project[] = [
     name: 'AFTERGLOW ✦',
     artwork: '/projects/afterglow.webp',
     category: 'build',
-    description: 'An original, endless light-painting game: you don\'t move a character — you leave light on. Hold the shutter and steer glowing pens to burn long-exposure trails onto a night sky. Features 10 brushes, 12 palettes, endless procedural shapes, a Daily Challenge, generative Web Audio, star-based unlocks, and a local gallery.',
+    description:
+      "An original, endless light-painting game: you don't move a character — you leave light on. Hold the shutter and steer glowing pens to burn long-exposure trails onto a night sky. Features 10 brushes, 12 palettes, endless procedural shapes, a Daily Challenge, generative Web Audio, star-based unlocks, and a local gallery.",
     url: 'https://dlinacre.github.io/afterglow/',
     host: 'dlinacre.github.io/afterglow',
     tag: 'Featured · Live Game',
     role: 'Creator & Lead Developer',
-    challenges: 'Inventing a genuinely novel core mechanic — persistent long-exposure light-painting as gameplay — then making it endless, teachable, and rewarding for long play sessions on a single mobile-friendly canvas with zero dependencies.',
-    solution: 'Built a dependency-free HTML5 engine with three layered canvases and additive glow blending, a seeded PRNG for deterministic endless levels, a synthesised Web Audio ambient engine, snapshot-based undo/redo, and a registry architecture so brushes, palettes and shapes extend in a single line. Auto-deployed to GitHub Pages via GitHub Actions.',
-    tech: ['JavaScript', 'HTML5 Canvas', 'Web Audio API', 'Procedural Generation', 'GitHub Actions', 'GitHub Pages'],
+    challenges:
+      'Inventing a genuinely novel core mechanic — persistent long-exposure light-painting as gameplay — then making it endless, teachable, and rewarding for long play sessions on a single mobile-friendly canvas with zero dependencies.',
+    solution:
+      'Built a dependency-free HTML5 engine with three layered canvases and additive glow blending, a seeded PRNG for deterministic endless levels, a synthesised Web Audio ambient engine, snapshot-based undo/redo, and a registry architecture so brushes, palettes and shapes extend in a single line. Auto-deployed to GitHub Pages via GitHub Actions.',
+    tech: [
+      'JavaScript',
+      'HTML5 Canvas',
+      'Web Audio API',
+      'Procedural Generation',
+      'GitHub Actions',
+      'GitHub Pages',
+    ],
     liveUrl: 'https://dlinacre.github.io/afterglow/',
     repoUrl: 'https://github.com/DLinacre/afterglow',
     live: true,
@@ -510,7 +560,8 @@ export const MANUAL_PROJECTS: Project[] = [
     solution:
       'Designed a hybrid React-Phaser architecture with custom laser collision physics, keycard hacking mechanics, and high scores.',
     tech: ['React 19', 'Phaser 3', 'TypeScript', 'Next.js 15'],
-    artwork: '/projects/pixel-heist.webp',    liveUrl: 'https://dlinacre.github.io/pixel-heist/',
+    artwork: '/projects/pixel-heist.webp',
+    liveUrl: 'https://dlinacre.github.io/pixel-heist/',
     repoUrl: 'https://github.com/DLinacre/pixel-heist',
     live: true,
   },
@@ -565,14 +616,25 @@ export const MANUAL_PROJECTS: Project[] = [
     bannerImage: '/banners/grumpy-guy.webp',
     artwork: '/projects/grumpy-guy-ai.webp',
     category: 'build',
-    description: 'Your disagreeable AI copilot delivering motivation with complaints. Features custom tone selection (Dry, Brutal, Supportive), Web Speech synthesis, local storage persistence, and Cloudflare Worker fallback architecture.',
+    description:
+      'Your disagreeable AI copilot delivering motivation with complaints. Features custom tone selection (Dry, Brutal, Supportive), Web Speech synthesis, local storage persistence, and Cloudflare Worker fallback architecture.',
     url: 'https://dlinacre.github.io/grumpy-guy-ai/',
     host: 'dlinacre.github.io/grumpy-guy-ai',
     tag: 'Featured · Live v0.1.0',
     role: 'Creator & Lead Engineer',
-    challenges: 'Developers and creators often face daily motivation slumps and need a fast, humorous, zero-friction reality check without bloat.',
-    solution: 'Engineered a React 19 + TypeScript + Vite app with built-in Web Speech API voice synthesis, HSL dark-mode styling, Vitest coverage, and automated GitHub Actions CI/CD Pages deployment.',
-    tech: ['React 19', 'TypeScript', 'Vite 7', 'Web Speech API', 'Vitest', 'GitHub Pages', 'Cloudflare Workers'],
+    challenges:
+      'Developers and creators often face daily motivation slumps and need a fast, humorous, zero-friction reality check without bloat.',
+    solution:
+      'Engineered a React 19 + TypeScript + Vite app with built-in Web Speech API voice synthesis, HSL dark-mode styling, Vitest coverage, and automated GitHub Actions CI/CD Pages deployment.',
+    tech: [
+      'React 19',
+      'TypeScript',
+      'Vite 7',
+      'Web Speech API',
+      'Vitest',
+      'GitHub Pages',
+      'Cloudflare Workers',
+    ],
     liveUrl: 'https://dlinacre.github.io/grumpy-guy-ai/',
     repoUrl: 'https://github.com/DLinacre/grumpy-guy-ai',
     live: true,
@@ -581,13 +643,16 @@ export const MANUAL_PROJECTS: Project[] = [
     name: "Nic's Food Decider 🍕",
     artwork: '/projects/nic-food-decider.webp',
     category: 'build',
-    description: 'An intelligent, bias-weighted meal decision web application designed to solve dinner paralysis with cook & takeaway modes, custom filters, and decision history.',
+    description:
+      'An intelligent, bias-weighted meal decision web application designed to solve dinner paralysis with cook & takeaway modes, custom filters, and decision history.',
     url: 'https://nic-food-decider.vercel.app',
     host: 'nic-food-decider.vercel.app',
     tag: 'Featured · Live v1.0.0',
     role: 'Full-stack developer & designer',
-    challenges: 'Overcoming daily meal decision paralysis with an instant, bias-weighted decider and clean mobile-first UI.',
-    solution: 'Engineered a Flask 3 & SQLite application with SQLAlchemy ORM, bcrypt auth, Pydantic validation, Jinja templates, and Vercel serverless deployment.',
+    challenges:
+      'Overcoming daily meal decision paralysis with an instant, bias-weighted decider and clean mobile-first UI.',
+    solution:
+      'Engineered a Flask 3 & SQLite application with SQLAlchemy ORM, bcrypt auth, Pydantic validation, Jinja templates, and Vercel serverless deployment.',
     tech: ['Python', 'Flask', 'SQLAlchemy', 'SQLite', 'Vercel', 'Vanilla JS', 'CSS3', 'Pydantic'],
     liveUrl: 'https://nic-food-decider.vercel.app',
     repoUrl: 'https://github.com/DLinacre/nic-food-decider',
@@ -599,7 +664,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'App · Live',
     actionType: 'open',
     bannerImage: '/banners/fleatment.webp',
-    artwork: '/projects/fleatment.webp',    category: 'build',
+    artwork: '/projects/fleatment.webp',
+    category: 'build',
     description:
       'An open-source UK cat flea & tick treatment finder, live delivered price index, active ingredient strength analyzer, and safety guide.',
     url: 'https://dlinacre.github.io/Fleatment/',
@@ -621,7 +687,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'App · Live',
     actionType: 'open',
     bannerImage: '/banners/opagent.webp',
-    artwork: '/projects/opagent.webp',    category: 'build',
+    artwork: '/projects/opagent.webp',
+    category: 'build',
     description:
       'A zero-setup, single-file HTML AI workspace and prompt controller running 100% locally in your browser with context history and model routing.',
     url: '/tools/opagent.html',
@@ -643,7 +710,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'App · Live',
     actionType: 'open',
     bannerImage: '/banners/arena-audit.webp',
-    artwork: '/projects/a-audit.webp',    category: 'build',
+    artwork: '/projects/a-audit.webp',
+    category: 'build',
     description:
       'A specialized browser audit tool for building systematic prompt checklists across UX, UI, SEO, Accessibility, and Security.',
     url: 'https://dlinacre.github.io/a-audit/',
@@ -663,7 +731,8 @@ export const MANUAL_PROJECTS: Project[] = [
     name: 'APKHub 📱',
     artwork: '/projects/apkhub.webp',
     category: 'build',
-    description: 'An open-source Android App Store & release indexer that discovers and downloads official APK releases from GitHub & F-Droid with QR installation support.',
+    description:
+      'An open-source Android App Store & release indexer that discovers and downloads official APK releases from GitHub & F-Droid with QR installation support.',
     url: 'https://apkhub-alpha.vercel.app',
     host: 'apkhub-alpha.vercel.app',
     tag: 'Featured · App',
@@ -683,7 +752,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'DevOps · Source',
     actionType: 'open',
     bannerImage: '/banners/omniroute.webp',
-    artwork: '/projects/omniroute.svg',    category: 'deploy',
+    artwork: '/projects/omniroute.svg',
+    category: 'deploy',
     description:
       'Enterprise multi-provider AI model gateway & orchestration suite with fallback routing, load balancing, cost tracking, and streaming SSE endpoints.',
     url: 'https://github.com/DLinacre/OmniRoute-LLM',
@@ -703,7 +773,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'App · Live',
     actionType: 'open',
     bannerImage: '/banners/pokeguru.webp',
-    artwork: '/projects/pokeguru.svg',    category: 'build',
+    artwork: '/projects/pokeguru.svg',
+    category: 'build',
     description:
       'A fast Pokémon TCG database with advanced search, UK prices in GBP, set history, chase-card discovery, and a local collection vault.',
     url: 'https://dlinacre.github.io/PokeGuru/',
@@ -725,7 +796,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'App · Live',
     actionType: 'open',
     bannerImage: '/banners/apex-pos.webp',
-    artwork: '/projects/apex-pos.svg',    category: 'build',
+    artwork: '/projects/apex-pos.svg',
+    category: 'build',
     description:
       'An offline-first point-of-sale system for the browser with register, stock, customers, expenses, receipts, and business reporting.',
     url: 'https://dlinacre.github.io/Apex-POS/',
@@ -747,7 +819,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'App · Live',
     actionType: 'open',
     bannerImage: '/banners/mob-deals.webp',
-    artwork: '/projects/mob-deals.svg',    category: 'build',
+    artwork: '/projects/mob-deals.svg',
+    category: 'build',
     description:
       'A transparent UK SIM-only comparison and switching guide with 64 provider records, public source checks, and plain-English PAC/STAC help.',
     url: 'https://dlinacre.github.io/mob-deals/',
@@ -769,7 +842,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'Tools · Open Source',
     actionType: 'open',
     bannerImage: '/banners/dkma-monster.webp',
-    artwork: '/projects/dkma-monster.svg',    category: 'build',
+    artwork: '/projects/dkma-monster.svg',
+    category: 'build',
     description:
       'A practical Android background-app survival toolkit: searchable guidance for 15 OEM families plus CLI, desktop GUI, ADB, root, and Magisk options.',
     url: 'https://dlinacre.github.io/dkma-monster/',
@@ -791,7 +865,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'Android · App',
     actionType: 'open',
     bannerImage: '/banners/linacre-uninstaller.webp',
-    artwork: '/projects/linacre-uninstaller.svg',    category: 'build',
+    artwork: '/projects/linacre-uninstaller.svg',
+    category: 'build',
     description:
       'A downloadable Android cleanup app with searchable app labels, safety tiers, guided review, and a scoped batch-uninstall flow.',
     url: 'https://github.com/DLinacre/LinacreUninstaller/releases/latest',
@@ -812,7 +887,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'Dashboard · Live',
     actionType: 'open',
     bannerImage: '/banners/linacre-llm-benchmarks.webp',
-    artwork: '/projects/llm-hub.svg',    category: 'deploy',
+    artwork: '/projects/llm-hub.svg',
+    category: 'deploy',
     description:
       'Automated 24-hour LLM benchmark dashboard and model discovery super-app aggregating speed, pricing, and capability metrics.',
     url: 'https://dlinacre.github.io/Linacre-LLM-Benchmarks/',
@@ -830,13 +906,16 @@ export const MANUAL_PROJECTS: Project[] = [
     name: 'KushCloud',
     artwork: '/projects/kushcloud.svg',
     category: 'design',
-    description: 'A polished one-tap browser game with four worlds, combo scoring, power-ups, unlockable cosmetics, synthesised audio, and an optional leaderboard.',
+    description:
+      'A polished one-tap browser game with four worlds, combo scoring, power-ups, unlockable cosmetics, synthesised audio, and an optional leaderboard.',
     url: 'https://dlinacre.github.io/KushCloud/',
     host: 'dlinacre.github.io/KushCloud',
     tag: 'Browser Game · Live',
     role: 'Game designer and frontend engineer',
-    challenges: 'Deliver responsive arcade controls, progression, sound, and visual variety without relying on heavy external game assets.',
-    solution: 'Used Canvas 2D, Web Audio, deterministic game state, adaptive quality, keyboard/touch controls, and a PWA-ready React shell.',
+    challenges:
+      'Deliver responsive arcade controls, progression, sound, and visual variety without relying on heavy external game assets.',
+    solution:
+      'Used Canvas 2D, Web Audio, deterministic game state, adaptive quality, keyboard/touch controls, and a PWA-ready React shell.',
     tech: ['React', 'TypeScript', 'Canvas 2D', 'Web Audio', 'PWA'],
     liveUrl: 'https://dlinacre.github.io/KushCloud/',
     repoUrl: 'https://github.com/DLinacre/KushCloud',
@@ -848,7 +927,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'DevOps · Source',
     actionType: 'open',
     bannerImage: '/banners/myhub-pipeline.webp',
-    artwork: '/projects/myhub-pipeline.svg',    category: 'deploy',
+    artwork: '/projects/myhub-pipeline.svg',
+    category: 'deploy',
     description:
       'A documented Python DevOps reference project covering CI/CD, security checks, DORA-style metrics, anomaly detection, tests, and automated remediation experiments.',
     url: 'https://github.com/DLinacre/myhub-pipeline',
@@ -866,17 +946,20 @@ export const MANUAL_PROJECTS: Project[] = [
     name: 'PayHip Scraper 🔎',
     artwork: '/projects/payhip-scraper.svg',
     category: 'build',
-    description: 'Digital product intelligence for Payhip sellers: scrapes the live marketplace, scores every listing for opportunity, and generates Arena.ai prompts to build a better version.',
+    description:
+      'Digital product intelligence for Payhip sellers: scrapes the live marketplace, scores every listing for opportunity, and generates Arena.ai prompts to build a better version.',
     url: 'https://payhipscraper-production.up.railway.app',
     host: 'payhipscraper-production.up.railway.app',
     tag: 'Featured · Live App',
     role: 'Creator and backend engineer',
-    challenges: 'Payhip renders its marketplace client-side and its search matches any term in a phrase, so a naive scraper reads an empty page and a literal search returns unrelated products.',
-    solution: 'Targets the marketplace search API directly, probes each term to narrow on the most selective one, then filters locally for full-phrase matches. Scores listings deterministically from real review volume, ratings and market size — no estimated sales figures.',
+    challenges:
+      'Payhip renders its marketplace client-side and its search matches any term in a phrase, so a naive scraper reads an empty page and a literal search returns unrelated products.',
+    solution:
+      'Targets the marketplace search API directly, probes each term to narrow on the most selective one, then filters locally for full-phrase matches. Scores listings deterministically from real review volume, ratings and market size — no estimated sales figures.',
     tech: ['Node.js', 'Express', 'SQLite', 'Cheerio', 'Zod', 'Docker', 'Railway'],
     liveUrl: 'https://payhipscraper-production.up.railway.app',
     repoUrl: 'https://github.com/DLinacre/PayHip-Scraper',
-    live: true
+    live: true,
   },
   {
     name: 'Deasy Continuous Command Suite',
@@ -884,7 +967,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'Desktop · Source',
     actionType: 'open',
     bannerImage: '/banners/deasy.webp',
-    artwork: '/projects/deasy.svg',    category: 'deploy',
+    artwork: '/projects/deasy.svg',
+    category: 'deploy',
     description:
       'Continuous command suite and branch desktop manager for streamlined project deployment and local environment control.',
     url: 'https://github.com/DLinacre/Deasy',
@@ -904,7 +988,8 @@ export const MANUAL_PROJECTS: Project[] = [
     badgeLabel: 'Voice AI · Source',
     actionType: 'open',
     bannerImage: '/banners/ev-bot.webp',
-    artwork: '/projects/ev-bot.svg',    category: 'deploy',
+    artwork: '/projects/ev-bot.svg',
+    category: 'deploy',
     description:
       'Voice assistant integration linking Alexa commands to desktop PC macro controls and Gemini-powered conversational responses.',
     url: 'https://github.com/DLinacre/ev-backend',
@@ -921,4 +1006,3 @@ export const MANUAL_PROJECTS: Project[] = [
 ];
 
 export const PROJECTS: Project[] = MANUAL_PROJECTS;
-

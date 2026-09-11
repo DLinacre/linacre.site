@@ -1,93 +1,180 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 — linacre.site</title>
-<meta name="theme-color" content="#030c14">
-<meta name="description" content="Page not found — linacre.site">
-<style>
-  :root {
-    --bg: #030c14; --amber: #22D3EE; --cyan: #5ccfe6; --text: #e6e9ef;
-    --muted: #8b93a7; --mono: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg); color: var(--text);
-    font-family: var(--mono); display: flex; align-items: center;
-    justify-content: center; min-height: 100vh; padding: 24px;
-    background-image: radial-gradient(60rem 40rem at 50% -10%, rgba(255,180,84,.06), transparent 60%);
-  }
-  .wrap { text-align: center; max-width: 420px; }
-  .code {
-    font-size: 6rem; font-weight: 700; color: var(--amber); line-height: 1;
-    position: relative; display: inline-block;
-  }
-  /* Glitch effect */
-  .code::before, .code::after {
-    content: '404'; position: absolute; top: 0; left: 0;
-    width: 100%; height: 100%;
-  }
-  .code::before {
-    color: var(--cyan); z-index: -1;
-    animation: glitch 2s infinite linear alternate-reverse;
-  }
-  .code::after {
-    color: #f87171; z-index: -1;
-    animation: glitch 1.5s infinite linear alternate;
-  }
-  @keyframes glitch {
-    0% { clip-path: inset(0 0 85% 0); transform: translate(-2px, 2px); }
-    20% { clip-path: inset(30% 0 50% 0); transform: translate(2px, -1px); }
-    40% { clip-path: inset(60% 0 10% 0); transform: translate(-1px, 1px); }
-    60% { clip-path: inset(10% 0 70% 0); transform: translate(1px, -2px); }
-    80% { clip-path: inset(50% 0 30% 0); transform: translate(-2px, 0px); }
-    100% { clip-path: inset(80% 0 0% 0); transform: translate(0px, 2px); }
-  }
-  .msg { color: var(--muted); margin: 16px 0 8px; font-size: 0.95rem; line-height: 1.5; }
-  .countdown { color: var(--muted); font-size: 0.75rem; margin-bottom: 28px; }
-  .countdown span { color: var(--cyan); font-weight: 600; }
-  a {
-    color: var(--cyan); text-decoration: none; padding: 12px 24px;
-    border: 1px solid rgba(92,207,230,.3); border-radius: 8px;
-    display: inline-block; font-size: 0.9rem; font-weight: 500;
-    transition: all 0.2s ease;
-  }
-  a:hover { border-color: var(--cyan); background: rgba(92,207,230,.08); transform: translateY(-1px); }
-  a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .code::before, .code::after { animation: none; }
-  }
-</style>
-</head>
-<body>
-<div class="wrap">
-  <p class="code">404</p>
-  <p class="msg">// page not found &mdash; the terminal has no record of this route</p>
-  <p class="countdown">Redirecting in <span id="timer">5</span>s...</p>
-  <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:12px;">
-    <a href="/" id="link-home">cd ~/linacre.site</a>
-    <a href="/contact" id="link-contact">Start a project</a>
-  </div>
-  <p style="color:var(--muted);font-size:0.7rem;margin-top:8px;">
-    Or email <a style="padding:0;border:0;color:var(--amber)" href="mailto:david@linacre.site">david@linacre.site</a>
-  </p>
-</div>
-<script>
-  (function() {
-    var seconds = 5;
-    var timer = document.getElementById('timer');
-    var interval = setInterval(function() {
-      seconds--;
-      if (timer) timer.textContent = seconds;
-      if (seconds <= 0) {
-        clearInterval(interval);
-        window.location.href = '/';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — linacre.site</title>
+    <meta name="theme-color" content="#030c14" />
+    <meta name="description" content="Page not found — linacre.site" />
+    <style>
+      :root {
+        --bg: #030c14;
+        --amber: #22d3ee;
+        --cyan: #5ccfe6;
+        --text: #e6e9ef;
+        --muted: #8b93a7;
+        --mono: ui-monospace, 'SF Mono', 'JetBrains Mono', monospace;
       }
-    }, 1000);
-  })();
-</script>
-</body>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--mono);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+        background-image: radial-gradient(
+          60rem 40rem at 50% -10%,
+          rgba(255, 180, 84, 0.06),
+          transparent 60%
+        );
+      }
+      .wrap {
+        text-align: center;
+        max-width: 420px;
+      }
+      .code {
+        font-size: 6rem;
+        font-weight: 700;
+        color: var(--amber);
+        line-height: 1;
+        position: relative;
+        display: inline-block;
+      }
+      /* Glitch effect */
+      .code::before,
+      .code::after {
+        content: '404';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .code::before {
+        color: var(--cyan);
+        z-index: -1;
+        animation: glitch 2s infinite linear alternate-reverse;
+      }
+      .code::after {
+        color: #f87171;
+        z-index: -1;
+        animation: glitch 1.5s infinite linear alternate;
+      }
+      @keyframes glitch {
+        0% {
+          clip-path: inset(0 0 85% 0);
+          transform: translate(-2px, 2px);
+        }
+        20% {
+          clip-path: inset(30% 0 50% 0);
+          transform: translate(2px, -1px);
+        }
+        40% {
+          clip-path: inset(60% 0 10% 0);
+          transform: translate(-1px, 1px);
+        }
+        60% {
+          clip-path: inset(10% 0 70% 0);
+          transform: translate(1px, -2px);
+        }
+        80% {
+          clip-path: inset(50% 0 30% 0);
+          transform: translate(-2px, 0px);
+        }
+        100% {
+          clip-path: inset(80% 0 0% 0);
+          transform: translate(0px, 2px);
+        }
+      }
+      .msg {
+        color: var(--muted);
+        margin: 16px 0 8px;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .countdown {
+        color: var(--muted);
+        font-size: 0.75rem;
+        margin-bottom: 28px;
+      }
+      .countdown span {
+        color: var(--cyan);
+        font-weight: 600;
+      }
+      a {
+        color: var(--cyan);
+        text-decoration: none;
+        padding: 12px 24px;
+        border: 1px solid rgba(92, 207, 230, 0.3);
+        border-radius: 8px;
+        display: inline-block;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+      a:hover {
+        border-color: var(--cyan);
+        background: rgba(92, 207, 230, 0.08);
+        transform: translateY(-1px);
+      }
+      a:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 2px;
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .code::before,
+        .code::after {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p class="code">404</p>
+      <p class="msg">// page not found &mdash; the terminal has no record of this route</p>
+      <p class="countdown">Redirecting in <span id="timer">5</span>s...</p>
+      <div
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          justify-content: center;
+          margin-bottom: 12px;
+        "
+      >
+        <a href="/" id="link-home">cd ~/linacre.site</a>
+        <a href="/contact" id="link-contact">Start a project</a>
+      </div>
+      <p style="color: var(--muted); font-size: 0.7rem; margin-top: 8px">
+        Or email
+        <a style="padding: 0; border: 0; color: var(--amber)" href="mailto:david@linacre.site"
+          >david@linacre.site</a
+        >
+      </p>
+    </div>
+    <script>
+      (function () {
+        var seconds = 5;
+        var timer = document.getElementById('timer');
+        var interval = setInterval(function () {
+          seconds--;
+          if (timer) timer.textContent = seconds;
+          if (seconds <= 0) {
+            clearInterval(interval);
+            window.location.href = '/';
+          }
+        }, 1000);
+      })();
+    </script>
+  </body>
 </html>

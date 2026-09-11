@@ -3,17 +3,32 @@ import { DEFAULT_IDENTITY, resolveColorScheme, resolveFontScheme } from './brand
 
 describe('brand configuration contracts', () => {
   it('resolves canonical and custom colour schemes', () => {
-    expect(resolveColorScheme(DEFAULT_IDENTITY)).toEqual({ primary: '#22D3EE', secondary: '#34D399' });
-    expect(resolveColorScheme({ colorId: 'custom', customPrimary: '#111111', customSecondary: '#eeeeee' })).toEqual({
+    expect(resolveColorScheme(DEFAULT_IDENTITY)).toEqual({
+      primary: '#22D3EE',
+      secondary: '#34D399',
+    });
+    expect(
+      resolveColorScheme({
+        colorId: 'custom',
+        customPrimary: '#111111',
+        customSecondary: '#eeeeee',
+      }),
+    ).toEqual({
       primary: '#111111',
-      secondary: '#eeeeee'
+      secondary: '#eeeeee',
     });
   });
 
   it('keeps compatibility aliases for existing shared URLs', () => {
-    expect(resolveColorScheme({ colorId: 'amber', customPrimary: '#000000', customSecondary: '#ffffff' })).toEqual({
+    expect(
+      resolveColorScheme({
+        colorId: 'amber',
+        customPrimary: '#000000',
+        customSecondary: '#ffffff',
+      }),
+    ).toEqual({
       primary: '#22D3EE',
-      secondary: '#34D399'
+      secondary: '#34D399',
     });
   });
 

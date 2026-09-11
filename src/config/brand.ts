@@ -11,7 +11,7 @@ export const DEFAULT_IDENTITY: IdentityPreferences = {
   bio: 'Building practical software, open-source tools, and reliable automation systems.',
   glow: 2,
   customPrimary: '#22D3EE',
-  customSecondary: '#34D399'
+  customSecondary: '#34D399',
 };
 
 export const BASE_COLOR_SCHEMES: Record<string, BrandColorScheme> = {
@@ -24,40 +24,47 @@ export const BASE_COLOR_SCHEMES: Record<string, BrandColorScheme> = {
   amber: { primary: '#22D3EE', secondary: '#34D399' },
   cyan: { primary: '#38BDF8', secondary: '#2DD4BF' },
   emerald: { primary: '#2DD4BF', secondary: '#A3E635' },
-  crimson: { primary: '#818CF8', secondary: '#22D3EE' }
+  crimson: { primary: '#818CF8', secondary: '#22D3EE' },
 };
 
 export const FONT_SCHEMES: Record<string, BrandFontScheme> = {
   cyber: {
     display: '"Space Grotesk", "Inter", sans-serif',
     mono: '"JetBrains Mono", monospace',
-    import: ''
+    import: '',
   },
   neotech: {
     display: '"Orbitron", sans-serif',
     mono: '"Share Tech Mono", monospace',
-    import: "@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Share+Tech+Mono&display=swap');"
+    import:
+      "@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Share+Tech+Mono&display=swap');",
   },
   brutalist: {
     display: '"Plus Jakarta Sans", sans-serif',
     mono: '"Fira Code", monospace',
-    import: "@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Plus+Jakarta+Sans:wght@500;800&display=swap');"
+    import:
+      "@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Plus+Jakarta+Sans:wght@500;800&display=swap');",
   },
   editorial: {
     display: '"Playfair Display", serif',
     mono: '"Fira Mono", monospace',
-    import: "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Fira+Mono&display=swap');"
-  }
+    import:
+      "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Fira+Mono&display=swap');",
+  },
 };
 
-export function colorSchemesFor(identity: Pick<IdentityPreferences, 'customPrimary' | 'customSecondary'>): Record<string, BrandColorScheme> {
+export function colorSchemesFor(
+  identity: Pick<IdentityPreferences, 'customPrimary' | 'customSecondary'>,
+): Record<string, BrandColorScheme> {
   return {
     ...BASE_COLOR_SCHEMES,
-    custom: { primary: identity.customPrimary, secondary: identity.customSecondary }
+    custom: { primary: identity.customPrimary, secondary: identity.customSecondary },
   };
 }
 
-export function resolveColorScheme(identity: Pick<IdentityPreferences, 'colorId' | 'customPrimary' | 'customSecondary'>): BrandColorScheme {
+export function resolveColorScheme(
+  identity: Pick<IdentityPreferences, 'colorId' | 'customPrimary' | 'customSecondary'>,
+): BrandColorScheme {
   const colors = colorSchemesFor(identity);
   return colors[identity.colorId] || colors.cyber;
 }

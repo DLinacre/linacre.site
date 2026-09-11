@@ -10,28 +10,28 @@
  */
 
 export type ProjectKind =
-  | 'App'      // consumer web app / PWA
-  | 'Tool'     // utility / calculator / directory
-  | 'AI'       // AI-powered product
-  | 'Game'     // playable game
-  | 'DevOps'   // backend / infra / pipeline / library
-  | 'Source'   // open-source project / collection
+  | 'App' // consumer web app / PWA
+  | 'Tool' // utility / calculator / directory
+  | 'AI' // AI-powered product
+  | 'Game' // playable game
+  | 'DevOps' // backend / infra / pipeline / library
+  | 'Source' // open-source project / collection
   | 'Private'; // private repo (listed, not linked)
 
 export interface SiteProject {
   name: string;
   kind: ProjectKind;
   blurb: string;
-  url?: string;       // primary destination (live app or repo)
-  repo?: string;      // repository URL when different from url
-  tags: string[];     // search keywords
+  url?: string; // primary destination (live app or repo)
+  repo?: string; // repository URL when different from url
+  tags: string[]; // search keywords
   emoji?: string;
   private?: boolean; // hidden from external links (private repo)
-  badge?: 'NEW';     // highlights recently shipped work
-  artwork?: string;  // image path in /banners or /projects (used for thumbnails)
+  badge?: 'NEW'; // highlights recently shipped work
+  artwork?: string; // image path in /banners or /projects (used for thumbnails)
   highlights?: string[]; // 2–3 bullet takeaways for the detail view
-  tech?: string[];   // language / stack
-  year?: number;     // launch / release year
+  tech?: string[]; // language / stack
+  year?: number; // launch / release year
   featured?: boolean; // shown in the hero spotlight on the start page
 }
 
@@ -55,7 +55,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'App',
     emoji: '🧁',
     artwork: '/banners/bonny-bakes.jpg',
-    blurb: 'Simple bakes. Happy hearts. A warm, friendly home-baking recipe website with a quantity calculator, favourites, shopping list and print-friendly cards.',
+    blurb:
+      'Simple bakes. Happy hearts. A warm, friendly home-baking recipe website with a quantity calculator, favourites, shopping list and print-friendly cards.',
     url: 'https://dlinacre.github.io/bonny-bakes/',
     repo: 'https://github.com/DLinacre/bonny-bakes',
     tags: ['baking', 'recipes', 'calculator', 'offline', 'food', 'pwa'],
@@ -74,7 +75,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'App',
     emoji: '🧬',
     artwork: '/banners/helix.webp',
-    blurb: 'Watch a living population of tiny programs evolve — no install, nothing leaves the browser.',
+    blurb:
+      'Watch a living population of tiny programs evolve — no install, nothing leaves the browser.',
     url: '/helix',
     repo: 'https://github.com/DLinacre/helix',
     tags: ['evolution', 'simulation', 'canvas', 'offline', 'generative'],
@@ -93,7 +95,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'Tool',
     emoji: '🛡️',
     artwork: '/projects/whole-home-adblocker.svg',
-    blurb: 'One-click Windows installer that turns an always-on PC into a network-wide ad blocker (AdGuard Home).',
+    blurb:
+      'One-click Windows installer that turns an always-on PC into a network-wide ad blocker (AdGuard Home).',
     repo: 'https://github.com/DLinacre/whole-home-adblocker',
     tags: ['adblock', 'adguard', 'dns', 'windows', 'privacy', 'docker'],
   },
@@ -102,7 +105,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'AI',
     emoji: '✉️',
     artwork: '/banners/smart-mail.webp',
-    blurb: 'AI-powered unified inbox — smart categorisation, importance detection & multi-account (Gemini).',
+    blurb:
+      'AI-powered unified inbox — smart categorisation, importance detection & multi-account (Gemini).',
     url: 'https://smart-mail-gamma.vercel.app',
     repo: 'https://github.com/DLinacre/smart-mail',
     tags: ['email', 'gmail', 'ai', 'gemini', 'inbox'],
@@ -222,7 +226,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     name: 'Prism',
     kind: 'Source',
     emoji: '📊',
-    blurb: 'Project intelligence & team collaboration platform — real-time kanban, analytics, state.',
+    blurb:
+      'Project intelligence & team collaboration platform — real-time kanban, analytics, state.',
     repo: 'https://github.com/DLinacre/prism',
     tags: ['kanban', 'project', 'analytics', 'collaboration'],
   },
@@ -259,7 +264,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'AI',
     emoji: 'ಠ_ಠ',
     artwork: '/banners/grumpy-guy.webp',
-    blurb: 'Your disagreeable AI copilot — motivation with complaints, custom tones, speech synthesis.',
+    blurb:
+      'Your disagreeable AI copilot — motivation with complaints, custom tones, speech synthesis.',
     url: 'https://dlinacre.github.io/grumpy-guy-ai/',
     repo: 'https://github.com/DLinacre/grumpy-guy-ai',
     tags: ['ai', 'copilot', 'motivation', 'speech', 'fun'],
@@ -325,7 +331,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'App',
     emoji: '🦇',
     artwork: '/banners/bonny-bats.webp',
-    blurb: 'Friendly client-facing guide to bats in buildings — spotting them, the law, humane exclusion.',
+    blurb:
+      'Friendly client-facing guide to bats in buildings — spotting them, the law, humane exclusion.',
     url: 'https://dlinacre.github.io/bonny-bats/',
     repo: 'https://github.com/DLinacre/bonny-bats',
     tags: ['bats', 'wildlife', 'guide', 'uk', 'law'],
@@ -364,7 +371,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     name: '1Files',
     kind: 'Source',
     emoji: '📄',
-    blurb: 'Collection of complete apps, each shipped as ONE self-contained HTML file — zero build.',
+    blurb:
+      'Collection of complete apps, each shipped as ONE self-contained HTML file — zero build.',
     url: 'https://dlinacre.github.io/1files/',
     repo: 'https://github.com/DLinacre/1files',
     tags: ['single-file', 'html', 'apps', 'no-build'],
@@ -415,7 +423,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     name: 'SIM://ROOT',
     kind: 'Tool',
     emoji: '📇',
-    blurb: 'The hacker\u2019s field guide to your SIM card — anatomy, pinout intel, client-side explorer.',
+    blurb:
+      'The hacker\u2019s field guide to your SIM card — anatomy, pinout intel, client-side explorer.',
     url: 'https://dlinacre.github.io/sim-root/',
     repo: 'https://github.com/DLinacre/sim-root',
     tags: ['sim', 'security', 'guide', 'explorer'],
@@ -425,7 +434,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'Tool',
     emoji: '🔋',
     artwork: '/banners/dkma-monster.webp',
-    blurb: 'Android OEM battery & autostart fixer — exact steps for 15 phone families plus a GUI tool.',
+    blurb:
+      'Android OEM battery & autostart fixer — exact steps for 15 phone families plus a GUI tool.',
     repo: 'https://github.com/DLinacre/dkma-monster',
     tags: ['android', 'battery', 'background', 'oem'],
     tech: ['TypeScript', 'React', 'Data'],
@@ -506,7 +516,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     name: 'Circuit',
     kind: 'Game',
     emoji: '🔌',
-    blurb: 'Rotate every wire until the whole grid lights up. Procedural puzzles, a shared daily grid, and par to beat.',
+    blurb:
+      'Rotate every wire until the whole grid lights up. Procedural puzzles, a shared daily grid, and par to beat.',
     url: '/games/circuit',
     repo: 'https://github.com/DLinacre/linacre.site',
     tags: ['puzzle', 'circuit', 'daily', 'arcade', 'game'],
@@ -517,7 +528,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     name: 'Decrypt',
     kind: 'Game',
     emoji: '🔓',
-    blurb: 'Crack a four-symbol code in eight guesses. Pure deduction with a daily streak and challenge links.',
+    blurb:
+      'Crack a four-symbol code in eight guesses. Pure deduction with a daily streak and challenge links.',
     url: '/games/decrypt',
     repo: 'https://github.com/DLinacre/linacre.site',
     tags: ['logic', 'code', 'daily', 'arcade', 'game'],
@@ -539,7 +551,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     name: 'Trigger',
     kind: 'Game',
     emoji: '⚡',
-    blurb: 'Two-player reflex game on one phone — green means go, amber is a trap. First to five wins.',
+    blurb:
+      'Two-player reflex game on one phone — green means go, amber is a trap. First to five wins.',
     url: '/games/trigger',
     repo: 'https://github.com/DLinacre/linacre.site',
     tags: ['reflex', '2 player', 'arcade', 'game'],
@@ -562,7 +575,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'Game',
     emoji: '🥊',
     artwork: '/banners/tap-and-slap.webp',
-    blurb: 'Dance-mat beat \u2019em up — tap to kill enemies ON the beat. Four neon lanes, combos, daily challenges.',
+    blurb:
+      'Dance-mat beat \u2019em up — tap to kill enemies ON the beat. Four neon lanes, combos, daily challenges.',
     url: 'https://tap-and-slap.vercel.app',
     repo: 'https://github.com/DLinacre/tap-and-slap',
     tags: ['rhythm', 'game', 'music', 'beat', 'arcade'],
@@ -610,7 +624,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'Game',
     emoji: '🐉',
     artwork: '/banners/dragon-rush-heroes.webp',
-    blurb: 'Anime action-RPG card battler — 464 fighters, real-time Arts combat, provably-fair summons.',
+    blurb:
+      'Anime action-RPG card battler — 464 fighters, real-time Arts combat, provably-fair summons.',
     url: 'https://dlinacre.github.io/dragon-rush-heroes/',
     repo: 'https://github.com/DLinacre/dragon-rush-heroes',
     tags: ['rpg', 'cards', 'anime', 'battler', 'gacha'],
@@ -623,7 +638,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'Game',
     emoji: '⚔️',
     artwork: '/banners/pixelpoke-arena.webp',
-    blurb: 'Android pixel battle-royale arena — a native APK wrapper for the PixelPoke Arena, installable with no Play Store.',
+    blurb:
+      'Android pixel battle-royale arena — a native APK wrapper for the PixelPoke Arena, installable with no Play Store.',
     url: 'https://github.com/DLinacre/PixelPokeArena/releases/latest',
     repo: 'https://github.com/DLinacre/PixelPokeArena',
     tags: ['android', 'apk', 'battle-royale', 'pixel-art', 'arena', 'game'],
@@ -635,7 +651,8 @@ export const SITE_PROJECTS: SiteProject[] = [
     kind: 'Game',
     emoji: '🟢',
     artwork: '/banners/slime-factory-tycoon.webp',
-    blurb: 'Open-source Roblox idle-tycoon template — server-authoritative Luau, pets, offline earnings.',
+    blurb:
+      'Open-source Roblox idle-tycoon template — server-authoritative Luau, pets, offline earnings.',
     url: 'https://dlinacre.github.io/slime-factory-tycoon/',
     repo: 'https://github.com/DLinacre/slime-factory-tycoon',
     tags: ['roblox', 'tycoon', 'luau', 'idle', 'template'],

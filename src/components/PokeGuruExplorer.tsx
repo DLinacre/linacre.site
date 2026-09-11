@@ -75,7 +75,8 @@ export default function PokeGuruExplorer() {
             Browse 126+ UK Pokémon TCG Sets & Market Values
           </h1>
           <p className="text-lg text-slate-300 leading-relaxed">
-            Search recent expansion releases, track chase card market values in GBP (£), and evaluate card rarity tier lists with UK collector data.
+            Search recent expansion releases, track chase card market values in GBP (£), and
+            evaluate card rarity tier lists with UK collector data.
           </p>
         </div>
       </section>

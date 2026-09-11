@@ -136,7 +136,9 @@ export default function ProjectDetailModal({ project, onClose }: Props) {
                   </span>
                 )}
                 {meta && (
-                  <span className={`rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${meta.chip}`}>
+                  <span
+                    className={`rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${meta.chip}`}
+                  >
                     {meta.label}
                   </span>
                 )}
@@ -159,7 +161,10 @@ export default function ProjectDetailModal({ project, onClose }: Props) {
                   <ul className="mt-2 space-y-1.5">
                     {project.highlights.map(h => (
                       <li key={h} className="flex gap-2 text-xs leading-5 text-foreground/90">
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-color" aria-hidden="true" />
+                        <span
+                          className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-color"
+                          aria-hidden="true"
+                        />
                         {h}
                       </li>
                     ))}
@@ -176,7 +181,10 @@ export default function ProjectDetailModal({ project, onClose }: Props) {
                     </div>
                     <div className="mt-1.5 flex flex-wrap gap-1.5">
                       {project.tech.map(t => (
-                        <span key={t} className="rounded bg-muted/40 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
+                        <span
+                          key={t}
+                          className="rounded bg-muted/40 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground"
+                        >
                           {t}
                         </span>
                       ))}
@@ -191,7 +199,9 @@ export default function ProjectDetailModal({ project, onClose }: Props) {
                     {project.year ?? '—'}
                   </div>
                   {host && (
-                    <div className="mt-1 font-mono text-[10px] text-muted-foreground/70">via {host}</div>
+                    <div className="mt-1 font-mono text-[10px] text-muted-foreground/70">
+                      via {host}
+                    </div>
                   )}
                 </div>
               </div>

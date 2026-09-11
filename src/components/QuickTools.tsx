@@ -195,9 +195,7 @@ export default function QuickTools() {
                 />
                 <span>
                   <span className="block font-mono text-xs font-bold">{utility.label}</span>
-                  <span className="mt-0.5 hidden text-[10px] sm:block">
-                    {utility.description}
-                  </span>
+                  <span className="mt-0.5 hidden text-[10px] sm:block">{utility.description}</span>
                 </span>
                 {isActive && (
                   <motion.span
@@ -270,7 +268,10 @@ export default function QuickTools() {
                 aria-describedby={jsonError ? 'json-error' : undefined}
               />
               <div className="flex min-h-5 items-center justify-between gap-4 font-mono text-[10px]">
-                <span id="json-error" className={jsonError ? 'text-error' : 'text-muted-foreground'}>
+                <span
+                  id="json-error"
+                  className={jsonError ? 'text-error' : 'text-muted-foreground'}
+                >
                   {jsonError || 'Supports objects, arrays, strings, numbers, booleans, and null.'}
                 </span>
                 <span className="shrink-0 text-muted-foreground">
@@ -393,7 +394,10 @@ export default function QuickTools() {
                     ['Unix seconds', String(Math.floor(parsedTimestamp.getTime() / 1000))],
                     ['Milliseconds', String(parsedTimestamp.getTime())],
                   ].map(([label, value]) => (
-                    <div key={label} className="rounded-xl border border-border-color bg-muted/15 p-4">
+                    <div
+                      key={label}
+                      className="rounded-xl border border-border-color bg-muted/15 p-4"
+                    >
                       <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                         {label}
                       </span>
@@ -409,7 +413,9 @@ export default function QuickTools() {
                 </div>
               )}
               <button
-                onClick={() => parsedTimestamp && copyText(parsedTimestamp.toISOString(), 'timestamp')}
+                onClick={() =>
+                  parsedTimestamp && copyText(parsedTimestamp.toISOString(), 'timestamp')
+                }
                 disabled={!parsedTimestamp}
                 className="flex items-center gap-2 rounded-lg bg-amber-color px-3 py-2 font-mono text-xs font-bold text-[#030c14] disabled:cursor-not-allowed disabled:opacity-40"
               >
@@ -470,9 +476,7 @@ export default function QuickTools() {
                     <label htmlFor="password-length" className="text-muted-foreground">
                       Password length
                     </label>
-                    <span className="font-bold text-amber-color">
-                      {passwordLength} characters
-                    </span>
+                    <span className="font-bold text-amber-color">{passwordLength} characters</span>
                   </div>
                   <input
                     id="password-length"

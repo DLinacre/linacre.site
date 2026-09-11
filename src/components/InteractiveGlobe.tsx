@@ -91,7 +91,14 @@ export default function InteractiveGlobe({
       ctx.clearRect(0, 0, size, size);
 
       // Atmosphere glow (radial gradient backing)
-      const glow = ctx.createRadialGradient(centerX, centerY, radius * 0.55, centerX, centerY, radius * 1.15);
+      const glow = ctx.createRadialGradient(
+        centerX,
+        centerY,
+        radius * 0.55,
+        centerX,
+        centerY,
+        radius * 1.15,
+      );
       glow.addColorStop(0, `${primaryColor}22`);
       glow.addColorStop(0.7, `${primaryColor}0d`);
       glow.addColorStop(1, `${primaryColor}00`);
@@ -138,7 +145,7 @@ export default function InteractiveGlobe({
       };
 
       // Render band rings first (behind the dots)
-      bands.forEach((p) => {
+      bands.forEach(p => {
         const { px, py, pz } = project(p);
         const depthRatio = (pz + radius) / (2 * radius);
         if (pz > -1) {
@@ -258,7 +265,7 @@ export default function InteractiveGlobe({
       style={{ width: `${size + 8}px`, height: `${size + 8}px` }}
       title="Linacre Global Monitor — live world dashboard"
       aria-label="Linacre Global Monitor — live geopolitical and environmental dashboard (opens in a new tab)"
-      onClick={(e) => {
+      onClick={e => {
         // A drag is not a click — don't navigate after spinning the globe.
         if (draggedDistance.current > 6) e.preventDefault();
       }}
@@ -270,7 +277,9 @@ export default function InteractiveGlobe({
         className="cursor-grab active:cursor-grabbing transition-all duration-300"
         style={{
           opacity: isHovered ? 1 : 0.8,
-          filter: isHovered ? `drop-shadow(0 0 6px ${primaryColor})` : `drop-shadow(0 0 2px ${primaryColor}66)`,
+          filter: isHovered
+            ? `drop-shadow(0 0 6px ${primaryColor})`
+            : `drop-shadow(0 0 2px ${primaryColor}66)`,
         }}
       />
     </a>

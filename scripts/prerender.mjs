@@ -27,21 +27,29 @@ if (!fs.existsSync(templatePath)) {
 }
 
 // ---------------------------------------------------------------- utilities
-const esc = (s = '') => String(s)
-  .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
-  .replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+const esc = (s = '') =>
+  String(s)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
 
 // ------------------------------------------------------------- site content
 // Strip a possible UTF-8 BOM before parsing -- some Windows editors/tools
 // save JSON with a leading BOM, which breaks JSON.parse silently otherwise.
-const stripBom = (s) => (s.charCodeAt(0) === 0xFEFF ? s.slice(1) : s);
+const stripBom = s => (s.charCodeAt(0) === 0xfeff ? s.slice(1) : s);
 const meta = JSON.parse(stripBom(fs.readFileSync(path.join(root, 'route-meta.json'), 'utf8')));
 
 // Bundle the typed data module, then import it.
 const dataBundle = path.join(distDir, '.prerender-data.mjs');
 await esbuild({
   entryPoints: [path.join(root, 'scripts', 'prerender-data.entry.ts')],
-  bundle: true, format: 'esm', platform: 'node', outfile: dataBundle, logLevel: 'silent',
+  bundle: true,
+  format: 'esm',
+  platform: 'node',
+  outfile: dataBundle,
+  logLevel: 'silent',
 });
 const { data } = await import(pathToFileURL(dataBundle).href);
 fs.rmSync(dataBundle, { force: true });
@@ -56,18 +64,23 @@ const PERSON = {
   image: `${SITE}/profile_avatar.webp`,
   email: 'mailto:david@linacre.site',
   jobTitle: 'Full-Stack Engineer & AI Systems Builder',
-  description: 'UK-based freelance full-stack & AI engineer. React, TypeScript, Go, Python. Systems audits, custom builds, fractional retainer.',
+  description:
+    'UK-based freelance full-stack & AI engineer. React, TypeScript, Go, Python. Systems audits, custom builds, fractional retainer.',
   address: { '@type': 'PostalAddress', addressCountry: 'GB', addressRegion: 'England' },
-  sameAs: [
-    'https://github.com/DLinacre',
-    'https://linkedin.com/in/david-linacre',
-    `${SITE}/`
-  ],
+  sameAs: ['https://github.com/DLinacre', 'https://linkedin.com/in/david-linacre', `${SITE}/`],
   knowsAbout: [
-    'React', 'TypeScript', 'Next.js', 'Node.js', 'Go', 'Python',
-    'PostgreSQL', 'AI engineering', 'DevOps', 'Developer Tools'
+    'React',
+    'TypeScript',
+    'Next.js',
+    'Node.js',
+    'Go',
+    'Python',
+    'PostgreSQL',
+    'AI engineering',
+    'DevOps',
+    'Developer Tools',
   ],
-  worksFor: { '@id': `${SITE}/#org` }
+  worksFor: { '@id': `${SITE}/#org` },
 };
 const ORGANIZATION = {
   '@type': 'ProfessionalService',
@@ -82,23 +95,21 @@ const ORGANIZATION = {
   founder: { '@id': `${SITE}/#person` },
   areaServed: ['GB', 'EU', 'US', 'Worldwide'],
   slogan: 'Reliable web applications, developer tools and automation systems.',
-  sameAs: [
-    'https://github.com/DLinacre',
-    'https://linkedin.com/in/david-linacre'
-  ]
+  sameAs: ['https://github.com/DLinacre', 'https://linkedin.com/in/david-linacre'],
 };
 const WEBSITE = {
   '@type': 'WebSite',
   '@id': `${SITE}/#website`,
   url: `${SITE}/`,
   name: 'linacre.site',
-  description: "David Linacre's complete project index: live apps, AI products, developer tools and games, with private in-browser utilities.",
+  description:
+    "David Linacre's complete project index: live apps, AI products, developer tools and games, with private in-browser utilities.",
   inLanguage: 'en-GB',
   publisher: { '@id': `${SITE}/#org` },
 };
 
 const ROUTE_LABEL = Object.fromEntries(
-  Object.entries(meta.routes).map(([route, m]) => [route, m.title.split(' — ')[0].split(' | ')[0]])
+  Object.entries(meta.routes).map(([route, m]) => [route, m.title.split(' — ')[0].split(' | ')[0]]),
 );
 
 const publicProjects = data.projects.filter(p => p.url);
@@ -114,7 +125,7 @@ function breadcrumbFor(route) {
       '@type': 'ListItem',
       position: i + 2,
       name: ROUTE_LABEL[running] || decodeURIComponent(p).replace(/-/g, ' '),
-      item: `${SITE}${running}`
+      item: `${SITE}${running}`,
     });
   });
   return { '@type': 'BreadcrumbList', itemListElement: items };
@@ -126,17 +137,20 @@ function jsonLdFor(route, m) {
   if (bc) graph.push(bc);
   if (route === '/') {
     graph.push({
-      '@type': 'ItemList', '@id': `${SITE}/#projects`, name: 'Projects by David Linacre',
+      '@type': 'ItemList',
+      '@id': `${SITE}/#projects`,
+      name: 'Projects by David Linacre',
       itemListElement: publicProjects.map((p, i) => ({
-        '@type': 'ListItem', position: i + 1,
+        '@type': 'ListItem',
+        position: i + 1,
         item: {
           '@type': p.kind === 'Game' ? 'VideoGame' : 'SoftwareApplication',
-          'name': p.name,
-          'url': p.url,
-          'description': p.blurb,
-          'applicationCategory': 'DeveloperApplication',
-          'operatingSystem': 'Web',
-          'author': { '@id': `${SITE}/#person` }
+          name: p.name,
+          url: p.url,
+          description: p.blurb,
+          applicationCategory: 'DeveloperApplication',
+          operatingSystem: 'Web',
+          author: { '@id': `${SITE}/#person` },
         },
       })),
     });
@@ -161,19 +175,19 @@ function jsonLdFor(route, m) {
     graph.push({
       '@type': 'ContactPage',
       '@id': `${SITE}/contact#page`,
-      'url': `${SITE}/contact`,
-      'name': m.title,
-      'mainEntity': {
+      url: `${SITE}/contact`,
+      name: m.title,
+      mainEntity: {
         '@type': 'ProfessionalService',
         '@id': `${SITE}/#service`,
-        'name': 'David Linacre Consulting',
-        'contactPoint': {
+        name: 'David Linacre Consulting',
+        contactPoint: {
           '@type': 'ContactPoint',
-          'contactType': 'sales',
-          'email': 'david@linacre.site',
-          'url': `${SITE}/contact`
-        }
-      }
+          contactType: 'sales',
+          email: 'david@linacre.site',
+          url: `${SITE}/contact`,
+        },
+      },
     });
   }
   return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
@@ -182,7 +196,8 @@ function jsonLdFor(route, m) {
 function headFor(route, m) {
   const robots = m.index ? 'index, follow' : 'noindex, nofollow';
   const image = m.image || meta.site.defaultImage;
-  const title = esc(m.title); const desc = esc(m.description);
+  const title = esc(m.title);
+  const desc = esc(m.description);
   const lines = [
     `<title>${title}</title>`,
     `<meta name="description" content="${desc}" />`,
@@ -206,7 +221,9 @@ function headFor(route, m) {
   // PERF-02: preload the avatar only where it renders as an above-the-fold
   // LCP candidate — /about alone.
   if (route === '/about') {
-    lines.push(`<link rel="preload" as="image" href="/profile_avatar.webp" type="image/webp" fetchpriority="high" />`);
+    lines.push(
+      `<link rel="preload" as="image" href="/profile_avatar.webp" type="image/webp" fetchpriority="high" />`,
+    );
   }
   lines.push(`<script type="application/ld+json">${jsonLdFor(route, m)}</script>`);
   return lines.join('\n    ');
@@ -214,7 +231,11 @@ function headFor(route, m) {
 
 // ------------------------------------------------- static content snapshots
 const NAV = [
-  ['/', 'Home'], ['/tools', 'Tools'], ['/games', 'Games'], ['/about', 'About'], ['/contact', 'Contact'],
+  ['/', 'Home'],
+  ['/tools', 'Tools'],
+  ['/games', 'Games'],
+  ['/about', 'About'],
+  ['/contact', 'Contact'],
 ];
 
 const SHELL_CSS = `
@@ -252,10 +273,18 @@ function pageBody(route) {
   switch (route) {
     case '/': {
       const featured = publicProjects.filter(p => p.featured);
-      const featuredRows = featured.map(p =>
-        `  <li><a href="${esc(p.url)}" rel="noopener">${esc(p.name)}</a> <span class="meta">[${esc(p.kind)}]${p.tech && p.tech.length ? ` · ${esc(p.tech.slice(0, 3).join(' · '))}` : ''}</span> — ${esc(p.blurb)}</li>`).join('\n');
-      const rows = publicProjects.map((p, i) =>
-        `  <li><a href="${esc(p.url)}" rel="noopener">${esc(p.name)}</a> <span class="meta">[${esc(p.kind)}]</span> — ${esc(p.blurb)}</li>`).join('\n');
+      const featuredRows = featured
+        .map(
+          p =>
+            `  <li><a href="${esc(p.url)}" rel="noopener">${esc(p.name)}</a> <span class="meta">[${esc(p.kind)}]${p.tech && p.tech.length ? ` · ${esc(p.tech.slice(0, 3).join(' · '))}` : ''}</span> — ${esc(p.blurb)}</li>`,
+        )
+        .join('\n');
+      const rows = publicProjects
+        .map(
+          (p, i) =>
+            `  <li><a href="${esc(p.url)}" rel="noopener">${esc(p.name)}</a> <span class="meta">[${esc(p.kind)}]</span> — ${esc(p.blurb)}</li>`,
+        )
+        .join('\n');
       return `
 <h1>Everything David builds — one search away</h1>
 <p>${publicProjects.length} live apps, AI products, developer tools and games, ordered by usefulness.
@@ -281,8 +310,12 @@ ${CTA_BLOCK}`;
     case '/tools': {
       const byCat = {};
       for (const t of data.tools) (byCat[t.category] ||= []).push(t);
-      const catRows = Object.entries(byCat).map(([cat, tools]) =>
-        `### ${esc(cat)}\n${tools.map(t => `- ${esc(t.name)}${t.url ? ` (${esc(t.url)})` : ''} — ${esc(t.description)}`).join('\n')}`).join('\n\n');
+      const catRows = Object.entries(byCat)
+        .map(
+          ([cat, tools]) =>
+            `### ${esc(cat)}\n${tools.map(t => `- ${esc(t.name)}${t.url ? ` (${esc(t.url)})` : ''} — ${esc(t.description)}`).join('\n')}`,
+        )
+        .join('\n\n');
       return `
 <h1>Tools that actually do the job</h1>
 <p>Browser utilities that run entirely on your device — nothing you paste leaves your machine —
@@ -307,8 +340,12 @@ ${CTA_BLOCK}`;
 
     case '/games': {
       const games = data.projects.filter(p => p.kind === 'Game' && p.url);
-      const rows = games.map(g =>
-        `  <li><a href="${esc(g.url)}" rel="noopener">${esc(g.name)}</a> — ${esc(g.blurb)}</li>`).join('\n');
+      const rows = games
+        .map(
+          g =>
+            `  <li><a href="${esc(g.url)}" rel="noopener">${esc(g.name)}</a> — ${esc(g.blurb)}</li>`,
+        )
+        .join('\n');
       return `
 <h1>Playable browser games</h1>
 <p>Free, instant-play games built by David — no install, no account, no tracking.</p>
@@ -381,9 +418,10 @@ ${CTA_BLOCK}`;
 }
 
 function buildShell(route, m) {
-  const hreflang = route === '/'
-    ? ''
-    : `    <link rel="alternate" hreflang="en-GB" href="${m.canonical}" />\n    <link rel="alternate" hreflang="x-default" href="${m.canonical}" />\n`;
+  const hreflang =
+    route === '/'
+      ? ''
+      : `    <link rel="alternate" hreflang="en-GB" href="${m.canonical}" />\n    <link rel="alternate" hreflang="x-default" href="${m.canonical}" />\n`;
   return `<!doctype html>
 <html lang="en-GB" class="dark">
   <head>
@@ -409,7 +447,8 @@ ${hreflang}  </head>
 // ---------------------------------------------------------------- emit pages
 const written = [];
 for (const [route, m] of Object.entries(meta.routes)) {
-  const out = route === '/' ? templatePath : path.join(distDir, route.replace(/^\//, ''), 'index.html');
+  const out =
+    route === '/' ? templatePath : path.join(distDir, route.replace(/^\//, ''), 'index.html');
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, buildShell(route, m));
   written.push(route);
@@ -419,7 +458,7 @@ for (const [route, m] of Object.entries(meta.routes)) {
 // ---------------------------------------------------------- sitemap.xml
 // SEO: derive lastmod from the actual mtime of the file that drives each
 // page's content, not the build timestamp.
-const isoDate = (d) => (d && d.length === 10 ? `${d}T00:00:00+00:00` : d);
+const isoDate = d => (d && d.length === 10 ? `${d}T00:00:00+00:00` : d);
 const indexable = Object.entries(meta.routes).filter(([, m]) => m.index);
 
 const ROUTE_LASTMOD_SOURCES = {
@@ -435,7 +474,7 @@ const ROUTE_LASTMOD_SOURCES = {
   '/terms': ['src/components/Terms.tsx'],
   '/accessibility': ['src/components/AccessibilityStatement.tsx'],
   '/mob-deals': ['src/components/MobDealsSwitcher.tsx'],
-  '/pokeguru': ['src/components/PokeGuruExplorer.tsx']
+  '/pokeguru': ['src/components/PokeGuruExplorer.tsx'],
 };
 
 function sourceMtimeMs(files = []) {
@@ -444,14 +483,19 @@ function sourceMtimeMs(files = []) {
     try {
       const stat = fs.statSync(path.join(root, rel));
       if (stat.mtimeMs > latest) latest = stat.mtimeMs;
-    } catch { /* file missing — skip */ }
+    } catch {
+      /* file missing — skip */
+    }
   }
   return latest;
 }
 
 let routeMetaMtimeMs;
-try { routeMetaMtimeMs = fs.statSync(path.join(root, 'route-meta.json')).mtimeMs; }
-catch { routeMetaMtimeMs = Date.now(); }
+try {
+  routeMetaMtimeMs = fs.statSync(path.join(root, 'route-meta.json')).mtimeMs;
+} catch {
+  routeMetaMtimeMs = Date.now();
+}
 
 const lastmodMsByRoute = new Map();
 for (const [route, m] of indexable) {
@@ -462,19 +506,24 @@ for (const [route, m] of indexable) {
   lastmodMsByRoute.set(route, ts || routeMetaMtimeMs);
 }
 
-lastmodMsByRoute.set('/', Math.max(
-  sourceMtimeMs(ROUTE_LASTMOD_SOURCES['/']),
-  ...lastmodMsByRoute.values(),
-) || routeMetaMtimeMs);
+lastmodMsByRoute.set(
+  '/',
+  Math.max(sourceMtimeMs(ROUTE_LASTMOD_SOURCES['/']), ...lastmodMsByRoute.values()) ||
+    routeMetaMtimeMs,
+);
 
-const lastmodFor = (route) => new Date(lastmodMsByRoute.get(route)).toISOString();
+const lastmodFor = route => new Date(lastmodMsByRoute.get(route)).toISOString();
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${indexable.map(([route, m]) => `  <url>
+${indexable
+  .map(
+    ([route, m]) => `  <url>
     <loc>${m.canonical}</loc>
     <lastmod>${lastmodFor(route)}</lastmod>
-  </url>`).join('\n')}
+  </url>`,
+  )
+  .join('\n')}
 </urlset>
 `;
 fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemap, 'utf8');
@@ -482,8 +531,12 @@ fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemap, 'utf8');
 // Validation: every sitemap URL must have an emitted file; fail the build otherwise.
 let failed = false;
 for (const [route] of indexable) {
-  const f = route === '/' ? templatePath : path.join(distDir, route.replace(/^\//, ''), 'index.html');
-  if (!fs.existsSync(f)) { console.error(`[prerender] SITEMAP VALIDATION FAILED: ${route} has no output file`); failed = true; }
+  const f =
+    route === '/' ? templatePath : path.join(distDir, route.replace(/^\//, ''), 'index.html');
+  if (!fs.existsSync(f)) {
+    console.error(`[prerender] SITEMAP VALIDATION FAILED: ${route} has no output file`);
+    failed = true;
+  }
 }
 if (failed) process.exit(1);
 
@@ -496,8 +549,12 @@ function buildLlmsFull() {
 
   push('# linacre.site — full content export for LLMs');
   push('');
-  push('> David Christopher Linacre — UK-based freelance full-stack & AI systems engineer (React, TypeScript, Go, Python). Systems audits, custom builds, and fractional engineering retainers.');
-  push('> This file mirrors the substantive content of https://www.linacre.site/ for AI retrieval. Contact: david@linacre.site');
+  push(
+    '> David Christopher Linacre — UK-based freelance full-stack & AI systems engineer (React, TypeScript, Go, Python). Systems audits, custom builds, and fractional engineering retainers.',
+  );
+  push(
+    '> This file mirrors the substantive content of https://www.linacre.site/ for AI retrieval. Contact: david@linacre.site',
+  );
   push('');
 
   push('## About David Linacre');
@@ -507,13 +564,21 @@ function buildLlmsFull() {
   push('- Contact: david@linacre.site');
   push('- GitHub: https://github.com/DLinacre');
   push('- LinkedIn: https://linkedin.com/in/david-linacre');
-  push('- Expertise: React, TypeScript, Next.js, Node.js, Go, Python, PostgreSQL, Docker, AI engineering, DevOps, developer tooling');
+  push(
+    '- Expertise: React, TypeScript, Next.js, Node.js, Go, Python, PostgreSQL, Docker, AI engineering, DevOps, developer tooling',
+  );
   push('');
 
   push('## Services & pricing');
-  push('- Systems & Infrastructure Audit — deep technical review of architecture, security, performance, and developer experience. From £1,800.');
-  push('- Custom Development Project — end-to-end build of production-grade tools, automation platforms, or AI integrations. From £6,500.');
-  push('- Ongoing Engineering Retainer — dedicated fractional engineering time for ongoing improvements and rapid iteration. £2,400 / month.');
+  push(
+    '- Systems & Infrastructure Audit — deep technical review of architecture, security, performance, and developer experience. From £1,800.',
+  );
+  push(
+    '- Custom Development Project — end-to-end build of production-grade tools, automation platforms, or AI integrations. From £6,500.',
+  );
+  push(
+    '- Ongoing Engineering Retainer — dedicated fractional engineering time for ongoing improvements and rapid iteration. £2,400 / month.',
+  );
   push('- Reply within 12 hours from david@linacre.site. NDA-friendly. UK GDPR compliant.');
   push('');
 
@@ -541,7 +606,9 @@ function buildLlmsFull() {
   }
 
   push('## Contact & engagement process');
-  push('1. Send an enquiry at https://www.linacre.site/contact (name, work email, optional company, budget, timeline, project details).');
+  push(
+    '1. Send an enquiry at https://www.linacre.site/contact (name, work email, optional company, budget, timeline, project details).',
+  );
   push('2. Reply within 12 hours from david@linacre.site.');
   push('3. Short discovery call to scope the work.');
   push('4. Written Statement of Work — scope, milestones, price, timeline, acceptance criteria.');
