@@ -7,8 +7,8 @@
   },
   "routes": {
     "/": {
-      "title": "Linacre.site — every project, tool and game by David Linacre",
-      "description": "The complete index of David Linacre's work: 49 live apps, AI products, developer tools, Roblox projects and browser games, all searchable from one page.",
+      "title": "Linacre project library — apps, tools, downloads and source",
+      "description": "Browse David Linacre's recorded projects by category, search by task, open browser apps, find available downloads and explore source repositories.",
       "canonical": "https://www.linacre.site/",
       "index": true
     },
@@ -19,8 +19,8 @@
       "index": true
     },
     "/games": {
-      "title": "Games — playable browser games & Roblox projects | Linacre.site",
-      "description": "Tap & Slap, KushCloud, AFTERGLOW, Pixel Heist, Dragon Rush Heroes, Slime Factory Tycoon, the daily arcade pack and Snake — free playable games, no install required.",
+      "title": "Games library — KushCloud and game projects | Linacre.site",
+      "description": "KushCloud first, with other game projects available for playtesting. Direct game and recorded download links without embedded players or automatic audio.",
       "canonical": "https://www.linacre.site/games",
       "image": "https://www.linacre.site/og.png",
       "index": true

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ExternalLink, Github, Lock, CalendarDays, Layers, Play } from 'lucide-react';
+import { X, Lock, CalendarDays, Layers } from 'lucide-react';
+import ProjectActions from './ProjectActions';
 import type { SiteProject } from '../data/siteProjects';
 import { KIND_META } from './projectMeta';
 
@@ -74,8 +75,6 @@ export default function ProjectDetailModal({ project, onClose }: Props) {
 
   const meta = project ? KIND_META[project.kind] : null;
   const isPrivate = project?.kind === 'Private' || project?.private;
-  const href = project?.url || project?.repo;
-  const isExternal = href?.startsWith('http');
   const host = project ? hostOf(project.url || project.repo) : null;
 
   return (
@@ -209,31 +208,7 @@ export default function ProjectDetailModal({ project, onClose }: Props) {
 
             {/* Actions */}
             <div className="flex items-center justify-end gap-2 border-t border-border-color/60 p-4">
-              {project.repo && (
-                <a
-                  href={project.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 rounded-lg border border-border-color px-3 py-2 font-mono text-xs font-bold text-foreground transition-colors hover:border-amber-color/40 hover:bg-muted/30"
-                >
-                  <Github className="h-3.5 w-3.5" /> Source
-                </a>
-              )}
-              {href && !isPrivate && (
-                <a
-                  href={href}
-                  target={isExternal ? '_blank' : undefined}
-                  rel={isExternal ? 'noopener noreferrer' : undefined}
-                  className="flex items-center gap-1.5 rounded-lg bg-amber-color px-3 py-2 font-mono text-xs font-bold text-[#030c14] transition-colors hover:bg-amber-glow"
-                >
-                  {project.url?.startsWith('/games/') ? (
-                    <Play className="h-3.5 w-3.5 fill-current" />
-                  ) : (
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  )}
-                  {isPrivate ? 'Private' : project.url ? 'Open project' : 'View source'}
-                </a>
-              )}
+              <ProjectActions project={project} />
             </div>
           </motion.div>
         </motion.div>

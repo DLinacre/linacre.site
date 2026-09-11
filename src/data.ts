@@ -8,11 +8,11 @@ export const TOOLS: Tool[] = [
     name: 'Slime Factory Tycoon 🟢',
     category: 'start',
     description:
-      'Production-ready open-source Roblox idle tycoon & interactive web demo with pets engine, offline earnings & balance simulator.',
-    url: 'https://dlinacre.github.io/slime-factory-tycoon/',
-    host: 'dlinacre.github.io/slime-factory-tycoon',
-    searchKeywords: 'slime factory tycoon roblox luau game idle simulator pets rebirth linacre',
-    tag: 'Game · Live',
+      'Roblox tycoon source template. Not offered here as a playable game.',
+    url: 'https://github.com/DLinacre/slime-factory-tycoon',
+    host: 'github.com/DLinacre/slime-factory-tycoon',
+    searchKeywords: 'slime factory tycoon roblox luau source template linacre',
+    tag: 'Source template',
   },
   {
     id: 'circuit',
