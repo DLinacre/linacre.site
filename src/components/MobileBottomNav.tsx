@@ -9,7 +9,7 @@ interface MobileBottomNavProps {
 
 /** Primary destinations for the floating dock (Start · Games · Tools · About + More). */
 const DOCK_ITEMS = [
-  { id: 'home', label: 'Start', icon: House },
+  { id: 'home', label: 'Projects', icon: House },
   { id: 'games', label: 'Games', icon: Gamepad2 },
   { id: 'tools', label: 'Tools', icon: Wrench },
   { id: 'about', label: 'About', icon: User },

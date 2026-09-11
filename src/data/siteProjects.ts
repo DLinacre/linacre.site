@@ -33,6 +33,8 @@ export interface SiteProject {
   tech?: string[]; // language / stack
   year?: number; // launch / release year
   featured?: boolean; // shown in the hero spotlight on the start page
+  pinned?: boolean; // prioritised in the library based on owner preference
+  downloadUrl?: string; // known download/release destination; never guessed from a repo
 }
 
 export const SITE_PROJECTS: SiteProject[] = [
@@ -251,6 +253,7 @@ export const SITE_PROJECTS: SiteProject[] = [
   },
   {
     name: 'Arena Audit Prompt Builder',
+    pinned: true,
     kind: 'Tool',
     emoji: '🛠️',
     artwork: '/banners/arena-audit.webp',
@@ -514,6 +517,26 @@ export const SITE_PROJECTS: SiteProject[] = [
 
   // ───────────────────────────────── Games ─────────────────────────────────
   {
+    name: 'Tiles',
+    kind: 'Game',
+    emoji: '🔢',
+    blurb: 'Sliding number puzzle. Previously listed only on the games page.',
+    url: '/games/tiles.html',
+    repo: 'https://github.com/DLinacre/linacre.site',
+    artwork: '/banners/tiles.webp',
+    tags: ['puzzle', '2048', 'numbers', 'game'],
+  },
+  {
+    name: 'Mines',
+    kind: 'Game',
+    emoji: '💣',
+    blurb: 'Minesweeper puzzle. Previously listed only on the games page.',
+    url: '/games/mines.html',
+    repo: 'https://github.com/DLinacre/linacre.site',
+    artwork: '/banners/mines.webp',
+    tags: ['puzzle', 'minesweeper', 'logic', 'game'],
+  },
+  {
     name: 'Circuit',
     kind: 'Game',
     emoji: '🔌',
@@ -586,6 +609,7 @@ export const SITE_PROJECTS: SiteProject[] = [
   },
   {
     name: 'KushCloud',
+    pinned: true,
     kind: 'Game',
     emoji: '🌿',
     artwork: '/banners/kushcloud.webp',
@@ -649,12 +673,10 @@ export const SITE_PROJECTS: SiteProject[] = [
   },
   {
     name: 'Slime Factory Tycoon',
-    kind: 'Game',
+    kind: 'Source',
     emoji: '🟢',
     artwork: '/banners/slime-factory-tycoon.webp',
-    blurb:
-      'Open-source Roblox idle-tycoon template — server-authoritative Luau, pets, offline earnings.',
-    url: 'https://dlinacre.github.io/slime-factory-tycoon/',
+    blurb: 'Roblox tycoon source template. Not offered here as a playable game.',
     repo: 'https://github.com/DLinacre/slime-factory-tycoon',
     tags: ['roblox', 'tycoon', 'luau', 'idle', 'template'],
     tech: ['Roblox Luau', 'Python', 'TypeScript'],
