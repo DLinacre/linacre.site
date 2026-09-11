@@ -2,7 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 
 // Whitelist build metadata only. Never export environment dumps or credentials.
 const env = process.env;
-const source = env.GITLAB_CI === 'true' ? 'gitlab-ci' : env.GITHUB_ACTIONS === 'true' ? 'github-actions' : 'local';
+const source = env.GITLAB_CI === 'true' ? 'gitlab-ci' : env.GITHUB_ACTIONS === 'true' ? 'github-actions' : env.VERCEL === '1' ? 'vercel' : 'local';
 const receipt = {
   schemaVersion: 1,
   generatedAt: new Date().toISOString(),

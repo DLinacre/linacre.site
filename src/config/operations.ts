@@ -18,7 +18,7 @@ export const OPERATIONS_FLOWS = [
 export interface BuildReceipt {
   schemaVersion: 1;
   generatedAt: string;
-  source: 'gitlab-ci' | 'github-actions' | 'local';
+  source: 'gitlab-ci' | 'github-actions' | 'vercel' | 'local';
   repository: string;
   sha: string;
   pipelineUrl: string | null;
@@ -31,7 +31,7 @@ export function parseBuildReceipt(value: unknown): BuildReceipt | null {
   const data = value as Record<string, unknown>;
   if (data.schemaVersion !== 1 || data.stage !== 'build' || data.status !== 'completed' ||
       typeof data.generatedAt !== 'string' || !Number.isFinite(Date.parse(data.generatedAt)) ||
-      !['gitlab-ci', 'github-actions', 'local'].includes(String(data.source)) ||
+      !['gitlab-ci', 'github-actions', 'vercel', 'local'].includes(String(data.source)) ||
       typeof data.repository !== 'string' || typeof data.sha !== 'string') return null;
   let pipelineUrl: string | null = null;
   if (typeof data.pipelineUrl === 'string') {

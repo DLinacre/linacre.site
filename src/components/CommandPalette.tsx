@@ -107,6 +107,13 @@ export default function CommandPalette({
       meta: 'Custom SVG emblems, social banners and badges',
     },
     {
+      id: 'nav-ops',
+      label: 'Open Mission Control',
+      icon: Cpu,
+      action: () => go('ops'),
+      meta: 'Agent squad, flow setup and published build receipts',
+    },
+    {
       id: 'nav-about',
       label: 'Go to About',
       icon: User,

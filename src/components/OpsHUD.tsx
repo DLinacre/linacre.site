@@ -95,7 +95,7 @@ export default function OpsHUD() {
   const shownAt = receipt ? new Date(receipt.generatedAt).toLocaleString() : 'No build receipt yet';
 
   return (
-    <div ref={root} className="space-y-6 rounded-3xl bg-background text-foreground fullscreen:overflow-y-auto fullscreen:p-6">
+    <div ref={root} className="space-y-6 rounded-3xl bg-background text-foreground [&:fullscreen]:overflow-y-auto [&:fullscreen]:p-6">
       <header className="flex flex-wrap items-center justify-between gap-4">
         <div><p className="font-mono text-xs uppercase tracking-[.22em] text-muted-foreground">Linacre / operations deck</p><h1 className="mt-2 font-display text-3xl font-bold tracking-tight sm:text-4xl">Mission Control</h1></div>
         <div className="flex gap-2"><button type="button" className={button} onClick={() => setRefresh(value => value + 1)}><RefreshCw className="h-4 w-4" aria-hidden="true" />Refresh feed</button><button type="button" className={button} onClick={toggleFullscreen} aria-label={fullscreen ? 'Exit fullscreen' : 'Open fullscreen'}>{fullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}</button></div>
@@ -126,4 +126,53 @@ export default function OpsHUD() {
 
       {tab === 'Agents' && <section className="space-y-5" aria-label="Agent squad">
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">{OPERATIONS_AGENTS.map(item => <button key={item.id} type="button" aria-pressed={agentId === item.id} onClick={() => setAgentId(item.id)} className={`${panel} p-4 text-left transition-transform hover:-translate-y-1 motion-reduce:transform-none ${agentId === item.id ? 'ring-2 ring-foreground' : ''}`}><Portrait color={item.color} number={item.badge} /><h2 className="mt-2 font-display text-lg font-bold">{item.name}</h2><p className="mt-1 text-xs text-muted-foreground">{item.role}</p></button>)}</div>
-        <article className={`${panel} p-6`}><p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Agent dossier / {agent.badge}</p><h2 className="mt-3 font-display text-2xl font-bold">{agent.name}</h2><p className
+        <article className={`${panel} p-6`}>
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Agent dossier / {agent.badge}</p>
+          <h2 className="mt-3 font-display text-2xl font-bold">{agent.name}</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">{agent.task}</p>
+          <dl className="mt-5 grid gap-4 text-sm sm:grid-cols-2">
+            <div><dt className="font-semibold">Tools</dt><dd className="mt-2 text-muted-foreground">{agent.tools}</dd></div>
+            <div><dt className="font-semibold">Operating boundary</dt><dd className="mt-2 text-muted-foreground">{agent.boundary}</dd></div>
+          </dl>
+          <p className="mt-5 text-sm text-muted-foreground">Defined as a flow component. Registration and runtime status are not verified.</p>
+          <button type="button" onClick={() => setTab('Flows & triggers')} className={`${button} mt-5`}>View flow setup<ArrowUpRight className="h-4 w-4" aria-hidden="true" /></button>
+        </article>
+      </section>}
+
+      {tab === 'Flows & triggers' && <section className="space-y-5" aria-label="Flow and trigger setup">
+        <div className={`${panel} p-6`}>
+          <h2 className="font-display text-xl font-bold">Activate deliberately, not automatically</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">These YAML definitions are ready for review in GitLab’s flow builder. Test and publish each flow, enable it for this project, then create its trigger. This dashboard does not register agents or activate triggers. Usage may consume GitLab credits.</p>
+          <div className="mt-4 flex flex-wrap gap-2"><a href={FLOW_GUIDE} target="_blank" rel="noopener noreferrer" className={button}>Flow setup guide<ArrowUpRight className="h-4 w-4" /></a><a href={TRIGGER_GUIDE} target="_blank" rel="noopener noreferrer" className={button}>Trigger setup guide<ArrowUpRight className="h-4 w-4" /></a></div>
+        </div>
+        {OPERATIONS_FLOWS.map(flow => {
+          const path = `.gitlab/duo/flows/${flow.file}`;
+          return <article key={flow.id} className={`${panel} overflow-hidden`}>
+            <div className="grid gap-6 p-6 lg:grid-cols-[1.3fr_1fr]">
+              <div><p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Flow definition</p><h2 className="mt-2 font-display text-xl font-bold">{flow.name}</h2><p className="mt-3 text-sm leading-7 text-muted-foreground">{flow.description}</p>
+                <ol aria-label={`${flow.name} stages`} className="mt-5 flex flex-wrap items-center gap-2">{flow.agents.map((name, index) => <li key={name} className="flex items-center gap-2"><span className="rounded-xl border border-border-color bg-muted/30 px-4 py-3 text-sm font-semibold">{index + 1}. {name}</span>{index < flow.agents.length - 1 && <span aria-hidden="true">→</span>}</li>)}<li className="text-sm text-muted-foreground">→ Human review</li></ol>
+              </div>
+              <div className="rounded-xl border border-border-color bg-background/40 p-4"><div className="flex items-center gap-2"><Zap className="h-4 w-4" aria-hidden="true" /><h3 className="text-sm font-semibold">Proposed trigger: {flow.event}</h3></div><p className="mt-3 text-sm leading-6 text-muted-foreground">{flow.setup}</p><p className="mt-3 text-xs font-semibold">Not activated here</p></div>
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border-color p-4"><code className="break-all text-xs text-muted-foreground">{path}</code><div className="flex flex-wrap gap-2"><button type="button" className={button} onClick={() => copy(path)} aria-label={`Copy ${flow.name} configuration path`}>{copied === path ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}Copy path</button><a className={button} href={`${OPERATIONS_PROJECT}/-/blob/main/${path}`} target="_blank" rel="noopener noreferrer" aria-label={`View ${flow.name} YAML`}>View YAML<ArrowUpRight className="h-4 w-4" /></a></div></div>
+          </article>;
+        })}
+      </section>}
+
+      {tab === 'Projects' && <section className="space-y-5" aria-label="Recorded projects">
+        <div className="flex flex-wrap gap-3">
+          <label className="relative min-w-0 flex-1"><span className="sr-only">Search recorded projects</span><Search className="absolute left-3 top-4 h-4 w-4 text-muted-foreground" aria-hidden="true" /><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Search name, purpose or tags…" className="min-h-12 w-full rounded-xl border border-border-color bg-background pl-10 pr-4" /></label>
+          <label><span className="sr-only">Project category</span><select value={kind} onChange={event => setKind(event.target.value)} className="min-h-12 rounded-xl border border-border-color bg-background px-4"><option value="all">All categories</option>{[...new Set(SITE_PROJECTS.map(project => project.kind))].map(value => <option key={value} value={value}>{value}</option>)}</select></label>
+        </div>
+        <p className="text-sm text-muted-foreground">{projects.length} of {SITE_PROJECTS.length} catalogue entries. This is not a live account inventory. App and repository health are unverified.</p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{projects.map(project => <article key={project.name} className={`${panel} flex min-w-0 flex-col overflow-hidden`}>
+          <div className="relative grid h-28 place-items-center overflow-hidden bg-muted/30"><span aria-hidden="true" className="text-4xl">{project.emoji || '📦'}</span>{project.artwork && <img src={project.artwork} alt="" loading="lazy" decoding="async" onError={event => { event.currentTarget.style.display = 'none'; }} className="absolute inset-0 h-full w-full object-cover" />}</div>
+          <div className="flex flex-1 flex-col p-5"><p className="text-xs text-muted-foreground">{project.kind} / Status unverified</p><h2 className="mt-2 break-words font-display text-lg font-bold">{project.name}</h2><p className="mt-3 flex-1 text-sm leading-6 text-muted-foreground">{project.blurb}</p>
+            <div className="mt-5 flex flex-wrap gap-2">{project.private || project.kind === 'Private' ? <span className="text-sm text-muted-foreground">Private — no public links</span> : <>{project.url && <a href={project.url} target={project.url.startsWith('http') ? '_blank' : undefined} rel={project.url.startsWith('http') ? 'noopener noreferrer' : undefined} className={button} aria-label={`Open listed link for ${project.name}`}>Listed link<ArrowUpRight className="h-4 w-4" /></a>}{project.repo && <a href={project.repo} target="_blank" rel="noopener noreferrer" className={button} aria-label={`Source for ${project.name}`}>Source<GitBranch className="h-4 w-4" /></a>}</>}</div>
+          </div>
+        </article>)}</div>
+        {projects.length === 0 && <div className={`${panel} p-8 text-center`}><p>No matching projects.</p><button type="button" className={`${button} mt-4`} onClick={() => { setQuery(''); setKind('all'); }}>Reset filters</button></div>}
+      </section>}
+    </div>
+  );
+}
