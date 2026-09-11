@@ -3,7 +3,7 @@ name: GitHub Pages Health Check
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 5 * * *"
+    - cron: '17 5 * * *'
 
 permissions:
   contents: read
