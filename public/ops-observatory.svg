@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 600" fill="none">
+  <defs>
+    <linearGradient id="space" x2="1440" y2="600" gradientUnits="userSpaceOnUse"><stop stop-color="#061224"/><stop offset="1" stop-color="#180c32"/></linearGradient>
+    <linearGradient id="glass" y2="1"><stop stop-color="#19394d"/><stop offset="1" stop-color="#071321"/></linearGradient>
+    <radialGradient id="planet"><stop stop-color="#a5f3fc"/><stop offset=".4" stop-color="#155e75"/><stop offset="1" stop-color="#081426"/></radialGradient>
+    <pattern id="grid" width="80" height="40" patternUnits="userSpaceOnUse"><path d="M80 0H0V40" stroke="#67e8f9" stroke-opacity=".09"/></pattern>
+  </defs>
+  <path fill="url(#space)" d="M0 0h1440v600H0z"/>
+  <g fill="#bae6fd" opacity=".65"><circle cx="85" cy="77" r="2"/><circle cx="200" cy="145" r="1"/><circle cx="341" cy="58" r="2"/><circle cx="495" cy="128" r="1"/><circle cx="670" cy="51" r="2"/><circle cx="821" cy="90" r="1"/><circle cx="954" cy="42" r="2"/><circle cx="1184" cy="65" r="1"/><circle cx="1350" cy="135" r="2"/><circle cx="1240" cy="231" r="1"/></g>
+  <circle cx="1090" cy="208" r="133" fill="url(#planet)"/>
+  <ellipse cx="1090" cy="208" rx="211" ry="44" stroke="#a78bfa" stroke-width="5" transform="rotate(-24 1090 208)"/>
+  <ellipse cx="1090" cy="208" rx="230" ry="50" stroke="#67e8f9" stroke-opacity=".3" transform="rotate(-24 1090 208)"/>
+  <path d="M0 411 720 330l720 81v189H0z" fill="#050d18"/>
+  <path d="M0 411 720 330l720 81v189H0z" fill="url(#grid)"/>
+  <path d="m230 484 490-86 490 86-490 94z" fill="#102237" stroke="#67e8f9" stroke-opacity=".3"/>
+  <path d="m230 484 490 94 490-94v22l-490 94-490-94z" fill="#071322"/>
+  <ellipse cx="720" cy="470" rx="180" ry="39" fill="#0b3042" stroke="#67e8f9" stroke-width="2"/>
+  <ellipse cx="720" cy="470" rx="132" ry="27" stroke="#6ee7b7" stroke-dasharray="8 8"/>
+  <path d="m720 254 105 152-105 50-105-50z" fill="#22d3ee" fill-opacity=".07" stroke="#67e8f9"/>
+  <path d="m720 254-28 152 28 50 28-50zM615 406h210" stroke="#67e8f9" stroke-opacity=".6"/>
+  <g fill="url(#glass)" stroke="#67e8f9" stroke-opacity=".5">
+    <path d="m341 318 170-31v129l-170 31z"/><path d="m929 287 170 31v129l-170-31z"/>
+    <path d="m140 376 125-23v89l-125 23z"/><path d="m1175 353 125 23v89l-125-23z"/>
+  </g>
+  <g stroke="#67e8f9" stroke-width="3"><path d="m362 345 121-22m-121 41 90-16m-90 39 109-20"/><path d="m952 318 120 22m-120-1 88 16m-88 4 108 20"/></g>
+  <g fill="#6ee7b7"><circle cx="157" cy="402" r="6"/><circle cx="1194" cy="383" r="6"/></g>
+  <path d="M0 567h190m1060 0h190M42 23h80M42 23v35m1356-35h-80m80 0v35" stroke="#67e8f9" stroke-opacity=".4" stroke-width="2"/>
+</svg>
