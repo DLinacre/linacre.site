@@ -21,10 +21,10 @@ describe('Mission Control', () => {
     const user = userEvent.setup();
     render(<OpsHUD />);
     expect(await screen.findAllByText(/Build feed unavailable/)).not.toHaveLength(0);
-    await user.click(screen.getByRole('button', { name: 'Agents', exact: true }));
+    await user.click(screen.getByRole('button', { name: 'Agents' }));
     await user.click(screen.getByRole('button', { name: /Engineer Scoped repairs/ }));
     expect(screen.getByText('Edits require approval. No automatic merge.')).toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: 'Flows & triggers', exact: true }));
+    await user.click(screen.getByRole('button', { name: 'Flows & triggers' }));
     expect(screen.getAllByText('Not activated here')).toHaveLength(3);
     expect(screen.getByRole('link', { name: 'View Repair → verify YAML' })).toBeInTheDocument();
   });

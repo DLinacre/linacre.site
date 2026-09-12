@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { runInNewContext } from 'node:vm';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 const html = readFileSync(resolve(process.cwd(), 'public/tools/arena-audit.html'), 'utf8');
 
@@ -43,7 +43,7 @@ function createAuditEnv() {
     window: windowMock,
     document: {
       querySelector: (sel: string) => getEl(sel),
-      querySelectorAll: (sel: string) => [],
+      querySelectorAll: () => [],
       getElementById: (id: string) => getEl('#' + id),
       body: { appendChild: vi.fn() },
       createElement: () => makeElement(),
@@ -58,7 +58,7 @@ function createAuditEnv() {
     location: { search: '', href: 'https://example.test' },
     history: { replaceState: vi.fn() },
     showToast: vi.fn(),
-    prompt: (msg: string, def?: string) => 'Security Forensic',
+    prompt: () => 'Security Forensic',
     alert: vi.fn(),
     console,
     setTimeout: (fn: Function) => { fn(); return 1; },
