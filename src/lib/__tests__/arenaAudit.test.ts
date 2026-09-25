@@ -61,7 +61,7 @@ function createAuditEnv() {
     prompt: () => 'Security Forensic',
     alert: vi.fn(),
     console,
-    setTimeout: (fn: Function) => { fn(); return 1; },
+    setTimeout: (fn: () => void) => { fn(); return 1; },
     clearTimeout: vi.fn(),
     URL: { createObjectURL: () => 'blob:test', revokeObjectURL: () => {} },
   };
