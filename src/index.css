@@ -150,6 +150,36 @@
   --linacre-gradient-card: linear-gradient(180deg, rgba(8, 28, 40, 0.94), rgba(5, 20, 30, 0.94));
 }
 
+/* ── Cyber Themes ── */
+.theme-purple {
+  --neon-accent: #c084fc;
+  --neon-glow: rgba(192, 132, 252, 0.35);
+  --neon-border: rgba(192, 132, 252, 0.25);
+}
+
+.theme-cyan {
+  --neon-accent: #38bdf8;
+  --neon-glow: rgba(56, 189, 248, 0.35);
+  --neon-border: rgba(56, 189, 248, 0.25);
+}
+
+.theme-sakura {
+  --neon-accent: #f472b6;
+  --neon-glow: rgba(244, 114, 182, 0.35);
+  --neon-border: rgba(244, 114, 182, 0.25);
+}
+
+.theme-emerald {
+  --neon-accent: #34d399;
+  --neon-glow: rgba(52, 211, 153, 0.35);
+  --neon-border: rgba(52, 211, 153, 0.25);
+}
+
+.hud-capsule {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
 /* ── Base Resets & Theme Transitions ── */
 body {
   background-color: var(--background);

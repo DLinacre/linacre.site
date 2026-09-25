@@ -654,6 +654,25 @@ export const SITE_PROJECTS: SiteProject[] = [
     year: 2023,
   },
   {
+    name: 'AeroFlap',
+    badge: 'NEW',
+    kind: 'Game',
+    emoji: '🚀',
+    artwork: '/banners/aeroflap.webp',
+    blurb:
+      'Next-gen cyberpunk arcade flyer — 10 character skins, customizable obstacle physics, biometric passkeys, and procedural synthesized audio.',
+    url: 'https://LIN4CRE.github.io/AeroFlap/',
+    repo: 'https://github.com/LIN4CRE/AeroFlap',
+    tags: ['arcade', 'flappy', 'game', 'cyberpunk', 'synthwave', 'passkeys', 'canvas', 'react'],
+    tech: ['React 19', 'TypeScript', 'Tailwind v4', 'Canvas 2D', 'Web Audio API'],
+    year: 2026,
+    highlights: [
+      '60+ FPS responsive canvas physics with customizable obstacle gaps and speeds.',
+      '10 unlockable avian mechs with distinct particle engines and sound pitch profiles.',
+      'WebAuthn biometric passkey authentication and encrypted cloud synchronization.',
+    ],
+  },
+  {
     name: 'AFTERGLOW',
     kind: 'Game',
     emoji: '✦',

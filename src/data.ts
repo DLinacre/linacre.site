@@ -15,6 +15,17 @@ export const TOOLS: Tool[] = [
     tag: 'Source template',
   },
   {
+    id: 'aeroflap',
+    name: 'AeroFlap 🚀',
+    category: 'start',
+    description:
+      'Cyberpunk arcade flight game — 10 character mechs, customizable obstacle physics, biometric passkeys, and synthesized Web Audio.',
+    url: 'https://LIN4CRE.github.io/AeroFlap/',
+    host: 'LIN4CRE.github.io/AeroFlap',
+    searchKeywords: 'aeroflap flappy bird arcade cyberpunk cyber synthwave game linacre',
+    tag: 'Game · Live',
+  },
+  {
     id: 'circuit',
     name: 'Circuit 🔌',
     category: 'start',
@@ -349,6 +360,29 @@ export const MANUAL_PROJECTS: Project[] = [
     tech: ['React', 'TypeScript', 'Vite', 'Canvas 2D', 'Web Audio API'],
     liveUrl: 'https://dlinacre.github.io/KushCloud/',
     repoUrl: 'https://github.com/DLinacre/KushCloud',
+    live: true,
+  },
+  {
+    name: 'AeroFlap 🚀',
+    authorHandle: '@LIN4CRE',
+    badgeLabel: 'Game · Live App',
+    actionType: 'play',
+    bannerImage: '/banners/aeroflap.webp',
+    artwork: '/banners/aeroflap.webp',
+    category: 'design',
+    description:
+      'Next-gen responsive cyberpunk arcade flight game with 10 character mechs, customizable obstacle physics, biometric passkeys, and synthesized Web Audio.',
+    url: 'https://LIN4CRE.github.io/AeroFlap/',
+    host: 'LIN4CRE.github.io/AeroFlap',
+    tag: 'Browser Game · Live',
+    role: 'Game designer and fullstack engineer',
+    challenges:
+      'Deliver ultra-smooth 60+ FPS canvas physics, biometric WebAuthn auth, procedural Web Audio effects, and responsive layout across desktop and mobile.',
+    solution:
+      'Engineered Canvas 2D render loop, custom gravity physics, procedural Web Audio synthesizer, WebAuthn biometric passkeys, and Tailwind v4 responsive shell.',
+    tech: ['React 19', 'TypeScript', 'Tailwind v4', 'Canvas 2D', 'Web Audio API', 'WebAuthn'],
+    liveUrl: 'https://LIN4CRE.github.io/AeroFlap/',
+    repoUrl: 'https://github.com/LIN4CRE/AeroFlap',
     live: true,
   },
   {

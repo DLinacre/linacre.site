@@ -423,31 +423,41 @@ ${CTA_BLOCK}`;
   }
 }
 
+const viteHtml = fs.readFileSync(templatePath, 'utf8');
+
 function buildShell(route, m) {
   const hreflang =
     route === '/'
       ? ''
       : `    <link rel="alternate" hreflang="en-GB" href="${m.canonical}" />\n    <link rel="alternate" hreflang="x-default" href="${m.canonical}" />\n`;
-  return `<!doctype html>
-<html lang="en-GB" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    ${headFor(route, m)}
-${hreflang}  </head>
-  <body>
-    <div id="root">
-      <div id="prerender-shell">
-        <a class="skip-link" href="#main-content">Skip to content</a>
-        <span class="brand">linacre.site</span>
-        <nav>${NAV.map(([href, label]) => `<a href="${href}">${label}</a>`).join('')}</nav>
+
+  let html = viteHtml;
+
+  // Replace head metadata block with route-specific head & JSON-LD
+  if (html.includes('<!--ROUTE_HEAD-->') && html.includes('<!--/ROUTE_HEAD-->')) {
+    html = html.replace(
+      /<!--ROUTE_HEAD-->[\s\S]*?<!--\/ROUTE_HEAD-->/,
+      `<!--ROUTE_HEAD-->\n    ${headFor(route, m)}\n${hreflang}    <!--/ROUTE_HEAD-->`
+    );
+  }
+
+  // Inject semantic content into #root for crawlers / noscript
+  const fallback = `
+    <noscript>
+      <div id="prerender-shell" style="max-width:60rem;margin:0 auto;padding:2rem 1.25rem;color:#e5e5e5;font-family:sans-serif;">
+        <span class="brand" style="font-weight:bold;color:#22d3ee;font-size:1.2rem;">linacre.site</span>
+        <nav style="display:flex;gap:1rem;margin:1rem 0;">${NAV.map(([href, label]) => `<a href="${href}" style="color:#22d3ee;">${label}</a>`).join('')}</nav>
         <div id="main-content">${pageBody(route)}</div>
-        <footer>© ${new Date().getFullYear()} David Linacre — built with React, TypeScript and Tailwind CSS. <a href="/about">About</a> · <a href="/privacy">Privacy</a></footer>
+        <footer style="margin-top:2rem;border-top:1px solid #333;padding-top:1rem;color:#888;">© ${new Date().getFullYear()} David Linacre</footer>
       </div>
-    </div>
-    <script type="module" src="/assets/index.js" crossorigin></script>
-  </body>
-</html>`;
+    </noscript>
+  `;
+
+  if (html.includes('<!--ROUTE_CONTENT-->')) {
+    html = html.replace('<!--ROUTE_CONTENT-->', fallback);
+  }
+
+  return html;
 }
 
 // ---------------------------------------------------------------- emit pages

@@ -1,0 +1,138 @@
+[
+  {
+    "id": "omniroute-llm",
+    "title": "OmniRoute-LLM",
+    "subtitle": "Multi-Provider LLM Gateway & Benchmark Hub",
+    "category": "AI & LLM",
+    "badge": "PRODUCTION",
+    "color": "cyan",
+    "description": "Unified routing architecture and real-time benchmarking across OpenAI, Anthropic, Gemini, and local Ollama instances with automated latency and cost tracking.",
+    "tags": ["Python", "FastAPI", "Ollama", "React", "Docker"],
+    "stats": "v2.1 • Multi-LLM",
+    "links": {
+      "github": "https://github.com/DLinacre/Linacre-LLM-Benchmarks",
+      "live": "",
+      "download": ""
+    },
+    "featured": true
+  },
+  {
+    "id": "deasy",
+    "title": "Deasy",
+    "subtitle": "Multi-Platform Branch Orchestrator",
+    "category": "Desktop & Systems",
+    "badge": "STABLE",
+    "color": "purple",
+    "description": "Multi-platform desktop suite for Git branch orchestration, serverless pipelines, AES-256-GCM encrypted cloud backups, and zero-terminal installers.",
+    "tags": ["TypeScript", "Electron", "AES-256", "PowerShell"],
+    "stats": "v2.4 • Windows x64",
+    "links": {
+      "github": "https://github.com/DLinacre/Deasy",
+      "live": "",
+      "download": "https://github.com/DLinacre/Deasy/releases"
+    },
+    "featured": true
+  },
+  {
+    "id": "linacre-wallpaper",
+    "title": "Linacre Mission Control",
+    "subtitle": "Cyber Anime Hardware Telemetry Suite",
+    "category": "Desktop & Systems",
+    "badge": "LIVE RIG",
+    "color": "sakura",
+    "description": "Real-time dual-monitor desktop HUD powered by Lively Wallpaper, WebView2, and PowerShell: live CPU thread telemetry, GPU metrics, storage monitors, and interactive terminal.",
+    "tags": ["JavaScript", "CSS3", "WebView2", "PowerShell"],
+    "stats": "v3.0 • 1440p Native",
+    "links": {
+      "github": "https://github.com/DLinacre/linacre-wallpaper",
+      "live": "",
+      "download": "https://github.com/DLinacre/linacre-wallpaper/releases"
+    },
+    "featured": true
+  },
+  {
+    "id": "whole-home-adblocker",
+    "title": "Whole-Home Adblocker",
+    "subtitle": "Network-Wide DNS Filter & Sinkhole",
+    "category": "Desktop & Systems",
+    "badge": "SHIELDED",
+    "color": "emerald",
+    "description": "One-click whole-home network adblocker running on Port 53: zero DNS leaks, live traffic telemetry, automated blocklist sync, and custom local domain routing.",
+    "tags": ["Docker", "DNS", "Security", "PowerShell"],
+    "stats": "Port 53 • 0 Leaks",
+    "links": {
+      "github": "https://github.com/DLinacre/whole-home-adblocker",
+      "live": "",
+      "download": ""
+    },
+    "featured": true
+  },
+  {
+    "id": "dkma-monster",
+    "title": "DKMA Monster",
+    "subtitle": "Android Power & Anti-Kill Toolkit",
+    "category": "Mobile & Android",
+    "badge": "TOOLKIT",
+    "color": "amber",
+    "description": "Universal Dont-Kill-My-App toolkit engineered to defeat aggressive OEM battery managers on Android devices (Poco F7, Xiaomi, Samsung) with Magisk and ADB hooks.",
+    "tags": ["Kotlin", "Android", "ADB", "Magisk", "Bash"],
+    "stats": "Poco F7 Tested",
+    "links": {
+      "github": "https://github.com/DLinacre/dkma-monster",
+      "live": "",
+      "download": ""
+    },
+    "featured": true
+  },
+  {
+    "id": "cubelab",
+    "title": "cubelab 3D",
+    "subtitle": "Offline Rubik's Cube Trainer & Solver",
+    "category": "Web & Tools",
+    "badge": "PWA",
+    "color": "cyan",
+    "description": "Zero-dependency offline-first 3D Rubik's cube simulator and solver built with Three.js. Includes step-by-step algorithms, scramble generation, and move timer.",
+    "tags": ["Three.js", "TypeScript", "PWA", "WebGL"],
+    "stats": "60 FPS • PWA",
+    "links": {
+      "github": "https://github.com/DLinacre/cubelab",
+      "live": "https://dlinacre.github.io/cubelab",
+      "download": ""
+    },
+    "featured": true
+  },
+  {
+    "id": "bonny-bakes",
+    "title": "Bonny Bakes",
+    "subtitle": "Dynamic Recipe Scaling & Baker's Ratios",
+    "category": "Web & Tools",
+    "badge": "UTILITY",
+    "color": "amber",
+    "description": "Smart bakery formulation calculator: dynamic yield scaling, baker's percentages, hydration calculation, and batch conversion for commercial and home bakers.",
+    "tags": ["TypeScript", "PWA", "Math Engine"],
+    "stats": "Precision Calc",
+    "links": {
+      "github": "https://github.com/DLinacre/bonny-bakes",
+      "live": "https://dlinacre.github.io/bonny-bakes",
+      "download": ""
+    },
+    "featured": true
+  },
+  {
+    "id": "dragon-rush-heroes",
+    "title": "Dragon Rush Heroes",
+    "subtitle": "Anime Action-RPG Card Battler",
+    "category": "Games & Creative",
+    "badge": "GAME",
+    "color": "sakura",
+    "description": "Zero-dependency anime action-RPG card battler featuring 464 unique fighters, real-time Arts combat system, and provably-fair gacha summons. 100% free forever.",
+    "tags": ["JavaScript", "HTML5 Canvas", "Web Audio"],
+    "stats": "464 Fighters",
+    "links": {
+      "github": "https://github.com/DLinacre/dragon-rush-heroes",
+      "live": "https://dlinacre.github.io/dragon-rush-heroes",
+      "download": ""
+    },
+    "featured": true
+  }
+]
