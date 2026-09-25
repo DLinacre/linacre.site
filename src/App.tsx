@@ -4,6 +4,9 @@ import CyberTerminal from './components/CyberTerminal';
 import ProjectRadar from './components/ProjectRadar';
 import CardManagerModal from './components/CardManagerModal';
 import TwinkleCanvas from './components/TwinkleCanvas';
+import CyberAudioPlayer from './components/CyberAudioPlayer';
+import QuickToolsDeck from './components/QuickToolsDeck';
+import LocalRigDeck from './components/LocalRigDeck';
 import defaultProjects from './config/projects.json';
 import { ProjectCard } from './types/project';
 import { audioFx } from './lib/audioFx';
@@ -15,6 +18,8 @@ export default function App() {
   const [cardManagerOpen, setCardManagerOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [theme, setTheme] = useState<'theme-purple' | 'theme-cyan' | 'theme-sakura' | 'theme-emerald'>('theme-purple');
+  const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const [currentTrackTitle, setCurrentTrackTitle] = useState('');
 
   // Load cards from localStorage or default configuration
   const [cards, setCards] = useState<ProjectCard[]>(() => {
@@ -110,12 +115,14 @@ export default function App() {
           soundEnabled={soundEnabled}
           toggleSound={toggleSound}
           projectCount={cards.length}
+          isPlayingMusic={isPlayingMusic}
+          currentTrackTitle={currentTrackTitle}
         />
 
         {/* Hero Section */}
-        <main className="mx-auto flex-1 w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12 space-y-12">
+        <main className="mx-auto flex-1 w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12 space-y-10">
           
-          <section className="flex flex-col items-center text-center space-y-4 pt-4 sm:pt-8">
+          <section className="flex flex-col items-center text-center space-y-4 pt-2 sm:pt-6">
             
             <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/10 px-3.5 py-1 text-xs font-mono font-semibold text-purple-300 shadow-[0_0_15px_rgba(192,132,252,0.2)]">
               <Sparkles className="h-3.5 w-3.5" />
@@ -127,20 +134,32 @@ export default function App() {
             </h1>
 
             <p className="max-w-2xl text-sm sm:text-base leading-relaxed text-slate-300">
-              Autonomous digital infrastructure, high-performance desktop utilities, AI routing gateways, and specialized software. Built from first principles with zero technical debt.
+              Autonomous digital infrastructure, daily in-browser developer utilities, Suno V6 master audio deck, and local AI orchestration. Built from first principles with zero technical debt.
             </p>
 
             {/* Quick Status Chips */}
-            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-              <div className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-[#0d1224]/70 px-3 py-1.5 text-xs font-mono text-slate-300 backdrop-blur-md">
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+              <div 
+                onClick={() => setActiveTab('rig')}
+                className="cursor-pointer flex items-center gap-1.5 rounded-lg border border-white/10 bg-[#0d1224]/70 px-3 py-1.5 text-xs font-mono text-slate-300 backdrop-blur-md hover:border-amber-500/40 hover:text-white transition-all"
+                title="View Rig Specs"
+              >
                 <Cpu className="h-3.5 w-3.5 text-amber-400" />
                 <span>i7-11700K • RTX 3070 Ti</span>
               </div>
-              <div className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-[#0d1224]/70 px-3 py-1.5 text-xs font-mono text-slate-300 backdrop-blur-md">
+              <div 
+                onClick={() => setActiveTab('rig')}
+                className="cursor-pointer flex items-center gap-1.5 rounded-lg border border-white/10 bg-[#0d1224]/70 px-3 py-1.5 text-xs font-mono text-slate-300 backdrop-blur-md hover:border-emerald-500/40 hover:text-white transition-all"
+                title="View DNS Telemetry"
+              >
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
                 <span>Whole-Home Port 53 DNS</span>
               </div>
-              <div className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-[#0d1224]/70 px-3 py-1.5 text-xs font-mono text-slate-300 backdrop-blur-md">
+              <div 
+                onClick={() => setActiveTab('projects')}
+                className="cursor-pointer flex items-center gap-1.5 rounded-lg border border-white/10 bg-[#0d1224]/70 px-3 py-1.5 text-xs font-mono text-slate-300 backdrop-blur-md hover:border-cyan-500/40 hover:text-white transition-all"
+                title="Browse Solutions"
+              >
                 <Layers className="h-3.5 w-3.5 text-cyan-400" />
                 <span>{cards.length} Active Solutions</span>
               </div>
@@ -148,13 +167,35 @@ export default function App() {
 
           </section>
 
-          {/* Project Radar Section */}
-          <ProjectRadar
-            cards={cards}
-            onOpenCardManager={() => setCardManagerOpen(true)}
-            onEditCard={() => setCardManagerOpen(true)}
-            onDeleteCard={id => handleSaveCards(cards.filter(c => c.id !== id))}
-          />
+          {/* Tab 1: Project Radar Section */}
+          <div className={activeTab === 'projects' ? 'block' : 'hidden'}>
+            <ProjectRadar
+              cards={cards}
+              onOpenCardManager={() => setCardManagerOpen(true)}
+              onEditCard={() => setCardManagerOpen(true)}
+              onDeleteCard={id => handleSaveCards(cards.filter(c => c.id !== id))}
+            />
+          </div>
+
+          {/* Tab 2: Proper Mad Studio Audio Deck */}
+          <div className={activeTab === 'music' ? 'block' : 'hidden'}>
+            <CyberAudioPlayer
+              onPlayingChange={(playing, title) => {
+                setIsPlayingMusic(playing);
+                setCurrentTrackTitle(title);
+              }}
+            />
+          </div>
+
+          {/* Tab 3: Daily Tools & Scratchpad */}
+          <div className={activeTab === 'tools' ? 'block' : 'hidden'}>
+            <QuickToolsDeck />
+          </div>
+
+          {/* Tab 4: Local Rig & Homelab Deck */}
+          <div className={activeTab === 'rig' ? 'block' : 'hidden'}>
+            <LocalRigDeck />
+          </div>
 
         </main>
 
@@ -198,6 +239,7 @@ export default function App() {
         onOpenCardManager={() => setCardManagerOpen(true)}
         cycleTheme={cycleTheme}
         playKeyTick={() => audioFx.playKeyTick()}
+        onSelectTab={setActiveTab}
       />
 
       {/* Card Manager Modal (Add / Edit / Remove) */}

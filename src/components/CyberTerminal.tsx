@@ -9,6 +9,7 @@ interface CyberTerminalProps {
   onOpenCardManager: () => void;
   cycleTheme: () => void;
   playKeyTick: () => void;
+  onSelectTab?: (tab: string) => void;
 }
 
 interface TermLine {
@@ -25,6 +26,7 @@ export default function CyberTerminal({
   onOpenCardManager,
   cycleTheme,
   playKeyTick,
+  onSelectTab,
 }: CyberTerminalProps) {
   const [inputVal, setInputVal] = useState('');
   const [history, setHistory] = useState<string[]>([]);
@@ -81,7 +83,10 @@ export default function CyberTerminal({
     switch (cmd) {
       case 'help':
         addLine('AVAILABLE TERMINAL COMMANDS:');
-        addLine('  projects   — List all active software engineering projects');
+        addLine('  projects   — List and navigate to software engineering solutions');
+        addLine('  music      — Launch Proper Mad studio music player & lyrics');
+        addLine('  tools      — Open Daily Scratchpad, JSON, Base64 & converters');
+        addLine('  rig        — Check local ComfyUI, Ollama, and hardware specs');
         addLine('  search <q> — Filter projects matching keyword');
         addLine('  add        — Open the Project Card Manager modal');
         addLine('  specs      — Workstation & hardware engineering specifications');
@@ -90,6 +95,27 @@ export default function CyberTerminal({
         addLine('  theme      — Cycle neon color accents (Cyan, Purple, Sakura, Emerald)');
         addLine('  clear      — Clear terminal viewport');
         addLine('  exit       — Close terminal console');
+        break;
+
+      case 'music':
+      case 'player':
+      case 'audio':
+        addLine('Switching to Proper Mad Studio Music Deck...', 'success');
+        onSelectTab?.('music');
+        break;
+
+      case 'tools':
+      case 'scratchpad':
+      case 'notes':
+        addLine('Switching to Daily Quick Tools & Scratchpad...', 'success');
+        onSelectTab?.('tools');
+        break;
+
+      case 'rig':
+      case 'homelab':
+      case 'ports':
+        addLine('Switching to Local Rig & Homelab Orchestration...', 'success');
+        onSelectTab?.('rig');
         break;
 
       case 'search':
