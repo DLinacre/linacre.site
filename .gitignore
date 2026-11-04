@@ -42,3 +42,6 @@ status.txt
 .vercel
 .env*
 .agents/
+
+# Legacy contact submissions may contain personal data
+contacts.json

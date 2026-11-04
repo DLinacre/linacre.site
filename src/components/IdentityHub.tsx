@@ -1,3 +1,4 @@
+import { sanitizeSvg } from '../lib/sanitize';
 import { useMemo, useRef, useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import {
@@ -349,7 +350,7 @@ function MarkTile({
       >
         <span
           className="mx-auto block aspect-square w-full max-w-[72px]"
-          dangerouslySetInnerHTML={{ __html: preview }}
+          dangerouslySetInnerHTML={{ __html: sanitizeSvg(preview) }}
         />
       </button>
       {onToggleFavourite && (
@@ -608,12 +609,14 @@ export default function IdentityHub() {
     [emblem, name, title, bio, website, palette, customBgColor],
   );
 
-  const currentAsset =
+  const rawAsset =
     previewMode === 'banner'
       ? { svg: bannerSvg, width: 1280, height: 320, name: 'linacre-github-banner' }
       : previewMode === 'avatar'
         ? { svg: avatarSvg, width: 512, height: 512, name: 'linacre-avatar' }
         : { svg: socialSvg, width: 1200, height: 630, name: 'linacre-social-card' };
+
+  const currentAsset = { ...rawAsset, svg: sanitizeSvg(rawAsset.svg) };
 
   const copy = async (value: string, key: string) => {
     try {
@@ -745,7 +748,7 @@ export default function IdentityHub() {
         setUploadError('That SVG file has no <svg> markup inside.');
         return;
       }
-      const sanitized = text.replace(/<script[\s\S]*?<\/script>/gi, '').slice(0, 200_000);
+      const sanitized = sanitizeSvg(text.slice(0, 200_000));
       const emblem: CustomEmblem = { id, name: label, type: 'svg', content: sanitized };
       setCustomEmblems(previous => [...previous, emblem]);
       selectMark(id, 'upload');
@@ -795,7 +798,7 @@ export default function IdentityHub() {
         id,
         name: label,
         type: 'svg',
-        content: data.svg,
+        content: sanitizeSvg(data.svg),
       };
 
       setCustomEmblems(previous => [...previous, emblem]);
@@ -1194,7 +1197,7 @@ export default function IdentityHub() {
                       <span
                         className="mx-auto block h-12 w-12"
                         dangerouslySetInnerHTML={{
-                          __html: getEmblemSVG(
+                          __html: sanitizeSvg(getEmblemSVG(
                             option.id,
                             palette.primary,
                             palette.secondary,
@@ -1202,7 +1205,7 @@ export default function IdentityHub() {
                             'slow',
                             1,
                             customEmblems,
-                          ),
+                          )),
                         }}
                       />
                       <span className="mt-2 block font-mono text-[10px] font-bold text-foreground">

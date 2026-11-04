@@ -1,3 +1,4 @@
+import { sanitizeHtml } from '../lib/sanitize';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -2965,7 +2966,7 @@ You do not need to use all agents if the task is simple, but at least two should
                             <div
                               className="prose prose-invert max-w-none text-xs sm:text-sm prose-p:my-1 prose-pre:bg-black/40"
                               dangerouslySetInnerHTML={{
-                                __html: formatMessageContent(msg.content),
+                                __html: sanitizeHtml(formatMessageContent(msg.content)),
                               }}
                             />
                           ) : (
@@ -2999,7 +3000,7 @@ You do not need to use all agents if the task is simple, but at least two should
                                   <div
                                     className="prose prose-invert max-w-none text-xs sm:text-sm prose-p:my-1 prose-pre:bg-black/40 text-muted-foreground/90 font-mono"
                                     dangerouslySetInnerHTML={{
-                                      __html: formatMessageContent(part.text),
+                                      __html: sanitizeHtml(formatMessageContent(part.text)),
                                     }}
                                   />
                                 </div>
