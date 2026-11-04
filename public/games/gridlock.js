@@ -173,6 +173,7 @@
       hit.setAttribute('class', 'hit');
       hit.setAttribute('tabindex', '0');
       hit.setAttribute('role', 'button');
+      hit.setAttribute('aria-label', `${axis === 'h' ? 'Horizontal' : 'Vertical'} edge ${i + 1}`);
       hit.dataset.a = axis;
       hit.dataset.i = i;
       hit.addEventListener('click', () => play(axis, i, false));

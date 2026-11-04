@@ -968,7 +968,6 @@ export default function OsintHud() {
                     rel="noopener noreferrer"
                     onClick={() => recordRecent(tool)}
                     className="osint-priority-card__link"
-                    aria-label={`Open ${tool.title} at ${tool.host} in a new tab`}
                   >
                     <span className="osint-priority-card__topline">
                       <span className="osint-priority-card__number">
@@ -1015,7 +1014,6 @@ export default function OsintHud() {
                   type="button"
                   className="osint-sector-card"
                   onClick={() => setSector(group.id)}
-                  aria-label={`Browse ${group.name}, ${sectorCount(group.id)} resources across ${group.cats.length} categories`}
                 >
                   <span className="osint-sector-card__index">
                     {String(index + 1).padStart(2, '0')}

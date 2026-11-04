@@ -287,7 +287,7 @@ export default function MusicVideos() {
               type="button"
               onClick={() => stepTrack(-1)}
               className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white hover:border-[#8fd6ff]/40 transition cursor-pointer"
-              aria-label="Previous music video"
+              aria-label="Prev, previous music video"
             >
               <SkipBack className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Prev</span>
@@ -305,7 +305,7 @@ export default function MusicVideos() {
               type="button"
               onClick={copyShareUrl}
               className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-medium text-[#9aa3b2] hover:text-white transition cursor-pointer"
-              aria-label="Copy share link to this track"
+              aria-label={copiedLink ? 'Copied link to this track' : 'Copy link to this track'}
             >
               {copiedLink ? (
                 <>

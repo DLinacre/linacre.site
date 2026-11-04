@@ -1,26 +1,5 @@
-import { useEffect } from 'react';
+import { selectedGames } from '../data/curatedWork';
 
-/**
- * Tabulous Games Portal Gateway
- *
- * linacre.site/games is a standalone, performance-optimized, zero-latency gaming portal.
- * If navigated within the React SPA, this component instantly redirects to the native /games portal.
- */
 export default function Games() {
-  useEffect(() => {
-    window.location.replace('/games');
-  }, []);
-
-  return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-4 text-center font-mono">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
-      <p className="text-sm text-slate-300">Launching Tabulous Games...</p>
-      <a
-        href="/games"
-        className="rounded-lg border border-purple-500/40 bg-purple-500/10 px-4 py-2 text-xs font-semibold text-purple-200 transition-colors hover:bg-purple-500/20"
-      >
-        Click here if not redirected automatically
-      </a>
-    </div>
-  );
+  return <div className="games-page"><section className="games-page__intro"><p className="studio-kicker">LIN4CRE / PLAY</p><h1>Games for<br /><em>the in-between.</em></h1><p>A small collection of browser games. Pick one, take a moment, and see where it goes.</p></section><div className="games-page__grid">{selectedGames.map((game, i) => <article className="games-page__item" key={game.name}><a href={game.url} className="work-image"><img src={game.image} alt={`${game.name} game screen`} width="1000" height="625" loading={i ? 'lazy' : 'eager'} /></a><p className="work-number">0{i + 1} / {game.genre}</p><h2>{game.name}</h2><p>{game.description}</p><p className="work-details">Available on this site · HTML · JavaScript</p><a className="text-link" href={game.url}>Play {game.name} <span aria-hidden="true">↗</span></a></article>)}</div></div>;
 }

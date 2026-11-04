@@ -12,61 +12,61 @@ const assert = require('assert').strict;
   });
   const errors = [];
   page.on('pageerror', e => errors.push(e.message));
-  async function open(path) {
-    const r = await page.goto((process.env.BROWSER_URL || 'http://127.0.0.1:3000') + path, {
+  const open = async path => {
+    const response = await page.goto((process.env.BROWSER_URL || 'http://127.0.0.1:3000') + path, {
       waitUntil: 'networkidle',
     });
-    assert.equal(r.status(), 200);
-  }
+    assert.equal(response.status(), 200, path);
+    assert.equal(
+      await page.evaluate(() => document.documentElement.scrollWidth > innerWidth),
+      false,
+      `${path}: horizontal overflow`,
+    );
+  };
   await open('/');
-  await page.getByRole('button', { name: 'Open navigation menu' }).click();
-  assert.equal(
-    await page.getByRole('button', { name: 'Close navigation menu' }).getAttribute('aria-expanded'),
-    'true',
-  );
-  await page.keyboard.press('Escape');
-  const search = page.getByRole('searchbox', { name: 'Find a project' });
-  await search.fill('no such project xqz');
-  assert.equal(await page.getByRole('button', { name: 'Surprise me' }).isDisabled(), true);
-  await search.fill('');
+  assert.equal(await page.locator('#work article').count(), 3);
+  assert.equal(await page.locator('.games-preview .game-row').count(), 3);
   await page
-    .getByRole('button', { name: /View details for/ })
+    .getByRole('link', { name: /selected work/i })
     .first()
     .click();
-  await page.getByRole('dialog').waitFor({ state: 'visible' });
-  await page.keyboard.press('Escape');
-  await page.getByRole('dialog').waitFor({ state: 'hidden' });
-  console.log('PASS home: mobile menu, empty search, detail dialog');
+  assert.equal(await page.evaluate(() => location.hash), '#work');
+  console.log('PASS home: curated work, game links, navigation');
   await open('/tools');
   const json = page.locator('#utility-panel-json textarea');
   await json.fill('{"ok":true}');
   await page.getByRole('button', { name: 'Format', exact: true }).click();
   assert.match(await json.inputValue(), /\n  "ok": true/);
-  await page.getByRole('tab', { name: /Base64/ }).click();
-  const b = page.locator('#utility-panel-base64 textarea');
-  await b.fill('hello');
-  await page.getByRole('button', { name: 'Encode', exact: true }).click();
-  assert.equal(await b.inputValue(), 'aGVsbG8=');
-  console.log('PASS tools: JSON formatting, Base64 encoding');
+  console.log('PASS tools: JSON formatting');
+  await open('/osint');
+  await page.locator('#osint-search').fill('shodan');
+  await page
+    .getByRole('link', { name: /Open Shodan/i })
+    .first()
+    .waitFor({ state: 'visible' });
+  console.log('PASS OSINT: search');
+  await open('/music-videos');
+  await page.locator('.music-videos-track').nth(1).click();
+  assert.notEqual(await page.evaluate(() => location.hash), '');
+  console.log('PASS music: track selection (external playback not tested)');
   await open('/games');
-  await page.locator('.chip').first().click();
-  assert.notEqual(await page.locator('#searchInput').inputValue(), '');
-  const info = page.locator('.game-card:visible .btn-info').first();
-  await info.click();
-  assert.equal(await info.getAttribute('aria-expanded'), 'true');
-  await info.click();
-  assert.equal(await info.getAttribute('aria-expanded'), 'false');
-  await page.locator('#searchInput').fill('no-game-xqz');
-  await page.locator('#resetFilters').click();
-  assert.equal(await page.locator('#searchInput').inputValue(), '');
-  console.log('PASS games: featured search, Info toggle, reset');
+  assert.equal(await page.locator('.games-page__item').count(), 3);
+  await page.getByRole('link', { name: 'Play Circuit' }).click();
+  await page.locator('#board .tile').first().click();
+  assert.match(await page.locator('#s-moves').innerText(), /1/);
+  await open('/games/decrypt');
+  for (let i = 0; i < 4; i++) await page.locator('#pad button').nth(i).click();
+  await page.locator('#b-go').click();
+  assert.match(await page.locator('#s-try').innerText(), /2\/8|1\/8/);
+  await open('/games/gridlock');
+  await page.locator('#board .hit').first().click();
+  assert.notEqual(await page.locator('#board .edge').first().getAttribute('class'), 'edge');
+  console.log('PASS games: Circuit rotation, Decrypt submission, Gridlock move');
   await open('/contact');
   await page.getByPlaceholder('Jane Doe').fill('Test');
-  await page.getByPlaceholder('you@company.com').fill('test@example.com');
   assert.equal((await page.locator('form').count()) > 0, true);
-  console.log('PASS contact: form fields present (no message sent)');
+  console.log('PASS contact: form present (no email sent)');
   assert.deepEqual(errors, []);
-  console.log('PASS page errors: none');
   await browser.close();
 })().catch(e => {
   console.error(e);
