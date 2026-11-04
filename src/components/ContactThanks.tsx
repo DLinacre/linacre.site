@@ -48,7 +48,7 @@ export default function ContactThanks() {
         <a href="mailto:david@linacre.site" className="text-amber-color hover:underline">
           david@linacre.site
         </a>{' '}
-        within 12 hours.
+        as soon as possible.
         {ref && (
           <>
             {' '}

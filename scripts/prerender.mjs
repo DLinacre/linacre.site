@@ -355,8 +355,8 @@ ${CTA_BLOCK}`;
 
     case '/games': {
       return `
-<h1>Tabulous Games — Browser games that actually run</h1>
-<p>A hand-picked library of instant-play browser game ports, AAA fan remakes, and WebAssembly classics that actually run in a tab — racing, shooters, strategy, survivors-likes and retro classics. Every link tested before it is listed. No installs, no ads, no files required.</p>
+<h1>Tabulous Games — Browser game directory</h1>
+<p>Explore a directory of browser game links by genre. External hosts control availability, requirements and content.</p>
 <p><a href="/games">Launch Tabulous Games Portal</a></p>
 `;
     }
@@ -427,7 +427,7 @@ ${CTA_BLOCK}`;
     case '/contact':
       return `
 <h1>Contact David Linacre</h1>
-<p>Have a project, a problem or a question? Use the form on this page — David replies within 12 hours from david@linacre.site.</p>
+<p>Have a project, a problem or a question? Use the form on this page to send an enquiry.</p>
 <ul>
   <li>Systems &amp; infrastructure audits from £1,800.</li>
   <li>Custom builds from £6,500.</li>
@@ -654,7 +654,7 @@ function buildLlmsFull() {
   push(
     '- Ongoing Engineering Retainer — dedicated fractional engineering time for ongoing improvements and rapid iteration. £2,400 / month.',
   );
-  push('- Reply within 12 hours from david@linacre.site. NDA-friendly. UK GDPR compliant.');
+  push('- Send an enquiry through the contact page.');
   push('');
 
   const pubProjects = (data.projects || []).filter(p => p.url);
@@ -684,7 +684,7 @@ function buildLlmsFull() {
   push(
     '1. Send an enquiry at https://www.linacre.site/contact (name, work email, optional company, budget, timeline, project details).',
   );
-  push('2. Reply within 12 hours from david@linacre.site.');
+  push('2. David reviews the enquiry and follows up.');
   push('3. Short discovery call to scope the work.');
   push('4. Written Statement of Work — scope, milestones, price, timeline, acceptance criteria.');
   push('');

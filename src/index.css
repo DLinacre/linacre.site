@@ -2265,14 +2265,14 @@ body {
   }
 }
 
-@media (max-width: 1040px) {
-  .site-nav__status,
-  .site-nav__footer > a {
-    display: none;
-  }
+/* The top row already links to GitHub. Hiding duplicate status text keeps
+   primary navigation and audio controls from overlapping on desktop. */
+.site-nav__status,
+.site-nav__footer > a {
+  display: none;
 }
 
-@media (max-width: 899px) {
+@media (max-width: 1199px) {
   .site-header__top-inner,
   .site-nav__inner {
     width: min(calc(100% - 2rem), 78rem);
@@ -2497,7 +2497,7 @@ body {
 
   .home-hero__stats > div {
     min-width: 0;
-    flex: 1 1 30%;
+    flex: 1 1 0;
     padding-right: 0.6rem;
   }
 

@@ -30,20 +30,19 @@ export default function StartPage({ navigate, query, setQuery, searchRef }: Star
           </p>
 
           <h1 id="home-heading" className="home-hero__title">
-            Useful software,
+            Independent software,
             <br />
-            <span>made with intent.</span>
+            <span>made to be useful.</span>
           </h1>
 
           <p className="home-hero__intro">
-            Practical apps, thoughtful browser tools, instant-play WebAssembly games, and live
-            planetary telemetry. Explore what is live, find a download, or follow the open source
-            behind each project.
+            Apps, AI experiments, developer tools and games, made in South Yorkshire. Explore the
+            projects, try a browser tool, or follow the source behind the work.
           </p>
 
           <div className="home-hero__actions">
             <a href="#project-library" className="home-hero__primary-action">
-              Explore the library <ArrowDown aria-hidden="true" />
+              Explore projects <ArrowDown aria-hidden="true" />
             </a>
             <button
               type="button"
@@ -56,7 +55,7 @@ export default function StartPage({ navigate, query, setQuery, searchRef }: Star
             </button>
             <a href="/games" className="home-hero__games-action">
               <Gamepad2 aria-hidden="true" />
-              Play games
+              Explore games
             </a>
             <button
               type="button"
@@ -113,10 +112,6 @@ export default function StartPage({ navigate, query, setQuery, searchRef }: Star
             <div>
               <dt>Source links</dt>
               <dd>{sourceCount.toString().padStart(2, '0')}</dd>
-            </div>
-            <div>
-              <dt>Instant games</dt>
-              <dd>77</dd>
             </div>
           </dl>
         </div>

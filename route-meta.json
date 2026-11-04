@@ -7,20 +7,20 @@
   },
   "routes": {
     "/": {
-      "title": "Linacre project library — apps, tools, downloads and source",
-      "description": "Browse David Linacre's recorded projects by category, search by task, open browser apps, find available downloads and explore source repositories.",
+      "title": "LIN4CRE — Independent Software, Tools & Games",
+      "description": "Explore David Linacre’s independent software projects, browser tools, AI experiments and games, with links to applications and source code.",
       "canonical": "https://www.linacre.site/",
       "index": true
     },
     "/tools": {
       "title": "Tools — browser utilities & curated directory | Linacre.site",
-      "description": "Private, in-browser utilities (JSON, Base64, timestamps, secure generators, VAT, text tools) plus a curated directory of developer tools. No sign-up, no tracking.",
+      "description": "Use browser-based JSON, Base64 and other utilities, explore the developer playground, and browse an external tool directory.",
       "canonical": "https://www.linacre.site/tools",
       "index": true
     },
     "/games": {
-      "title": "Tabulous Games — Browser games that actually run | Linacre.site",
-      "description": "Hand-picked browser game ports, fan remakes, and WebAssembly classics that actually run in a tab. 77 verified instant-play browser games with zero file downloads.",
+      "title": "Tabulous Games — Browser game directory | LIN4CRE",
+      "description": "Explore a directory of browser game links by genre. Games are hosted by third parties and availability or requirements can vary.",
       "canonical": "https://www.linacre.site/games",
       "image": "https://www.linacre.site/games/assets/brand/og-image.png",
       "index": true
@@ -65,13 +65,13 @@
     },
     "/contact": {
       "title": "Contact David Linacre — software & automation projects",
-      "description": "Contact David Linacre about software design, developer tools and automation projects. Replies within 12 hours.",
+      "description": "Contact David Linacre about software, developer tools and automation projects.",
       "canonical": "https://www.linacre.site/contact",
       "index": true
     },
     "/contact/thanks": {
       "title": "Thanks — message received | Linacre.site",
-      "description": "Your enquiry has been received. David will reply from david@linacre.site within 12 hours.",
+      "description": "Your enquiry has been accepted for delivery.",
       "canonical": "https://www.linacre.site/contact/thanks",
       "index": false
     },

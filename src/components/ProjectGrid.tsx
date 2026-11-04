@@ -33,9 +33,8 @@ export default function ProjectGrid({
   const [viewMode, setViewMode] = useState<'grid' | 'compact'>('grid');
 
   const openRandomProject = () => {
-    const pool = visible.length > 0 ? visible : projects;
-    if (pool.length === 0) return;
-    const pick = pool[Math.floor(Math.random() * pool.length)];
+    if (visible.length === 0) return;
+    const pick = visible[Math.floor(Math.random() * visible.length)];
     setSelected(pick);
   };
 
@@ -106,7 +105,8 @@ export default function ProjectGrid({
           <button
             type="button"
             onClick={openRandomProject}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-[#0e1016] px-2.5 py-1 text-xs text-[#8fd6ff] hover:border-[#8fd6ff]/40 transition cursor-pointer"
+            disabled={visible.length === 0}
+            className="inline-flex items-center gap-1.5 disabled:cursor-not-allowed disabled:opacity-50 rounded-lg border border-white/10 bg-[#0e1016] px-2.5 py-1 text-xs text-[#8fd6ff] hover:border-[#8fd6ff]/40 transition cursor-pointer"
           >
             <Shuffle className="h-3.5 w-3.5" aria-hidden="true" />
             <span>Surprise me</span>

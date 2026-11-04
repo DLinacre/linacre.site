@@ -12,6 +12,12 @@ describe('ProjectGrid', () => {
     expect(screen.getByText(/All projects/i)).toBeInTheDocument();
   });
 
+  it('does not offer an unrelated random project when no results match', () => {
+    render(<ProjectGrid query="no such project xqz" setQuery={() => {}} />);
+    expect(screen.getByText(/No projects match these filters/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Surprise me' })).toBeDisabled();
+  });
+
   it('marks pinned projects', () => {
     render(<ProjectGrid query="" setQuery={() => {}} />);
     const badges = screen.getAllByText(/Pinned/i);

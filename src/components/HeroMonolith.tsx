@@ -166,7 +166,7 @@ export default function HeroMonolith() {
           <div className="hero-art__face hero-art__face--left">
             <span className="hero-art__face-index">BUILD / TEST / SHIP</span>
             <span className="hero-art__face-rule" />
-            <span className="hero-art__face-index">EST. 2020</span>
+            <span className="hero-art__face-index">LIN4CRE</span>
           </div>
           <div className="hero-art__face hero-art__face--top">
             <span className="hero-art__top-mark">L</span>
@@ -180,19 +180,19 @@ export default function HeroMonolith() {
       {/* Floating Holographic Telemetry Chips */}
       <div className="hero-art__chip hero-art__chip--nw">
         <span className="hero-art__chip-dot hero-art__chip-dot--cyan" />
-        <span>77 INSTANT GAMES</span>
+        <span>BROWSER GAMES</span>
       </div>
       <div className="hero-art__chip hero-art__chip--ne">
         <span className="hero-art__chip-dot hero-art__chip-dot--emerald" />
-        <span>1,310 OSINT NODES</span>
+        <span>RESEARCH TOOLS</span>
       </div>
       <div className="hero-art__chip hero-art__chip--sw">
         <span className="hero-art__chip-dot hero-art__chip-dot--purple" />
-        <span>10 CINEMA MASTERS</span>
+        <span>MUSIC VIDEOS</span>
       </div>
       <div className="hero-art__chip hero-art__chip--se">
         <span className="hero-art__chip-dot hero-art__chip-dot--amber" />
-        <span>ISS ORBIT LIVE</span>
+        <span>EARTH OBSERVATORY</span>
       </div>
 
       <div className="hero-art__label hero-art__label--top">

@@ -87,7 +87,7 @@ export default function FeaturedSpotlight() {
                       {p.tech.slice(0, 2).map(t => (
                         <span
                           key={t}
-                          className="rounded border border-white/[0.06] bg-white/[0.03] px-1.5 py-0.5 font-mono text-[9px] text-[#6b7482]"
+                          className="rounded border border-white/[0.06] bg-white/[0.03] px-1.5 py-0.5 font-mono text-[9px] text-[#a2adbc]"
                         >
                           {t}
                         </span>
@@ -96,7 +96,7 @@ export default function FeaturedSpotlight() {
                   )}
                 </div>
 
-                <div className="flex items-center justify-between border-t border-white/[0.06] px-3 py-2 font-mono text-[10px] text-[#6b7482]">
+                <div className="flex items-center justify-between border-t border-white/[0.06] px-3 py-2 font-mono text-[10px] text-[#a2adbc]">
                   <span className="flex items-center gap-1 group-hover:text-white transition-colors">
                     {host ? (
                       <>

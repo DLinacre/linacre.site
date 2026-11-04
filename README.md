@@ -21,18 +21,40 @@ A React 19 single-page application with prerendered static routes, deployed on
 Vercel. It serves three purposes:
 
 1. **A free browser toolbox** — JSON, Base64, VAT, hashing, text and URL
-   utilities that run entirely client-side. Nothing is uploaded anywhere.
+   utilities that run client-side; the optional AI playground sends prompts to the configured API, and external services have their own policies.
 2. **A project showcase** — live builds, downloadable releases, and inspectable
    source.
-3. **A games hub** — playable browser games plus
+3. **A games hub** — links to third-party browser games (availability and requirements vary) plus
    [Slime Factory Tycoon](https://github.com/DLinacre/slime-factory-tycoon), an
    open-source Roblox idle-tycoon.
 
 ---
 
+## Current release note (2026-11-04)
+
+The security hardening and website-evolution work is on an active branch, not
+verified in production. The current live API health route has returned 404;
+check Vercel rewrites and environment configuration on an accessible preview
+before merging or deploying. See [AUDIT.md](AUDIT.md) and
+[hardening notes](docs/2026-11-04-hardening.md). Existing or exposed dashboard
+credentials should be rotated. No real contact email delivery has been tested.
+
+The games directory lists external hosts; no blanket guarantee is made about
+playability, ownership, safety or download requirements. Its checked-in data is
+`public/games/games.json`. `npm run build` regenerates the directory **in dist
+only**. Use `npm run games:build` to explicitly refresh checked-in generated
+files, then review the diff.
+
 ## Verification
 
-Run `npm run verify` and `npm run build` for the current local results. These
+Run `npm ci`, `npm run verify`, and `npm run build`. For the browser smoke
+journeys, install the Playwright Chromium browser (`npx playwright install
+chromium`), start the built server (`npm start`), then run `npm run
+test:browser`. Set `BROWSER_URL` for another server; `CHROMIUM_PATH` and a JSON
+array in `CHROMIUM_ARGS` are optional overrides. The smoke test does not send a
+contact message or test external games. Run `npm audit --audit-level=moderate`
+at the root and in `mcp/` after installation. For the current local results see
+[AUDIT.md](AUDIT.md). These
 checks do not establish production availability, accessibility conformance, or
 Core Web Vitals; verify those separately against the actual deployment.
 

@@ -1,5 +1,49 @@
 # Linacre.site — UX & technical audit
 
+## Current audit — 2026-11-04
+
+**Release status: not ready for production.** Production still served the old
+commit `434be2a` during this audit. `/api/health` returned 404 and
+`/api/providers` resolved to an Express 404. A Vercel preview for the security
+branch was READY but protected by login, so functionality and production
+configuration were not verified. Rotate previously exposed/hardcoded credentials
+and session secrets. Never promote until routing, auth and contact have been
+verified on an accessible preview. Provider acceptance is not inbox delivery.
+
+| Priority | Finding | Status |
+|---|---|---|
+| Critical | Prior dashboard authentication used hardcoded/unsafe secrets and a local bypass | Fixed on branch, not deployed or verified live; rotate secrets |
+| Critical | Production API routing returned 404 | Outstanding; determine Vercel rewrite behavior before release |
+| Major | Games page crashed while registering featured search chips, preventing subsequent Info/Share setup | Fixed `$('.chip')` to `$$`; tested search and Info in Chromium |
+| Major | Home and games failed automated contrast checks; desktop nav overlapped; mobile hero metrics wrapped | Fixed tested findings and layouts; manual accessibility review remains |
+| Major | Games and tools made unsupported playability/privacy claims; contact promised 12-hour replies | Copy corrected; individual third-party links and rights remain unverified |
+| Major | Production build rewrote checked-in game data and markup | Build now writes generated game files only to `dist`; explicit `games:build` still updates source |
+| Minor | Invalid SVG path generated a browser error; no-results random action could select an unrelated project | Fixed; tests added |
+| Outstanding | Existing lint warnings, format debt, external links, offline behavior, real integrations, deployment and human WCAG review | Not fully verified |
+
+### Evidence and verification
+
+- Chromium at 1440×900, 768×1024 and 390×844: home has no horizontal
+  overflow; before/after screenshots captured outside the repository. At 390px,
+  axe-core WCAG 2/2.1/2.2 AA-tag checks found 12 serious home contrast nodes
+  and 78 games contrast nodes plus a link-distinction issue before; zero
+  automated violations on `/`, `/games`, `/tools`, `/about`, `/contact` after.
+  This is not proof of conformance, and not a complete interaction audit.
+- Mobile browser smoke: menu, empty project search, project dialog, JSON format,
+  Base64 encode, games featured search/Info/empty reset and contact field entry
+  passed with no uncaught page errors. No email or external game was launched.
+- `npm run verify`: typecheck and lint passed (175 existing warnings); 194 tests
+  passed. `npm run build` passed; 18 route outputs, 17 sitemap URLs.
+- Main Vite JS entry: 300.65 kB / 92.54 kB gzip before, 300.36 kB / 92.42 kB
+  gzip after; CSS 208.18 / 33.28 kB before, 208.19 / 33.29 kB after. Build
+  sizes are not field performance or Core Web Vitals.
+- Dependency audit, MCP checks, production/preview status and authentication
+  limitations are detailed in `docs/2026-11-04-hardening.md`.
+
+---
+
+## Historical audit — 2026-11-01 (superseded where conflicting)
+
 Updated: 2026-11-01
 
 Auditor: Arena.ai agent

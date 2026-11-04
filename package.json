@@ -7,7 +7,7 @@
     "dev": "python linacre.py dev",
     "games:build": "node scripts/build-games.mjs",
     "games:search": "node scripts/search-new-tab-games.mjs",
-    "build": "node scripts/build-games.mjs && vite build && node scripts/prerender.mjs && esbuild api/server.ts --bundle --platform=node --format=esm --packages=external --sourcemap --outfile=dist/server.js && node scripts/write-ops-status.mjs",
+    "build": "vite build && node scripts/build-games.mjs --dist && node scripts/prerender.mjs && esbuild api/server.ts --bundle --platform=node --format=esm --packages=external --sourcemap --outfile=dist/server.js && node scripts/write-ops-status.mjs",
     "start": "node dist/server.js",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
@@ -23,7 +23,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "verify": "npm run typecheck && npm run lint && npm run test",
-    "check": "npm run lint && npm run test && npm run build"
+    "check": "npm run lint && npm run test && npm run build",
+    "test:browser": "node scripts/browser-smoke.cjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

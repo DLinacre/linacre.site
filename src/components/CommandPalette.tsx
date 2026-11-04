@@ -95,7 +95,7 @@ export default function CommandPalette({
         window.location.href = '/games';
         onClose();
       },
-      meta: 'Tabulous Games — 77 verified instant-play games, zero installs',
+      meta: 'Tabulous Games — browse external game links',
     },
     {
       id: 'nav-music-videos',
