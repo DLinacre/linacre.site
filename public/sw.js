@@ -1,7 +1,6 @@
 // linacre.site service worker
-// v17 — fixed absolute /games/assets/ paths for Tabulous Games cover art.
-// Purges any old v14/v15/v16 cached assets on activation.
-var CACHE = 'linacre-v17';
+// Versioned site cache. Do not delete caches belonging to other applications.
+var CACHE = 'linacre-v18';
 var OFFLINE_URL = 'offline.html';
 var URLS = [
   '.',
@@ -58,7 +57,7 @@ self.addEventListener('activate', function (e) {
         return Promise.all(
           keys
             .filter(function (k) {
-              return k !== CACHE;
+              return k.indexOf('linacre-v') === 0 && k !== CACHE;
             })
             .map(function (k) {
               return caches.delete(k);
@@ -84,15 +83,19 @@ self.addEventListener('fetch', function (e) {
     e.respondWith(
       fetch(e.request)
         .then(function (r) {
-          var copy = r.clone();
-          caches.open(CACHE).then(function (cache) {
-            cache.put(e.request, copy);
-          });
+          if (r.ok) {
+            var copy = r.clone();
+            caches.open(CACHE).then(function (cache) {
+              return cache.put(e.request, copy);
+            });
+          }
           return r;
         })
         .catch(function () {
           return caches.match(e.request).then(function (r) {
-            return r || caches.match('index.html') || caches.match(OFFLINE_URL);
+            return r || caches.match('index.html').then(function (index) {
+              return index || caches.match(OFFLINE_URL);
+            });
           });
         }),
     );
@@ -119,7 +122,7 @@ self.addEventListener('fetch', function (e) {
         })
         .catch(function () {
           // Last-resort offline fallback for lost same-origin GETs
-          return caches.match(OFFLINE_URL);
+          return Response.error();
         });
     }),
   );

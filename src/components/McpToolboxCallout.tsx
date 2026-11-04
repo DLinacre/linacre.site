@@ -75,7 +75,7 @@ export default function McpToolboxCallout({ blurb, className = '' }: McpToolboxC
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-1 max-w-2xl">
             {blurb ||
-              'The Linacre Tool Box ships as a Model Context Protocol server — the same private, offline utilities, callable by Claude, Cursor or any MCP client. Nothing you pass in ever leaves your machine.'}
+              'The Linacre Tool Box ships as a local Model Context Protocol server for offline utilities. Your AI client or model provider may process information you share with it.'}
           </p>
         </div>
       </div>

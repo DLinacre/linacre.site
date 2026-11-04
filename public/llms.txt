@@ -19,7 +19,7 @@
 - /lab — Interactive AI model sandbox
 - /identity — Brand asset exporter (logos, banners, social cards)
 - /about — Detailed bio, skills and changelog
-- /contact — Enquiry form (replies within 12 hours)
+- /contact — Enquiry form
 
 ## Notable Projects
 - Whole-Home Ad Blocker — one-click Windows installer for network-wide ad blocking (AdGuard Home).

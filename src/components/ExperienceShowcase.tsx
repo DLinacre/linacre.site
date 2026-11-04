@@ -30,10 +30,10 @@ const DESTINATIONS: DestinationItem[] = [
     id: 'dest-games',
     tab: 'games',
     title: 'Tabulous Games Vault',
-    kicker: 'INSTANT-PLAY ARCADE',
-    metric: '77 Verified Games',
+    kicker: 'GAME DIRECTORY',
+    metric: 'Browser game links',
     description:
-      'Half-Life, Quake III, Mario 64, Doom, strategy and retro classics running natively in WebAssembly with zero file downloads.',
+      'Browse a directory of browser games and external hosts. Availability and requirements vary by game.',
     accent: '#38bdf8',
     icon: Gamepad2,
     artworkType: 'games',
@@ -131,8 +131,8 @@ function DestinationArtwork({ type }: { type: DestinationItem['artworkType'] }) 
             stroke="#38bdf8"
             strokeWidth="1.4"
           />
-          <polyline
-            points="124,38 160,48 196,38 M160,16 160,48 182,74 M160,48 138,74"
+          <path
+            d="M124,38 L160,48 L196,38 M160,16 L160,48 L182,74 M160,48 L138,74"
             fill="none"
             stroke="#8fd6ff"
             strokeWidth="0.9"

@@ -1,5 +1,11 @@
 # Master Project Improvement Roadmap — linacre.site
 
+> **2026-11-04 status note:** The following is historical planning, not a verified
+> current inventory, delivery commitment, playability guarantee, or instruction
+> to push directly to `main`. Revalidate links, project status and ownership
+> before presenting them as facts. See [AUDIT.md](AUDIT.md) and [README.md](README.md)
+> for current verification, build and deployment guidance.
+
 > **Authoritative Catalogue & Portfolio Upgrade Matrix**
 > Covers all 24 projects curated in [`src/data/siteProjects.ts`](file:///C:/Users/David/.gemini/antigravity/scratch/linacre.site/src/data/siteProjects.ts).
 > Operational goal: Elevate each project sequentially with **at least 10 distinct, production-grade improvements**, 100% passing test suites, green production builds, direct `main` branch sync, 0 open pull requests, and real-time metadata updates on `linacre.site`.

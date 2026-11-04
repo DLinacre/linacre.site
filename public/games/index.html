@@ -4,7 +4,7 @@
   <base href="/games/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabulous Games — Browser games that actually run</title>
+  <title>Tabulous Games — Explore browser games</title>
   <meta name="description" content="A hand-picked library of browser game ports and fan remakes that actually run in a tab — racing, shooters, strategy, survivors-likes and retro classics. Every link tested before it is listed. No installs, no ads.">
   <meta name="theme-color" content="#07080b">
   <link rel="icon" href="/games/assets/brand/favicon.svg" type="image/svg+xml">
@@ -16,13 +16,13 @@
   <meta property="og:url" content="https://www.linacre.site/games/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tabulous Games">
-  <meta property="og:title" content="Tabulous Games — Browser games that actually run">
+  <meta property="og:title" content="Tabulous Games — Explore browser games">
   <meta property="og:description" content="Hand-picked browser game ports and fan remakes that run in a tab. Every link tested before it is listed. No installs, no ads.">
   <meta property="og:image" content="https://www.linacre.site/games/assets/brand/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tabulous Games — Browser games that actually run">
+  <meta name="twitter:title" content="Tabulous Games — Explore browser games">
   <meta name="twitter:description" content="Hand-picked browser game ports that run in a tab. No installs, no ads.">
   <meta name="twitter:image" content="https://www.linacre.site/games/assets/brand/og-image.png">
 
@@ -40,7 +40,7 @@
       --line-2: rgba(255, 255, 255, 0.15);
       --text: #eef1f6;
       --muted: #9aa3b2;
-      --dim: #6b7482;
+      --dim: #a3aebd;
       --accent: #8fd6ff;
       --ok: #5ad19a;
       --warn: #e8b25f;
@@ -229,6 +229,7 @@
     .about { padding-top: 40px; padding-bottom: 24px; }
     .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
     .about-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; font-size: 0.84rem; color: var(--muted); }
+    .about-card p a:not(.btn-support) { text-decoration: underline; text-underline-offset: 0.16em; }
     .about-card h2 { font: 800 0.95rem var(--display); color: #fff; margin-bottom: 8px; }
     .about-card ul { list-style: none; display: grid; gap: 6px; }
     .about-card li b { color: var(--text); }
@@ -458,7 +459,7 @@
       </label>
 
       <div class="topbar-right">
-        <span class="status" id="status" title="When every link was last tested"><i id="statusDot"></i><span id="statusText">Links tested</span></span>
+        <span class="status" id="status" title="Link review status"><i id="statusDot"></i><span id="statusText">Link status unavailable</span></span>
         <button class="btn-sound" id="soundToggle" type="button" title="Toggle retro audio FX">🔊 Sound: Off</button>
         <button class="btn-surprise" id="surpriseBtn" type="button" title="Pick a random game (Press R)">🎲 Surprise Me</button>
         <a class="btn-support" href="https://paypal.me/dlinacre16" target="_blank" rel="noopener noreferrer" title="Support Tabulous Games via PayPal">♥ Support</a>
@@ -468,13 +469,13 @@
 
   <main>
     <section class="container intro">
-      <h1>Browser games that actually run.</h1>
-      <p><strong data-count-games>77</strong> hand-picked ports &amp; remakes · hit <strong>Play</strong> and it opens in a new tab · no installs, no ads.</p>
+      <h1>Explore browser games.</h1>
+      <p><strong data-count-games>77</strong> game links across genres. Most open on third-party sites; availability, downloads and controls vary by host.</p>
 
-      <div class="featured-ribbon" aria-label="Featured instant AAA browser hits">
+      <div class="featured-ribbon" aria-label="Featured game searches">
         <div class="featured-ribbon-header">
           <span class="ribbon-glow-dot"></span>
-          <span class="ribbon-title">FEATURED AAA INSTANT HITS</span>
+          <span class="ribbon-title">EXPLORE BY GAME</span>
           <span class="ribbon-subtitle">Click to jump or filter</span>
         </div>
         <div class="featured-ribbon-chips">
@@ -510,7 +511,7 @@
           <div class="segs" role="group" aria-label="Filter by how it plays">
             <!-- STATUS-PILLS:START -->
           <button class="seg active" data-status="all">Any</button>
-          <button class="seg" data-status="instant" title="Instant Play">Instant <span>63</span></button>
+          <button class="seg" data-status="instant" title="Listed as browser games">Browser <span>63</span></button>
           <button class="seg" data-status="multiplayer" title="Multiplayer">Online <span>14</span></button>
 <!-- STATUS-PILLS:END -->
           </div>
@@ -530,8 +531,8 @@
         <article class="game-card" id="game-nfs-most-wanted-web" data-id="nfs-most-wanted-web" data-category="sports" data-status="instant" data-platform="WebGPU" data-title="need for speed: most wanted — web port" data-year="2005" data-tags="need for speed: most wanted — web port nfs most wanted need for speed racing most wanted webgpu webassembly ea black box fan port sports &amp; arcade ea black box / dezm0n pc recompilation / webassembly / webgpu nfs most wanted (2005) need for speed: most wanted 2005 new tab games instant play browser game webgpu">
           <a class="cover" href="https://dezm0n.itch.io/nfs-most-wanted-web-port" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/nfs-most-wanted-web.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgpu">WebGPU</span>
           </a>
@@ -545,7 +546,7 @@
               <p class="card-dev">EA Black Box / dezm0n · PC Recompilation / WebAssembly / WebGPU</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://dezm0n.itch.io/nfs-most-wanted-web-port" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://dezm0n.itch.io/nfs-most-wanted-web-port" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="nfs-most-wanted-web" data-title="Need for Speed: Most Wanted — Web Port" title="Copy direct link to Need for Speed: Most Wanted — Web Port" aria-label="Copy direct link to Need for Speed: Most Wanted — Web Port"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -554,8 +555,8 @@
         <article class="game-card" id="game-sm64-web" data-id="sm64-web" data-category="classic-pc" data-status="instant" data-platform="WebGL" data-title="super mario 64 (pc port webgl)" data-year="1996" data-tags="super mario 64 (pc port webgl) super mario 64 super mario 64 mario platformer nintendo 64 decompilation webgl classic pc &amp; retro ports nintendo / notan127 &amp; sm64pc team sm64pc / webassembly / webgl sm64 super mario 64 web sm64 webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://notan127.github.io/SM64-PC-Port-WebGL/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/sm64-web.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -569,7 +570,7 @@
               <p class="card-dev">Nintendo / notan127 &amp; sm64pc team · sm64pc / WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://notan127.github.io/SM64-PC-Port-WebGL/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://notan127.github.io/SM64-PC-Port-WebGL/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="sm64-web" data-title="Super Mario 64 (PC Port WebGL)" title="Copy direct link to Super Mario 64 (PC Port WebGL)" aria-label="Copy direct link to Super Mario 64 (PC Port WebGL)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -578,8 +579,8 @@
         <article class="game-card" id="game-townscaper" data-id="townscaper" data-category="strategy" data-status="instant" data-platform="WebGL" data-title="townscaper (web edition)" data-year="2021" data-tags="townscaper (web edition) townscaper townscaper procedural relaxing webgl indie strategy &amp; management oskar stålberg / raw fury unity webgl / webassembly new tab games instant play browser game webgl">
           <a class="cover" href="https://oskarstalberg.com/Townscaper/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/townscaper.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -593,7 +594,7 @@
               <p class="card-dev">Oskar Stålberg / Raw Fury · Unity WebGL / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://oskarstalberg.com/Townscaper/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://oskarstalberg.com/Townscaper/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="townscaper" data-title="Townscaper (Web Edition)" title="Copy direct link to Townscaper (Web Edition)" aria-label="Copy direct link to Townscaper (Web Edition)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -602,8 +603,8 @@
         <article class="game-card" id="game-celeste-classic" data-id="celeste-classic" data-category="classic-pc" data-status="instant" data-platform="Wasm" data-title="celeste classic (pico-8)" data-year="2015" data-tags="celeste classic (pico-8) celeste classic celeste platformer pico-8 classic indie classic pc &amp; retro ports maddy thorson &amp; noel berry pico-8 / webassembly new tab games instant play browser game wasm">
           <a class="cover" href="https://maddymakesgamesinc.itch.io/celesteclassic" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/celeste-classic.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -617,7 +618,7 @@
               <p class="card-dev">Maddy Thorson &amp; Noel Berry · PICO-8 / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://maddymakesgamesinc.itch.io/celesteclassic" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://maddymakesgamesinc.itch.io/celesteclassic" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="celeste-classic" data-title="Celeste Classic (PICO-8)" title="Copy direct link to Celeste Classic (PICO-8)" aria-label="Copy direct link to Celeste Classic (PICO-8)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -626,8 +627,8 @@
         <article class="game-card" id="game-legend-of-legaia" data-id="legend-of-legaia" data-category="classic-pc" data-status="instant" data-platform="WebGL" data-title="legend of legaia (web recompilation)" data-year="1998" data-tags="legend of legaia (web recompilation) legend of legaia legend of legaia ps1 jrpg recompilation webassembly classic pc &amp; retro ports contrail / prokion / andrew altimit ps1 recompilation / webgl / webassembly new tab games instant play browser game webgl">
           <a class="cover" href="https://andrewaltimit.github.io/legend-of-legaia-re/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/legend-of-legaia.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -641,7 +642,7 @@
               <p class="card-dev">Contrail / Prokion / Andrew Altimit · PS1 Recompilation / WebGL / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://andrewaltimit.github.io/legend-of-legaia-re/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://andrewaltimit.github.io/legend-of-legaia-re/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="legend-of-legaia" data-title="Legend of Legaia (Web Recompilation)" title="Copy direct link to Legend of Legaia (Web Recompilation)" aria-label="Copy direct link to Legend of Legaia (Web Recompilation)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -650,8 +651,8 @@
         <article class="game-card" id="game-re-after-burner" data-id="re-after-burner" data-category="sports" data-status="instant" data-platform="WebGL" data-title="after burner ii (html5 arcade port)" data-year="1987" data-tags="after burner ii (html5 arcade port) after burner ii after burner sega arcade flight combat retro sports &amp; arcade sega / melonjs team melonjs / html5 canvas / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://melonjs.itch.io/after-burner" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/re-after-burner.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -665,7 +666,7 @@
               <p class="card-dev">Sega / melonJS team · melonJS / HTML5 Canvas / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://melonjs.itch.io/after-burner" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://melonjs.itch.io/after-burner" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="re-after-burner" data-title="After Burner II (HTML5 Arcade Port)" title="Copy direct link to After Burner II (HTML5 Arcade Port)" aria-label="Copy direct link to After Burner II (HTML5 Arcade Port)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -674,8 +675,8 @@
         <article class="game-card" id="game-web-dashers" data-id="web-dashers" data-category="sports" data-status="instant" data-platform="WebGL" data-title="web dashers (geometry rhythm platformer)" data-year="2024" data-tags="web dashers (geometry rhythm platformer) web dashers geometry dash rhythm platformer music arcade sports &amp; arcade web dashers team html5 canvas / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://web-dashers.github.io/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/web-dashers.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -689,7 +690,7 @@
               <p class="card-dev">Web Dashers Team · HTML5 Canvas / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://web-dashers.github.io/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://web-dashers.github.io/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="web-dashers" data-title="Web Dashers (Geometry Rhythm Platformer)" title="Copy direct link to Web Dashers (Geometry Rhythm Platformer)" aria-label="Copy direct link to Web Dashers (Geometry Rhythm Platformer)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -698,8 +699,8 @@
         <article class="game-card" id="game-web-mystery-dungeon" data-id="web-mystery-dungeon" data-category="strategy" data-status="instant" data-platform="HTML5" data-title="pokémon mystery dungeon: web engine" data-year="2005" data-tags="pokémon mystery dungeon: web engine pokémon mystery dungeon pokemon mystery dungeon roguelike gba rpg strategy &amp; management frequentgamer / chunsoft html5 canvas / webaudio new tab games instant play browser game html5">
           <a class="cover" href="https://frequentgamer.itch.io/pmdweb" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/web-mystery-dungeon.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--html5">HTML5</span>
           </a>
@@ -713,7 +714,7 @@
               <p class="card-dev">FrequentGamer / Chunsoft · HTML5 Canvas / WebAudio</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://frequentgamer.itch.io/pmdweb" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://frequentgamer.itch.io/pmdweb" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="web-mystery-dungeon" data-title="Pokémon Mystery Dungeon: Web Engine" title="Copy direct link to Pokémon Mystery Dungeon: Web Engine" aria-label="Copy direct link to Pokémon Mystery Dungeon: Web Engine"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -722,8 +723,8 @@
         <article class="game-card" id="game-hege-mania" data-id="hege-mania" data-category="survivors" data-status="instant" data-platform="WebGL" data-title="hege mania (browser bullet heaven)" data-year="2024" data-tags="hege mania (browser bullet heaven) hege mania survivors bullet heaven roguelite action browser bullet heaven &amp; survivors hege studios html5 canvas / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://hegemania.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/hege-mania.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -737,7 +738,7 @@
               <p class="card-dev">Hege Studios · HTML5 Canvas / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://hegemania.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://hegemania.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="hege-mania" data-title="Hege Mania (Browser Bullet Heaven)" title="Copy direct link to Hege Mania (Browser Bullet Heaven)" aria-label="Copy direct link to Hege Mania (Browser Bullet Heaven)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -746,8 +747,8 @@
         <article class="game-card" id="game-apex-gp-26" data-id="apex-gp-26" data-category="sports" data-status="instant" data-platform="WebGPU" data-title="apex gp 26 (3d formula racer)" data-year="2024" data-tags="apex gp 26 (3d formula racer) apex gp 26 racing formula 1 webgpu 3d simulation sports &amp; arcade kfplay webgpu / webgl / three.js new tab games instant play browser game webgpu">
           <a class="cover" href="https://kfplay.itch.io/apex-gp-26" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/apex-gp-26.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgpu">WebGPU</span>
           </a>
@@ -761,7 +762,7 @@
               <p class="card-dev">KFPlay · WebGPU / WebGL / Three.js</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://kfplay.itch.io/apex-gp-26" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://kfplay.itch.io/apex-gp-26" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="apex-gp-26" data-title="APEX GP 26 (3D Formula Racer)" title="Copy direct link to APEX GP 26 (3D Formula Racer)" aria-label="Copy direct link to APEX GP 26 (3D Formula Racer)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -770,8 +771,8 @@
         <article class="game-card" id="game-crosscode-web" data-id="crosscode-web" data-category="classic-pc" data-status="instant" data-platform="HTML5" data-title="crosscode (html5 action-rpg)" data-year="2018" data-tags="crosscode (html5 action-rpg) crosscode demo action rpg retro html5 indie masterpiece classic pc &amp; retro ports radical fish games impactjs / html5 canvas new tab games instant play browser game html5">
           <a class="cover" href="https://www.cross-code.com/en/start" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/crosscode-web.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--html5">HTML5</span>
           </a>
@@ -785,7 +786,7 @@
               <p class="card-dev">Radical Fish Games · ImpactJS / HTML5 Canvas</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://www.cross-code.com/en/start" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://www.cross-code.com/en/start" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="crosscode-web" data-title="CrossCode (HTML5 Action-RPG)" title="Copy direct link to CrossCode (HTML5 Action-RPG)" aria-label="Copy direct link to CrossCode (HTML5 Action-RPG)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -794,7 +795,7 @@
         <article class="game-card" id="game-venge-io" data-id="venge-io" data-category="shooters" data-status="multiplayer" data-platform="WebGL" data-title="venge.io (tactical 3d hero shooter)" data-year="2020" data-tags="venge.io (tactical 3d hero shooter) venge.io fps tactical hero shooter playcanvas multiplayer shooters &amp; fps onrush studio playcanvas / webgl engine new tab games instant play browser game webgl">
           <a class="cover" href="https://venge.io/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/venge-io.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
@@ -809,7 +810,7 @@
               <p class="card-dev">OnRush Studio · PlayCanvas / WebGL Engine</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://venge.io/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://venge.io/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="venge-io" data-title="Venge.io (Tactical 3D Hero Shooter)" title="Copy direct link to Venge.io (Tactical 3D Hero Shooter)" aria-label="Copy direct link to Venge.io (Tactical 3D Hero Shooter)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -818,7 +819,7 @@
         <article class="game-card" id="game-shell-shockers" data-id="shell-shockers" data-category="shooters" data-status="multiplayer" data-platform="WebGL" data-title="shell shockers (3d egg battle fps)" data-year="2017" data-tags="shell shockers (3d egg battle fps) shell shockers fps multiplayer arena shooter babylon.js funny shooters &amp; fps blue wizard digital babylon.js / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://shellshock.io/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/shell-shockers.webp" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
@@ -833,7 +834,7 @@
               <p class="card-dev">Blue Wizard Digital · Babylon.js / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://shellshock.io/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://shellshock.io/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="shell-shockers" data-title="Shell Shockers (3D Egg Battle FPS)" title="Copy direct link to Shell Shockers (3D Egg Battle FPS)" aria-label="Copy direct link to Shell Shockers (3D Egg Battle FPS)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -842,7 +843,7 @@
         <article class="game-card" id="game-smash-karts" data-id="smash-karts" data-category="sports" data-status="multiplayer" data-platform="WebGL" data-title="smash karts (3d kart battle arena)" data-year="2020" data-tags="smash karts (3d kart battle arena) smash karts kart racing battle arena multiplayer arcade sports &amp; arcade tall team unity webgl / 3d engine new tab games instant play browser game webgl">
           <a class="cover" href="https://smashkarts.io/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/smash-karts.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
@@ -857,7 +858,7 @@
               <p class="card-dev">Tall Team · Unity WebGL / 3D Engine</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://smashkarts.io/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://smashkarts.io/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="smash-karts" data-title="Smash Karts (3D Kart Battle Arena)" title="Copy direct link to Smash Karts (3D Kart Battle Arena)" aria-label="Copy direct link to Smash Karts (3D Kart Battle Arena)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -866,7 +867,7 @@
         <article class="game-card" id="game-krunker" data-id="krunker" data-category="shooters" data-status="multiplayer" data-platform="WebGL" data-title="krunker.io (3d multiplayer fps)" data-year="2018" data-tags="krunker.io (3d multiplayer fps) krunker.io fps multiplayer fast-paced competitive webgl shooters &amp; fps yendis entertainment webgl / custom 3d engine new tab games instant play browser game webgl">
           <a class="cover" href="https://krunker.io/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/krunker.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
@@ -881,7 +882,7 @@
               <p class="card-dev">Yendis Entertainment · WebGL / Custom 3D Engine</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://krunker.io/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://krunker.io/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="krunker" data-title="Krunker.io (3D Multiplayer FPS)" title="Copy direct link to Krunker.io (3D Multiplayer FPS)" aria-label="Copy direct link to Krunker.io (3D Multiplayer FPS)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -890,7 +891,7 @@
         <article class="game-card" id="game-nfs-underground-2-web" data-id="nfs-underground-2-web" data-category="sports" data-status="multiplayer" data-platform="WebGPU" data-title="need for speed: underground 2 (web)" data-year="2004" data-tags="need for speed: underground 2 (web) nfs underground 2 need for speed nfsu2 racing street racing open world webgpu multiplayer sports &amp; arcade ea black box / underground 2 revived pc recompilation / webgpu nfsu2 nfs underground 2 underground 2 revived new tab games instant play browser game webgpu">
           <a class="cover" href="https://nfsu2.xyz/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/nfs-underground-2-web.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgpu">WebGPU</span>
@@ -905,7 +906,7 @@
               <p class="card-dev">EA Black Box / Underground 2 Revived · PC Recompilation / WebGPU</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://nfsu2.xyz/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://nfsu2.xyz/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="nfs-underground-2-web" data-title="Need for Speed: Underground 2 (Web)" title="Copy direct link to Need for Speed: Underground 2 (Web)" aria-label="Copy direct link to Need for Speed: Underground 2 (Web)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -914,7 +915,7 @@
         <article class="game-card" id="game-burnout-3-web" data-id="burnout-3-web" data-category="sports" data-status="multiplayer" data-platform="WebGPU" data-title="burnout 3: takedown (web preview)" data-year="2004" data-tags="burnout 3: takedown (web preview) burnout 3 web burnout racing criterion webgpu webassembly multiplayer preview sports &amp; arcade criterion games / slayoner ps2 web recomp / webassembly / webgpu burnout 3 web burnout 3: takedown new tab games instant play browser game webgpu">
           <a class="cover" href="https://burnout3.online/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/burnout-3-web.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgpu">WebGPU</span>
@@ -929,7 +930,7 @@
               <p class="card-dev">Criterion Games / Slayoner · PS2 Web Recomp / WebAssembly / WebGPU</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://burnout3.online/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://burnout3.online/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="burnout-3-web" data-title="Burnout 3: Takedown (Web Preview)" title="Copy direct link to Burnout 3: Takedown (Web Preview)" aria-label="Copy direct link to Burnout 3: Takedown (Web Preview)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -938,7 +939,7 @@
         <article class="game-card" id="game-midnight-club-3-web" data-id="midnight-club-3-web" data-category="sports" data-status="multiplayer" data-platform="WebGL" data-title="midnight club 3: dub edition (web)" data-year="2005" data-tags="midnight club 3: dub edition (web) midnight club 3 midnight club racing rockstar psp webassembly webgl multiplayer sports &amp; arcade rockstar san diego / fan port psp web recomp / webassembly / webgl mc3 dub edition midnight club 3 midnight club 3 dub edition new tab games instant play browser game webgl">
           <a class="cover" href="https://midnighhtclub3.online/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/midnight-club-3-web.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
@@ -953,7 +954,7 @@
               <p class="card-dev">Rockstar San Diego / Fan Port · PSP Web Recomp / WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://midnighhtclub3.online/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://midnighhtclub3.online/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="midnight-club-3-web" data-title="Midnight Club 3: DUB Edition (Web)" title="Copy direct link to Midnight Club 3: DUB Edition (Web)" aria-label="Copy direct link to Midnight Club 3: DUB Edition (Web)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -962,7 +963,7 @@
         <article class="game-card" id="game-resident-evil-outbreak-web" data-id="resident-evil-outbreak-web" data-category="zombies" data-status="multiplayer" data-platform="WebGPU" data-title="resident evil outbreak &amp; file #2 (web)" data-year="2003" data-tags="resident evil outbreak &amp; file #2 (web) re outbreak web resident evil outbreak survival horror zombies co-op webassembly webgpu zombies &amp; co-op capcom / independent web project webassembly / webgpu browser client resident evil outbreak file #1 resident evil outbreak file #2 outbreakweb new tab games instant play browser game webgpu">
           <a class="cover" href="https://outbreakweb.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/resident-evil-outbreak-web.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgpu">WebGPU</span>
@@ -977,7 +978,7 @@
               <p class="card-dev">Capcom / Independent Web Project · WebAssembly / WebGPU Browser Client</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://outbreakweb.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://outbreakweb.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="resident-evil-outbreak-web" data-title="Resident Evil Outbreak &amp; File #2 (Web)" title="Copy direct link to Resident Evil Outbreak &amp; File #2 (Web)" aria-label="Copy direct link to Resident Evil Outbreak &amp; File #2 (Web)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -986,7 +987,7 @@
         <article class="game-card" id="game-starcraft-brood-war-web" data-id="starcraft-brood-war-web" data-category="strategy" data-status="multiplayer" data-platform="Wasm" data-title="starcraft: brood war (openbw web)" data-year="1998" data-tags="starcraft: brood war (openbw web) starcraft: brood war starcraft starcraft 1 brood war rts blizzard openbw webassembly online strategy &amp; sim blizzard entertainment / openbw openbw / webassembly starcraft 1 starcraft bw brood war openbw new tab games instant play browser game wasm">
           <a class="cover" href="https://playscbw.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/starcraft-brood-war-web.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
@@ -1001,7 +1002,7 @@
               <p class="card-dev">Blizzard Entertainment / OpenBW · OpenBW / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://playscbw.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://playscbw.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="starcraft-brood-war-web" data-title="StarCraft: Brood War (OpenBW Web)" title="Copy direct link to StarCraft: Brood War (OpenBW Web)" aria-label="Copy direct link to StarCraft: Brood War (OpenBW Web)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1010,8 +1011,8 @@
         <article class="game-card" id="game-azeroth-survivors" data-id="azeroth-survivors" data-category="survivors" data-status="instant" data-platform="WebGPU" data-title="azeroth survivors (world of warcraft survivors)" data-year="2026" data-tags="azeroth survivors (world of warcraft survivors) azeroth survivors survivors world of warcraft roguelite webgpu fan project survivors &amp; roguelite aethus (fan project) webgpu / rust + bevy wasm world of warcraft survivors wow survivors new tab games instant play browser game webgpu">
           <a class="cover" href="https://wow.aethus.pl/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/azeroth-survivors.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgpu">WebGPU</span>
           </a>
@@ -1025,7 +1026,7 @@
               <p class="card-dev">Aethus (fan project) · WebGPU / Rust + Bevy WASM</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wow.aethus.pl/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wow.aethus.pl/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="azeroth-survivors" data-title="Azeroth Survivors (World of Warcraft Survivors)" title="Copy direct link to Azeroth Survivors (World of Warcraft Survivors)" aria-label="Copy direct link to Azeroth Survivors (World of Warcraft Survivors)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1034,8 +1035,8 @@
         <article class="game-card" id="game-diablo-survivors-spawn" data-id="diablo-survivors-spawn" data-category="survivors" data-status="instant" data-platform="WebGL" data-title="diablo survivors (3d multiplayer)" data-year="2026" data-tags="diablo survivors (3d multiplayer) diablo survivors survivors diablo action rpg 3d multiplayer survivors &amp; roguelite izkimar / spawn webgl / spawn engine diablo survivors v1699 new tab games instant play browser game webgl">
           <a class="cover" href="https://www.spawn.co/@izkimar/diablo-survivors" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/diablo-survivors-spawn.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1049,7 +1050,7 @@
               <p class="card-dev">izkimar / Spawn · WebGL / Spawn Engine</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://www.spawn.co/@izkimar/diablo-survivors" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://www.spawn.co/@izkimar/diablo-survivors" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="diablo-survivors-spawn" data-title="Diablo Survivors (3D Multiplayer)" title="Copy direct link to Diablo Survivors (3D Multiplayer)" aria-label="Copy direct link to Diablo Survivors (3D Multiplayer)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1058,8 +1059,8 @@
         <article class="game-card" id="game-pokebonk" data-id="pokebonk" data-category="survivors" data-status="instant" data-platform="WebGL" data-title="pokébonk (3d pokémon survivors)" data-year="2026" data-tags="pokébonk (3d pokémon survivors) pokébonk survivors pokémon 3d roguelite fan project survivors &amp; roguelite charcher webgl / 3d megabonk-style new tab games instant play browser game webgl">
           <a class="cover" href="https://pokebonk.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/pokebonk.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1073,7 +1074,7 @@
               <p class="card-dev">Charcher · WebGL / 3D Megabonk-style</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://pokebonk.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://pokebonk.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="pokebonk" data-title="PokéBonk (3D Pokémon Survivors)" title="Copy direct link to PokéBonk (3D Pokémon Survivors)" aria-label="Copy direct link to PokéBonk (3D Pokémon Survivors)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1082,8 +1083,8 @@
         <article class="game-card" id="game-pokesurvivor" data-id="pokesurvivor" data-category="survivors" data-status="instant" data-platform="WebGL" data-title="pokésurvivor (966 pokémon)" data-year="2026" data-tags="pokésurvivor (966 pokémon) pokésurvivor survivors pokémon 2d co-op fan project survivors &amp; roguelite jpter78 html5 canvas / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://pokesurvivor.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/pokesurvivor.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1097,7 +1098,7 @@
               <p class="card-dev">JPTER78 · HTML5 Canvas / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://pokesurvivor.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://pokesurvivor.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="pokesurvivor" data-title="PokéSurvivor (966 Pokémon)" title="Copy direct link to PokéSurvivor (966 Pokémon)" aria-label="Copy direct link to PokéSurvivor (966 Pokémon)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1106,8 +1107,8 @@
         <article class="game-card" id="game-pokemon-survivors" data-id="pokemon-survivors" data-category="survivors" data-status="instant" data-platform="HTML5" data-title="pokémon survivors (bullet heaven)" data-year="2026" data-tags="pokémon survivors (bullet heaven) pokémon survivors survivors pokémon roguelite mega evolution fan project survivors &amp; roguelite pokémon survivors team html5 / canvas new tab games instant play browser game html5">
           <a class="cover" href="https://www.pokemonsurvivors.com/en/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/pokemon-survivors.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--html5">HTML5</span>
           </a>
@@ -1121,7 +1122,7 @@
               <p class="card-dev">Pokémon Survivors team · HTML5 / Canvas</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://www.pokemonsurvivors.com/en/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://www.pokemonsurvivors.com/en/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="pokemon-survivors" data-title="Pokémon Survivors (Bullet Heaven)" title="Copy direct link to Pokémon Survivors (Bullet Heaven)" aria-label="Copy direct link to Pokémon Survivors (Bullet Heaven)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1130,8 +1131,8 @@
         <article class="game-card" id="game-bacon-survivor" data-id="bacon-survivor" data-category="survivors" data-status="instant" data-platform="HTML5" data-title="bacon survivor (pork survivors-like)" data-year="2025" data-tags="bacon survivor (pork survivors-like) bacon survivor survivors pig pork bullet heaven arcade survivors &amp; roguelite snoutup games html5 / canvas pork survivors new tab games instant play browser game html5">
           <a class="cover" href="https://poki.com/en/g/bacon-survivor" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/bacon-survivor.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--html5">HTML5</span>
           </a>
@@ -1145,7 +1146,7 @@
               <p class="card-dev">SnoutUp Games · HTML5 / Canvas</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://poki.com/en/g/bacon-survivor" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://poki.com/en/g/bacon-survivor" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="bacon-survivor" data-title="Bacon Survivor (Pork Survivors-like)" title="Copy direct link to Bacon Survivor (Pork Survivors-like)" aria-label="Copy direct link to Bacon Survivor (Pork Survivors-like)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1154,8 +1155,8 @@
         <article class="game-card" id="game-wasm-doom" data-id="wasm-doom" data-category="classic-pc" data-status="instant" data-platform="Wasm" data-title="doom (wasm doom)" data-year="1993" data-tags="doom (wasm doom) doom web doom id software fps wasm multiplayer classic pc &amp; retro ports cloudflare / id software chocolate doom wasm / websockets doom in the browser new tab games instant play browser game wasm">
           <a class="cover" href="https://silentspacemarine.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/wasm-doom.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1169,7 +1170,7 @@
               <p class="card-dev">Cloudflare / id Software · Chocolate Doom WASM / WebSockets</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://silentspacemarine.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://silentspacemarine.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="wasm-doom" data-title="Doom (Wasm Doom)" title="Copy direct link to Doom (Wasm Doom)" aria-label="Copy direct link to Doom (Wasm Doom)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1178,7 +1179,7 @@
         <article class="game-card" id="game-crash-bash-online" data-id="crash-bash-online" data-category="sports" data-status="multiplayer" data-platform="WebGL" data-title="crash bash online" data-year="2000" data-tags="crash bash online crash bash crash bandicoot party multiplayer ps1 fan port sports &amp; arcade paolo furlan (fan port) webgl / server-side game logic new tab games instant play browser game webgl">
           <a class="cover" href="https://crashbash.app/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/crash-bash-online.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
@@ -1193,7 +1194,7 @@
               <p class="card-dev">Paolo Furlan (fan port) · WebGL / Server-side Game Logic</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://crashbash.app/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://crashbash.app/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="crash-bash-online" data-title="Crash Bash Online" title="Copy direct link to Crash Bash Online" aria-label="Copy direct link to Crash Bash Online"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1202,8 +1203,8 @@
         <article class="game-card" id="game-openlara" data-id="openlara" data-category="classic-pc" data-status="instant" data-platform="WebGL" data-title="tomb raider (openlara)" data-year="1996" data-tags="tomb raider (openlara) openlara tomb raider adventure webgl open source retro classic pc &amp; retro ports xproger / core design webgl / webassembly engine rewrite new tab games instant play browser game webgl">
           <a class="cover" href="http://xproger.info/projects/OpenLara/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/openlara.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1217,7 +1218,7 @@
               <p class="card-dev">XProger / Core Design · WebGL / WebAssembly Engine Rewrite</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="http://xproger.info/projects/OpenLara/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="http://xproger.info/projects/OpenLara/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="openlara" data-title="Tomb Raider (OpenLara)" title="Copy direct link to Tomb Raider (OpenLara)" aria-label="Copy direct link to Tomb Raider (OpenLara)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1226,8 +1227,8 @@
         <article class="game-card" id="game-openttd-online" data-id="openttd-online" data-category="strategy" data-status="instant" data-platform="Wasm" data-title="openttd online (transport tycoon)" data-year="1995" data-tags="openttd online (transport tycoon) openttd online transport tycoon strategy simulation open source wasm strategy &amp; sim openttd / owen gerke webassembly / opengfx new tab games instant play browser game wasm">
           <a class="cover" href="https://openttdonline.com/play/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/openttd-online.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1241,7 +1242,7 @@
               <p class="card-dev">OpenTTD / Owen Gerke · WebAssembly / OpenGFX</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://openttdonline.com/play/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://openttdonline.com/play/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="openttd-online" data-title="OpenTTD Online (Transport Tycoon)" title="Copy direct link to OpenTTD Online (Transport Tycoon)" aria-label="Copy direct link to OpenTTD Online (Transport Tycoon)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1250,8 +1251,8 @@
         <article class="game-card" id="game-road-rash" data-id="road-rash" data-category="sports" data-status="instant" data-platform="WebGL" data-title="road rash (three.js port)" data-year="1996" data-tags="road rash (three.js port) road rash road rash racing three.js retro fan port sports &amp; arcade olucurious / electronic arts three.js / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://roadrash.pages.dev/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/road-rash.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1265,7 +1266,7 @@
               <p class="card-dev">olucurious / Electronic Arts · Three.js / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://roadrash.pages.dev/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://roadrash.pages.dev/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="road-rash" data-title="Road Rash (Three.js Port)" title="Copy direct link to Road Rash (Three.js Port)" aria-label="Copy direct link to Road Rash (Three.js Port)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1274,8 +1275,8 @@
         <article class="game-card" id="game-wipeout" data-id="wipeout" data-category="sports" data-status="instant" data-platform="WebGL" data-title="wipeout (wipeout-rewrite)" data-year="1995" data-tags="wipeout (wipeout-rewrite) wipeout wipeout racing playstation webassembly retro sports &amp; arcade dominic szablewski / psygnosis webassembly / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://phoboslab.org/wipegame/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/wipeout.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1289,7 +1290,7 @@
               <p class="card-dev">Dominic Szablewski / Psygnosis · WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://phoboslab.org/wipegame/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://phoboslab.org/wipegame/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="wipeout" data-title="WipEout (wipeout-rewrite)" title="Copy direct link to WipEout (wipeout-rewrite)" aria-label="Copy direct link to WipEout (wipeout-rewrite)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1298,8 +1299,8 @@
         <article class="game-card" id="game-lego-island" data-id="lego-island" data-category="openworld" data-status="instant" data-platform="Wasm" data-title="lego island (isle.pizza)" data-year="1997" data-tags="lego island (isle.pizza) lego island lego adventure open world decompilation retro open world &amp; action isledecomp / the lego group webassembly / decompilation new tab games instant play browser game wasm">
           <a class="cover" href="https://isle.pizza/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/lego-island.webp" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1313,7 +1314,7 @@
               <p class="card-dev">isledecomp / The LEGO Group · WebAssembly / Decompilation</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://isle.pizza/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://isle.pizza/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="lego-island" data-title="LEGO Island (isle.pizza)" title="Copy direct link to LEGO Island (isle.pizza)" aria-label="Copy direct link to LEGO Island (isle.pizza)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1322,8 +1323,8 @@
         <article class="game-card" id="game-lugaru-web" data-id="lugaru-web" data-category="openworld" data-status="instant" data-platform="Wasm" data-title="lugaru (lugaru-web)" data-year="2005" data-tags="lugaru (lugaru-web) lugaru lugaru action open source webassembly indie open world &amp; action wolfire / loganwalkerdev webassembly / oss lugaru new tab games instant play browser game wasm">
           <a class="cover" href="https://loganwalkerdev.github.io/lugaru-web/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/lugaru-web.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1337,7 +1338,7 @@
               <p class="card-dev">Wolfire / loganwalkerdev · WebAssembly / OSS Lugaru</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://loganwalkerdev.github.io/lugaru-web/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://loganwalkerdev.github.io/lugaru-web/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="lugaru-web" data-title="Lugaru (Lugaru-Web)" title="Copy direct link to Lugaru (Lugaru-Web)" aria-label="Copy direct link to Lugaru (Lugaru-Web)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1346,8 +1347,8 @@
         <article class="game-card" id="game-alley-cat" data-id="alley-cat" data-category="classic-pc" data-status="instant" data-platform="Wasm" data-title="alley cat (alleycat.exe)" data-year="1984" data-tags="alley cat (alleycat.exe) alley cat alley cat dos retro recompilation 1984 classic pc &amp; retro ports bill williams / petarov static recompilation / wasm new tab games instant play browser game wasm">
           <a class="cover" href="https://petarov.github.io/alleycat.exe/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/alley-cat.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1361,7 +1362,7 @@
               <p class="card-dev">Bill Williams / petarov · Static Recompilation / WASM</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://petarov.github.io/alleycat.exe/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://petarov.github.io/alleycat.exe/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="alley-cat" data-title="Alley Cat (alleycat.exe)" title="Copy direct link to Alley Cat (alleycat.exe)" aria-label="Copy direct link to Alley Cat (alleycat.exe)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1370,8 +1371,8 @@
         <article class="game-card" id="game-simcity-classic" data-id="simcity-classic" data-category="strategy" data-status="instant" data-platform="HTML5" data-title="simcity classic (micropolisjs)" data-year="1989" data-tags="simcity classic (micropolisjs) simcity classic simcity city builder strategy open source retro strategy &amp; sim will wright / graeme mccutcheon javascript / html5 canvas new tab games instant play browser game html5">
           <a class="cover" href="https://www.graememcc.co.uk/micropolisJS/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/simcity-classic.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--html5">HTML5</span>
           </a>
@@ -1385,7 +1386,7 @@
               <p class="card-dev">Will Wright / Graeme McCutcheon · JavaScript / HTML5 Canvas</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://www.graememcc.co.uk/micropolisJS/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://www.graememcc.co.uk/micropolisJS/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="simcity-classic" data-title="SimCity Classic (micropolisJS)" title="Copy direct link to SimCity Classic (micropolisJS)" aria-label="Copy direct link to SimCity Classic (micropolisJS)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1394,8 +1395,8 @@
         <article class="game-card" id="game-cricket-07" data-id="cricket-07" data-category="sports" data-status="instant" data-platform="WebGPU" data-title="cricket 07 (browser recompilation)" data-year="2006" data-tags="cricket 07 (browser recompilation) cricket 07 cricket sports ea sports webgpu recompilation sports &amp; arcade dhaiwat pandya / ea sports webassembly / webgpu recompilation new tab games instant play browser game webgpu">
           <a class="cover" href="https://cricket07.dhaiwat.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/cricket-07.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgpu">WebGPU</span>
           </a>
@@ -1409,7 +1410,7 @@
               <p class="card-dev">Dhaiwat Pandya / EA Sports · WebAssembly / WebGPU Recompilation</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://cricket07.dhaiwat.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://cricket07.dhaiwat.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="cricket-07" data-title="Cricket 07 (Browser Recompilation)" title="Copy direct link to Cricket 07 (Browser Recompilation)" aria-label="Copy direct link to Cricket 07 (Browser Recompilation)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1418,8 +1419,8 @@
         <article class="game-card" id="game-cs-surf" data-id="cs-surf" data-category="shooters" data-status="instant" data-platform="WebGL" data-title="counter-strike surf (surfd.net)" data-year="2004" data-tags="counter-strike surf (surfd.net) cs surf surfing source engine speedrun skill smooth 60fps shooters &amp; fps valve / surfd community webgl / source physics engine new tab games instant play browser game webgl">
           <a class="cover" href="https://surfd.net/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/cssurf.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1433,7 +1434,7 @@
               <p class="card-dev">Valve / Surfd Community · WebGL / Source Physics Engine</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://surfd.net/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://surfd.net/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="cs-surf" data-title="Counter-Strike Surf (Surfd.net)" title="Copy direct link to Counter-Strike Surf (Surfd.net)" aria-label="Copy direct link to Counter-Strike Surf (Surfd.net)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1442,8 +1443,8 @@
         <article class="game-card" id="game-halo-ce-web" data-id="halo-ce-web" data-category="shooters" data-status="instant" data-platform="WebGL" data-title="halo: combat evolved (combat lab)" data-year="2001" data-tags="halo: combat evolved (combat lab) halo ce web master chief halo bungie campaign legendary combat lab online shooters &amp; fps bungie / mitchell hynes webgl / webassembly engine new tab games instant play browser game webgl">
           <a class="cover" href="https://mitchellhynes.com/combat-lab/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/haloce.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1457,7 +1458,7 @@
               <p class="card-dev">Bungie / Mitchell Hynes · WebGL / WebAssembly Engine</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://mitchellhynes.com/combat-lab/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://mitchellhynes.com/combat-lab/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="halo-ce-web" data-title="Halo: Combat Evolved (Combat Lab)" title="Copy direct link to Halo: Combat Evolved (Combat Lab)" aria-label="Copy direct link to Halo: Combat Evolved (Combat Lab)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1466,8 +1467,8 @@
         <article class="game-card" id="game-skate-3" data-id="skate-3" data-category="sports" data-status="instant" data-platform="WebGL" data-title="skate 3 (web fan project)" data-year="2010" data-tags="skate 3 (web fan project) skate 3 fan game skating ea physics sandbox bails sports &amp; arcade ea black box / community webgl / canvas physics new tab games instant play browser game webgl">
           <a class="cover" href="https://skate.aaddpp.lol/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/skate3.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1481,7 +1482,7 @@
               <p class="card-dev">EA Black Box / Community · WebGL / Canvas Physics</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://skate.aaddpp.lol/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://skate.aaddpp.lol/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="skate-3" data-title="Skate 3 (Web Fan Project)" title="Copy direct link to Skate 3 (Web Fan Project)" aria-label="Copy direct link to Skate 3 (Web Fan Project)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1490,8 +1491,8 @@
         <article class="game-card" id="game-pes-6" data-id="pes-6" data-category="sports" data-status="instant" data-platform="Wasm" data-title="pro evolution soccer 6 (pes 6 web)" data-year="2006" data-tags="pro evolution soccer 6 (pes 6 web) pes 6 web soccer konami adriano ppsspp multiplayer sports &amp; arcade konami / ppsspp web ppsspp webassembly emulation new tab games instant play browser game wasm">
           <a class="cover" href="https://pes6.optijuegos.net/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/pes6.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1505,7 +1506,7 @@
               <p class="card-dev">Konami / PPSSPP Web · PPSSPP WebAssembly Emulation</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://pes6.optijuegos.net/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://pes6.optijuegos.net/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="pes-6" data-title="Pro Evolution Soccer 6 (PES 6 Web)" title="Copy direct link to Pro Evolution Soccer 6 (PES 6 Web)" aria-label="Copy direct link to Pro Evolution Soccer 6 (PES 6 Web)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1514,8 +1515,8 @@
         <article class="game-card" id="game-gta-vice-city" data-id="gta-vice-city" data-category="openworld" data-status="instant" data-platform="WebGL" data-title="grand theft auto: vice city (revc wasm)" data-year="2002" data-tags="grand theft auto: vice city (revc wasm) gta: vice city rockstar vice city revc 80s open world open world &amp; action rockstar north / revc team revc webassembly / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://joncodeofficial.github.io/gta-vice-city-wasm/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/gtavc.webp" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1529,7 +1530,7 @@
               <p class="card-dev">Rockstar North / reVC Team · reVC WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://joncodeofficial.github.io/gta-vice-city-wasm/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://joncodeofficial.github.io/gta-vice-city-wasm/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="gta-vice-city" data-title="Grand Theft Auto: Vice City (reVC WASM)" title="Copy direct link to Grand Theft Auto: Vice City (reVC WASM)" aria-label="Copy direct link to Grand Theft Auto: Vice City (reVC WASM)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1538,8 +1539,8 @@
         <article class="game-card" id="game-gta-3" data-id="gta-3" data-category="openworld" data-status="instant" data-platform="WebGL" data-title="grand theft auto iii (re3 wasm)" data-year="2001" data-tags="grand theft auto iii (re3 wasm) gta iii web gta liberty city rockstar 3d classic crime open world &amp; action rockstar north / wasm arcade re3 webassembly / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://wasmarcade.com/gta3" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/gta3.webp" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1553,7 +1554,7 @@
               <p class="card-dev">Rockstar North / WASM Arcade · re3 WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wasmarcade.com/gta3" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wasmarcade.com/gta3" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="gta-3" data-title="Grand Theft Auto III (re3 WASM)" title="Copy direct link to Grand Theft Auto III (re3 WASM)" aria-label="Copy direct link to Grand Theft Auto III (re3 WASM)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1562,8 +1563,8 @@
         <article class="game-card" id="game-simpsons-hit-and-run" data-id="simpsons-hit-and-run" data-category="openworld" data-status="instant" data-platform="Wasm" data-title="the simpsons: hit &amp; run (shar wasm)" data-year="2003" data-tags="the simpsons: hit &amp; run (shar wasm) simpsons hit &amp; run simpsons springfield driving humor open world open world &amp; action radical entertainment / vivendi webassembly / cloudflare workers new tab games instant play browser game wasm">
           <a class="cover" href="http://shar-wasm.cjoseph.workers.dev/?skipmovie" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/simpsons.webp" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1577,7 +1578,7 @@
               <p class="card-dev">Radical Entertainment / Vivendi · WebAssembly / Cloudflare Workers</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="http://shar-wasm.cjoseph.workers.dev/?skipmovie" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="http://shar-wasm.cjoseph.workers.dev/?skipmovie" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="simpsons-hit-and-run" data-title="The Simpsons: Hit &amp; Run (SHAR WASM)" title="Copy direct link to The Simpsons: Hit &amp; Run (SHAR WASM)" aria-label="Copy direct link to The Simpsons: Hit &amp; Run (SHAR WASM)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1586,8 +1587,8 @@
         <article class="game-card" id="game-minecraft-wasm" data-id="minecraft-wasm" data-category="openworld" data-status="instant" data-platform="Wasm" data-title="minecraft java 1.8.8 (eaglercraft wasm)" data-year="2011" data-tags="minecraft java 1.8.8 (eaglercraft wasm) minecraft 1.8.8 minecraft eaglercraft building survival multiplayer open world &amp; action mojang / eaglercraft team teavm / webassembly java new tab games instant play browser game wasm">
           <a class="cover" href="https://wasmarcade.com/minecraft" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/minecraft.webp" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1601,7 +1602,7 @@
               <p class="card-dev">Mojang / Eaglercraft Team · TeaVM / WebAssembly Java</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wasmarcade.com/minecraft" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wasmarcade.com/minecraft" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="minecraft-wasm" data-title="Minecraft Java 1.8.8 (Eaglercraft WASM)" title="Copy direct link to Minecraft Java 1.8.8 (Eaglercraft WASM)" aria-label="Copy direct link to Minecraft Java 1.8.8 (Eaglercraft WASM)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1610,7 +1611,7 @@
         <article class="game-card" id="game-quake-1" data-id="quake-1" data-category="classic-pc" data-status="multiplayer" data-platform="WebGL" data-title="quake (quakeworld online)" data-year="1996" data-tags="quake (quakeworld online) quake 1 id software john carmack rocket jump deathmatch pioneer classic pc &amp; retro ports id software / pieter webquake / webgl / websockets new tab games instant play browser game webgl">
           <a class="cover" href="https://q1.pieter.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/q1.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
 
             <span class="badge badge--platform badge--webgl">WebGL</span>
@@ -1625,7 +1626,7 @@
               <p class="card-dev">id Software / Pieter · WebQuake / WebGL / WebSockets</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://q1.pieter.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://q1.pieter.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="quake-1" data-title="Quake (QuakeWorld Online)" title="Copy direct link to Quake (QuakeWorld Online)" aria-label="Copy direct link to Quake (QuakeWorld Online)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1634,7 +1635,7 @@
         <article class="game-card" id="game-quake-2" data-id="quake-2" data-category="classic-pc" data-status="multiplayer" data-platform="WebGL" data-title="quake ii (jsquake ii)" data-year="1997" data-tags="quake ii (jsquake ii) quake 2 id software railgun strogg multiplayer fast fps classic pc &amp; retro ports id software webgl / webassembly netcode new tab games instant play browser game webgl">
           <a class="cover" href="https://q2.pieter.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/q2.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
 
             <span class="badge badge--platform badge--webgl">WebGL</span>
@@ -1649,7 +1650,7 @@
               <p class="card-dev">id Software · WebGL / WebAssembly Netcode</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://q2.pieter.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://q2.pieter.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="quake-2" data-title="Quake II (JSQuake II)" title="Copy direct link to Quake II (JSQuake II)" aria-label="Copy direct link to Quake II (JSQuake II)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1658,7 +1659,7 @@
         <article class="game-card" id="game-quake-3-arena" data-id="quake-3-arena" data-category="classic-pc" data-status="multiplayer" data-platform="WebGL" data-title="quake iii arena (ioquake3 web)" data-year="1999" data-tags="quake iii arena (ioquake3 web) quake iii arena arena fps competitive fast-paced railgun masterpiece classic pc &amp; retro ports id software ioquake3 webassembly / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://q3.pieter.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/q3.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
 
             <span class="badge badge--platform badge--webgl">WebGL</span>
@@ -1673,7 +1674,7 @@
               <p class="card-dev">id Software · ioquake3 WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://q3.pieter.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://q3.pieter.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="quake-3-arena" data-title="Quake III Arena (ioquake3 Web)" title="Copy direct link to Quake III Arena (ioquake3 Web)" aria-label="Copy direct link to Quake III Arena (ioquake3 Web)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1682,7 +1683,7 @@
         <article class="game-card" id="game-rtcw" data-id="rtcw" data-category="classic-pc" data-status="multiplayer" data-platform="WebGL" data-title="return to castle wolfenstein (iortcw web)" data-year="2001" data-tags="return to castle wolfenstein (iortcw web) rtcw web wolfenstein wwii multiplayer classes occult classic pc &amp; retro ports gray matter / id software iortcw webassembly / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://rtcw.pieter.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/rtcw.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge is-multiplayer">Online</span>
 
             <span class="badge badge--platform badge--webgl">WebGL</span>
@@ -1697,7 +1698,7 @@
               <p class="card-dev">Gray Matter / id Software · iortcw WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://rtcw.pieter.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://rtcw.pieter.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="rtcw" data-title="Return to Castle Wolfenstein (iortcw Web)" title="Copy direct link to Return to Castle Wolfenstein (iortcw Web)" aria-label="Copy direct link to Return to Castle Wolfenstein (iortcw Web)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1706,8 +1707,8 @@
         <article class="game-card" id="game-urban-terror" data-id="urban-terror" data-category="shooters" data-status="instant" data-platform="Wasm" data-title="urban terror (ut.pieter.com)" data-year="2007" data-tags="urban terror (ut.pieter.com) urban terror urban terror parkour tactical team survivor quake engine shooters &amp; fps frozensand ioquake3 webassembly new tab games instant play browser game wasm">
           <a class="cover" href="https://ut.pieter.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/urban-terror.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1721,7 +1722,7 @@
               <p class="card-dev">FrozenSand · ioquake3 WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://ut.pieter.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://ut.pieter.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="urban-terror" data-title="Urban Terror (ut.pieter.com)" title="Copy direct link to Urban Terror (ut.pieter.com)" aria-label="Copy direct link to Urban Terror (ut.pieter.com)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1730,8 +1731,8 @@
         <article class="game-card" id="game-half-life-1" data-id="half-life-1" data-category="classic-pc" data-status="instant" data-platform="Wasm" data-title="half-life (pixelsuft webxash)" data-year="1998" data-tags="half-life (pixelsuft webxash) half-life 1 valve gordon freeman black mesa crowbar goty 1998 classic pc &amp; retro ports valve / pixelsuft xash3d fwgs webassembly new tab games instant play browser game wasm">
           <a class="cover" href="https://pixelsuft.github.io/hl/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/hl1.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1745,7 +1746,7 @@
               <p class="card-dev">Valve / Pixelsuft · Xash3D FWGS WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://pixelsuft.github.io/hl/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://pixelsuft.github.io/hl/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="half-life-1" data-title="Half-Life (Pixelsuft WebXash)" title="Copy direct link to Half-Life (Pixelsuft WebXash)" aria-label="Copy direct link to Half-Life (Pixelsuft WebXash)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1754,8 +1755,8 @@
         <article class="game-card" id="game-diablo-1" data-id="diablo-1" data-category="classic-pc" data-status="instant" data-platform="Wasm" data-title="diablo 1 (diabloweb / devilutionx)" data-year="1996" data-tags="diablo 1 (diabloweb / devilutionx) diablo 1 web blizzard tristram loot dungeon crawler arpg legend classic pc &amp; retro ports blizzard north / devilutionx team devilutionx webassembly new tab games instant play browser game wasm">
           <a class="cover" href="https://johnimril.github.io/diablo_web/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/diablo.png" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
 
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1769,7 +1770,7 @@
               <p class="card-dev">Blizzard North / DevilutionX Team · DevilutionX WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://johnimril.github.io/diablo_web/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://johnimril.github.io/diablo_web/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="diablo-1" data-title="Diablo 1 (DiabloWeb / DevilutionX)" title="Copy direct link to Diablo 1 (DiabloWeb / DevilutionX)" aria-label="Copy direct link to Diablo 1 (DiabloWeb / DevilutionX)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1778,8 +1779,8 @@
         <article class="game-card" id="game-lethal-company-web" data-id="lethal-company-web" data-category="zombies" data-status="instant" data-platform="WebGL" data-title="lethal company (web port)" data-year="2023" data-tags="lethal company (web port) lethal company lethal company horror co-op survival webassembly unity aaa zombies &amp; co-op zeekerss / webassembly team unity webassembly / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1793,7 +1794,7 @@
               <p class="card-dev">Zeekerss / WebAssembly Team · Unity WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="lethal-company-web" data-title="Lethal Company (Web Port)" title="Copy direct link to Lethal Company (Web Port)" aria-label="Copy direct link to Lethal Company (Web Port)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1802,8 +1803,8 @@
         <article class="game-card" id="game-stardew-valley-web" data-id="stardew-valley-web" data-category="strategy" data-status="instant" data-platform="Wasm" data-title="stardew valley (web edition)" data-year="2016" data-tags="stardew valley (web edition) stardew valley stardew valley farming rpg relaxing indie webassembly strategy &amp; sim concernedape / webassembly team monogame / webassembly new tab games instant play browser game wasm">
           <a class="cover" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1817,7 +1818,7 @@
               <p class="card-dev">ConcernedApe / WebAssembly Team · MonoGame / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="stardew-valley-web" data-title="Stardew Valley (Web Edition)" title="Copy direct link to Stardew Valley (Web Edition)" aria-label="Copy direct link to Stardew Valley (Web Edition)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1826,8 +1827,8 @@
         <article class="game-card" id="game-cuphead-web" data-id="cuphead-web" data-category="sports" data-status="instant" data-platform="WebGL" data-title="cuphead: don&#39;t deal with the devil (web port)" data-year="2017" data-tags="cuphead: don&#39;t deal with the devil (web port) cuphead cuphead run and gun arcade action boss rush webassembly sports &amp; arcade studio mdhr / webassembly team unity / webassembly / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1841,7 +1842,7 @@
               <p class="card-dev">Studio MDHR / WebAssembly Team · Unity / WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="cuphead-web" data-title="Cuphead: Don&#39;t Deal with the Devil (Web Port)" title="Copy direct link to Cuphead: Don&#39;t Deal with the Devil (Web Port)" aria-label="Copy direct link to Cuphead: Don&#39;t Deal with the Devil (Web Port)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1850,8 +1851,8 @@
         <article class="game-card" id="game-chrono-divide" data-id="chrono-divide" data-category="strategy" data-status="instant" data-platform="WebGL" data-title="command &amp; conquer: red alert (chronodivide)" data-year="1996" data-tags="command &amp; conquer: red alert (chronodivide) chronodivide command and conquer red alert rts strategy westwood webgl strategy &amp; sim westwood studios / chronodivide team typescript / webassembly / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://chronodivide.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/covers/chrono-divide.jpg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1865,7 +1866,7 @@
               <p class="card-dev">Westwood Studios / ChronoDivide Team · TypeScript / WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://chronodivide.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://chronodivide.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="chrono-divide" data-title="Command &amp; Conquer: Red Alert (ChronoDivide)" title="Copy direct link to Command &amp; Conquer: Red Alert (ChronoDivide)" aria-label="Copy direct link to Command &amp; Conquer: Red Alert (ChronoDivide)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1874,8 +1875,8 @@
         <article class="game-card" id="game-clustertruck-web" data-id="clustertruck-web" data-category="sports" data-status="instant" data-platform="WebGL" data-title="clustertruck (web edition)" data-year="2016" data-tags="clustertruck (web edition) clustertruck clustertruck parkour physics action landfall sports &amp; arcade landfall games / webassembly team unity / webgl / webassembly new tab games instant play browser game webgl">
           <a class="cover" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -1889,7 +1890,7 @@
               <p class="card-dev">Landfall Games / WebAssembly Team · Unity / WebGL / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="clustertruck-web" data-title="ClusterTruck (Web Edition)" title="Copy direct link to ClusterTruck (Web Edition)" aria-label="Copy direct link to ClusterTruck (Web Edition)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1898,8 +1899,8 @@
         <article class="game-card" id="game-inscryption-web" data-id="inscryption-web" data-category="strategy" data-status="instant" data-platform="Wasm" data-title="inscryption (web port)" data-year="2021" data-tags="inscryption (web port) inscryption inscryption card game roguelike horror indie strategy &amp; sim daniel mullins games / webassembly team unity / webassembly new tab games instant play browser game wasm">
           <a class="cover" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1913,7 +1914,7 @@
               <p class="card-dev">Daniel Mullins Games / WebAssembly Team · Unity / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="inscryption-web" data-title="Inscryption (Web Port)" title="Copy direct link to Inscryption (Web Port)" aria-label="Copy direct link to Inscryption (Web Port)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1922,8 +1923,8 @@
         <article class="game-card" id="game-among-us-web" data-id="among-us-web" data-category="openworld" data-status="instant" data-platform="Wasm" data-title="among us (community web edition)" data-year="2018" data-tags="among us (community web edition) among us among us multiplayer social deduction space innersloth open world &amp; action innersloth / webassembly team unity / il2cpp / webassembly new tab games instant play browser game wasm">
           <a class="cover" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1937,7 +1938,7 @@
               <p class="card-dev">Innersloth / WebAssembly Team · Unity / IL2CPP / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="among-us-web" data-title="Among Us (Community Web Edition)" title="Copy direct link to Among Us (Community Web Edition)" aria-label="Copy direct link to Among Us (Community Web Edition)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1946,8 +1947,8 @@
         <article class="game-card" id="game-prince-of-persia-html5" data-id="prince-of-persia-html5" data-category="classic-pc" data-status="instant" data-platform="HTML5" data-title="prince of persia (html5)" data-year="1989" data-tags="prince of persia (html5) prince of persia prince of persia platformer retro dos classic pc classic pc &amp; retro ports jordan mechner / oliver klemenz html5 canvas / javascript (princejs) new tab games instant play browser game html5">
           <a class="cover" href="https://princejs.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--html5">HTML5</span>
           </a>
@@ -1961,7 +1962,7 @@
               <p class="card-dev">Jordan Mechner / Oliver Klemenz · HTML5 Canvas / JavaScript (princejs)</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://princejs.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://princejs.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="prince-of-persia-html5" data-title="Prince of Persia (HTML5)" title="Copy direct link to Prince of Persia (HTML5)" aria-label="Copy direct link to Prince of Persia (HTML5)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1970,8 +1971,8 @@
         <article class="game-card" id="game-wolfenstein-3d-web" data-id="wolfenstein-3d-web" data-category="shooters" data-status="instant" data-platform="Wasm" data-title="wolfenstein 3d (html5 / wasm)" data-year="1992" data-tags="wolfenstein 3d (html5 / wasm) wolfenstein 3d wolfenstein 3d id software fps classic pc retro shooters &amp; fps id software / webassembly team raycasting engine / webassembly new tab games instant play browser game wasm">
           <a class="cover" href="https://wolf3d.cx/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -1985,7 +1986,7 @@
               <p class="card-dev">id Software / WebAssembly Team · Raycasting Engine / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wolf3d.cx/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wolf3d.cx/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="wolfenstein-3d-web" data-title="Wolfenstein 3D (HTML5 / Wasm)" title="Copy direct link to Wolfenstein 3D (HTML5 / Wasm)" aria-label="Copy direct link to Wolfenstein 3D (HTML5 / Wasm)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -1994,8 +1995,8 @@
         <article class="game-card" id="game-dune-2-web" data-id="dune-2-web" data-category="strategy" data-status="instant" data-platform="Wasm" data-title="dune ii: the building of a dynasty" data-year="1992" data-tags="dune ii: the building of a dynasty dune ii dune ii westwood rts classic pc sci-fi strategy &amp; sim westwood studios / epicport opendune / webassembly new tab games instant play browser game wasm">
           <a class="cover" href="https://epicport.com/en/dune2" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -2009,7 +2010,7 @@
               <p class="card-dev">Westwood Studios / EpicPort · OpenDUNE / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://epicport.com/en/dune2" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://epicport.com/en/dune2" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="dune-2-web" data-title="Dune II: The Building of a Dynasty" title="Copy direct link to Dune II: The Building of a Dynasty" aria-label="Copy direct link to Dune II: The Building of a Dynasty"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2018,8 +2019,8 @@
         <article class="game-card" id="game-kerbal-space-program-web" data-id="kerbal-space-program-web" data-category="strategy" data-status="instant" data-platform="WebGL" data-title="kerbal space program (web port)" data-year="2015" data-tags="kerbal space program (web port) kerbal space program kerbal space program space simulation physics sandbox strategy &amp; sim squad / webassembly team unity / webassembly / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -2033,7 +2034,7 @@
               <p class="card-dev">Squad / WebAssembly Team · Unity / WebAssembly / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://wasm.rip/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="kerbal-space-program-web" data-title="Kerbal Space Program (Web Port)" title="Copy direct link to Kerbal Space Program (Web Port)" aria-label="Copy direct link to Kerbal Space Program (Web Port)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2042,8 +2043,8 @@
         <article class="game-card" id="game-slow-roads" data-id="slow-roads" data-category="sports" data-status="instant" data-platform="WebGL" data-title="slow roads (endless driving simulator)" data-year="2022" data-tags="slow roads (endless driving simulator) slow roads slow roads driving procedural relaxing three.js webgl sports &amp; arcade anslo / three.js three.js / webgl / web audio new tab games instant play browser game webgl">
           <a class="cover" href="https://slowroads.io/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -2057,7 +2058,7 @@
               <p class="card-dev">Anslo / Three.js · Three.js / WebGL / Web Audio</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://slowroads.io/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://slowroads.io/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="slow-roads" data-title="Slow Roads (Endless Driving Simulator)" title="Copy direct link to Slow Roads (Endless Driving Simulator)" aria-label="Copy direct link to Slow Roads (Endless Driving Simulator)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2066,8 +2067,8 @@
         <article class="game-card" id="game-poly-track" data-id="poly-track" data-category="sports" data-status="instant" data-platform="WebGL" data-title="poly track (3d time-trial racer)" data-year="2023" data-tags="poly track (3d time-trial racer) poly track poly track racing trackmania time trial webgl sports &amp; arcade kodub / three.js webgl / three.js new tab games instant play browser game webgl">
           <a class="cover" href="https://polytrack.io/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -2081,7 +2082,7 @@
               <p class="card-dev">Kodub / Three.js · WebGL / Three.js</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://polytrack.io/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://polytrack.io/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="poly-track" data-title="Poly Track (3D Time-Trial Racer)" title="Copy direct link to Poly Track (3D Time-Trial Racer)" aria-label="Copy direct link to Poly Track (3D Time-Trial Racer)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2090,8 +2091,8 @@
         <article class="game-card" id="game-1v1-lol" data-id="1v1-lol" data-category="shooters" data-status="instant" data-platform="WebGL" data-title="1v1.lol (3d battle royale &amp; builder)" data-year="2019" data-tags="1v1.lol (3d battle royale &amp; builder) 1v1.lol 1v1.lol shooter building battle royale multiplayer shooters &amp; fps justplay.lol unity webgl / webassembly new tab games instant play browser game webgl">
           <a class="cover" href="https://1v1.lol/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -2105,7 +2106,7 @@
               <p class="card-dev">JustPlay.LOL · Unity WebGL / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://1v1.lol/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://1v1.lol/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="1v1-lol" data-title="1v1.LOL (3D Battle Royale &amp; Builder)" title="Copy direct link to 1v1.LOL (3D Battle Royale &amp; Builder)" aria-label="Copy direct link to 1v1.LOL (3D Battle Royale &amp; Builder)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2114,8 +2115,8 @@
         <article class="game-card" id="game-drift-hunters" data-id="drift-hunters" data-category="sports" data-status="instant" data-platform="WebGL" data-title="drift hunters (3d tuning &amp; stunts)" data-year="2017" data-tags="drift hunters (3d tuning &amp; stunts) drift hunters drift hunters drifting cars racing tuning webgl sports &amp; arcade ilya kaminetsky unity webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://drift-hunters.io/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -2129,7 +2130,7 @@
               <p class="card-dev">Ilya Kaminetsky · Unity WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://drift-hunters.io/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://drift-hunters.io/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="drift-hunters" data-title="Drift Hunters (3D Tuning &amp; Stunts)" title="Copy direct link to Drift Hunters (3D Tuning &amp; Stunts)" aria-label="Copy direct link to Drift Hunters (3D Tuning &amp; Stunts)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2138,8 +2139,8 @@
         <article class="game-card" id="game-tetrio" data-id="tetrio" data-category="sports" data-status="instant" data-platform="WebGL" data-title="tetr.io (uncapped competitive tetris)" data-year="2020" data-tags="tetr.io (uncapped competitive tetris) tetr.io tetr.io tetris puzzle esports multiplayer sports &amp; arcade osk / tetr.io team html5 canvas / webgl / websockets new tab games instant play browser game webgl">
           <a class="cover" href="https://tetr.io/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -2153,7 +2154,7 @@
               <p class="card-dev">OSK / Tetr.io Team · HTML5 Canvas / WebGL / WebSockets</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://tetr.io/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://tetr.io/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="tetrio" data-title="TETR.IO (Uncapped Competitive Tetris)" title="Copy direct link to TETR.IO (Uncapped Competitive Tetris)" aria-label="Copy direct link to TETR.IO (Uncapped Competitive Tetris)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2162,8 +2163,8 @@
         <article class="game-card" id="game-srb2-web" data-id="srb2-web" data-category="classic-pc" data-status="instant" data-platform="Wasm" data-title="sonic robo blast 2 (srb2 webassembly)" data-year="2021" data-tags="sonic robo blast 2 (srb2 webassembly) sonic robo blast 2 sonic robo blast 2 sonic doom engine platformer webassembly classic pc &amp; retro ports sonic team junior / karl-police modified doom engine / webassembly new tab games instant play browser game wasm">
           <a class="cover" href="https://karl-police.itch.io/srb2-web" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--wasm">Wasm</span>
           </a>
@@ -2177,7 +2178,7 @@
               <p class="card-dev">Sonic Team Junior / karl-police · Modified Doom Engine / WebAssembly</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://karl-police.itch.io/srb2-web" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://karl-police.itch.io/srb2-web" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="srb2-web" data-title="Sonic Robo Blast 2 (SRB2 WebAssembly)" title="Copy direct link to Sonic Robo Blast 2 (SRB2 WebAssembly)" aria-label="Copy direct link to Sonic Robo Blast 2 (SRB2 WebAssembly)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2186,8 +2187,8 @@
         <article class="game-card" id="game-vampire-survivors-web" data-id="vampire-survivors-web" data-category="survivors" data-status="instant" data-platform="HTML5" data-title="vampire survivors (original web edition)" data-year="2021" data-tags="vampire survivors (original web edition) vampire survivors vampire survivors bullet heaven roguelite survival indie survivors &amp; roguelite poncle phaser / html5 canvas new tab games instant play browser game html5">
           <a class="cover" href="https://poncle.itch.io/vampire-survivors" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--html5">HTML5</span>
           </a>
@@ -2201,7 +2202,7 @@
               <p class="card-dev">poncle · Phaser / HTML5 Canvas</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://poncle.itch.io/vampire-survivors" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://poncle.itch.io/vampire-survivors" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="vampire-survivors-web" data-title="Vampire Survivors (Original Web Edition)" title="Copy direct link to Vampire Survivors (Original Web Edition)" aria-label="Copy direct link to Vampire Survivors (Original Web Edition)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2210,8 +2211,8 @@
         <article class="game-card" id="game-cookie-clicker" data-id="cookie-clicker" data-category="strategy" data-status="instant" data-platform="HTML5" data-title="cookie clicker (original web edition)" data-year="2013" data-tags="cookie clicker (original web edition) cookie clicker cookie clicker idle incremental orteil classic strategy &amp; sim orteil / dashnet javascript / html5 canvas new tab games instant play browser game html5">
           <a class="cover" href="https://orteil.dashnet.org/cookieclicker/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--html5">HTML5</span>
           </a>
@@ -2225,7 +2226,7 @@
               <p class="card-dev">Orteil / DashNet · JavaScript / HTML5 Canvas</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://orteil.dashnet.org/cookieclicker/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://orteil.dashnet.org/cookieclicker/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="cookie-clicker" data-title="Cookie Clicker (Original Web Edition)" title="Copy direct link to Cookie Clicker (Original Web Edition)" aria-label="Copy direct link to Cookie Clicker (Original Web Edition)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2234,8 +2235,8 @@
         <article class="game-card" id="game-geofs-flight-sim" data-id="geofs-flight-sim" data-category="openworld" data-status="instant" data-platform="WebGL" data-title="geofs (global 3d flight simulator)" data-year="2010" data-tags="geofs (global 3d flight simulator) geofs geofs flight simulator aviation cesiumjs webgl open world &amp; action xavier tassin cesiumjs / webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://www.geo-fs.com/geofs.php" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -2249,7 +2250,7 @@
               <p class="card-dev">Xavier Tassin · CesiumJS / WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://www.geo-fs.com/geofs.php" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://www.geo-fs.com/geofs.php" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="geofs-flight-sim" data-title="GeoFS (Global 3D Flight Simulator)" title="Copy direct link to GeoFS (Global 3D Flight Simulator)" aria-label="Copy direct link to GeoFS (Global 3D Flight Simulator)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2258,8 +2259,8 @@
         <article class="game-card" id="game-ev-io" data-id="ev-io" data-category="shooters" data-status="instant" data-platform="WebGL" data-title="ev.io (cyberpunk arena fps)" data-year="2021" data-tags="ev.io (cyberpunk arena fps) ev.io ev.io shooter fps arena cyberpunk webgl shooters &amp; fps addicting games / enthusiast gaming three.js / webgl / websockets new tab games instant play browser game webgl">
           <a class="cover" href="https://ev.io/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -2273,7 +2274,7 @@
               <p class="card-dev">Addicting Games / Enthusiast Gaming · Three.js / WebGL / WebSockets</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://ev.io/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://ev.io/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="ev-io" data-title="Ev.io (Cyberpunk Arena FPS)" title="Copy direct link to Ev.io (Cyberpunk Arena FPS)" aria-label="Copy direct link to Ev.io (Cyberpunk Arena FPS)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2282,8 +2283,8 @@
         <article class="game-card" id="game-spelunky-classic-html5" data-id="spelunky-classic-html5" data-category="classic-pc" data-status="instant" data-platform="HTML5" data-title="spelunky classic (html5)" data-year="2008" data-tags="spelunky classic (html5) spelunky classic spelunky roguelike platformer indie classic pc classic pc &amp; retro ports derek yu / darius kazemi html5 canvas / javascript new tab games instant play browser game html5">
           <a class="cover" href="https://tinysubversions.com/spelunky/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--html5">HTML5</span>
           </a>
@@ -2297,7 +2298,7 @@
               <p class="card-dev">Derek Yu / Darius Kazemi · HTML5 Canvas / JavaScript</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://tinysubversions.com/spelunky/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://tinysubversions.com/spelunky/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="spelunky-classic-html5" data-title="Spelunky Classic (HTML5)" title="Copy direct link to Spelunky Classic (HTML5)" aria-label="Copy direct link to Spelunky Classic (HTML5)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2306,8 +2307,8 @@
         <article class="game-card" id="game-a-dark-room" data-id="a-dark-room" data-category="strategy" data-status="instant" data-platform="HTML5" data-title="a dark room (atmospheric survival rpg)" data-year="2013" data-tags="a dark room (atmospheric survival rpg) a dark room a dark room rpg atmospheric survival indie strategy &amp; sim michael townsend / doublespeak games javascript / web audio new tab games instant play browser game html5">
           <a class="cover" href="https://adarkroom.doublespeakgames.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--html5">HTML5</span>
           </a>
@@ -2321,7 +2322,7 @@
               <p class="card-dev">Michael Townsend / Doublespeak Games · JavaScript / Web Audio</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://adarkroom.doublespeakgames.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://adarkroom.doublespeakgames.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="a-dark-room" data-title="A Dark Room (Atmospheric Survival RPG)" title="Copy direct link to A Dark Room (Atmospheric Survival RPG)" aria-label="Copy direct link to A Dark Room (Atmospheric Survival RPG)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2330,8 +2331,8 @@
         <article class="game-card" id="game-super-smash-flash-2" data-id="super-smash-flash-2" data-category="sports" data-status="instant" data-platform="WebGL" data-title="super smash flash 2 (web edition)" data-year="2014" data-tags="super smash flash 2 (web edition) super smash flash 2 super smash bros smash flash fighting anime nintendo arcade sports &amp; arcade mcleodgaming webassembly / webgl / mgn engine new tab games instant play browser game webgl">
           <a class="cover" href="https://www.supersmashflash.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -2345,7 +2346,7 @@
               <p class="card-dev">McLeodGaming · WebAssembly / WebGL / MGN Engine</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://www.supersmashflash.com/" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://www.supersmashflash.com/" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="super-smash-flash-2" data-title="Super Smash Flash 2 (Web Edition)" title="Copy direct link to Super Smash Flash 2 (Web Edition)" aria-label="Copy direct link to Super Smash Flash 2 (Web Edition)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2354,8 +2355,8 @@
         <article class="game-card" id="game-subway-surfers-web" data-id="subway-surfers-web" data-category="sports" data-status="instant" data-platform="WebGL" data-title="subway surfers (web edition)" data-year="2012" data-tags="subway surfers (web edition) subway surfers subway surfers endless runner arcade action unity sports &amp; arcade kiloo / sybo games unity webgl new tab games instant play browser game webgl">
           <a class="cover" href="https://poki.com/en/g/subway-surfers" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="/games/assets/brand/banner.svg" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
-            <span class="badge is-instant">Instant</span>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
+            <span class="badge is-instant">Browser</span>
             <span class="badge badge--new">New</span>
             <span class="badge badge--platform badge--webgl">WebGL</span>
           </a>
@@ -2369,7 +2370,7 @@
               <p class="card-dev">Kiloo / SYBO Games · Unity WebGL</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="https://poki.com/en/g/subway-surfers" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="https://poki.com/en/g/subway-surfers" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="subway-surfers-web" data-title="Subway Surfers (Web Edition)" title="Copy direct link to Subway Surfers (Web Edition)" aria-label="Copy direct link to Subway Surfers (Web Edition)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -2390,9 +2391,9 @@
         <div class="about-card">
           <h2>What the badges mean</h2>
           <ul>
-            <li><b class="k-instant">Instant</b> — loads straight away, nothing to supply.</li>
+            <li><b class="k-instant">Browser</b> — listed as a browser game; the external host determines availability and requirements.</li>
             <li><b class="k-online">Online</b> — multiplayer or online rooms; some also play solo.</li>
-            <li><b class="k-instant">100% Playable</b> — all games run immediately in your browser tab with zero purchases or file imports required.</li>
+            <li>External sites may change, require files, or be unavailable. Check the host before playing.</li>
           </ul>
         </div>
         <div class="about-card">
@@ -2406,7 +2407,7 @@
         </div>
         <div class="about-card">
           <h2>About</h2>
-          <p>Built and maintained by one developer. No ads, no trackers. Every link is tested before it goes on the list, and dead or hijacked links are pulled.</p>
+          <p>A directory of links to games and external hosts. Their availability, content, privacy practices and rights are controlled by their respective operators.</p>
           <p>Found a broken game? <a href="https://github.com/LIN4CRE/tabulous-games/issues" target="_blank" rel="noopener noreferrer">Report it on GitHub</a>.</p>
           <a class="btn-support" href="https://paypal.me/dlinacre16" target="_blank" rel="noopener noreferrer">♥ Buy Me a Smoke</a>
         </div>
@@ -2710,7 +2711,7 @@
       }
 
       // Hook chip clicks
-      $('.chip').forEach(btn => {
+      $$('.chip').forEach(btn => {
         btn.addEventListener('click', () => {
           audioEngine.click();
           const query = btn.dataset.chip || '';
@@ -2765,13 +2766,13 @@
       function render() {
         if (!data || !data.lastScan || !(data.stats && data.stats.linksChecked)) {
           dot.className = '';
-          text.textContent = 'Links tested before listing';
+          text.textContent = 'Link status unavailable';
           return;
         }
         const age = Date.now() - new Date(data.lastScan).getTime();
         const days = age / 86400000;
         dot.className = days <= 3 ? 'ok' : days <= 10 ? 'warn' : 'bad';
-        text.textContent = `Links tested ${ago(age)}`;
+        text.textContent = `Link review ${ago(age)}`;
         $('#status').title = `${data.stats.linksChecked} links tested on ${new Date(data.lastScan).toUTCString()}`;
       }
       render();

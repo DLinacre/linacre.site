@@ -1,3 +1,4 @@
+import { sanitizeSvg } from '../lib/sanitize';
 import { useState, useEffect, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -2632,7 +2633,7 @@ border-radius: 12px;`;
                               transformOrigin: 'center center',
                             }}
                             className="max-w-full max-h-full transition-transform duration-200 p-4"
-                            dangerouslySetInnerHTML={{ __html: svgCode }}
+                            dangerouslySetInnerHTML={{ __html: sanitizeSvg(svgCode) }}
                           />
                         </div>
                       </div>

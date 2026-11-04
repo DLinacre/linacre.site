@@ -96,7 +96,7 @@ export default function BookCall({ navigate }: BookCallProps) {
         </h1>
         <p className="text-base text-muted-foreground leading-relaxed">
           No automated calendar loops or pushy sales reps. Pick your topic below and send two
-          preferred time slots &mdash; I reply with a calendar invite within 12 hours.
+          preferred time slots &mdash; I’ll follow up to arrange a call.
         </p>
       </motion.section>
 

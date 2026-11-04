@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import {
   ArrowUpRight,
   ChevronDown,
@@ -19,6 +19,10 @@ import Emblem3D from './Emblem3D';
 import { tabToPath } from '../config/routes';
 
 type ThemeMode = 'dark' | 'light';
+
+function isPlainClick(event: MouseEvent<HTMLAnchorElement>) {
+  return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+}
 
 interface SiteHeaderProps {
   activeTab: string;
@@ -151,6 +155,7 @@ export default function SiteHeader({
       aria-current={activeTab === tab ? 'page' : undefined}
       className={className}
       onClick={event => {
+        if (!isPlainClick(event)) return;
         event.preventDefault();
         navigate(tab);
       }}
@@ -170,6 +175,7 @@ export default function SiteHeader({
               href="/"
               className="site-header__wordmark"
               onClick={event => {
+                if (!isPlainClick(event)) return;
                 event.preventDefault();
                 navigate('home');
               }}
@@ -208,6 +214,7 @@ export default function SiteHeader({
               className="site-header__cta"
               href="/contact"
               onClick={event => {
+                if (!isPlainClick(event)) return;
                 event.preventDefault();
                 navigate('contact');
               }}
@@ -266,6 +273,7 @@ export default function SiteHeader({
                     aria-current={activeTab === tab ? 'page' : undefined}
                     className={`site-nav__link${activeTab === tab ? ' is-active' : ''}`}
                     onClick={event => {
+                      if (!isPlainClick(event)) return;
                       event.preventDefault();
                       navigate(tab);
                     }}
@@ -283,6 +291,7 @@ export default function SiteHeader({
                     aria-current={activeTab === tab ? 'page' : undefined}
                     className={`site-nav__link${activeTab === tab ? ' is-active' : ''}`}
                     onClick={event => {
+                      if (!isPlainClick(event)) return;
                       event.preventDefault();
                       navigate(tab);
                     }}

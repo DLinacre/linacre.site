@@ -75,11 +75,9 @@ function chatInputGuard(req: Request, res: Response, next: NextFunction) {
     prompt !== undefined &&
     (typeof prompt !== 'string' || prompt.length === 0 || prompt.length > MAX_PROMPT_CHARS)
   ) {
-    return res
-      .status(400)
-      .json({
-        error: `Prompt must be a non-empty string of at most ${MAX_PROMPT_CHARS} characters.`,
-      });
+    return res.status(400).json({
+      error: `Prompt must be a non-empty string of at most ${MAX_PROMPT_CHARS} characters.`,
+    });
   }
   for (const arr of [history, messages]) {
     if (arr === undefined) continue;
@@ -115,7 +113,7 @@ function timingSafeEqualStr(a: string, b: string): boolean {
 
 function isDashAuthed(req: Request): boolean {
   const secret = process.env.DASHBOARD_SESSION_SECRET;
-  if (!secret) return false;
+  if (!secret || secret.length < 32 || !process.env.DASHBOARD_PASSWORD_HASH) return false;
   const cookie = req.headers.cookie ?? '';
   const match = cookie.match(new RegExp(`${COOKIE_NAME}=([^;]+)`));
   if (!match) return false;
@@ -126,10 +124,6 @@ function isDashAuthed(req: Request): boolean {
 
 function checkAuth(req: Request, res: Response, next: NextFunction) {
   if (isDashAuthed(req)) {
-    return next();
-  }
-  const isLocal = req.hostname === 'localhost' || req.hostname === '127.0.0.1';
-  if (isLocal && process.env.NODE_ENV !== 'production') {
     return next();
   }
   return res.status(401).json({ error: 'Unauthorized. Dashboard session required.' });
@@ -164,7 +158,8 @@ if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) 
 }
 
 async function aiRateLimiter(req: Request, res: Response, next: NextFunction) {
-  const forwarded = req.headers['x-forwarded-for'];
+  // Vercel overwrites this header; direct/self-hosted requests must not trust it.
+  const forwarded = process.env.VERCEL ? req.headers['x-vercel-forwarded-for'] : undefined;
   const ip =
     (typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : forwarded?.[0]) ||
     req.socket.remoteAddress ||
@@ -218,18 +213,15 @@ async function aiRateLimiter(req: Request, res: Response, next: NextFunction) {
 // Max 3 submissions per 5 minutes per IP address.
 const contactRateLimitLog = new Map<string, number[]>();
 
-app.post('/api/contact', (req, res) => {
+app.post('/api/contact', async (req, res) => {
   const contentType = req.headers['content-type'] ?? '';
   const isJson = contentType.includes('application/json');
   const isUrlEncoded = contentType.includes('application/x-www-form-urlencoded');
 
   if (!isJson && !isUrlEncoded) {
-    return res
-      .status(400)
-      .json({
-        error:
-          'Invalid Content-Type. Must be application/json or application/x-www-form-urlencoded',
-      });
+    return res.status(400).json({
+      error: 'Invalid Content-Type. Must be application/json or application/x-www-form-urlencoded',
+    });
   }
 
   const { email, subject, message, name } = req.body ?? {};
@@ -283,45 +275,11 @@ app.post('/api/contact', (req, res) => {
     return sendError(400, 'Subject exceeds maximum length of 200 characters.');
   }
 
-  // Bot protection (free, no third-party service):
-  // 1. Honeypot — "company" is invisible to humans; bots that fill it get a
-  //    success response so they do not adapt, but the submission is dropped.
-  // 2. Time gate — forms submitted faster than a human can type are dropped.
+  // Reject honeypot submissions without falsely claiming they were delivered.
   const { company, startedAt } = req.body ?? {};
   if (typeof company === 'string' && company.trim() !== '') {
     logEvent('contact.honeypot', { ua: req.headers['user-agent'] ?? '' });
-    const fakeRequestId = `req_${crypto.randomBytes(8).toString('hex')}`;
-    if (isUrlEncoded) {
-      return res.status(200).send(`
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Transmission Received | linacre.site</title>
-  <style>
-    body { background-color: #0b0e14; color: #e5e5e5; font-family: monospace; text-align: center; padding: 50px 20px; }
-    .container { max-width: 500px; margin: 0 auto; border: 1px solid #2e3545; padding: 30px; border-radius: 12px; background: rgba(22, 27, 38, 0.5); }
-    h1 { color: #f59e0b; font-size: 1.25rem; font-weight: bold; }
-    p { font-size: 0.75rem; color: #8b93a5; line-height: 1.5; }
-    .ref { font-weight: bold; color: #22d3ee; }
-    a { display: inline-block; margin-top: 20px; color: #f59e0b; text-decoration: none; border: 1px solid #f59e0b; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; }
-    a:hover { background-color: rgba(245, 158, 11, 0.1); }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>TRANSMISSION RECEIVED</h1>
-    <p>Thank you. Your message has been accepted with reference:</p>
-    <p class="ref">${fakeRequestId}</p>
-    <p>You can close this tab or return to the site.</p>
-    <a href="/contact">Go Back</a>
-  </div>
-</body>
-</html>
-      `);
-    } else {
-      return res.status(200).json({ requestId: fakeRequestId });
-    }
+    return sendError(400, 'Submission could not be accepted.');
   }
 
   if (startedAt !== undefined) {
@@ -338,7 +296,8 @@ app.post('/api/contact', (req, res) => {
     }
   }
 
-  const forwarded = req.headers['x-forwarded-for'];
+  // Vercel overwrites this header; direct/self-hosted requests must not trust it.
+  const forwarded = process.env.VERCEL ? req.headers['x-vercel-forwarded-for'] : undefined;
   const ip =
     (typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : forwarded?.[0]) ||
     req.socket.remoteAddress ||
@@ -370,29 +329,37 @@ app.post('/api/contact', (req, res) => {
 
   const requestId = `req_${crypto.randomBytes(8).toString('hex')}`;
 
-  logEvent('contact.accepted', {
-    requestId,
-    emailHash: crypto.createHash('sha256').update(email).digest('hex').substring(0, 16),
-  });
-
-  // Local file-based backup for dev environments (ignores read-only Vercel tmp/root write errors)
-  try {
-    const contactsFile = path.join(process.cwd(), 'contacts.json');
-    const contactsList = fs.existsSync(contactsFile)
-      ? JSON.parse(fs.readFileSync(contactsFile, 'utf8'))
-      : [];
-    const entryMessage = name ? `Name: ${name}\n\n${message}` : message;
-    contactsList.push({
-      requestId,
-      email,
-      subject,
-      message: entryMessage,
-      timestamp: new Date().toISOString(),
-    });
-    fs.writeFileSync(contactsFile, JSON.stringify(contactsList, null, 2), 'utf8');
-  } catch (err) {
-    // Fail silently in cloud environments
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.CONTACT_FROM_EMAIL;
+  const to = process.env.CONTACT_TO_EMAIL;
+  if (!apiKey || !from || !to) {
+    return sendError(
+      503,
+      'Contact delivery is not configured. Please email david@linacre.site directly.',
+    );
   }
+  try {
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        reply_to: email,
+        subject: subject || 'Website enquiry',
+        text: name ? `Name: ${name}\n\n${message}` : message,
+      }),
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!response.ok) {
+      logEvent('contact.delivery_failed', { status: response.status });
+      return sendError(502, 'Message delivery failed. Please email david@linacre.site directly.');
+    }
+  } catch {
+    logEvent('contact.delivery_failed', { reason: 'network' });
+    return sendError(502, 'Message delivery failed. Please email david@linacre.site directly.');
+  }
+  logEvent('contact.accepted', { requestId });
 
   if (isUrlEncoded) {
     res.status(200).send(`
@@ -501,6 +468,7 @@ app.post('/api/chat', chatInputGuard, aiRateLimiter, async (req, res) => {
 
   // 2. Try OpenAI Fallback
   try {
+    if (!isDashAuthed(req)) throw new Error('Owner session required for premium fallback');
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) throw new Error('No OpenAI key');
 
@@ -535,6 +503,7 @@ app.post('/api/chat', chatInputGuard, aiRateLimiter, async (req, res) => {
 
   // 3. Try Claude Fallback
   try {
+    if (!isDashAuthed(req)) throw new Error('Owner session required for premium fallback');
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) throw new Error('No Claude key');
 
@@ -576,6 +545,12 @@ app.post('/api/generate-icon', chatInputGuard, aiRateLimiter, async (req, res) =
   const { prompt, primaryColor = '#22D3EE', secondaryColor = '#34D399' } = req.body ?? {};
   if (!prompt || typeof prompt !== 'string') {
     return res.status(400).json({ error: 'Prompt is required.' });
+  }
+
+  if (
+    ![primaryColor, secondaryColor].every(c => typeof c === 'string' && /^#[0-9a-f]{6}$/i.test(c))
+  ) {
+    return res.status(400).json({ error: 'Colors must be six-digit hex values.' });
   }
 
   const systemInstruction = `You are a world-class vector graphic designer and SVG artist.
@@ -627,7 +602,10 @@ Strict rules:
     }
     throw new Error('Could not extract SVG markup from Gemini response.');
   } catch (err: any) {
-    console.warn('AI Icon Generation via Gemini failed, executing fallback generator:', err.message || err);
+    console.warn(
+      'AI Icon Generation via Gemini failed, executing fallback generator:',
+      err.message || err,
+    );
     const cleanPrompt = String(prompt)
       .replace(/[^a-zA-Z0-9 ]/g, '')
       .trim();
@@ -742,6 +720,7 @@ app.post('/api/chat/stream', chatInputGuard, aiRateLimiter, async (req, res) => 
 
   // 2. Try OpenAI Fallback
   try {
+    if (!isDashAuthed(req)) throw new Error('Owner session required for premium fallback');
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) throw new Error('No OpenAI key');
 
@@ -807,6 +786,7 @@ app.post('/api/chat/stream', chatInputGuard, aiRateLimiter, async (req, res) => 
 
   // 3. Try Claude Fallback
   try {
+    if (!isDashAuthed(req)) throw new Error('Owner session required for premium fallback');
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) throw new Error('No Claude key');
 
@@ -966,14 +946,14 @@ app.get('/api/tasks', checkAuth, async (_req, res) => {
 // Secure Server-side OpenAI Streaming Proxy
 app.post('/api/chat/openai', chatInputGuard, aiRateLimiter, async (req, res) => {
   const { prompt, history, apiKey: clientApiKey } = req.body;
+  if (!clientApiKey && !isDashAuthed(req))
+    return res.status(401).json({ error: 'Owner session required for server API keys.' });
   const apiKey = clientApiKey || process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    return res
-      .status(400)
-      .json({
-        error:
-          'OpenAI API Key is missing. Provide it on the client or set OPENAI_API_KEY in the server environment.',
-      });
+    return res.status(400).json({
+      error:
+        'OpenAI API Key is missing. Provide it on the client or set OPENAI_API_KEY in the server environment.',
+    });
   }
 
   try {
@@ -1036,14 +1016,14 @@ app.post('/api/chat/openai', chatInputGuard, aiRateLimiter, async (req, res) => 
 // Secure Server-side Claude Streaming Proxy
 app.post('/api/chat/claude', chatInputGuard, aiRateLimiter, async (req, res) => {
   const { prompt, history, apiKey: clientApiKey } = req.body;
+  if (!clientApiKey && !isDashAuthed(req))
+    return res.status(401).json({ error: 'Owner session required for server API keys.' });
   const apiKey = clientApiKey || process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY;
   if (!apiKey) {
-    return res
-      .status(400)
-      .json({
-        error:
-          'Claude API Key is missing. Provide it on the client or set ANTHROPIC_API_KEY in the server environment.',
-      });
+    return res.status(400).json({
+      error:
+        'Claude API Key is missing. Provide it on the client or set ANTHROPIC_API_KEY in the server environment.',
+    });
   }
 
   try {
@@ -1337,7 +1317,7 @@ app.post('/api/agents/spawn/:agentId', checkAuth, (req, res) => {
 });
 
 // Proxy endpoint to communicate with FastAPI backend on port 8000
-app.all('/api/evbot-proxy/*', async (req, res) => {
+app.all('/api/evbot-proxy/*', checkAuth, async (req, res) => {
   const subPath =
     (req.params as unknown as string[])[0] || req.path.replace(/^\/api\/evbot-proxy\//, '');
 
@@ -1397,35 +1377,21 @@ app.get('/api/health', (_req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-app.post('/api/auth', (req, res) => {
-  const secret =
-    process.env.DASHBOARD_SESSION_SECRET || 'default_session_secret_32_bytes_min_12345';
-  const passwordHash =
-    process.env.DASHBOARD_PASSWORD_HASH ||
-    'e716eb6bf2edcc90a2998bf03f1621e0c1858fa503bc39f492f1da71f38a89d5';
-  const { password } = req.body ?? {};
-  const rawPassword = typeof password === 'string' ? password : '';
-  const cleanPassword = rawPassword.trim();
-  if (!cleanPassword) {
+// Authentication is disabled unless both values are explicitly configured.
+// The hash format remains compatible with existing SHA-256 configuration;
+// use a long random password and protect this endpoint with a shared limiter.
+app.post('/api/auth', aiRateLimiter, (req, res) => {
+  const secret = process.env.DASHBOARD_SESSION_SECRET;
+  const passwordHash = process.env.DASHBOARD_PASSWORD_HASH;
+  if (!secret || secret.length < 32 || !passwordHash || !/^[a-f0-9]{64}$/i.test(passwordHash)) {
+    return res.status(503).json({ error: 'Dashboard authentication is not configured.' });
+  }
+  const password = req.body?.password;
+  if (typeof password !== 'string' || !password.trim()) {
     return res.status(400).json({ error: 'Password required' });
   }
-  const suppliedHash = crypto.createHash('sha256').update(cleanPassword).digest('hex');
-  const suppliedLowerHash = crypto
-    .createHash('sha256')
-    .update(cleanPassword.toLowerCase())
-    .digest('hex');
-  const masterChristopherHash = 'e716eb6bf2edcc90a2998bf03f1621e0c1858fa503bc39f492f1da71f38a89d5';
-  const masterChristopherLowerHash =
-    '5d8bccf165fda6bf1dabc782be82e45e70487aa6b2518704bd269745d583f208';
-
-  const isValid =
-    timingSafeEqualStr(suppliedHash, passwordHash) ||
-    timingSafeEqualStr(suppliedHash, masterChristopherHash) ||
-    timingSafeEqualStr(suppliedLowerHash, masterChristopherLowerHash) ||
-    cleanPassword === 'Christopher91' ||
-    cleanPassword.toLowerCase() === 'christopher91';
-
-  if (!isValid) {
+  const suppliedHash = crypto.createHash('sha256').update(password.trim()).digest('hex');
+  if (!timingSafeEqualStr(suppliedHash, passwordHash.toLowerCase())) {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
   const expires = Date.now() + SESSION_TTL_MS;
@@ -1434,69 +1400,17 @@ app.post('/api/auth', (req, res) => {
     'Set-Cookie',
     `${COOKIE_NAME}=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${SESSION_TTL_MS / 1000}`,
   );
-  return res.status(200).json({
-    ok: true,
-    keysEnabled: true,
-    vault: 'Vault.kdbx',
-    activeKeys: [
-      'GEMINI_API_KEY',
-      'OPENAI_API_KEY',
-      'ANTHROPIC_API_KEY',
-      'LITELLM_API_KEY',
-      'GITHUB_TOKEN',
-      'OPENROUTER_API_KEY',
-    ],
-  });
+  return res.status(200).json({ ok: true, keysEnabled: true });
 });
 
+// There is no verified Google identity flow in this application.
 app.post('/api/auth/google', (_req, res) => {
-  const secret =
-    process.env.DASHBOARD_SESSION_SECRET || 'default_session_secret_32_bytes_min_12345';
-  const expires = Date.now() + SESSION_TTL_MS;
-  const token = `${expires}.${sign(String(expires), secret)}`;
-  res.setHeader(
-    'Set-Cookie',
-    `${COOKIE_NAME}=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${SESSION_TTL_MS / 1000}`,
-  );
-  return res.status(200).json({
-    ok: true,
-    authenticated: true,
-    method: 'google_auto_login',
-    activeKeys: [
-      'GEMINI_API_KEY',
-      'OPENAI_API_KEY',
-      'ANTHROPIC_API_KEY',
-      'LITELLM_API_KEY',
-      'GITHUB_TOKEN',
-      'OPENROUTER_API_KEY',
-    ],
-  });
+  return res.status(503).json({ error: 'Google sign-in is not configured.' });
 });
 
 app.get('/api/auth', (req, res) => {
-  const secret =
-    process.env.DASHBOARD_SESSION_SECRET || 'default_session_secret_32_bytes_min_12345';
-  const cookie = req.headers.cookie ?? '';
-  const match = cookie.match(new RegExp(`${COOKIE_NAME}=([^;]+)`));
-  if (!match) return res.status(200).json({ authenticated: false });
-  const [expiresStr, sig] = match[1].split('.');
-  if (!expiresStr || !sig) return res.status(200).json({ authenticated: false });
-  const valid =
-    timingSafeEqualStr(sig, sign(expiresStr, secret)) && Number(expiresStr) > Date.now();
-  return res.status(200).json({
-    authenticated: valid,
-    keysEnabled: valid,
-    activeKeys: valid
-      ? [
-          'GEMINI_API_KEY',
-          'OPENAI_API_KEY',
-          'ANTHROPIC_API_KEY',
-          'LITELLM_API_KEY',
-          'GITHUB_TOKEN',
-          'OPENROUTER_API_KEY',
-        ]
-      : [],
-  });
+  const valid = isDashAuthed(req);
+  return res.status(200).json({ authenticated: valid, keysEnabled: valid });
 });
 
 app.delete('/api/auth', (_req, res) => {
@@ -1577,11 +1491,9 @@ app.post('/api/chat/unified', chatInputGuard, aiRateLimiter, async (req, res) =>
 
   const catalog = MODEL_CATALOG[provider as string];
   if (!catalog) {
-    return res
-      .status(400)
-      .json({
-        error: `Unknown provider "${provider}". Valid: ${Object.keys(MODEL_CATALOG).join(', ')}`,
-      });
+    return res.status(400).json({
+      error: `Unknown provider "${provider}". Valid: ${Object.keys(MODEL_CATALOG).join(', ')}`,
+    });
   }
   if (typeof model !== 'string' || !model.trim()) {
     return res.status(400).json({ error: 'Model id is required' });
@@ -1594,12 +1506,9 @@ app.post('/api/chat/unified', chatInputGuard, aiRateLimiter, async (req, res) =>
         m && typeof m.content === 'string' && (m.role === 'user' || m.role === 'assistant'),
     )
   ) {
-    return res
-      .status(400)
-      .json({
-        error:
-          'messages must be a non-empty array of { role: "user"|"assistant", content: string }',
-      });
+    return res.status(400).json({
+      error: 'messages must be a non-empty array of { role: "user"|"assistant", content: string }',
+    });
   }
   if (!catalog.hasKey()) {
     return res.status(503).json({ error: `No server key configured for ${provider}` });
@@ -1617,12 +1526,9 @@ app.post('/api/chat/unified', chatInputGuard, aiRateLimiter, async (req, res) =>
     return res.status(400).json({ error: `Unknown model "${model}" for provider ${provider}` });
   }
   if (tier === 'premium' && !isDashAuthed(req)) {
-    return res
-      .status(401)
-      .json({
-        error:
-          'This model is owner-gated. Unlock with your dashboard password in the config panel.',
-      });
+    return res.status(401).json({
+      error: 'This model is owner-gated. Unlock with your dashboard password in the config panel.',
+    });
   }
 
   // Bound the payload to keep abuse cheap

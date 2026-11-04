@@ -6,6 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 const gamesJsonPath = path.join(root, 'public', 'games', 'games.json');
 const indexHtmlPath = path.join(root, 'public', 'games', 'index.html');
+const distOnly = process.argv.includes('--dist');
 
 const raw = JSON.parse(fs.readFileSync(gamesJsonPath, 'utf8'));
 
@@ -25,16 +26,13 @@ const existingInstantGames = raw.games.filter(g => {
 
 // Final instant play list
 const finalGames = existingInstantGames;
-console.log(`[build-games] Assembling ${finalGames.length} verified instant-play browser games...`);
+console.log(`[build-games] Assembling ${finalGames.length} listed browser game links...`);
 
-// Save public/games/games.json
-fs.writeFileSync(gamesJsonPath, JSON.stringify({ games: finalGames }, null, 2), 'utf8');
-
-// Also update dist/games/games.json if dist directory exists
-const distGamesJson = path.join(root, 'dist', 'games', 'games.json');
-if (fs.existsSync(path.dirname(distGamesJson))) {
-  fs.writeFileSync(distGamesJson, JSON.stringify({ games: finalGames }, null, 2), 'utf8');
-}
+// Production builds write only to dist; the explicit games:build command
+// refreshes checked-in generated files and must be reviewed before committing.
+const jsonOutput = distOnly ? path.join(root, 'dist', 'games', 'games.json') : gamesJsonPath;
+fs.mkdirSync(path.dirname(jsonOutput), { recursive: true });
+fs.writeFileSync(jsonOutput, JSON.stringify({ games: finalGames }, null, 2), 'utf8');
 
 function escapeHtml(s) {
   return String(s || '')
@@ -86,7 +84,7 @@ catPillsHtml += '\n';
 // Status pills (Instant & Online only)
 let statusPillsHtml = '\n          <button class="seg active" data-status="all">Any</button>';
 if (statusCounts['instant']) {
-  statusPillsHtml += `\n          <button class="seg" data-status="instant" title="Instant Play">Instant <span>${statusCounts['instant']}</span></button>`;
+  statusPillsHtml += `\n          <button class="seg" data-status="instant" title="Listed as browser games">Browser <span>${statusCounts['instant']}</span></button>`;
 }
 if (statusCounts['multiplayer']) {
   statusPillsHtml += `\n          <button class="seg" data-status="multiplayer" title="Multiplayer">Online <span>${statusCounts['multiplayer']}</span></button>`;
@@ -120,7 +118,7 @@ for (const g of finalGames) {
   const tagsStr = tagsArr.join(' ').toLowerCase();
   const isNew = Boolean(g.isNew);
   const statusBadgeClass = g.status === 'multiplayer' ? 'is-multiplayer' : 'is-instant';
-  const statusBadgeText = g.status === 'multiplayer' ? 'Online' : 'Instant';
+  const statusBadgeText = g.status === 'multiplayer' ? 'Online' : 'Browser';
 
   let coverSrc = g.cover || '/games/assets/brand/banner.svg';
   if (!coverSrc.startsWith('/') && !coverSrc.startsWith('http')) {
@@ -131,7 +129,7 @@ for (const g of finalGames) {
         <article class="game-card" id="game-${escapeHtml(g.id)}" data-id="${escapeHtml(g.id)}" data-category="${escapeHtml(g.category)}" data-status="${escapeHtml(g.status)}" data-platform="${escapeHtml(platform)}" data-title="${escapeHtml(g.title.toLowerCase())}" data-year="${escapeHtml(g.year)}" data-tags="${escapeHtml(tagsStr)}">
           <a class="cover" href="${escapeHtml(g.url)}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <img src="${escapeHtml(coverSrc)}" alt="" loading="lazy" decoding="async" width="640" height="360" onerror="this.onerror=null;this.src='/games/assets/brand/banner.svg'">
-            <div class="cover-overlay"><span class="cover-play-badge">▶ Play Now</span></div>
+            <div class="cover-overlay"><span class="cover-play-badge">↗ Open game</span></div>
             <span class="badge ${statusBadgeClass}">${statusBadgeText}</span>
             ${isNew ? '<span class="badge badge--new">New</span>' : ''}
             <span class="badge badge--platform badge--${escapeHtml(platform.toLowerCase())}">${escapeHtml(platform)}</span>
@@ -146,7 +144,7 @@ for (const g of finalGames) {
               <p class="card-dev">${escapeHtml(g.dev)} · ${escapeHtml(g.engine)}</p>
             </div>
             <div class="card-actions">
-              <a class="btn-play" href="${escapeHtml(g.url)}" target="_blank" rel="noopener noreferrer">Play</a>
+              <a class="btn-play" href="${escapeHtml(g.url)}" target="_blank" rel="noopener noreferrer">Open game</a>
               <button class="btn-info" type="button" aria-expanded="false">Info</button>
               <button class="btn-share" type="button" data-id="${escapeHtml(g.id)}" data-title="${escapeHtml(g.title)}" title="Copy direct link to ${escapeHtml(g.title)}" aria-label="Copy direct link to ${escapeHtml(g.title)}"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
             </div>
@@ -184,10 +182,6 @@ html = html.replace(
 html = html.replace(
   /placeholder="Search games, series, studios…"|placeholder="Search games, series, new tab games…" aria-label="Search games"/,
   'placeholder="Search games, series, new tab games…" aria-label="Search games"',
-);
-html = html.replace(
-  /<li><b class="k-files">Own files<\/b>[^<]*<\/li>/,
-  '<li><b class="k-instant">100% Playable</b> — all games run immediately in your browser tab with zero purchases or file imports required.</li>',
 );
 
 // Add styles for hover overlays, sound toggle, and platform badges if not present
@@ -403,12 +397,8 @@ if (!html.includes('audioEngine')) {
 
 // Keep generated HTML deterministic and free of whitespace-only lines.
 html = html.replace(/[\t ]+$/gm, '');
-fs.writeFileSync(indexHtmlPath, html, 'utf8');
-
-// Update dist if it exists
-const distIndex = path.join(root, 'dist', 'games', 'index.html');
-if (fs.existsSync(distIndex)) {
-  fs.writeFileSync(distIndex, html, 'utf8');
-}
+const htmlOutput = distOnly ? path.join(root, 'dist', 'games', 'index.html') : indexHtmlPath;
+fs.mkdirSync(path.dirname(htmlOutput), { recursive: true });
+fs.writeFileSync(htmlOutput, html, 'utf8');
 
 console.log('[build-games] Successfully refreshed games index with audio FX and featured ribbon!');

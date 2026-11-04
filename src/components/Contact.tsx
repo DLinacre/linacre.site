@@ -168,7 +168,7 @@ export default function Contact() {
         </h1>
         <p className="text-base text-muted-foreground leading-relaxed">
           Custom software, pipeline automation, or an infrastructure audit? Tell me what you&#39;re
-          building &mdash; I reply within 12 hours.
+          building &mdash; I’d be glad to hear from you.
         </p>
       </motion.section>
 
@@ -239,7 +239,7 @@ export default function Contact() {
                   <h2 className="font-display text-lg font-bold text-foreground">Message sent</h2>
                   <p className="text-xs text-muted-foreground max-w-sm mx-auto font-mono">
                     Reference <span className="text-amber-color font-bold">{requestId}</span>{' '}
-                    &mdash; I&#39;ll reply from david@linacre.site within 12 hours.
+                    &mdash; I&#39;ll reply from david@linacre.site.
                   </p>
                   <div className="flex flex-wrap justify-center gap-2 pt-2">
                     <a
@@ -535,7 +535,7 @@ export default function Contact() {
                         <Lock className="w-3 h-3 text-cyan" aria-hidden="true" /> UK GDPR
                       </span>
                       <span>&middot;</span>
-                      <span>Reply &lt; 12h</span>
+                      <span>Direct enquiry</span>
                       <span>&middot;</span>
                       <span>NDA-friendly</span>
                     </div>

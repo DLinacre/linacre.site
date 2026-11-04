@@ -8,8 +8,6 @@
 [![CI](https://github.com/DLinacre/linacre.site/actions/workflows/ci.yml/badge.svg)](https://github.com/DLinacre/linacre.site/actions/workflows/ci.yml)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)](tsconfig.json)
 [![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=black)](https://react.dev)
-[![Tests](https://img.shields.io/badge/tests-18%20passing-brightgreen)](src/components/__tests__)
-[![WCAG](https://img.shields.io/badge/WCAG_2.2_AA-0%20violations-success)](#accessibility)
 
 **[www.linacre.site](https://www.linacre.site)** · [Tools](https://www.linacre.site/tools) · [Games](https://www.linacre.site/games) · [About](https://www.linacre.site/about)
 
@@ -23,32 +21,42 @@ A React 19 single-page application with prerendered static routes, deployed on
 Vercel. It serves three purposes:
 
 1. **A free browser toolbox** — JSON, Base64, VAT, hashing, text and URL
-   utilities that run entirely client-side. Nothing is uploaded anywhere.
+   utilities that run client-side; the optional AI playground sends prompts to the configured API, and external services have their own policies.
 2. **A project showcase** — live builds, downloadable releases, and inspectable
    source.
-3. **A games hub** — playable browser games plus
+3. **A games hub** — links to third-party browser games (availability and requirements vary) plus
    [Slime Factory Tycoon](https://github.com/DLinacre/slime-factory-tycoon), an
    open-source Roblox idle-tycoon.
 
 ---
 
-## Quality bar
+## Current release note (2026-11-04)
 
-Everything below is measured on the live site, not estimated.
+The security hardening and website-evolution work is on an active branch, not
+verified in production. The current live API health route has returned 404;
+check Vercel rewrites and environment configuration on an accessible preview
+before merging or deploying. See [AUDIT.md](AUDIT.md) and
+[hardening notes](docs/2026-11-04-hardening.md). Existing or exposed dashboard
+credentials should be rotated. No real contact email delivery has been tested.
 
-| Metric                         |            Value | Threshold |
-| ------------------------------ | ---------------: | --------- |
-| TypeScript errors (strict)     |            **0** | —         |
-| Test suite                     |   **18 passing** | —         |
-| axe-core WCAG 2.2 AA — mobile  | **0 violations** | 0         |
-| axe-core WCAG 2.2 AA — desktop | **0 violations** | 0         |
-| CLS — mobile                   |       **0.0155** | < 0.10    |
-| CLS — desktop                  |       **0.0023** | < 0.10    |
-| LCP                            |       **~1.0 s** | < 2.5 s   |
-| TTFB                           |      **~150 ms** | < 800 ms  |
+The games directory lists external hosts; no blanket guarantee is made about
+playability, ownership, safety or download requirements. Its checked-in data is
+`public/games/games.json`. `npm run build` regenerates the directory **in dist
+only**. Use `npm run games:build` to explicitly refresh checked-in generated
+files, then review the diff.
 
-Reproduce with `npm run verify`, or see [Testing](#testing) for the browser
-measurements.
+## Verification
+
+Run `npm ci`, `npm run verify`, and `npm run build`. For the browser smoke
+journeys, install the Playwright Chromium browser (`npx playwright install
+chromium`), start the built server (`npm start`), then run `npm run
+test:browser`. Set `BROWSER_URL` for another server; `CHROMIUM_PATH` and a JSON
+array in `CHROMIUM_ARGS` are optional overrides. The smoke test does not send a
+contact message or test external games. Run `npm audit --audit-level=moderate`
+at the root and in `mcp/` after installation. For the current local results see
+[AUDIT.md](AUDIT.md). These
+checks do not establish production availability, accessibility conformance, or
+Core Web Vitals; verify those separately against the actual deployment.
 
 ---
 
@@ -58,7 +66,7 @@ measurements.
 | ---------- | ------------------------------ | ---------------------------------------------------------------------- |
 | Framework  | React 19                       | Concurrent rendering, `useReducedMotion`, modern Suspense              |
 | Language   | TypeScript 5.8, **strict**     | `strict`, `noUnusedLocals`, `noUnusedParameters`, `noImplicitOverride` |
-| Build      | Vite 7                         | Fast HMR, Rollup manual chunking                                       |
+| Build      | Vite 6                         | Fast HMR, Rollup manual chunking                                       |
 | Styling    | Tailwind CSS v4                | Vite plugin, no PostCSS config needed                                  |
 | Animation  | Motion                         | Respects `prefers-reduced-motion` throughout                           |
 | Testing    | Vitest + React Testing Library | Shares the Vite config; jsdom environment                              |
@@ -85,7 +93,7 @@ npm run dev            # http://localhost:3000
 | Script                  | Does                                                  |
 | ----------------------- | ----------------------------------------------------- |
 | `npm run dev`           | Vite dev server                                       |
-| `npm run build`         | Vite build → prerender 22 routes → bundle the API     |
+| `npm run build`         | Vite build → prerender static routes → bundle the API     |
 | `npm run preview`       | Serve the production build locally                    |
 | `npm run typecheck`     | `tsc --noEmit` under strict mode                      |
 | `npm run lint`          | ESLint                                                |
@@ -106,7 +114,7 @@ linacre.site/
 ├── api/
 │   └── server.ts              Express API (contact, status, proxies)
 ├── scripts/
-│   ├── prerender.mjs          Static-renders 22 routes + sitemap.xml + llms-full.txt
+│   ├── prerender.mjs          Static-renders routes + sitemap.xml + llms-full.txt
 │   └── agents/                Maintenance tooling
 ├── src/
 │   ├── App.tsx                Shell: routing, theming, layout
@@ -125,7 +133,7 @@ linacre.site/
 
 ### Design decisions worth knowing
 
-**Prerendering over SSR.** `scripts/prerender.mjs` emits static HTML for 22
+**Prerendering over SSR.** `scripts/prerender.mjs` emits static HTML for selected
 routes at build time. Crawlers get real content with no JS; users get an SPA
 after hydration. No server rendering cost.
 
@@ -145,8 +153,8 @@ third-party font requests.
 
 ## Accessibility
 
-Verified with axe-core against WCAG 2.0/2.1/2.2 A **and** AA at 390 px and
-1440 px: **0 violations, 27 passing checks** on both.
+The interface includes the following accessibility features. They are not a
+claim of independently verified WCAG conformance:
 
 - Full ARIA tabs pattern — `tablist` container, `aria-controls` ↔
   `aria-labelledby` wiring, roving `tabindex`, arrow-key navigation
@@ -163,7 +171,7 @@ The tabs contract is covered by tests, so the fix can't silently regress.
 ## Testing
 
 ```bash
-npm test                  # 18 tests
+npm test                  # unit and component tests
 npm run test:coverage     # V8 coverage
 ```
 
@@ -214,7 +222,27 @@ their feature rather than breaking the build.
 | ----------------------------------- | --------------------- |
 | `GEMINI_API_KEY`                    | AI assistant          |
 | `UPSTASH_REDIS_REST_URL` / `_TOKEN` | API rate limiting     |
-| `RESEND_API_KEY`                    | Contact form delivery |
+| `RESEND_API_KEY` | Contact delivery API key |
+| `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL` | Verified sender and destination for contact mail |
+| `DASHBOARD_SESSION_SECRET`, `DASHBOARD_PASSWORD_HASH` | Dashboard session signing and SHA-256 password hash |
+
+Contact submission returns an error until all three contact variables are set;
+Resend must verify the sender domain. A provider acceptance response is not proof
+of final inbox delivery. Dashboard sign-in is disabled without a session secret
+of at least 32 characters and a configured password hash. Google sign-in is not
+implemented. Generate a hash locally with
+`node -e "console.log(require('crypto').createHash('sha256').update(process.argv[1]).digest('hex'))" 'YOUR_LONG_RANDOM_PASSWORD'`
+(use a private terminal; avoid leaving passwords in shell history). Rotate any
+credentials formerly used with the removed built-in password. Serverless in-memory
+rate limits are per instance, not a global abuse protection; configure Upstash
+and provider-side quotas. Contact limiting remains per instance.
+
+GitHub Pages is static and does not host the Express API. A Vite preview likewise
+serves static output only; use `NODE_ENV=production npm start` after building to
+run the Express server locally. Existing `contacts.json` files, if any, may
+contain personal data and must be secured and backed up separately; the server
+no longer writes them. Vercel redeployment/rollback uses the provider dashboard;
+no database backup is configured in this repository.
 
 ---
 

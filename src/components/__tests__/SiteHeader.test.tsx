@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import SiteHeader from '../SiteHeader';
@@ -39,6 +39,16 @@ describe('SiteHeader', () => {
 
     await user.click(screen.getByRole('button', { name: 'Search projects and pages' }));
     expect(props.onOpenSearch).toHaveBeenCalledOnce();
+  });
+
+  it('preserves modified clicks for native open-in-new-tab behavior', () => {
+    const { props } = renderHeader();
+    const navigation = screen.getByRole('navigation', { name: 'Primary navigation' });
+    const toolsLink = within(navigation).getByRole('link', { name: 'Tools' });
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true, ctrlKey: true });
+    fireEvent(toolsLink, event);
+    expect(event.defaultPrevented).toBe(false);
+    expect(props.onNavigate).not.toHaveBeenCalled();
   });
 
   it('opens the More menu and navigates to secondary destinations', async () => {

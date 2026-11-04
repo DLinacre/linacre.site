@@ -19,10 +19,10 @@ describe('StartPage', () => {
     renderStartPage();
 
     expect(
-      screen.getByRole('heading', { level: 1, name: /Useful software,.*made with intent/i }),
+      screen.getByRole('heading', { level: 1, name: /Independent software,.*made to be useful/i }),
     ).toBeInTheDocument();
     expect(screen.getByRole('search')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Explore the library/i })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Explore projects/i })).toHaveAttribute(
       'href',
       '#project-library',
     );

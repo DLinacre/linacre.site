@@ -1,5 +1,11 @@
 # Project: linacre.site Enhancements, Developer Tools, Tabulous Games & Verification
 
+> **2026-11-04 status note:** The following is historical planning, not a verified
+> current inventory, delivery commitment, playability guarantee, or instruction
+> to push directly to `main`. Revalidate links, project status and ownership
+> before presenting them as facts. See [AUDIT.md](AUDIT.md) and [README.md](README.md)
+> for current verification, build and deployment guidance.
+
 ## Architecture
 - **Framework**: React 19 + TypeScript 5.8 + Vite 6
 - **Styling**: Tailwind CSS 4.1 + modern glassmorphism design tokens
