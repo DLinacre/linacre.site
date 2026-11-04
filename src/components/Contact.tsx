@@ -1,7 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Send, CheckCircle, ShieldAlert, Lock, Calendar } from 'lucide-react';
-import FAQ from './FAQ';
 
 /**
  * Plain-English contact form (audit CRO-01 / UX-03 / #006 / #017).
@@ -150,7 +149,7 @@ export default function Contact() {
   return (
     <motion.div
       variants={containerVariants}
-      initial="hidden"
+      initial={false}
       animate="show"
       className="space-y-12 animate-fade-in"
     >
@@ -176,7 +175,7 @@ export default function Contact() {
         {/* Info column */}
         <motion.div variants={itemVariants} className="lg:col-span-4 space-y-6">
           <div className="bg-muted/10 border border-border-color rounded-xl p-6 space-y-4 text-sm text-muted-foreground">
-            <h3 className="text-foreground font-bold text-sm font-display">What to include</h3>
+            <h2 className="text-foreground font-bold text-sm font-display">What to include</h2>
             <ul className="space-y-1.5 text-xs leading-relaxed list-disc pl-4">
               <li>What are you building, and why now?</li>
               <li>Rough budget and timeline (best guess is fine)</li>
@@ -189,13 +188,12 @@ export default function Contact() {
                 <span>HTTPS &middot; UK GDPR &middot; NDA-friendly</span>
               </div>
               <p className="text-muted-foreground/70">
-                We use your email and message only to reply. Retained max 30 days post-resolution.
-                See{' '}
-                <a href="/privacy" className="text-amber-color hover:underline">
+                For details on how enquiries are handled, see{' '}
+                <a href="/privacy" className="text-amber-color underline">
                   Privacy
                 </a>{' '}
                 and{' '}
-                <a href="/cookie-policy" className="text-amber-color hover:underline">
+                <a href="/cookie-policy" className="text-amber-color underline">
                   Cookie Policy
                 </a>
                 .
@@ -204,7 +202,7 @@ export default function Contact() {
           </div>
 
           <div className="bg-amber-color/5 border border-border-color rounded-xl p-6 space-y-3">
-            <h3 className="text-amber-color font-bold text-sm font-display">Prefer to talk?</h3>
+            <h2 className="text-amber-color font-bold text-sm font-display">Prefer to talk?</h2>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Email a couple of time slots that suit you and I&#39;ll send a calendar invite for a
               free 15-minute discovery call.
@@ -478,11 +476,11 @@ export default function Contact() {
                       />
                       <span>
                         I agree to the{' '}
-                        <a href="/privacy" className="text-amber-color hover:underline">
+                        <a href="/privacy" className="text-amber-color underline">
                           Privacy Policy
                         </a>{' '}
                         and{' '}
-                        <a href="/terms" className="text-amber-color hover:underline">
+                        <a href="/terms" className="text-amber-color underline">
                           Terms
                         </a>
                         . <span className="text-amber-color">*</span>
@@ -573,7 +571,6 @@ export default function Contact() {
       <div className="linacre-pulse-line w-full my-8" />
 
       <motion.div variants={itemVariants}>
-        <FAQ />
       </motion.div>
     </motion.div>
   );

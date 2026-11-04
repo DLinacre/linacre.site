@@ -26,7 +26,7 @@
         --panel: #232834;
         --line: #2d3440;
         --ink: #cccac2;
-        --muted: #5c6773;
+        --muted: #a4afbd;
         --dim: #39414f;
         --live: #73d0ff;
         --core: #ffcc66;
@@ -119,6 +119,7 @@
 
       /* ---------- Board ---------- */
       .stage {
+        overflow: clip;
         flex: 1 1 auto;
         display: grid;
         place-items: center;
@@ -487,7 +488,7 @@
       </header>
 
       <div class="stage">
-        <div class="board" id="board" role="grid" aria-label="Circuit grid"></div>
+        <div class="board" id="board" role="group" aria-label="Circuit grid"></div>
       </div>
 
       <p class="hint-line" id="status">TAP TO TURN · HOLD OR RIGHT-CLICK TO TURN BACK</p>

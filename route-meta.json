@@ -7,8 +7,8 @@
   },
   "routes": {
     "/": {
-      "title": "LIN4CRE — Independent Software, Tools & Games",
-      "description": "Explore David Linacre’s independent software projects, browser tools, AI experiments and games, with links to applications and source code.",
+      "title": "LIN4CRE — Independent software, made with purpose",
+      "description": "Selected software, browser tools, research interfaces and games by David Linacre, an independent developer in South Yorkshire.",
       "canonical": "https://www.linacre.site/",
       "index": true
     },
@@ -19,10 +19,9 @@
       "index": true
     },
     "/games": {
-      "title": "Tabulous Games — Browser game directory | LIN4CRE",
-      "description": "Explore a directory of browser game links by genre. Games are hosted by third parties and availability or requirements can vary.",
+      "title": "Games — LIN4CRE",
+      "description": "Play Circuit, Decrypt and Gridlock: three browser games from LIN4CRE.",
       "canonical": "https://www.linacre.site/games",
-      "image": "https://www.linacre.site/games/assets/brand/og-image.png",
       "index": true
     },
     "/music-videos": {
@@ -58,8 +57,8 @@
       "index": true
     },
     "/about": {
-      "title": "About David Linacre — full-stack & AI engineer",
-      "description": "David Linacre's background in software engineering, technical philosophy, skills matrix, career timeline and the site changelog.",
+      "title": "About David Linacre | LIN4CRE",
+      "description": "Meet David Linacre, a self-taught software developer in Barnsley, South Yorkshire.",
       "canonical": "https://www.linacre.site/about",
       "index": true
     },

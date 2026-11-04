@@ -15,6 +15,19 @@
 
 ---
 
+## Portfolio curation (2026-11-04)
+
+The public home now presents Browser Tools, OSINT HUD and Music Videos, plus
+three self-hosted games (Circuit, Decrypt and Gridlock). The previous project
+and third-party game data and individual routes remain in the repository; they
+are not a public catalogue. The selection is provisional where external
+playback and other projects could not be tested. See
+[the internal selection record](docs/portfolio-curation-2026-11-04.md).
+
+The Vite build emits a React/prerendered `/games` page; it does not run the old
+game-directory generator. `npm run games:build` remains a maintenance command
+that updates the legacy source directory, not the new public games page.
+
 ## Overview
 
 A React 19 single-page application with prerendered static routes, deployed on
@@ -24,9 +37,8 @@ Vercel. It serves three purposes:
    utilities that run client-side; the optional AI playground sends prompts to the configured API, and external services have their own policies.
 2. **A project showcase** — live builds, downloadable releases, and inspectable
    source.
-3. **A games hub** — links to third-party browser games (availability and requirements vary) plus
-   [Slime Factory Tycoon](https://github.com/DLinacre/slime-factory-tycoon), an
-   open-source Roblox idle-tycoon.
+3. **A small games collection** — Circuit, Decrypt and Gridlock, hosted on
+   this site. Other game assets and historical directory data are preserved.
 
 ---
 
@@ -39,11 +51,8 @@ before merging or deploying. See [AUDIT.md](AUDIT.md) and
 [hardening notes](docs/2026-11-04-hardening.md). Existing or exposed dashboard
 credentials should be rotated. No real contact email delivery has been tested.
 
-The games directory lists external hosts; no blanket guarantee is made about
-playability, ownership, safety or download requirements. Its checked-in data is
-`public/games/games.json`. `npm run build` regenerates the directory **in dist
-only**. Use `npm run games:build` to explicitly refresh checked-in generated
-files, then review the diff.
+The previous external games directory is retained as historical data in
+`public/games/games.json`; its external hosts have not been verified. `npm run games:build` explicitly refreshes the legacy checked-in directory; review its diff. The regular build emits the curated React games page instead.
 
 ## Verification
 

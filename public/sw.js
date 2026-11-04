@@ -1,6 +1,6 @@
 // linacre.site service worker
 // Versioned site cache. Do not delete caches belonging to other applications.
-var CACHE = 'linacre-v18';
+var CACHE = 'linacre-v19';
 var OFFLINE_URL = 'offline.html';
 var URLS = [
   '.',

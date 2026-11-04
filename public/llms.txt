@@ -1,34 +1,13 @@
-# linacre.site
+# LIN4CRE
 
-> David Linacre builds reliable web applications, developer tools and automation systems. Full-stack engineer focused on speed, security, and developer experience.
+Independent software, browser tools and games by David Linacre in South Yorkshire.
 
-## Full Content
-- /llms-full.txt — complete site content (services & pricing, full project catalogue, toolkit), generated at build for AI retrieval.
+## Selected work
+- /tools — Browser utilities and a developer playground. The optional AI feature uses an external service.
+- /osint — Searchable open-source research directory.
+- /music-videos — Proper Mad music-video collection, with playback on an external host.
+- /games — Three self-hosted browser games: Circuit, Decrypt and Gridlock.
+- /about — About David Linacre.
+- /contact — Contact form.
 
-## About
-- Full name: David Christopher Linacre
-- Location: United Kingdom
-- Contact: david@linacre.site
-- GitHub: https://github.com/DLinacre
-- Expertise: React, TypeScript, Go, Python, Docker, AI engineering, developer tools
-
-## Key Pages
-- / — Complete project index with search (49 apps, tools, AI products and games)
-- /tools — Private in-browser utilities (JSON, Base64, timestamps, generators, VAT, text tools) + curated directory
-- /games — Playable browser games and Roblox projects
-- /lab — Interactive AI model sandbox
-- /identity — Brand asset exporter (logos, banners, social cards)
-- /about — Detailed bio, skills and changelog
-- /contact — Enquiry form
-
-## Notable Projects
-- Whole-Home Ad Blocker — one-click Windows installer for network-wide ad blocking (AdGuard Home).
-- Smart Mail AI — AI-powered unified inbox with smart categorisation (Gemini).
-- Mob Deals — Transparent UK SIM-only comparison and PAC/STAC switching help.
-- PokeGuru — Pokémon TCG search, UK pricing, set history, and local collection tracking.
-- APKHub — Open-source Android APK release indexer.
-- Linacre Uninstaller — Safety-tiered Android app review and guided uninstall utility.
-- Tap & Slap — dance-mat rhythm brawler (Next.js + Phaser 3).
-- KushCloud — one-tap arcade flyer with synthesised audio.
-- Slime Factory Tycoon — open-source Roblox idle-tycoon template.
-- linacre.site — this site: complete project index, private browser tools, and a developer playground.
+Source: https://github.com/LIN4CRE/linacre.site

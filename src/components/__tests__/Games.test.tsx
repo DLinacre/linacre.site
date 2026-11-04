@@ -2,12 +2,11 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import Games from '../Games';
 
-describe('Tabulous Games gateway', () => {
-  it('renders the Tabulous Games launch link and redirect gateway', () => {
+describe('curated games', () => {
+  it('links directly to the three self-hosted games', () => {
     render(<Games />);
-    expect(screen.getByText('Launching Tabulous Games...')).toBeInTheDocument();
-    expect(
-      screen.getByRole('link', { name: /Click here if not redirected automatically/i }),
-    ).toHaveAttribute('href', '/games');
+    expect(screen.getByRole('link', { name: /play circuit/i })).toHaveAttribute('href', '/games/circuit');
+    expect(screen.getByRole('link', { name: /play decrypt/i })).toHaveAttribute('href', '/games/decrypt');
+    expect(screen.getByRole('link', { name: /play gridlock/i })).toHaveAttribute('href', '/games/gridlock');
   });
 });
