@@ -51,3 +51,7 @@
 /* Keep legacy application links distinguishable and readable within the new shell. */
 .portfolio-shell .music-videos-open-link { color: #e6f3ff; }
 .music-videos-player-note a, .music-videos-credit a { text-decoration: underline; text-underline-offset: .2em; }
+@media (max-width:360px) {
+  .studio-nav { font-size:10px; }
+  .studio-nav a { margin-right:8px; }
+}
