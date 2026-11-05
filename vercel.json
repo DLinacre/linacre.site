@@ -70,7 +70,7 @@
     },
     {
       "source": "/work",
-      "destination": "/contact",
+      "destination": "/#work",
       "permanent": true
     },
     {
@@ -140,15 +140,6 @@
     },
     {
       "source": "/games/(.*)",
-      "headers": [
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https:; font-src 'self' data: https:; connect-src 'self' https: data: blob:; worker-src 'self' blob:; frame-src 'self' https:; object-src 'none'; base-uri 'self';"
-        }
-      ]
-    },
-    {
-      "source": "/games",
       "headers": [
         {
           "key": "Content-Security-Policy",

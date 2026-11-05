@@ -1,13 +1,24 @@
 # LIN4CRE
 
-Independent software, browser tools and games by David Linacre in South Yorkshire.
+Independent software studio by David Linacre in Barnsley, South Yorkshire, UK.
 
-## Selected work
-- /tools — Browser utilities and a developer playground. The optional AI feature uses an external service.
-- /osint — Searchable open-source research directory.
-- /music-videos — Proper Mad music-video collection, with playback on an external host.
-- /games — Three self-hosted browser games: Circuit, Decrypt and Gridlock.
-- /about — About David Linacre.
-- /contact — Contact form.
+## Selected Work
+- Dual Audio Synchronizer (https://lin4cre.github.io/dual-audio-synchronizer/) — Native Windows C# / WASAPI multi-speaker audio engine with ±1 ms phase-locked drift control, 2.8 kHz Vocal Clarity EQ, and true stereo channel split. Source: https://github.com/LIN4CRE/dual-audio-synchronizer
+- CubeLab (https://dlinacre.github.io/cubelab/) — Interactive 3D Rubik's Cube solver and trainer powered by a Web Worker Kociemba two-phase engine (≤21 moves), 7-stage visual guide, verified OLL/PLL algorithms, and offline PWA support. Source: https://github.com/LIN4CRE/cubelab
+- HELIX (https://www.linacre.site/helix/) — Zero-dependency artificial-life observatory evolving 64 digital organisms on a custom 20-opcode register VM with Shannon entropy fitness and live genome disassembly. Source: https://github.com/DLinacre/helix
+- Orbit & Earth Observatory (https://www.linacre.site/orbit) — Real-time planetary telemetry desk plotting live ISS orbital tracks, solar day/night terminator, USGS M4.5+ seismic events, and global rocket launches. Source: https://github.com/LIN4CRE/linacre.site
+- SpeedRead (https://lin4cre.github.io/SpeedRead/) — Offline-first RSVP speed-reading studio with Optimal Recognition Point reticles, adaptive cadence, 19 bundled classics, and local PDF/EPUB parsing. Source: https://github.com/LIN4CRE/SpeedRead
+
+## Selected Games
+- Afterglow (https://dlinacre.github.io/afterglow/) — Generative long-exposure light-painting studio and trace puzzle game. Source: https://github.com/DLinacre/afterglow
+- Circuit (https://www.linacre.site/games/circuit) — Spatial conduit-rotation logic puzzle with campaign and daily seeded grids.
+- Decrypt (https://www.linacre.site/games/decrypt) — Daily symbol-deduction codebreaker with streak tracking.
+- Gridlock (https://www.linacre.site/games/gridlock) — Turn-based territory strategy game against a tactical heuristic AI or local opponent.
+
+## Studio Pages
+- Home: https://www.linacre.site/
+- Games: https://www.linacre.site/games
+- About: https://www.linacre.site/about
+- Contact: https://www.linacre.site/contact
 
 Source: https://github.com/LIN4CRE/linacre.site

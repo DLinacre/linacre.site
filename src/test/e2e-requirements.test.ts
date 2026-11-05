@@ -597,15 +597,18 @@ describe('Tier 1 — Feature Coverage', () => {
       }
     });
 
-    it('1.5.3 enforces noindex on confirmation route and index on public content routes', () => {
+    it('1.5.3 enforces noindex on confirmation and archived routes and index on curated studio routes', () => {
       expect(routeMeta.routes['/contact/thanks'].index).toBe(false);
+      expect(routeMeta.routes['/ops'].index).toBe(false);
+      expect(routeMeta.routes['/lab'].index).toBe(false);
+      expect(routeMeta.routes['/identity'].index).toBe(false);
+      expect(routeMeta.routes['/mob-deals'].index).toBe(false);
+      expect(routeMeta.routes['/pokeguru'].index).toBe(false);
       expect(routeMeta.routes['/'].index).toBe(true);
-      expect(routeMeta.routes['/tools'].index).toBe(true);
       expect(routeMeta.routes['/games'].index).toBe(true);
-      expect(routeMeta.routes['/ops'].index).toBe(true);
-      expect(routeMeta.routes['/music-videos'].index).toBe(true);
-      expect(routeMeta.routes['/osint'].index).toBe(true);
       expect(routeMeta.routes['/orbit'].index).toBe(true);
+      expect(routeMeta.routes['/about'].index).toBe(true);
+      expect(routeMeta.routes['/contact'].index).toBe(true);
     });
 
     it('1.5.4 updates document head tags dynamically via RouteHead component', () => {
@@ -1088,11 +1091,11 @@ describe('Tier 4 — Real-World Application Scenarios', () => {
       'utf8',
     );
 
-    // Step 1: Crawler parses all indexable routes for sitemap generation
+    // Step 1: Crawler parses all curated studio + legal indexable routes for sitemap generation
     const indexableRoutes = Object.entries(routeMeta).filter(
       ([, meta]: [string, any]) => meta.index === true,
     );
-    expect(indexableRoutes.length).toBe(17); // 18 total minus /contact/thanks
+    expect(indexableRoutes.length).toBe(9); // /, /games, /orbit, /about, /contact + 4 legal routes
 
     // Step 2: Crawler verifies canonical URLs are absolute and use HTTPS
     for (const [, meta] of indexableRoutes as Array<[string, RouteMeta]>) {

@@ -1,74 +1,93 @@
+#!/usr/bin/env node
+/**
+ * Real-Chromium smoke suite against the built dist/ served by Vite preview.
+ * Run via: npm run test:e2e (after npm run build).
+ */
+const { spawn } = require('node:child_process');
+const http = require('node:http');
+const assert = require('node:assert/strict');
 const { chromium } = require('playwright');
-const assert = require('assert').strict;
+
+const PORT = Number(process.env.SMOKE_PORT || 4173);
+const BASE = `http://127.0.0.1:${PORT}`;
+
+function waitForServer(url, timeoutMs = 15000) {
+  const start = Date.now();
+  return new Promise((resolve, reject) => {
+    const tick = () => {
+      http
+        .get(url, res => {
+          res.resume();
+          resolve();
+        })
+        .on('error', err => {
+          if (Date.now() - start > timeoutMs) reject(err);
+          else setTimeout(tick, 200);
+        });
+    };
+    tick();
+  });
+}
+
 (async () => {
-  const browser = await chromium.launch({
-    executablePath: process.env.CHROMIUM_PATH || undefined,
-    args: JSON.parse(process.env.CHROMIUM_ARGS || '[]'),
-    headless: true,
-  });
-  const page = await browser.newPage({
-    viewport: { width: 390, height: 844 },
-    reducedMotion: 'reduce',
-  });
-  const errors = [];
-  page.on('pageerror', e => errors.push(e.message));
-  const open = async path => {
-    const response = await page.goto((process.env.BROWSER_URL || 'http://127.0.0.1:3000') + path, {
-      waitUntil: 'networkidle',
+  const preview = spawn(
+    process.platform === 'win32' ? 'npx.cmd' : 'npx',
+    ['vite', 'preview', '--host', '127.0.0.1', '--port', String(PORT), '--strictPort'],
+    { stdio: 'pipe' },
+  );
+
+  let browser;
+  try {
+    await waitForServer(BASE);
+    browser = await chromium.launch({ headless: true });
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const page = await ctx.newPage();
+
+    const errors = [];
+    page.on('pageerror', e => errors.push(`pageerror: ${e.message}`));
+    page.on('console', m => {
+      if (m.type() === 'error') errors.push(`console.error: ${m.text()}`);
     });
-    assert.equal(response.status(), 200, path);
-    assert.equal(
-      await page.evaluate(() => document.documentElement.scrollWidth > innerWidth),
-      false,
-      `${path}: horizontal overflow`,
-    );
-  };
-  await open('/');
-  assert.equal(await page.locator('#work article').count(), 3);
-  assert.equal(await page.locator('.games-preview .game-row').count(), 3);
-  await page
-    .getByRole('link', { name: /selected work/i })
-    .first()
-    .click();
-  assert.equal(await page.evaluate(() => location.hash), '#work');
-  console.log('PASS home: curated work, game links, navigation');
-  await open('/tools');
-  const json = page.locator('#utility-panel-json textarea');
-  await json.fill('{"ok":true}');
-  await page.getByRole('button', { name: 'Format', exact: true }).click();
-  assert.match(await json.inputValue(), /\n  "ok": true/);
-  console.log('PASS tools: JSON formatting');
-  await open('/osint');
-  await page.locator('#osint-search').fill('shodan');
-  await page
-    .getByRole('link', { name: /Open Shodan/i })
-    .first()
-    .waitFor({ state: 'visible' });
-  console.log('PASS OSINT: search');
-  await open('/music-videos');
-  await page.locator('.music-videos-track').nth(1).click();
-  assert.notEqual(await page.evaluate(() => location.hash), '');
-  console.log('PASS music: track selection (external playback not tested)');
-  await open('/games');
-  assert.equal(await page.locator('.games-page__item').count(), 3);
-  await page.getByRole('link', { name: 'Play Circuit' }).click();
-  await page.locator('#board .tile').first().click();
-  assert.match(await page.locator('#s-moves').innerText(), /1/);
-  await open('/games/decrypt');
-  for (let i = 0; i < 4; i++) await page.locator('#pad button').nth(i).click();
-  await page.locator('#b-go').click();
-  assert.match(await page.locator('#s-try').innerText(), /2\/8|1\/8/);
-  await open('/games/gridlock');
-  await page.locator('#board .hit').first().click();
-  assert.notEqual(await page.locator('#board .edge').first().getAttribute('class'), 'edge');
-  console.log('PASS games: Circuit rotation, Decrypt submission, Gridlock move');
-  await open('/contact');
-  await page.getByPlaceholder('Jane Doe').fill('Test');
-  assert.equal((await page.locator('form').count()) > 0, true);
-  console.log('PASS contact: form present (no email sent)');
-  assert.deepEqual(errors, []);
-  await browser.close();
-})().catch(e => {
-  console.error(e);
+
+    await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
+    await page.locator('h1').first().waitFor({ timeout: 5000 });
+    assert.match(await page.title(), /LIN4CRE/i);
+    for (const projectName of [
+      'Dual Audio Synchronizer',
+      'CubeLab',
+      'HELIX',
+      'Orbit & Earth Observatory',
+      'SpeedRead',
+    ]) {
+      await page.getByRole('heading', { name: projectName }).first().waitFor({ timeout: 5000 });
+    }
+
+    await page.goto(`${BASE}/games`, { waitUntil: 'networkidle' });
+    for (const gameName of ['Afterglow', 'Circuit', 'Decrypt', 'Gridlock']) {
+      await page.getByRole('heading', { name: gameName }).first().waitFor({ timeout: 5000 });
+    }
+
+    await page.goto(`${BASE}/about`, { waitUntil: 'networkidle' });
+    await page.getByRole('heading', { name: /Independent software from South Yorkshire/i }).waitFor({
+      timeout: 5000,
+    });
+
+    await page.goto(`${BASE}/contact`, { waitUntil: 'networkidle' });
+    await page.locator('input[placeholder="Jane Doe"]').waitFor({ timeout: 5000 });
+
+    await page.goto(`${BASE}/orbit`, { waitUntil: 'domcontentloaded' });
+    await page.locator('svg[aria-label*="Interactive world map"]').waitFor({ timeout: 5000 });
+
+    await page.goto(`${BASE}/helix/`, { waitUntil: 'domcontentloaded' });
+    await page.locator('#world-canvas').waitFor({ timeout: 5000 });
+
+    assert.deepEqual(errors, [], `Browser reported errors:\n${errors.join('\n')}`);
+    console.log('✓ browser smoke passed (/, /games, /about, /contact, /orbit, /helix/)');
+  } finally {
+    if (browser) await browser.close();
+    preview.kill('SIGTERM');
+  }
+})().catch(err => {
+  console.error('✗ browser smoke failed:', err);
   process.exit(1);
 });

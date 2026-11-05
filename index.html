@@ -2,65 +2,68 @@
 <html lang="en-GB" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--ROUTE_HEAD-->
-    <title>Linacre.site — every project, tool and game by David Linacre</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#080a0e" />
+
+    <!-- PRERENDER-HEAD-START -->
+    <title>LIN4CRE — Independent Software Studio · David Linacre</title>
     <meta
       name="description"
-      content="The complete index of David Linacre's work: live apps, AI products, developer tools and games, all searchable from one page."
+      content="Independent software studio by David Linacre in South Yorkshire. Selected native Windows audio software, 3D & simulation web applications, and original browser games."
     />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.linacre.site/" />
-    <!--/ROUTE_HEAD-->
-    <meta name="author" content="David Christopher Linacre" />
-    <meta name="theme-color" content="#07080b" />
-    <meta name="color-scheme" content="dark light" />
-
-    <!-- Preconnect / DNS-prefetch (Performance) -->
-    <!-- Default fonts are self-hosted, but custom themes load Google Fonts via
-         @import (src/config/brand.ts), and the AI Lab pulls sprites from
-         Pokémon Showdown — warm those connections up early. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://play.pokemonshowdown.com" />
-
-    <!-- Critical self-hosted fonts -->
-    <link
-      rel="preload"
-      href="/fonts/inter-var-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
+    <meta property="og:title" content="LIN4CRE — Independent Software Studio · David Linacre" />
+    <meta
+      property="og:description"
+      content="Selected native Windows audio software, 3D & simulation web applications, and original browser games by David Linacre."
     />
-    <link
-      rel="preload"
-      href="/fonts/space-grotesk-var-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LIN4CRE" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:url" content="https://www.linacre.site/" />
+    <meta property="og:image" content="https://www.linacre.site/showcase/dual-audio-synchronizer.webp" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="800" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LIN4CRE — Independent Software Studio · David Linacre" />
+    <meta
+      name="twitter:description"
+      content="Selected native Windows audio software, 3D & simulation web applications, and original browser games."
     />
-    <link
-      rel="preload"
-      href="/fonts/jetbrains-mono-var-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <meta name="twitter:image" content="https://www.linacre.site/showcase/dual-audio-synchronizer.webp" />
+    <!-- PRERENDER-HEAD-END -->
 
-    <!-- Web App & PWA Support -->
     <link rel="manifest" href="/manifest.json" />
-
-    <!-- Icons -->
-    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <!-- Hreflang -->
-    <link rel="alternate" hreflang="en-GB" href="https://www.linacre.site/" />
-    <link rel="alternate" hreflang="x-default" href="https://www.linacre.site/" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/inter-latin-wght-normal.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/space-grotesk-latin-wght-normal.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/jetbrains-mono-latin-wght-normal.woff2"
+      crossorigin
+    />
   </head>
-  <body>
-    <div id="root" style="min-height: 100svh"><!--ROUTE_CONTENT--></div>
+  <body class="bg-background text-foreground antialiased">
+    <div id="root"></div>
+    <!-- PRERENDER-NOSCRIPT -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -40,6 +40,7 @@ export default function App() {
     }
     return 'home';
   });
+
   useEffect(() => {
     document.documentElement.classList.remove('light');
     document.documentElement.classList.add('dark');
@@ -58,23 +59,22 @@ export default function App() {
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
+  const isHome = activeTab === 'home';
+
   return (
-    <div className="portfolio-shell min-h-screen">
-      {/* WCAG 2.2 AA Skip to Content Link */}
-      <a href="#main-content" className="skip-link">
+    <div className="studio-shell">
+      <a href="#main-content" className="studio-skip">
         Skip to content
       </a>
 
-      {/* Dynamic Route Title & SEO Sync */}
       <RouteHead meta={currentMeta} />
 
-      <StudioHeader />
+      <StudioHeader activeTab={String(activeTab)} />
 
-      {/* Main Content Area */}
       <main
         id="main-content"
         tabIndex={-1}
-        className="portfolio-main"
+        className={isHome ? 'studio-main' : 'studio-main studio-main--contained'}
       >
         <Suspense fallback={<RouteLoading />}>
           {activeTab === 'home' && <StartPage />}
@@ -98,7 +98,23 @@ export default function App() {
         </Suspense>
       </main>
 
-      <footer className="studio-footer"><span>© {new Date().getFullYear()} David Linacre</span><span>Independent software · South Yorkshire</span><nav aria-label="Footer navigation"><a href="https://github.com/LIN4CRE">GitHub ↗</a><a href="/privacy">Privacy</a><a href="/accessibility">Accessibility</a><a href="/terms">Terms</a></nav></footer>
+      <footer className="studio-footer">
+        <div className="studio-footer__inner">
+          <div className="studio-footer__meta">
+            <span>© {new Date().getFullYear()} LIN4CRE · David Linacre</span>
+            <span>Barnsley, South Yorkshire</span>
+          </div>
+          <nav className="studio-footer__nav" aria-label="Footer navigation">
+            <a href="https://github.com/LIN4CRE" target="_blank" rel="noopener noreferrer">
+              GitHub ↗
+            </a>
+            <a href="/privacy">Privacy</a>
+            <a href="/cookie-policy">Storage</a>
+            <a href="/accessibility">Accessibility</a>
+            <a href="/terms">Terms</a>
+          </nav>
+        </div>
+      </footer>
     </div>
   );
 }

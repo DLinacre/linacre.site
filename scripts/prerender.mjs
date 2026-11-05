@@ -112,7 +112,8 @@ const ROUTE_LABEL = Object.fromEntries(
   Object.entries(meta.routes).map(([route, m]) => [route, m.title.split(' — ')[0].split(' | ')[0]]),
 );
 
-const publicProjects = data.projects.filter(p => p.url);
+const publicProjects = data.selectedWork;
+const publicGames = data.selectedGames;
 const osintPayload = JSON.parse(
   fs.readFileSync(path.join(root, 'public', 'data', 'osint-hud.json'), 'utf8'),
 );
@@ -151,17 +152,19 @@ function jsonLdFor(route, m) {
     graph.push({
       '@type': 'ItemList',
       '@id': `${SITE}/#work`,
-      name: 'Projects by David Linacre',
+      name: 'Selected Work by LIN4CRE',
       itemListElement: publicProjects.map((p, i) => ({
         '@type': 'ListItem',
         position: i + 1,
         item: {
-          '@type': p.name === 'Music Videos' ? 'CreativeWork' : 'SoftwareApplication',
+          '@type': 'SoftwareApplication',
           name: p.name,
-          url: p.url.startsWith('/') ? `${SITE}${p.url}` : p.url,
-          description: p.blurb,
+          url: p.primaryAction.href.startsWith('/')
+            ? `${SITE}${p.primaryAction.href}`
+            : p.primaryAction.href,
+          description: p.summary,
           applicationCategory: 'DeveloperApplication',
-          operatingSystem: 'Web',
+          operatingSystem: p.id === 'dual-audio-synchronizer' ? 'Windows' : 'Web',
           author: { '@id': `${SITE}/#person` },
         },
       })),
@@ -230,11 +233,9 @@ function headFor(route, m) {
     `<meta name="twitter:description" content="${desc}" />`,
     `<meta name="twitter:image" content="${image}" />`,
   ];
-  // PERF-02: preload the avatar only where it renders as an above-the-fold
-  // LCP candidate — /about alone.
-  if (route === '/about') {
+  if (route === '/') {
     lines.push(
-      `<link rel="preload" as="image" href="/profile_avatar.webp" type="image/webp" fetchpriority="high" />`,
+      `<link rel="preload" as="image" href="/showcase/dual-audio-synchronizer.webp" type="image/webp" fetchpriority="high" />`,
     );
   }
   lines.push(`<script type="application/ld+json">${jsonLdFor(route, m)}</script>`);
@@ -244,11 +245,8 @@ function headFor(route, m) {
 // ------------------------------------------------- static content snapshots
 const NAV = [
   ['/', 'Home'],
-  ['/tools', 'Tools'],
+  ['/#work', 'Selected Work'],
   ['/games', 'Games'],
-  ['/music-videos', 'Music Videos'],
-  ['/osint', 'OSINT HUD'],
-  ['/orbit', 'Orbit'],
   ['/about', 'About'],
   ['/contact', 'Contact'],
 ];
@@ -286,12 +284,31 @@ const CTA_BLOCK = `
 
 function pageBody(route) {
   switch (route) {
-    case '/':
-      return `<h1>Independent software, made with purpose.</h1>
-<p>Selected work by David Linacre, a self-taught developer in South Yorkshire.</p>
-<h2>Selected work</h2><ul><li><a href="/tools">Browser Tools</a> — useful utilities in your browser.</li><li><a href="/osint">OSINT HUD</a> — a searchable directory of research resources.</li><li><a href="/music-videos">Music Videos</a> — the Proper Mad collection.</li></ul>
-<h2>Games</h2><p><a href="/games">Explore Circuit, Decrypt and Gridlock.</a></p>
-<p><a href="/about">About David</a> · <a href="/contact">Contact</a></p>`;
+    case '/': {
+      const workItems = publicProjects
+        .map(
+          p =>
+            `  <li><a href="${esc(p.primaryAction.href)}">${esc(p.name)}</a> — ${esc(p.summary)}</li>`,
+        )
+        .join('\n');
+      const gameItems = publicGames
+        .map(
+          g =>
+            `  <li><a href="${esc(g.playAction.href)}">${esc(g.name)}</a> — ${esc(g.summary)}</li>`,
+        )
+        .join('\n');
+      return `<h1>Focused software, built to do one thing properly.</h1>
+<p>LIN4CRE is the independent software studio of David Linacre in Barnsley, South Yorkshire.</p>
+<h2>Selected Work</h2>
+<ul>
+${workItems}
+</ul>
+<h2>Selected Games</h2>
+<ul>
+${gameItems}
+</ul>
+<p><a href="/games">Full game notes</a> · <a href="/about">About LIN4CRE</a> · <a href="/contact">Contact</a></p>`;
+    }
 
     case '/tools': {
       const byCat = {};
@@ -324,8 +341,19 @@ ${catRows}
 ${CTA_BLOCK}`;
     }
 
-    case '/games':
-      return `<h1>Games for the in-between</h1><p>Three browser games from LIN4CRE.</p><ul><li><a href="/games/circuit">Circuit</a> — rotate the wires.</li><li><a href="/games/decrypt">Decrypt</a> — crack the code.</li><li><a href="/games/gridlock">Gridlock</a> — claim the board.</li></ul>`;
+    case '/games': {
+      const gameItems = publicGames
+        .map(
+          g =>
+            `  <li><a href="${esc(g.playAction.href)}">${esc(g.name)}</a> (${esc(g.genre)}) — ${esc(g.summary)}</li>`,
+        )
+        .join('\n');
+      return `<h1>Focused browser games, ready in one click.</h1>
+<p>Four self-contained browser games designed and coded from scratch by LIN4CRE.</p>
+<ul>
+${gameItems}
+</ul>`;
+    }
 
     case '/music-videos': {
       const tracks = data.musicVideos
@@ -561,11 +589,34 @@ if (failed) process.exit(1);
 // AI discoverability: emit a full-content Markdown export so LLMs / answer
 // engines can retrieve substantive site content.
 function buildLlmsFull() {
-  const lines = ['# LIN4CRE', '', 'Independent software, browser tools and games by David Linacre in South Yorkshire.', '', '## Selected work'];
+  const toAbs = href => (href.startsWith('http') ? href : `${SITE}${href}`);
+  const lines = [
+    '# LIN4CRE',
+    '',
+    'Independent software studio by David Linacre in Barnsley, South Yorkshire, UK.',
+    '',
+    '## Selected Work',
+  ];
   for (const p of publicProjects) {
-    lines.push(`### ${p.name}`, p.blurb, `Link: ${SITE}${p.url}`, `Source: ${p.repo}`, '');
+    lines.push(
+      `### ${p.name} (${p.category})`,
+      p.summary,
+      `Link: ${toAbs(p.primaryAction.href)}`,
+      `Source: ${p.sourceUrl}`,
+      '',
+    );
   }
-  lines.push('## Games', '- Circuit — /games/circuit', '- Decrypt — /games/decrypt', '- Gridlock — /games/gridlock', '', 'Contact: https://www.linacre.site/contact', '');
+  lines.push('## Selected Games', '');
+  for (const g of publicGames) {
+    lines.push(
+      `### ${g.name} (${g.genre})`,
+      g.summary,
+      `Play: ${toAbs(g.playAction.href)}`,
+      `Source: ${g.sourceUrl}`,
+      '',
+    );
+  }
+  lines.push('Contact: https://www.linacre.site/contact', '');
   return lines.join('\n');
 }
 fs.writeFileSync(path.join(distDir, 'llms-full.txt'), buildLlmsFull(), 'utf8');
