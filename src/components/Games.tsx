@@ -1,5 +1,95 @@
 import { selectedGames } from '../data/curatedWork';
 
 export default function Games() {
-  return <div className="games-page"><section className="games-page__intro"><p className="studio-kicker">LIN4CRE / PLAY</p><h1>Games for<br /><em>the in-between.</em></h1><p>A small collection of browser games. Pick one, take a moment, and see where it goes.</p></section><div className="games-page__grid">{selectedGames.map((game, i) => <article className="games-page__item" key={game.name}><a href={game.url} className="work-image"><img src={game.image} alt={`${game.name} game screen`} width="1000" height="625" loading={i ? 'lazy' : 'eager'} /></a><p className="work-number">0{i + 1} / {game.genre}</p><h2>{game.name}</h2><p>{game.description}</p><p className="work-details">Available on this site · HTML · JavaScript</p><a className="text-link" href={game.url}>Play {game.name} <span aria-hidden="true">↗</span></a></article>)}</div></div>;
+  return (
+    <section aria-labelledby="games-page-title">
+      <header className="page-hero">
+        <p className="eyebrow">
+          <span className="eyebrow__dot" aria-hidden="true" />
+          LIN4CRE · Original Browser Games
+        </p>
+        <h1 id="games-page-title" className="page-title">
+          Focused browser games, ready in one click.
+        </h1>
+        <p className="page-lead">
+          Four self-contained games designed and coded from scratch—from long-exposure generative
+          light photography to spatial logic, deduction, and territory strategy. No accounts, ads,
+          or downloads required.
+        </p>
+      </header>
+
+      <div className="games-editorial-list">
+        {selectedGames.map((game, index) => (
+          <article key={game.id} className="games-page__item">
+            <a
+              href={game.playAction.href}
+              className="media-frame"
+              {...(game.playAction.external
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+            >
+              <img
+                src={game.image}
+                alt={game.imageAlt}
+                width={1280}
+                height={800}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : undefined}
+                decoding="async"
+              />
+            </a>
+
+            <div>
+              <div className="work-meta-bar">
+                <span>
+                  {game.index} / {game.genre}
+                </span>
+                <span className="status-line">{game.status}</span>
+              </div>
+              <h2 className="work-card__title">{game.name}</h2>
+              <p className="work-card__summary">{game.summary}</p>
+
+              <dl className="game-specs">
+                <div className="game-specs__row">
+                  <dt>Modes</dt>
+                  <dd>{game.modes}</dd>
+                </div>
+                <div className="game-specs__row">
+                  <dt>Controls</dt>
+                  <dd>{game.controls}</dd>
+                </div>
+                <div className="game-specs__row">
+                  <dt>Stack</dt>
+                  <dd>{game.stack.join(' · ')}</dd>
+                </div>
+              </dl>
+
+              <div className="work-card__actions">
+                <a
+                  href={game.playAction.href}
+                  className="btn-primary"
+                  {...(game.playAction.external
+                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                    : {})}
+                >
+                  <span>{game.playAction.label}</span>
+                  <span aria-hidden="true">{game.playAction.external ? '↗' : '→'}</span>
+                </a>
+                <a
+                  href={game.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                  aria-label={`View source code for ${game.name}`}
+                >
+                  <span>Source</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 }

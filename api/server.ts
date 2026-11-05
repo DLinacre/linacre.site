@@ -1740,7 +1740,14 @@ if (process.env.NODE_ENV !== 'production') {
   app.get('*', (req, res) => {
     const pathname = req.path.replace(/\/$/, '') || '/';
 
-    // Directly serve standalone games portal for /games
+    if (pathname === '/helix') {
+      const helixIndex = path.join(distPath, 'helix', 'index.html');
+      if (fs.existsSync(helixIndex)) {
+        return res.sendFile(helixIndex);
+      }
+    }
+
+    // Directly serve prerendered React SPA shell for /games
     if (pathname === '/games' || req.path === '/games' || req.path === '/games/') {
       const gamesIndex = path.join(distPath, 'games', 'index.html');
       if (fs.existsSync(gamesIndex)) {

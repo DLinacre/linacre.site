@@ -5,8 +5,36 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
-  return {
-    plugins: [react(), tailwindcss()],
+    return {
+      plugins: [
+        {
+          name: 'studio-spa-routes',
+          configureServer(server) {
+            server.middlewares.use((req, _res, next) => {
+              const pathname = req.url?.split('?')[0];
+              if (pathname === '/games' || pathname === '/games/') {
+                req.url = '/index.html';
+              } else if (pathname === '/helix') {
+                req.url = '/helix/index.html';
+              }
+              next();
+            });
+          },
+          configurePreviewServer(server) {
+            server.middlewares.use((req, _res, next) => {
+              const pathname = req.url?.split('?')[0];
+              if (pathname === '/games' || pathname === '/games/') {
+                req.url = '/index.html';
+              } else if (pathname === '/helix') {
+                req.url = '/helix/index.html';
+              }
+              next();
+            });
+          },
+        },
+        react(),
+        tailwindcss(),
+      ],
     build: {
       rollupOptions: {
         output: {
@@ -29,6 +57,9 @@ export default defineConfig(() => {
       hmr: process.env.DISABLE_HMR !== 'true',
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      allowedHosts: ['dl', 'poco-f7-1', '.local', '.tailscale.net', '.e2b.app'],
+    },
+    preview: {
       allowedHosts: ['dl', 'poco-f7-1', '.local', '.tailscale.net', '.e2b.app'],
     },
     test: {
