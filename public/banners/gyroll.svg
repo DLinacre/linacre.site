@@ -1,0 +1,232 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#050814" />
+      <stop offset="60%" stop-color="#0c1126" />
+      <stop offset="100%" stop-color="#030611" />
+    </linearGradient>
+    
+    <radialGradient id="nebulaCyan" cx="30%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.25" />
+      <stop offset="50%" stop-color="#3b82f6" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#000" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="nebulaViolet" cx="70%" cy="30%" r="55%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.28" />
+      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Ball Shading Gradients -->
+    <radialGradient id="chromeBall" cx="35%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="18%" stop-color="#e2e8f0" />
+      <stop offset="45%" stop-color="#94a3b8" />
+      <stop offset="75%" stop-color="#334155" />
+      <stop offset="92%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </radialGradient>
+
+    <radialGradient id="ballGazeHighlight" cx="32%" cy="28%" r="24%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="40%" stop-color="#38bdf8" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="ballRimGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="85%" stop-color="#38bdf8" stop-opacity="0" />
+      <stop offset="96%" stop-color="#38bdf8" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.9" />
+    </radialGradient>
+
+    <!-- Track Gradients -->
+    <linearGradient id="trackGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.95" />
+    </linearGradient>
+
+    <linearGradient id="railGlowCyan" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+
+    <linearGradient id="railGlowPink" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="50%" stop-color="#c026d3" />
+      <stop offset="100%" stop-color="#9333ea" />
+    </linearGradient>
+
+    <linearGradient id="trailRibbon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0" />
+      <stop offset="40%" stop-color="#38bdf8" stop-opacity="0.6" />
+      <stop offset="75%" stop-color="#818cf8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.95" />
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="heavyGlow">
+      <feGaussianBlur stdDeviation="14" result="blur1" />
+      <feGaussianBlur stdDeviation="28" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Deep Cosmos Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+  <rect width="1200" height="630" fill="url(#nebulaCyan)" />
+  <rect width="1200" height="630" fill="url(#nebulaViolet)" />
+
+  <!-- Distant Stars & Dust -->
+  <g opacity="0.6">
+    <circle cx="120" cy="80" r="1.5" fill="#ffffff" />
+    <circle cx="280" cy="140" r="1.0" fill="#38bdf8" />
+    <circle cx="450" cy="60" r="2.0" fill="#ffffff" />
+    <circle cx="680" cy="110" r="1.2" fill="#e0e7ff" />
+    <circle cx="850" cy="70" r="2.0" fill="#c084fc" />
+    <circle cx="980" cy="130" r="1.0" fill="#ffffff" />
+    <circle cx="1120" cy="90" r="1.8" fill="#38bdf8" />
+    <circle cx="90" cy="220" r="1.2" fill="#ffffff" />
+    <circle cx="1060" cy="240" r="1.5" fill="#f43f5e" />
+    <circle cx="340" cy="200" r="1.0" fill="#ffffff" />
+    <circle cx="890" cy="190" r="1.5" fill="#ffffff" />
+  </g>
+
+  <!-- Cyber Horizon Grid -->
+  <g opacity="0.22" stroke="#38bdf8" stroke-width="1">
+    <line x1="0" y1="280" x2="1200" y2="280" />
+    <line x1="0" y1="300" x2="1200" y2="300" />
+    <line x1="0" y1="330" x2="1200" y2="330" />
+    <line x1="0" y1="375" x2="1200" y2="375" />
+    <line x1="0" y1="440" x2="1200" y2="440" />
+    <line x1="0" y1="530" x2="1200" y2="530" />
+    
+    <!-- Vanishing Lines to (600, 260) -->
+    <line x1="600" y1="260" x2="0" y2="630" />
+    <line x1="600" y1="260" x2="150" y2="630" />
+    <line x1="600" y1="260" x2="320" y2="630" />
+    <line x1="600" y1="260" x2="880" y2="630" />
+    <line x1="600" y1="260" x2="1050" y2="630" />
+    <line x1="600" y1="260" x2="1200" y2="630" />
+  </g>
+
+  <!-- Distant Glowing Obstacle: Checkpoint Gate -->
+  <g transform="translate(600, 240)" filter="url(#glow)">
+    <ellipse cx="0" cy="0" rx="45" ry="55" fill="none" stroke="#06b6d4" stroke-width="4" opacity="0.8" />
+    <ellipse cx="0" cy="0" rx="35" ry="45" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.6" stroke-dasharray="6,4" />
+    <line x1="-50" y1="45" x2="-50" y2="65" stroke="#38bdf8" stroke-width="3" />
+    <line x1="50" y1="45" x2="50" y2="65" stroke="#38bdf8" stroke-width="3" />
+  </g>
+
+  <!-- 3D Elevated Track Bed Extending into Distance -->
+  <!-- Track Polygon -->
+  <polygon points="560,260 640,260 840,630 360,630" fill="url(#trackGrad)" stroke="#1e293b" stroke-width="2" />
+  
+  <!-- Track Surface Chevrons / Speed Markings -->
+  <g stroke="#38bdf8" stroke-width="2" opacity="0.35" fill="none">
+    <polyline points="575,300 600,290 625,300" />
+    <polyline points="555,360 600,345 645,360" stroke-width="3" opacity="0.5" />
+    <polyline points="525,440 600,415 675,440" stroke-width="4" opacity="0.7" />
+    <polyline points="480,540 600,505 720,540" stroke-width="5" opacity="0.9" />
+  </g>
+
+  <!-- Left Glowing Rail -->
+  <line x1="560" y1="260" x2="360" y2="630" stroke="url(#railGlowCyan)" stroke-width="8" filter="url(#glow)" />
+  <line x1="560" y1="260" x2="360" y2="630" stroke="#ffffff" stroke-width="2" opacity="0.8" />
+
+  <!-- Right Glowing Rail -->
+  <line x1="640" y1="260" x2="840" y2="630" stroke="url(#railGlowPink)" stroke-width="8" filter="url(#glow)" />
+  <line x1="640" y1="260" x2="840" y2="630" stroke="#ffffff" stroke-width="2" opacity="0.8" />
+
+  <!-- Dynamic Speed & Particle Trails from Ball -->
+  <!-- Flowing Energy Trail -->
+  <path d="M 590,320 C 580,360 630,420 540,510" fill="none" stroke="url(#trailRibbon)" stroke-width="24" stroke-linecap="round" opacity="0.6" filter="url(#heavyGlow)" />
+  <path d="M 605,310 C 600,350 635,410 560,505" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" opacity="0.8" filter="url(#glow)" />
+
+  <!-- Trail Particles Floating Up -->
+  <g filter="url(#glow)">
+    <circle cx="585" cy="340" r="4" fill="#38bdf8" />
+    <circle cx="615" cy="365" r="5" fill="#818cf8" />
+    <circle cx="595" cy="395" r="3.5" fill="#c084fc" />
+    <circle cx="620" cy="430" r="6" fill="#38bdf8" />
+    <circle cx="580" cy="455" r="4.5" fill="#f43f5e" />
+    <circle cx="560" cy="485" r="7" fill="#38bdf8" />
+    <circle cx="530" cy="520" r="5" fill="#a855f7" />
+  </g>
+
+  <!-- The Physics Chrome Ball (Foreground Focal Hero) -->
+  <g transform="translate(560, 485)">
+    <!-- Shadow on Track -->
+    <ellipse cx="0" cy="62" rx="60" ry="16" fill="#000000" opacity="0.75" />
+    <ellipse cx="0" cy="60" rx="42" ry="10" fill="#0284c7" opacity="0.45" filter="url(#glow)" />
+
+    <!-- Sphere Body -->
+    <circle cx="0" cy="0" r="64" fill="url(#chromeBall)" />
+    
+    <!-- Neon Rim Reflection -->
+    <circle cx="0" cy="0" r="64" fill="url(#ballRimGlow)" />
+    
+    <!-- Specular Flare / Reflection -->
+    <circle cx="-16" cy="-18" r="42" fill="url(#ballGazeHighlight)" />
+    <circle cx="-24" cy="-24" r="8" fill="#ffffff" opacity="0.9" filter="url(#glow)" />
+    <circle cx="-28" cy="-28" r="3" fill="#ffffff" />
+    
+    <!-- Speed streak reflection on ball surface -->
+    <path d="M -30,25 Q 0,42 38,20" stroke="#38bdf8" stroke-width="3" fill="none" opacity="0.7" filter="url(#glow)" />
+  </g>
+
+  <!-- Lateral Neon Accents (Floating UI / HUD aesthetic) -->
+  <g opacity="0.85">
+    <!-- Left telemetry element -->
+    <rect x="70" y="490" width="180" height="54" rx="12" fill="#0f172a" fill-opacity="0.7" stroke="#334155" stroke-width="1.5" />
+    <text x="90" y="514" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#94a3b8" letter-spacing="1.5">VELOCITY</text>
+    <text x="90" y="534" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="900" fill="#38bdf8">42.8 <tspan font-size="11" fill="#64748b" font-weight="600">KM/H</tspan></text>
+    
+    <!-- Right telemetry element -->
+    <rect x="950" y="490" width="180" height="54" rx="12" fill="#0f172a" fill-opacity="0.7" stroke="#334155" stroke-width="1.5" />
+    <text x="970" y="514" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#94a3b8" letter-spacing="1.5">TILT CONTROL</text>
+    <text x="970" y="534" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="900" fill="#10b981">6-AXIS GYRO</text>
+  </g>
+
+  <!-- Title & Branding (Header Section) -->
+  <g transform="translate(600, 110)">
+    <!-- Glow Backdrop for Title -->
+    <ellipse cx="0" cy="10" rx="360" ry="40" fill="#0284c7" opacity="0.25" filter="url(#heavyGlow)" />
+
+    <!-- Subtitle Pill -->
+    <g transform="translate(0, -55)">
+      <rect x="-140" y="-14" width="280" height="28" rx="14" fill="#0f172a" fill-opacity="0.8" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="0" y="4" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#38bdf8" text-anchor="middle" letter-spacing="3">PRECISION 3D BALL ROLLER</text>
+    </g>
+
+    <!-- Main Title -->
+    <text x="0" y="24" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="76" font-weight="950" text-anchor="middle" letter-spacing="8" fill="#ffffff" filter="url(#glow)">
+      GYRO<tspan fill="#38bdf8">ROLL</tspan>
+    </text>
+
+    <!-- Tagline -->
+    <text x="0" y="58" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#cbd5e1" text-anchor="middle" letter-spacing="2">
+      MOBILE GYROSCOPE &amp; KEYBOARD 3D OBSTACLE COURSE
+    </text>
+  </g>
+
+  <!-- Bottom Feature Badges Bar -->
+  <g transform="translate(600, 595)">
+    <text x="0" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#64748b" text-anchor="middle" letter-spacing="1.5">
+      THREE.JS WEBGL  •  PHYSICS ENGINE  •  BALL GARAGE &amp; TRAILS  •  ADAPTIVE DIFFICULTY  •  LOCAL LEADERBOARD
+    </text>
+  </g>
+</svg>

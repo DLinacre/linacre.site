@@ -957,6 +957,8 @@
       const res = await fetch('/api/health', { signal: ctrl.signal });
       clearTimeout(timer);
       if (!res.ok) return false;
+      const payload = await res.json().catch(() => null);
+      if (!payload || payload.service !== 'helix') return false;
       remote = true;
       const wsProto = location.protocol === 'https:' ? 'wss' : 'ws';
       const ws = new WebSocket(wsProto + '://' + location.host + '/ws');

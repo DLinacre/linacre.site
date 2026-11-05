@@ -7,6 +7,31 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
+// Mock localStorage for environments where jsdom/node26 lacks full localStorage support
+const store = new Map<string, string>();
+const mockLocalStorage = {
+  getItem: (key: string) => store.get(key) ?? null,
+  setItem: (key: string, value: string) => store.set(key, String(value)),
+  removeItem: (key: string) => { store.delete(key); },
+  clear: () => { store.clear(); },
+  get length() { return store.size; },
+  key: (index: number) => Array.from(store.keys())[index] ?? null,
+};
+Object.defineProperty(window, 'localStorage', {
+  value: mockLocalStorage,
+  writable: true,
+});
+Object.defineProperty(globalThis, 'localStorage', {
+  value: mockLocalStorage,
+  writable: true,
+});
+
+if (typeof window !== 'undefined' && window.HTMLMediaElement) {
+  window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+  window.HTMLMediaElement.prototype.pause = () => {};
+  window.HTMLMediaElement.prototype.load = () => {};
+}
+
 // jsdom implements neither of these, and components under test rely on both.
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

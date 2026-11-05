@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
-import { 
-  Github, 
-  Terminal as TerminalIcon, 
-  Layers, 
-  Volume2, 
-  VolumeX, 
+import {
+  Github,
+  Terminal as TerminalIcon,
+  Layers,
+  Volume2,
+  VolumeX,
   Palette,
   Music,
   Code2,
   Cpu,
-  Radio
+  Radio,
+  Gamepad2,
 } from 'lucide-react';
 import { audioFx } from '../lib/audioFx';
 
@@ -38,7 +39,7 @@ export default function CyberHUD({
   toggleSound,
   projectCount,
   isPlayingMusic,
-  currentTrackTitle
+  currentTrackTitle,
 }: CyberHUDProps) {
   const [timeStr, setTimeStr] = useState('');
   const [dateStr, setDateStr] = useState('');
@@ -52,8 +53,8 @@ export default function CyberHUD({
           weekday: 'short',
           day: 'numeric',
           month: 'short',
-          year: 'numeric'
-        })
+          year: 'numeric',
+        }),
       );
     };
     updateTime();
@@ -69,10 +70,8 @@ export default function CyberHUD({
   return (
     <header className="sticky top-4 z-40 flex w-full flex-col items-center px-4 space-y-2">
       <div className="hud-capsule flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-[#0d111e]/90 px-4 py-3 shadow-2xl backdrop-blur-xl sm:px-8">
-        
         {/* Top Row: Clock, Status, Active Track Pill, & Vitals */}
         <div className="flex items-center justify-between gap-4 sm:gap-8 w-full">
-          
           {/* Clock */}
           <div className="font-mono text-2xl font-bold tracking-wider text-white drop-shadow-[0_0_12px_rgba(192,132,252,0.4)] sm:text-3xl">
             {timeStr || '12:00:00'}
@@ -96,7 +95,7 @@ export default function CyberHUD({
 
           {/* Active Audio Playing Pill */}
           {isPlayingMusic && currentTrackTitle && (
-            <div 
+            <div
               onClick={() => handleTabClick('music')}
               className="cursor-pointer hidden md:flex items-center gap-2 rounded-full border border-pink-500/40 bg-pink-500/15 px-3 py-1 text-xs font-mono text-pink-300 shadow-[0_0_12px_rgba(244,114,182,0.3)] animate-pulse"
               title="Click to jump to Music Deck"
@@ -130,12 +129,10 @@ export default function CyberHUD({
               )}
             </button>
           </div>
-
         </div>
 
         {/* Bottom Row: Quick Dock Navigation */}
         <nav className="flex flex-wrap items-center justify-center gap-1.5 border-t border-white/10 pt-2.5 sm:gap-2.5 w-full">
-          
           {/* Projects Tab */}
           <button
             onClick={() => handleTabClick('projects')}
@@ -160,7 +157,9 @@ export default function CyberHUD({
             }`}
             title="Proper Mad Studio Audio Player, Visualizer & Live Lyrics"
           >
-            <Music className={`h-3.5 w-3.5 ${isPlayingMusic ? 'text-pink-400 animate-bounce' : ''}`} />
+            <Music
+              className={`h-3.5 w-3.5 ${isPlayingMusic ? 'text-pink-400 animate-bounce' : ''}`}
+            />
             <span>Proper Mad</span>
           </button>
 
@@ -192,6 +191,16 @@ export default function CyberHUD({
             <span>Local Rig</span>
           </button>
 
+          {/* Games Dock Link */}
+          <a
+            href="/games"
+            className="dock-btn flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-mono font-semibold text-purple-200 border border-purple-500/40 bg-purple-500/15 hover:bg-purple-500/25 hover:text-white hover:border-purple-500/70 shadow-[0_0_12px_rgba(168,85,247,0.25)] transition-all"
+            title="Tabulous Games — 77 Verified Instant-Play Games"
+          >
+            <Gamepad2 className="h-3.5 w-3.5 text-purple-300" />
+            <span>Games</span>
+          </a>
+
           <div className="hidden sm:block h-4 w-px bg-white/15 mx-1" />
 
           {/* Terminal Toggle */}
@@ -222,9 +231,7 @@ export default function CyberHUD({
             <Github className="h-3.5 w-3.5" />
             <span>GitHub</span>
           </a>
-
         </nav>
-
       </div>
     </header>
   );

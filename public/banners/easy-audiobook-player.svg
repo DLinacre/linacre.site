@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#180e06" />
+      <stop offset="50%" stop-color="#2a180b" />
+      <stop offset="100%" stop-color="#0c0703" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#000" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)" />
+  <rect width="1200" height="675" fill="url(#glow)" />
+  <g transform="translate(450, 180)">
+    <!-- Book Outline -->
+    <path d="M150 240 C100 210, 30 220, 0 240 V60 C30 40, 100 30, 150 60 C200 30, 270 40, 300 60 V240 C270 220, 200 210, 150 240 Z" fill="none" stroke="#d97706" stroke-width="8" />
+    <path d="M150 60 V240" stroke="#f59e0b" stroke-width="6" />
+    <!-- Headphones Arc -->
+    <path d="M-30 140 C-30 0, 330 0, 330 140" fill="none" stroke="#fbbf24" stroke-width="14" stroke-linecap="round" />
+    <rect x="-50" y="120" width="40" height="70" rx="15" fill="#f59e0b" />
+    <rect x="310" y="120" width="40" height="70" rx="15" fill="#f59e0b" />
+  </g>
+  <text x="600" y="520" fill="#fef3c7" font-family="system-ui, sans-serif" font-size="52" font-weight="900" text-anchor="middle" letter-spacing="2">EASY AUDIOBOOK PLAYER</text>
+  <text x="600" y="570" fill="#d97706" font-family="system-ui, sans-serif" font-size="24" font-weight="600" text-anchor="middle" letter-spacing="1">ZERO-DEPENDENCY SINGLE-FILE HTML5 AUDIO ENGINE</text>
+</svg>

@@ -1,4 +1,5 @@
 import type { AppTab } from '../app/types';
+export type { AppTab };
 
 export const ROUTE_LABEL: Record<string, string> = {
   '/': 'Home',
@@ -16,6 +17,9 @@ export const ROUTE_LABEL: Record<string, string> = {
   '/mob-deals': 'Mob Deals',
   '/pokeguru': 'PokeGuru',
   '/ops': 'Ops HUD',
+  '/music-videos': 'Music Videos',
+  '/osint': 'OSINT HUD',
+  '/orbit': 'Orbit',
 };
 
 export const ROUTE_TAB_IDS = [
@@ -33,6 +37,9 @@ export const ROUTE_TAB_IDS = [
   'mob-deals',
   'pokeguru',
   'ops',
+  'music-videos',
+  'osint',
+  'orbit',
 ] as const;
 
 export const APP_TABS: readonly AppTab[] = [
@@ -51,6 +58,9 @@ export const APP_TABS: readonly AppTab[] = [
   'mob-deals',
   'pokeguru',
   'ops',
+  'music-videos',
+  'osint',
+  'orbit',
 ];
 
 const routeTabSet = new Set<string>(ROUTE_TAB_IDS);

@@ -39,7 +39,13 @@ export default function MobileBottomNav({
             <button
               key={item.id}
               type="button"
-              onClick={() => setActiveTab(item.id)}
+              onClick={() => {
+                if (item.id === 'games') {
+                  window.location.href = '/games';
+                  return;
+                }
+                setActiveTab(item.id);
+              }}
               aria-current={active ? 'page' : undefined}
               className={`relative flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl px-1 text-[10px] font-semibold transition-colors ${active ? 'text-[var(--linacre-accent)]' : 'text-muted-foreground hover:text-foreground'}`}
             >

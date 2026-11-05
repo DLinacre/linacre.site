@@ -1,0 +1,134 @@
+{
+  "generatedAt": "2026-10-27T19:44:34.373Z",
+  "degraded": false,
+  "mode": "fixtures",
+  "stats": {
+    "sources": 12,
+    "fetched": 0,
+    "errors": 0,
+    "skippedKnown": 3,
+    "candidates": 4,
+    "dead": 0
+  },
+  "warnings": [],
+  "candidates": [
+    {
+      "id": "redshift-survivor",
+      "title": "Redshift Survivor",
+      "url": "https://redshift-survivor.vercel.app/",
+      "source": "curated",
+      "sourceUrl": "data/discovery-sources.json",
+      "description": "Three.js space survivor-like; desktop only.",
+      "genres": [
+        "survivors",
+        "space"
+      ],
+      "category": "survivors",
+      "statusHint": "unknown",
+      "phones": null,
+      "coverUrl": null,
+      "dev": null,
+      "firstSeen": "2026-10-27",
+      "lastSeen": "2026-10-27",
+      "known": false,
+      "verified": {
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://redshift-survivor.vercel.app/",
+        "note": ""
+      }
+    },
+    {
+      "id": "slow-roads",
+      "title": "Slow Roads",
+      "url": "https://slowroads.io/",
+      "source": "curated",
+      "sourceUrl": "data/discovery-sources.json",
+      "description": "Infinite procedural 3D browser driving game by anslo.",
+      "genres": [
+        "racing",
+        "driving",
+        "procedural"
+      ],
+      "category": "sports",
+      "statusHint": "unknown",
+      "phones": null,
+      "coverUrl": null,
+      "dev": null,
+      "firstSeen": "2026-10-27",
+      "lastSeen": "2026-10-27",
+      "known": false,
+      "verified": {
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://slowroads.io/",
+        "note": ""
+      }
+    },
+    {
+      "id": "sonic-1-2-web",
+      "title": "Sonic 1 & 2 Web",
+      "url": "https://rubberduckscat.github.io/Sonic-1-2-Web/",
+      "source": "curated",
+      "sourceUrl": "data/discovery-sources.json",
+      "description": "Decompilation of Sonic the Hedgehog 1 & 2 running in WebAssembly.",
+      "genres": [
+        "classic-pc",
+        "platformer",
+        "decompilation"
+      ],
+      "category": "classic-pc",
+      "statusHint": "unknown",
+      "phones": null,
+      "coverUrl": null,
+      "dev": null,
+      "firstSeen": "2026-10-27",
+      "lastSeen": "2026-10-27",
+      "known": false,
+      "verified": {
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://rubberduckscat.github.io/Sonic-1-2-Web/",
+        "note": ""
+      }
+    },
+    {
+      "id": "swarm-lantern",
+      "title": "Swarm Lantern",
+      "url": "https://www.spawn.co/@moth/swarm-lantern",
+      "source": "spawn",
+      "sourceUrl": "https://www.spawn.co/api/feed?sort=hot",
+      "description": "A new bullet heaven.",
+      "genres": [
+        "roguelite",
+        "action"
+      ],
+      "category": "survivors",
+      "statusHint": "instant",
+      "phones": true,
+      "coverUrl": null,
+      "dev": null,
+      "firstSeen": "2026-10-27",
+      "lastSeen": "2026-10-27",
+      "known": false,
+      "verified": {
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://www.spawn.co/@moth/swarm-lantern",
+        "note": ""
+      }
+    }
+  ],
+  "deadLinks": [],
+  "catalogueChecked": 58,
+  "portedSlugs": [
+    "azeroth-survivors",
+    "hege-mania",
+    "porkoss"
+  ],
+  "portedSlugScans": {
+    "azeroth-survivors": "2026-10-27T19:44:34.365Z",
+    "hege-mania": "2026-10-27T19:44:34.365Z",
+    "porkoss": "2026-10-27T19:44:34.366Z"
+  }
+}

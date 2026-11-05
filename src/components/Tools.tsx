@@ -54,15 +54,15 @@ export default function Tools({ theme = 'dark' }: ToolsProps) {
       <section className="relative overflow-hidden rounded-3xl border border-border-color bg-[var(--linacre-panel)] p-6 sm:p-10">
         <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-cyan/10 blur-3xl pointer-events-none" />
         <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-color">
-          Free · private · no sign-up
+          Browser utilities · developer playground
         </span>
         <h1 className="mt-2 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Tools that actually do the job
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">
-          Browser utilities that run entirely on your device, plus a curated directory of the
-          external tools David uses daily. Nothing here tracks you, and nothing you paste leaves
-          your machine.
+          Use local browser utilities or explore the developer playground and external tool directory.
+          The optional AI chat sends prompts to the configured service; external tools have their
+          own privacy policies.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-1.5" role="tablist" aria-label="Tool sections">

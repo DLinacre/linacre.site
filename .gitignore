@@ -39,3 +39,9 @@ status.txt
 # Scratch
 *.log
 *.tmp
+.vercel
+.env*
+.agents/
+
+# Legacy contact submissions may contain personal data
+contacts.json

@@ -3,21 +3,81 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "redirects": [
-    { "source": "/projects", "destination": "/", "permanent": true },
-    { "source": "/projects/:path*", "destination": "/", "permanent": true },
-    { "source": "/toolkit", "destination": "/tools", "permanent": true },
-    { "source": "/playground", "destination": "/tools", "permanent": true },
-    { "source": "/learn", "destination": "/tools", "permanent": true },
-    { "source": "/blog", "destination": "/", "permanent": true },
-    { "source": "/blog/:path*", "destination": "/", "permanent": true },
-    { "source": "/status", "destination": "/", "permanent": true },
-    { "source": "/now", "destination": "/about", "permanent": true },
-    { "source": "/dashboard", "destination": "/", "permanent": true },
-    { "source": "/low-stakes", "destination": "/", "permanent": true },
-    { "source": "/dkma", "destination": "/", "permanent": true },
-    { "source": "/agents", "destination": "/lab", "permanent": true },
-    { "source": "/work", "destination": "/contact", "permanent": true },
-    { "source": "/book", "destination": "/contact", "permanent": true }
+    {
+      "source": "/projects",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/projects/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/toolkit",
+      "destination": "/tools",
+      "permanent": true
+    },
+    {
+      "source": "/playground",
+      "destination": "/tools",
+      "permanent": true
+    },
+    {
+      "source": "/learn",
+      "destination": "/tools",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/status",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/now",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/low-stakes",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/dkma",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/agents",
+      "destination": "/lab",
+      "permanent": true
+    },
+    {
+      "source": "/work",
+      "destination": "/#work",
+      "permanent": true
+    },
+    {
+      "source": "/book",
+      "destination": "/contact",
+      "permanent": true
+    }
   ],
   "headers": [
     {
@@ -79,6 +139,15 @@
       ]
     },
     {
+      "source": "/games/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https:; font-src 'self' data: https:; connect-src 'self' https: data: blob:; worker-src 'self' blob:; frame-src 'self' https:; object-src 'none'; base-uri 'self';"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -115,12 +184,24 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://play.pokemonshowdown.com https://*.githubusercontent.com https://www.linacre.site; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://generativelanguage.googleapis.com https://*.googleapis.com https://api.openai.com https://api.anthropic.com https://vercel.live wss:; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://play.pokemonshowdown.com https://*.githubusercontent.com https://www.linacre.site; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://generativelanguage.googleapis.com https://*.googleapis.com https://api.openai.com https://api.anthropic.com https://api.wheretheiss.at https://earthquake.usgs.gov https://ll.thespacedevs.com https://api.open-meteo.com https://vercel.live wss:; worker-src 'self' blob:; frame-src 'self' https://lin4cre.github.io; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
         }
       ]
     }
   ],
   "rewrites": [
+    {
+      "source": "/assets/covers/:path*",
+      "destination": "/games/assets/covers/:path*"
+    },
+    {
+      "source": "/assets/brand/:path*",
+      "destination": "/games/assets/brand/:path*"
+    },
+    {
+      "source": "/assets/fonts/:path*",
+      "destination": "/games/assets/fonts/:path*"
+    },
     {
       "source": "/api/:path*",
       "destination": "/api/server.ts"
@@ -138,8 +219,28 @@
       "destination": "/tools/index.html"
     },
     {
-      "source": "/games",
-      "destination": "/games/index.html"
+      "source": "/music-videos",
+      "destination": "/music-videos/index.html"
+    },
+    {
+      "source": "/music-videos/",
+      "destination": "/music-videos/index.html"
+    },
+    {
+      "source": "/osint",
+      "destination": "/osint/index.html"
+    },
+    {
+      "source": "/osint/",
+      "destination": "/osint/index.html"
+    },
+    {
+      "source": "/orbit",
+      "destination": "/orbit/index.html"
+    },
+    {
+      "source": "/orbit/",
+      "destination": "/orbit/index.html"
     },
     {
       "source": "/games/circuit",
@@ -168,6 +269,14 @@
     {
       "source": "/games/gridlock",
       "destination": "/games/gridlock.html"
+    },
+    {
+      "source": "/games",
+      "destination": "/games/index.html"
+    },
+    {
+      "source": "/games/",
+      "destination": "/games/index.html"
     },
     {
       "source": "/lab",

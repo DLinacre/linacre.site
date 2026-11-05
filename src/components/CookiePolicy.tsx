@@ -45,6 +45,24 @@ const KEYS: Array<{
     category: 'Optional',
     retention: 'Until you clear it',
   },
+  {
+    key: 'linacre_osint_stars_v1',
+    purpose: 'Stores OSINT HUD bookmarks as resource URLs on this device.',
+    category: 'Functional',
+    retention: 'Until you clear it',
+  },
+  {
+    key: 'linacre_osint_recents_v1',
+    purpose: 'Stores the last 14 OSINT HUD resources opened for quick access.',
+    category: 'Functional',
+    retention: 'Until you clear it',
+  },
+  {
+    key: 'linacre_osint_accent_v1 / linacre_osint_density_v1',
+    purpose: 'Remembers the OSINT HUD accent colour and compact/comfortable layout choice.',
+    category: 'Functional',
+    retention: 'Until you clear it',
+  },
 ];
 
 export default function CookiePolicy() {
@@ -64,7 +82,7 @@ export default function CookiePolicy() {
           Cookies &amp; browser storage
         </h1>
         <p className="text-sm text-muted-foreground font-mono">
-          Version 1.1 &middot; Last updated 11 July 2026
+          Version 1.2 &middot; Last updated 1 November 2026
         </p>
       </header>
 
@@ -139,6 +157,16 @@ export default function CookiePolicy() {
             <strong>AI Lab providers</strong> (Google Gemini, optionally OpenAI or Anthropic if you
             supply your own key) &mdash; requests are proxied server-side, and no chat content is
             stored on our servers.
+          </li>
+          <li>
+            <strong>GitHub Pages</strong> hosts the original Music Videos player and media files.
+            The player may save playback preferences on its own origin; linacre.site cannot read
+            that storage. Your browser connects to GitHub Pages when the embedded player is loaded.
+          </li>
+          <li>
+            <strong>OSINT HUD resources</strong> are loaded from this site&#39;s own static
+            directory. The HUD does not request third-party favicons or search APIs; a provider
+            receives a request only when you open one of its links.
           </li>
         </ul>
       </section>

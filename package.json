@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "python linacre.py dev",
+    "games:build": "node scripts/build-games.mjs",
+    "games:search": "node scripts/search-new-tab-games.mjs",
     "build": "vite build && node scripts/prerender.mjs && esbuild api/server.ts --bundle --platform=node --format=esm --packages=external --sourcemap --outfile=dist/server.js && node scripts/write-ops-status.mjs",
     "start": "node dist/server.js",
     "preview": "vite preview",
@@ -21,7 +23,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "verify": "npm run typecheck && npm run lint && npm run test",
-    "check": "npm run lint && npm run test && npm run build"
+    "check": "npm run lint && npm run test && npm run build",
+    "test:browser": "node scripts/browser-smoke.cjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -30,6 +33,7 @@
     "@upstash/redis": "^1.38.0",
     "@vitejs/plugin-react": "^5.0.4",
     "chart.js": "^4.5.1",
+    "dompurify": "^3.4.17",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "fuse.js": "^7.4.2",
@@ -38,6 +42,10 @@
     "react": "^19.0.1",
     "react-chartjs-2": "^5.3.1",
     "react-dom": "^19.0.1"
+  },
+  "overrides": {
+    "minimatch": "^11.0.1",
+    "qs": "^6.17.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -48,7 +56,7 @@
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@vitest/coverage-v8": "^4.1.10",
+    "@vitest/coverage-v8": "^4.1.12",
     "esbuild": "^0.25.0",
     "eslint": "^10.8.0",
     "eslint-plugin-react-hooks": "^7.1.1",
@@ -61,6 +69,6 @@
     "typescript": "~5.8.2",
     "typescript-eslint": "^8.65.0",
     "vite": "^6.2.3",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.12"
   }
 }

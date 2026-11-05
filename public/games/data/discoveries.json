@@ -1,0 +1,69 @@
+{
+  "generatedAt": "2026-10-31T22:47:59.708Z",
+  "mode": "instant-new-tab-games",
+  "stats": {
+    "activeInstantGames": 77,
+    "categories": [
+      "shooters",
+      "sports",
+      "classic-pc",
+      "strategy",
+      "survivors",
+      "openworld",
+      "zombies"
+    ],
+    "dead": 0
+  },
+  "sampleCheckedUrls": [
+    {
+      "id": "nfs-most-wanted-web",
+      "title": "Need for Speed: Most Wanted — Web Port",
+      "url": "https://dezm0n.itch.io/nfs-most-wanted-web-port"
+    },
+    {
+      "id": "sm64-web",
+      "title": "Super Mario 64 (PC Port WebGL)",
+      "url": "https://notan127.github.io/SM64-PC-Port-WebGL/"
+    },
+    {
+      "id": "townscaper",
+      "title": "Townscaper (Web Edition)",
+      "url": "https://oskarstalberg.com/Townscaper/"
+    },
+    {
+      "id": "celeste-classic",
+      "title": "Celeste Classic (PICO-8)",
+      "url": "https://maddymakesgamesinc.itch.io/celesteclassic"
+    },
+    {
+      "id": "legend-of-legaia",
+      "title": "Legend of Legaia (Web Recompilation)",
+      "url": "https://andrewaltimit.github.io/legend-of-legaia-re/"
+    },
+    {
+      "id": "re-after-burner",
+      "title": "After Burner II (HTML5 Arcade Port)",
+      "url": "https://melonjs.itch.io/after-burner"
+    },
+    {
+      "id": "web-dashers",
+      "title": "Web Dashers (Geometry Rhythm Platformer)",
+      "url": "https://web-dashers.github.io/"
+    },
+    {
+      "id": "web-mystery-dungeon",
+      "title": "Pokémon Mystery Dungeon: Web Engine",
+      "url": "https://frequentgamer.itch.io/pmdweb"
+    },
+    {
+      "id": "hege-mania",
+      "title": "Hege Mania (Browser Bullet Heaven)",
+      "url": "https://hegemania.com/"
+    },
+    {
+      "id": "apex-gp-26",
+      "title": "APEX GP 26 (3D Formula Racer)",
+      "url": "https://kfplay.itch.io/apex-gp-26"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Tabulous Games — Browser Game Vault",
+  "short_name": "Tabulous Games",
+  "description": "A curated vault of browser-native games, re-verified every 24 hours by an automated bot.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#050608",
+  "theme_color": "#050608",
+  "icons": [
+    { "src": "assets/brand/emblem-256.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "assets/brand/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/brand/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

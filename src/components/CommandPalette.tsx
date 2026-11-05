@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Search,
+  Clapperboard,
   Compass,
   Cpu,
   CornerDownLeft,
@@ -17,6 +18,7 @@ import {
   Github,
 } from 'lucide-react';
 import { TOOLS } from '../data';
+import { getTabFromLocation } from '../config/routes';
 import { SITE_PROJECTS } from '../data/siteProjects';
 import Fuse from 'fuse.js';
 
@@ -89,8 +91,35 @@ export default function CommandPalette({
       id: 'nav-games',
       label: 'Go to Games',
       icon: Gamepad2,
-      action: () => go('games'),
-      meta: 'Playable browser games and Roblox projects',
+      action: () => {
+        window.location.href = '/games';
+        onClose();
+      },
+      meta: 'Tabulous Games — browse external game links',
+    },
+    {
+      id: 'nav-music-videos',
+      label: 'Open Music Videos cinema',
+      icon: Clapperboard,
+      action: () => go('music-videos'),
+      meta: 'Ten Proper Mad lyric-video masters, synced lyrics and playback controls',
+      keywords: 'music videos lyrics cinema proper mad player album',
+    },
+    {
+      id: 'nav-osint',
+      label: 'Open OSINT HUD',
+      icon: Globe2,
+      action: () => go('osint'),
+      meta: 'Search 1,310 curated resources across 11 sectors and 77 categories',
+      keywords: 'osint intelligence recon search research hud sectors',
+    },
+    {
+      id: 'nav-orbit',
+      label: 'Open Orbit Observatory',
+      icon: Globe2,
+      action: () => go('orbit'),
+      meta: 'Live ISS orbital telemetry, day/night terminator, seismic events & rocket launches',
+      keywords: 'orbit iss space station satellites earthquakes launches weather astronomy barnsley',
     },
     {
       id: 'nav-lab',
@@ -159,10 +188,10 @@ export default function CommandPalette({
       label: 'Open GitHub profile',
       icon: Github,
       action: () => {
-        window.open('https://github.com/DLinacre', '_blank', 'noopener');
+        window.open('https://github.com/LIN4CRE', '_blank', 'noopener');
         onClose();
       },
-      meta: 'All source code at github.com/DLinacre',
+      meta: 'All source code at github.com/LIN4CRE',
       keywords: 'github repos repository source code',
     },
     {
@@ -172,9 +201,6 @@ export default function CommandPalette({
       action: () => {
         const next = theme === 'dark' ? 'light' : 'dark';
         setTheme(next);
-        document.documentElement.classList.remove('dark', 'light');
-        document.documentElement.classList.add(next);
-        localStorage.setItem('linacre_theme', next);
         onClose();
       },
       meta: 'Toggle the visual theme',
@@ -201,6 +227,18 @@ export default function CommandPalette({
           return;
         }
         const target = p.url || p.repo;
+        if (target?.startsWith('/')) {
+          const destination = getTabFromLocation(target);
+          if (destination === 'games') {
+            window.location.href = target;
+            onClose();
+            return;
+          }
+          if (destination !== 'home' || target === '/') {
+            go(destination);
+            return;
+          }
+        }
         if (target) window.open(target, '_blank', 'noopener');
         onClose();
       },
@@ -305,14 +343,14 @@ export default function CommandPalette({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.98 }}
             transition={{ duration: 0.14 }}
-            className="relative mx-auto mt-20 w-full max-w-xl rounded-2xl border border-amber-color/15 bg-[#08121c] shadow-[0_30px_90px_rgba(0,0,0,0.55)] overflow-hidden"
+            className="relative mx-auto mt-20 w-full max-w-xl rounded-2xl border border-white/[0.1] bg-[#0e1016] shadow-[0_30px_90px_rgba(0,0,0,0.7)] overflow-hidden"
             role="dialog"
             aria-modal="true"
             aria-label="Command palette"
           >
             {/* Search field */}
-            <div className="flex items-center gap-3 border-b border-amber-color/10 px-4">
-              <Search className="h-4 w-4 shrink-0 text-amber-color" aria-hidden="true" />
+            <div className="flex items-center gap-3 border-b border-white/[0.08] px-4">
+              <Search className="h-4 w-4 shrink-0 text-[#8fd6ff]" aria-hidden="true" />
               <input
                 ref={inputRef}
                 value={query}
@@ -346,14 +384,14 @@ export default function CommandPalette({
                     onMouseEnter={() => setActiveIndex(index)}
                     onClick={item.action}
                     className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors ${
-                      active ? 'bg-amber-color/10 text-foreground' : 'text-muted-foreground'
+                      active ? 'bg-white/[0.06] text-white' : 'text-[#9aa3b2] hover:bg-white/[0.03]'
                     }`}
                   >
                     <span
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border ${
                         active
-                          ? 'border-amber-color/40 bg-amber-color/10 text-amber-color'
-                          : 'border-border-color bg-muted/20'
+                          ? 'border-[#8fd6ff]/40 bg-[#8fd6ff]/10 text-[#8fd6ff]'
+                          : 'border-white/[0.08] bg-white/[0.03] text-[#9aa3b2]'
                       }`}
                     >
                       {Icon && <Icon className="h-4 w-4" aria-hidden="true" />}
@@ -370,7 +408,7 @@ export default function CommandPalette({
                     </span>
                     {active && (
                       <CornerDownLeft
-                        className="h-3.5 w-3.5 shrink-0 text-amber-color"
+                        className="h-3.5 w-3.5 shrink-0 text-[#8fd6ff]"
                         aria-hidden="true"
                       />
                     )}

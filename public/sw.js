@@ -1,7 +1,6 @@
 // linacre.site service worker
-// v14 — refreshed precache list for the consolidated route set (v8).
-// Keep API + cross-origin requests untouched (Lab streaming still works).
-var CACHE = 'linacre-v14';
+// Versioned site cache. Do not delete caches belonging to other applications.
+var CACHE = 'linacre-v19';
 var OFFLINE_URL = 'offline.html';
 var URLS = [
   '.',
@@ -20,20 +19,16 @@ var URLS = [
   'lab',
   'identity',
   'games',
+  'games/',
+  'games/index.html',
+  'games/games.json',
+  'games/manifest.webmanifest',
+  'games/assets/brand/favicon.svg',
+  'games/assets/brand/emblem-256.png',
+  'games/assets/fonts/manrope-800.woff2',
   'tools',
   'mob-deals',
   'pokeguru',
-  'games/circuit',
-  'games/circuit.js',
-  'games/decrypt',
-  'games/decrypt.js',
-  'games/pulse',
-  'games/pulse.js',
-  'games/trigger',
-  'games/trigger.js',
-  'games/gridlock',
-  'games/gridlock.js',
-  'games/slime-factory-tycoon/banner.webp',
   'tools/opagent.html',
   'tools/arena-audit.html',
   'tools/apk-hub.html',
@@ -62,7 +57,7 @@ self.addEventListener('activate', function (e) {
         return Promise.all(
           keys
             .filter(function (k) {
-              return k !== CACHE;
+              return k.indexOf('linacre-v') === 0 && k !== CACHE;
             })
             .map(function (k) {
               return caches.delete(k);
@@ -78,24 +73,29 @@ self.addEventListener('activate', function (e) {
 self.addEventListener('fetch', function (e) {
   var url = new URL(e.request.url);
 
-  // Never touch API calls, POSTs, or third-party requests (Lab streaming!)
+  // Never touch API calls, POSTs, streaming audio, or third-party requests (Lab streaming!)
   if (e.request.method !== 'GET' || url.origin !== self.location.origin) return;
   if (url.pathname.indexOf('/api/') === 0) return;
+  if (url.pathname.indexOf('/audio/') === 0) return;
 
   // Network-first for page navigations: fresh deploys win, cache is the offline fallback
   if (e.request.mode === 'navigate') {
     e.respondWith(
       fetch(e.request)
         .then(function (r) {
-          var copy = r.clone();
-          caches.open(CACHE).then(function (cache) {
-            cache.put(e.request, copy);
-          });
+          if (r.ok) {
+            var copy = r.clone();
+            caches.open(CACHE).then(function (cache) {
+              return cache.put(e.request, copy);
+            });
+          }
           return r;
         })
         .catch(function () {
           return caches.match(e.request).then(function (r) {
-            return r || caches.match('index.html') || caches.match(OFFLINE_URL);
+            return r || caches.match('index.html').then(function (index) {
+              return index || caches.match(OFFLINE_URL);
+            });
           });
         }),
     );
@@ -122,7 +122,7 @@ self.addEventListener('fetch', function (e) {
         })
         .catch(function () {
           // Last-resort offline fallback for lost same-origin GETs
-          return caches.match(OFFLINE_URL);
+          return Response.error();
         });
     }),
   );

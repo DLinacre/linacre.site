@@ -1,0 +1,169 @@
+{
+  "userAgent": "TabulousGamesDiscovery/1.0 (+https://github.com/LIN4CRE/tabulous-games)",
+  "limits": {
+    "portedgamesDetails": 30,
+    "concurrency": 4,
+    "timeoutMs": 20000,
+    "minSpawnPlays": 20,
+    "revisitDays": 5
+  },
+  "sources": {
+    "portedgames": [
+      {
+        "id": "portedgames-new",
+        "enabled": true,
+        "url": "https://portedgames.com/new/",
+        "note": "Daily-checked changelog of newly added fan ports."
+      },
+      {
+        "id": "portedgames-browser",
+        "enabled": true,
+        "url": "https://portedgames.com/browser/",
+        "note": "Every browser port the directory tracks."
+      }
+    ],
+    "spawn": [
+      {
+        "id": "spawn-hot",
+        "enabled": true,
+        "url": "https://www.spawn.co/api/feed?sort=hot",
+        "genres": [
+          "survivors",
+          "survival",
+          "roguelite",
+          "roguelike",
+          "action",
+          "fps",
+          "racing",
+          "arena"
+        ],
+        "note": "Public Spawn feed; 3D games running in browser tabs with no install."
+      },
+      {
+        "id": "spawn-new",
+        "enabled": true,
+        "url": "https://www.spawn.co/api/feed?sort=new",
+        "genres": [
+          "survivors",
+          "survival",
+          "roguelite",
+          "roguelike",
+          "action",
+          "shooter"
+        ],
+        "note": "Freshest Spawn worlds across multiple genres."
+      }
+    ],
+    "itch": [
+      {
+        "id": "itch-webgpu",
+        "enabled": true,
+        "url": "https://itch.io/games/html5/tag-webgpu",
+        "note": "HTML5 WebGPU native ports and games on itch.io."
+      },
+      {
+        "id": "itch-webassembly",
+        "enabled": true,
+        "url": "https://itch.io/games/html5/tag-webassembly",
+        "note": "WebAssembly game ports and recompilations on itch.io."
+      },
+      {
+        "id": "itch-source-port",
+        "enabled": true,
+        "url": "https://itch.io/games/html5/tag-port",
+        "note": "Community source ports compiled for web on itch.io."
+      },
+      {
+        "id": "itch-fps",
+        "enabled": true,
+        "url": "https://itch.io/games/html5/tag-fps",
+        "note": "HTML5 3D first-person shooters on itch.io."
+      },
+      {
+        "id": "itch-racing",
+        "enabled": true,
+        "url": "https://itch.io/games/html5/tag-racing",
+        "note": "HTML5 racing and driving games on itch.io."
+      },
+      {
+        "id": "itch-decompile",
+        "enabled": true,
+        "url": "https://itch.io/games/html5/tag-decompile",
+        "note": "Community game recompilations and decomp projects on itch.io."
+      }
+    ],
+    "curated": [
+      {
+        "title": "Slow Roads",
+        "url": "https://slowroads.io/",
+        "genres": [
+          "racing",
+          "driving",
+          "procedural"
+        ],
+        "note": "Infinite procedural 3D browser driving game by anslo."
+      },
+      {
+        "title": "Hege Mania",
+        "url": "https://hegemania.com/",
+        "genres": [
+          "survivors"
+        ],
+        "note": "Browser survivor game posted to r/indiegames."
+      },
+      {
+        "title": "Redshift Survivor",
+        "url": "https://redshift-survivor.vercel.app/",
+        "genres": [
+          "survivors",
+          "space"
+        ],
+        "note": "Three.js space survivor-like; desktop only."
+      },
+      {
+        "title": "Sonic 1 & 2 Web",
+        "url": "https://rubberduckscat.github.io/Sonic-1-2-Web/",
+        "genres": [
+          "classic-pc",
+          "platformer",
+          "decompilation"
+        ],
+        "note": "Decompilation of Sonic the Hedgehog 1 & 2 running in WebAssembly."
+      }
+    ],
+    "github": {
+      "enabled": false,
+      "queries": [
+        "webassembly source port in:name,description",
+        "webgpu recompilation in:name,description",
+        "survivors browser game in:name,description"
+      ],
+      "note": "Enable for a broader sweep; unauthenticated search is rate-limited, GITHUB_TOKEN lifts it."
+    }
+  },
+  "watchKeywords": [
+    "webgpu",
+    "webassembly",
+    "wasm",
+    "decompilation",
+    "recompilation",
+    "source port",
+    "browser port",
+    "fps",
+    "racing",
+    "kart",
+    "rts",
+    "open world",
+    "survivor",
+    "roguelite",
+    "bullet heaven",
+    "horde",
+    "vampire survivors",
+    "pokemon",
+    "diablo",
+    "warcraft",
+    "half-life",
+    "quake",
+    "doom"
+  ]
+}

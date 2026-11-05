@@ -103,7 +103,7 @@ const WEBSITE = {
   url: `${SITE}/`,
   name: 'linacre.site',
   description:
-    "David Linacre's complete project index: live apps, AI products, developer tools and games, with private in-browser utilities.",
+    "Selected software, browser tools and games by David Linacre.",
   inLanguage: 'en-GB',
   publisher: { '@id': `${SITE}/#org` },
 };
@@ -112,7 +112,20 @@ const ROUTE_LABEL = Object.fromEntries(
   Object.entries(meta.routes).map(([route, m]) => [route, m.title.split(' — ')[0].split(' | ')[0]]),
 );
 
-const publicProjects = data.projects.filter(p => p.url);
+const publicProjects = data.selectedWork;
+const publicGames = data.selectedGames;
+const osintPayload = JSON.parse(
+  fs.readFileSync(path.join(root, 'public', 'data', 'osint-hud.json'), 'utf8'),
+);
+const osintCounts = osintPayload.groups.reduce(
+  (counts, group) => {
+    counts.sectors += 1;
+    counts.categories += group.cats.length;
+    counts.tools += group.cats.reduce((total, category) => total + category.links.length, 0);
+    return counts;
+  },
+  { tools: 0, categories: 0, sectors: 0 },
+);
 
 function breadcrumbFor(route) {
   if (route === '/') return null;
@@ -138,18 +151,20 @@ function jsonLdFor(route, m) {
   if (route === '/') {
     graph.push({
       '@type': 'ItemList',
-      '@id': `${SITE}/#projects`,
-      name: 'Projects by David Linacre',
+      '@id': `${SITE}/#work`,
+      name: 'Selected Work by LIN4CRE',
       itemListElement: publicProjects.map((p, i) => ({
         '@type': 'ListItem',
         position: i + 1,
         item: {
-          '@type': p.kind === 'Game' ? 'VideoGame' : 'SoftwareApplication',
+          '@type': 'SoftwareApplication',
           name: p.name,
-          url: p.url,
-          description: p.blurb,
+          url: p.primaryAction.href.startsWith('/')
+            ? `${SITE}${p.primaryAction.href}`
+            : p.primaryAction.href,
+          description: p.summary,
           applicationCategory: 'DeveloperApplication',
-          operatingSystem: 'Web',
+          operatingSystem: p.id === 'dual-audio-synchronizer' ? 'Windows' : 'Web',
           author: { '@id': `${SITE}/#person` },
         },
       })),
@@ -218,11 +233,9 @@ function headFor(route, m) {
     `<meta name="twitter:description" content="${desc}" />`,
     `<meta name="twitter:image" content="${image}" />`,
   ];
-  // PERF-02: preload the avatar only where it renders as an above-the-fold
-  // LCP candidate — /about alone.
-  if (route === '/about') {
+  if (route === '/') {
     lines.push(
-      `<link rel="preload" as="image" href="/profile_avatar.webp" type="image/webp" fetchpriority="high" />`,
+      `<link rel="preload" as="image" href="/showcase/dual-audio-synchronizer.webp" type="image/webp" fetchpriority="high" />`,
     );
   }
   lines.push(`<script type="application/ld+json">${jsonLdFor(route, m)}</script>`);
@@ -232,7 +245,7 @@ function headFor(route, m) {
 // ------------------------------------------------- static content snapshots
 const NAV = [
   ['/', 'Home'],
-  ['/tools', 'Tools'],
+  ['/#work', 'Selected Work'],
   ['/games', 'Games'],
   ['/about', 'About'],
   ['/contact', 'Contact'],
@@ -266,45 +279,35 @@ font-family:'JetBrains Mono',monospace;font-weight:700;overflow:visible}
 const CTA_BLOCK = `
 <p>
   <a class="cta" href="/contact">Start a project — get in touch</a>
-  <a class="cta alt" href="/#projects">See all projects</a>
+  <a class="cta alt" href="/#work">See selected work</a>
 </p>`;
 
 function pageBody(route) {
   switch (route) {
     case '/': {
-      const featured = publicProjects.filter(p => p.featured);
-      const featuredRows = featured
+      const workItems = publicProjects
         .map(
           p =>
-            `  <li><a href="${esc(p.url)}" rel="noopener">${esc(p.name)}</a> <span class="meta">[${esc(p.kind)}]${p.tech && p.tech.length ? ` · ${esc(p.tech.slice(0, 3).join(' · '))}` : ''}</span> — ${esc(p.blurb)}</li>`,
+            `  <li><a href="${esc(p.primaryAction.href)}">${esc(p.name)}</a> — ${esc(p.summary)}</li>`,
         )
         .join('\n');
-      const rows = publicProjects
+      const gameItems = publicGames
         .map(
-          (p, i) =>
-            `  <li><a href="${esc(p.url)}" rel="noopener">${esc(p.name)}</a> <span class="meta">[${esc(p.kind)}]</span> — ${esc(p.blurb)}</li>`,
+          g =>
+            `  <li><a href="${esc(g.playAction.href)}">${esc(g.name)}</a> — ${esc(g.summary)}</li>`,
         )
         .join('\n');
-      return `
-<h1>Everything David builds — one search away</h1>
-<p>${publicProjects.length} live apps, AI products, developer tools and games, ordered by usefulness.
-Every project below is real, shipped, and either live on the web or open source on GitHub.
-Use the search bar on the page to filter the full catalogue.</p>
-<h2>Featured work</h2>
+      return `<h1>Focused software, built to do one thing properly.</h1>
+<p>LIN4CRE is the independent software studio of David Linacre in Barnsley, South Yorkshire.</p>
+<h2>Selected Work</h2>
 <ul>
-${featuredRows}
+${workItems}
 </ul>
-<h2>All projects</h2>
+<h2>Selected Games</h2>
 <ul>
-${rows}
+${gameItems}
 </ul>
-<h2>Also on this site</h2>
-<ul>
-  <li><a href="/tools">Tools</a> — private in-browser utilities (JSON, Base64, timestamps, secure generators) plus a curated directory.</li>
-  <li><a href="/games">Games</a> — playable browser games, no install.</li>
-  <li><a href="/about">About</a> — career, skills and changelog.</li>
-</ul>
-${CTA_BLOCK}`;
+<p><a href="/games">Full game notes</a> · <a href="/about">About LIN4CRE</a> · <a href="/contact">Contact</a></p>`;
     }
 
     case '/tools': {
@@ -339,52 +342,74 @@ ${CTA_BLOCK}`;
     }
 
     case '/games': {
-      const games = data.projects.filter(p => p.kind === 'Game' && p.url);
-      const rows = games
+      const gameItems = publicGames
         .map(
           g =>
-            `  <li><a href="${esc(g.url)}" rel="noopener">${esc(g.name)}</a> — ${esc(g.blurb)}</li>`,
+            `  <li><a href="${esc(g.playAction.href)}">${esc(g.name)}</a> (${esc(g.genre)}) — ${esc(g.summary)}</li>`,
+        )
+        .join('\n');
+      return `<h1>Focused browser games, ready in one click.</h1>
+<p>Four self-contained browser games designed and coded from scratch by LIN4CRE.</p>
+<ul>
+${gameItems}
+</ul>`;
+    }
+
+    case '/music-videos': {
+      const tracks = data.musicVideos
+        .map(
+          (track, index) =>
+            `  <li><a href="https://lin4cre.github.io/linacre-music-videos/#${esc(track.id)}">${esc(track.title)}</a> <span class="meta">${String(index + 1).padStart(2, '0')} · ${esc(track.duration)} · ${esc(track.genre)}</span></li>`,
         )
         .join('\n');
       return `
-<h1>Playable browser games</h1>
-<p>Free, instant-play games built by David — no install, no account, no tracking.</p>
+<h1>Music Videos — The Proper Mad collection</h1>
+<p>The official cinema player hosts ${data.musicVideos.length} original lyric-video masters, with the original artwork, timed lyrics, playlist, playback controls, theatre mode and audio profiles.</p>
+<p><a href="https://lin4cre.github.io/linacre-music-videos/#the-road-beyond">Open The Road Beyond in the official player</a></p>
+<h2>Track collection</h2>
 <ul>
-${rows}
+${tracks}
 </ul>
-<h2>Roblox projects</h2>
-<ul>
-  <li><a href="https://dlinacre.github.io/slime-factory-tycoon/" rel="noopener">Slime Factory Tycoon</a> — open-source Roblox idle-tycoon template with an interactive web demo.</li>
-  <li><a href="https://github.com/DLinacre/BloxCapital" rel="noopener">BloxCapital</a> — Roblox monetization &amp; game-performance suite.</li>
-  <li><a href="https://github.com/DLinacre/Blox-Capital" rel="noopener">Blox-Capital</a> — Roblox money-making extension.</li>
-</ul>
-${CTA_BLOCK}`;
+<p>The video masters remain on the official project host rather than being duplicated into this site.</p>
+`;
     }
 
-    case '/about':
+    case '/osint': {
+      const sectors = osintPayload.groups
+        .map(
+          group =>
+            `  <li><strong>${esc(group.name)}</strong> — ${group.cats.length} categories and ${group.cats.reduce((total, category) => total + category.links.length, 0)} resources.</li>`,
+        )
+        .join('\n');
       return `
-<h1>About David Linacre</h1>
-<p>I'm a self-taught full-stack engineer focused on developer experience, automation and AI systems.
-I build with React, TypeScript, Node.js, Python and Go, and I ship on Vercel, Docker and self-hosted infrastructure.</p>
-<p>This site is my working environment as much as a portfolio: a complete project index, a tool box,
-an AI lab and a set of browser utilities — all open to use.</p>
+<h1>OSINT HUD — ${osintCounts.tools.toLocaleString('en-GB')} curated resources</h1>
+<p>Search and browse ${osintCounts.tools.toLocaleString('en-GB')} public research links across ${osintCounts.sectors} sectors and ${osintCounts.categories} categories. Search, favorites, recents, and world clocks run client-side.</p>
+<h2>Research sectors</h2>
 <ul>
-  <li><a href="https://github.com/DLinacre" rel="noopener noreferrer">GitHub — github.com/DLinacre</a></li>
-  <li><a href="https://linkedin.com/in/david-linacre" rel="noopener noreferrer">LinkedIn — david-linacre</a></li>
+${sectors}
 </ul>
-${CTA_BLOCK}`;
+<p>Use these third-party resources lawfully, respect privacy and provider terms, and obtain appropriate consent. The curated directory is available from the <a href="https://github.com/LIN4CRE/linacre-osint-hud">original project source</a>.</p>
+<p class="meta">Enable JavaScript to search and interact with the directory. Search filters are stored in the URL fragment, not sent to the site server.</p>
+`;
+    }
+
+    case '/orbit':
+      return `
+<h1>Orbit &amp; Earth Observatory</h1>
+<p>Real-time planetary desk tracking the International Space Station, the solar day/night terminator, global M4.5+ seismic events, upcoming orbital launches, and live sky conditions over Barnsley (53.55°N, 1.48°W).</p>
+<ul>
+  <li><strong>ISS Live Telemetry</strong> — real-time latitude, longitude, altitude, velocity and 90-minute orbital ground track.</li>
+  <li><strong>Solar Terminator &amp; Lunar Phase</strong> — live sub-solar point, day/night boundary and moon illumination.</li>
+  <li><strong>USGS M4.5+ Seismic Feed</strong> — past 24 hours of global earthquakes plotted on an equirectangular world map.</li>
+  <li><strong>Orbital Launch Schedule</strong> — upcoming rocket launches with live T-minus countdowns.</li>
+</ul>
+`;
+
+    case '/about':
+      return `<h1>About David Linacre</h1><p>David is a self-taught software developer based in Barnsley, South Yorkshire, building browser tools, games and creative experiments.</p><p><a href="https://github.com/LIN4CRE">GitHub</a> · <a href="/contact">Contact</a></p>`;
 
     case '/contact':
-      return `
-<h1>Contact David Linacre</h1>
-<p>Have a project, a problem or a question? Use the form on this page — David replies within 12 hours from david@linacre.site.</p>
-<ul>
-  <li>Systems &amp; infrastructure audits from £1,800.</li>
-  <li>Custom builds from £6,500.</li>
-  <li>Fractional engineering retainer £2,400/mo.</li>
-  <li>NDA-friendly · UK GDPR compliant.</li>
-</ul>
-${CTA_BLOCK}`;
+      return `<h1>Contact David Linacre</h1><p>Send an enquiry through the contact form, or email david@linacre.site.</p>`;
 
     case '/lab':
       return `
@@ -480,7 +505,10 @@ const indexable = Object.entries(meta.routes).filter(([, m]) => m.index);
 const ROUTE_LASTMOD_SOURCES = {
   '/': ['route-meta.json', 'src/App.tsx', 'src/data/siteProjects.ts'],
   '/tools': ['src/components/Tools.tsx', 'src/components/QuickTools.tsx', 'src/data.ts'],
-  '/games': ['src/components/Games.tsx', 'public/games/index.html'],
+  '/games': ['public/games/index.html', 'public/games/games.json'],
+  '/music-videos': ['src/components/MusicVideos.tsx', 'src/data/musicVideos.ts'],
+  '/osint': ['src/components/OsintHud.tsx', 'public/data/osint-hud.json'],
+  '/orbit': ['src/components/OrbitObservatory.tsx', 'src/lib/orbit.ts', 'src/data/worldLand.ts'],
   '/about': ['src/components/About.tsx'],
   '/lab': ['src/components/Lab.tsx'],
   '/identity': ['src/components/IdentityHub.tsx'],
@@ -561,78 +589,35 @@ if (failed) process.exit(1);
 // AI discoverability: emit a full-content Markdown export so LLMs / answer
 // engines can retrieve substantive site content.
 function buildLlmsFull() {
-  const L = [];
-  const push = (...lines) => L.push(...lines);
-
-  push('# linacre.site — full content export for LLMs');
-  push('');
-  push(
-    '> David Christopher Linacre — UK-based freelance full-stack & AI systems engineer (React, TypeScript, Go, Python). Systems audits, custom builds, and fractional engineering retainers.',
-  );
-  push(
-    '> This file mirrors the substantive content of https://www.linacre.site/ for AI retrieval. Contact: david@linacre.site',
-  );
-  push('');
-
-  push('## About David Linacre');
-  push('- Full name: David Christopher Linacre');
-  push('- Location: United Kingdom (England)');
-  push('- Role: Full-Stack Engineer & AI Systems Builder');
-  push('- Contact: david@linacre.site');
-  push('- GitHub: https://github.com/DLinacre');
-  push('- LinkedIn: https://linkedin.com/in/david-linacre');
-  push(
-    '- Expertise: React, TypeScript, Next.js, Node.js, Go, Python, PostgreSQL, Docker, AI engineering, DevOps, developer tooling',
-  );
-  push('');
-
-  push('## Services & pricing');
-  push(
-    '- Systems & Infrastructure Audit — deep technical review of architecture, security, performance, and developer experience. From £1,800.',
-  );
-  push(
-    '- Custom Development Project — end-to-end build of production-grade tools, automation platforms, or AI integrations. From £6,500.',
-  );
-  push(
-    '- Ongoing Engineering Retainer — dedicated fractional engineering time for ongoing improvements and rapid iteration. £2,400 / month.',
-  );
-  push('- Reply within 12 hours from david@linacre.site. NDA-friendly. UK GDPR compliant.');
-  push('');
-
-  const pubProjects = (data.projects || []).filter(p => p.url);
-  if (pubProjects.length) {
-    push('## Projects');
-    for (const p of pubProjects) {
-      push(`### ${p.name} [${p.kind}]`);
-      if (p.blurb) push(p.blurb);
-      if (p.repo) push(`Source: ${p.repo}`);
-      if (p.url) push(`Link: ${p.url}`);
-      push('');
-    }
+  const toAbs = href => (href.startsWith('http') ? href : `${SITE}${href}`);
+  const lines = [
+    '# LIN4CRE',
+    '',
+    'Independent software studio by David Linacre in Barnsley, South Yorkshire, UK.',
+    '',
+    '## Selected Work',
+  ];
+  for (const p of publicProjects) {
+    lines.push(
+      `### ${p.name} (${p.category})`,
+      p.summary,
+      `Link: ${toAbs(p.primaryAction.href)}`,
+      `Source: ${p.sourceUrl}`,
+      '',
+    );
   }
-
-  if (Array.isArray(data.tools) && data.tools.length) {
-    push('## Free developer toolkit');
-    const byCat = {};
-    for (const t of data.tools) (byCat[t.category] ||= []).push(t);
-    for (const [cat, tools] of Object.entries(byCat)) {
-      push(`### ${cat}`);
-      for (const t of tools) push(`- ${t.name}${t.url ? ` (${t.url})` : ''} — ${t.description}`);
-      push('');
-    }
+  lines.push('## Selected Games', '');
+  for (const g of publicGames) {
+    lines.push(
+      `### ${g.name} (${g.genre})`,
+      g.summary,
+      `Play: ${toAbs(g.playAction.href)}`,
+      `Source: ${g.sourceUrl}`,
+      '',
+    );
   }
-
-  push('## Contact & engagement process');
-  push(
-    '1. Send an enquiry at https://www.linacre.site/contact (name, work email, optional company, budget, timeline, project details).',
-  );
-  push('2. Reply within 12 hours from david@linacre.site.');
-  push('3. Short discovery call to scope the work.');
-  push('4. Written Statement of Work — scope, milestones, price, timeline, acceptance criteria.');
-  push('');
-  push(`_Generated at build: ${new Date().toISOString()}_`);
-
-  return L.join('\n') + '\n';
+  lines.push('Contact: https://www.linacre.site/contact', '');
+  return lines.join('\n');
 }
 fs.writeFileSync(path.join(distDir, 'llms-full.txt'), buildLlmsFull(), 'utf8');
 console.log('[prerender] llms-full.txt written');

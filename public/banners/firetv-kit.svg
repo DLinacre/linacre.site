@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080c14" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#030712" />
+    </linearGradient>
+    
+    <radialGradient id="fire-glow" cx="20%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#ff6b00" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#ff3d00" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="cyan-glow" cx="85%" cy="75%" r="50%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.25" />
+      <stop offset="70%" stop-color="#4facfe" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="title-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="45%" stop-color="#f8fafc" />
+      <stop offset="80%" stop-color="#fdba74" />
+      <stop offset="100%" stop-color="#ff8c00" />
+    </linearGradient>
+
+    <linearGradient id="card-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.55" />
+    </linearGradient>
+
+    <linearGradient id="border-fire" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff8c00" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#ff4500" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#00f2fe" stop-opacity="0.6" />
+    </linearGradient>
+
+    <filter id="drop-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+
+    <filter id="glow-filter" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="420" fill="url(#bg-grad)" rx="16" />
+  <rect width="1200" height="420" fill="url(#fire-glow)" rx="16" />
+  <rect width="1200" height="420" fill="url(#cyan-glow)" rx="16" />
+
+  <!-- Subtle Cyber Grid -->
+  <g opacity="0.08" stroke="#ffffff" stroke-width="1">
+    <path d="M0 60 H1200 M0 120 H1200 M0 180 H1200 M0 240 H1200 M0 300 H1200 M0 360 H1200" />
+    <path d="M100 0 V420 M200 0 V420 M300 0 V420 M400 0 V420 M500 0 V420 M600 0 V420 M700 0 V420 M800 0 V420 M900 0 V420 M100 0 V420 M1100 0 V420" />
+  </g>
+
+  <!-- Border Highlight -->
+  <rect x="1" y="1" width="1198" height="418" rx="15" fill="none" stroke="url(#border-fire)" stroke-width="1.5" opacity="0.6" />
+
+  <!-- LEFT LOGO EMBLEM: Fire TV Screen + Plasma Flame -->
+  <g transform="translate(65, 80)">
+    <!-- Ambient TV Glow -->
+    <rect x="-10" y="-10" width="180" height="180" rx="36" fill="#ff4500" opacity="0.15" filter="url(#glow-filter)" />
+    
+    <!-- Outer TV Bezel -->
+    <rect x="0" y="0" width="160" height="160" rx="32" fill="url(#card-grad)" stroke="url(#border-fire)" stroke-width="2" filter="url(#drop-shadow)" />
+    
+    <!-- Inner Screen Display -->
+    <rect x="12" y="12" width="136" height="136" rx="22" fill="#090d16" stroke="#334155" stroke-width="1" />
+    
+    <!-- Vibrant Vector Flame -->
+    <path d="M80 26 C82 48, 108 62, 108 90 C108 116, 90 126, 80 126 C70 126, 52 116, 52 90 C52 70, 68 56, 72 38 C75 32, 79 26, 80 26 Z" 
+          fill="url(#title-grad)" filter="url(#glow-filter)" />
+    <path d="M80 62 C82 74, 96 82, 96 98 C96 112, 86 118, 80 118 C74 118, 64 112, 64 98 C64 86, 74 78, 76 68 Z" 
+          fill="#ffffff" opacity="0.9" />
+
+    <!-- Play Symbol in Flame -->
+    <polygon points="76,86 88,94 76,102" fill="#ff4500" />
+  </g>
+
+  <!-- MAIN HEADER TEXT -->
+  <!-- Top Category Tag -->
+  <g transform="translate(265, 82)">
+    <rect x="0" y="0" width="220" height="26" rx="13" fill="#ff4500" fill-opacity="0.18" stroke="#ff8c00" stroke-width="1" stroke-opacity="0.7" />
+    <text x="110" y="17" fill="#ffedd5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" text-anchor="middle">
+      FIRE OS &bull; ANDROID TV TOOLKIT
+    </text>
+  </g>
+
+  <!-- Big Title -->
+  <text x="265" y="145" fill="url(#title-grad)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="44" font-weight="900" letter-spacing="-0.5" filter="url(#drop-shadow)">
+    FIRE TV ULTIMATE SETUP KIT
+  </text>
+
+  <!-- Subtitle -->
+  <text x="265" y="180" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="18" font-weight="500">
+    The Zero-Middleman Streaming Stack: Stremio, SmartTube &amp; TiviMate
+  </text>
+
+  <!-- FEATURE BADGES (Middle Row) -->
+  <g transform="translate(265, 212)">
+    <!-- Badge 1: Stremio Trailer Fix -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="180" height="34" rx="8" fill="#1e1b4b" stroke="#6366f1" stroke-width="1" />
+      <text x="14" y="22" fill="#c7d2fe" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="12" font-weight="700">⚡ ExoPlayer Bugfix</text>
+    </g>
+
+    <!-- Badge 2: AdGuard DoT -->
+    <g transform="translate(192, 0)">
+      <rect x="0" y="0" width="185" height="34" rx="8" fill="#064e3b" stroke="#10b981" stroke-width="1" />
+      <text x="14" y="22" fill="#a7f3d0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="12" font-weight="700">🛡️ AdGuard DNS (DoT)</text>
+    </g>
+
+    <!-- Badge 3: 1-Click Wi-Fi -->
+    <g transform="translate(389, 0)">
+      <rect x="0" y="0" width="165" height="34" rx="8" fill="#0c4a6e" stroke="#0284c7" stroke-width="1" />
+      <text x="14" y="22" fill="#bae6fd" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="12" font-weight="700">🚀 1-Click Wi-Fi ADB</text>
+    </g>
+
+    <!-- Badge 4: USB Toolkit -->
+    <g transform="translate(566, 0)">
+      <rect x="0" y="0" width="170" height="34" rx="8" fill="#451a03" stroke="#f59e0b" stroke-width="1" />
+      <text x="14" y="22" fill="#fde68a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="12" font-weight="700">💾 USB Flash Toolkit</text>
+    </g>
+
+    <!-- Badge 5: Debloat -->
+    <g transform="translate(748, 0)">
+      <rect x="0" y="0" width="125" height="34" rx="8" fill="#312e81" stroke="#818cf8" stroke-width="1" />
+      <text x="14" y="22" fill="#e0e7ff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="12" font-weight="700">🧹 Debloated</text>
+    </g>
+  </g>
+
+  <!-- BOTTOM APP SHOWCASE CARDS -->
+  <g transform="translate(65, 275)">
+    <!-- Stremio Card -->
+    <g transform="translate(0, 0)">
+      <rect width="255" height="105" rx="14" fill="#13132b" stroke="#7c3aed" stroke-width="1.5" />
+      <circle cx="45" cy="52" r="22" fill="#7c3aed" fill-opacity="0.3" />
+      <!-- Stremio Mini Icon -->
+      <polygon points="38,40 58,52 38,64" fill="#a78bfa" />
+      <text x="78" y="44" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="16" font-weight="800">Stremio</text>
+      <text x="78" y="64" fill="#a78bfa" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="12" font-weight="600">Android TV &bull; Ultra Fast</text>
+      <text x="78" y="82" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="11">ExoPlayer deadlock fixed</text>
+    </g>
+
+    <!-- SmartTube Card -->
+    <g transform="translate(275, 0)">
+      <rect width="255" height="105" rx="14" fill="#200d11" stroke="#e11d48" stroke-width="1.5" />
+      <circle cx="45" cy="52" r="22" fill="#e11d48" fill-opacity="0.3" />
+      <!-- SmartTube Mini Icon -->
+      <polygon points="38,40 58,52 38,64" fill="#fb7185" />
+      <text x="78" y="44" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="16" font-weight="800">SmartTube</text>
+      <text x="78" y="64" fill="#fb7185" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="12" font-weight="600">4K HDR &bull; SponsorBlock</text>
+      <text x="78" y="82" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="11">Zero video advertisements</text>
+    </g>
+
+    <!-- TiviMate Card -->
+    <g transform="translate(550, 0)">
+      <rect width="255" height="105" rx="14" fill="#08233a" stroke="#0284c7" stroke-width="1.5" />
+      <circle cx="45" cy="52" r="22" fill="#0284c7" fill-opacity="0.3" />
+      <!-- TiviMate Mini Icon -->
+      <rect x="34" y="42" width="22" height="18" rx="3" fill="#38bdf8" />
+      <polygon points="41,47 50,51 41,55" fill="#08233a" />
+      <text x="78" y="44" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="16" font-weight="800">TiviMate</text>
+      <text x="78" y="64" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="12" font-weight="600">Premium IPTV Engine</text>
+      <text x="78" y="82" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="11">EPG guide &amp; multi-screen</text>
+    </g>
+
+    <!-- AdGuard DoT Card -->
+    <g transform="translate(825, 0)">
+      <rect width="245" height="105" rx="14" fill="#072218" stroke="#10b981" stroke-width="1.5" />
+      <circle cx="45" cy="52" r="22" fill="#10b981" fill-opacity="0.3" />
+      <!-- AdGuard Mini Shield Icon -->
+      <path d="M45 38 L55 42 V52 C55 58, 45 64, 45 64 C45 64, 35 58, 35 52 V42 Z" fill="#34d399" />
+      <text x="78" y="44" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="16" font-weight="800">AdGuard DoT</text>
+      <text x="78" y="64" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="12" font-weight="600">Encrypted DNS (TLS)</text>
+      <text x="78" y="82" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto" font-size="11">System-wide ad blocker</text>
+    </g>
+  </g>
+</svg>

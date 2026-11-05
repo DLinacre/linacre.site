@@ -104,12 +104,29 @@ export default function ProjectDetailModal({ project, onClose }: Props) {
             transition={{ duration: 0.2 }}
           >
             {/* Banner / artwork header */}
-            <div className="relative h-40 w-full bg-muted/30">
+            <div className="relative aspect-video max-h-60 w-full overflow-hidden bg-muted/30">
               {project.artwork ? (
-                <img src={project.artwork} alt="" className="h-full w-full object-cover" />
+                <>
+                  <img
+                    src={project.artwork}
+                    alt=""
+                    onError={e => {
+                      e.currentTarget.style.display = "none";
+                      const fallback = e.currentTarget.nextElementSibling;
+                      if (fallback) fallback.classList.remove("hidden");
+                    }}
+                    className="h-full w-full object-cover"
+                  />
+                  <span
+                    className="hidden grid h-full w-full place-items-center text-6xl bg-gradient-to-br from-[#12151e] to-[#07080b]"
+                    aria-hidden="true"
+                  >
+                    {project.emoji ?? "??"}
+                  </span>
+                </>
               ) : (
                 <span className="grid h-full w-full place-items-center text-6xl" aria-hidden="true">
-                  {project.emoji ?? '📦'}
+                  {project.emoji ?? "??"}
                 </span>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--linacre-panel)] to-transparent" />

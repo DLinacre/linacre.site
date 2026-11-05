@@ -85,11 +85,11 @@ export default function Footer() {
               </p>
               <div className="flex items-center gap-3 mt-3">
                 <a
-                  href="https://github.com/DLinacre"
+                  href="https://github.com/LIN4CRE"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground/60 hover:text-amber-color transition-colors"
-                  aria-label="GitHub — DLinacre"
+                  aria-label="GitHub — LIN4CRE"
                 >
                   <Github className="w-4 h-4" />
                 </a>

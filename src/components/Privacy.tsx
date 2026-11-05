@@ -39,7 +39,9 @@ export default function Privacy() {
         <h1 className="font-display text-3xl font-bold tracking-tight text-foreground mt-3">
           Privacy <span className="text-cyan">Policy</span>
         </h1>
-        <p className="text-sm">// Last updated: 10 July 2026. Zero tracking cookies active.</p>
+        <p className="text-sm">
+          // Last updated: 1 November 2026. No advertising or analytics cookies.
+        </p>
       </motion.section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -112,10 +114,14 @@ export default function Privacy() {
             <span>5. SUB-PROCESSORS & TRANSFERS</span>
           </h2>
           <p>
-            We share contact submissions and prompt queries with our sub-processors, Vercel Inc.
-            (hosting & serverless functions) and Google Cloud Platform (Gemini API calls). Since
-            these third parties operate in the United States, we rely on standard contract clauses
-            (SCCs) to guarantee equivalent data protection levels.
+            Contact submissions and Gemini requests are handled by Vercel Inc. (hosting and
+            serverless functions) and Google Cloud Platform (Gemini API calls). The Music Videos
+            page also embeds a player hosted by GitHub Pages and streams its media from that origin;
+            that provider receives ordinary request metadata when the player is loaded. The OSINT
+            HUD data is served locally by this site and external resources are contacted only when
+            you choose to open them. Where a provider processes personal data outside the UK or EEA,
+            the relevant service transfer safeguards, including standard contractual clauses where
+            applicable, govern that processing.
           </p>
         </motion.div>
 
@@ -144,7 +150,8 @@ export default function Privacy() {
             <span>7. COOKIE & LOCAL STORAGE INVENTORY</span>
           </h2>
           <p>
-            This site does not use cookies. We use browser Local Storage solely to persist
+            This site does not use advertising or analytics cookies. Our hosting provider may set a
+            short-lived security cookie for edge protection. We use browser Local Storage to persist
             functional workspace settings:
           </p>
           <ul className="list-disc pl-4 space-y-1.5 text-[11px]">
@@ -166,7 +173,20 @@ export default function Privacy() {
               <strong>linacre_lab_sessions_v1</strong> — Saves your AI Lab local conversation
               blueprints.
             </li>
+            <li>
+              <strong>linacre_osint_stars_v1 / linacre_osint_recents_v1</strong> — Stores the OSINT
+              HUD resources you star and your latest 14 opened links on this device.
+            </li>
+            <li>
+              <strong>linacre_osint_accent_v1 / linacre_osint_density_v1</strong> — Remembers the
+              HUD accent colour and compact/comfortable layout preference.
+            </li>
           </ul>
+          <p className="text-[11px]">
+            OSINT HUD search filters may appear in the URL fragment for sharing. URL fragments are
+            not sent in HTTP requests to this site, but remain visible in the address bar and
+            browser history; avoid putting sensitive identifiers into a query.
+          </p>
           <p className="text-[11px] text-amber-color/90 mt-2">
             Provider API keys (OpenAI, Anthropic, LiteLLM) are <em>not</em> written to browser
             storage. If you paste one into the AI Lab it stays in memory for that tab only and is

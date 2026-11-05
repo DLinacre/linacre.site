@@ -10,6 +10,8 @@ describe('route configuration contracts', () => {
     expect(getTabFromLocation('/contact/thanks')).toBe('contact-thanks');
     expect(getTabFromLocation('/cookie-policy')).toBe('cookie-policy');
     expect(getTabFromLocation('/ops')).toBe('ops');
+    expect(getTabFromLocation('/music-videos', '#the-road-beyond')).toBe('music-videos');
+    expect(getTabFromLocation('/osint', '#q=flight&g=geo')).toBe('osint');
   });
 
   it('supports legacy hash navigation without overriding known paths', () => {
@@ -29,6 +31,8 @@ describe('route configuration contracts', () => {
     expect(tabToPath('tools')).toBe('/tools');
     expect(tabToPath('pokeguru')).toBe('/pokeguru');
     expect(tabToPath('ops')).toBe('/ops');
+    expect(tabToPath('music-videos')).toBe('/music-videos');
+    expect(tabToPath('osint')).toBe('/osint');
     expect(routeKeyForTab('tools', '/tools')).toBe('/tools');
     expect(routeKeyForTab('ops', '/ops')).toBe('/ops');
   });

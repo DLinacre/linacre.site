@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-gm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050d1a" />
+      <stop offset="50%" stop-color="#0f223f" />
+      <stop offset="100%" stop-color="#02070f" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg-gm)" />
+  <!-- Stylized Earth Globe Wireframe -->
+  <g transform="translate(600, 240)">
+    <circle cx="0" cy="0" r="140" fill="none" stroke="#0284c7" stroke-width="4" opacity="0.8" />
+    <ellipse cx="0" cy="0" rx="140" ry="50" fill="none" stroke="#38bdf8" stroke-width="2" opacity="0.6" />
+    <ellipse cx="0" cy="0" rx="60" ry="140" fill="none" stroke="#38bdf8" stroke-width="2" opacity="0.6" />
+    <line x1="-140" y1="0" x2="140" y2="0" stroke="#0284c7" stroke-width="2" />
+    <line x1="0" y1="-140" x2="0" y2="140" stroke="#0284c7" stroke-width="2" />
+    <!-- Orbiting Satellite -->
+    <circle cx="110" cy="-90" r="6" fill="#38bdf8" />
+    <path d="M-150 120 Q 0 -180, 150 -120" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="8 6" opacity="0.7" />
+  </g>
+  <text x="600" y="500" fill="#ffffff" font-family="system-ui, sans-serif" font-size="56" font-weight="900" text-anchor="middle" letter-spacing="2">LINACRE GLOBAL MONITOR</text>
+  <text x="600" y="555" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="24" font-weight="600" text-anchor="middle" letter-spacing="1">REAL-TIME GEOPOLITICAL &amp; ENVIRONMENTAL SITUATIONAL AWARENESS</text>
+</svg>

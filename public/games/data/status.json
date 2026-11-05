@@ -1,0 +1,16 @@
+{
+  "lastScan": "2026-10-31T22:47:59.708Z",
+  "nextScan": "2026-11-01T22:47:59.708Z",
+  "schedule": "daily",
+  "scheduleCron": "0 9 * * *",
+  "workflow": "linacre-site-maintenance",
+  "mode": "automated",
+  "stats": {
+    "totalGames": 77,
+    "sampleChecked": 10,
+    "sampleHealthy": 10,
+    "instantPlayGuaranteed": true,
+    "ownFilesExcluded": 251
+  },
+  "lastUpdated": "2026-10-31"
+}

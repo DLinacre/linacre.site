@@ -29,10 +29,27 @@ describe('project library', () => {
     expect(filterProjects(projects, '', 'all', 'download')).toEqual([]);
     expect(filterProjects(projects, '', 'Tool', 'source')).toEqual([projects[1]]);
   });
-  it('keeps Tycoon source-only and prioritises KushCloud', () => {
-    const tycoon = SITE_PROJECTS.find(project => project.name === 'Slime Factory Tycoon')!;
-    expect(projectCategory(tycoon)).toBe('Source');
-    expect(projectActions(tycoon).map(action => action.kind)).toEqual(['source']);
-    expect(SITE_PROJECTS.find(project => project.name === 'KushCloud')?.pinned).toBe(true);
+  it('correctly categorises source repositories and prioritises pinned projects', () => {
+    const sourceProject = SITE_PROJECTS.find(project => project.name === '1Files Repository')!;
+    expect(sourceProject).toBeDefined();
+    expect(projectCategory(sourceProject)).toBe('Source');
+    expect(SITE_PROJECTS.find(project => project.name === 'Fire TV Setup Kit')?.pinned).toBe(true);
+  });
+  it('publishes the Music Videos and OSINT experiences as first-class site routes', () => {
+    const musicVideos = SITE_PROJECTS.find(project => project.name === 'Music Videos')!;
+    const osintHud = SITE_PROJECTS.find(project => project.name === 'Linacre OSINT HUD')!;
+    expect(musicVideos.url).toBe('/music-videos');
+    expect(musicVideos.pinned).toBe(true);
+    expect(projectActions(musicVideos)).toContainEqual({
+      kind: 'use',
+      label: 'Use project',
+      href: '/music-videos',
+    });
+    expect(osintHud.url).toBe('/osint');
+    expect(projectActions(osintHud)).toContainEqual({
+      kind: 'use',
+      label: 'Use project',
+      href: '/osint',
+    });
   });
 });

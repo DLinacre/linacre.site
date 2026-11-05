@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 110" width="100%" height="100%">
+  <defs>
+    <linearGradient id="stickerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#18132b"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="borderNeon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="35%" stop-color="#a855f7"/>
+      <stop offset="70%" stop-color="#ff0077"/>
+      <stop offset="100%" stop-color="#ffbd2e"/>
+    </linearGradient>
+    <filter id="stickerGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Outer Card with Neon Holographic Border -->
+  <rect x="3" y="3" width="614" height="104" rx="24" fill="url(#stickerGrad)" stroke="url(#borderNeon)" stroke-width="2.5" filter="url(#stickerGlow)"/>
+
+  <!-- Arcade Machine Icon Badge -->
+  <g transform="translate(26, 22)">
+    <rect x="0" y="0" width="66" height="66" rx="16" fill="rgba(0, 240, 255, 0.12)" stroke="#00f0ff" stroke-width="1.5"/>
+    <!-- Pixel Gamepad Icon -->
+    <path d="M 18 35 L 48 35 M 33 20 L 33 50" stroke="#00f0ff" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="48" cy="27" r="3.5" fill="#ff0077"/>
+    <circle cx="48" cy="43" r="3.5" fill="#ffbd2e"/>
+  </g>
+
+  <!-- Text Header & Description -->
+  <g transform="translate(108, 20)">
+    <!-- Top Pill Tag -->
+    <rect x="0" y="0" width="158" height="20" rx="10" fill="rgba(168, 85, 247, 0.2)" stroke="#a855f7" stroke-width="1"/>
+    <text x="10" y="14" fill="#d8b4fe" font-family="'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.5">
+      ★ SISTER REPO &amp; HUB
+    </text>
+
+    <!-- Main Title -->
+    <text x="0" y="44" fill="#ffffff" font-family="'Segoe UI', 'Arial Black', sans-serif" font-size="19" font-weight="800" letter-spacing="1.2">
+      RETRO ARCADE VAULT
+    </text>
+
+    <!-- Subtitle description -->
+    <text x="0" y="66" fill="#94a3b8" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500">
+      124 Preloaded Console Masterpieces · PS1 · GBA · SNES · Genesis · DS
+    </text>
+  </g>
+
+  <!-- Right Arrow CTA Button -->
+  <g transform="translate(525, 33)">
+    <circle cx="22" cy="22" r="22" fill="url(#borderNeon)"/>
+    <circle cx="22" cy="22" r="19" fill="#0f172a"/>
+    <path d="M 18 15 L 27 22 L 18 29" fill="none" stroke="#00f0ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

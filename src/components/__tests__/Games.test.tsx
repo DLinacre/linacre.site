@@ -1,14 +1,26 @@
-import { render, screen, within } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+// @vitest-environment jsdom
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Games from '../Games';
+import { selectedGames } from '../../data/curatedWork';
 
-describe('Games library', () => {
-  it('puts KushCloud first without embedded games or the Tycoon showcase', () => {
-    const { container } = render(<Games />);
-    const first = screen.getAllByRole('article')[0];
-    expect(within(first).getByRole('heading', { name: 'KushCloud' })).toBeInTheDocument();
-    expect(within(first).getByRole('link', { name: /Open game: KushCloud/ })).toHaveAttribute('href', 'https://dlinacre.github.io/KushCloud/');
-    expect(screen.queryByText('Slime Factory Tycoon')).not.toBeInTheDocument();
-    expect(container.querySelector('iframe, canvas, audio')).toBeNull();
+describe('Games curated showcase', () => {
+  it('renders all four original browser games with gameplay screenshots, specs, and play links', () => {
+    render(<Games />);
+
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: /Focused browser games, ready in one click/i,
+      }),
+    ).toBeDefined();
+
+    expect(selectedGames).toHaveLength(4);
+    for (const game of selectedGames) {
+      expect(screen.getByRole('heading', { level: 2, name: game.name })).toBeDefined();
+      expect(screen.getByAltText(game.imageAlt).getAttribute('src')).toBe(game.image);
+      const playLink = screen.getByRole('link', { name: new RegExp(game.playAction.label, 'i') });
+      expect(playLink.getAttribute('href')).toBe(game.playAction.href);
+    }
   });
 });

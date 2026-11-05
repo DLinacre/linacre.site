@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070a10" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#080c14" />
+    </linearGradient>
+
+    <!-- Emerald Glow Gradient -->
+    <radialGradient id="emeraldGlow" cx="20%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.25" />
+      <stop offset="60%" stop-color="#059669" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="skyGlow" cx="80%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.2" />
+      <stop offset="70%" stop-color="#0f172a" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.7" stroke-opacity="0.5" />
+    </pattern>
+
+    <!-- Card Background -->
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="480" fill="url(#bgGradient)" />
+  <rect width="1200" height="480" fill="url(#grid)" />
+  <rect width="1200" height="480" fill="url(#emeraldGlow)" />
+  <rect width="1200" height="480" fill="url(#skyGlow)" />
+
+  <!-- Outer Border -->
+  <rect x="1" y="1" width="1198" height="478" fill="none" stroke="#334155" stroke-width="1.5" stroke-opacity="0.6" rx="8" />
+
+  <!-- Left Side: Brand & Value Prop -->
+  <g transform="translate(80, 80)">
+    <!-- Category Badge -->
+    <rect x="0" y="0" width="310" height="30" rx="6" fill="#064e3b" fill-opacity="0.5" stroke="#10b981" stroke-width="1" stroke-opacity="0.4" />
+    <text x="12" y="20" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#34d399" letter-spacing="1">
+      ROBLOX STUDIO MONETIZATION &amp; DEVEX
+    </text>
+
+    <!-- Main Title -->
+    <text x="0" y="85" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="46" font-weight="800" fill="#ffffff" letter-spacing="-1">
+      BloxMonetize <tspan fill="#34d399">Studio</tspan>
+    </text>
+
+    <!-- Subtitle -->
+    <text x="0" y="125" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="500" fill="#94a3b8">
+      Zero-Cost Roblox Game Development, 15 Hit Game Blueprints &amp; £ DevEx Engine
+    </text>
+
+    <!-- Core Feature Bullet Badges -->
+    <g transform="translate(0, 165)">
+      <!-- Badge 1 -->
+      <g transform="translate(0, 0)">
+        <rect width="180" height="34" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+        <circle cx="16" cy="17" r="4" fill="#34d399" />
+        <text x="28" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">15 Hit Game Clones</text>
+      </g>
+
+      <!-- Badge 2 -->
+      <g transform="translate(192, 0)">
+        <rect width="180" height="34" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+        <circle cx="16" cy="17" r="4" fill="#38bdf8" />
+        <text x="28" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">100% Free Tools</text>
+      </g>
+
+      <!-- Badge 3 -->
+      <g transform="translate(384, 0)">
+        <rect width="180" height="34" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+        <circle cx="16" cy="17" r="4" fill="#fbbf24" />
+        <text x="28" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">£ DevEx &amp; HMRC Guide</text>
+      </g>
+    </g>
+
+    <!-- Footer Stats Strip inside banner -->
+    <g transform="translate(0, 240)">
+      <text x="0" y="0" font-family="'JetBrains Mono', monospace" font-size="12" fill="#64748b">
+        RATE: <tspan fill="#34d399" font-weight="600">$0.0035/R$</tspan>  ·  THRESHOLD: <tspan fill="#e2e8f0" font-weight="600">30,000 R$ (~£82)</tspan>  ·  TAX TREATY: <tspan fill="#38bdf8" font-weight="600">0% US W-8BEN</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- Right Side: Graphic Visual Display (Mock Studio Dashboard Card) -->
+  <g transform="translate(740, 70)">
+    <!-- Floating Card Container -->
+    <rect width="380" height="330" rx="14" fill="url(#cardBg)" stroke="#334155" stroke-width="1.2" />
+
+    <!-- Card Header -->
+    <rect width="380" height="45" rx="14" fill="#0f172a" fill-opacity="0.9" />
+    <circle cx="25" cy="22" r="5" fill="#ef4444" fill-opacity="0.8" />
+    <circle cx="40" cy="22" r="5" fill="#f59e0b" fill-opacity="0.8" />
+    <circle cx="55" cy="22" r="5" fill="#10b981" fill-opacity="0.8" />
+    <text x="80" y="26" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">devex_cashout_pipeline.luau</text>
+
+    <!-- Mini Metric 1: Monthly DevEx -->
+    <g transform="translate(25, 65)">
+      <rect width="330" height="70" rx="10" fill="#090d16" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="24" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">Projected Monthly DevEx Cashout</text>
+      <text x="16" y="52" font-family="'JetBrains Mono', monospace" font-size="24" font-weight="700" fill="#34d399">£2,730.00 <tspan font-size="12" fill="#94a3b8">GBP</tspan></text>
+      <text x="210" y="50" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38bdf8">1,000,000 R$</text>
+    </g>
+
+    <!-- Mini Metric 2: Live Luau Module -->
+    <g transform="translate(25, 148)">
+      <rect width="330" height="80" rx="10" fill="#090d16" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="22" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">-- ServerScriptService &gt; MarketplaceHandler</text>
+      <text x="16" y="42" font-family="'JetBrains Mono', monospace" font-size="11" fill="#e2e8f0">MarketplaceService.<tspan fill="#38bdf8">ProcessReceipt</tspan> = function(info)</text>
+      <text x="32" y="62" font-family="'JetBrains Mono', monospace" font-size="11" fill="#34d399">return Enum.ProductPurchaseDecision.PurchaseGranted</text>
+    </g>
+
+    <!-- Mini Metric 3: HMRC Readiness -->
+    <g transform="translate(25, 240)">
+      <rect width="330" height="65" rx="10" fill="#090d16" stroke="#1e293b" stroke-width="1" />
+      <text x="16" y="24" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">HMRC Compliance Tracker</text>
+      <text x="16" y="48" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#ffffff">UK Trading Allowance: <tspan fill="#34d399">£1,000 Tax-Free</tspan></text>
+      <circle cx="305" cy="35" r="10" fill="#065f46" />
+      <path d="M 300 35 L 304 39 L 311 31" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+  </g>
+</svg>

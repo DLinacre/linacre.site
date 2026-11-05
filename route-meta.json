@@ -1,101 +1,123 @@
 {
   "site": {
-    "name": "linacre.site",
+    "name": "LIN4CRE",
     "defaultImage": "https://www.linacre.site/og.png",
     "locale": "en_GB",
     "twitterCard": "summary_large_image"
   },
   "routes": {
     "/": {
-      "title": "Linacre project library — apps, tools, downloads and source",
-      "description": "Browse David Linacre's recorded projects by category, search by task, open browser apps, find available downloads and explore source repositories.",
+      "title": "LIN4CRE — Independent Software Studio · David Linacre",
+      "description": "Independent software studio by David Linacre in South Yorkshire. Selected native Windows audio software, 3D & simulation web applications, and original browser games.",
       "canonical": "https://www.linacre.site/",
-      "index": true
-    },
-    "/tools": {
-      "title": "Tools — browser utilities & curated directory | Linacre.site",
-      "description": "Private, in-browser utilities (JSON, Base64, timestamps, secure generators, VAT, text tools) plus a curated directory of developer tools. No sign-up, no tracking.",
-      "canonical": "https://www.linacre.site/tools",
+      "image": "https://www.linacre.site/showcase/dual-audio-synchronizer.webp",
       "index": true
     },
     "/games": {
-      "title": "Games library — KushCloud and game projects | Linacre.site",
-      "description": "KushCloud first, with other game projects available for playtesting. Direct game and recorded download links without embedded players or automatic audio.",
+      "title": "Selected Games — Original Browser Games | LIN4CRE",
+      "description": "Play Afterglow, Circuit, Decrypt, and Gridlock: four self-contained browser games designed and coded from scratch by LIN4CRE.",
       "canonical": "https://www.linacre.site/games",
-      "image": "https://www.linacre.site/og.png",
+      "image": "https://www.linacre.site/showcase/game-afterglow.webp",
       "index": true
     },
-    "/lab": {
-      "title": "AI Lab — model sandbox and experiments | Linacre.site",
-      "description": "An interactive AI lab: chat with models, inspect data structures and explore live experiments in the browser.",
-      "canonical": "https://www.linacre.site/lab",
-      "index": true
-    },
-    "/identity": {
-      "title": "Identity Studio — brand asset exporter | Linacre.site",
-      "description": "Create and export coordinated SVG and PNG logos, GitHub banners, avatars and social cards — endless generated emblems, full-spectrum colour boxes.",
-      "canonical": "https://www.linacre.site/identity",
+    "/orbit": {
+      "title": "Orbit & Earth Observatory — Live ISS, Seismic & Launch Telemetry | LIN4CRE",
+      "description": "Real-time planetary observatory tracking the International Space Station, solar day/night terminator, global M4.5+ earthquakes, rocket launches, and Barnsley sky conditions.",
+      "canonical": "https://www.linacre.site/orbit",
+      "image": "https://www.linacre.site/showcase/orbit.webp",
       "index": true
     },
     "/about": {
-      "title": "About David Linacre — full-stack & AI engineer",
-      "description": "David Linacre's background in software engineering, technical philosophy, skills matrix, career timeline and the site changelog.",
+      "title": "About David Linacre & LIN4CRE — Independent Software Studio",
+      "description": "About David Linacre, an independent software developer in Barnsley, South Yorkshire building local-first desktop utilities, computational web apps, and original games.",
       "canonical": "https://www.linacre.site/about",
       "index": true
     },
     "/contact": {
-      "title": "Contact David Linacre — software & automation projects",
-      "description": "Contact David Linacre about software design, developer tools and automation projects. Replies within 12 hours.",
+      "title": "Contact — LIN4CRE · David Linacre",
+      "description": "Get in touch with David Linacre regarding software projects, technical questions, or open-source releases.",
       "canonical": "https://www.linacre.site/contact",
       "index": true
     },
     "/contact/thanks": {
-      "title": "Thanks — message received | Linacre.site",
-      "description": "Your enquiry has been received. David will reply from david@linacre.site within 12 hours.",
+      "title": "Message Received — LIN4CRE",
+      "description": "Your enquiry has been accepted for delivery.",
       "canonical": "https://www.linacre.site/contact/thanks",
       "index": false
     },
     "/privacy": {
-      "title": "Privacy policy | Linacre.site",
-      "description": "How linacre.site handles information, browser storage and contact requests.",
+      "title": "Privacy Policy | LIN4CRE",
+      "description": "How linacre.site handles information, browser storage, and contact requests under UK GDPR.",
       "canonical": "https://www.linacre.site/privacy",
       "index": true
     },
     "/cookie-policy": {
-      "title": "Cookie & storage policy | Linacre.site",
-      "description": "How linacre.site uses browser storage and consent under UK GDPR / PECR. No tracking cookies — full disclosure of every key.",
+      "title": "Storage & Cookie Policy | LIN4CRE",
+      "description": "How linacre.site uses local browser storage under UK GDPR and PECR, with zero behavioural tracking cookies.",
       "canonical": "https://www.linacre.site/cookie-policy",
       "index": true
     },
     "/terms": {
-      "title": "Terms of service | Linacre.site",
-      "description": "Terms of service for David Linacre freelance engineering — engagements, deliverables, liability cap, governing law (England & Wales).",
+      "title": "Terms of Service | LIN4CRE",
+      "description": "Terms of service for LIN4CRE and David Linacre software engagements under the laws of England and Wales.",
       "canonical": "https://www.linacre.site/terms",
       "index": true
     },
     "/accessibility": {
-      "title": "Accessibility statement | Linacre.site",
-      "description": "Accessibility statement, known limitations and feedback route for linacre.site.",
+      "title": "Accessibility Statement | LIN4CRE",
+      "description": "WCAG 2.2 AA accessibility statement, keyboard navigation support, and feedback contact for linacre.site.",
       "canonical": "https://www.linacre.site/accessibility",
       "index": true
     },
+    "/tools": {
+      "title": "Browser Utilities — Archive | LIN4CRE",
+      "description": "Local browser-based JSON, Base64, hashing, and developer formatting utilities.",
+      "canonical": "https://www.linacre.site/tools",
+      "index": false
+    },
+    "/music-videos": {
+      "title": "Music Videos — Proper Mad Archive | LIN4CRE",
+      "description": "Archive of ten Proper Mad lyric-video masters.",
+      "canonical": "https://www.linacre.site/music-videos",
+      "image": "https://www.linacre.site/music-videos/covers/the-road-beyond.jpg",
+      "index": false
+    },
+    "/osint": {
+      "title": "OSINT Research Directory — Archive | LIN4CRE",
+      "description": "Searchable open-source research directory.",
+      "canonical": "https://www.linacre.site/osint",
+      "image": "https://www.linacre.site/banners/linacre-osint-hud.jpg",
+      "index": false
+    },
+    "/lab": {
+      "title": "AI Lab — Sandbox Archive | LIN4CRE",
+      "description": "Experimental browser sandbox archive.",
+      "canonical": "https://www.linacre.site/lab",
+      "index": false
+    },
+    "/identity": {
+      "title": "Identity Studio — Archive | LIN4CRE",
+      "description": "Brand asset generator archive.",
+      "canonical": "https://www.linacre.site/identity",
+      "index": false
+    },
     "/mob-deals": {
-      "title": "Mob Deals — Compare UK SIM-Only Deals & PAC Code Switcher Guide",
-      "description": "Filter UK 5G SIM-only contracts by budget and data allowance. Follow the 3-step PAC code guide to switch networks seamlessly.",
+      "title": "Mob Deals — UK SIM Comparison Archive | LIN4CRE",
+      "description": "UK SIM-only comparison reference archive.",
       "canonical": "https://www.linacre.site/mob-deals",
-      "index": true
+      "index": false
     },
     "/pokeguru": {
-      "title": "PokeGuru — Search 126+ UK Pokémon TCG Sets & Market Prices",
-      "description": "Browse UK Pokémon TCG set expansion releases, track chase card market values in GBP (£), and evaluate card rarity tier lists.",
+      "title": "PokeGuru — TCG Set Explorer Archive | LIN4CRE",
+      "description": "UK Pokémon TCG expansion explorer archive.",
       "canonical": "https://www.linacre.site/pokeguru",
-      "index": true
+      "index": false
     },
     "/ops": {
-      "title": "Mission Control — agents, flows and build receipts | Linacre.site",
-      "description": "An illustrated command deck for Linacre projects, agent flow definitions, trigger setup and published build receipts. Runtime connections are clearly identified.",
+      "title": "Mission Control — Internal Archive | LIN4CRE",
+      "description": "Internal project receipt deck.",
       "canonical": "https://www.linacre.site/ops",
-      "index": true
+      "index": false
     }
   }
 }
