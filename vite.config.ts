@@ -1,12 +1,28 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import fs from 'node:fs';
+import type { Connect } from 'vite';
 /// <reference types="vitest/config" />
 import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(),
+      tailwindcss(),
+      {
+        name: 'studio-detail-routes',
+        // Vite's clean-URL fallback otherwise prefers public/games/tiles.html
+        // over the studio detail route. Explicit .html links still launch games.
+        configureServer(server) {
+          server.middlewares.use(studioRoutes(false));
+        },
+        configurePreviewServer(server) {
+          server.middlewares.use(studioRoutes(true));
+        },
+      },
+    ],
     build: {
       rollupOptions: {
         output: {
@@ -46,3 +62,23 @@ export default defineConfig(() => {
     },
   };
 });
+
+function studioRoutes(built: boolean): Connect.NextHandleFunction {
+  const routes = new Set(
+    ['games', 'projects'].flatMap(section => {
+      const records = JSON.parse(
+        fs.readFileSync(path.resolve(`src/content/${section}/records.json`), 'utf8'),
+      ) as { slug: string }[];
+      return records.flatMap(record => [
+        `/${section}/${record.slug}`,
+        ...(section === 'games' ? [`/games/${record.slug}/play`] : []),
+      ]);
+    }),
+  );
+  return (req, _res, next) => {
+    const pathname = (req.url || '/').split('?')[0].replace(/\/$/, '');
+    if (['/helix', '/legacy-games'].includes(pathname)) req.url = `${pathname}/index.html`;
+    if (routes.has(pathname)) req.url = built ? `${pathname}/index.html` : '/index.html';
+    next();
+  };
+}

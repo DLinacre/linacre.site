@@ -6,21 +6,15 @@ import {
   ExternalLink, 
   Download, 
   SlidersHorizontal, 
-  Plus, 
   Layers, 
   Cpu, 
   Smartphone, 
   Globe, 
   Gamepad2, 
-  Edit3, 
-  Trash2 
 } from 'lucide-react';
 
 interface ProjectRadarProps {
   cards: ProjectCard[];
-  onOpenCardManager: () => void;
-  onEditCard: (card: ProjectCard) => void;
-  onDeleteCard: (id: string) => void;
 }
 
 const CATEGORIES: { label: ProjectCategory; icon: ReactNode }[] = [
@@ -34,9 +28,6 @@ const CATEGORIES: { label: ProjectCategory; icon: ReactNode }[] = [
 
 export default function ProjectRadar({
   cards,
-  onOpenCardManager,
-  onEditCard,
-  onDeleteCard,
 }: ProjectRadarProps) {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -135,14 +126,7 @@ export default function ProjectRadar({
             />
           </div>
 
-          <button
-            onClick={onOpenCardManager}
-            className="flex items-center gap-1.5 rounded-xl border border-purple-500/40 bg-purple-500/15 px-3.5 py-1.5 text-xs font-bold text-purple-300 hover:bg-purple-500/25 hover:border-purple-400 transition-all shadow-[0_0_10px_rgba(192,132,252,0.2)] whitespace-nowrap"
-            title="Add, edit, or remove project cards"
-          >
-            <Plus className="h-3.5 w-3.5" />
-            <span>Manage Cards</span>
-          </button>
+
         </div>
 
       </div>
@@ -166,20 +150,6 @@ export default function ProjectRadar({
                       {card.category}
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <button
-                        onClick={() => onEditCard(card)}
-                        className="opacity-0 group-hover:opacity-100 rounded p-1 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
-                        title="Edit project card"
-                      >
-                        <Edit3 className="h-3 w-3" />
-                      </button>
-                      <button
-                        onClick={() => onDeleteCard(card.id)}
-                        className="opacity-0 group-hover:opacity-100 rounded p-1 text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all"
-                        title="Delete project card"
-                      >
-                        <Trash2 className="h-3 w-3" />
-                      </button>
                       <span
                         className={`rounded-md border px-2 py-0.5 text-[0.65rem] font-bold font-mono tracking-wide ${colors.badge}`}
                       >

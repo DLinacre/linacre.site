@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { filterProjects, PROJECT_CATEGORIES, projectActions, projectCategory } from '../projectLibrary';
-import { SITE_PROJECTS, type SiteProject } from '../../data/siteProjects';
+import { SITE_PROJECTS, type SiteProject } from '../../content/adapters/siteProjects';
 
 const sample: SiteProject = { name: 'Example', kind: 'App', blurb: 'Meal planning', tags: ['food'] };
 
@@ -29,10 +29,10 @@ describe('project library', () => {
     expect(filterProjects(projects, '', 'all', 'download')).toEqual([]);
     expect(filterProjects(projects, '', 'Tool', 'source')).toEqual([projects[1]]);
   });
-  it('keeps Tycoon source-only and prioritises KushCloud', () => {
+  it('keeps Tycoon a template with an evidenced Studio download and prioritises KushCloud', () => {
     const tycoon = SITE_PROJECTS.find(project => project.name === 'Slime Factory Tycoon')!;
     expect(projectCategory(tycoon)).toBe('Source');
-    expect(projectActions(tycoon).map(action => action.kind)).toEqual(['source']);
+    expect(projectActions(tycoon).map(action => action.kind)).toEqual(['download', 'source']);
     expect(SITE_PROJECTS.find(project => project.name === 'KushCloud')?.pinned).toBe(true);
   });
 });

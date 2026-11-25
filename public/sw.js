@@ -1,7 +1,7 @@
 // linacre.site service worker
-// v14 — refreshed precache list for the consolidated route set (v8).
+// v16 — refresh modified game scripts and the original-games showcase.
 // Keep API + cross-origin requests untouched (Lab streaming still works).
-var CACHE = 'linacre-v14';
+var CACHE = 'linacre-v16';
 var OFFLINE_URL = 'offline.html';
 var URLS = [
   '.',

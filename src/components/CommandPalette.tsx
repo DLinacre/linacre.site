@@ -17,7 +17,7 @@ import {
   Github,
 } from 'lucide-react';
 import { TOOLS } from '../data';
-import { SITE_PROJECTS } from '../data/siteProjects';
+import { SITE_PROJECTS } from '../content/adapters/siteProjects';
 import Fuse from 'fuse.js';
 
 interface CommandPaletteProps {

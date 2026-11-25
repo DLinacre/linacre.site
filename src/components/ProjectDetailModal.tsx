@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Lock, CalendarDays, Layers } from 'lucide-react';
 import ProjectActions from './ProjectActions';
-import type { SiteProject } from '../data/siteProjects';
+import type { SiteProject } from '../content/adapters/siteProjects';
 import { KIND_META } from './projectMeta';
 
 interface Props {
@@ -148,6 +148,7 @@ export default function ProjectDetailModal({ project, onClose }: Props) {
                 )}
               </div>
 
+              <p className="mt-3 text-xs text-muted-foreground">{project.statusLabel ?? 'Status not verified'}</p>
               {/* Blurb */}
               <p className="mt-3 text-sm leading-6 text-muted-foreground">{project.blurb}</p>
 

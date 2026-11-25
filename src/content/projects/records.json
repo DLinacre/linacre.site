@@ -1,0 +1,1687 @@
+[
+  {
+    "id": "linacre-site",
+    "slug": "linacre-site",
+    "type": "project",
+    "name": "linacre.site",
+    "shortDescription": "This site — every project, tool and game in one place.",
+    "featured": true,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/linacre.site",
+    "tags": ["portfolio", "website", "react", "tools"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "App",
+    "technologyStack": ["React", "TypeScript", "Tailwind", "Node.js"],
+    "presentation": {
+      "emoji": "🌐"
+    },
+    "liveUrl": "https://www.linacre.site"
+  },
+  {
+    "id": "bonny-bakes",
+    "slug": "bonny-bakes",
+    "type": "project",
+    "name": "Bonny Bakes",
+    "shortDescription": "Simple bakes. Happy hearts. A warm, friendly home-baking recipe website with a quantity calculator, favourites, shopping list and print-friendly cards.",
+    "featured": true,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/bonny-bakes",
+    "tags": ["baking", "recipes", "calculator", "offline", "food", "pwa"],
+    "provenance": [
+      "DLinacre siteProjects",
+      "dashboard-projects (unverified badges/stats archived)"
+    ],
+    "category": "App",
+    "artwork": "/banners/bonny-bakes.jpg",
+    "technologyStack": ["HTML5", "Vanilla JS", "CSS3", "Web Storage"],
+    "features": [
+      "Interactive quantity scaler for batch sizes and custom servings.",
+      "One-click interactive shopping list and print-friendly recipe cards.",
+      "14 classic homemade recipes including Victoria sponge, flapjacks and chocolate brownies."
+    ],
+    "presentation": {
+      "emoji": "🧁",
+      "dashboardCategory": "Web & Tools",
+      "color": "amber"
+    },
+    "liveUrl": "https://dlinacre.github.io/bonny-bakes/"
+  },
+  {
+    "id": "cubelab",
+    "slug": "cubelab",
+    "type": "project",
+    "name": "CubeLab",
+    "shortDescription": "A browser-based Rubik’s Cube solver and trainer with a 3D cube interface.",
+    "featured": true,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/cubelab",
+    "tags": [
+      "rubiks-cube",
+      "solver",
+      "puzzle",
+      "timer",
+      "pwa",
+      "offline",
+      "3d",
+      "algorithms",
+      "cfop"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "LIN4CRE curatedWork",
+      "dashboard-projects (unverified badges/stats archived)"
+    ],
+    "category": "App",
+    "artwork": "/banners/cubelab.webp",
+    "technologyStack": ["TypeScript", "Three.js", "Web Workers", "PWA"],
+    "features": [
+      "Interactive cube interface",
+      "Solver and training views",
+      "Timer and algorithm tools"
+    ],
+    "presentation": {
+      "emoji": "🧊",
+      "dashboardCategory": "Web & Tools",
+      "color": "cyan"
+    },
+    "liveUrl": "https://dlinacre.github.io/cubelab/",
+    "fullDescription": "A browser-based Rubik’s Cube solver and trainer with a 3D cube interface.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at 097e6302ecb96e6d95c97a1f58ae345f20b8a8b6. External deployment could not be functionally checked from this restricted network. npm ci --ignore-scripts and the repository production build passed; local UI rendered without page-script errors. Full solver, offline operation and real-device tests not completed."
+    },
+    "portfolio": {
+      "category": "Web Applications",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "097e6302ecb96e6d95c97a1f58ae345f20b8a8b6",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "problemSolved": "Cube state, algorithms and practice tools are brought together in one browser interface.",
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/DLinacre/cubelab/blob/097e6302ecb96e6d95c97a1f58ae345f20b8a8b6/README.md",
+    "screenshots": [
+      {
+        "src": "/project-captures/cubelab.png",
+        "alt": "CubeLab interface captured from actual repository source served locally; not a public-deployment certification",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "097e6302ecb96e6d95c97a1f58ae345f20b8a8b6"
+      }
+    ]
+  },
+  {
+    "id": "helix",
+    "slug": "helix",
+    "type": "project",
+    "name": "HELIX",
+    "shortDescription": "An artificial-life observatory with evolving programs and an interactive visual field.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/helix",
+    "tags": ["evolution", "simulation", "canvas", "offline", "generative"],
+    "provenance": ["DLinacre siteProjects", "LIN4CRE curatedWork"],
+    "category": "App",
+    "artwork": "/banners/helix.webp",
+    "technologyStack": ["JavaScript", "20-Opcode VM", "HTML5 Canvas", "Web Audio"],
+    "features": [
+      "Artificial-life engine",
+      "Population visualisation",
+      "Genome inspection controls"
+    ],
+    "presentation": {
+      "emoji": "🧬"
+    },
+    "liveUrl": "/helix/",
+    "fullDescription": "An artificial-life observatory with evolving programs and an interactive visual field.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at 746de5505a17c85a4eaec091a4f34dafa6bc9644. External deployment could not be functionally checked from this restricted network."
+    },
+    "portfolio": {
+      "category": "Experimental Projects",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "746de5505a17c85a4eaec091a4f34dafa6bc9644",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "problemSolved": "An experiment in making simulated populations and their behaviour visible.",
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/DLinacre/helix/blob/746de5505a17c85a4eaec091a4f34dafa6bc9644/README.md"
+  },
+  {
+    "id": "whole-home-ad-blocker",
+    "slug": "whole-home-ad-blocker",
+    "type": "project",
+    "name": "Whole-Home Ad Blocker",
+    "shortDescription": "One-click Windows installer that turns an always-on PC into a network-wide ad blocker (AdGuard Home).",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/whole-home-adblocker",
+    "tags": ["adblock", "adguard", "dns", "windows", "privacy", "docker"],
+    "provenance": [
+      "DLinacre siteProjects",
+      "dashboard-projects (unverified badges/stats archived)",
+      "LIN4CRE siteProjects",
+      "data.ts MANUAL_PROJECTS"
+    ],
+    "category": "Tool",
+    "artwork": "/projects/whole-home-adblocker.svg",
+    "presentation": {
+      "emoji": "🛡️",
+      "dashboardCategory": "Desktop & Systems",
+      "color": "emerald"
+    },
+    "problemSolved": "Network-wide ad blocking (Pi-hole / AdGuard Home) normally demands DNS knowledge, YAML editing and Docker familiarity — far out of reach for non-technical households.",
+    "implementation": "Wrapped AdGuard Home in Docker behind an interactive PowerShell setup wizard: auto-installs Docker Desktop, asks three plain-English questions (dashboard port, encrypted DNS provider incl. family mode, blocklist strength), bcrypt-seeds a ready-made config with three filter lists, self-heals port conflicts, schedules silent weekly updates, and ships router guides with UK ISP workarounds. Validated in CI with PSScriptAnalyzer and yamllint.",
+    "role": "Product designer and developer",
+    "fullDescription": "A one-click Windows installer that turns an always-on PC into an AdGuard Home network ad blocker — interactive setup wizard, live blocking dashboard, preloaded filter lists and encrypted DNS.",
+    "technologyStack": ["PowerShell", "Docker", "AdGuard Home", "Batch", "GitHub Actions"]
+  },
+  {
+    "id": "smart-mail-ai",
+    "slug": "smart-mail-ai",
+    "type": "project",
+    "name": "Smart Mail AI",
+    "shortDescription": "AI-powered unified inbox — smart categorisation, importance detection & multi-account (Gemini).",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/smart-mail",
+    "tags": ["email", "gmail", "ai", "gemini", "inbox", "react", "pwa", "productivity"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "AI",
+    "artwork": "/banners/smart-mail.webp",
+    "technologyStack": ["React", "Gemini AI", "Node.js"],
+    "presentation": {
+      "emoji": "✉️"
+    },
+    "liveUrl": "https://smart-mail-gamma.vercel.app",
+    "features": [
+      "Multi-account Google Workspace & Gmail synchronization in a clean unified interface.",
+      "Gemini AI importance scoring highlights critical messages and generates action items.",
+      "One-click newsletter detection and bulk subscription cleanup."
+    ],
+    "problemSolved": "Sorting thousands of incoming emails by urgency and context without exposing private credentials.",
+    "implementation": "Built a client-side inbox scanner powered by Gemini API, importance classification, tag filtering, and mobile Capacitor wrapper.",
+    "role": "Full-stack AI developer",
+    "fullDescription": "AI-powered unified inbox (Google Gemini) — smart email categorisation, importance detection & multi-account summary generator."
+  },
+  {
+    "id": "linacre-uninstaller",
+    "slug": "linacre-uninstaller",
+    "type": "project",
+    "name": "Linacre Uninstaller",
+    "shortDescription": "An Android package-management application with a published debug APK.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/LinacreUninstaller",
+    "tags": ["android", "apk", "debloat", "uninstall", "adb"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "App",
+    "artwork": "/banners/linacre-uninstaller.webp",
+    "presentation": {
+      "emoji": "📦"
+    },
+    "downloadUrl": "https://github.com/DLinacre/LinacreUninstaller/releases/download/v1.3.1/LUninstall-v1.3.1-debug.apk",
+    "status": "Released",
+    "statusNote": "Official release asset exists. This is not a certification of installation, safety or advertised functionality.",
+    "problemSolved": "Provides an interface for inspecting installed packages and managing removal workflows.",
+    "fullDescription": "An Android package-management application with a published debug APK.",
+    "technologyStack": ["Kotlin", "Android", "Material Design", "GitHub Releases"],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source at bdea8a8236f96824acb77a404713cf143a913447 and exact official release asset metadata inspected. Binary/build ZIP not executed or installed."
+    },
+    "portfolio": {
+      "category": "Android Applications",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "bdea8a8236f96824acb77a404713cf143a913447",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "features": [
+      "Android package-management interface",
+      "Published debug APK",
+      "Source and setup documentation"
+    ],
+    "documentation": "https://github.com/DLinacre/LinacreUninstaller/blob/bdea8a8236f96824acb77a404713cf143a913447/README.md",
+    "releases": [
+      {
+        "version": "v1.3.1",
+        "url": "https://github.com/DLinacre/LinacreUninstaller/releases/tag/v1.3.1",
+        "publishedAt": "2026-08-07",
+        "notes": "Repository-published release metadata; assets were not installed."
+      },
+      {
+        "version": "v1.3.0",
+        "url": "https://github.com/DLinacre/LinacreUninstaller/releases/tag/v1.3.0",
+        "publishedAt": "2026-08-07",
+        "notes": "Repository-published release metadata; assets were not installed."
+      },
+      {
+        "version": "v1.2.0",
+        "url": "https://github.com/DLinacre/LinacreUninstaller/releases/tag/v1.2.0",
+        "publishedAt": "2026-08-07",
+        "notes": "Repository-published release metadata; assets were not installed."
+      },
+      {
+        "version": "v1.1.0-debug",
+        "url": "https://github.com/DLinacre/LinacreUninstaller/releases/tag/v1.1.0-debug",
+        "publishedAt": "2026-08-07",
+        "notes": "Repository-published release metadata; assets were not installed."
+      },
+      {
+        "version": "v1.0.0-debug",
+        "url": "https://github.com/DLinacre/LinacreUninstaller/releases/tag/v1.0.0-debug",
+        "publishedAt": "2026-08-07",
+        "notes": "Repository-published release metadata; assets were not installed."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Download APK",
+        "url": "https://github.com/DLinacre/LinacreUninstaller/releases/download/v1.3.1/LUninstall-v1.3.1-debug.apk",
+        "version": "v1.3.1",
+        "note": "Debug APK published by the repository; not a Windows installer. Installation and signing not independently checked."
+      }
+    ],
+    "platforms": ["Android"]
+  },
+  {
+    "id": "apkhub",
+    "slug": "apkhub",
+    "type": "project",
+    "name": "APKHub",
+    "shortDescription": "An APK discovery and catalogue application with web and Android source.",
+    "featured": false,
+    "relationship": "directory",
+    "sourceRepository": "https://github.com/DLinacre/APKHub",
+    "tags": ["android", "apk", "f-droid", "store", "indexer"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "Tool",
+    "artwork": "/banners/apkhub.webp",
+    "technologyStack": ["HTML", "JavaScript"],
+    "presentation": {
+      "emoji": "📱"
+    },
+    "liveUrl": "https://apkhub-alpha.vercel.app",
+    "problemSolved": "Organises application-discovery information without treating third-party applications as LIN4CRE products.",
+    "fullDescription": "An APK discovery and catalogue application with web and Android source.",
+    "portfolio": {
+      "category": "Android Applications",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "742fbaa709a03405533e0c3069fa515001246730",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "features": ["Web catalogue interface", "Android client source", "Indexing pipeline source"],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at 742fbaa709a03405533e0c3069fa515001246730. External deployment could not be functionally checked from this restricted network."
+    },
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/DLinacre/APKHub/blob/742fbaa709a03405533e0c3069fa515001246730/README.md"
+  },
+  {
+    "id": "nic-s-food-decider",
+    "slug": "nic-s-food-decider",
+    "type": "project",
+    "name": "Nic's Food Decider",
+    "shortDescription": "One-click decision engine for meals — cook or takeaway, weighted random choices.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/nic-food-decider",
+    "tags": [
+      "food",
+      "decision",
+      "random",
+      "meals",
+      "decider",
+      "dinner",
+      "recipes",
+      "python",
+      "flask",
+      "sqlite"
+    ],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "App",
+    "artwork": "/projects/nic-food-decider.webp",
+    "presentation": {
+      "emoji": "🍕"
+    },
+    "liveUrl": "https://nic-food-decider.vercel.app",
+    "technologyStack": ["Python", "Flask", "SQLAlchemy", "SQLite", "Vercel Serverless"],
+    "features": [
+      "Dual Cook vs Takeaway engine with dynamic probability weighting for favorites.",
+      "Dietary filters (vegetarian, vegan, gluten-free) across 50+ pre-seeded meals.",
+      "Decision history logging to avoid repeating recent meals."
+    ],
+    "problemSolved": "Overcoming daily meal decision paralysis with an instant, bias-weighted decider and clean mobile-first UI.",
+    "implementation": "Engineered a Flask 3 & SQLite application with SQLAlchemy ORM, bcrypt auth, Pydantic validation, Jinja templates, and Vercel serverless deployment.",
+    "role": "Full-stack developer & designer",
+    "fullDescription": "An intelligent, bias-weighted meal decision web application designed to solve dinner paralysis with cook & takeaway modes, custom filters, and decision history."
+  },
+  {
+    "id": "fleatment",
+    "slug": "fleatment",
+    "type": "project",
+    "name": "Fleatment",
+    "shortDescription": "UK cat flea & tick treatment finder with live delivered-price comparisons.",
+    "featured": true,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/Fleatment",
+    "tags": ["pets", "cats", "flea", "uk", "prices"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "App",
+    "artwork": "/banners/fleatment.webp",
+    "technologyStack": ["TypeScript", "React", "Price data"],
+    "features": [
+      "Live delivered-price comparisons for UK cat flea & tick treatments.",
+      "Safety guides that flag dangerous canine pyrethroid ingredients.",
+      "Find the right treatment for your cat without price-gouging."
+    ],
+    "presentation": {
+      "emoji": "🐱"
+    },
+    "liveUrl": "https://dlinacre.github.io/Fleatment/",
+    "problemSolved": "Cat owners struggle to compare real delivered prices (with VAT & shipping) and identify dangerous canine pyrethroid ingredients.",
+    "implementation": "Built an offline-first single-page web app with live JSON price auto-fetching, per-dose unit cost calculations, active ingredient matrix, and cost calculator.",
+    "role": "Creator and product engineer",
+    "fullDescription": "An open-source UK cat flea & tick treatment finder, live delivered price index, active ingredient strength analyzer, and safety guide."
+  },
+  {
+    "id": "life-hacks",
+    "slug": "life-hacks",
+    "type": "project",
+    "name": "Life Hacks",
+    "shortDescription": "PWA of clever, well-explained fixes — starting with a DIY capacitive stylus.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/life-hacks",
+    "tags": ["pwa", "diy", "hacks", "guides", "hardware", "stylus", "offline", "lifestyle"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "App",
+    "presentation": {
+      "emoji": "🚀"
+    },
+    "liveUrl": "https://dlinacre.github.io/life-hacks/",
+    "technologyStack": ["HTML5", "CSS3", "JavaScript", "PWA", "Offline-First"],
+    "features": [
+      "Step-by-step DIY capacitive stylus tutorial with diagrammatic build flow.",
+      "Works 100% offline as an installable Progressive Web App.",
+      "Tested companion stylus designed specifically for digital sketch and touch apps."
+    ]
+  },
+  {
+    "id": "mydiy",
+    "slug": "mydiy",
+    "type": "project",
+    "name": "MyDIY",
+    "shortDescription": "Zero-dependency folding-stool calculator & build guide — React single-file app.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/MyDIY",
+    "tags": ["diy", "furniture", "calculator", "woodworking"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "App",
+    "presentation": {
+      "emoji": "🪑"
+    }
+  },
+  {
+    "id": "string-band",
+    "slug": "string-band",
+    "type": "project",
+    "name": "String & Band",
+    "shortDescription": "Interactive string-and-band mechanics explorer.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/string-and-band",
+    "tags": ["physics", "interactive", "canvas"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "App",
+    "artwork": "/projects/string-and-band.webp",
+    "presentation": {
+      "emoji": "🏹"
+    },
+    "liveUrl": "https://dlinacre.github.io/string-and-band/",
+    "problemSolved": "Delivering a premium, genuinely searchable reference — with radar charts, a command palette, fuzzy search and an interactive material rules engine — inside a single portable HTML file with zero dependencies and no build step, while hitting WCAG 2.2 AA and full offline support.",
+    "implementation": "Architected a data-driven single-file SPA in vanilla ES2025 with hand-rolled SVG radar and meter charts, a subsequence-scored fuzzy search engine over 107 indexed items, a category-driven material explorer with historical synergy detection, route-level code organisation and a 34-assertion Node smoke-test harness in CI. Deployed to GitHub Pages with service-worker offline caching and a web manifest.",
+    "role": "Creator, designer & sole developer",
+    "fullDescription": "An offline-first educational knowledge base on the history, materials and craft of archery equipment and slingshots: 18 long-form articles, a 44-material explorer with a live analysis engine, comparison lab, 49-term glossary and fuzzy search — all in one self-contained, dependency-free HTML file.",
+    "technologyStack": [
+      "HTML5",
+      "Vanilla ES2025 JS",
+      "SVG Charts",
+      "CSS Custom Properties",
+      "Service Worker",
+      "PWA",
+      "GitHub Actions",
+      "WCAG 2.2 AA"
+    ]
+  },
+  {
+    "id": "mob-deals",
+    "slug": "mob-deals",
+    "type": "project",
+    "name": "Mob Deals",
+    "shortDescription": "Compare UK SIM-only deals by budget and data, with a plain-English PAC switcher guide.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/mob-deals",
+    "tags": ["mobile", "sim", "uk", "deals", "comparison", "pac"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "Tool",
+    "artwork": "/banners/mob-deals.webp",
+    "technologyStack": ["React", "TypeScript", "Tailwind"],
+    "presentation": {
+      "emoji": "📶"
+    },
+    "liveUrl": "/mob-deals",
+    "problemSolved": "Mobile comparison sites often blur live prices, affiliate claims, and editorial data, making it hard for non-technical users to judge what is current.",
+    "implementation": "Separated manually reviewed deal entries from automated reachability checks, linked every source, added clear disclaimers, and built an accessible number-switching flow.",
+    "role": "Product designer and developer",
+    "fullDescription": "A transparent UK SIM-only comparison and switching guide with 64 provider records, public source checks, and plain-English PAC/STAC help."
+  },
+  {
+    "id": "pokeguru",
+    "slug": "pokeguru",
+    "type": "project",
+    "name": "PokeGuru",
+    "shortDescription": "A Pokémon reference application with browsing tools and a recorded downloadable build ZIP.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/PokeGuru",
+    "tags": [
+      "pokemon",
+      "tcg",
+      "cards",
+      "prices",
+      "uk",
+      "pricing",
+      "react",
+      "portfolio",
+      "indexeddb"
+    ],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "Tool",
+    "artwork": "/banners/pokeguru.webp",
+    "technologyStack": ["TypeScript", "React", "Data indexing"],
+    "features": ["Reference browsing", "Search interface source", "Versioned build ZIP"],
+    "presentation": {
+      "emoji": "🃏"
+    },
+    "liveUrl": "/pokeguru",
+    "problemSolved": "Combines reference information and browsing tools in a single interface. Franchise material is third-party intellectual property.",
+    "fullDescription": "A Pokémon reference application with browsing tools and a recorded downloadable build ZIP.",
+    "portfolio": {
+      "category": "Web Applications",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "63ff6699406f910121320dbd98d0516d7f37f2f3",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source at 63ff6699406f910121320dbd98d0516d7f37f2f3 and exact official release asset metadata inspected. Binary/build ZIP not executed or installed."
+    },
+    "statusNote": "Official release asset exists. This is not a certification of installation, safety or advertised functionality.",
+    "documentation": "https://github.com/DLinacre/PokeGuru/blob/63ff6699406f910121320dbd98d0516d7f37f2f3/README.md",
+    "releases": [
+      {
+        "version": "v1.6.0",
+        "url": "https://github.com/DLinacre/PokeGuru/releases/tag/v1.6.0",
+        "publishedAt": "2026-08-07",
+        "notes": "Repository-published release metadata; assets were not installed."
+      },
+      {
+        "version": "v1.5.2",
+        "url": "https://github.com/DLinacre/PokeGuru/releases/tag/v1.5.2",
+        "publishedAt": "2026-08-07",
+        "notes": "Repository-published release metadata; assets were not installed."
+      },
+      {
+        "version": "v1.5.1",
+        "url": "https://github.com/DLinacre/PokeGuru/releases/tag/v1.5.1",
+        "publishedAt": "2026-08-07",
+        "notes": "Repository-published release metadata; assets were not installed."
+      },
+      {
+        "version": "v1.5.0",
+        "url": "https://github.com/DLinacre/PokeGuru/releases/tag/v1.5.0",
+        "publishedAt": "2026-08-07",
+        "notes": "Repository-published release metadata; assets were not installed."
+      },
+      {
+        "version": "v1.4.0",
+        "url": "https://github.com/DLinacre/PokeGuru/releases/tag/v1.4.0",
+        "publishedAt": "2026-08-07",
+        "notes": "Repository-published release metadata; assets were not installed."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Download build ZIP",
+        "url": "https://github.com/DLinacre/PokeGuru/releases/download/v1.5.2/pokeguru-build.zip",
+        "version": "v1.5.2",
+        "note": "Official GitHub release asset. Installation, signature and safety not independently tested."
+      }
+    ],
+    "downloadUrl": "https://github.com/DLinacre/PokeGuru/releases/download/v1.5.2/pokeguru-build.zip",
+    "status": "Released"
+  },
+  {
+    "id": "prism",
+    "slug": "prism",
+    "type": "project",
+    "name": "Prism",
+    "shortDescription": "Project intelligence & team collaboration platform — real-time kanban, analytics, state.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/prism",
+    "tags": ["kanban", "project", "analytics", "collaboration"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "Source",
+    "presentation": {
+      "emoji": "📊"
+    }
+  },
+  {
+    "id": "linacre-global-monitor",
+    "slug": "linacre-global-monitor",
+    "type": "project",
+    "name": "Linacre Global Monitor",
+    "shortDescription": "Real-time geopolitical & environmental situational-awareness dashboard.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/linacre-global-monitor",
+    "tags": ["dashboard", "geopolitics", "realtime", "map"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "App",
+    "presentation": {
+      "emoji": "📡"
+    },
+    "liveUrl": "https://dlinacre.github.io/linacre-global-monitor/"
+  },
+  {
+    "id": "payhip-scraper",
+    "slug": "payhip-scraper",
+    "type": "project",
+    "name": "PayHip Scraper",
+    "shortDescription": "Digital-product intelligence & market research scraper for PayHip storefronts.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/PayHip-Scraper",
+    "tags": ["scraper", "payhip", "market", "research"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "Tool",
+    "artwork": "/projects/payhip-scraper.svg",
+    "presentation": {
+      "emoji": "🔎"
+    },
+    "problemSolved": "Payhip renders its marketplace client-side and its search matches any term in a phrase, so a naive scraper reads an empty page and a literal search returns unrelated products.",
+    "implementation": "Targets the marketplace search API directly, probes each term to narrow on the most selective one, then filters locally for full-phrase matches. Scores listings deterministically from real review volume, ratings and market size — no estimated sales figures.",
+    "role": "Creator and backend engineer",
+    "fullDescription": "Digital product intelligence for Payhip sellers: scrapes the live marketplace, scores every listing for opportunity, and generates Arena.ai prompts to build a better version.",
+    "technologyStack": ["Node.js", "Express", "SQLite", "Cheerio", "Zod", "Docker", "Railway"],
+    "liveUrl": "https://payhipscraper-production.up.railway.app"
+  },
+  {
+    "id": "arena-audit-prompt-builder",
+    "slug": "arena-audit-prompt-builder",
+    "type": "project",
+    "name": "Arena Audit Prompt Builder",
+    "shortDescription": "Modular browser audit-prompt builder for codebases, UX, security and performance.",
+    "featured": true,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/a-audit",
+    "tags": ["audit", "prompts", "code", "ux", "security"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "Tool",
+    "artwork": "/banners/arena-audit.webp",
+    "presentation": {
+      "emoji": "🛠️",
+      "pinned": true
+    },
+    "liveUrl": "/tools/arena-audit.html",
+    "problemSolved": "Structured technical audits require exhaustive checklists that are easily customizable per product domain.",
+    "implementation": "Built a modular single-page audit generator with instant search, category filtering, export formats, and zero third-party dependencies.",
+    "role": "Developer and prompt strategist",
+    "fullDescription": "A specialized browser audit tool for building systematic prompt checklists across UX, UI, SEO, Accessibility, and Security.",
+    "technologyStack": ["HTML5", "JavaScript", "Tailwind CSS", "GitHub Pages"]
+  },
+  {
+    "id": "grumpy-guy-ai",
+    "slug": "grumpy-guy-ai",
+    "type": "project",
+    "name": "Grumpy Guy AI",
+    "shortDescription": "Your disagreeable AI copilot — motivation with complaints, custom tones, speech synthesis.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/grumpy-guy-ai",
+    "tags": ["ai", "copilot", "motivation", "speech", "fun"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "AI",
+    "artwork": "/banners/grumpy-guy.webp",
+    "technologyStack": ["React", "TypeScript", "Speech Synthesis"],
+    "presentation": {
+      "emoji": "ಠ_ಠ"
+    },
+    "liveUrl": "https://dlinacre.github.io/grumpy-guy-ai/",
+    "problemSolved": "Developers and creators often face daily motivation slumps and need a fast, humorous, zero-friction reality check without bloat.",
+    "implementation": "Engineered a React 19 + TypeScript + Vite app with built-in Web Speech API voice synthesis, HSL dark-mode styling, Vitest coverage, and automated GitHub Actions CI/CD Pages deployment.",
+    "role": "Creator & Lead Engineer",
+    "fullDescription": "Your disagreeable AI copilot delivering motivation with complaints. Features custom tone selection (Dry, Brutal, Supportive), Web Speech synthesis, local storage persistence, and Cloudflare Worker fallback architecture."
+  },
+  {
+    "id": "pokeflip-ai",
+    "slug": "pokeflip-ai",
+    "type": "project",
+    "name": "PokéFlip AI",
+    "shortDescription": "A trading-card research application with valuation and collection-management interfaces.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/Pok-Flip-AI",
+    "tags": ["pokemon", "tcg", "ai", "arbitrage", "gemini"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "AI",
+    "artwork": "/banners/pokeflip-ai.webp",
+    "presentation": {
+      "emoji": "🎴"
+    },
+    "liveUrl": "https://pok-flip-ai.vercel.app",
+    "problemSolved": "Explores how card listings, pricing information and collection workflows can be presented together.",
+    "fullDescription": "A trading-card research application with valuation and collection-management interfaces.",
+    "technologyStack": ["React Native", "Gemini AI", "TypeScript", "Tailwind CSS"],
+    "portfolio": {
+      "category": "AI & Machine Learning",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "81a3c1e6ce934a8a5c4c73e9987b68c41a6c9374",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "features": [
+      "Listing and portfolio interfaces",
+      "Valuation workflow source",
+      "Market-analysis views"
+    ],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at 81a3c1e6ce934a8a5c4c73e9987b68c41a6c9374. External deployment could not be functionally checked from this restricted network."
+    },
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/DLinacre/Pok-Flip-AI/blob/81a3c1e6ce934a8a5c4c73e9987b68c41a6c9374/README.md"
+  },
+  {
+    "id": "facerater-ai",
+    "slug": "facerater-ai",
+    "type": "project",
+    "name": "FaceRater AI",
+    "shortDescription": "Neutral aesthetic face scoring with instant AI reasoning cards.",
+    "featured": false,
+    "relationship": "original",
+    "tags": ["ai", "vision", "selfie", "scoring"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "AI",
+    "artwork": "/banners/facerater.webp",
+    "presentation": {
+      "emoji": "✨"
+    },
+    "liveUrl": "https://ai-face-rater-next.vercel.app",
+    "problemSolved": "Providing instantaneous face aesthetic scoring without complex backend server infrastructure.",
+    "implementation": "Built a Next.js 15 app leveraging Gemini 2.5 Flash Vision API for facial landmark analysis, symmetry scoring, and instant social card rendering.",
+    "role": "Creator and full-stack engineer",
+    "fullDescription": "Neutral aesthetic face scoring & instant AI reasoning card generator with shareable 1080×1350 social media layout and live vision metrics.",
+    "technologyStack": ["Next.js 15", "Gemini 2.5 Flash", "React 19", "Tailwind CSS"]
+  },
+  {
+    "id": "apex-pos",
+    "slug": "apex-pos",
+    "type": "project",
+    "name": "Apex POS",
+    "shortDescription": "Offline-first point of sale — stock, customers, expenses, receipts and reports.",
+    "featured": true,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/Apex-POS",
+    "tags": ["pos", "retail", "offline", "stock", "business"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "App",
+    "artwork": "/banners/apex-pos.webp",
+    "technologyStack": ["React", "TypeScript", "IndexedDB", "PWA"],
+    "features": [
+      "Works fully offline — no internet or account required to take payments or run stock.",
+      "Everything (products, customers, expenses, receipts) lives on the device.",
+      "Exports reports so you can hand data to accounting without a cloud service."
+    ],
+    "presentation": {
+      "emoji": "🏪"
+    },
+    "liveUrl": "https://dlinacre.github.io/Apex-POS/",
+    "problemSolved": "Small operators need a usable register and stock system even when connectivity is poor and without sending business data to a third-party backend.",
+    "implementation": "Kept the product client-side with IndexedDB offline storage, responsive register flows, inventory warnings, expense tracking, and receipt output.",
+    "role": "Product developer and maintainer",
+    "fullDescription": "An offline-first point-of-sale system for the browser with register, stock, customers, expenses, receipts, and business reporting."
+  },
+  {
+    "id": "personal-op-agent",
+    "slug": "personal-op-agent",
+    "type": "project",
+    "name": "Personal OP Agent",
+    "shortDescription": "Single-file HTML AI workspace & prompt controller running 100% in your browser.",
+    "featured": true,
+    "relationship": "original",
+    "tags": ["ai", "agent", "single-file", "offline"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "Tool",
+    "artwork": "/banners/opagent.webp",
+    "technologyStack": ["HTML", "Vanilla JS", "Pyodide", "Web Audio"],
+    "features": [
+      "A zero-setup AI workspace in one HTML file — chat, code, images and MCP in your browser.",
+      "No API key, no install, no uploads: everything runs locally.",
+      "Real code execution (JS + Python via Pyodide) and a live preview pane."
+    ],
+    "presentation": {
+      "emoji": "🤖"
+    },
+    "liveUrl": "/tools/opagent.html",
+    "problemSolved": "Developers need an immediate, zero-build AI playground that runs offline and connects to models without multi-step server setup.",
+    "implementation": "Engineered a standalone 170KB single-file HTML workspace with inline CSS, key storage, dynamic system prompts, and responsive streaming layout.",
+    "role": "Creator and frontend architect",
+    "fullDescription": "A zero-setup, single-file HTML AI workspace and prompt controller running 100% locally in your browser with context history and model routing."
+  },
+  {
+    "id": "bonny-bats",
+    "slug": "bonny-bats",
+    "type": "project",
+    "name": "Bonny Bats",
+    "shortDescription": "Friendly client-facing guide to bats in buildings — spotting them, the law, humane exclusion.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/bonny-bats",
+    "tags": ["bats", "wildlife", "guide", "uk", "law"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "App",
+    "artwork": "/banners/bonny-bats.webp",
+    "presentation": {
+      "emoji": "🦇"
+    },
+    "liveUrl": "https://dlinacre.github.io/bonny-bats/",
+    "problemSolved": "Make a genuinely useful, trustworthy guide about a legally protected species — while keeping it easy for non-experts (and my mum) to read and use.",
+    "implementation": "One self-contained HTML file with clear step-by-step sections, live seasonal advice, readability controls (text size, high contrast) and a print-friendly layout.",
+    "role": "Designer and frontend engineer",
+    "fullDescription": "A friendly, beautifully illustrated guide to bats in buildings — spotting them, staying safe, the law, and humane one-way exclusion. Named after my mum, Bonny.",
+    "technologyStack": ["HTML", "CSS", "JavaScript", "SVG", "GitHub Pages"]
+  },
+  {
+    "id": "omniroute-llm-engine",
+    "slug": "omniroute-llm-engine",
+    "type": "project",
+    "name": "OmniRoute LLM Engine",
+    "shortDescription": "An LLM-routing and gateway project with server and client source.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/OmniRoute-LLM",
+    "tags": ["llm", "ai", "routing", "api", "gateway"],
+    "provenance": [
+      "DLinacre siteProjects",
+      "dashboard-projects (unverified badges/stats archived)",
+      "data.ts MANUAL_PROJECTS"
+    ],
+    "category": "DevOps",
+    "artwork": "/banners/omniroute.webp",
+    "presentation": {
+      "emoji": "🧭",
+      "dashboardCategory": "AI & LLM",
+      "color": "cyan"
+    },
+    "problemSolved": "Collects model-routing and integration workflows behind a shared interface.",
+    "fullDescription": "An LLM-routing and gateway project with server and client source.",
+    "technologyStack": [
+      "Next.js",
+      "TypeScript",
+      "Docker",
+      "Gemini AI",
+      "OpenAI",
+      "Claude",
+      "Ollama"
+    ],
+    "portfolio": {
+      "category": "AI & Machine Learning",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "d365cf130d6d0c0b9a64a83b947d60b4f7aa7e1c",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "features": ["Gateway source", "Provider integration code", "Client and setup documentation"],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at d365cf130d6d0c0b9a64a83b947d60b4f7aa7e1c. External deployment could not be functionally checked from this restricted network."
+    },
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/DLinacre/OmniRoute-LLM/blob/d365cf130d6d0c0b9a64a83b947d60b4f7aa7e1c/README.md"
+  },
+  {
+    "id": "linacre-llm-hub-benchmarks",
+    "slug": "linacre-llm-hub-benchmarks",
+    "type": "project",
+    "name": "Linacre LLM Hub & Benchmarks",
+    "shortDescription": "An AI-model research dashboard with dataset views, comparison tools and local-model configuration.",
+    "featured": true,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/Linacre-LLM-Benchmarks",
+    "tags": ["llm", "benchmarks", "automation", "github-actions"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "AI",
+    "artwork": "/banners/linacre-llm-benchmarks.webp",
+    "presentation": {
+      "emoji": "📈"
+    },
+    "liveUrl": "https://dlinacre.github.io/Linacre-LLM-Benchmarks/",
+    "problemSolved": "Puts model metadata, dataset provenance and comparison interfaces in one workspace.",
+    "fullDescription": "An AI-model research dashboard with dataset views, comparison tools and local-model configuration.",
+    "technologyStack": ["JavaScript", "Python", "GitHub Actions", "JSON"],
+    "portfolio": {
+      "category": "AI & Machine Learning",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "7372f4af2c5dc3671e025029a763663e348ddd8b",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "features": ["Dataset browsing", "Model comparisons", "Local-model connection settings"],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at 7372f4af2c5dc3671e025029a763663e348ddd8b. External deployment could not be functionally checked from this restricted network."
+    },
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/DLinacre/Linacre-LLM-Benchmarks/blob/7372f4af2c5dc3671e025029a763663e348ddd8b/README.md"
+  },
+  {
+    "id": "osint-hud",
+    "slug": "osint-hud",
+    "type": "project",
+    "name": "OSINT HUD",
+    "shortDescription": "A searchable interface for a collection of third-party open-source intelligence resources.",
+    "featured": false,
+    "relationship": "directory",
+    "sourceRepository": "https://github.com/DLinacre/linacre-osint-hud",
+    "tags": ["osint", "tools", "directory", "intelligence"],
+    "provenance": ["DLinacre siteProjects", "LIN4CRE siteProjects"],
+    "category": "Tool",
+    "presentation": {
+      "emoji": "🛰️"
+    },
+    "liveUrl": "https://dlinacre.github.io/linacre-osint-hud/",
+    "portfolio": {
+      "category": "Web Applications",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "f569c0713d2d53cd92e5f4091b43241e212bde42",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "fullDescription": "A searchable interface for a collection of third-party open-source intelligence resources.",
+    "problemSolved": "Organises research links into a consistent interface; linked resources remain the work of their respective authors.",
+    "features": ["Categorised resource links", "Search and saved selections", "Time-zone overview"],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at f569c0713d2d53cd92e5f4091b43241e212bde42. External deployment could not be functionally checked from this restricted network."
+    },
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/DLinacre/linacre-osint-hud/blob/f569c0713d2d53cd92e5f4091b43241e212bde42/README.md"
+  },
+  {
+    "id": "1files",
+    "slug": "1files",
+    "type": "project",
+    "name": "1Files",
+    "shortDescription": "Collection of complete apps, each shipped as ONE self-contained HTML file — zero build.",
+    "featured": false,
+    "relationship": "directory",
+    "sourceRepository": "https://github.com/DLinacre/1files",
+    "tags": ["single-file", "html", "apps", "no-build"],
+    "provenance": ["DLinacre siteProjects", "LIN4CRE siteProjects"],
+    "category": "Tool",
+    "presentation": {
+      "emoji": "📄"
+    },
+    "liveUrl": "https://dlinacre.github.io/1files/"
+  },
+  {
+    "id": "ghostmail",
+    "slug": "ghostmail",
+    "type": "project",
+    "name": "GhostMail",
+    "shortDescription": "Privacy-first disposable email + alias toolkit — self-host your own inboxes.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/GhostMail",
+    "tags": ["email", "privacy", "disposable", "self-host"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "App",
+    "presentation": {
+      "emoji": "👻"
+    }
+  },
+  {
+    "id": "ev-backend",
+    "slug": "ev-backend",
+    "type": "project",
+    "name": "EV Backend",
+    "shortDescription": "Backend for the EV voice assistant — Alexa to desktop automation bridge.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/ev-backend",
+    "tags": ["voice", "alexa", "backend", "automation"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "DevOps",
+    "presentation": {
+      "emoji": "🎙️"
+    },
+    "problemSolved": "Low-latency Alexa skill handling and macro dispatch require strict signature validation and request rate limiting.",
+    "implementation": "Engineered a FastAPI Python backend service with SQLite memory persistence, SSE event channels, and Alexa interaction models.",
+    "role": "Systems engineer",
+    "fullDescription": "Voice assistant integration linking Alexa commands to desktop PC macro controls and Gemini-powered conversational responses.",
+    "artwork": "/projects/ev-bot.svg",
+    "technologyStack": ["FastAPI", "Python", "Alexa Skill Kit", "Gemini AI", "SQLite"]
+  },
+  {
+    "id": "ev-bot-companion",
+    "slug": "ev-bot-companion",
+    "type": "project",
+    "name": "EV Bot Companion",
+    "shortDescription": "Companion bot for the EV assistant hub — chat, reminders and desktop hooks.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/ev-bot-companion",
+    "tags": ["voice", "bot", "assistant", "automation"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "DevOps",
+    "artwork": "/banners/ev-bot.webp",
+    "presentation": {
+      "emoji": "🤝"
+    }
+  },
+  {
+    "id": "myhub-dev-pipeline",
+    "slug": "myhub-dev-pipeline",
+    "type": "project",
+    "name": "MyHub Dev Pipeline",
+    "shortDescription": "Documented CI/CD pipeline with automation, deploy targets and ops runbooks.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/myhub-pipeline",
+    "tags": ["ci", "cd", "pipeline", "devops", "automation"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "DevOps",
+    "artwork": "/banners/myhub-pipeline.webp",
+    "presentation": {
+      "emoji": "🔁"
+    },
+    "problemSolved": "Pipeline concepts are often presented as disconnected YAML snippets rather than one inspectable system with tests, reports, and operational history.",
+    "implementation": "Organised the workflow as a versioned Python project with architecture notes, CI, tests, security reports, release tags, and a repository-hosted demo recording.",
+    "role": "Automation and platform engineer",
+    "fullDescription": "A documented Python DevOps reference project covering CI/CD, security checks, DORA-style metrics, anomaly detection, tests, and automated remediation experiments.",
+    "technologyStack": ["Python", "GitHub Actions", "CI/CD", "Security", "DORA Metrics"]
+  },
+  {
+    "id": "sidehustles",
+    "slug": "sidehustles",
+    "type": "project",
+    "name": "SideHustles",
+    "shortDescription": "Deployment tooling — \"deployment made easy\" for side projects.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/SideHustles",
+    "tags": ["deploy", "tooling", "side-projects"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "DevOps",
+    "presentation": {
+      "emoji": "⚡"
+    }
+  },
+  {
+    "id": "sim-root",
+    "slug": "sim-root",
+    "type": "project",
+    "name": "SIM://ROOT",
+    "shortDescription": "The hacker’s field guide to your SIM card — anatomy, pinout intel, client-side explorer.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/sim-root",
+    "tags": ["sim", "security", "guide", "explorer"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "Tool",
+    "presentation": {
+      "emoji": "📇"
+    },
+    "liveUrl": "https://dlinacre.github.io/sim-root/"
+  },
+  {
+    "id": "dkma-monster",
+    "slug": "dkma-monster",
+    "type": "project",
+    "name": "DKMA Monster",
+    "shortDescription": "Android OEM battery & autostart fixer — exact steps for 15 phone families plus a GUI tool.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/dkma-monster",
+    "tags": ["android", "battery", "background", "oem"],
+    "provenance": [
+      "DLinacre siteProjects",
+      "dashboard-projects (unverified badges/stats archived)",
+      "data.ts MANUAL_PROJECTS"
+    ],
+    "category": "Tool",
+    "artwork": "/banners/dkma-monster.webp",
+    "technologyStack": ["TypeScript", "React", "Data"],
+    "presentation": {
+      "emoji": "🔋",
+      "dashboardCategory": "Mobile & Android",
+      "color": "amber"
+    },
+    "problemSolved": "Android manufacturers hide battery and autostart controls in different places, causing alarms, sync, and background services to stop silently.",
+    "implementation": "Centralised OEM-specific guidance in one data model and reused it across a web guide and GUI tool (`/tools/dkma-gui.html`), with a no-root path for ordinary users.",
+    "role": "Systems designer and maintainer",
+    "fullDescription": "A practical Android background-app survival toolkit: searchable guidance for 15 OEM families plus CLI, desktop GUI, ADB, root, and Magisk options.",
+    "liveUrl": "https://dlinacre.github.io/dkma-monster/"
+  },
+  {
+    "id": "deasy",
+    "slug": "deasy",
+    "type": "project",
+    "name": "Deasy",
+    "shortDescription": "Continuous command suite for desktop — Electron-based productivity shell.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/Deasy",
+    "tags": ["electron", "desktop", "commands", "productivity"],
+    "provenance": [
+      "DLinacre siteProjects",
+      "dashboard-projects (unverified badges/stats archived)",
+      "data.ts MANUAL_PROJECTS"
+    ],
+    "category": "App",
+    "artwork": "/banners/deasy.webp",
+    "technologyStack": ["TypeScript", "Node.js"],
+    "presentation": {
+      "emoji": "⌨️",
+      "dashboardCategory": "Desktop & Systems",
+      "color": "purple"
+    },
+    "status": "Released",
+    "statusNote": "Release asset listed by GitHub; installation and advertised capabilities not independently tested.",
+    "downloadUrl": "https://github.com/DLinacre/Deasy/releases",
+    "platforms": ["Windows", "Android"],
+    "problemSolved": "Managing multiple local development services and deployment branches requires an efficient desktop control interface.",
+    "implementation": "Built a lightweight manager connecting CLI script orchestration, status monitoring, and electron deployment wrappers.",
+    "role": "Creator and core engineer",
+    "fullDescription": "Continuous command suite and branch desktop manager for streamlined project deployment and local environment control.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "GitHub release asset metadata inspected in audit; binary not executed."
+    }
+  },
+  {
+    "id": "glitchart-engine",
+    "slug": "glitchart-engine",
+    "type": "project",
+    "name": "GlitchArt Engine",
+    "shortDescription": "Procedural glitch-art engine — WebGL shaders, image lab and canvas exporter.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/GlitchArt",
+    "tags": ["webgl", "shaders", "art", "glitch", "canvas"],
+    "provenance": ["DLinacre siteProjects", "data.ts MANUAL_PROJECTS"],
+    "category": "Tool",
+    "artwork": "/banners/glitchart-engine.webp",
+    "presentation": {
+      "emoji": "🎨"
+    },
+    "liveUrl": "https://dlinacre.github.io/GlitchArt/",
+    "problemSolved": "Real-time GPU shader manipulation of uploaded images and video streams in browser.",
+    "implementation": "Developed custom WebGL shader pipelines for chromatic aberration, CRT scanlines, datamosh simulation, and high-res export.",
+    "role": "Creative technologist & shader engineer",
+    "fullDescription": "Procedural digital glitch art engine & image manipulation laboratory with WebGL shaders, real-time parameter controls, canvas exporter, and glitch presets.",
+    "technologyStack": ["WebGL", "Canvas 2D", "TypeScript", "Vite"]
+  },
+  {
+    "id": "linacre-wallpaper",
+    "slug": "linacre-wallpaper",
+    "type": "project",
+    "name": "linacre-wallpaper",
+    "shortDescription": "CyberBlue wallpaper pack for desktop and mobile.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/linacre-wallpaper",
+    "tags": ["wallpaper", "design"],
+    "provenance": [
+      "DLinacre siteProjects",
+      "dashboard-projects (unverified badges/stats archived)",
+      "LIN4CRE siteProjects"
+    ],
+    "category": "Source",
+    "presentation": {
+      "emoji": "🖼️",
+      "dashboardCategory": "Desktop & Systems",
+      "color": "sakura"
+    }
+  },
+  {
+    "id": "pixelpoke-arena",
+    "slug": "pixelpoke-arena",
+    "type": "project",
+    "name": "PixelPoke Arena",
+    "shortDescription": "Unofficial Android WebView wrapper for the third-party PixelPoke Arena service.",
+    "featured": false,
+    "relationship": "wrapper",
+    "sourceRepository": "https://github.com/DLinacre/PixelPokeArena",
+    "tags": ["android", "apk", "battle-royale", "pixel-art", "arena", "game"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "App",
+    "artwork": "/banners/pixelpoke-arena.webp",
+    "technologyStack": ["Java", "Android", "WebView"],
+    "presentation": {
+      "emoji": "⚔️"
+    },
+    "downloadUrl": "https://github.com/DLinacre/PixelPokeArena/releases/latest",
+    "platforms": ["Android"]
+  },
+  {
+    "id": "bloxcapital",
+    "slug": "bloxcapital",
+    "type": "project",
+    "name": "BloxCapital",
+    "shortDescription": "Roblox monetization & game-performance suite.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/BloxCapital",
+    "tags": ["roblox", "monetization", "luau"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "Source",
+    "presentation": {
+      "emoji": "💰"
+    }
+  },
+  {
+    "id": "blox-capital",
+    "slug": "blox-capital",
+    "type": "project",
+    "name": "Blox-Capital",
+    "shortDescription": "Roblox extension for money making — companion tooling to BloxCapital.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/Blox-Capital",
+    "tags": ["roblox", "money", "extension", "luau"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "Source",
+    "presentation": {
+      "emoji": "📈"
+    }
+  },
+  {
+    "id": "mdt-kit",
+    "slug": "mdt-kit",
+    "type": "project",
+    "name": "MDT-kit",
+    "shortDescription": "MTD-Ready 2026 UK Tax Filing Kit, compliance checklist & interactive landing page.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/MDT-kit",
+    "tags": ["tax", "uk", "compliance", "finance", "mtd"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "Tool",
+    "technologyStack": ["TypeScript", "React", "Tailwind"],
+    "presentation": {
+      "emoji": "📋"
+    }
+  },
+  {
+    "id": "circuit-guide",
+    "slug": "circuit-guide",
+    "type": "project",
+    "name": "circuit-guide",
+    "shortDescription": "Interactive electronics & circuit wiring reference guide with live schematics and calculations.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/circuit-guide",
+    "tags": ["electronics", "circuit", "schematics", "hardware", "guide"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "Tool",
+    "technologyStack": ["HTML5", "CSS", "JavaScript"],
+    "presentation": {
+      "emoji": "⚡"
+    }
+  },
+  {
+    "id": "easy-audiobook-player",
+    "slug": "easy-audiobook-player",
+    "type": "project",
+    "name": "easy-audiobook-player",
+    "shortDescription": "A browser audiobook player with a local library and chapter controls.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/easy-audiobook-player",
+    "tags": ["audiobook", "player", "pwa", "media", "offline"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "App",
+    "technologyStack": ["JavaScript", "Web Audio", "PWA"],
+    "presentation": {
+      "emoji": "🎧"
+    },
+    "portfolio": {
+      "category": "Web Applications",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "7eafede1999b1876ddfb196b2abce46e21aa6eeb",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "fullDescription": "A browser audiobook player with a local library and chapter controls.",
+    "problemSolved": "Collects audio links and local files into a chapter-oriented listening interface.",
+    "features": ["Chapter library", "Local audio-file input", "Playback-speed controls"],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at 7eafede1999b1876ddfb196b2abce46e21aa6eeb. External deployment could not be functionally checked from this restricted network."
+    },
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/DLinacre/easy-audiobook-player/blob/7eafede1999b1876ddfb196b2abce46e21aa6eeb/README.md",
+    "screenshots": [
+      {
+        "src": "/project-captures/easy-audiobook-player.png",
+        "alt": "easy-audiobook-player interface captured from actual repository source served locally; not a public-deployment certification",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "7eafede1999b1876ddfb196b2abce46e21aa6eeb"
+      }
+    ]
+  },
+  {
+    "id": "jessica-gcse-maths-exam",
+    "slug": "jessica-gcse-maths-exam",
+    "type": "project",
+    "name": "jessica-gcse-maths-exam",
+    "shortDescription": "Static HTML GCSE maths revision project.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/jessica-gcse-maths-exam",
+    "tags": ["education", "maths", "gcse", "quiz", "revision"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "App",
+    "presentation": {
+      "emoji": "📐"
+    }
+  },
+  {
+    "id": "kidsvids",
+    "slug": "kidsvids",
+    "type": "project",
+    "name": "KidsVids",
+    "shortDescription": "Static video portal source; parental-control behaviour not verified.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/KidsVids",
+    "tags": ["video", "kids", "safe", "streaming", "pwa"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "App",
+    "presentation": {
+      "emoji": "📺"
+    }
+  },
+  {
+    "id": "guruai-project",
+    "slug": "guruai-project",
+    "type": "project",
+    "name": "GuruAi-project",
+    "shortDescription": "Intelligent multi-model AI agent workspace and prompt execution playground.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/GuruAi-project",
+    "tags": ["ai", "llm", "workspace", "agent", "automation"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "AI",
+    "technologyStack": ["Python", "FastAPI", "React", "TypeScript"],
+    "presentation": {
+      "emoji": "🤖"
+    }
+  },
+  {
+    "id": "azaroth-installer",
+    "slug": "azaroth-installer",
+    "type": "project",
+    "name": "azaroth-installer",
+    "shortDescription": "Modular Windows deployment, repackaging, and automated software installation toolkit.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/azaroth-installer",
+    "tags": ["windows", "installer", "powershell", "devops", "automation"],
+    "provenance": ["DLinacre siteProjects"],
+    "category": "DevOps",
+    "technologyStack": ["PowerShell", "Batch", "Packaging"],
+    "presentation": {
+      "emoji": "📦"
+    }
+  },
+  {
+    "id": "fire-tv-setup-kit",
+    "slug": "fire-tv-setup-kit",
+    "type": "project",
+    "name": "Fire TV Setup Kit",
+    "shortDescription": "A PowerShell setup and recovery toolkit for Fire TV and Android TV devices.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/firetv-kit",
+    "tags": [
+      "firetv",
+      "stremio",
+      "smarttube",
+      "tivimate",
+      "androidtv",
+      "adguard",
+      "streaming",
+      "adb",
+      "debloat",
+      "diagnostics"
+    ],
+    "provenance": ["LIN4CRE siteProjects"],
+    "category": "Tool",
+    "technologyStack": [
+      "PowerShell",
+      "Bash",
+      "Android ADB",
+      "Fire OS",
+      "DNS over TLS",
+      "Diagnostics"
+    ],
+    "features": [
+      "PowerShell setup scripts",
+      "Device discovery source",
+      "Recovery and setup documentation"
+    ],
+    "presentation": {
+      "emoji": "🔥",
+      "pinned": true
+    },
+    "liveUrl": "https://lin4cre.github.io/firetv-kit/",
+    "portfolio": {
+      "category": "Automation & Infrastructure",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "35b7ca8ab3176aba781939c8422575fda54bd1e3",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "fullDescription": "A PowerShell setup and recovery toolkit for Fire TV and Android TV devices.",
+    "problemSolved": "Brings device setup steps and recovery scripts into one documented workflow.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at 35b7ca8ab3176aba781939c8422575fda54bd1e3. External deployment could not be functionally checked from this restricted network."
+    },
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/LIN4CRE/firetv-kit/blob/35b7ca8ab3176aba781939c8422575fda54bd1e3/README.md",
+    "releases": [
+      {
+        "version": "v1.0.0",
+        "url": "https://github.com/LIN4CRE/firetv-kit/releases/tag/v1.0.0",
+        "publishedAt": "2026-10-31",
+        "notes": "Repository-published release metadata; assets were not installed."
+      }
+    ]
+  },
+  {
+    "id": "tabulous-games",
+    "slug": "tabulous-games",
+    "type": "project",
+    "name": "Tabulous Games",
+    "shortDescription": "A directory of browser game links, including retro-inspired titles, multiplayer games and WebAssembly projects. Availability varies by host.",
+    "featured": false,
+    "relationship": "directory",
+    "sourceRepository": "https://github.com/LIN4CRE/tabulous-games",
+    "tags": ["games", "vault", "retro", "wasm", "fps", "emulator", "webassembly", "offline"],
+    "provenance": ["LIN4CRE siteProjects"],
+    "category": "Tool",
+    "technologyStack": ["HTML", "JavaScript"],
+    "features": ["Browser game-link directory", "External game links organised by genre"],
+    "presentation": {
+      "emoji": "🎮",
+      "pinned": true
+    },
+    "statusNote": "Legacy third-party game directory; entries are archived separately and are not original LIN4CRE games."
+  },
+  {
+    "id": "retro-arcade-vault",
+    "slug": "retro-arcade-vault",
+    "type": "project",
+    "name": "Retro Arcade Vault",
+    "shortDescription": "Retro-game directory and emulator interface involving third-party content.",
+    "featured": false,
+    "relationship": "directory",
+    "sourceRepository": "https://github.com/LIN4CRE/retro-arcade-vault",
+    "tags": ["retro", "emulator", "ps1", "gba", "arcade", "webassembly"],
+    "provenance": ["LIN4CRE siteProjects"],
+    "category": "Tool",
+    "technologyStack": ["WebAssembly", "HTML5 Canvas", "Web Audio API", "Gamepad API"],
+    "features": [
+      "Instant-play WebAssembly cores: PCSX ReARMed, mGBA, DeSmuME, Snes9x, and Genesis Plus GX.",
+      "Real-time retro scanline and CRT phosphor bloom shaders.",
+      "Automatic state saving and Bluetooth gamepad vibration integration."
+    ],
+    "presentation": {
+      "emoji": "🕹️",
+      "pinned": true
+    },
+    "liveUrl": "https://lin4cre.github.io/retro-arcade-vault/",
+    "statusNote": "Not an original-games collection. Third-party rights and current playability are not verified."
+  },
+  {
+    "id": "dual-audio-synchronizer",
+    "slug": "dual-audio-synchronizer",
+    "type": "project",
+    "name": "Dual Audio Synchronizer",
+    "shortDescription": "A Windows audio-routing utility with multi-output, timing and dialogue controls.",
+    "featured": true,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/dual-audio-synchronizer",
+    "tags": ["audio", "wasapi", "synchronizer", "dsp", "windows", "csharp", "clarity"],
+    "provenance": ["LIN4CRE siteProjects", "LIN4CRE curatedWork"],
+    "category": "Tool",
+    "technologyStack": ["C#", "Windows WASAPI", "WinForms", "Real-Time DSP"],
+    "features": [
+      "Multiple audio-output controls",
+      "Timing adjustments",
+      "Dialogue-processing controls"
+    ],
+    "presentation": {
+      "emoji": "🔊",
+      "pinned": true
+    },
+    "liveUrl": "https://lin4cre.github.io/dual-audio-synchronizer/",
+    "fullDescription": "A Windows audio-routing utility with multi-output, timing and dialogue controls.",
+    "downloadUrl": "https://github.com/LIN4CRE/dual-audio-synchronizer/releases/download/v2.0.0/DualAudioStudio.exe",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source at 074db8e78968da40d9a9f9799b077aa3589b0e6d and exact official release asset metadata inspected. Binary/build ZIP not executed or installed."
+    },
+    "status": "Released",
+    "statusNote": "Official release asset exists. This is not a certification of installation, safety or advertised functionality.",
+    "platforms": ["Windows"],
+    "portfolio": {
+      "category": "Windows Software",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "074db8e78968da40d9a9f9799b077aa3589b0e6d",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "problemSolved": "Brings output-routing and timing controls into one Windows interface.",
+    "documentation": "https://github.com/LIN4CRE/dual-audio-synchronizer/blob/074db8e78968da40d9a9f9799b077aa3589b0e6d/README.md",
+    "releases": [
+      {
+        "version": "v2.0.0",
+        "url": "https://github.com/LIN4CRE/dual-audio-synchronizer/releases/tag/v2.0.0",
+        "publishedAt": "2026-10-24",
+        "notes": "Repository-published release metadata; assets were not installed."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Download Windows",
+        "url": "https://github.com/LIN4CRE/dual-audio-synchronizer/releases/download/v2.0.0/DualAudioStudio.exe",
+        "version": "v2.0.0",
+        "note": "Official GitHub release asset. Installation, signature and safety not independently tested."
+      }
+    ],
+    "screenshots": [
+      {
+        "src": "/project-captures/dual-audio-synchronizer.png",
+        "alt": "Repository-supplied Dual Audio Studio application screenshot; not an independent installation test",
+        "sourceSha": "074db8e78968da40d9a9f9799b077aa3589b0e6d"
+      }
+    ]
+  },
+  {
+    "id": "music-videos",
+    "slug": "music-videos",
+    "type": "project",
+    "name": "Music Videos",
+    "shortDescription": "The official Proper Mad cinema: ten original lyric-video masters with interactive timed lyrics, artwork, theatre mode, playback controls and studio audio profiles.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/linacre-music-videos",
+    "tags": ["music", "videos", "proper mad", "lyrics", "cinema", "audio", "playlist"],
+    "provenance": ["LIN4CRE siteProjects"],
+    "category": "App",
+    "technologyStack": ["HTML5 Video", "Web Audio API", "MediaSession", "Responsive player"],
+    "features": [
+      "Ten original 1080p music videos with album artwork and synchronized lyric navigation.",
+      "Playback speed, shuffle, repeat, theatre mode, keyboard shortcuts and MediaSession support.",
+      "Embedded from the canonical player so its video masters and Web Audio profiles remain intact."
+    ],
+    "presentation": {
+      "emoji": "🎬",
+      "pinned": true
+    },
+    "liveUrl": "https://lin4cre.github.io/linacre-music-videos/"
+  },
+  {
+    "id": "karaoke-pulse",
+    "slug": "karaoke-pulse",
+    "type": "project",
+    "name": "Karaoke Pulse",
+    "shortDescription": "A karaoke application with player, lyrics and microphone-processing source.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/karaoke-pulse",
+    "tags": ["karaoke", "music", "vocal-remover", "youtube", "dsp", "audio"],
+    "provenance": ["LIN4CRE siteProjects"],
+    "category": "App",
+    "technologyStack": ["TypeScript", "Web Audio API", "React", "FastAPI", "Spleeter"],
+    "features": [
+      "Player and queue interfaces",
+      "Lyrics support in source",
+      "Web Audio processing source"
+    ],
+    "presentation": {
+      "emoji": "🎤",
+      "pinned": false
+    },
+    "liveUrl": "https://lin4cre.github.io/karaoke-pulse/",
+    "portfolio": {
+      "category": "Web Applications",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "e03a3b79ba9ef18ef73d67791e10a3d68ce8e5f4",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "fullDescription": "A karaoke application with player, lyrics and microphone-processing source.",
+    "problemSolved": "Explores a combined playback and singing interface. External media and microphone processing need environment-specific testing.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at e03a3b79ba9ef18ef73d67791e10a3d68ce8e5f4. External deployment could not be functionally checked from this restricted network."
+    },
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/LIN4CRE/karaoke-pulse/blob/e03a3b79ba9ef18ef73d67791e10a3d68ce8e5f4/README.md"
+  },
+  {
+    "id": "speedread",
+    "slug": "speedread",
+    "type": "project",
+    "name": "SpeedRead",
+    "shortDescription": "A browser reading application with RSVP presentation, a bookshelf and reading settings.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/SpeedRead",
+    "tags": ["speedread", "rsvp", "productivity", "reading", "tool"],
+    "provenance": ["LIN4CRE siteProjects", "LIN4CRE curatedWork"],
+    "category": "Tool",
+    "technologyStack": ["TypeScript", "Vite", "PDF.js Worker", "JSZip"],
+    "features": ["RSVP reading interface", "Bookshelf", "Typography and reading settings"],
+    "presentation": {
+      "emoji": "⚡",
+      "pinned": false
+    },
+    "liveUrl": "https://lin4cre.github.io/SpeedRead/",
+    "fullDescription": "A browser reading application with RSVP presentation, a bookshelf and reading settings.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at e3c09455ade372a3b13418ec87d67260416f6360. External deployment could not be functionally checked from this restricted network."
+    },
+    "portfolio": {
+      "category": "Web Applications",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "e3c09455ade372a3b13418ec87d67260416f6360",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "problemSolved": "Provides a focused reading interface for text and book content.",
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "documentation": "https://github.com/LIN4CRE/SpeedRead/blob/e3c09455ade372a3b13418ec87d67260416f6360/README.md",
+    "screenshots": [
+      {
+        "src": "/project-captures/speedread.png",
+        "alt": "SpeedRead interface captured from actual repository source served locally; not a public-deployment certification",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "e3c09455ade372a3b13418ec87d67260416f6360"
+      }
+    ]
+  },
+  {
+    "id": "orbit",
+    "slug": "orbit",
+    "type": "project",
+    "name": "Orbit & Earth Observatory",
+    "shortDescription": "An observatory component with orbit calculations and an Earth-oriented visual interface.",
+    "featured": false,
+    "relationship": "original",
+    "category": "Tool",
+    "provenance": ["LIN4CRE curatedWork"],
+    "fullDescription": "An observatory component with orbit calculations and an Earth-oriented visual interface.",
+    "technologyStack": ["React 19", "TypeScript", "Orbital Math", "SVG Projections"],
+    "features": [
+      "Observatory component source",
+      "Orbit calculation utilities",
+      "Upstream component tests"
+    ],
+    "sourceRepository": "https://github.com/LIN4CRE/linacre.site",
+    "documentation": "https://github.com/LIN4CRE/linacre.site/blob/c92645cdc3e2e16b69731fa53c1ff095d111727a/README.md",
+    "statusNote": "Source-reviewed software. Current public deployment and device compatibility have not been independently verified.",
+    "portfolio": {
+      "category": "Experimental Projects",
+      "sourceVerifiedAt": "2026-11-25",
+      "sourceSha": "c92645cdc3e2e16b69731fa53c1ff095d111727a",
+      "reviewNote": "Public repository implementation and documentation inspected. Source review is not deployment, functionality, safety or device-compatibility certification."
+    },
+    "problemSolved": "Explores how satellite and astronomical calculations can be presented in an interactive web view.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Repository source and documentation reviewed at c92645cdc3e2e16b69731fa53c1ff095d111727a. External deployment could not be functionally checked from this restricted network."
+    }
+  },
+  {
+    "id": "android-apk-launch-hub",
+    "slug": "android-apk-launch-hub",
+    "type": "project",
+    "name": "Android APK Launch Hub",
+    "shortDescription": "Quick launcher and download index for David's Android utilities and debloat tools.",
+    "liveUrl": "/tools/apk-hub.html",
+    "category": "Tool",
+    "relationship": "directory",
+    "featured": false,
+    "provenance": ["data.ts TOOLS"]
+  }
+]

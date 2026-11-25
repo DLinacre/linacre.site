@@ -161,7 +161,15 @@
         b.setAttribute('aria-label', 'row ' + (r + 1) + ' column ' + (c + 1));
         b.dataset.r = r;
         b.dataset.c = c;
-        b.addEventListener('click', () => reveal(r, c));
+        let longPressed = false;
+        b.addEventListener('click', () => {
+          if (longPressed) {
+            longPressed = false;
+            return;
+          }
+          if (flagMode) toggleFlag(r, c);
+          else reveal(r, c);
+        });
         b.addEventListener('contextmenu', e => {
           e.preventDefault();
           toggleFlag(r, c);
@@ -183,7 +191,9 @@
         b.addEventListener(
           'touchstart',
           () => {
+            longPressed = false;
             touchTimer = setTimeout(() => {
+              longPressed = true;
               toggleFlag(r, c);
               navigator.vibrate && navigator.vibrate(30);
             }, 400);
@@ -383,13 +393,6 @@
     const s = saved();
     store.write({ ...s, muted });
     if (!muted) tone(660, 0.06);
-  });
-
-  // flag mode overrides tap to flag
-  el.board.addEventListener('click', e => {
-    const b = e.target.closest('.cell');
-    if (!b || !flagMode) return;
-    toggleFlag(+b.dataset.r, +b.dataset.c);
   });
 
   // ---------- boot ----------

@@ -1,4 +1,4 @@
-import type { ProjectKind, SiteProject } from '../data/siteProjects';
+import type { ProjectKind, SiteProject } from '../content/adapters/siteProjects';
 
 export const PROJECT_CATEGORIES: { id: ProjectKind; label: string }[] = [
   { id: 'App', label: 'Everyday apps' },

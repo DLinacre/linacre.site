@@ -54,6 +54,40 @@ await esbuild({
 const { data } = await import(pathToFileURL(dataBundle).href);
 fs.rmSync(dataBundle, { force: true });
 
+// Launch documents keep native navigation/refresh working without game-site chrome.
+for (const game of data.records.filter(
+  r =>
+    r.type === 'game' &&
+    r.status === 'Live' &&
+    (/^\/games\/[a-z0-9-]+\.html$/.test(r.playUrl || '') ||
+      /^\/published\/games\/[a-z0-9-]+\/build\/index\.html$/.test(r.playUrl || '')),
+)) {
+  const route = `/games/${game.slug}/play`;
+  meta.routes[route] = {
+    title: `Play ${game.name} — LIN4CRE`,
+    description: game.shortDescription,
+    canonical: `https://www.linacre.site${route}`,
+    index: false,
+  };
+}
+
+// Detail pages use the same canonical records as the browser, not a parallel route list.
+for (const record of data.records) {
+  const route = `/${record.type === 'game' ? 'games' : 'projects'}/${record.slug}`;
+  meta.routes[route] = {
+    title: `${record.name} — LIN4CRE`,
+    description: record.shortDescription,
+    canonical: `https://www.linacre.site${route}`,
+    index: record.type === 'game' || !!record.portfolio,
+    ...(record.screenshots?.[0]?.src
+      ? { image: `https://www.linacre.site${record.screenshots[0].src}` }
+      : {}),
+    ...(!record.screenshots?.length && record.artwork
+      ? { image: `https://www.linacre.site${record.artwork}` }
+      : {}),
+  };
+}
+
 const SITE = 'https://www.linacre.site';
 const PERSON = {
   '@type': 'Person',
@@ -133,28 +167,24 @@ function breadcrumbFor(route) {
 
 function jsonLdFor(route, m) {
   const graph = [PERSON, ORGANIZATION, WEBSITE];
+  const record = data.records.find(
+    r => `/${r.type === 'game' ? 'games' : 'projects'}/${r.slug}` === route,
+  );
+  if (record)
+    graph.push({
+      '@type': record.type === 'game' ? 'VideoGame' : 'SoftwareSourceCode',
+      '@id': `${SITE}${route}#work`,
+      name: record.name,
+      description: record.shortDescription,
+      url: `${SITE}${route}`,
+      author: { '@id': `${SITE}/#person` },
+      ...(record.sourceRepository ? { codeRepository: record.sourceRepository } : {}),
+      ...(record.screenshots?.length
+        ? { screenshot: record.screenshots.map(s => `${SITE}${s.src}`) }
+        : {}),
+    });
   const bc = breadcrumbFor(route);
   if (bc) graph.push(bc);
-  if (route === '/') {
-    graph.push({
-      '@type': 'ItemList',
-      '@id': `${SITE}/#projects`,
-      name: 'Projects by David Linacre',
-      itemListElement: publicProjects.map((p, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        item: {
-          '@type': p.kind === 'Game' ? 'VideoGame' : 'SoftwareApplication',
-          name: p.name,
-          url: p.url,
-          description: p.blurb,
-          applicationCategory: 'DeveloperApplication',
-          operatingSystem: 'Web',
-          author: { '@id': `${SITE}/#person` },
-        },
-      })),
-    });
-  }
   if (route === '/') {
     graph.push({
       '@type': 'WebPage',
@@ -225,15 +255,17 @@ function headFor(route, m) {
       `<link rel="preload" as="image" href="/profile_avatar.webp" type="image/webp" fetchpriority="high" />`,
     );
   }
-  lines.push(`<script type="application/ld+json">${jsonLdFor(route, m)}</script>`);
+  lines.push(
+    `<script type="application/ld+json">${jsonLdFor(route, m).replaceAll('<', '\\u003c')}</script>`,
+  );
   return lines.join('\n    ');
 }
 
 // ------------------------------------------------- static content snapshots
 const NAV = [
   ['/', 'Home'],
-  ['/tools', 'Tools'],
   ['/games', 'Games'],
+  ['/projects', 'Projects'],
   ['/about', 'About'],
   ['/contact', 'Contact'],
 ];
@@ -270,6 +302,30 @@ const CTA_BLOCK = `
 </p>`;
 
 function pageBody(route) {
+  if (route === '/')
+    return `<h1>Independent software. Original games. Built with purpose.</h1><p>LIN4CRE is an independent software and game studio by David Linacre.</p><p><a href="/games">Explore Games</a> · <a href="/projects">Explore Projects</a></p><h2>Verified browser games</h2>${data.records
+      .filter(r => r.type === 'game' && r.status === 'Live')
+      .slice(0, 2)
+      .map(
+        r =>
+          `<article><h3><a href="/games/${esc(r.slug)}">${esc(r.name)}</a></h3><p>${esc(r.shortDescription)}</p></article>`,
+      )
+      .join('')}<h2>Software from the studio</h2>${data.records
+      .filter(r => r.type === 'project' && r.portfolio && r.featured)
+      .map(
+        r =>
+          `<article><h3><a href="/projects/${esc(r.slug)}">${esc(r.name)}</a></h3><p>${esc(r.shortDescription)}</p></article>`,
+      )
+      .join('')}`;
+  if (route === '/projects')
+    return `<h1>Useful ideas. Real software.</h1><p>Source-reviewed software and applications by LIN4CRE. Source review is not a claim of a working deployment.</p>${data.records
+      .filter(r => r.type === 'project' && r.portfolio)
+      .map(
+        r =>
+          `<article><h2><a href="/projects/${esc(r.slug)}">${esc(r.name)}</a></h2><p>${esc(r.shortDescription)}</p><p>${esc(r.status || 'Status not verified')}</p></article>`,
+      )
+      .join('')}`;
+
   switch (route) {
     case '/': {
       const featured = publicProjects.filter(p => p.featured);
@@ -282,13 +338,13 @@ function pageBody(route) {
       const rows = publicProjects
         .map(
           (p, i) =>
-            `  <li><a href="${esc(p.url)}" rel="noopener">${esc(p.name)}</a> <span class="meta">[${esc(p.kind)}]</span> — ${esc(p.blurb)}</li>`,
+            `  <li><a href="${esc(p.url)}" rel="noopener">${esc(p.name)}</a> <span class="meta">[${esc(p.kind)}] · ${esc(p.statusLabel)}</span> — ${esc(p.blurb)}</li>`,
         )
         .join('\n');
       return `
 <h1>Everything David builds — one search away</h1>
-<p>${publicProjects.length} live apps, AI products, developer tools and games, ordered by usefulness.
-Every project below is real, shipped, and either live on the web or open source on GitHub.
+<p>${publicProjects.length} recorded apps, projects and games. Status and availability vary.
+Source links and recorded builds are not independent functional verification.
 Use the search bar on the page to filter the full catalogue.</p>
 <h2>Featured work</h2>
 <ul>
@@ -339,7 +395,7 @@ ${CTA_BLOCK}`;
     }
 
     case '/games': {
-      const games = data.projects.filter(p => p.kind === 'Game' && p.url);
+      const games = data.projects.filter(p => p.kind === 'Game' && p.playUrl);
       const rows = games
         .map(
           g =>
@@ -347,16 +403,10 @@ ${CTA_BLOCK}`;
         )
         .join('\n');
       return `
-<h1>Playable browser games</h1>
-<p>Free, instant-play games built by David — no install, no account, no tracking.</p>
+<h1>Games and playtesting builds</h1>
+<p>Recorded game links. Status not verified unless explicitly stated; controls and platform requirements vary.</p>
 <ul>
 ${rows}
-</ul>
-<h2>Roblox projects</h2>
-<ul>
-  <li><a href="https://dlinacre.github.io/slime-factory-tycoon/" rel="noopener">Slime Factory Tycoon</a> — open-source Roblox idle-tycoon template with an interactive web demo.</li>
-  <li><a href="https://github.com/DLinacre/BloxCapital" rel="noopener">BloxCapital</a> — Roblox monetization &amp; game-performance suite.</li>
-  <li><a href="https://github.com/DLinacre/Blox-Capital" rel="noopener">Blox-Capital</a> — Roblox money-making extension.</li>
 </ul>
 ${CTA_BLOCK}`;
     }
@@ -437,17 +487,42 @@ function buildShell(route, m) {
   if (html.includes('<!--ROUTE_HEAD-->') && html.includes('<!--/ROUTE_HEAD-->')) {
     html = html.replace(
       /<!--ROUTE_HEAD-->[\s\S]*?<!--\/ROUTE_HEAD-->/,
-      `<!--ROUTE_HEAD-->\n    ${headFor(route, m)}\n${hreflang}    <!--/ROUTE_HEAD-->`
+      `<!--ROUTE_HEAD-->\n    ${headFor(route, m)}\n${hreflang}    <!--/ROUTE_HEAD-->`,
     );
   }
 
   // Inject semantic content into #root for crawlers / noscript
+  const record = data.records.find(
+    r => `/${r.type === 'game' ? 'games' : 'projects'}/${r.slug}` === route,
+  );
+  const launchRecord = data.records.find(
+    r => `/games/${r.slug}/play` === route && r.type === 'game' && r.status === 'Live',
+  );
+  const detailBody = launchRecord
+    ? `<h1>Play ${esc(launchRecord.name)}</h1><a href="${esc(launchRecord.playUrl)}">Open standalone game</a><a href="/games/${esc(launchRecord.slug)}">Exit to game details</a>`
+    : record
+      ? `<h1>${esc(record.name)}</h1><p>${esc(record.shortDescription)}</p><p>${esc(record.status || 'Status not verified')}</p><p>${esc(record.fullDescription || '')}</p><nav aria-label="Project actions">${[
+          [record.status === 'Live' ? record.playUrl : null, 'Play Now'],
+          [record.status === 'Live' ? record.liveUrl : null, 'Launch Web App'],
+          [
+            record.type === 'game' ? record.downloadUrl : record.downloads?.[0]?.url,
+            'Official downloads',
+          ],
+          [record.sourceRepository, 'View source'],
+          [record.documentation, 'Documentation'],
+        ]
+          .filter(([url]) => url)
+          .map(([url, label]) => `<a href="${esc(url)}">${label}</a>`)
+          .join(
+            ' · ',
+          )}</nav>${record.problemSolved ? `<h2>Project context</h2><p>${esc(record.problemSolved)}</p>` : ''}${record.features?.length ? `<h2>Features</h2><ul>${record.features.map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}${record.screenshots?.map(s => `<figure><img src="${esc(s.src)}" alt="${esc(s.alt)}" width="960" loading="lazy" /></figure>`).join('') || ''}`
+      : null;
   const fallback = `
     <noscript>
       <div id="prerender-shell" style="max-width:60rem;margin:0 auto;padding:2rem 1.25rem;color:#e5e5e5;font-family:sans-serif;">
         <span class="brand" style="font-weight:bold;color:#22d3ee;font-size:1.2rem;">linacre.site</span>
         <nav style="display:flex;gap:1rem;margin:1rem 0;">${NAV.map(([href, label]) => `<a href="${href}" style="color:#22d3ee;">${label}</a>`).join('')}</nav>
-        <div id="main-content">${pageBody(route)}</div>
+        <div id="main-content">${detailBody || pageBody(route)}</div>
         <footer style="margin-top:2rem;border-top:1px solid #333;padding-top:1rem;color:#888;">© ${new Date().getFullYear()} David Linacre</footer>
       </div>
     </noscript>
@@ -478,7 +553,12 @@ const isoDate = d => (d && d.length === 10 ? `${d}T00:00:00+00:00` : d);
 const indexable = Object.entries(meta.routes).filter(([, m]) => m.index);
 
 const ROUTE_LASTMOD_SOURCES = {
-  '/': ['route-meta.json', 'src/App.tsx', 'src/data/siteProjects.ts'],
+  '/': [
+    'route-meta.json',
+    'src/App.tsx',
+    'src/content/projects/records.json',
+    'src/content/games/records.json',
+  ],
   '/tools': ['src/components/Tools.tsx', 'src/components/QuickTools.tsx', 'src/data.ts'],
   '/games': ['src/components/Games.tsx', 'public/games/index.html'],
   '/about': ['src/components/About.tsx'],
@@ -491,7 +571,11 @@ const ROUTE_LASTMOD_SOURCES = {
   '/accessibility': ['src/components/AccessibilityStatement.tsx'],
   '/mob-deals': ['src/components/MobDealsSwitcher.tsx'],
   '/pokeguru': ['src/components/PokeGuruExplorer.tsx'],
-  '/ops': ['src/components/OpsHUD.tsx', 'src/data/siteProjects.ts'],
+  '/ops': [
+    'src/components/OpsHUD.tsx',
+    'src/content/projects/records.json',
+    'src/content/games/records.json',
+  ],
 };
 
 function sourceMtimeMs(files = []) {
@@ -607,6 +691,7 @@ function buildLlmsFull() {
       if (p.blurb) push(p.blurb);
       if (p.repo) push(`Source: ${p.repo}`);
       if (p.url) push(`Link: ${p.url}`);
+      push(`Status: ${p.statusLabel}`);
       push('');
     }
   }

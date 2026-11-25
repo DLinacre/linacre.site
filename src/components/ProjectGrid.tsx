@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SITE_PROJECTS, type ProjectKind, type SiteProject } from '../data/siteProjects';
+import { SITE_PROJECTS, type ProjectKind, type SiteProject } from '../content/adapters/siteProjects';
 import { filterProjects, PROJECT_CATEGORIES, projectActions, projectCategory, type AccessFilter } from '../lib/projectLibrary';
 import ProjectActions from './ProjectActions';
 import ProjectDetailModal from './ProjectDetailModal';
@@ -63,11 +63,12 @@ export default function ProjectGrid({ query, setQuery, projects = SITE_PROJECTS,
           <h3 className="font-display text-xl font-semibold">{group.label}</h3>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {group.projects.map(project => (
-              <article key={project.name} aria-label={project.name} className="flex min-w-0 flex-col rounded-2xl border border-border-color bg-[var(--linacre-panel)] p-5">
+              <article key={project.id ?? project.name} aria-label={project.name} className="flex min-w-0 flex-col rounded-2xl border border-border-color bg-[var(--linacre-panel)] p-5">
                 <div className="flex items-start gap-3">
                   <span aria-hidden="true" className="text-2xl">{project.emoji || '📦'}</span>
                   <h4 className="min-w-0 break-words font-display text-lg font-bold">{project.name}</h4>
                 </div>
+                <p className="mt-2 text-xs text-muted-foreground">{project.statusLabel ?? 'Status not verified'}</p>
                 {project.pinned && <p className="mt-2 text-xs font-semibold text-muted-foreground">Pinned</p>}
                 <p className="mb-5 mt-3 flex-1 text-sm leading-6 text-muted-foreground">{project.blurb}</p>
                 {projectCategory(project) !== 'Private' && projectActions(project).every(action => action.kind === 'source') && <p className="mb-3 text-xs text-muted-foreground">Source only — no app or download recorded</p>}

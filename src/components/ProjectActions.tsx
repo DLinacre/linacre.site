@@ -1,5 +1,5 @@
 import { ArrowUpRight, Download, Code2 } from 'lucide-react';
-import type { SiteProject } from '../data/siteProjects';
+import type { SiteProject } from '../content/adapters/siteProjects';
 import { projectActions, projectCategory } from '../lib/projectLibrary';
 
 export default function ProjectActions({ project }: { project: SiteProject }) {

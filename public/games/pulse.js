@@ -3,7 +3,7 @@
 
   const PADS = 9;
   const KEY = 'linacre.pulse.v1';
-  const BASE = 'https://linacre.site/games/pulse';
+  const BASE = 'https://linacre.site/games/pulse.html';
   const COLOURS = [
     '#73D0FF',
     '#FFCC66',

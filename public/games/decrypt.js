@@ -6,7 +6,7 @@
     TRIES = 8;
   const KEY = 'linacre.decrypt.v1';
   const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
-  const BASE = 'https://linacre.site/games/decrypt';
+  const BASE = 'https://linacre.site/games/decrypt.html';
 
   const hashStr = s => {
     let h = 2166136261;

@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#05060a">
+<title>AFTERGLOW</title>
+<!--
+  ════════════════════════════════════════════════════════════════════════
+   AFTERGLOW — paint with long-exposure light.
+   Single self-contained file. Just open it. No build, no server needed.
+
+   HOW TO EXTEND (everything is a registry — add one entry, done):
+     • New shape   → push to SHAPES  (curated) or add a PROC_GENERATORS fn
+     • New brush    → push to BRUSHES  ({id,name,connected,make})
+     • New palette  → push to PALETTES ({name,lo,hi,speed,cycle})
+     • New tip      → push a string to TIPS
+   See AFTERGLOW_DEVGUIDE.md for the full map.
+  ════════════════════════════════════════════════════════════════════════
+-->
+<style>
+  :root { --ink:#eef3ff; --acc:#8fb2ff; }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; overflow:hidden; background:#05060a; color:var(--ink);
+    font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, -apple-system, sans-serif;
+    touch-action:none; -webkit-user-select:none; user-select:none; }
+  #stage { position:fixed; inset:0; }
+  canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+
+  /* ---------- HUD ---------- */
+  .hud { position:fixed; left:0; right:0; top:0; padding:12px 14px calc(12px + env(safe-area-inset-top));
+    display:flex; justify-content:space-between; align-items:flex-start; pointer-events:none; z-index:5;
+    font-variant-numeric:tabular-nums; gap:8px; }
+  .pill { background:rgba(12,16,28,.55); backdrop-filter:blur(8px);
+    border:1px solid rgba(150,180,255,.14); border-radius:14px; padding:8px 12px; line-height:1.15; }
+  .lbl { font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; opacity:.55; }
+  .val { font-size:16px; font-weight:600; }
+  .target .val { color:#bfe0ff; }
+  .iconbtn { pointer-events:auto; width:42px; height:42px; border-radius:13px; display:flex; align-items:center;
+    justify-content:center; font-size:19px; background:rgba(12,16,28,.55); backdrop-filter:blur(8px);
+    border:1px solid rgba(150,180,255,.16); cursor:pointer; }
+  .iconbtn:active { transform:scale(.93); }
+
+  /* ---------- bottom toolbar ---------- */
+  .toolbar { position:fixed; left:0; right:0; bottom:0; padding:12px 14px calc(14px + env(safe-area-inset-bottom));
+    display:flex; gap:9px; justify-content:center; align-items:center; z-index:5; }
+  button { pointer-events:auto; font-family:inherit; font-size:15px; font-weight:600; color:var(--ink);
+    background:rgba(18,24,40,.6); backdrop-filter:blur(8px);
+    border:1px solid rgba(150,180,255,.20); border-radius:16px; padding:13px 18px; cursor:pointer;
+    transition:transform .08s ease, background .15s ease, border-color .15s; }
+  button:active { transform:scale(.95); }
+  button.primary { background:linear-gradient(135deg,#3b6dff,#8f5bff); border-color:transparent;
+    box-shadow:0 6px 24px rgba(90,110,255,.35); }
+  button.compact { padding:13px 15px; font-size:18px; line-height:1; min-width:48px; }
+  button:disabled { opacity:.35; cursor:default; }
+  button:disabled:active { transform:none; }
+  .hidden { display:none !important; }
+
+  /* range slider (brush size) */
+  .rangerow { display:flex; align-items:center; gap:12px; padding:8px 0 2px; }
+  .rangerow .rv { font-size:13px; opacity:.7; min-width:74px; text-align:right; font-variant-numeric:tabular-nums; }
+  input[type=range] { -webkit-appearance:none; appearance:none; flex:1; height:6px; border-radius:6px;
+    background:rgba(120,140,200,.28); outline:none; pointer-events:auto; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:22px; height:22px;
+    border-radius:50%; background:linear-gradient(135deg,#7fb2ff,#c79bff); cursor:pointer;
+    box-shadow:0 2px 10px rgba(120,120,255,.5); }
+  input[type=range]::-moz-range-thumb { width:22px; height:22px; border:none; border-radius:50%;
+    background:linear-gradient(135deg,#7fb2ff,#c79bff); cursor:pointer; }
+
+  /* ---------- overlays ---------- */
+  .overlay { position:fixed; inset:0; z-index:20; display:flex; align-items:center; justify-content:center;
+    padding:22px; background:radial-gradient(120% 120% at 50% 30%, rgba(20,26,46,.72), rgba(4,5,10,.93));
+    backdrop-filter:blur(6px); text-align:center; }
+  .card { max-width:430px; width:100%; max-height:92vh; overflow-y:auto; }
+  .logo { font-size:38px; font-weight:800; letter-spacing:.18em;
+    background:linear-gradient(120deg,#7fb2ff,#c79bff 60%,#ff9bd0);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 0 22px rgba(130,140,255,.45)); }
+  .tag { font-size:12px; letter-spacing:.30em; text-transform:uppercase; opacity:.6; margin-top:6px; }
+  .desc { font-size:14.5px; line-height:1.6; opacity:.87; margin:18px auto 6px; max-width:350px; }
+  .desc b { color:#cfe2ff; font-weight:700; }
+  .how { text-align:left; max-width:330px; margin:12px auto 20px; font-size:13.5px; line-height:1.65; opacity:.82; }
+  .how li { margin-left:18px; margin-bottom:2px; }
+  .big-score { font-size:64px; font-weight:800; line-height:1; letter-spacing:-.02em; }
+  .big-score span { font-size:25px; opacity:.6; }
+  .stars { font-size:38px; letter-spacing:8px; margin:6px 0 2px; height:44px; color:#ffd67a;
+    text-shadow:0 0 18px rgba(255,200,90,.5); }
+  .sub { font-size:14px; opacity:.72; margin:2px 0 10px; }
+  .feedback { font-size:13.5px; line-height:1.55; opacity:.9; background:rgba(80,110,200,.14);
+    border:1px solid rgba(140,170,255,.18); border-radius:14px; padding:12px 14px; margin:6px auto 18px; max-width:340px; }
+  .feedback b { color:#ffe6a8; }
+  .btnrow { display:flex; gap:9px; justify-content:center; flex-wrap:wrap; }
+  .tiplink { margin-top:16px; font-size:13px; opacity:.75; }
+  .tiplink a { color:#bfe0ff; text-decoration:underline; text-underline-offset:2px; }
+
+  /* ---------- settings panel ---------- */
+  .panel { position:fixed; inset:0; z-index:25; display:flex; align-items:flex-start; justify-content:center;
+    padding:64px 16px 16px; background:rgba(4,5,10,.6); backdrop-filter:blur(7px); overflow-y:auto; }
+  .panel .card { background:rgba(14,18,32,.92); border:1px solid rgba(150,180,255,.16);
+    border-radius:20px; padding:20px; text-align:left; }
+  .panel h2 { font-size:13px; letter-spacing:.2em; text-transform:uppercase; opacity:.6; margin:16px 0 9px; }
+  .panel h2:first-child { margin-top:0; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip { pointer-events:auto; font-size:13.5px; font-weight:600; padding:9px 13px; border-radius:12px;
+    background:rgba(30,38,60,.7); border:1px solid rgba(150,180,255,.16); cursor:pointer; opacity:.8;
+    transition:all .12s; }
+  .chip .cn { font-size:10.5px; opacity:.6; font-weight:500; display:block; margin-top:1px; }
+  .chip.active { background:linear-gradient(135deg,#3b6dff,#8f5bff); border-color:transparent; opacity:1;
+    box-shadow:0 4px 16px rgba(90,110,255,.35); }
+  .chip.locked { opacity:.5; cursor:not-allowed; }
+  .chip.locked .cn { color:#ffd67a; opacity:.85; }
+  .chip.locked:active { transform:none; }
+
+  /* gallery */
+  .galgrid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:6px; }
+  .galgrid img { width:100%; border-radius:12px; border:1px solid rgba(150,180,255,.16); display:block;
+    aspect-ratio:9/16; object-fit:cover; background:#05060a; }
+  .galcell { position:relative; }
+  .galcell .del { position:absolute; top:6px; right:6px; width:26px; height:26px; border-radius:8px;
+    background:rgba(8,10,18,.75); border:1px solid rgba(255,140,140,.4); color:#ffb4b4; font-size:14px;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; pointer-events:auto; }
+  .galempty { opacity:.6; font-size:14px; text-align:center; padding:26px 6px; line-height:1.6; }
+  .toggle { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 0;
+    border-bottom:1px solid rgba(150,180,255,.08); font-size:14.5px; }
+  .switch { pointer-events:auto; width:48px; height:28px; border-radius:14px; background:rgba(60,70,100,.7);
+    position:relative; cursor:pointer; transition:background .15s; flex:none; }
+  .switch::after { content:""; position:absolute; top:3px; left:3px; width:22px; height:22px; border-radius:50%;
+    background:#dfe7ff; transition:left .15s; }
+  .switch.on { background:linear-gradient(135deg,#3b6dff,#8f5bff); }
+  .switch.on::after { left:23px; }
+  .panelclose { width:100%; margin-top:18px; text-align:center; }
+
+  /* ---------- floating hint ---------- */
+  .hint { position:fixed; left:50%; top:calc(50% - 6px); transform:translate(-50%,-50%);
+    z-index:4; pointer-events:none; text-align:center; opacity:0; transition:opacity .5s; max-width:80%; }
+  .hint.show { opacity:.9; }
+  .hint .t1 { font-size:17px; font-weight:700; color:#dbe8ff; }
+  .hint .t2 { font-size:12.5px; opacity:.7; margin-top:4px; }
+
+  /* tiny toast */
+  .toast { position:fixed; left:50%; bottom:calc(84px + env(safe-area-inset-bottom)); transform:translateX(-50%);
+    z-index:8; background:rgba(20,26,44,.9); border:1px solid rgba(150,180,255,.2); border-radius:12px;
+    padding:9px 15px; font-size:13.5px; opacity:0; transition:opacity .3s, transform .3s; pointer-events:none; }
+  .toast.show { opacity:1; transform:translate(-50%,-6px); }
+
+  /* streak pill — floats just under the HUD */
+  .streakpill { position:fixed; left:50%; top:calc(70px + env(safe-area-inset-top)); transform:translateX(-50%);
+    z-index:6; font-size:12.5px; font-weight:600; color:#ffd9a0; padding:6px 12px;
+    background:rgba(40,26,12,.6); border-color:rgba(255,180,90,.28); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="bg"></canvas>
+  <canvas id="paint"></canvas>
+  <canvas id="fx"></canvas>
+</div>
+
+<!-- HUD -->
+<div class="hud">
+  <div class="iconbtn" id="btnSettings">⚙</div>
+  <div class="pill target" style="text-align:center"><div class="lbl" id="hMode">Photo 1</div><div class="val" id="hTarget">—</div></div>
+  <div class="pill" style="text-align:right"><div class="lbl">Best</div><div class="val" id="hBest">0</div></div>
+</div>
+<div class="pill streakpill hidden" id="streakPill"><span id="streakVal">0</span>🔥 streak</div>
+
+<div class="hint" id="hint"><div class="t1"></div><div class="t2"></div></div>
+<div class="toast" id="toast"></div>
+
+<!-- bottom toolbars (swap by mode) -->
+<div class="toolbar" id="barGuided">
+  <button class="compact" id="btnUndoG" title="Undo (Z)">↶</button>
+  <button class="compact" id="btnRedoG" title="Redo (X)">↷</button>
+  <button id="btnRetake">Retake</button>
+  <button class="primary" id="btnDevelop">Develop&nbsp;Photo</button>
+</div>
+<div class="toolbar hidden" id="barFree">
+  <button class="compact" id="btnUndoF" title="Undo (Z)">↶</button>
+  <button class="compact" id="btnRedoF" title="Redo (X)">↷</button>
+  <button id="btnClear">Clear</button>
+  <button class="primary" id="btnSaveFree">Save&nbsp;Photo</button>
+  <button id="btnExitFree">Exit</button>
+</div>
+
+<!-- Start screen -->
+<div class="overlay" id="startScreen">
+  <div class="card">
+    <div class="logo">AFTERGLOW</div>
+    <div class="tag">paint with long-exposure light</div>
+    <p class="desc">You don't move a character — <b>you leave light on.</b> Hold the shutter open and steer glowing lights to burn shimmering trails onto a night photo.</p>
+    <ul class="how">
+      <li><b>Hold &amp; drag</b> anywhere to open the shutter and paint.</li>
+      <li>Fill the faint, pulsing <b>guide shape</b> (a coach shows you the stroke order).</li>
+      <li>Made a mistake? <b>Undo</b> ↶ any stroke — 10 brushes await in ⚙.</li>
+      <li>Tap <b>Develop</b> to score. Photos are endless — each one is new.</li>
+    </ul>
+    <div class="btnrow">
+      <button class="primary" id="btnStart">Start Shooting</button>
+      <button id="btnDaily">Daily Challenge</button>
+      <button id="btnFree">Free Studio</button>
+      <button id="btnGallery">Gallery</button>
+    </div>
+    <p class="tiplink">🖊️ No stylus? <a href="https://dlinacre.github.io/life-hacks/#/hack/diy-capacitive-stylus" target="_blank" rel="noopener">Make the perfect AFTERGLOW pen</a> in 10 minutes.</p>
+  </div>
+</div>
+
+<!-- Result screen -->
+<div class="overlay hidden" id="resultScreen">
+  <div class="card">
+    <div class="stars" id="rStars"></div>
+    <div class="big-score" id="rScore">0<span>%</span></div>
+    <div class="sub" id="rMsg">exposure developed</div>
+    <div class="feedback" id="rFeedback"></div>
+    <div class="sub hidden" id="rUnlock" style="color:#ffd67a;font-weight:700"></div>
+    <div class="btnrow">
+      <button id="btnRedo">Reshoot</button>
+      <button id="btnKeep">Keep</button>
+      <button id="btnSaveResult">Save</button>
+      <button id="btnShareResult">Share</button>
+      <button class="primary" id="btnNext">Next Photo</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings panel -->
+<div class="panel hidden" id="settingsPanel">
+  <div class="card">
+    <h2>Brush</h2>
+    <div class="chips" id="brushChips"></div>
+    <h2>Brush size</h2>
+    <div class="rangerow"><input type="range" id="szRange" min="55" max="180" value="100"><span class="rv" id="szVal">100%</span></div>
+    <h2>Palette</h2>
+    <div class="chips" id="paletteChips"></div>
+    <h2>Coaching</h2>
+    <div class="toggle"><span>Show guide shape</span><div class="switch on" id="swGuide"></div></div>
+    <div class="toggle"><span>Trace coach (learn stroke order)</span><div class="switch on" id="swCoach"></div></div>
+    <h2>Sound</h2>
+    <div class="toggle"><span>Ambient music &amp; painting chimes</span><div class="switch on" id="swSound"></div></div>
+    <h2>Progress</h2>
+    <div class="toggle"><span>Lifetime stars earned</span><span id="totalStars" style="color:#ffd67a;font-weight:700">0 ★</span></div>
+    <div class="toggle" style="border:none"><span>Next unlock</span><span id="nextUnlock" style="opacity:.8">—</span></div>
+    <div class="panelclose"><button class="primary" id="btnCloseSettings">Done</button></div>
+  </div>
+</div>
+
+<!-- Gallery -->
+<div class="panel hidden" id="galleryPanel">
+  <div class="card">
+    <h2 style="margin-top:0">Gallery <span id="galCount" style="opacity:.5;font-weight:500"></span></h2>
+    <div id="galBody"></div>
+    <div class="panelclose"><button class="primary" id="btnCloseGallery">Done</button></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  /* ═══════════════════════════════ CONFIG ═══════════════════════════════ */
+  const CONFIG = {
+    guideBoxFrac: 0.62,      // guide fits in min(W,H)*this
+    scoreCell: 6,            // px grid used for scoring
+    curatedLevels: 6,        // first N photos are hand-picked, then procedural forever
+    litThreshold: 42,        // luminance considered "painted"
+    coverageGain: 1.06,      // how generously coverage maps to %
+    spillPenalty: 0.26,      // penalty weight for painting outside the guide
+    autoCoachLevels: 3,      // trace coach auto-plays for the first N photos
+  };
+
+  /* ═══════════════════════ CANVAS / GLOBALS ═════════════════════════════ */
+  const bg = document.getElementById('bg'), paint = document.getElementById('paint'), fx = document.getElementById('fx');
+  const bgx = bg.getContext('2d'), px = paint.getContext('2d'), fxx = fx.getContext('2d');
+  let W = 0, H = 0, DPR = 1, DIM = 0;
+
+  /* ═══════════════════════ GLOW SPRITE ATLAS ════════════════════════════ */
+  const HUES = 36, sprites = [];
+  (function buildSprites() {
+    const R = 46;
+    for (let i = 0; i < HUES; i++) {
+      const c = document.createElement('canvas'); c.width = c.height = R * 2;
+      const g = c.getContext('2d'), hue = i / HUES * 360;
+      const grad = g.createRadialGradient(R, R, 0, R, R, R);
+      grad.addColorStop(0.0, `hsla(${hue},100%,90%,0.95)`);
+      grad.addColorStop(0.22, `hsla(${hue},100%,72%,0.55)`);
+      grad.addColorStop(0.55, `hsla(${hue},100%,56%,0.16)`);
+      grad.addColorStop(1.0, `hsla(${hue},100%,50%,0)`);
+      g.fillStyle = grad; g.fillRect(0, 0, R * 2, R * 2);
+      sprites.push(c);
+    }
+  })();
+  function stamp(x, y, size, hueDeg) {
+    let idx = (hueDeg / 360 * HUES) | 0; idx = ((idx % HUES) + HUES) % HUES;
+    px.drawImage(sprites[idx], x - size / 2, y - size / 2, size, size);
+  }
+  function stampLine(x0, y0, x1, y1, size, hueDeg) {
+    const d = Math.hypot(x1 - x0, y1 - y0), steps = Math.max(1, Math.ceil(d / (size * 0.18)));
+    for (let i = 0; i <= steps; i++) { const t = i / steps; stamp(x0 + (x1 - x0) * t, y0 + (y1 - y0) * t, size, hueDeg); }
+  }
+
+  /* ═══════════════════════════ AUDIO ════════════════════════════════════ */
+  // Generative ambient pad + a soft "chime" that follows your painting speed.
+  // Everything is synthesised (no files). Lazily created on first user gesture.
+  const AUDIO = (() => {
+    let ctx=null, master=null, padGain=null, ready=false, enabled=true;
+    const PENT = [0,3,5,7,10,12,15];          // pentatonic scale (semitones)
+    const ROOT = 220;                          // A3
+    const midi = s => ROOT * Math.pow(2, s/12);
+    let padVoices=[], lastChime=0;
+    function init(){
+      if (ctx) return;
+      try {
+        const AC = window.AudioContext || window.webkitAudioContext; if(!AC) return;
+        ctx = new AC();
+        master = ctx.createGain(); master.gain.value = 0.0; master.connect(ctx.destination);
+        // gentle reverb-ish: a lowpass on the master bus
+        const lp = ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=2600;
+        master.disconnect(); master.connect(lp); lp.connect(ctx.destination);
+        padGain = ctx.createGain(); padGain.gain.value = 0.10; padGain.connect(master);
+        // three detuned sine "pad" voices forming a soft chord
+        [0,7,12].forEach((semi,i)=>{
+          const o=ctx.createOscillator(); o.type='sine'; o.frequency.value=midi(semi-12);
+          const g=ctx.createGain(); g.gain.value = i===0?0.5:0.28;
+          const lfo=ctx.createOscillator(); lfo.type='sine'; lfo.frequency.value=0.05+i*0.03;
+          const lg=ctx.createGain(); lg.gain.value=1.5; lfo.connect(lg); lg.connect(o.detune);
+          o.connect(g); g.connect(padGain); o.start(); lfo.start(); padVoices.push({o,g});
+        });
+        ready=true;
+      } catch(e){ /* audio unavailable */ }
+    }
+    function resume(){ if(ctx && ctx.state==='suspended') ctx.resume(); }
+    function setEnabled(on){ enabled=on; if(master) master.gain.setTargetAtTime(on?0.9:0.0, ctx.currentTime, 0.4); }
+    // called while painting; speed 0..1 and y 0..1 shape the chime
+    function paintTick(speed, y, now){
+      if(!ready||!enabled||!ctx) return;
+      if (now - lastChime < 90 - speed*55) return;         // faster painting = denser chimes
+      lastChime = now;
+      const deg = PENT[Math.floor((1-y)*(PENT.length-1)+0.5)] + 12*(speed>0.6?1:0);
+      const f = midi(deg);
+      const o=ctx.createOscillator(); o.type = speed>0.5?'triangle':'sine'; o.frequency.value=f;
+      const g=ctx.createGain(); const t=ctx.currentTime;
+      const vol = 0.05 + speed*0.10;
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t+0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, t+0.6);
+      o.connect(g); g.connect(master); o.start(t); o.stop(t+0.65);
+    }
+    function chord(kind){ // small feedback stingers
+      if(!ready||!enabled||!ctx) return; const t=ctx.currentTime;
+      const set = kind==='win'?[0,4,7,12]:kind==='next'?[0,5,7]:[0,3,7];
+      set.forEach((semi,i)=>{ const o=ctx.createOscillator(); o.type='sine'; o.frequency.value=midi(semi);
+        const g=ctx.createGain(); g.gain.setValueAtTime(0,t+i*0.06);
+        g.gain.linearRampToValueAtTime(0.10,t+i*0.06+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+i*0.06+0.9);
+        o.connect(g); g.connect(master); o.start(t+i*0.06); o.stop(t+i*0.06+0.95); });
+    }
+    return { init, resume, setEnabled, paintTick, chord, get on(){return enabled;}, get ready(){return ready;} };
+  })();
+
+  /* ═══════════════════════════ PALETTES ═════════════════════════════════ */
+  // hue(phase) → degrees. cycle=true sweeps the whole range; else oscillates within it.
+  const PALETTES = [
+    { name: 'Aurora', lo: 130, hi: 230, speed: 0.9, cycle: false },
+    { name: 'Ember',  lo: 8,   hi: 48,  speed: 1.1, cycle: false },
+    { name: 'Ice',    lo: 185, hi: 265, speed: 0.8, cycle: false },
+    { name: 'Neon',   lo: 0,   hi: 360, speed: 0.35, cycle: true },
+    { name: 'Gold',   lo: 40,  hi: 56,  speed: 1.0, cycle: false },
+    { name: 'Rose',   lo: 300, hi: 350, speed: 0.9, cycle: false },
+    { name: 'Sunset', lo: 350, hi: 40,  speed: 1.0, cycle: false },
+    { name: 'Lagoon', lo: 150, hi: 200, speed: 0.85, cycle: false },
+    { name: 'Candy',  lo: 280, hi: 340, speed: 1.2, cycle: false },
+    { name: 'Toxic',  lo: 80,  hi: 160, speed: 1.0, cycle: false },
+    { name: 'Mono',   lo: 210, hi: 214, speed: 0.6, cycle: false },
+    { name: 'Prism',  lo: 0,   hi: 360, speed: 0.7, cycle: true },
+  ];
+  function paletteHue(pal, phase) {
+    if (pal.cycle) return pal.lo + ((phase * pal.speed) % 1) * (pal.hi - pal.lo);
+    return pal.lo + (pal.hi - pal.lo) * (0.5 + 0.5 * Math.sin(phase * pal.speed * 6.2832));
+  }
+
+  /* ═══════════════════════════ BRUSHES ══════════════════════════════════ */
+  // A brush instance: reset(); pens(s) → [{x,y,size,hueDeg}]  (stable count while connected)
+  // s = {x,y,dt,t,phase,pal,dim}
+  const BRUSHES = [
+    { id: 'comet', name: 'Comet', cn: 'steer + moons', connected: true, make: () => {
+        const N = 4; const ang = Array.from({ length: N }, (_, i) => i / N * 6.2832);
+        const spin = Array.from({ length: N }, (_, i) => (0.9 + i * 0.35) * (i % 2 ? -1 : 1));
+        return {
+          reset() {}, 
+          pens(s) {
+            const out = [{ x: s.x, y: s.y, size: s.dim * 0.078, hueDeg: paletteHue(s.pal, s.phase) }];
+            const rad = s.dim * 0.055;
+            for (let i = 0; i < N; i++) {
+              ang[i] += spin[i] * s.dt * 0.004;
+              out.push({ x: s.x + Math.cos(ang[i]) * rad * (0.7 + i * 0.28),
+                         y: s.y + Math.sin(ang[i]) * rad * (0.7 + i * 0.28),
+                         size: s.dim * 0.05, hueDeg: paletteHue(s.pal, s.phase + ang[i] / 6.2832 * 0.4) });
+            }
+            return out;
+          }
+        };
+      }},
+    { id: 'ribbon', name: 'Ribbon', cn: 'smooth wide trail', connected: true, make: () => ({
+        reset() {},
+        pens(s) { return [{ x: s.x, y: s.y, size: s.dim * 0.12, hueDeg: paletteHue(s.pal, s.phase) }]; }
+      })},
+    { id: 'mirror', name: 'Mirror', cn: '2-fold symmetry', connected: true, make: () => {
+        let a = 0, b = Math.PI;
+        return {
+          reset() {},
+          pens(s) {
+            a += 2.6 * s.dt * 0.004; b -= 2.6 * s.dt * 0.004; const r = s.dim * 0.045;
+            const h = paletteHue(s.pal, s.phase);
+            return [
+              { x: s.x, y: s.y, size: s.dim * 0.062, hueDeg: h },
+              { x: W - s.x, y: s.y, size: s.dim * 0.062, hueDeg: paletteHue(s.pal, s.phase + 0.5) },
+              { x: s.x + Math.cos(a) * r, y: s.y + Math.sin(a) * r, size: s.dim * 0.04, hueDeg: h },
+              { x: W - s.x - Math.cos(a) * r, y: s.y + Math.sin(a) * r, size: s.dim * 0.04, hueDeg: paletteHue(s.pal, s.phase + 0.5) },
+            ];
+          }
+        };
+      }},
+    { id: 'kaleido', name: 'Kaleidoscope', cn: 'radial symmetry', connected: true, make: () => {
+        const N = 6;
+        return {
+          reset() {},
+          pens(s) {
+            const cx = W / 2, cy = H / 2, dx = s.x - cx, dy = s.y - cy, out = [];
+            for (let k = 0; k < N; k++) {
+              const rot = k / N * 6.2832, c = Math.cos(rot), sn = Math.sin(rot);
+              out.push({ x: cx + dx * c - dy * sn, y: cy + dx * sn + dy * c,
+                         size: s.dim * 0.05, hueDeg: paletteHue(s.pal, s.phase + k / N) });
+              // mirrored copy for a true kaleidoscope
+              out.push({ x: cx + dx * c + dy * sn, y: cy - dx * sn + dy * c,
+                         size: s.dim * 0.05, hueDeg: paletteHue(s.pal, s.phase + k / N + 0.05) });
+            }
+            return out;
+          }
+        };
+      }},
+    { id: 'spark', name: 'Sparkler', cn: 'scattered dabs', connected: false, make: () => ({
+        reset() {},
+        pens(s) {
+          const out = [{ x: s.x, y: s.y, size: s.dim * 0.05, hueDeg: paletteHue(s.pal, s.phase) }];
+          for (let i = 0; i < 5; i++) { const a = Math.random() * 6.2832, r = Math.random() * s.dim * 0.06;
+            out.push({ x: s.x + Math.cos(a) * r, y: s.y + Math.sin(a) * r, size: s.dim * 0.025,
+                       hueDeg: paletteHue(s.pal, s.phase + Math.random()) }); }
+          return out;
+        }
+      })},
+    { id: 'neon', name: 'Neon Pen', cn: 'fine bright line', connected: true, make: () => ({
+        reset() {},
+        pens(s) { return [{ x: s.x, y: s.y, size: s.dim * 0.03, hueDeg: paletteHue(s.pal, s.phase) }]; }
+      })},
+    { id: 'ink', name: 'Ink', cn: 'pressure by speed', connected: true, make: () => {
+        let w = 0.09;
+        return {
+          reset() { w = 0.09; },
+          pens(s) {
+            // slow = thick, fast = thin (like a real brush pen). s.spd is 0..1
+            const target = 0.13 - Math.min(1, s.spd) * 0.10;
+            w += (target - w) * 0.25;
+            return [{ x: s.x, y: s.y, size: s.dim * w, hueDeg: paletteHue(s.pal, s.phase) }];
+          }
+        };
+      }},
+    { id: 'chroma', name: 'Chroma', cn: 'rainbow split', connected: true, make: () => {
+        let a = 0;
+        return {
+          reset() { a = 0; },
+          pens(s) {
+            a += 2.0 * s.dt * 0.004; const o = s.dim * 0.025;
+            return [
+              { x: s.x + Math.cos(a) * o,        y: s.y + Math.sin(a) * o,        size: s.dim * 0.05, hueDeg: 0   + s.phase * 360 },
+              { x: s.x + Math.cos(a + 2.09) * o, y: s.y + Math.sin(a + 2.09) * o, size: s.dim * 0.05, hueDeg: 120 + s.phase * 360 },
+              { x: s.x + Math.cos(a + 4.19) * o, y: s.y + Math.sin(a + 4.19) * o, size: s.dim * 0.05, hueDeg: 240 + s.phase * 360 },
+            ];
+          }
+        };
+      }},
+    { id: 'trine', name: 'Trine', cn: '3-fold symmetry', connected: true, make: () => ({
+        reset() {},
+        pens(s) {
+          const cx = W / 2, cy = H / 2, dx = s.x - cx, dy = s.y - cy, out = [];
+          for (let k = 0; k < 3; k++) { const rot = k / 3 * 6.2832, c = Math.cos(rot), sn = Math.sin(rot);
+            out.push({ x: cx + dx * c - dy * sn, y: cy + dx * sn + dy * c, size: s.dim * 0.06,
+                       hueDeg: paletteHue(s.pal, s.phase + k / 3) }); }
+          return out;
+        }
+      })},
+    { id: 'bloom', name: 'Bloom', cn: 'petals of light', connected: true, make: () => {
+        const P = 5, ang = Array.from({ length: P }, (_, i) => i / P * 6.2832);
+        return {
+          reset() {},
+          pens(s) {
+            const out = [{ x: s.x, y: s.y, size: s.dim * 0.05, hueDeg: paletteHue(s.pal, s.phase) }];
+            const r = s.dim * 0.05;
+            for (let i = 0; i < P; i++) { ang[i] += 1.4 * s.dt * 0.004;
+              out.push({ x: s.x + Math.cos(ang[i]) * r, y: s.y + Math.sin(ang[i]) * r, size: s.dim * 0.035,
+                         hueDeg: paletteHue(s.pal, s.phase + i / P) }); }
+            return out;
+          }
+        };
+      }},
+  ];
+
+  /* ═══════════════════════════ UNLOCKS ══════════════════════════════════ */
+  // Lifetime stars needed to unlock each brush / palette. Anything not listed is free.
+  // To gate new content, just add its id/name here with a star cost.
+  const BRUSH_UNLOCKS = { neon:10, ink:25, chroma:45, trine:70, bloom:100 };
+  const PALETTE_UNLOCKS = { Sunset:15, Lagoon:30, Candy:55, Toxic:85, Mono:120, Prism:150 };
+  const brushCost   = id   => BRUSH_UNLOCKS[id]     || 0;
+  const paletteCost = name => PALETTE_UNLOCKS[name] || 0;
+  const brushLocked   = id   => S.totalStars < brushCost(id);
+  const paletteLocked = name => S.totalStars < paletteCost(name);
+
+  /* ═══════════════════════════ SHAPES ═══════════════════════════════════ */
+  // A generator returns strokes: [ [{x,y}...], ... ] in normalized units (~ -0.5..0.5).
+  function circle(){ return () => { const p=[]; for(let a=0;a<=6.34;a+=0.12) p.push({x:Math.cos(a)*0.34,y:Math.sin(a)*0.34}); return [p]; }; }
+  function heart(){ return () => { const p=[]; for(let t=0;t<=6.34;t+=0.06){ const x=16*Math.pow(Math.sin(t),3);
+      const y=13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t); p.push({x:x/34,y:-y/34}); } return [p]; }; }
+  function starShape(n){ return () => { const p=[],step=Math.PI/n; for(let i=0;i<=n*2;i++){ const r=(i%2===0)?0.42:0.17,a=-Math.PI/2+i*step;
+      p.push({x:Math.cos(a)*r,y:Math.sin(a)*r}); } return [p]; }; }
+  function figure8(){ return () => { const p=[]; for(let t=0;t<=6.34;t+=0.08) p.push({x:Math.sin(t)*0.40,y:Math.sin(t)*Math.cos(t)*0.44}); return [p]; }; }
+  function flower(petals){ return () => { const p=[]; for(let t=0;t<=6.34;t+=0.05){ const rr=0.20+Math.abs(0.24*Math.cos(petals*t));
+      p.push({x:Math.cos(t)*rr,y:Math.sin(t)*rr}); } return [p]; }; }
+  function constellation(pts,edges){ return () => edges.map(([a,b]) => [{x:pts[a][0],y:pts[a][1]},{x:pts[b][0],y:pts[b][1]}]); }
+
+  const SHAPES = [   // curated onboarding order (indices 0..curatedLevels-1 used first)
+    { name:'Ring',   gen: circle() },
+    { name:'Heart',  gen: heart() },
+    { name:'Nova',   gen: starShape(5) },
+    { name:'Orion',  gen: constellation(
+        [[-0.28,-0.42],[0.0,-0.34],[0.26,-0.40],[-0.34,0.10],[0.0,-0.02],[0.30,0.14],[-0.22,0.44],[0.24,0.42]],
+        [[0,1],[1,2],[0,3],[2,5],[3,4],[4,5],[3,6],[5,7]]) },
+    { name:'Infinity', gen: figure8() },
+    { name:'Blossom',  gen: flower(6) },
+  ];
+
+  /* --- procedural generators (endless). Each takes a seeded rng, returns {name,strokes} --- */
+  function mulberry32(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15,1|seed);
+    t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+  function rint(rng,a,b){ return a+Math.floor(rng()*(b-a+1)); }
+
+  const PROC_GENERATORS = [
+    // Rose / rhodonea curve
+    (rng) => { const k=rint(rng,2,7), a=0.42; const p=[]; for(let t=0;t<=6.34*(k%2?1:2)+0.05;t+=0.03){ const r=a*Math.cos(k*t);
+        p.push({x:Math.cos(t)*r,y:Math.sin(t)*r}); } return { name:`Rose·${k}`, strokes:[p] }; },
+    // Lissajous
+    (rng) => { const A=rint(rng,2,5), B=rint(rng,2,5), d=rng()*Math.PI; const p=[]; for(let t=0;t<=6.34+0.05;t+=0.02)
+        p.push({x:Math.sin(A*t+d)*0.42,y:Math.sin(B*t)*0.42}); return { name:'Lissajous', strokes:[p] }; },
+    // Star polygon {n/m}
+    (rng) => { const n=rint(rng,5,9); let m=rint(rng,2,Math.max(2,Math.floor(n/2))); if(gcd(n,m)!==1)m=1;
+        const p=[]; for(let i=0;i<=n;i++){ const idx=(i*m)%n, a=-Math.PI/2+idx/n*6.2832; p.push({x:Math.cos(a)*0.42,y:Math.sin(a)*0.42}); }
+        return { name:`Star ${n}/${m}`, strokes:[p] }; },
+    // Spirograph (hypotrochoid)
+    (rng) => { const R=5, r=rint(rng,2,4), d=rint(rng,2,5); const p=[]; const turns=r/gcd(R,r);
+        for(let t=0;t<=6.34*turns+0.05;t+=0.03){ const x=(R-r)*Math.cos(t)+d*Math.cos((R-r)/r*t);
+          const y=(R-r)*Math.sin(t)-d*Math.sin((R-r)/r*t); p.push({x:x,y:y}); } return norm({name:'Spirograph',strokes:[p]}); },
+    // Random constellation (nearest-neighbour path)
+    (rng) => { const n=rint(rng,5,8), nodes=[]; for(let i=0;i<n;i++) nodes.push([(rng()-0.5)*0.86,(rng()-0.5)*0.86]);
+        const used=[0]; let cur=0; const edges=[]; while(used.length<n){ let best=-1,bd=1e9;
+          for(let j=0;j<n;j++){ if(used.includes(j))continue; const dd=(nodes[cur][0]-nodes[j][0])**2+(nodes[cur][1]-nodes[j][1])**2;
+            if(dd<bd){bd=dd;best=j;} } edges.push([cur,best]); used.push(best); cur=best; }
+        return constToObj('Constellation',nodes,edges); },
+    // Superformula bloom
+    (rng) => { const m=rint(rng,3,8), n1=rng()*2+0.4, n2=rng()*2+0.4, n3=rng()*2+0.4; const p=[];
+        for(let t=0;t<=6.34+0.05;t+=0.02){ const a=Math.pow(Math.abs(Math.cos(m*t/4)),n2), b=Math.pow(Math.abs(Math.sin(m*t/4)),n3);
+          const r=Math.pow(a+b,-1/n1); p.push({x:Math.cos(t)*r,y:Math.sin(t)*r}); } return norm({name:'Bloom',strokes:[p]}); },
+    // Epicycloid / flower-of-life style loops
+    (rng) => { const k=rint(rng,3,7); const p=[]; for(let t=0;t<=6.34*k+0.05;t+=0.03){
+        const r=0.30+0.12*Math.cos(k*t); p.push({x:Math.cos(t)*r,y:Math.sin(t)*r}); } return norm({name:'Epicycle',strokes:[p]}); },
+    // Butterfly curve
+    (rng) => { const p=[]; for(let t=0;t<=12.57+0.05;t+=0.03){ const e=Math.exp(Math.cos(t))-2*Math.cos(4*t)-Math.pow(Math.sin(t/12),5);
+        p.push({x:Math.sin(t)*e, y:-Math.cos(t)*e}); } return norm({name:'Butterfly',strokes:[p]}); },
+    // Heart-gear (rose with offset)
+    (rng) => { const k=rint(rng,4,9); const p=[]; for(let t=0;t<=6.34+0.05;t+=0.02){
+        const r=0.22+0.10*Math.abs(Math.sin(k*t/2)); p.push({x:Math.cos(t)*r,y:Math.sin(t)*r}); } return norm({name:'Gear',strokes:[p]}); },
+    // Polygon (clean n-gon)
+    (rng) => { const n=rint(rng,3,8); const p=[]; for(let i=0;i<=n;i++){ const a=-Math.PI/2+i/n*6.2832;
+        p.push({x:Math.cos(a)*0.42,y:Math.sin(a)*0.42}); } return { name:`${n}-gon`, strokes:[p] }; },
+    // Wave ribbon (open stroke)
+    (rng) => { const f=rint(rng,2,5), amp=0.18+rng()*0.14; const p=[]; for(let x=-0.42;x<=0.42;x+=0.02)
+        p.push({x, y:Math.sin(x*f*3.14159*2)*amp}); return { name:'Wave', strokes:[p] }; },
+  ];
+  function gcd(a,b){ while(b){ [a,b]=[b,a%b]; } return a; }
+  function constToObj(name,nodes,edges){ return { name, strokes: edges.map(([a,b]) => [{x:nodes[a][0],y:nodes[a][1]},{x:nodes[b][0],y:nodes[b][1]}]) }; }
+  // scale any shape to fit ~0.44 radius, centred
+  function norm(obj,target=0.44){ let mx=0; for(const st of obj.strokes) for(const p of st) mx=Math.max(mx,Math.hypot(p.x,p.y));
+    const s=mx>0?target/mx:1; for(const st of obj.strokes) for(const p of st){ p.x*=s; p.y*=s; } return obj; }
+
+  function makeShapeForLevel(n){
+    if (n <= CONFIG.curatedLevels) { const s = SHAPES[n - 1]; return { name: s.name, strokes: s.gen() }; }
+    const rng = mulberry32(n * 2654435761);
+    const gen = PROC_GENERATORS[Math.floor(rng() * PROC_GENERATORS.length)];
+    return gen(rng);
+  }
+  // Daily challenge: a fixed shape seeded by today's date (same for everyone, all day).
+  function todaySeed(){ const d=new Date(); return d.getFullYear()*10000 + (d.getMonth()+1)*100 + d.getDate(); }
+  function todayLabel(){ return new Date().toLocaleDateString(undefined,{month:'short',day:'numeric'}); }
+  function makeDailyShape(){
+    const seed = todaySeed(); const rng = mulberry32(seed ^ 0x9e3779b9);
+    const gen = PROC_GENERATORS[Math.floor(rng() * PROC_GENERATORS.length)];
+    const obj = gen(rng); obj.name = 'Daily · ' + obj.name; return obj;
+  }
+
+  /* ═══════════════════════════ TIPS ═════════════════════════════════════ */
+  const TIPS = [
+    "Move slowly through curves — steady speed makes smooth light.",
+    "Follow the guide in one continuous motion where you can.",
+    "Let the orbiting moons add width; you just steer the centre.",
+    "Lift your finger between separate strokes to avoid stray trails.",
+    "Symmetry shapes love the Mirror & Kaleidoscope brushes.",
+    "Overlap the ends of a loop so circles close cleanly.",
+    "Negative space matters — keep light off the dark areas.",
+    "Plan the whole path before you press: long exposures reward patience.",
+    "Draw big, confident arcs rather than tiny nervous jabs.",
+    "Anchor your eye on the next node, not the tip of your finger.",
+    "The Ribbon brush is great for bold, simple shapes.",
+    "Try tracing a shape twice — a second pass brightens and steadies it.",
+  ];
+  const pickTip = () => TIPS[Math.floor(Math.random() * TIPS.length)];
+
+  /* ═══════════════════════════ STATE ════════════════════════════════════ */
+  const S = {
+    mode: 'menu',            // 'menu' | 'guided' | 'free' | 'daily'
+    level: 1, best: 0, totalStars: 0, streak: 0,
+    target: null, daily: false,
+    brush: null, brushId: 'comet',
+    palIdx: 0, sizeMul: 1,
+    showGuide: true, coachOn: true, coachPlaying: false, soundOn: true,
+    painting: false, hasPainted: false, hasPaintedThisLevel: false,
+    phase: 0,
+    prevPens: null,
+    history: [], future: [],   // undo/redo snapshots (ImageData)
+  };
+  S.best = +(localStorage.getItem('afterglow_best') || 0);
+  S.totalStars = +(localStorage.getItem('afterglow_stars') || 0);
+  S.soundOn = localStorage.getItem('afterglow_sound') !== '0';
+  document.getElementById('hBest').textContent = S.best;
+  const pointer = { x: 0, y: 0, px: 0, py: 0, down: false, spd: 0 };
+
+  function setBrush(id){ if(brushLocked(id)) return; S.brushId = id; const def = BRUSHES.find(b => b.id === id); S.brush = def.make(); S.brush.reset(); S.brush.def = def; S.prevPens = null; renderChips(); }
+  setBrush('comet');
+
+  /* ═══════════════════════ RESIZE / BACKDROP ════════════════════════════ */
+  let stars = [];
+  function makeStars(){ stars = []; const n = Math.round((W * H) / 9000);
+    for (let i = 0; i < n; i++) stars.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.3+0.2,
+      a: Math.random()*0.5+0.1, tw: Math.random()*6.28, sp: Math.random()*1.5+0.3 }); }
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.floor(window.innerWidth); H = Math.floor(window.innerHeight); DIM = Math.min(W, H);
+    for (const c of [bg, paint, fx]) { c.width = Math.floor(W*DPR); c.height = Math.floor(H*DPR); }
+    for (const ctx of [bgx, px, fxx]) ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    makeStars();
+    if (S.target) buildTargetMask();
+    clearPaint();
+    if (S.history) resetHistory();   // old snapshots are the wrong size now
+  }
+  window.addEventListener('resize', resize);
+  function drawBg(t){
+    bgx.clearRect(0,0,W,H);
+    const g = bgx.createRadialGradient(W*0.5,H*0.42,0,W*0.5,H*0.5,Math.max(W,H)*0.75);
+    g.addColorStop(0,'#0b1022'); g.addColorStop(0.6,'#070912'); g.addColorStop(1,'#04050a');
+    bgx.fillStyle=g; bgx.fillRect(0,0,W,H);
+    for (const s of stars){ bgx.globalAlpha = s.a*(0.6+0.4*Math.sin(t*0.001*s.sp+s.tw));
+      bgx.fillStyle='#cfe0ff'; bgx.beginPath(); bgx.arc(s.x,s.y,s.r,0,7); bgx.fill(); }
+    bgx.globalAlpha=1;
+  }
+  function clearPaint(){ px.clearRect(0,0,W,H); S.hasPainted=false; }
+
+  /* ═══════════════════════ UNDO / REDO ══════════════════════════════════ */
+  // Snapshot-based: we save the paint canvas before each stroke begins.
+  const HISTORY_MAX = 20;
+  function pushHistory(){
+    try {
+      S.history.push(px.getImageData(0,0,Math.floor(W*DPR),Math.floor(H*DPR)));
+      if (S.history.length > HISTORY_MAX) S.history.shift();
+      S.future.length = 0;   // a new stroke invalidates the redo chain
+    } catch(e){ /* ignore (e.g. tainted canvas) */ }
+    updateUndoButtons();
+  }
+  function resetHistory(){ S.history.length=0; S.future.length=0; updateUndoButtons(); }
+  function putSnapshot(img){ px.putImageData(img,0,0); S.hasPainted = hasAnyLight(); }
+  function undo(){
+    if (!S.history.length){ toast('Nothing to undo'); return; }
+    S.future.push(px.getImageData(0,0,Math.floor(W*DPR),Math.floor(H*DPR)));
+    putSnapshot(S.history.pop()); updateUndoButtons(); toast('Undo');
+  }
+  function redo(){
+    if (!S.future.length){ toast('Nothing to redo'); return; }
+    S.history.push(px.getImageData(0,0,Math.floor(W*DPR),Math.floor(H*DPR)));
+    putSnapshot(S.future.pop()); updateUndoButtons(); toast('Redo');
+  }
+  function hasAnyLight(){
+    // cheap check: sample a coarse grid for any lit pixel
+    const bw=Math.floor(W*DPR), bh=Math.floor(H*DPR);
+    const d=px.getImageData(0,0,bw,bh).data, step=(bw*4)*8;
+    for (let i=0;i<d.length;i+=step*2){ if (d[i]+d[i+1]+d[i+2] > 30) return true; } return false;
+  }
+  function updateUndoButtons(){
+    const canU=S.history.length>0, canR=S.future.length>0;
+    for (const id of ['btnUndoG','btnUndoF']){ const b=document.getElementById(id); if(b) b.disabled=!canU; }
+    for (const id of ['btnRedoG','btnRedoF']){ const b=document.getElementById(id); if(b) b.disabled=!canR; }
+  }
+
+  /* ═══════════════════════ TARGET / MASK ════════════════════════════════ */
+  function buildTargetMask(){
+    const box = DIM * CONFIG.guideBoxFrac, cx = W/2, cy = H/2;
+    S.target.screen = S.target.strokes.map(st => st.map(p => ({ x: cx + p.x*box, y: cy + p.y*box })));
+    const GS = CONFIG.scoreCell, gw = Math.ceil(W/GS), gh = Math.ceil(H/GS);
+    const tmp = document.createElement('canvas'); tmp.width=gw; tmp.height=gh; const tg=tmp.getContext('2d');
+    tg.strokeStyle='#fff'; tg.lineJoin='round'; tg.lineCap='round'; tg.lineWidth=Math.max(2,(box*0.08)/GS);
+    for (const st of S.target.screen){ tg.beginPath(); st.forEach((p,i)=> i? tg.lineTo(p.x/GS,p.y/GS):tg.moveTo(p.x/GS,p.y/GS)); tg.stroke(); }
+    const data = tg.getImageData(0,0,gw,gh).data; const mask=new Uint8Array(gw*gh); let cells=0;
+    for (let i=0;i<mask.length;i++){ if(data[i*4+3]>40){ mask[i]=1; cells++; } }
+    S.target.gw=gw; S.target.gh=gh; S.target.mask=mask; S.target.cells=cells;
+    // build flattened coach path
+    S.target.path = []; for (const st of S.target.screen){ S.target.path.push({move:true,x:st[0].x,y:st[0].y});
+      for (let i=1;i<st.length;i++) S.target.path.push({x:st[i].x,y:st[i].y}); }
+  }
+
+  function loadLevel(n){
+    S.target = makeShapeForLevel(n); buildTargetMask(); clearPaint();
+    S.hasPaintedThisLevel=false; S.brush.reset(); S.prevPens=null; resetHistory();
+    S.coachPlaying = S.coachOn && (n <= CONFIG.autoCoachLevels);
+    document.getElementById('hMode').textContent = 'Photo ' + n;
+    document.getElementById('hTarget').textContent = S.target.name;
+  }
+
+  /* ═══════════════════════ DRAW: GUIDE + COACH ══════════════════════════ */
+  function drawGuide(t){
+    if (!S.showGuide || !S.target.screen) return;
+    const pulse = 0.26 + 0.12*Math.sin(t*0.002), box = DIM*CONFIG.guideBoxFrac;
+    fxx.save(); fxx.globalCompositeOperation='lighter'; fxx.lineJoin='round'; fxx.lineCap='round';
+    fxx.strokeStyle=`rgba(120,150,255,${pulse*0.5})`; fxx.lineWidth=box*0.09;
+    for (const st of S.target.screen) strokePath(fxx,st);
+    fxx.strokeStyle=`rgba(190,215,255,${pulse})`; fxx.lineWidth=2;
+    for (const st of S.target.screen) strokePath(fxx,st);
+    fxx.fillStyle=`rgba(210,230,255,${pulse+0.15})`;
+    for (const st of S.target.screen) for (const p of st){ fxx.beginPath(); fxx.arc(p.x,p.y,2.6,0,7); fxx.fill(); }
+    fxx.restore();
+  }
+  let coachHead = 0;
+  function drawCoach(dt){
+    if (!S.coachPlaying || !S.target.path || S.target.path.length < 2) return;
+    const path = S.target.path;
+    coachHead += dt * 0.02; if (coachHead >= path.length - 1) coachHead = 0;
+    const i = Math.floor(coachHead), f = coachHead - i;
+    const a = path[i], b = path[Math.min(path.length-1, i+1)];
+    const hx = a.x + (b.x-a.x)*f, hy = a.y + (b.y-a.y)*f;
+    // fading tail (last ~14 path points)
+    fxx.save(); fxx.globalCompositeOperation='lighter'; fxx.lineCap='round'; fxx.lineJoin='round';
+    for (let k=0;k<16;k++){ const j=i-k; if(j<0)break; const p0=path[j], p1=path[j+1]; if(!p1||p1.move) continue;
+      const al=(1-k/16)*0.5; fxx.strokeStyle=`rgba(255,236,170,${al})`; fxx.lineWidth=3.2; 
+      fxx.beginPath(); fxx.moveTo(p0.x,p0.y); fxx.lineTo(p1.x,p1.y); fxx.stroke(); }
+    // head dot
+    fxx.fillStyle='rgba(255,244,200,0.95)'; fxx.beginPath(); fxx.arc(hx,hy,6,0,7); fxx.fill();
+    fxx.fillStyle='rgba(255,224,140,0.28)'; fxx.beginPath(); fxx.arc(hx,hy,13,0,7); fxx.fill();
+    // "start" marker
+    const s0 = path[0]; fxx.fillStyle='rgba(255,255,255,0.9)'; fxx.font='700 13px sans-serif';
+    fxx.textAlign='center'; fxx.textBaseline='middle'; fxx.fillText('1', s0.x, s0.y);
+    fxx.restore();
+  }
+  function strokePath(ctx,st){ ctx.beginPath(); st.forEach((p,i)=> i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y)); ctx.stroke(); }
+
+  /* ═══════════════════════════ MAIN LOOP ════════════════════════════════ */
+  let last = performance.now();
+  function frame(now){
+    const dt = Math.min(50, now - last); last = now;
+    drawBg(now);
+    fxx.clearRect(0,0,W,H);
+
+    if (S.mode === 'guided' && S.target){ drawGuide(now); drawCoach(dt); }
+
+    if (S.mode !== 'menu'){
+      S.phase += dt * 0.0006;
+      // pointer speed (normalized) for pressure-style brushes
+      const inst = Math.hypot(pointer.x-pointer.px, pointer.y-pointer.py) / Math.max(1,DIM) / (dt/16.67+0.001);
+      pointer.spd += (Math.min(1,inst*3) - pointer.spd) * 0.3;
+      pointer.px = pointer.x; pointer.py = pointer.y;
+      if (S.painting && pointer.down && S.brush){
+        px.globalCompositeOperation='lighter';
+        const pens = S.brush.pens({ x:pointer.x, y:pointer.y, dt, t:now, phase:S.phase, pal:PALETTES[S.palIdx], dim:DIM, spd:pointer.spd });
+        for (const p of pens) p.size *= S.sizeMul;
+        if (S.brush.def.connected && S.prevPens && S.prevPens.length===pens.length){
+          for (let i=0;i<pens.length;i++) stampLine(S.prevPens[i].x,S.prevPens[i].y,pens[i].x,pens[i].y,pens[i].size,pens[i].hueDeg);
+        } else { for (const p of pens) stamp(p.x,p.y,p.size,p.hueDeg); }
+        S.prevPens = S.brush.def.connected ? pens : null;
+        S.hasPainted = true; S.hasPaintedThisLevel = true;
+        AUDIO.paintTick(pointer.spd, pointer.y / H, now);
+        px.globalCompositeOperation='source-over';
+        // live pen markers
+        fxx.save(); fxx.globalCompositeOperation='lighter';
+        for (const p of pens){ fxx.fillStyle='rgba(255,255,255,.9)'; fxx.beginPath(); fxx.arc(p.x,p.y,3,0,7); fxx.fill(); }
+        fxx.restore();
+      } else S.prevPens = null;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ═══════════════════════════ SCORING ══════════════════════════════════ */
+  function developPhoto(){
+    if (!S.hasPainted){ flashHint('Paint some light first!','hold and drag across the guide'); return; }
+    const { gw, gh, mask, cells } = S.target;
+    const bw = Math.floor(W*DPR), GS = CONFIG.scoreCell;
+    const img = px.getImageData(0,0,bw,Math.floor(H*DPR)).data;
+    let covered=0, spill=0;
+    for (let gy=0; gy<gh; gy++) for (let gx=0; gx<gw; gx++){
+      const sx=Math.min(bw-1,Math.floor((gx*GS+GS/2)*DPR)), sy=Math.floor((gy*GS+GS/2)*DPR);
+      const p=(sy*bw+sx)*4, lum=img[p]*0.6+img[p+1]*0.7+img[p+2]*0.5, lit=lum>CONFIG.litThreshold;
+      if (mask[gy*gw+gx]){ if (lit) covered++; } else if (lit) spill++;
+    }
+    const coverage = covered/Math.max(1,cells), spillRatio = spill/Math.max(1,cells);
+    let score = Math.round(Math.min(100, Math.max(0, coverage*100*CONFIG.coverageGain - spillRatio*100*CONFIG.spillPenalty)));
+    showResult(score, coverage, spillRatio);
+  }
+  function showResult(score, coverage, spill){
+    S.mode = 'result';
+    { const nu=document.getElementById('rUnlock'); if(nu){ nu.textContent=''; nu.classList.add('hidden'); } }
+    const stars = score>=85?3 : score>=65?2 : score>=40?1 : 0;
+    let msg = score>=90?'stunning long exposure ✦' : score>=75?'beautifully lit' : score>=55?'nicely traced'
+            : score>=35?'a little more light next time' : 'keep the light on the guide';
+    // personalised feedback (teaches technique)
+    let fb;
+    if (coverage < 0.5) fb = "<b>Coverage:</b> you missed parts of the guide — trace the whole shape, and a slow second pass helps fill gaps.";
+    else if (spill > 0.35) fb = "<b>Control:</b> lots of light landed outside the shape. Lift between strokes and keep the moons over the guide.";
+    else if (score >= 85) fb = "<b>Lovely.</b> " + pickTip();
+    else fb = "<b>Getting there.</b> " + pickTip();
+    document.getElementById('rScore').innerHTML = score + '<span>%</span>';
+    document.getElementById('rStars').textContent = '★'.repeat(stars) + '☆'.repeat(3-stars);
+    document.getElementById('rMsg').textContent = msg;
+    document.getElementById('rFeedback').innerHTML = fb;
+    if (score > S.best){ S.best = score; localStorage.setItem('afterglow_best', S.best); document.getElementById('hBest').textContent = S.best; }
+    if (stars > 0){ const before=S.totalStars; S.totalStars += stars; localStorage.setItem('afterglow_stars', S.totalStars);
+      const ts=document.getElementById('totalStars'); if(ts) ts.textContent = S.totalStars + ' ★';
+      // did we just cross an unlock threshold?
+      const newly = [];
+      for (const b of BRUSHES){ const c=brushCost(b.id); if(c>before && c<=S.totalStars) newly.push(b.name+' brush'); }
+      for (const p of PALETTES){ const c=paletteCost(p.name); if(c>before && c<=S.totalStars) newly.push(p.name+' palette'); }
+      if (newly.length){ setTimeout(()=>toast('✦ Unlocked: '+newly.join(', ')), 700);
+        const nu=document.getElementById('rUnlock'); if(nu){ nu.textContent='✦ Unlocked: '+newly.join(', '); nu.classList.remove('hidden'); } }
+    }
+    { const nu=document.getElementById('rUnlock'); if(nu && !nu.textContent) nu.classList.add('hidden'); }
+    // streak: consecutive photos scoring 65%+ (2★ or better)
+    if (score >= 65){ S.streak++; if (S.streak >= 2) toast('🔥 '+S.streak+' in a row!'); }
+    else S.streak = 0;
+    updateStreakPill();
+    AUDIO.chord(score>=85?'win':score>=50?'next':'ok');
+    document.getElementById('resultScreen').classList.remove('hidden');
+  }
+
+  /* ═══════════════════════════ SAVE PHOTO ═══════════════════════════════ */
+  function savePhoto(){
+    const c = document.createElement('canvas'); c.width = Math.floor(W*DPR); c.height = Math.floor(H*DPR);
+    const g = c.getContext('2d'); g.drawImage(bg,0,0); g.drawImage(paint,0,0);
+    g.fillStyle='rgba(255,255,255,.5)'; g.font=`${14*DPR}px sans-serif`; g.textAlign='right';
+    g.fillText('AFTERGLOW', c.width-14*DPR, c.height-14*DPR);
+    const a = document.createElement('a'); a.download = 'afterglow-'+Date.now()+'.png';
+    a.href = c.toDataURL('image/png'); a.click(); toast('Photo saved ✓');
+  }
+  function composePhotoCanvas(){
+    const c = document.createElement('canvas'); c.width = Math.floor(W*DPR); c.height = Math.floor(H*DPR);
+    const g = c.getContext('2d'); g.drawImage(bg,0,0); g.drawImage(paint,0,0);
+    g.fillStyle='rgba(255,255,255,.5)'; g.font=`${14*DPR}px sans-serif`; g.textAlign='right';
+    g.fillText('AFTERGLOW', c.width-14*DPR, c.height-14*DPR); return c;
+  }
+  async function sharePhoto(){
+    const url = 'https://dlinacre.github.io/afterglow/';
+    const txt = 'I painted this with light in AFTERGLOW ✦';
+    try {
+      const c = composePhotoCanvas();
+      const blob = await new Promise(res => c.toBlob(res, 'image/png'));
+      const file = new File([blob], 'afterglow.png', { type:'image/png' });
+      if (navigator.canShare && navigator.canShare({ files:[file] })) {
+        await navigator.share({ files:[file], text:txt, url }); return;
+      }
+      if (navigator.share) { await navigator.share({ text:txt, url }); return; }
+    } catch(e){ if (e && e.name==='AbortError') return; }
+    // fallback: copy link, then save the image
+    try { await navigator.clipboard.writeText(url); toast('Link copied — saving image'); }
+    catch(_){ toast('Saving image'); }
+    savePhoto();
+  }
+  function updateStreakPill(){
+    const p=document.getElementById('streakPill');
+    if (S.streak >= 2 && (S.mode==='guided'||S.mode==='daily'||S.mode==='result')){
+      document.getElementById('streakVal').textContent = S.streak; p.classList.remove('hidden');
+    } else p.classList.add('hidden');
+  }
+
+  /* ═══════════════════════════ GALLERY ══════════════════════════════════ */
+  // Saves small JPEG thumbnails of your shots to localStorage (newest first, capped).
+  const GALLERY = (() => {
+    const KEY='afterglow_gallery', MAX=24;
+    const load = () => { try { return JSON.parse(localStorage.getItem(KEY)||'[]'); } catch(_){ return []; } };
+    const save = arr => { try { localStorage.setItem(KEY, JSON.stringify(arr)); } catch(_){ /* quota */ } };
+    function keepCurrent(label){
+      const src=composePhotoCanvas();
+      // downscale to a light thumbnail so we don't blow the storage quota
+      const tw=270, th=Math.round(tw*src.height/src.width);
+      const c=document.createElement('canvas'); c.width=tw; c.height=th;
+      c.getContext('2d').drawImage(src,0,0,tw,th);
+      let data; try { data=c.toDataURL('image/jpeg',0.72); } catch(_){ return false; }
+      const arr=load(); arr.unshift({ img:data, label:label||'', t:Date.now() });
+      while(arr.length>MAX) arr.pop();
+      save(arr); return true;
+    }
+    function remove(t){ save(load().filter(x=>x.t!==t)); }
+    return { load, keepCurrent, remove, get count(){ return load().length; } };
+  })();
+  function openGallery(){
+    const body=document.getElementById('galBody'), items=GALLERY.load();
+    document.getElementById('galCount').textContent = items.length?`(${items.length})`:'';
+    if (!items.length){ body.innerHTML='<div class="galempty">No saved shots yet.<br>Tap <b>Keep</b> after developing a photo,<br>or use Save in Free Studio.</div>'; }
+    else {
+      const grid=document.createElement('div'); grid.className='galgrid';
+      for (const it of items){ const cell=document.createElement('div'); cell.className='galcell';
+        const im=document.createElement('img'); im.src=it.img; im.alt=it.label||'afterglow';
+        const del=document.createElement('div'); del.className='del'; del.textContent='✕';
+        del.onclick=()=>{ GALLERY.remove(it.t); openGallery(); toast('Removed'); };
+        cell.appendChild(im); cell.appendChild(del); grid.appendChild(cell); }
+      body.innerHTML=''; body.appendChild(grid);
+    }
+    document.getElementById('galleryPanel').classList.remove('hidden');
+  }
+  function keepShot(){
+    const label = S.target ? S.target.name : 'Free Studio';
+    if (GALLERY.keepCurrent(label)) toast('★ Kept in Gallery'); else toast('Gallery is full or storage blocked');
+  }
+
+  /* ═══════════════════════════ UI HELPERS ═══════════════════════════════ */
+  let hintTimer; function flashHint(t1,t2){ const h=document.getElementById('hint');
+    h.querySelector('.t1').textContent=t1; h.querySelector('.t2').textContent=t2||'';
+    h.classList.add('show'); clearTimeout(hintTimer); hintTimer=setTimeout(()=>h.classList.remove('show'),1800); }
+  let toastTimer; function toast(msg){ const el=document.getElementById('toast'); el.textContent=msg;
+    el.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),1400); }
+
+  function renderChips(){
+    const bc=document.getElementById('brushChips'); bc.innerHTML='';
+    for (const b of BRUSHES){ const locked=brushLocked(b.id);
+      const el=document.createElement('div'); el.className='chip'+(b.id===S.brushId?' active':'')+(locked?' locked':'');
+      el.innerHTML = b.name + `<span class="cn">${locked?('🔒 '+brushCost(b.id)+'★'):b.cn}</span>`;
+      el.onclick = locked ? ()=>toast('Unlock at '+brushCost(b.id)+'★ (you have '+S.totalStars+')')
+                          : ()=>{ setBrush(b.id); toast(b.name+' brush'); };
+      bc.appendChild(el); }
+    const pc=document.getElementById('paletteChips'); pc.innerHTML='';
+    PALETTES.forEach((p,i)=>{ const locked=paletteLocked(p.name);
+      const el=document.createElement('div'); el.className='chip'+(i===S.palIdx?' active':'')+(locked?' locked':'');
+      el.innerHTML = p.name + (locked?`<span class="cn">🔒 ${paletteCost(p.name)}★</span>`:'');
+      el.onclick = locked ? ()=>toast('Unlock at '+paletteCost(p.name)+'★ (you have '+S.totalStars+')')
+                          : ()=>{ S.palIdx=i; renderChips(); toast(p.name+' palette'); };
+      pc.appendChild(el); });
+  }
+
+  /* ═══════════════════════════ INPUT ════════════════════════════════════ */
+  function pos(e){ const t=e.touches?e.touches[0]:e; pointer.x=t.clientX; pointer.y=t.clientY; }
+  function down(e){ if(S.mode==='menu'||S.mode==='result')return; e.preventDefault(); pos(e);
+    if(S.soundOn){ AUDIO.init(); AUDIO.resume(); AUDIO.setEnabled(true); }
+    pointer.px=pointer.x; pointer.py=pointer.y; pointer.spd=0;
+    pushHistory();                      // save state so this stroke can be undone
+    pointer.down=true; S.painting=true;
+    S.prevPens=null; if(S.brush)S.brush.reset(); S.coachPlaying=false; document.getElementById('hint').classList.remove('show'); }
+  function move(e){ if(!pointer.down)return; e.preventDefault(); pos(e); }
+  function up(){ pointer.down=false; S.painting=false; S.prevPens=null; }
+  fx.addEventListener('touchstart',down,{passive:false}); fx.addEventListener('touchmove',move,{passive:false});
+  fx.addEventListener('touchend',up,{passive:false}); fx.addEventListener('touchcancel',up,{passive:false});
+  fx.addEventListener('mousedown',down); window.addEventListener('mousemove',move); window.addEventListener('mouseup',up);
+
+  /* ═══════════════════════════ BUTTONS ══════════════════════════════════ */
+  const show=id=>document.getElementById(id).classList.remove('hidden');
+  const hide=id=>document.getElementById(id).classList.add('hidden');
+
+  document.getElementById('btnStart').onclick = ()=>{ hide('startScreen'); S.mode='guided'; S.level=1; S.daily=false; S.streak=0; updateStreakPill();
+    document.getElementById('barGuided').classList.remove('hidden'); document.getElementById('barFree').classList.add('hidden');
+    loadLevel(S.level); flashHint('Follow the golden coach','then hold & drag to paint the light'); };
+  document.getElementById('btnFree').onclick = ()=>{ hide('startScreen'); enterFree(); };
+  document.getElementById('btnDaily').onclick = ()=>{ hide('startScreen'); startDaily(); };
+  document.getElementById('btnDevelop').onclick = developPhoto;
+  document.getElementById('btnRetake').onclick = ()=>{ if(S.mode==='guided'){ clearPaint(); S.brush.reset(); resetHistory(); flashHint('Fresh frame','the shutter is reset'); } };
+  document.getElementById('btnNext').onclick = ()=>{ hide('resultScreen');
+    if (S.daily){ toast('Come back tomorrow for a new daily ✦'); S.mode='daily'; loadDaily(); }
+    else { S.mode='guided'; S.level++; loadLevel(S.level); } };
+  document.getElementById('btnRedo').onclick = ()=>{ hide('resultScreen');
+    if (S.daily){ S.mode='daily'; loadDaily(); } else { S.mode='guided'; loadLevel(S.level); } };
+  document.getElementById('btnSaveResult').onclick = savePhoto;
+  document.getElementById('btnShareResult').onclick = sharePhoto;
+  document.getElementById('btnKeep').onclick = keepShot;
+  document.getElementById('btnGallery').onclick = openGallery;
+  document.getElementById('btnCloseGallery').onclick = ()=> hide('galleryPanel');
+
+  function startDaily(){ S.daily=true; S.mode='daily'; S.streak=0; updateStreakPill();
+    document.getElementById('barGuided').classList.remove('hidden'); document.getElementById('barFree').classList.add('hidden');
+    loadDaily(); flashHint('Daily Challenge · '+todayLabel(),'same shape for everyone today — one perfect exposure'); }
+  function loadDaily(){ S.target = makeDailyShape(); buildTargetMask(); clearPaint();
+    S.hasPaintedThisLevel=false; S.brush.reset(); S.prevPens=null; resetHistory();
+    S.coachPlaying = S.coachOn;
+    document.getElementById('hMode').textContent = 'Daily · '+todayLabel();
+    document.getElementById('hTarget').textContent = S.target.name.replace('Daily · ',''); }
+
+  function enterFree(){ S.daily=false; S.mode='free'; document.getElementById('barGuided').classList.add('hidden');
+    document.getElementById('barFree').classList.remove('hidden'); clearPaint(); S.brush.reset(); resetHistory();
+    document.getElementById('hMode').textContent='Free Studio'; document.getElementById('hTarget').textContent='make art ✦';
+    flashHint('Free Studio','pick a brush & palette in ⚙, then paint'); }
+  document.getElementById('btnClear').onclick = ()=>{ pushHistory(); clearPaint(); S.brush.reset(); toast('Cleared'); };
+  document.getElementById('btnSaveFree').onclick = savePhoto;
+  document.getElementById('btnExitFree').onclick = ()=>{ S.mode='menu'; document.getElementById('barFree').classList.add('hidden'); document.getElementById('streakPill').classList.add('hidden'); show('startScreen'); };
+
+  // settings panel
+  document.getElementById('btnSettings').onclick = ()=>{ renderChips(); refreshStars(); updateNextUnlock(); show('settingsPanel'); };
+  document.getElementById('btnCloseSettings').onclick = ()=> hide('settingsPanel');
+  function updateNextUnlock(){
+    const el=document.getElementById('nextUnlock'); if(!el) return;
+    let best=null;
+    for (const b of BRUSHES){ const c=brushCost(b.id); if(c>S.totalStars && (!best||c<best.c)) best={c,name:b.name+' brush'}; }
+    for (const p of PALETTES){ const c=paletteCost(p.name); if(c>S.totalStars && (!best||c<best.c)) best={c,name:p.name+' palette'}; }
+    el.textContent = best ? `${best.name} at ${best.c}★ (${best.c-S.totalStars} to go)` : 'all unlocked ✦';
+  }
+  function bindSwitch(id, key, onChange){ const el=document.getElementById(id);
+    el.onclick=()=>{ S[key]=!S[key]; el.classList.toggle('on',S[key]); onChange&&onChange(); }; }
+  bindSwitch('swGuide','showGuide');
+  bindSwitch('swCoach','coachOn', ()=>{ S.coachPlaying = S.coachOn && (S.mode==='guided'||S.mode==='daily'); });
+  document.getElementById('swSound').classList.toggle('on', S.soundOn);
+  bindSwitch('swSound','soundOn', ()=>{ localStorage.setItem('afterglow_sound', S.soundOn?'1':'0');
+    if (S.soundOn){ AUDIO.init(); AUDIO.resume(); AUDIO.setEnabled(true); } else AUDIO.setEnabled(false); });
+
+  // undo / redo buttons (both toolbars)
+  document.getElementById('btnUndoG').onclick = undo;
+  document.getElementById('btnUndoF').onclick = undo;
+  document.getElementById('btnRedoG').onclick = redo;
+  document.getElementById('btnRedoF').onclick = redo;
+
+  // brush size slider
+  const szRange=document.getElementById('szRange'), szVal=document.getElementById('szVal');
+  szRange.value = Math.round((+(localStorage.getItem('afterglow_size')||100)));
+  function applySize(){ S.sizeMul = szRange.value/100; szVal.textContent = szRange.value+'%';
+    localStorage.setItem('afterglow_size', szRange.value); }
+  szRange.addEventListener('input', applySize); applySize();
+
+  // total stars display
+  function refreshStars(){ document.getElementById('totalStars').textContent = S.totalStars + ' ★'; }
+  refreshStars();
+
+  // keyboard shortcuts (desktop): Z undo, X redo, space develop, arrows for brush size
+  window.addEventListener('keydown', (e)=>{
+    if (S.mode==='menu') return;
+    const k=e.key.toLowerCase();
+    if (k==='z'){ undo(); e.preventDefault(); }
+    else if (k==='x'){ redo(); e.preventDefault(); }
+    else if (k===' ' && (S.mode==='guided'||S.mode==='daily')){ developPhoto(); e.preventDefault(); }
+    else if (k==='c' && S.mode==='free'){ pushHistory(); clearPaint(); toast('Cleared'); }
+    else if (k==='arrowup' || k==='arrowdown'){
+      szRange.value = Math.max(55, Math.min(180, +szRange.value + (k==='arrowup'?5:-5)));
+      applySize(); e.preventDefault();
+    }
+  });
+
+  /* ═══════════════════════════ BOOT ═════════════════════════════════════ */
+  resize();
+  renderChips();
+  updateUndoButtons();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

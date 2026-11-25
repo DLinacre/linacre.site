@@ -16,7 +16,7 @@
   const STORE_KEY = 'linacre.circuit.v2';
   const MAX_SIZE = 7;
   const DAILY_SIZE = 5;
-  const SHARE_URL = 'linacre.site/games/circuit';
+  const SHARE_URL = 'linacre.site/games/circuit.html';
 
   // ---------- seeded rng ----------
   const hashStr = s => {

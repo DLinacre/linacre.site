@@ -1,0 +1,122 @@
+[
+  {
+    "id": "vscode",
+    "name": "VS Code",
+    "category": "start",
+    "description": "Gold-standard code editor with essential TypeScript, Git, and React extensions.",
+    "url": "https://code.visualstudio.com",
+    "host": "code.visualstudio.com",
+    "searchKeywords": "vs code editor microsoft extensions vscode",
+    "tag": "Free"
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "category": "start",
+    "description": "Version control, open-source portfolio hosting, Actions CI/CD, and release management.",
+    "url": "https://github.com/DLinacre",
+    "host": "github.com/DLinacre",
+    "searchKeywords": "github version control repos repositories git dlinacre",
+    "tag": "Free"
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "category": "start",
+    "description": "Fundamental CLI version control tool for tracking commits, branches, and releases.",
+    "url": "https://git-scm.com",
+    "host": "git-scm.com",
+    "searchKeywords": "git version control cli terminal commandline",
+    "tag": "Free"
+  },
+  {
+    "id": "react",
+    "name": "React",
+    "category": "build",
+    "description": "Modern component-based UI library powering interactive browser tools and SPAs.",
+    "url": "https://react.dev",
+    "host": "react.dev",
+    "searchKeywords": "react ui library javascript components frontend framework SPA vdom",
+    "tag": "Free"
+  },
+  {
+    "id": "vite",
+    "name": "Vite",
+    "category": "build",
+    "description": "Lightning-fast dev server and frontend build tool with hot module replacement.",
+    "url": "https://vitejs.dev",
+    "host": "vitejs.dev",
+    "searchKeywords": "vite build tool dev server bundler HMR esbuild rollup",
+    "tag": "Free"
+  },
+  {
+    "id": "tailwind",
+    "name": "Tailwind CSS",
+    "category": "build",
+    "description": "Utility-first CSS framework for rapid responsive layouts and consistent styling.",
+    "url": "https://tailwindcss.com",
+    "host": "tailwindcss.com",
+    "searchKeywords": "tailwind css utility styling layout responsive",
+    "tag": "Free"
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "category": "build",
+    "description": "Versatile language used for backend services, automation scripts, and CLI toolchains.",
+    "url": "https://python.org",
+    "host": "python.org",
+    "searchKeywords": "python backend automation scripting CLI fast-api",
+    "tag": "Free"
+  },
+  {
+    "id": "kotlin",
+    "name": "Kotlin & Android SDK",
+    "category": "build",
+    "description": "Native Android development for utilities like Linacre Uninstaller and DKMA Monster.",
+    "url": "https://developer.android.com",
+    "host": "developer.android.com",
+    "searchKeywords": "kotlin android mobile app development sdk",
+    "tag": "Free"
+  },
+  {
+    "id": "dexie",
+    "name": "Dexie / IndexedDB",
+    "category": "build",
+    "description": "Local-first browser database wrapper for fast offline storage without backend dependence.",
+    "url": "https://dexie.org",
+    "host": "dexie.org",
+    "searchKeywords": "dexie indexeddb storage local-first database offline",
+    "tag": "Free"
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "category": "deploy",
+    "description": "Global edge hosting platform with automated GitHub deployment previews and SSL.",
+    "url": "https://vercel.com",
+    "host": "vercel.com",
+    "searchKeywords": "vercel deploy hosting edge serverless static analytics",
+    "tag": "Free"
+  },
+  {
+    "id": "github_pages",
+    "name": "GitHub Pages",
+    "category": "deploy",
+    "description": "Free static hosting directly from GitHub repositories for web guides and games.",
+    "url": "https://pages.github.com",
+    "host": "pages.github.com",
+    "searchKeywords": "github pages static hosting deploy web docs",
+    "tag": "Free"
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare",
+    "category": "deploy",
+    "description": "DNS management, edge workers, and CDN caching for domain performance.",
+    "url": "https://cloudflare.com",
+    "host": "cloudflare.com",
+    "searchKeywords": "cloudflare cdn dns workers security edge",
+    "tag": "Free"
+  }
+]

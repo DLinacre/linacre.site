@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SITE_PROJECTS } from '../data/siteProjects';
+import { SITE_PROJECTS } from '../content/adapters/siteProjects';
 import ProjectGrid from './ProjectGrid';
 
 const games = SITE_PROJECTS.filter(project => project.kind === 'Game' && !project.private);

@@ -39,3 +39,8 @@ status.txt
 # Scratch
 *.log
 *.tmp
+
+.cache/
+
+# Local publishing rollback snapshots (never public)
+.publishing-backups/
