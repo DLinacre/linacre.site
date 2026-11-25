@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Bot, Check, Copy, GitBranch, Layers, Maximize2, Minimize2, Radio, RefreshCw, Search, Workflow, Zap } from 'lucide-react';
-import { SITE_PROJECTS } from '../data/siteProjects';
+import { SITE_PROJECTS } from '../content/adapters/siteProjects';
 import { OPERATIONS_AGENTS, OPERATIONS_FLOWS, OPERATIONS_PROJECT, FLOW_GUIDE, TRIGGER_GUIDE, parseBuildReceipt, type BuildReceipt } from '../config/operations';
 
 const panel = 'rounded-2xl border border-border-color bg-[var(--linacre-panel)]';

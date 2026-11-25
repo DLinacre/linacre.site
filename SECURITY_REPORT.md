@@ -1,0 +1,9 @@
+# Security review checkpoint — 2026-11-25
+
+- Dashboard authentication now fails closed without a sufficiently long signing secret and a configured password hash. Exact password comparison replaces built-in/fallback access. Tests confirm localhost cannot bypass a protected API route and unverified Google assertions do not create sessions.
+- Contact handling no longer claims successful delivery when production delivery is unavailable; responds 503. Reliable delivery remains a release prerequisite if the form is advertised as functional.
+- Publisher fixtures test validation and fail-closed behavior; no automatic commits, source deletion or deployment. Native Windows execution and hosted published-game headers remain unverified.
+- Vite moved from unsupported 6.2 to supported 7.3.8 backport branch after compatibility review, retaining the existing Rollup/plugin stack. Targeted transitive updates removed the observed high/critical advisories; lockfile clean-install and full tests pass.
+- Recorded `npm audit`: **13 moderate, zero high, zero critical**. Affected dependency entries: @eslint/config-array, @typescript-eslint/eslint-plugin, @typescript-eslint/parser, @typescript-eslint/type-utils, @typescript-eslint/typescript-estree, @typescript-eslint/utils, @vitest/coverage-v8, @vitest/mocker, eslint, minimatch, qs, typescript-eslint, vitest. Counts include dependency chains and are not 13 independently established exploitable application flaws. Remaining advisories need individual reachability/remediation review; qs is not assumed dev-only.
+
+No penetration-test, exhaustive secret scan, release-asset malware scan, deployed CSP certification or complete API authorization audit is claimed. No release assets were installed or executed. Repository origin mismatch blocks push pending user confirmation. Production infrastructure was not modified.

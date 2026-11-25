@@ -2,55 +2,24 @@ import { useState, useEffect } from 'react';
 import CyberHUD from './components/CyberHUD';
 import CyberTerminal from './components/CyberTerminal';
 import ProjectRadar from './components/ProjectRadar';
-import CardManagerModal from './components/CardManagerModal';
 import TwinkleCanvas from './components/TwinkleCanvas';
 import CyberAudioPlayer from './components/CyberAudioPlayer';
 import QuickToolsDeck from './components/QuickToolsDeck';
 import LocalRigDeck from './components/LocalRigDeck';
-import defaultProjects from './config/projects.json';
-import { ProjectCard } from './types/project';
+import { dashboardProjects as defaultProjects } from './content/adapters/dashboard';
 import { audioFx } from './lib/audioFx';
 import { Terminal as TerminalIcon, Sparkles, Layers, Cpu, ShieldCheck, Github } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('projects');
   const [terminalOpen, setTerminalOpen] = useState(false);
-  const [cardManagerOpen, setCardManagerOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [theme, setTheme] = useState<'theme-purple' | 'theme-cyan' | 'theme-sakura' | 'theme-emerald'>('theme-purple');
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
   const [currentTrackTitle, setCurrentTrackTitle] = useState('');
 
-  // Load cards from localStorage or default configuration
-  const [cards, setCards] = useState<ProjectCard[]>(() => {
-    try {
-      const saved = localStorage.getItem('linacre_site_projects');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
-        }
-      }
-    } catch {}
-    return defaultProjects as ProjectCard[];
-  });
-
-  // Save cards to localStorage whenever modified
-  const handleSaveCards = (updated: ProjectCard[]) => {
-    setCards(updated);
-    try {
-      localStorage.setItem('linacre_site_projects', JSON.stringify(updated));
-    } catch {}
-    audioFx.playClick();
-  };
-
-  const handleResetDefaults = () => {
-    setCards(defaultProjects as ProjectCard[]);
-    try {
-      localStorage.removeItem('linacre_site_projects');
-    } catch {}
-    audioFx.playClick();
-  };
+  // All public cards are derived from canonical content; persisted/session catalogues cannot override it.
+  const cards = defaultProjects;
 
   const cycleTheme = () => {
     const themes: ('theme-purple' | 'theme-cyan' | 'theme-sakura' | 'theme-emerald')[] = [
@@ -171,9 +140,6 @@ export default function App() {
           <div className={activeTab === 'projects' ? 'block' : 'hidden'}>
             <ProjectRadar
               cards={cards}
-              onOpenCardManager={() => setCardManagerOpen(true)}
-              onEditCard={() => setCardManagerOpen(true)}
-              onDeleteCard={id => handleSaveCards(cards.filter(c => c.id !== id))}
             />
           </div>
 
@@ -236,20 +202,11 @@ export default function App() {
         isOpen={terminalOpen}
         onClose={() => setTerminalOpen(false)}
         cards={cards}
-        onOpenCardManager={() => setCardManagerOpen(true)}
         cycleTheme={cycleTheme}
         playKeyTick={() => audioFx.playKeyTick()}
         onSelectTab={setActiveTab}
       />
 
-      {/* Card Manager Modal (Add / Edit / Remove) */}
-      <CardManagerModal
-        isOpen={cardManagerOpen}
-        onClose={() => setCardManagerOpen(false)}
-        cards={cards}
-        onSaveCards={handleSaveCards}
-        onResetDefaults={handleResetDefaults}
-      />
 
     </div>
   );

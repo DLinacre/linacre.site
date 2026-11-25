@@ -1,4 +1,4 @@
-import type { ProjectKind } from '../data/siteProjects';
+import type { ProjectKind } from '../content/adapters/siteProjects';
 
 export const KIND_META: Record<
   ProjectKind,

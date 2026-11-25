@@ -2,7 +2,7 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import ProjectGrid from '../ProjectGrid';
-import { SITE_PROJECTS } from '../../data/siteProjects';
+import { SITE_PROJECTS } from '../../content/adapters/siteProjects';
 
 // Pick a featured public project that definitely has highlights + tech.
 const sample = SITE_PROJECTS.find(p => p.featured && !p.private && p.highlights && p.tech);

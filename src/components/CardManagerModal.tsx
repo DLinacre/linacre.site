@@ -121,7 +121,7 @@ export default function CardManagerModal({
     const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(cards, null, 2));
     const dlAnchor = document.createElement('a');
     dlAnchor.setAttribute('href', dataStr);
-    dlAnchor.setAttribute('download', 'projects.json');
+    dlAnchor.setAttribute('download', 'session-project-view.json');
     dlAnchor.click();
   };
 
@@ -176,7 +176,7 @@ export default function CardManagerModal({
               <button
                 onClick={handleDownloadJson}
                 className="flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
-                title="Download projects.json"
+                title="Download session-project-view.json"
               >
                 <Download className="h-3.5 w-3.5" />
                 <span>Export JSON</span>
@@ -419,7 +419,7 @@ export default function CardManagerModal({
 
         {/* Modal Footer */}
         <div className="flex items-center justify-between border-t border-white/10 px-6 py-3 bg-black/40 text-xs text-slate-400">
-          <span>Config path: <code className="font-mono text-purple-300">src/config/projects.json</code></span>
+          <span>Config path: <code className="font-mono text-purple-300">src/content/ (canonical records)</code></span>
           <button
             onClick={onClose}
             className="rounded-lg bg-white/10 px-4 py-1.5 font-semibold text-white hover:bg-white/20 transition-colors"

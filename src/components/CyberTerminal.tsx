@@ -6,7 +6,6 @@ interface CyberTerminalProps {
   isOpen: boolean;
   onClose: () => void;
   cards: ProjectCard[];
-  onOpenCardManager: () => void;
   cycleTheme: () => void;
   playKeyTick: () => void;
   onSelectTab?: (tab: string) => void;
@@ -23,7 +22,6 @@ export default function CyberTerminal({
   isOpen,
   onClose,
   cards,
-  onOpenCardManager,
   cycleTheme,
   playKeyTick,
   onSelectTab,
@@ -141,14 +139,13 @@ export default function CyberTerminal({
         cards.forEach((c, idx) => {
           addLine(`${idx + 1}. [${c.category}] ${c.title} — ${c.subtitle || c.description}`, 'info');
         });
-        addLine('Type "add" to add or edit cards.');
+        addLine('Published registry is read-only.');
         break;
 
       case 'add':
       case 'manage':
       case 'edit':
-        addLine('Opening Project Card Manager...', 'success');
-        onOpenCardManager();
+        addLine('Published content is maintained in src/content/; public editing is disabled.');
         break;
 
       case 'specs':

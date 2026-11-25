@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import FeaturedSpotlight from '../FeaturedSpotlight';
-import { SITE_PROJECTS } from '../../data/siteProjects';
+import { SITE_PROJECTS } from '../../content/adapters/siteProjects';
 
 describe('FeaturedSpotlight', () => {
   it('renders the featured projects', () => {

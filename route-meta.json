@@ -7,50 +7,49 @@
   },
   "routes": {
     "/": {
-      "title": "Linacre project library — apps, tools, downloads and source",
-      "description": "Browse David Linacre's recorded projects by category, search by task, open browser apps, find available downloads and explore source repositories.",
+      "title": "LIN4CRE \u2014 Independent software & game studio",
+      "description": "Independent software and game studio by David Linacre. Explore original games, useful tools and creative experiments.",
       "canonical": "https://www.linacre.site/",
       "index": true
     },
     "/tools": {
-      "title": "Tools — browser utilities & curated directory | Linacre.site",
+      "title": "Tools \u2014 browser utilities & curated directory | Linacre.site",
       "description": "Private, in-browser utilities (JSON, Base64, timestamps, secure generators, VAT, text tools) plus a curated directory of developer tools. No sign-up, no tracking.",
       "canonical": "https://www.linacre.site/tools",
       "index": true
     },
     "/games": {
-      "title": "Games library — KushCloud and game projects | Linacre.site",
-      "description": "KushCloud first, with other game projects available for playtesting. Direct game and recorded download links without embedded players or automatic audio.",
+      "title": "Games \u2014 LIN4CRE",
+      "description": "Original games, experiments and development templates from the LIN4CRE studio.",
       "canonical": "https://www.linacre.site/games",
-      "image": "https://www.linacre.site/og.png",
       "index": true
     },
     "/lab": {
-      "title": "AI Lab — model sandbox and experiments | Linacre.site",
+      "title": "AI Lab \u2014 model sandbox and experiments | Linacre.site",
       "description": "An interactive AI lab: chat with models, inspect data structures and explore live experiments in the browser.",
       "canonical": "https://www.linacre.site/lab",
       "index": true
     },
     "/identity": {
-      "title": "Identity Studio — brand asset exporter | Linacre.site",
-      "description": "Create and export coordinated SVG and PNG logos, GitHub banners, avatars and social cards — endless generated emblems, full-spectrum colour boxes.",
+      "title": "Identity Studio \u2014 brand asset exporter | Linacre.site",
+      "description": "Create and export coordinated SVG and PNG logos, GitHub banners, avatars and social cards \u2014 endless generated emblems, full-spectrum colour boxes.",
       "canonical": "https://www.linacre.site/identity",
       "index": true
     },
     "/about": {
-      "title": "About David Linacre — full-stack & AI engineer",
+      "title": "About David Linacre \u2014 full-stack & AI engineer",
       "description": "David Linacre's background in software engineering, technical philosophy, skills matrix, career timeline and the site changelog.",
       "canonical": "https://www.linacre.site/about",
       "index": true
     },
     "/contact": {
-      "title": "Contact David Linacre — software & automation projects",
+      "title": "Contact David Linacre \u2014 software & automation projects",
       "description": "Contact David Linacre about software design, developer tools and automation projects. Replies within 12 hours.",
       "canonical": "https://www.linacre.site/contact",
       "index": true
     },
     "/contact/thanks": {
-      "title": "Thanks — message received | Linacre.site",
+      "title": "Thanks \u2014 message received | Linacre.site",
       "description": "Your enquiry has been received. David will reply from david@linacre.site within 12 hours.",
       "canonical": "https://www.linacre.site/contact/thanks",
       "index": false
@@ -63,13 +62,13 @@
     },
     "/cookie-policy": {
       "title": "Cookie & storage policy | Linacre.site",
-      "description": "How linacre.site uses browser storage and consent under UK GDPR / PECR. No tracking cookies — full disclosure of every key.",
+      "description": "How linacre.site uses browser storage and consent under UK GDPR / PECR. No tracking cookies \u2014 full disclosure of every key.",
       "canonical": "https://www.linacre.site/cookie-policy",
       "index": true
     },
     "/terms": {
       "title": "Terms of service | Linacre.site",
-      "description": "Terms of service for David Linacre freelance engineering — engagements, deliverables, liability cap, governing law (England & Wales).",
+      "description": "Terms of service for David Linacre freelance engineering \u2014 engagements, deliverables, liability cap, governing law (England & Wales).",
       "canonical": "https://www.linacre.site/terms",
       "index": true
     },
@@ -80,21 +79,27 @@
       "index": true
     },
     "/mob-deals": {
-      "title": "Mob Deals — Compare UK SIM-Only Deals & PAC Code Switcher Guide",
+      "title": "Mob Deals \u2014 Compare UK SIM-Only Deals & PAC Code Switcher Guide",
       "description": "Filter UK 5G SIM-only contracts by budget and data allowance. Follow the 3-step PAC code guide to switch networks seamlessly.",
       "canonical": "https://www.linacre.site/mob-deals",
       "index": true
     },
     "/pokeguru": {
-      "title": "PokeGuru — Search 126+ UK Pokémon TCG Sets & Market Prices",
-      "description": "Browse UK Pokémon TCG set expansion releases, track chase card market values in GBP (£), and evaluate card rarity tier lists.",
+      "title": "PokeGuru \u2014 Search 126+ UK Pok\u00e9mon TCG Sets & Market Prices",
+      "description": "Browse UK Pok\u00e9mon TCG set expansion releases, track chase card market values in GBP (\u00a3), and evaluate card rarity tier lists.",
       "canonical": "https://www.linacre.site/pokeguru",
       "index": true
     },
     "/ops": {
-      "title": "Mission Control — agents, flows and build receipts | Linacre.site",
+      "title": "Mission Control \u2014 agents, flows and build receipts | Linacre.site",
       "description": "An illustrated command deck for Linacre projects, agent flow definitions, trigger setup and published build receipts. Runtime connections are clearly identified.",
       "canonical": "https://www.linacre.site/ops",
+      "index": true
+    },
+    "/projects": {
+      "title": "Projects \u2014 LIN4CRE",
+      "description": "Practical software, tools and experiments by David Linacre. Explore the work and source.",
+      "canonical": "https://www.linacre.site/projects",
       "index": true
     }
   }

@@ -3,21 +3,71 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "redirects": [
-    { "source": "/projects", "destination": "/", "permanent": true },
-    { "source": "/projects/:path*", "destination": "/", "permanent": true },
-    { "source": "/toolkit", "destination": "/tools", "permanent": true },
-    { "source": "/playground", "destination": "/tools", "permanent": true },
-    { "source": "/learn", "destination": "/tools", "permanent": true },
-    { "source": "/blog", "destination": "/", "permanent": true },
-    { "source": "/blog/:path*", "destination": "/", "permanent": true },
-    { "source": "/status", "destination": "/", "permanent": true },
-    { "source": "/now", "destination": "/about", "permanent": true },
-    { "source": "/dashboard", "destination": "/", "permanent": true },
-    { "source": "/low-stakes", "destination": "/", "permanent": true },
-    { "source": "/dkma", "destination": "/", "permanent": true },
-    { "source": "/agents", "destination": "/lab", "permanent": true },
-    { "source": "/work", "destination": "/contact", "permanent": true },
-    { "source": "/book", "destination": "/contact", "permanent": true }
+    {
+      "source": "/toolkit",
+      "destination": "/tools",
+      "permanent": true
+    },
+    {
+      "source": "/playground",
+      "destination": "/tools",
+      "permanent": true
+    },
+    {
+      "source": "/learn",
+      "destination": "/tools",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/status",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/now",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/low-stakes",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/dkma",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/agents",
+      "destination": "/lab",
+      "permanent": true
+    },
+    {
+      "source": "/work",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/book",
+      "destination": "/contact",
+      "permanent": true
+    }
   ],
   "headers": [
     {
@@ -90,10 +140,6 @@
           "value": "nosniff"
         },
         {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
         },
@@ -112,15 +158,66 @@
         {
           "key": "X-DNS-Prefetch-Control",
           "value": "on"
+        }
+      ]
+    },
+    {
+      "source": "/((?!games/(circuit|decrypt|gridlock|mines|pulse|tiles|trigger|afterglow)\\.html$|published/games/[a-z0-9-]+/build/.*).*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
         },
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://play.pokemonshowdown.com https://*.githubusercontent.com https://www.linacre.site; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://generativelanguage.googleapis.com https://*.googleapis.com https://api.openai.com https://api.anthropic.com https://vercel.live wss:; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
         }
       ]
+    },
+    {
+      "source": "/games/(circuit|decrypt|gridlock|mines|pulse|tiles|trigger|afterglow)\\.html",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'sha256-G1vN0bLK/IefGmcDJOwTTp8RrX9w9hYsEvzt8gYsfvw='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'self'"
+        }
+      ]
+    },
+    {
+      "source": "/published/games/[a-z0-9-]+/build/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; media-src 'self' blob:; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'self'"
+        }
+      ]
     }
   ],
   "rewrites": [
+    {
+      "source": "/games/:slug/play",
+      "destination": "/games/:slug/play/index.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/projects/index.html"
+    },
+    {
+      "source": "/projects/:slug",
+      "destination": "/projects/:slug/index.html"
+    },
+    {
+      "source": "/games/:slug",
+      "destination": "/games/:slug/index.html"
+    },
     {
       "source": "/api/:path*",
       "destination": "/api/server.ts"
@@ -140,34 +237,6 @@
     {
       "source": "/games",
       "destination": "/games/index.html"
-    },
-    {
-      "source": "/games/circuit",
-      "destination": "/games/circuit.html"
-    },
-    {
-      "source": "/games/decrypt",
-      "destination": "/games/decrypt.html"
-    },
-    {
-      "source": "/games/pulse",
-      "destination": "/games/pulse.html"
-    },
-    {
-      "source": "/games/trigger",
-      "destination": "/games/trigger.html"
-    },
-    {
-      "source": "/games/tiles",
-      "destination": "/games/tiles.html"
-    },
-    {
-      "source": "/games/mines",
-      "destination": "/games/mines.html"
-    },
-    {
-      "source": "/games/gridlock",
-      "destination": "/games/gridlock.html"
     },
     {
       "source": "/lab",
@@ -231,5 +300,5 @@
     }
   ],
   "trailingSlash": false,
-  "cleanUrls": true
+  "cleanUrls": false
 }

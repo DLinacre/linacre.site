@@ -1,0 +1,42 @@
+[
+  {
+    "name": "EV",
+    "kind": "Private",
+    "emoji": "🔐",
+    "blurb": "Voice-controlled personal assistant hub linking Alexa to desktop automation.",
+    "tags": ["voice", "assistant", "alexa", "private"],
+    "private": true
+  },
+  {
+    "name": "knowledge-vault",
+    "kind": "Private",
+    "emoji": "🔐",
+    "blurb": "Curated engineering knowledge base — patterns, snippets and reference notes.",
+    "tags": ["knowledge", "notes", "patterns", "private"],
+    "private": true
+  },
+  {
+    "name": "linacre-toolkit",
+    "kind": "Private",
+    "emoji": "🔐",
+    "blurb": "Small CLI & web utilities for everyday development and ops tasks.",
+    "tags": ["cli", "utilities", "toolkit", "private"],
+    "private": true
+  },
+  {
+    "name": "linacre-devops-hub",
+    "kind": "Private",
+    "emoji": "🔐",
+    "blurb": "CI/CD templates, Dockerfiles and deployment automation shared across projects.",
+    "tags": ["devops", "ci", "docker", "templates", "private"],
+    "private": true
+  },
+  {
+    "name": "NixLabs",
+    "kind": "Private",
+    "emoji": "🔐",
+    "blurb": "Declarative-environment lab — reproducible Nix dev shells and build configs.",
+    "tags": ["nix", "dev-shells", "reproducible", "private"],
+    "private": true
+  }
+]

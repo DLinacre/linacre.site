@@ -1,6 +1,6 @@
 import { ArrowUpRight, Code2 } from 'lucide-react';
 import { motion } from 'motion/react';
-import { SITE_PROJECTS } from '../data/siteProjects';
+import { SITE_PROJECTS } from '../content/adapters/siteProjects';
 
 /**
  * FeaturedSpotlight — a hero banner of the featured flagship projects.

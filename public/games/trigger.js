@@ -2,7 +2,7 @@
   'use strict';
 
   const KEY = 'linacre.trigger.v1';
-  const BASE = 'https://linacre.site/games/trigger';
+  const BASE = 'https://linacre.site/games/trigger.html';
   const TARGET = 5; // rounds to win a duel
   const SOLO_ROUNDS = 5;
   const FAKE_CHANCE = 0.22;

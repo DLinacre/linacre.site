@@ -1,0 +1,282 @@
+[
+  {
+    "id": "slime_factory_tycoon",
+    "name": "Slime Factory Tycoon 🟢",
+    "category": "start",
+    "description": "Roblox tycoon source template. Not offered here as a playable game.",
+    "url": "https://github.com/DLinacre/slime-factory-tycoon",
+    "host": "github.com/DLinacre/slime-factory-tycoon",
+    "searchKeywords": "slime factory tycoon roblox luau source template linacre",
+    "tag": "Source template"
+  },
+  {
+    "id": "aeroflap",
+    "name": "AeroFlap 🚀",
+    "category": "start",
+    "description": "Cyberpunk arcade flight game — 10 character mechs, customizable obstacle physics, biometric passkeys, and synthesized Web Audio.",
+    "url": "https://LIN4CRE.github.io/AeroFlap/",
+    "host": "LIN4CRE.github.io/AeroFlap",
+    "searchKeywords": "aeroflap flappy bird arcade cyberpunk cyber synthwave game linacre",
+    "tag": "Game · Live"
+  },
+  {
+    "id": "circuit",
+    "name": "Circuit 🔌",
+    "category": "start",
+    "description": "Rotate every wire until the whole grid lights up — procedural puzzles with a shared daily grid and par.",
+    "url": "/games/circuit",
+    "host": "linacre.site/games",
+    "searchKeywords": "circuit puzzle wire rotate grid daily arcade game linacre",
+    "tag": "Game · Live"
+  },
+  {
+    "id": "decrypt",
+    "name": "Decrypt 🔓",
+    "category": "start",
+    "description": "Crack a four-symbol code in eight guesses — pure deduction with a daily streak and challenge links.",
+    "url": "/games/decrypt",
+    "host": "linacre.site/games",
+    "searchKeywords": "decrypt code logic mastermind deduction daily streak game linacre",
+    "tag": "Game · Live"
+  },
+  {
+    "id": "pulse",
+    "name": "Pulse 🫀",
+    "category": "start",
+    "description": "Repeat the signal, one step longer each round — solo memory game or pass-and-play duel.",
+    "url": "/games/pulse",
+    "host": "linacre.site/games",
+    "searchKeywords": "pulse memory simon signal repeat duel daily game linacre",
+    "tag": "Game · Live"
+  },
+  {
+    "id": "trigger",
+    "name": "Trigger ⚡",
+    "category": "start",
+    "description": "Two-player reflex game on one phone — green means go, amber is a trap. First to five wins.",
+    "url": "/games/trigger",
+    "host": "linacre.site/games",
+    "searchKeywords": "trigger reflex two player reaction game duel linacre",
+    "tag": "Game · Live"
+  },
+  {
+    "id": "gridlock",
+    "name": "Gridlock 〰️",
+    "category": "start",
+    "description": "Draw a line, close a square, go again — pass-and-play or take on a chain-aware AI.",
+    "url": "/games/gridlock",
+    "host": "linacre.site/games",
+    "searchKeywords": "gridlock dots and boxes strategy two player ai game linacre",
+    "tag": "Game · Live"
+  },
+  {
+    "id": "facerater_ai",
+    "name": "FaceRater AI ✨",
+    "category": "start",
+    "description": "Neutral aesthetic face scoring & instant AI reasoning card with shareable TikTok/Instagram 1080x1350 layouts.",
+    "url": "https://ai-face-rater-next.vercel.app",
+    "host": "ai-face-rater-next.vercel.app",
+    "searchKeywords": "face rater ai aesthetic scoring vision selfie ratings viral tiktok vercel dlinacre",
+    "tag": "App · Live"
+  },
+  {
+    "id": "pixel_heist",
+    "name": "Pixel Heist 🚨",
+    "category": "start",
+    "description": "Cyberpunk stealth heist arcade game built with React 19 & Phaser 3. Procedural neon vaults, guard AI, laser grids & HMAC high scores.",
+    "url": "https://dlinacre.github.io/pixel-heist/",
+    "host": "dlinacre.github.io/pixel-heist",
+    "searchKeywords": "pixel heist game stealth phaser cyberpunk arcade arcade game procedural lockpicking dlinacre github pages",
+    "tag": "Game · Live"
+  },
+  {
+    "id": "grumpy_guy_ai",
+    "name": "Grumpy Guy AI ಠ_ಠ",
+    "category": "start",
+    "description": "Your disagreeable AI copilot — motivation, with complaints. Reality checks with custom tones & speech synthesis.",
+    "url": "https://dlinacre.github.io/grumpy-guy-ai/",
+    "host": "dlinacre.github.io/grumpy-guy-ai",
+    "searchKeywords": "grumpy guy ai motivation copilot disagreeable reality check react vite speak synthesis dlinacre github pages",
+    "tag": "App · Live"
+  },
+  {
+    "id": "poke_flip_ai",
+    "name": "PokéFlip AI",
+    "category": "start",
+    "description": "Real-time arbitrage, high-frequency card flipping & predictive TCG valuation engine powered by Gemini.",
+    "url": "https://pok-flip-ai.vercel.app",
+    "host": "pok-flip-ai.vercel.app",
+    "searchKeywords": "poke flip ai pokemon tcg arbitrage valuation high frequency trading gemini cardmarket ebay",
+    "tag": "App · Live"
+  },
+  {
+    "id": "nic_food_decider",
+    "name": "Nic's Food Decider",
+    "category": "start",
+    "description": "One-click decision engine for dinner — cook or takeaway with weighted preferences & dietary filters.",
+    "url": "https://nic-food-decider.vercel.app",
+    "host": "nic-food-decider.vercel.app",
+    "searchKeywords": "nic food decider dinner meal decision takeaway cook recipes flask vercel",
+    "tag": "App · Live"
+  },
+  {
+    "id": "payhip_scraper",
+    "name": "PayHip Scraper",
+    "category": "start",
+    "description": "Digital product intelligence for Payhip: live marketplace scraping, deterministic scoring & Arena.ai prompts.",
+    "url": "https://payhipscraper-production.up.railway.app",
+    "host": "payhipscraper-production.up.railway.app",
+    "searchKeywords": "payhip scraper digital product intelligence market research arena ai node railway",
+    "tag": "App · Live"
+  },
+  {
+    "id": "opagent",
+    "name": "Personal OP Agent",
+    "category": "start",
+    "description": "Zero-setup client-side AI workspace & prompt controller. Runs 100% in your browser.",
+    "url": "/tools/opagent.html",
+    "host": "linacre.site/tools/opagent.html",
+    "searchKeywords": "opagent personal ai agent prompt workspace single file html",
+    "tag": "App · Live"
+  },
+  {
+    "id": "arena_audit",
+    "name": "Arena Audit Prompt Builder",
+    "category": "start",
+    "description": "Universal browser audit prompt generator for engineering, UX, security, and performance reviews.",
+    "url": "https://dlinacre.github.io/a-audit/",
+    "host": "dlinacre.github.io/a-audit",
+    "searchKeywords": "arena audit prompt builder security performance code quality",
+    "tag": "App · Live"
+  },
+  {
+    "id": "apk_hub",
+    "name": "Android APK Launch Hub",
+    "category": "start",
+    "description": "Quick launcher and download index for David's Android utilities and debloat tools.",
+    "url": "/tools/apk-hub.html",
+    "host": "linacre.site/tools/apk-hub.html",
+    "searchKeywords": "apk hub launcher android utilities uninstaller",
+    "tag": "App · Live"
+  },
+  {
+    "id": "vscode",
+    "name": "VS Code",
+    "category": "start",
+    "description": "Gold-standard code editor with essential TypeScript, Git, and React extensions.",
+    "url": "https://code.visualstudio.com",
+    "host": "code.visualstudio.com",
+    "searchKeywords": "vs code editor microsoft extensions vscode",
+    "tag": "Free"
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "category": "start",
+    "description": "Version control, open-source portfolio hosting, Actions CI/CD, and release management.",
+    "url": "https://github.com/DLinacre",
+    "host": "github.com/DLinacre",
+    "searchKeywords": "github version control repos repositories git dlinacre",
+    "tag": "Free"
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "category": "start",
+    "description": "Fundamental CLI version control tool for tracking commits, branches, and releases.",
+    "url": "https://git-scm.com",
+    "host": "git-scm.com",
+    "searchKeywords": "git version control cli terminal commandline",
+    "tag": "Free"
+  },
+  {
+    "id": "react",
+    "name": "React",
+    "category": "build",
+    "description": "Modern component-based UI library powering interactive browser tools and SPAs.",
+    "url": "https://react.dev",
+    "host": "react.dev",
+    "searchKeywords": "react ui library javascript components frontend framework SPA vdom",
+    "tag": "Free"
+  },
+  {
+    "id": "vite",
+    "name": "Vite",
+    "category": "build",
+    "description": "Lightning-fast dev server and frontend build tool with hot module replacement.",
+    "url": "https://vitejs.dev",
+    "host": "vitejs.dev",
+    "searchKeywords": "vite build tool dev server bundler HMR esbuild rollup",
+    "tag": "Free"
+  },
+  {
+    "id": "tailwind",
+    "name": "Tailwind CSS",
+    "category": "build",
+    "description": "Utility-first CSS framework for rapid responsive layouts and consistent styling.",
+    "url": "https://tailwindcss.com",
+    "host": "tailwindcss.com",
+    "searchKeywords": "tailwind css utility styling layout responsive",
+    "tag": "Free"
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "category": "build",
+    "description": "Versatile language used for backend services, automation scripts, and CLI toolchains.",
+    "url": "https://python.org",
+    "host": "python.org",
+    "searchKeywords": "python backend automation scripting CLI fast-api",
+    "tag": "Free"
+  },
+  {
+    "id": "kotlin",
+    "name": "Kotlin & Android SDK",
+    "category": "build",
+    "description": "Native Android development for utilities like Linacre Uninstaller and DKMA Monster.",
+    "url": "https://developer.android.com",
+    "host": "developer.android.com",
+    "searchKeywords": "kotlin android mobile app development sdk",
+    "tag": "Free"
+  },
+  {
+    "id": "dexie",
+    "name": "Dexie / IndexedDB",
+    "category": "build",
+    "description": "Local-first browser database wrapper for fast offline storage without backend dependence.",
+    "url": "https://dexie.org",
+    "host": "dexie.org",
+    "searchKeywords": "dexie indexeddb storage local-first database offline",
+    "tag": "Free"
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "category": "deploy",
+    "description": "Global edge hosting platform with automated GitHub deployment previews and SSL.",
+    "url": "https://vercel.com",
+    "host": "vercel.com",
+    "searchKeywords": "vercel deploy hosting edge serverless static analytics",
+    "tag": "Free"
+  },
+  {
+    "id": "github_pages",
+    "name": "GitHub Pages",
+    "category": "deploy",
+    "description": "Free static hosting directly from GitHub repositories for web guides and games.",
+    "url": "https://pages.github.com",
+    "host": "pages.github.com",
+    "searchKeywords": "github pages static hosting deploy web docs",
+    "tag": "Free"
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare",
+    "category": "deploy",
+    "description": "DNS management, edge workers, and CDN caching for domain performance.",
+    "url": "https://cloudflare.com",
+    "host": "cloudflare.com",
+    "searchKeywords": "cloudflare cdn dns workers security edge",
+    "tag": "Free"
+  }
+]

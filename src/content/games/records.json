@@ -1,0 +1,1172 @@
+[
+  {
+    "id": "tiles",
+    "slug": "tiles",
+    "type": "game",
+    "name": "Tiles",
+    "shortDescription": "Slide, merge and make room for one more move. A number puzzle built around reaching 2048.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/linacre.site",
+    "tags": [
+      "puzzle",
+      "2048",
+      "numbers",
+      "game"
+    ],
+    "provenance": [
+      "DLinacre siteProjects"
+    ],
+    "artwork": "/banners/tiles.webp",
+    "presentation": {
+      "emoji": "🔢"
+    },
+    "playUrl": "/games/tiles.html",
+    "platforms": [
+      "Web browser"
+    ],
+    "inputMethods": [
+      "Keyboard",
+      "Pointer",
+      "Touch"
+    ],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "functional",
+      "scope": "Working-tree browser build tested in Chromium: core keyboard/pointer input and touch-emulated input change real game state, assets load without page errors. Desktop 1280×800 and touch emulation 390×844; no physical-device, complete-game, persistence or public-host certification."
+    },
+    "genre": [
+      "Puzzle",
+      "Arcade"
+    ],
+    "controls": "Swipe on the board or use arrow keys / WASD to slide the tiles. Merge matching values. New Game restarts.",
+    "features": [
+      "Sliding number puzzle",
+      "Keyboard and swipe input",
+      "Score and local best-score display"
+    ],
+    "technologyStack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "status": "Live",
+    "statusNote": "Playable self-hosted browser build verified locally on 2026-11-25. This updated website has not been deployed; physical mobile devices and full game completion remain untested.",
+    "screenshots": [
+      {
+        "src": "/gameplay/tiles.png",
+        "alt": "Tiles during a real Chromium gameplay smoke test, after input changed the game state",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "3cbac931f9c5d3ce0ade377505e1a3e042cfaf12"
+      }
+    ],
+    "relatedIds": [
+      "mines",
+      "circuit",
+      "decrypt"
+    ],
+    "documentation": "https://github.com/DLinacre/linacre.site/blob/main/public/games/tiles.js"
+  },
+  {
+    "id": "mines",
+    "slug": "mines",
+    "type": "game",
+    "name": "Mines",
+    "shortDescription": "Read the clues, flag the mines and uncover the safe cells. A compact minefield logic puzzle.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/linacre.site",
+    "tags": [
+      "puzzle",
+      "minesweeper",
+      "logic",
+      "game"
+    ],
+    "provenance": [
+      "DLinacre siteProjects"
+    ],
+    "artwork": "/banners/mines.webp",
+    "presentation": {
+      "emoji": "💣"
+    },
+    "playUrl": "/games/mines.html",
+    "platforms": [
+      "Web browser"
+    ],
+    "inputMethods": [
+      "Keyboard",
+      "Pointer",
+      "Touch"
+    ],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "functional",
+      "scope": "Working-tree browser build tested in Chromium: core keyboard/pointer input and touch-emulated input change real game state, assets load without page errors. Desktop 1280×800 and touch emulation 390×844; no physical-device, complete-game, persistence or public-host certification."
+    },
+    "genre": [
+      "Puzzle",
+      "Logic"
+    ],
+    "controls": "Tap or click to reveal. Use Flag mode to place flags on touch screens; right-click or press F on a focused cell on desktop. Arrow keys move focus; Enter or Space reveals.",
+    "features": [
+      "Minefield puzzles",
+      "Easy, medium and hard boards",
+      "Touch flag mode and keyboard navigation"
+    ],
+    "technologyStack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "status": "Live",
+    "statusNote": "Playable self-hosted browser build verified locally on 2026-11-25. This updated website has not been deployed; physical mobile devices and full game completion remain untested.",
+    "screenshots": [
+      {
+        "src": "/gameplay/mines.png",
+        "alt": "Mines during a real Chromium gameplay smoke test, after input changed the game state",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "675fbd2929c73097fad3d7690170ae39b04f7d3f"
+      }
+    ],
+    "relatedIds": [
+      "tiles",
+      "circuit",
+      "decrypt"
+    ],
+    "documentation": "https://github.com/DLinacre/linacre.site/blob/main/public/games/mines.js",
+    "development": {
+      "changelog": [
+        {
+          "version": "working-tree",
+          "date": "2026-11-25",
+          "title": "Games showcase rebuild",
+          "changes": [
+            "Fixed touch Flag mode revealing the cell before flagging.",
+            "Kept shared challenge links pointed at the standalone HTML game."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "circuit",
+    "slug": "circuit",
+    "type": "game",
+    "name": "Circuit",
+    "shortDescription": "Rotate every wire until the whole grid lights up. Procedural puzzles, a shared daily grid, and par to beat.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/linacre.site",
+    "tags": [
+      "puzzle",
+      "circuit",
+      "daily",
+      "arcade",
+      "game"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "LIN4CRE curatedWork"
+    ],
+    "technologyStack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "presentation": {
+      "emoji": "🔌"
+    },
+    "playUrl": "/games/circuit.html",
+    "fullDescription": "Rotate conduit tiles until every terminal connects back to the power core in a single closed network, with live current propagation and zero dead ends.",
+    "controls": "Click or tap a tile to rotate it. Right-click or hold to rotate backwards. Use arrow keys to move focus and Enter or Space to rotate; Shift rotates backwards. Z undoes a move; R resets.",
+    "genre": [
+      "Puzzle",
+      "Logic"
+    ],
+    "modes": "3×3 to 7×7 campaign progression & seeded 5×5 daily grid",
+    "platforms": [
+      "Web browser"
+    ],
+    "inputMethods": [
+      "Keyboard",
+      "Pointer",
+      "Touch"
+    ],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "functional",
+      "scope": "Working-tree browser build tested in Chromium: core keyboard/pointer input and touch-emulated input change real game state, assets load without page errors. Desktop 1280×800 and touch emulation 390×844; no physical-device, complete-game, persistence or public-host certification."
+    },
+    "features": [
+      "Wire-rotation puzzles",
+      "Daily grid and campaign",
+      "Undo, reset and hint controls"
+    ],
+    "status": "Live",
+    "statusNote": "Playable self-hosted browser build verified locally on 2026-11-25. This updated website has not been deployed; physical mobile devices and full game completion remain untested.",
+    "screenshots": [
+      {
+        "src": "/gameplay/circuit.png",
+        "alt": "Circuit during a real Chromium gameplay smoke test, after input changed the game state",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "6ca94e813bbb8fa3fd24dda3b82b6ff006625887"
+      }
+    ],
+    "artwork": "/banners/circuit.webp",
+    "relatedIds": [
+      "tiles",
+      "mines",
+      "decrypt"
+    ],
+    "documentation": "https://github.com/DLinacre/linacre.site/blob/main/public/games/circuit.js",
+    "development": {
+      "changelog": [
+        {
+          "version": "working-tree",
+          "date": "2026-11-25",
+          "title": "Games showcase rebuild",
+          "changes": [
+            "Clipped decorative board glow to prevent page overflow.",
+            "Kept shared challenge links pointed at the standalone HTML game."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "decrypt",
+    "slug": "decrypt",
+    "type": "game",
+    "name": "Decrypt",
+    "shortDescription": "Crack a four-symbol code in eight guesses. Pure deduction with a daily streak and challenge links.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/linacre.site",
+    "tags": [
+      "logic",
+      "code",
+      "daily",
+      "arcade",
+      "game"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "LIN4CRE curatedWork"
+    ],
+    "technologyStack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "presentation": {
+      "emoji": "🔓"
+    },
+    "playUrl": "/games/decrypt.html",
+    "fullDescription": "Deduce a hidden four-symbol sequence from six colour-coded tokens within eight guesses, guided by exact-position and misplaced feedback pegs.",
+    "controls": "Choose symbols with the on-screen pad or keys 1–6 / A–F. Fill four slots and press Enter or Submit. Backspace removes a symbol.",
+    "genre": [
+      "Puzzle",
+      "Logic"
+    ],
+    "modes": "Shared daily cipher & unlimited practice rounds with local streak tracking",
+    "platforms": [
+      "Web browser"
+    ],
+    "inputMethods": [
+      "Keyboard",
+      "Pointer",
+      "Touch"
+    ],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "functional",
+      "scope": "Working-tree browser build tested in Chromium: core keyboard/pointer input and touch-emulated input change real game state, assets load without page errors. Desktop 1280×800 and touch emulation 390×844; no physical-device, complete-game, persistence or public-host certification."
+    },
+    "features": [
+      "Symbol code-breaking",
+      "Exact and misplaced feedback",
+      "Daily and challenge codes"
+    ],
+    "status": "Live",
+    "statusNote": "Playable self-hosted browser build verified locally on 2026-11-25. This updated website has not been deployed; physical mobile devices and full game completion remain untested.",
+    "screenshots": [
+      {
+        "src": "/gameplay/decrypt.png",
+        "alt": "Decrypt during a real Chromium gameplay smoke test, after input changed the game state",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "aa162d28064d1b6d5e7913952f1f46096a750cea"
+      }
+    ],
+    "artwork": "/banners/decrypt.webp",
+    "relatedIds": [
+      "tiles",
+      "mines",
+      "circuit"
+    ],
+    "documentation": "https://github.com/DLinacre/linacre.site/blob/main/public/games/decrypt.js"
+  },
+  {
+    "id": "pulse",
+    "slug": "pulse",
+    "type": "game",
+    "name": "Pulse",
+    "shortDescription": "Repeat the signal, one step longer each round. Solo memory game or pass-and-play duel.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/linacre.site",
+    "tags": [
+      "memory",
+      "duel",
+      "daily",
+      "arcade",
+      "game"
+    ],
+    "provenance": [
+      "DLinacre siteProjects"
+    ],
+    "technologyStack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "presentation": {
+      "emoji": "🫀"
+    },
+    "playUrl": "/games/pulse.html",
+    "platforms": [
+      "Web browser"
+    ],
+    "inputMethods": [
+      "Keyboard",
+      "Pointer",
+      "Touch"
+    ],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "functional",
+      "scope": "Working-tree browser build tested in Chromium: core keyboard/pointer input and touch-emulated input change real game state, assets load without page errors. Desktop 1280×800 and touch emulation 390×844; no physical-device, complete-game, persistence or public-host certification."
+    },
+    "genre": [
+      "Memory",
+      "Puzzle"
+    ],
+    "controls": "Press Start or Enter. Watch the lit pads, then repeat the sequence with taps, clicks or number keys 1–9.",
+    "features": [
+      "Repeat-the-signal memory game",
+      "Daily, free and local duel selectors",
+      "Optional synthesised sound"
+    ],
+    "status": "Live",
+    "statusNote": "Playable self-hosted browser build verified locally on 2026-11-25. This updated website has not been deployed; physical mobile devices and full game completion remain untested.",
+    "screenshots": [
+      {
+        "src": "/gameplay/pulse.png",
+        "alt": "Pulse during a real Chromium gameplay smoke test, after input changed the game state",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "fa8944a53cc66ffe85cc23da271f94a7d2a6d0a1"
+      }
+    ],
+    "artwork": "/banners/pulse.webp",
+    "relatedIds": [
+      "tiles",
+      "mines",
+      "circuit"
+    ],
+    "documentation": "https://github.com/DLinacre/linacre.site/blob/main/public/games/pulse.js"
+  },
+  {
+    "id": "trigger",
+    "slug": "trigger",
+    "type": "game",
+    "name": "Trigger",
+    "shortDescription": "Wait for the signal and hit your side. A reaction game with false starts and local duels.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/linacre.site",
+    "tags": [
+      "reflex",
+      "2 player",
+      "arcade",
+      "game"
+    ],
+    "provenance": [
+      "DLinacre siteProjects"
+    ],
+    "technologyStack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "presentation": {
+      "emoji": "⚡"
+    },
+    "playUrl": "/games/trigger.html",
+    "platforms": [
+      "Web browser"
+    ],
+    "inputMethods": [
+      "Keyboard",
+      "Pointer",
+      "Touch"
+    ],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "functional",
+      "scope": "Working-tree browser build tested in Chromium: core keyboard/pointer input and touch-emulated input change real game state, assets load without page errors. Desktop 1280×800 and touch emulation 390×844; no physical-device, complete-game, persistence or public-host certification."
+    },
+    "genre": [
+      "Arcade",
+      "Reaction"
+    ],
+    "controls": "Start a round and wait for NOW. Tap or click your side, or press A for player one and L for player two. Enter starts a round.",
+    "features": [
+      "Reaction-time rounds",
+      "Solo and local duel selectors",
+      "False-start penalties"
+    ],
+    "status": "Live",
+    "statusNote": "Playable self-hosted browser build verified locally on 2026-11-25. This updated website has not been deployed; physical mobile devices and full game completion remain untested.",
+    "screenshots": [
+      {
+        "src": "/gameplay/trigger.png",
+        "alt": "Trigger during a real Chromium gameplay smoke test, after input changed the game state",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "d224dbb78d09eee5129e72ba6f9108f1297f7ed2"
+      }
+    ],
+    "artwork": "/banners/trigger.webp",
+    "relatedIds": [
+      "tiles",
+      "tap-slap",
+      "kushcloud"
+    ],
+    "documentation": "https://github.com/DLinacre/linacre.site/blob/main/public/games/trigger.js"
+  },
+  {
+    "id": "gridlock",
+    "slug": "gridlock",
+    "type": "game",
+    "name": "Gridlock",
+    "shortDescription": "Draw a line, close a square, go again. Pass-and-play or take on a chain-aware AI.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/linacre.site",
+    "tags": [
+      "strategy",
+      "2 player",
+      "vs ai",
+      "arcade",
+      "game"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "LIN4CRE curatedWork"
+    ],
+    "technologyStack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "presentation": {
+      "emoji": "〰️"
+    },
+    "playUrl": "/games/gridlock.html",
+    "fullDescription": "Claim one edge per turn on a crisp lattice board; completing the fourth wall of a square captures it and grants an immediate bonus move.",
+    "controls": "Click or tap an edge to draw it; complete boxes to score. Tab focuses edges, Enter or Space selects. New Game restarts.",
+    "genre": [
+      "Strategy",
+      "Puzzle"
+    ],
+    "modes": "Solo vs chain-aware machine opponent & 2-player pass-and-play (3×3, 4×4, 5×5)",
+    "platforms": [
+      "Web browser"
+    ],
+    "inputMethods": [
+      "Keyboard",
+      "Pointer",
+      "Touch"
+    ],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "functional",
+      "scope": "Working-tree browser build tested in Chromium: core keyboard/pointer input and touch-emulated input change real game state, assets load without page errors. Desktop 1280×800 and touch emulation 390×844; no physical-device, complete-game, persistence or public-host certification."
+    },
+    "features": [
+      "Dots-and-boxes board",
+      "Machine opponent and local two-player mode",
+      "Board-size selector"
+    ],
+    "status": "Live",
+    "statusNote": "Playable self-hosted browser build verified locally on 2026-11-25. This updated website has not been deployed; physical mobile devices and full game completion remain untested.",
+    "screenshots": [
+      {
+        "src": "/gameplay/gridlock.png",
+        "alt": "Gridlock during a real Chromium gameplay smoke test, after input changed the game state",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "837f38b26609aaecfc08a1bb031b27be4ffbbff8"
+      }
+    ],
+    "artwork": "/banners/gridlock.webp",
+    "relatedIds": [
+      "tiles",
+      "mines",
+      "circuit"
+    ],
+    "documentation": "https://github.com/DLinacre/linacre.site/blob/main/public/games/gridlock.js"
+  },
+  {
+    "id": "tap-slap",
+    "slug": "tap-slap",
+    "type": "game",
+    "name": "Tap & Slap",
+    "shortDescription": "Dance-mat beat ’em up — tap to kill enemies ON the beat. Four neon lanes, combos, daily challenges.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/tap-and-slap",
+    "tags": [
+      "rhythm",
+      "game",
+      "music",
+      "beat",
+      "arcade"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "data.ts MANUAL_PROJECTS"
+    ],
+    "artwork": "/banners/tap-and-slap.webp",
+    "technologyStack": [
+      "Next.js",
+      "Phaser 3",
+      "Web Audio"
+    ],
+    "presentation": {
+      "emoji": "🥊"
+    },
+    "playUrl": "https://tap-and-slap.vercel.app",
+    "implementation": "A Next.js 15 + Phaser 3 + TypeScript monolith with a BeatClock-anchored Web Audio scheduler, procedural seeded levels, Prisma + PostgreSQL leaderboards, Auth.js accounts and Playwright E2E coverage.",
+    "role": "Creator and lead developer",
+    "fullDescription": "A dance-mat beat 'em up: tap to kill enemies exactly on the beat. Four neon lanes, combo multipliers up to 8×, original procedural synthwave fight music, daily challenges and a live leaderboard — keyboard or touch, free in the browser.",
+    "genre": [
+      "Arcade"
+    ],
+    "statusNote": "Real game source inspected. Recorded public URL could not be reached from this network-restricted sandbox; current playability and device support are unverified.",
+    "relatedIds": [
+      "tiles",
+      "trigger",
+      "kushcloud"
+    ]
+  },
+  {
+    "id": "kushcloud",
+    "slug": "kushcloud",
+    "type": "game",
+    "name": "KushCloud",
+    "shortDescription": "Chill one-tap arcade flyer — synth audio, unlockable cosmetics and power-ups.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/KushCloud",
+    "tags": [
+      "arcade",
+      "flappy",
+      "game",
+      "synth",
+      "canvas",
+      "chill",
+      "procedural",
+      "react"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "data.ts MANUAL_PROJECTS",
+      "data.ts MANUAL_PROJECTS"
+    ],
+    "artwork": "/banners/kushcloud.webp",
+    "technologyStack": [
+      "React",
+      "TypeScript",
+      "Canvas 2D"
+    ],
+    "presentation": {
+      "emoji": "🌿",
+      "pinned": true
+    },
+    "playUrl": "https://dlinacre.github.io/KushCloud/",
+    "features": [
+      "One-tap canvas arcade flight",
+      "Synthesised Web Audio sound",
+      "Local score persistence"
+    ],
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "page-retrieval",
+      "scope": "Public UI retrieved during audit, not a functional or device-install test."
+    },
+    "implementation": "Used Canvas 2D, Web Audio, deterministic game state, adaptive quality, keyboard/touch controls, and a PWA-ready React shell.",
+    "role": "Game designer and frontend engineer",
+    "fullDescription": "One-tap browser arcade flyer with power-ups and cosmetic unlocks. Online leaderboard behaviour has not been independently tested.",
+    "genre": [
+      "Arcade"
+    ],
+    "statusNote": "Real game source inspected. Recorded public URL could not be reached from this network-restricted sandbox; current playability and device support are unverified.",
+    "relatedIds": [
+      "tiles",
+      "trigger",
+      "tap-slap"
+    ]
+  },
+  {
+    "id": "aeroflap",
+    "slug": "aeroflap",
+    "type": "game",
+    "name": "AeroFlap",
+    "shortDescription": "Cyberpunk-themed arcade flyer with character skins and configurable obstacles.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/AeroFlap",
+    "tags": [
+      "arcade",
+      "flappy",
+      "game",
+      "cyberpunk",
+      "synthwave",
+      "passkeys",
+      "canvas",
+      "react"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "data.ts MANUAL_PROJECTS"
+    ],
+    "artwork": "/banners/aeroflap.webp",
+    "technologyStack": [
+      "React 19",
+      "TypeScript",
+      "Tailwind v4",
+      "Canvas 2D",
+      "Web Audio API"
+    ],
+    "features": [
+      "Canvas flight mechanics",
+      "Configurable obstacles",
+      "Synthesised audio"
+    ],
+    "presentation": {
+      "emoji": "🚀"
+    },
+    "playUrl": "https://LIN4CRE.github.io/AeroFlap/",
+    "implementation": "Engineered Canvas 2D render loop, custom gravity physics, procedural Web Audio synthesizer, WebAuthn biometric passkeys, and Tailwind v4 responsive shell.",
+    "role": "Game designer and fullstack engineer",
+    "fullDescription": "Next-gen responsive cyberpunk arcade flight game with 10 character mechs, customizable obstacle physics, biometric passkeys, and synthesized Web Audio.",
+    "genre": [
+      "Arcade"
+    ],
+    "statusNote": "Real game source inspected. Recorded public URL could not be reached from this network-restricted sandbox; current playability and device support are unverified.",
+    "relatedIds": [
+      "tiles",
+      "trigger",
+      "tap-slap"
+    ]
+  },
+  {
+    "id": "afterglow",
+    "slug": "afterglow",
+    "type": "game",
+    "name": "AFTERGLOW",
+    "shortDescription": "Paint with long-exposure light — an original endless light-painting game.",
+    "featured": true,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/afterglow",
+    "tags": [
+      "light",
+      "painting",
+      "endless",
+      "creative",
+      "game",
+      "light-painting",
+      "canvas",
+      "art",
+      "ambient"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "LIN4CRE curatedWork",
+      "data.ts MANUAL_PROJECTS",
+      "MIT-licensed self-contained index.html imported unmodified from DLinacre/afterglow at 2de56d12d51516533cbc6828180f2b820d427000; license in /games/afterglow.LICENSE.txt"
+    ],
+    "artwork": "/gameplay/afterglow.png",
+    "technologyStack": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Canvas 2D"
+    ],
+    "presentation": {
+      "emoji": "✦"
+    },
+    "playUrl": "/games/afterglow.html",
+    "features": [
+      "Free Studio light painting",
+      "Guided photo challenges",
+      "Brush and palette selection",
+      "Undo and redo"
+    ],
+    "fullDescription": "Paint with long-exposure light in a quiet darkroom canvas—trace constellation targets to unlock luminous brushes and palettes, or sketch freeform ribbons with live ambient synthesis.",
+    "controls": "Choose Start Shooting or Free Studio. Hold and drag with a mouse or touch to paint light. Z undoes, X redoes, Space develops a guided photo; arrow keys adjust brush size.",
+    "genre": [
+      "Creative",
+      "Relaxing"
+    ],
+    "modes": "Guided constellation targets & freeform darkroom",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "functional",
+      "scope": "Working-tree browser build tested in Chromium: core keyboard/pointer input and touch-emulated input change real game state, assets load without page errors. Desktop 1280×800 and touch emulation 390×844; no physical-device, complete-game, persistence or public-host certification."
+    },
+    "implementation": "Built a dependency-free HTML5 engine with three layered canvases and additive glow blending, a seeded PRNG for deterministic endless levels, a synthesised Web Audio ambient engine, snapshot-based undo/redo, and a registry architecture so brushes, palettes and shapes extend in a single line. Auto-deployed to GitHub Pages via GitHub Actions.",
+    "role": "Creator & Lead Developer",
+    "platforms": [
+      "Web browser"
+    ],
+    "inputMethods": [
+      "Keyboard",
+      "Pointer",
+      "Touch"
+    ],
+    "status": "Live",
+    "statusNote": "Playable self-hosted browser build verified locally on 2026-11-25. This updated website has not been deployed; physical mobile devices and full game completion remain untested.",
+    "screenshots": [
+      {
+        "src": "/gameplay/afterglow.png",
+        "alt": "AFTERGLOW during a real Chromium gameplay smoke test, after input changed the game state",
+        "capturedAt": "2026-11-25",
+        "sourceSha": "61f1a8dd6c1ffad7c657a4796f5354902d23d5b3"
+      }
+    ],
+    "relatedIds": []
+  },
+  {
+    "id": "pixel-heist",
+    "slug": "pixel-heist",
+    "type": "game",
+    "name": "Pixel Heist",
+    "shortDescription": "Cyberpunk stealth-heist arcade — hack terminals, dodge laser grids, escape with loot.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/pixel-heist",
+    "tags": [
+      "stealth",
+      "arcade",
+      "phaser",
+      "cyberpunk"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "data.ts MANUAL_PROJECTS"
+    ],
+    "artwork": "/banners/pixel-heist.webp",
+    "technologyStack": [
+      "React",
+      "Phaser 3",
+      "TypeScript"
+    ],
+    "presentation": {
+      "emoji": "🚨"
+    },
+    "playUrl": "https://dlinacre.github.io/pixel-heist/",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "page-retrieval",
+      "scope": "Public UI retrieved during audit, not a functional or device-install test."
+    },
+    "implementation": "Designed a hybrid React-Phaser architecture with custom laser collision physics, keycard hacking mechanics, and high scores.",
+    "role": "Game architect",
+    "fullDescription": "Cyberpunk stealth heist arcade game with Next.js 15, Phaser 3, and React 19. Features procedural neon vault levels, security lasers, hack terminals, and leaderboards.",
+    "genre": [
+      "Stealth",
+      "Puzzle"
+    ],
+    "statusNote": "Real game source inspected. Recorded public URL could not be reached from this network-restricted sandbox; current playability and device support are unverified.",
+    "relatedIds": [
+      "tiles",
+      "mines",
+      "circuit"
+    ]
+  },
+  {
+    "id": "dragon-rush-heroes",
+    "slug": "dragon-rush-heroes",
+    "type": "game",
+    "name": "Dragon Rush Heroes",
+    "shortDescription": "Anime-inspired action-RPG card battler with summon and combat systems.",
+    "featured": false,
+    "relationship": "original",
+    "sourceRepository": "https://github.com/DLinacre/dragon-rush-heroes",
+    "tags": [
+      "rpg",
+      "cards",
+      "anime",
+      "battler",
+      "gacha"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "dashboard-projects (unverified badges/stats archived)",
+      "data.ts MANUAL_PROJECTS"
+    ],
+    "artwork": "/banners/dragon-rush-heroes.webp",
+    "technologyStack": [
+      "Vanilla JS",
+      "Canvas",
+      "Web Audio"
+    ],
+    "presentation": {
+      "emoji": "🐉",
+      "dashboardCategory": "Games & Creative",
+      "color": "sakura"
+    },
+    "playUrl": "https://dlinacre.github.io/dragon-rush-heroes/",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "page-retrieval",
+      "scope": "Public UI retrieved during audit, not a functional or device-install test."
+    },
+    "implementation": "Engineered an HTML5 Canvas 2D engine with Web Audio synth soundtrack, Gacha RNG verification, and local state persistence.",
+    "role": "Game creator and audio engineer",
+    "fullDescription": "Browser action-RPG card battler. Fighter counts, summon fairness and account synchronisation have not been independently verified.",
+    "genre": [
+      "RPG",
+      "Card"
+    ],
+    "statusNote": "Real game source inspected. Recorded public URL could not be reached from this network-restricted sandbox; current playability and device support are unverified.",
+    "relatedIds": [
+      "digipoke"
+    ]
+  },
+  {
+    "id": "slime-factory-tycoon",
+    "slug": "slime-factory-tycoon",
+    "type": "game",
+    "name": "Slime Factory Tycoon",
+    "shortDescription": "Roblox tycoon source template. Not offered here as a playable game.",
+    "featured": false,
+    "relationship": "template",
+    "sourceRepository": "https://github.com/DLinacre/slime-factory-tycoon",
+    "tags": [
+      "roblox",
+      "tycoon",
+      "luau",
+      "idle",
+      "template"
+    ],
+    "provenance": [
+      "DLinacre siteProjects",
+      "data.ts MANUAL_PROJECTS"
+    ],
+    "artwork": "/games/slime-factory-tycoon/banner.webp",
+    "technologyStack": [
+      "Luau",
+      "Roblox Studio",
+      "Python"
+    ],
+    "presentation": {
+      "emoji": "🟢"
+    },
+    "status": "In Development",
+    "statusNote": "Not yet published to Roblox. Download is a Roblox Studio template.",
+    "platforms": [
+      "Roblox Studio"
+    ],
+    "downloadUrl": "https://github.com/DLinacre/slime-factory-tycoon/releases/download/v0.3.0/SlimeFactoryTycoon-v0.3.0.rbxlx",
+    "documentation": "https://github.com/DLinacre/slime-factory-tycoon/releases/latest",
+    "fullDescription": "Roblox idle-tycoon source template with a downloadable Studio place file. Not a published Roblox experience.",
+    "features": [
+      "Luau service architecture",
+      "Save and progression systems",
+      "Python balance simulator"
+    ],
+    "development": {
+      "systems": [
+        "Save/load with session locking",
+        "Player progression & rebirth prestige",
+        "Generic inventory framework",
+        "Economy & multiplier pipeline",
+        "Achievements",
+        "Daily reward streaks",
+        "Server-persisted settings",
+        "Procedural audio engine",
+        "Themed UI component library",
+        "Promo codes",
+        "Global leaderboards",
+        "Seasonal event framework"
+      ],
+      "changelog": [
+        {
+          "version": "0.3.0",
+          "date": "2026-07-30",
+          "title": "Architecture & brand foundation",
+          "changes": [
+            "Refactored to an auto-discovering service registry with init/start/player lifecycle",
+            "Added declarative Net layer: per-remote validators and rate limits in one table",
+            "Added Validate module rejecting NaN, infinity, oversized strings and type confusion",
+            "Added achievement system with 16 stat-driven unlocks and automatic reward granting",
+            "Added cosmetic framework with 15 items, structurally unable to affect gameplay balance",
+            "Added generic inventory framework with ownership verification and save-size pruning",
+            "Added server-persisted settings with reduced motion, high contrast, text scale and colour-blind modes",
+            "Added pooled procedural audio engine with pentatonic tap combo pitching",
+            "Added themed UI component library with 44px minimum touch targets",
+            "Established visual identity: logo, icon set, banner, and full brand guidelines",
+            "Published v0.3.0 with a downloadable .rbxlx place file — no toolchain required"
+          ]
+        },
+        {
+          "version": "0.2.0",
+          "date": "2026-07-30",
+          "title": "Automation",
+          "changes": [
+            "Added Rojo project for live Studio sync",
+            "Added CI workflow: lint, balance check, and place-file build artifact",
+            "Added dependency-free Python balance simulator with CI gating",
+            "Added promo code system with server-side validation",
+            "Rebalanced rebirth cost after the simulator found first rebirth at 33 minutes, past the churn point"
+          ]
+        },
+        {
+          "version": "0.1.0",
+          "date": "2026-07-30",
+          "title": "Initial foundation",
+          "changes": [
+            "Core tap-to-earn loop with client prediction and batched remotes",
+            "Five upgrades, six factory zones, rebirth prestige",
+            "Pet hatching with server-side RNG and published odds",
+            "Offline earnings, seven-day daily streak, global leaderboards",
+            "Session-locked DataStore persistence and idempotent receipt handling"
+          ]
+        }
+      ],
+      "roadmap": [
+        {
+          "item": "Seasonal event content",
+          "status": "planned"
+        },
+        {
+          "item": "AnalyticsService funnel instrumentation",
+          "status": "planned"
+        },
+        {
+          "item": "Final art pass on pets and zones",
+          "status": "planned"
+        },
+        {
+          "item": "Roblox publication",
+          "status": "planned"
+        }
+      ]
+    },
+    "implementation": "Engineered a session-locked DataStore framework with automated CI testing, pets engine, offline calculations, and open-source codebase.",
+    "role": "Lead game software engineer",
+    "genre": [
+      "Simulation",
+      "Tycoon"
+    ],
+    "relatedIds": [
+      "frostpine"
+    ]
+  },
+  {
+    "id": "frostpine",
+    "slug": "frostpine",
+    "type": "game",
+    "name": "Frostpine",
+    "shortDescription": "Snow-plough game development with vehicle, terrain and cabin systems.",
+    "fullDescription": "Snow-plough game development with vehicle, terrain and cabin systems. A source prototype, not a verified public release.",
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/Frostpine",
+    "featured": false,
+    "genre": [
+      "Simulation"
+    ],
+    "status": "Prototype",
+    "statusNote": "Genuine implementation inspected; installation, gameplay, supported devices and current completion are not verified. No Play Now or download claim.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Inspected src/App.tsx and vehicle/terrain components at a8806dd07110d291bcba5948625c738f59e2d141. No public release or working install verified."
+    },
+    "provenance": [
+      "GAME_INVENTORY.md; refreshed GitHub source inspection 2026-11-25"
+    ],
+    "relatedIds": [
+      "slime-factory-tycoon"
+    ]
+  },
+  {
+    "id": "gyroll",
+    "slug": "gyroll",
+    "type": "game",
+    "name": "Gyroll",
+    "shortDescription": "A rolling-ball obstacle-course prototype with custom physics and track systems.",
+    "fullDescription": "A rolling-ball obstacle-course prototype with custom physics and track systems. A source prototype, not a verified public release.",
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/Gyroll",
+    "featured": false,
+    "genre": [
+      "Arcade",
+      "Physics"
+    ],
+    "status": "Prototype",
+    "statusNote": "Genuine implementation inspected; installation, gameplay, supported devices and current completion are not verified. No Play Now or download claim.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Inspected src/game/physics.ts and documented controls at eac0b135572109f7f487d96948c6db7928dfaa72. No public release or working install verified. Pure game logic tests run independently: 24 passed. This is not a working-browser-build certification."
+    },
+    "provenance": [
+      "GAME_INVENTORY.md; refreshed GitHub source inspection 2026-11-25"
+    ],
+    "relatedIds": [
+      "tiles",
+      "trigger",
+      "tap-slap"
+    ]
+  },
+  {
+    "id": "mmosnake",
+    "slug": "mmosnake",
+    "type": "game",
+    "name": "MmoSnake",
+    "shortDescription": "Snake-game development with a 3D scene and multiplayer server source.",
+    "fullDescription": "Snake-game development with a 3D scene and multiplayer server source. A source prototype, not a verified public release.",
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/MmoSnake",
+    "featured": false,
+    "genre": [
+      "Arcade"
+    ],
+    "status": "Prototype",
+    "statusNote": "Genuine implementation inspected; installation, gameplay, supported devices and current completion are not verified. No Play Now or download claim.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Inspected src/components/GameScene.tsx and server.ts at fd0677410d60e0616ce040f2e6c60218e981d76a. No public release or working install verified."
+    },
+    "provenance": [
+      "GAME_INVENTORY.md; refreshed GitHub source inspection 2026-11-25"
+    ],
+    "relatedIds": [
+      "tiles",
+      "trigger",
+      "tap-slap"
+    ]
+  },
+  {
+    "id": "pulserider",
+    "slug": "pulserider",
+    "type": "game",
+    "name": "PulseRider",
+    "shortDescription": "A reaction-game prototype with solo and local-duel source implementations.",
+    "fullDescription": "A reaction-game prototype with solo and local-duel source implementations. A source prototype, not a verified public release.",
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/PulseRider",
+    "featured": false,
+    "genre": [
+      "Arcade",
+      "Reaction"
+    ],
+    "status": "Prototype",
+    "statusNote": "Genuine implementation inspected; installation, gameplay, supported devices and current completion are not verified. No Play Now or download claim.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Inspected src/components/SoloGame.tsx and LocalDuelGame.tsx at 97b0e9c2181d67de22f19df0791c0b046e79691b. No public release or working install verified."
+    },
+    "provenance": [
+      "GAME_INVENTORY.md; refreshed GitHub source inspection 2026-11-25"
+    ],
+    "relatedIds": [
+      "tiles",
+      "trigger",
+      "tap-slap"
+    ]
+  },
+  {
+    "id": "line-rider",
+    "slug": "line-rider",
+    "type": "game",
+    "name": "LineRider",
+    "shortDescription": "Android drawing-and-physics game development with track persistence.",
+    "fullDescription": "Android drawing-and-physics game development with track persistence. A source prototype, not a verified public release.",
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/LineRider",
+    "featured": false,
+    "genre": [
+      "Physics"
+    ],
+    "status": "Prototype",
+    "statusNote": "Genuine implementation inspected; installation, gameplay, supported devices and current completion are not verified. No Play Now or download claim.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Inspected app/src/main/java/com/example/physics/PhysicsEngine.kt and TrackRepository.kt at e877a7ac79ac70232fd4d4f5fe1cfe7b289a750c. No public release or working install verified."
+    },
+    "provenance": [
+      "GAME_INVENTORY.md; refreshed GitHub source inspection 2026-11-25"
+    ],
+    "relatedIds": [
+      "gyroll"
+    ]
+  },
+  {
+    "id": "daves-dash",
+    "slug": "daves-dash",
+    "type": "game",
+    "name": "Dave’s Dash",
+    "shortDescription": "A side-scrolling game prototype with physics, levels and an editor.",
+    "fullDescription": "A side-scrolling game prototype with physics, levels and an editor. A source prototype, not a verified public release.",
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/Daves-Dash-",
+    "featured": false,
+    "genre": [
+      "Platformer"
+    ],
+    "status": "Prototype",
+    "statusNote": "Genuine implementation inspected; installation, gameplay, supported devices and current completion are not verified. No Play Now or download claim.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Inspected src/game/physics.ts, levels.ts and components/GameCanvas.tsx at 7c332f40614f5708329405445d131e717ef256a6. No public release or working install verified. Pure physics tests run independently: 8 passed. This is not a working-browser-build certification."
+    },
+    "provenance": [
+      "GAME_INVENTORY.md; refreshed GitHub source inspection 2026-11-25"
+    ],
+    "relatedIds": []
+  },
+  {
+    "id": "digipoke",
+    "slug": "digipoke",
+    "type": "game",
+    "name": "DigiPoke",
+    "shortDescription": "Creature-collecting battle-game development with local-first state.",
+    "fullDescription": "Creature-collecting battle-game development with local-first state. A source prototype, not a verified public release.",
+    "relationship": "original",
+    "sourceRepository": "https://github.com/LIN4CRE/digipoke",
+    "featured": false,
+    "genre": [
+      "RPG",
+      "Creature collecting"
+    ],
+    "status": "Prototype",
+    "statusNote": "Genuine implementation inspected; installation, gameplay, supported devices and current completion are not verified. No Play Now or download claim.",
+    "lastVerifiedDate": "2026-11-25",
+    "verification": {
+      "method": "source",
+      "scope": "Inspected apps/web/src/domain/battle.js and apps/web/src/ui/screens/battle.js at d9279c5020627ce03832f98a6a4d9a27a496f386. No public release or working install verified."
+    },
+    "provenance": [
+      "GAME_INVENTORY.md; refreshed GitHub source inspection 2026-11-25"
+    ],
+    "relatedIds": [
+      "dragon-rush-heroes"
+    ]
+  }
+]

@@ -1,3 +1,4 @@
+import { dashboardAuthConfigured, dashboardPasswordMatches } from './dashboard-auth';
 import express from 'express';
 import type { Request, Response, NextFunction } from 'express';
 import path from 'path';
@@ -75,11 +76,9 @@ function chatInputGuard(req: Request, res: Response, next: NextFunction) {
     prompt !== undefined &&
     (typeof prompt !== 'string' || prompt.length === 0 || prompt.length > MAX_PROMPT_CHARS)
   ) {
-    return res
-      .status(400)
-      .json({
-        error: `Prompt must be a non-empty string of at most ${MAX_PROMPT_CHARS} characters.`,
-      });
+    return res.status(400).json({
+      error: `Prompt must be a non-empty string of at most ${MAX_PROMPT_CHARS} characters.`,
+    });
   }
   for (const arr of [history, messages]) {
     if (arr === undefined) continue;
@@ -115,7 +114,7 @@ function timingSafeEqualStr(a: string, b: string): boolean {
 
 function isDashAuthed(req: Request): boolean {
   const secret = process.env.DASHBOARD_SESSION_SECRET;
-  if (!secret) return false;
+  if (!dashboardAuthConfigured(secret, process.env.DASHBOARD_PASSWORD_HASH)) return false;
   const cookie = req.headers.cookie ?? '';
   const match = cookie.match(new RegExp(`${COOKIE_NAME}=([^;]+)`));
   if (!match) return false;
@@ -126,10 +125,6 @@ function isDashAuthed(req: Request): boolean {
 
 function checkAuth(req: Request, res: Response, next: NextFunction) {
   if (isDashAuthed(req)) {
-    return next();
-  }
-  const isLocal = req.hostname === 'localhost' || req.hostname === '127.0.0.1';
-  if (isLocal && process.env.NODE_ENV !== 'production') {
     return next();
   }
   return res.status(401).json({ error: 'Unauthorized. Dashboard session required.' });
@@ -224,12 +219,9 @@ app.post('/api/contact', (req, res) => {
   const isUrlEncoded = contentType.includes('application/x-www-form-urlencoded');
 
   if (!isJson && !isUrlEncoded) {
-    return res
-      .status(400)
-      .json({
-        error:
-          'Invalid Content-Type. Must be application/json or application/x-www-form-urlencoded',
-      });
+    return res.status(400).json({
+      error: 'Invalid Content-Type. Must be application/json or application/x-www-form-urlencoded',
+    });
   }
 
   const { email, subject, message, name } = req.body ?? {};
@@ -368,6 +360,13 @@ app.post('/api/contact', (req, res) => {
     }
   }
 
+  // No durable delivery service is configured. Never report a cloud submission as delivered.
+  if (process.env.NODE_ENV === 'production')
+    return sendError(
+      503,
+      'The contact form is not configured for reliable delivery. Please email david@linacre.site directly.',
+    );
+
   const requestId = `req_${crypto.randomBytes(8).toString('hex')}`;
 
   logEvent('contact.accepted', {
@@ -391,7 +390,11 @@ app.post('/api/contact', (req, res) => {
     });
     fs.writeFileSync(contactsFile, JSON.stringify(contactsList, null, 2), 'utf8');
   } catch (err) {
-    // Fail silently in cloud environments
+    logEvent('contact.storage_failed', {});
+    return sendError(
+      503,
+      'Your message could not be saved. Please email david@linacre.site directly.',
+    );
   }
 
   if (isUrlEncoded) {
@@ -945,12 +948,10 @@ app.post('/api/chat/openai', chatInputGuard, aiRateLimiter, async (req, res) => 
   const { prompt, history, apiKey: clientApiKey } = req.body;
   const apiKey = clientApiKey || process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    return res
-      .status(400)
-      .json({
-        error:
-          'OpenAI API Key is missing. Provide it on the client or set OPENAI_API_KEY in the server environment.',
-      });
+    return res.status(400).json({
+      error:
+        'OpenAI API Key is missing. Provide it on the client or set OPENAI_API_KEY in the server environment.',
+    });
   }
 
   try {
@@ -1015,12 +1016,10 @@ app.post('/api/chat/claude', chatInputGuard, aiRateLimiter, async (req, res) => 
   const { prompt, history, apiKey: clientApiKey } = req.body;
   const apiKey = clientApiKey || process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY;
   if (!apiKey) {
-    return res
-      .status(400)
-      .json({
-        error:
-          'Claude API Key is missing. Provide it on the client or set ANTHROPIC_API_KEY in the server environment.',
-      });
+    return res.status(400).json({
+      error:
+        'Claude API Key is missing. Provide it on the client or set ANTHROPIC_API_KEY in the server environment.',
+    });
   }
 
   try {
@@ -1437,107 +1436,27 @@ Make the SVG viewBox="0 0 100 100" with width="100%" and height="100%".`;
   return res.json({ svg: fallbackSvg });
 });
 
-app.post('/api/auth', (req, res) => {
-  const secret =
-    process.env.DASHBOARD_SESSION_SECRET || 'default_session_secret_32_bytes_min_12345';
-  const passwordHash =
-    process.env.DASHBOARD_PASSWORD_HASH ||
-    'e716eb6bf2edcc90a2998bf03f1621e0c1858fa503bc39f492f1da71f38a89d5';
-  const { password } = req.body ?? {};
-  const rawPassword = typeof password === 'string' ? password : '';
-  const cleanPassword = rawPassword.trim();
-  if (!cleanPassword) {
-    return res.status(400).json({ error: 'Password required' });
-  }
-  const suppliedHash = crypto.createHash('sha256').update(cleanPassword).digest('hex');
-  const suppliedLowerHash = crypto
-    .createHash('sha256')
-    .update(cleanPassword.toLowerCase())
-    .digest('hex');
-  const masterChristopherHash = 'e716eb6bf2edcc90a2998bf03f1621e0c1858fa503bc39f492f1da71f38a89d5';
-  const masterChristopherLowerHash =
-    '5d8bccf165fda6bf1dabc782be82e45e70487aa6b2518704bd269745d583f208';
-
-  const isValid =
-    timingSafeEqualStr(suppliedHash, passwordHash) ||
-    timingSafeEqualStr(suppliedHash, masterChristopherHash) ||
-    timingSafeEqualStr(suppliedLowerHash, masterChristopherLowerHash) ||
-    cleanPassword === 'Christopher91' ||
-    cleanPassword.toLowerCase() === 'christopher91';
-
-  if (!isValid) {
+app.post('/api/auth', aiRateLimiter, (req, res) => {
+  const secret = process.env.DASHBOARD_SESSION_SECRET;
+  const passwordHash = process.env.DASHBOARD_PASSWORD_HASH;
+  if (!dashboardAuthConfigured(secret, passwordHash))
+    return res.status(503).json({ error: 'Dashboard authentication is not configured.' });
+  if (!dashboardPasswordMatches(req.body?.password, passwordHash!))
     return res.status(401).json({ error: 'Invalid credentials' });
-  }
   const expires = Date.now() + SESSION_TTL_MS;
   const token = `${expires}.${sign(String(expires), secret)}`;
   res.setHeader(
     'Set-Cookie',
     `${COOKIE_NAME}=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${SESSION_TTL_MS / 1000}`,
   );
-  return res.status(200).json({
-    ok: true,
-    keysEnabled: true,
-    vault: 'Vault.kdbx',
-    activeKeys: [
-      'GEMINI_API_KEY',
-      'OPENAI_API_KEY',
-      'ANTHROPIC_API_KEY',
-      'LITELLM_API_KEY',
-      'GITHUB_TOKEN',
-      'OPENROUTER_API_KEY',
-    ],
-  });
+  return res.status(200).json({ ok: true });
 });
 
-app.post('/api/auth/google', (_req, res) => {
-  const secret =
-    process.env.DASHBOARD_SESSION_SECRET || 'default_session_secret_32_bytes_min_12345';
-  const expires = Date.now() + SESSION_TTL_MS;
-  const token = `${expires}.${sign(String(expires), secret)}`;
-  res.setHeader(
-    'Set-Cookie',
-    `${COOKIE_NAME}=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${SESSION_TTL_MS / 1000}`,
-  );
-  return res.status(200).json({
-    ok: true,
-    authenticated: true,
-    method: 'google_auto_login',
-    activeKeys: [
-      'GEMINI_API_KEY',
-      'OPENAI_API_KEY',
-      'ANTHROPIC_API_KEY',
-      'LITELLM_API_KEY',
-      'GITHUB_TOKEN',
-      'OPENROUTER_API_KEY',
-    ],
-  });
-});
-
-app.get('/api/auth', (req, res) => {
-  const secret =
-    process.env.DASHBOARD_SESSION_SECRET || 'default_session_secret_32_bytes_min_12345';
-  const cookie = req.headers.cookie ?? '';
-  const match = cookie.match(new RegExp(`${COOKIE_NAME}=([^;]+)`));
-  if (!match) return res.status(200).json({ authenticated: false });
-  const [expiresStr, sig] = match[1].split('.');
-  if (!expiresStr || !sig) return res.status(200).json({ authenticated: false });
-  const valid =
-    timingSafeEqualStr(sig, sign(expiresStr, secret)) && Number(expiresStr) > Date.now();
-  return res.status(200).json({
-    authenticated: valid,
-    keysEnabled: valid,
-    activeKeys: valid
-      ? [
-          'GEMINI_API_KEY',
-          'OPENAI_API_KEY',
-          'ANTHROPIC_API_KEY',
-          'LITELLM_API_KEY',
-          'GITHUB_TOKEN',
-          'OPENROUTER_API_KEY',
-        ]
-      : [],
-  });
-});
+// No OAuth token-verification implementation is configured. Never mint a session from a client claim.
+app.post('/api/auth/google', (_req, res) =>
+  res.status(501).json({ error: 'Google sign-in is not configured.' }),
+);
+app.get('/api/auth', (req, res) => res.status(200).json({ authenticated: isDashAuthed(req) }));
 
 app.delete('/api/auth', (_req, res) => {
   res.setHeader(
@@ -1617,11 +1536,9 @@ app.post('/api/chat/unified', chatInputGuard, aiRateLimiter, async (req, res) =>
 
   const catalog = MODEL_CATALOG[provider as string];
   if (!catalog) {
-    return res
-      .status(400)
-      .json({
-        error: `Unknown provider "${provider}". Valid: ${Object.keys(MODEL_CATALOG).join(', ')}`,
-      });
+    return res.status(400).json({
+      error: `Unknown provider "${provider}". Valid: ${Object.keys(MODEL_CATALOG).join(', ')}`,
+    });
   }
   if (typeof model !== 'string' || !model.trim()) {
     return res.status(400).json({ error: 'Model id is required' });
@@ -1634,12 +1551,9 @@ app.post('/api/chat/unified', chatInputGuard, aiRateLimiter, async (req, res) =>
         m && typeof m.content === 'string' && (m.role === 'user' || m.role === 'assistant'),
     )
   ) {
-    return res
-      .status(400)
-      .json({
-        error:
-          'messages must be a non-empty array of { role: "user"|"assistant", content: string }',
-      });
+    return res.status(400).json({
+      error: 'messages must be a non-empty array of { role: "user"|"assistant", content: string }',
+    });
   }
   if (!catalog.hasKey()) {
     return res.status(503).json({ error: `No server key configured for ${provider}` });
@@ -1657,12 +1571,9 @@ app.post('/api/chat/unified', chatInputGuard, aiRateLimiter, async (req, res) =>
     return res.status(400).json({ error: `Unknown model "${model}" for provider ${provider}` });
   }
   if (tier === 'premium' && !isDashAuthed(req)) {
-    return res
-      .status(401)
-      .json({
-        error:
-          'This model is owner-gated. Unlock with your dashboard password in the config panel.',
-      });
+    return res.status(401).json({
+      error: 'This model is owner-gated. Unlock with your dashboard password in the config panel.',
+    });
   }
 
   // Bound the payload to keep abuse cheap

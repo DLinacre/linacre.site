@@ -14,7 +14,7 @@ import FAQ from './FAQ';
  * - Trust row under submit: UK GDPR / Reply < 12h / NDA-friendly with lock icon.
  * - On success, redirect to /contact/thanks (secondary Calendly CTA lives there too).
  */
-export default function Contact() {
+export default function Contact({ embedded = false }: { embedded?: boolean }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [companyOrg, setCompanyOrg] = useState('');
@@ -155,22 +155,24 @@ export default function Contact() {
       className="space-y-12 animate-fade-in"
     >
       {/* Title hero - plain English (audit UX-03) */}
-      <motion.section
-        variants={itemVariants}
-        className="text-center md:text-left space-y-4 max-w-3xl"
-        id="contact-hero"
-      >
-        <span className="font-mono text-xs text-amber-color tracking-widest uppercase font-semibold bg-amber-color/10 border border-amber-color/20 px-2.5 py-1 rounded-full">
-          Contact
-        </span>
-        <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-foreground mt-3">
-          Let&#39;s build something <span className="text-amber-color">reliable</span>
-        </h1>
-        <p className="text-base text-muted-foreground leading-relaxed">
-          Custom software, pipeline automation, or an infrastructure audit? Tell me what you&#39;re
-          building &mdash; I reply within 12 hours.
-        </p>
-      </motion.section>
+      {!embedded && (
+        <motion.section
+          variants={itemVariants}
+          className="text-center md:text-left space-y-4 max-w-3xl"
+          id="contact-hero"
+        >
+          <span className="font-mono text-xs text-amber-color tracking-widest uppercase font-semibold bg-amber-color/10 border border-amber-color/20 px-2.5 py-1 rounded-full">
+            Contact
+          </span>
+          <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-foreground mt-3">
+            Let&#39;s build something <span className="text-amber-color">reliable</span>
+          </h1>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            Custom software, pipeline automation, or an infrastructure audit? Tell me what
+            you&#39;re building &mdash; I reply within 12 hours.
+          </p>
+        </motion.section>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Info column */}
